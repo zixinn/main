@@ -2,11 +2,11 @@
 :site-section: ContactUs
 :stylesDir: stylesheets
 
-* *Bug reports, Suggestions* : Post in our https://github.com/se-edu/addressbook-level3/issues[issue tracker] if you noticed bugs or have suggestions on how to improve.
+* *Bug reports, Suggestions* : Post in our https://github.com/AY1920S2-CS2103T-F10-4/main/issues[issue tracker] if you noticed bugs or have suggestions on how to improve.
 
 * *Email us* : You can also reach us at
-    ** `dpnhat.nguyen [at] nus.edu.sg`
-    ** `nhobao.dinh [at] comp.nus.edu.sg`
-    ** `e0324667 [at] comp.nus.edu.sg`
-    ** `e0322948 [at] comp.nus.edu.sg`
-    ** `heidi [at] comp.nus.edu.sg`
+    ** `dpnhat.nguyen [at] u.nus.edu`
+    ** `nhobao.dinh [at] u.nus.edu`
+    ** `e0322948 [at] u.nus.edu`
+    ** `e0324667 [at] u.nus.edu`
+    ** `heidi [at] u.nus.edu`
