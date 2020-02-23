@@ -4,51 +4,50 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 3 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
+Mod Manager was developed by the https://se-edu.github.io/docs/Team.html[AY1920S2-CS2103T-F10-4] team.
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Nguyen Dang Phuc Nhat
+image::NNpanpan.jpg[width="150", align="left"]
+{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/NNpanpan[github]] [<<NNpanpan#, portfolio>>]
 
-Role: Project Advisor
+Role: Developer
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Dinh Nho Bao
+image::dinhnhobao.jpg[width="150", align="left"]
+{empty}[http://github.com/dinhnhobao[github]] [<<dinhnhobao#, portfolio>>]
 
-Role: Team Lead +
+Role: Developer +
 Responsibilities: UI
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Ang Lu Shing
+image::alushingg.jpg[width="150", align="left"]
+{empty}[http://github.com/alushingg[github]] [<<alushingg#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Ng Zi Xin
+image::zixinn.jpg[width="150", align="left"]
+{empty}[http://github.com/zixinn[github]] [<<zixinn#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Chan Heidi
+image::heidicrq.jpg[width="150", align="left"]
+{empty}[http://github.com/heidicrq[github]] [<<heidicrq#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
