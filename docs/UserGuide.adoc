@@ -183,10 +183,21 @@ Format: `cal find /type empty`
 
 === Listing commands : `command`
 
-Clears all entries from the address book. +
-Format: `clear`
+==== Listing all commands
+
+Lists all valid commands. +
+Format: `command all`
+
+==== Listing commands for a specific feature
+
+Lists commands for a specific feature. +
+Format: `command feat COMMAND_NAME` +
+Example: `command feat task`
 
 === Automatic command guidance
+
+Guides you in cases when you forget and mistype your commands by showing a list of possible valid commands. +
+The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
 === Exiting the program : `exit`
 
@@ -214,6 +225,9 @@ There is no need to save manually.
 *Class* : `class`
 
 *Command* : `command`
+
+* `command all`
+* `command feat COMMAND_NAME`
 
 *Exit* : `exit`
 
