@@ -1,6 +1,7 @@
 = Mod Manager - User Guide
 :site-section: UserGuide
 :toc:
+:toclevels: 5
 :toc-title:
 :toc-placement: preamble
 :sectnums:
@@ -52,16 +53,41 @@ Format: `help`
 
 === Managing modules : `mod`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+==== Adding a module
 
-[TIP]
-A person can have any number of tags (including 0)
+Adds a module to the module list. +
+Format: `mod add /code MOD_CODE /desc DESCRIPTION`
 
-Examples:
+****
+* MOD_CODE should not exceed 10 characters.
+* DESCRIPTION should not exceed 64 characters.
+****
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Example: `mod add /code CS2103T /desc Software Engineering`
+
+==== Viewing information related to a module
+
+Shows all classes, tasks and facilitators for a module. +
+Format: `mod view /code MOD_CODE` +
+Example: `mod view /code CS2103T`
+
+==== Editing a module's description
+
+Edits the description of the module. +
+Format: `mod edit /code MOD_CODE /desc DESCRIPTION`
+
+****
+* DESCRIPTION should not exceed 64 characters.
+* Existing values will be updated to the input values.
+****
+
+Example: `mod edit /code CS2103T /desc A+ for everyone`
+
+==== Deleting a module
+
+Deletes the module, along with classes, facilitators and tasks for that module. +
+Format: `mod delete /code MOD_CODE` +
+Example: `mod delete /code CS2103T`
 
 === Managing classes : `class`
 
@@ -90,8 +116,25 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 
 === Managing facilitators : `facil`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+==== Adding a facilitator
+
+Adds a facilitator to the module. +
+Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+
+****
+* At least one of the optional fields must be provided.
+* A facilitator can be linked to any number of modules (including 0).
+****
+
+Example: `facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /phone 98765432 /code CS2103T`
+
+==== Viewing all facilitators
+Shows a list of all facilitators +
+Format: `facil view`
+
+==== Finding a facilitator by name
+Finds facilitators whose names contain the given keywords. +
+Format: `facil find /name FACILITATOR_NAME`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -101,12 +144,25 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-Examples:
+Example: `facil find /name Akshay Narayan`
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+==== Editing a facilitator
+Edits the information of a facilitator. +
+Format: `facil edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+
+****
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
+* You can remove all module codes linked to the facilitator by typing `/code` without specifying any module code after it.
+****
+
+Example: `facil edit /name Akshay Narayan /email hisnewemail@nus.edu.sg`
+
+==== Deleting a facilitator
+Deletes a facilitator from the module. +
+Format: `facil delete /name FACILITATOR_NAME` +
+Example: `facil delete /name Akshay Narayan`
 
 === Managing calendar : `cal`
 
@@ -163,8 +219,19 @@ There is no need to save manually.
 
 *Facilitator* : `facil`
 
+* `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+* `facil delete /name FACILITATOR_NAME`
+* `facil edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+* `facil find /name FACILITATOR_NAME`
+* `facil view`
+
 *Help* : `help`
 
 *Module* : `mod`
+
+* `mod add /code MOD_CODE /desc DESCRIPTION`
+* `mod delete /code MOD_CODE`
+* `mod edit /code MOD_CODE /desc DESCRIPTION`
+* `mod view /code MOD_CODE`
 
 *Task* : `task`
