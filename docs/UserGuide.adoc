@@ -303,7 +303,7 @@ These features will be available in the next version of Mark.
 | `*mod* add /code MOD_CODE /desc DESCRIPTION`
 | `*mod* delete /code MOD_CODE`
 | `*mod* edit /code MOD_CODE /desc DESCRIPTION`
-| `*mod* view /code MOD_CODE
+| `*mod* view /code MOD_CODE`
 
 .3+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
@@ -339,9 +339,4 @@ These features will be available in the next version of Mark.
 
 .1+|Exit
 |  `*exit*`
-
-
-
-`
-
 
