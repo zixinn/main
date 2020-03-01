@@ -277,38 +277,16 @@ These features will be available in the next version of Mark.
 [%autowidth]
 |=====
 |*Category* |*Commands*
-.3+|Calendar
-|  `*cal* find /type empty`
-|  `*cal* view /week next`
-|  `*cal* view /week this`
+.4+|Module
+| `*mod* add /code MOD_CODE /desc DESCRIPTION`
+| `*mod* delete /code MOD_CODE`
+| `*mod* edit /code MOD_CODE /desc DESCRIPTION`
+| `*mod* view /code MOD_CODE
 
 .3+|Class
 |  `*cal* find /type empty`
 |  `*cal* view /week next`
 |  `*cal* view /week this`
-
-.2+|Command
-|  `*command* all`
-|  `*command* feat COMMAND_NAME`
-
-.1+|Exit
-|  `*exit*`
-
-.5+|Facilitators
-|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-|  `*facil* delete /name FACILITATOR_NAME`
-|  `*facil* edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-|  `*facil* find /name FACILITATOR_NAME`
-|  `*facil* view`
-
-.1+|Help
-|  `*help*`
-
-.4+|Module
-| `*mod* add /code MOD_CODE /desc DESCRIPTION`
-| `*mod* delete /code MOD_CODE`
-| `*mod* edit /code MOD_CODE /desc DESCRIPTION`
-| `*mod* view /code MOD_CODE`
 
 .6+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
@@ -317,3 +295,31 @@ These features will be available in the next version of Mark.
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
+
+.5+|Facilitators
+|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* delete /name FACILITATOR_NAME`
+|  `*facil* edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* find /name FACILITATOR_NAME`
+|  `*facil* view`
+
+.3+|Calendar
+|  `*cal* find /type empty`
+|  `*cal* view /week next`
+|  `*cal* view /week this`
+
+.2+|Command
+|  `*command* all`
+|  `*command* feat COMMAND_NAME`
+
+.1+|Help
+|  `*help*`
+
+.1+|Exit
+|  `*exit*`
+
+
+
+`
+
+
