@@ -284,9 +284,9 @@ These features will be available in the next version of Mark.
 | `*mod* view /code MOD_CODE
 
 .3+|Class
-|  `*cal* find /type empty`
-|  `*cal* view /week next`
-|  `*cal* view /week this`
+|  `*class* foo bar`
+|  `*class* foo bar`
+|  `*class* foo bar`
 
 .6+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
