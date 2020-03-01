@@ -306,9 +306,9 @@ These features will be available in the next version of Mark.
 | `*mod* view /code MOD_CODE
 
 .3+|Class
-|  `*class* foo bar`
-|  `*class* foo bar`
-|  `*class* foo bar`
+|  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
+|  `*class* edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]`
+|  `*class* delete /code MOD_CODE /type CLASS_TYPE`
 
 .6+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
