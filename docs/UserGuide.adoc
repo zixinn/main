@@ -261,6 +261,11 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Upcoming `[coming in v2.0]`
+These features will be available in the next version of Mark.
+
+==== Indexing command system `[coming in v2.0]`
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -268,43 +273,47 @@ There is no need to save manually.
 
 == Command Summary
 
-*Calendar* `cal`:
+.Summary of command formats
+[%autowidth]
+|=====
+|*Category* |*Commands*
+.3+|Calendar
+|  `*cal* find /type empty`
+|  `*cal* view /week next`
+|  `*cal* view /week this`
 
-* `cal find /type empty`
-* `cal view /week next`
-* `cal view /week this`
+.3+|Class
+|  `*cal* find /type empty`
+|  `*cal* view /week next`
+|  `*cal* view /week this`
 
-*Class* : `class`
+.2+|Command
+|  `*command* all`
+|  `*command* feat COMMAND_NAME`
 
-*Command* : `command`
+.1+|Exit
+|  `*exit*`
 
-* `command all`
-* `command feat COMMAND_NAME`
+.5+|Facilitators
+|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* delete /name FACILITATOR_NAME`
+|  `*facil* edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* find /name FACILITATOR_NAME`
+|  `*facil* view`
 
-*Exit* : `exit`
+.1+|Help
+|  `*help*`
 
-*Facilitator* : `facil`
+.4+|Module
+| `*mod* add /code MOD_CODE /desc DESCRIPTION`
+| `*mod* delete /code MOD_CODE`
+| `*mod* edit /code MOD_CODE /desc DESCRIPTION`
+| `*mod* view /code MOD_CODE`
 
-* `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-* `facil delete /name FACILITATOR_NAME`
-* `facil edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-* `facil find /name FACILITATOR_NAME`
-* `facil view`
-
-*Help* : `help`
-
-*Module* : `mod`
-
-* `mod add /code MOD_CODE /desc DESCRIPTION`
-* `mod delete /code MOD_CODE`
-* `mod edit /code MOD_CODE /desc DESCRIPTION`
-* `mod view /code MOD_CODE`
-
-*Task* : `task`
-
-* `task add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}`
-* `task view`
-* `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}`
-* `task delete /code MOD_CODE /task TASK_NAME`
-* `task find [/date DATE] [/month MONTH] [/year YEAR]`
-* `task find /upcoming`
+.6+|Task
+| `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* view`
+| `*task* edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* delete /code MOD_CODE /task TASK_NAME`
+| `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
+| `*task* find /upcoming`
