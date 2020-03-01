@@ -91,8 +91,30 @@ Example: `mod delete /code CS2103T`
 
 === Managing classes : `class`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+==== Adding a class
+
+Adds a class to a module. +
+Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]` +
+****
+* VENUE and FACILITATOR_NAME are optional
+****
+Example: `class add /code CS2103T /type Lec /at Fri 14:00 16:00 /venue i3-Aud /facil Akshay Narayan`
+
+
+==== Editing a class
+
+Edits the information of the class. +
+Format: `class edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]` +
+****
+* VENUE and FACILITATOR_NAME are optional
+****
+Example: `class edit /code CS2103T /type Lec /at Fri 14:00 16:00 /venue I3_AUD /facil Akshay Narayan`
+
+==== Deleting a class
+
+Deletes the class from the module. +
+Format: `class delete /code MOD_CODE /type CLASS_TYPE` +
+Example: `class delete /code CS2103T /type Tut`
 
 === Managing tasks : `task`
 
@@ -223,6 +245,10 @@ There is no need to save manually.
 * `cal view /week this`
 
 *Class* : `class`
+
+* `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
+* `class edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]`
+* `class delete /code MOD_CODE /type CLASS_TYPE`
 
 *Command* : `command`
 
