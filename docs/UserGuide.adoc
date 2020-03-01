@@ -284,7 +284,7 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 === Upcoming `[coming in v2.0]`
-These features will be available in the next version of Mark.
+These features will be available in the next version of Mod Manager.
 
 ==== Indexing command system `[coming in v2.0]`
 

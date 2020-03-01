@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Dinh Nho Bao - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
