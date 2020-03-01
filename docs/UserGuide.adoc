@@ -23,17 +23,58 @@ Mod Manager is for those who *prefer to use a desktop app for managing tasks for
 
 == Quick Start
 
+=== Installing ModManager
+
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `modmanager.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Mod Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+.GUI for Mark
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
++
+Here are some example commands that you can try:
+
+* *`command all`* : lists all available commands in our Mod Manager.
+* *`mod add /code CS2103T /desc Software Engineering`* : start by adding our module CS2103T to our module list.
+* *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this at [...] conveniently.
+* *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module
+* *`task add /code CS2103T /task Improve the DG`*: adds another task to our CS2103T module
+* *`task find /upcoming`*: finds upcoming tasks. You should see the two tasks above right here.
+* *`exit`* : exits the application
+
 .  Refer to <<Features>> for details of each command.
 
+=== Using ModManager
+This section offers an overview of ModManager's layout so that you can find what you need easily.
+
+There are three main areas in ModManager:
+
+. A __task bar with all the module codes__ at the top of the screen
+. A __command box__ and __result display box__ at the bottom of the screen
+. A __dashboard__ that occupies most of the screen, which tells you the module code and name,
+facilitators' information, classes information, and tasks or deadlines that you need to complete.
+
+The *_taskbar_* at the top of the screen lists all of the modules that you are taking this semester.
+Clicking in one of these tabs will lead you to the section related to that module.
+
+.The taskbar
+image::foo.png[]
+
+The *_command box_* is the area for you to enter commands. The result of each command will be shown
+in the *_result display box_*, immediately below the command box.
+
+.The command box and result display box
+image::foo.png[]
+
+The *_dashboard_* shows all the contents and task for your module. It contains information about
+the module, facilitators' information, classes information, and tasks or deadlines that you need to complete.
+
+.The dashboard
+image::foo.png[]
 [[Features]]
 == Features
 
