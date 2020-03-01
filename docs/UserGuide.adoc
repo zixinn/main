@@ -136,24 +136,35 @@ Shows a list of all persons in the address book. +
 Format: `list`
 
 === Managing tasks : `task`
+==== Adding a task
+Adds a task to a module. +
+Format: `task add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
+Example: `task add /code CS2103T /task duke /by 2020-02-20 23:59`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+==== Viewing all tasks
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+Shows a list of all tasks. +
+Format: `task view`
 
-Examples:
+==== Editing a task
+Edits the information of a task. +
+Format: `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
+Example: `task edit /code CS2103T /task duke /by 02-03-2020 23:59`
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+==== Delete a task
+Deletes a task from the module. +
+Format: `task delete /code MOD_CODE /task TASK_NAME` +
+Example: `task delete /code CS2103T /task IP week 4`
+
+==== Finding tasks by date
+
+Finds tasks occurring on a specific date, month or year. +
+Format: `task find [/date DATE] [/month MONTH] [/year YEAR]` +
+Example: `task find /month 02`
+
+==== Finding upcoming tasks
+Finds upcoming tasks +
+Format: `task find /upcoming` +
 
 === Managing facilitators : `facil`
 
