@@ -301,3 +301,10 @@ There is no need to save manually.
 * `mod view /code MOD_CODE`
 
 *Task* : `task`
+
+* `task add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}`
+* `task view`
+* `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}`
+* `task delete /code MOD_CODE /task TASK_NAME`
+* `task find [/date DATE] [/month MONTH] [/year YEAR]`
+* `task find /upcoming`
