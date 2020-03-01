@@ -23,7 +23,7 @@ Mod Manager is for those who *prefer to use a desktop app for managing tasks for
 
 == Quick Start
 
-=== Installing ModManager
+=== Installing Mod Manager
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `modmanager.jar` link:{repoURL}/releases[here].
@@ -48,10 +48,10 @@ Here are some example commands that you can try:
 
 .  Refer to <<Features>> for details of each command.
 
-=== Using ModManager
-This section offers an overview of ModManager's layout so that you can find what you need easily.
+=== Using Mod Manager
+This section offers an overview of Mod Manager's layout so that you can find what you need easily.
 
-There are three main areas in ModManager:
+There are three main areas in Mod Manager:
 
 . A __task bar with all the module codes__ at the top of the screen
 . A __command box__ and __result display box__ at the bottom of the screen
