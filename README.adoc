@@ -18,25 +18,24 @@ endif::[]
 // Marketing blurb
 == About Mod Manager
 
-Mod Manager::
-The best Task Manager made for NUS Students who love to type and dislike using mouses for their task.
-
-Mod Manager is for *NUS students* who prefer to use a desktop application for managing tasks for modules in a semester.
-
+The best module manager made for *NUS students* who love to type and prefer to use a desktop application for managing modules in a semester.
 
 ****
 *Special Features*:
+
 ////
 * Save important content from a webpage for *offline* use, and *annotate* it right away.
 * Set *reminders* for websites. Never forget to pay those pesky e-bills again!
 * Sort and tag your bookmarks automatically with our intelligent *auto-tagging* system. Keeping your bookmarks organized is easy.
 ////
-* It can get your management of tasks done faster than traditional GUI apps, if you can type fast.
-
+* It can get your management of modules done faster than traditional GUI apps, if you can type fast.
 ****
 
-// Target user
-Target User: NUS Students
+****
+*Target User*:
+
+* NUS students
+****
 
 == Site Map
 
