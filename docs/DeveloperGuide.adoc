@@ -19,10 +19,10 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `
 == Introduction
 
 === Purpose
-Purpose.
+This document describes the architecture and system design of Mod Manager.
 
 === Audience
-Audience.
+The developer guide is for software developers, designers and testers who wants to understand the architecture and system design of Mod Manager.
 
 == Setting up
 
