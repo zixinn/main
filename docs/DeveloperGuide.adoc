@@ -294,11 +294,11 @@ Refer to the guide <<DevOps#, here>>.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using <<cli, CLI>> apps
 
 *Value proposition*:
 
-* manage school-related modules faster than a typical mouse/GUI driven app
+* manage school-related modules faster than a typical mouse/<<gui, GUI>> driven app
 * view schedule and tasks for the current and upcoming week easily
 * navigate easily with the command assistant for quicker management
 
@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |careless user |undo my commands |undo the mistakes in my command
 
-|`*` |visual user |see a clear GUI |navigate the App more easily
+|`*` |visual user |see a clear <<gui, GUI>> |navigate the App more easily
 |=======================================================================
 
 _{More to be added}_
@@ -391,7 +391,7 @@ _{More to be added}_
 [discrete]
 === Use case: Delete person
 
-*MSS*
+*<<mss, MSS>>*
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
@@ -400,7 +400,7 @@ _{More to be added}_
 +
 Use case ends.
 
-*Extensions*
+*<<extensions, Extensions>>*
 
 [none]
 * 2a. The list is empty.
@@ -416,7 +416,7 @@ Use case resumes at step 2.
 
 [discrete]
 === Use case: UC05 - Add class
-*MSS*
+*<<mss, MSS>>*
 
 1. User request to add a class.
 2. User provides the details of the class.
@@ -424,7 +424,7 @@ Use case resumes at step 2.
 +
 Use case ends.
 
-*Extensions*
+*<<extensions, Extensions>>*
 [none]
 * 2a. Compulsory fields are not provided or none of the optional fields provided.
 +
@@ -436,7 +436,7 @@ Use case resumes at step 2.
 
 [discrete]
 === Use case: UC06 - Edit class
-*MSS*
+*<<mss, MSS>>*
 
 1. User request to edit a class.
 2. User provides the module code and class type of the class to be edited.
@@ -445,7 +445,7 @@ Use case resumes at step 2.
 +
 Use case ends.
 
-*Extensions*
+*<<extensions, Extensions>>*
 [none]
 * 2a. Compulsory fields are not provided or fields provided are not valid.
 +
@@ -457,7 +457,7 @@ Use case resumes at step 2.
 
 [discrete]
 === Use case: UC07 - Delete class
-*MSS*
+*<<mss, MSS>>*
 
 1. User requests to delete a class.
 2. User provides module code and class type.
@@ -465,7 +465,7 @@ Use case resumes at step 2.
 +
 Use case ends.
 
-*Extensions*
+*<<extensions, Extensions>>*
 [none]
 * 2a. Module code or class type provided is invalid.
 +
@@ -475,6 +475,48 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: UC19 - View calendar
+*<<mss, MSS>>*
+
+1. User requests to view the calendar for a specified week.
+2. Mod Manager shows the calendar for the specified week.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. The specified week is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
+** 1a2. Mod Manager requests for correct input.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: UC20 - Find empty slots in calendar
+*<<mss, MSS>>*
+
+1. User requests to find empty slots in the calendar.
+2. Mod Manager shows the list of empty slots available.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. The given input is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
+** 1a2. Mod Manager requests for correct input.
++
+Use case resumes at step 1.
+
+[none]
+* 2a. The list of empty slots is empty.
++
+Use case ends.
 
 _{More to be added}_
 
@@ -490,11 +532,20 @@ _{More to be added}_
 [appendix]
 == Glossary
 
+[[cli]] CLI::
+Command-line interface: processes commands to a computer program in the form of lines of text
+
+[[extensions]] Extensions::
+"Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario that can happen if certain things are not as expected by the <<mss, MSS>>
+
+[[gui]] GUI::
+Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons
+
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[mss]] MSS::
+Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
 
 [appendix]
 == Product Survey
@@ -527,7 +578,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the <<gui, GUI>> with a set of sample contacts. The window size may not be optimum.
 
 . Saving window preferences
 
