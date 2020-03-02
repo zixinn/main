@@ -386,7 +386,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Mod Manager` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -413,6 +413,68 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC05 - Add class
+*MSS*
+
+1. User request to add a class.
+2. User provides the details of the class.
+3. Mod Manager adds a class.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 2a. Compulsory fields are not provided or none of the optional fields provided.
++
+[none]
+** 2a1. Mod Manager shows an error message.
+** 2a2. Mod Manager requests for the correct data.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC06 - Edit class
+*MSS*
+
+1. User request to edit a class.
+2. User provides the module code and class type of the class to be edited.
+3. User provides the new details of the class.
+4. Mod Manager edits the class.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 2a. Compulsory fields are not provided or fields provided are not valid.
++
+[none]
+** 2a1. Mod Manager shows an error message.
+** 2a2. Mod Manager requests for valid data.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC07 - Delete class
+*MSS*
+
+1. User requests to delete a class.
+2. User provides module code and class type.
+3. Mod Manager deletes the class.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 2a. Module code or class type provided is invalid.
++
+[none]
+** 2a1. Mod Manager shows an error message.
+** 2a2. Mod Manager requests for valid data.
++
+Use case resumes at step 2.
+
 
 _{More to be added}_
 
