@@ -46,8 +46,8 @@ Responsibilities: Task component
 image::alushingg.png[width="150", align="left"]
 {empty}[http://github.com/alushingg[github]] [<<alushingg#, portfolio>>]
 
-Role: Developer, Integration
-Responsibilities: -
+Role: Developer, Integration +
+Responsibilities: Calendar component
 
 '''
 
