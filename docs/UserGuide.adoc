@@ -19,7 +19,10 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-Mod Manager is for those who *prefer to use a desktop app for managing tasks for modules in a semester*. More importantly, Mod Manager is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Mod Manager can get your management of tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Mod Manager is for those who *prefer to use a desktop app for managing tasks for modules in a semester*.
+More importantly, Mod Manager is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, Mod Manager can get your management of tasks done faster than traditional GUI apps.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -40,7 +43,7 @@ Here are some example commands that you can try:
 
 * *`command all`* : lists all available commands in our Mod Manager.
 * *`mod add /code CS2103T /desc Software Engineering`* : adds our module CS2103T to our module list.
-* *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this at [...] conveniently.
+* *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this conveniently.
 * *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module.
 * *`task add /code CS2103T /task Improve the DG`*: adds another task to our CS2103T module.
 * *`task find /upcoming`*: finds upcoming tasks. You should see the two tasks above right here.
@@ -270,7 +273,7 @@ Example: `command feat task`
 
 === Automatic command guidance
 
-Guides you in cases when you forget and mistype your commands by showing a list of possible valid commands. +
+Provides guidance for mistyped commands by showing a list of possible valid commands. +
 The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
 === Exiting the program : `exit`
@@ -280,13 +283,30 @@ Format: `exit`
 
 === Saving the data
 
-Mod Manager data are saved in the hard disk automatically after any command that changes the data. +
+Saves Mod Manager data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Upcoming `[coming in v2.0]`
 These features will be available in the next version of Mod Manager.
 
-==== Indexing command system `[coming in v2.0]`
+==== Using indexing command system `[coming in v2.0]`
+
+Accesses modules, classes, tasks and facilitators using an indexing system.
+
+==== Undoing previous command `[coming in v2.0]`
+Restores the Mod Manager to the state before the previous undoable command was executed.
+
+==== Categorising a tasks `[coming in v2.0]`
+
+Add tags to a task.
+
+==== Adding a priority level to a task `[coming in v2.0]`
+
+Adds a priority level to a task.
+
+==== Receiving reminders `[coming in v2.0]`
+
+Receive reminders for deadlines and events the next day.
 
 == FAQ
 
