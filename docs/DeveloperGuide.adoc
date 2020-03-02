@@ -16,6 +16,14 @@ endif::[]
 
 By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 
+== Introduction
+
+=== Purpose
+Purpose.
+
+=== Audience
+Audience.
+
 == Setting up
 
 Refer to the guide <<SettingUp#, here>>.
@@ -279,13 +287,20 @@ Refer to the guide <<DevOps#, here>>.
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* is a NUS student
+* has a need to manage modules taken in a semester
+* has a need to manage classes, tasks and facilitators for each module
+* has a need to visualize schedule and tasks of the week in a calendar
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*:
+
+* manage school-related modules faster than a typical mouse/GUI driven app
+* view schedule and tasks for the current and upcoming week easily
+* navigate easily with the command assistant for quicker management
 
 [appendix]
 == User Stories
@@ -297,15 +312,73 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |student |add modules I am taking  |keep track of the information related to the module
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |student |add classes |keep track of the classes I have for a particular module
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |student |add tasks |keep track of the tasks I have for a particular module
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |student |add facilitators' information |keep track of the information of the facilitators
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |student |view information related to a module  |prepare for each module
+
+|`* * *` |student |view tasks |complete them
+
+|`* * *` |student |view facilitators' information |contact them when I need help
+
+|`* * *` |student |edit a module’s description |modify the module’s description
+
+|`* * *` |student |edit classes |keep my classes up to date
+
+|`* * *` |student |edit a task |keep my tasks up to date
+
+|`* * *` |student |edit a facilitator’s information |keep their contact details up to date
+
+|`* * *` |student |delete a module |use the App for different semesters
+
+|`* * *` |student |delete a class |remove classes that I am no longer in
+
+|`* * *` |student |delete a task |remove tasks that I no longer need to track
+
+|`* * *` |student |delete a facilitator’s information |remove information that I no longer need
+
+|`* * *` |busy student |view schedule for the current week |prepare for them
+
+|`* * *` |busy student |view schedule for the upcoming week |prepare for them
+
+|`* * *` |new user |view all commands |learn how to use them
+
+|`* * *` |new user |view commands for a specific feature |learn how to use them
+
+|`* * *` |user |get reminded about how commands work |recall the commands
+
+|`* * *` |user |import and export data |easily migrate the data to another computer
+
+|`* *` |student |find a facilitator by name |locate details of facilitators without having to go through the entire list
+
+|`* *` |student |find tasks by date |keep track of tasks on a particular date
+
+|`* *` |student |find upcoming tasks |prioritise them
+
+|`* *` |busy student |find empty slots in my schedule |manage my time easily
+
+|`*` |student |mark a task as done |not take note of them anymore
+
+|`*` |student |add a priority level to a task |prioritise my tasks
+
+|`*` |student |tag my tasks |categorise them
+
+|`*` |student |see countdown timers |be reminded of deadlines
+
+|`*` |busy student |receive reminders about deadlines and events the next day |take note of them
+
+|`*` |student |mass delete the modules |delete them quickly once the semester is over
+
+|`*` |advanced user |use shorter versions of a command |type a command faster
+
+|`*` |careless user |undo my commands |undo the mistakes in my command
+
+|`*` |visual user |see a clear GUI |navigate the App more easily
 |=======================================================================
 
 _{More to be added}_
