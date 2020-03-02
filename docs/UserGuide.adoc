@@ -30,7 +30,7 @@ Mod Manager is for those who *prefer to use a desktop app for managing tasks for
 .  Copy the file to the folder you want to use as the home folder for your Mod Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-.GUI for Mark
+.GUI for Mod Manager
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -39,12 +39,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Here are some example commands that you can try:
 
 * *`command all`* : lists all available commands in our Mod Manager.
-* *`mod add /code CS2103T /desc Software Engineering`* : start by adding our module CS2103T to our module list.
+* *`mod add /code CS2103T /desc Software Engineering`* : adds our module CS2103T to our module list.
 * *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this at [...] conveniently.
-* *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module
-* *`task add /code CS2103T /task Improve the DG`*: adds another task to our CS2103T module
+* *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module.
+* *`task add /code CS2103T /task Improve the DG`*: adds another task to our CS2103T module.
 * *`task find /upcoming`*: finds upcoming tasks. You should see the two tasks above right here.
-* *`exit`* : exits the application
+* *`exit`* : exits the application.
 
 .  Refer to <<Features>> for details of each command.
 
@@ -53,8 +53,8 @@ This section offers an overview of Mod Manager's layout so that you can find wha
 
 There are three main areas in Mod Manager:
 
-. A __task bar with all the module codes__ at the top of the screen
-. A __command box__ and __result display box__ at the bottom of the screen
+. A __task bar with all the module codes__ at the top of the screen.
+. A __command box__ and __result display box__ at the bottom of the screen.
 . A __dashboard__ that occupies most of the screen, which tells you the module code and name,
 facilitators' information, classes information, and tasks or deadlines that you need to complete.
 
@@ -185,7 +185,7 @@ Format: `task find [/date DATE] [/month MONTH] [/year YEAR]` +
 Example: `task find /month 02`
 
 ==== Finding upcoming tasks
-Finds upcoming tasks +
+Finds upcoming tasks. +
 Format: `task find /upcoming` +
 
 === Managing facilitators : `facil`
@@ -203,7 +203,7 @@ Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [
 Example: `facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /phone 98765432 /code CS2103T`
 
 ==== Viewing all facilitators
-Shows a list of all facilitators +
+Shows a list of all facilitators. +
 Format: `facil view`
 
 ==== Finding a facilitator by name
@@ -211,11 +211,11 @@ Finds facilitators whose names contain the given keywords. +
 Format: `facil find /name FACILITATOR_NAME`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 ****
 
 Example: `facil find /name Akshay Narayan`
