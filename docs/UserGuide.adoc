@@ -280,7 +280,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Mod Manager data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Upcoming `[coming in v2.0]`
