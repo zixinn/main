@@ -64,7 +64,7 @@ Responsibilities: -
 image::heidicrq.png[width="150", align="left"]
 {empty}[http://github.com/heidicrq[github]] [<<heidicrq#, portfolio>>]
 
-Role: Developer +
-Responsibilities: -
+Role: Developer, Documentation +
+Responsibilities: Module component
 
 '''
