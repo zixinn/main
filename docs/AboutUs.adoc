@@ -55,8 +55,8 @@ Responsibilities: Calendar component
 image::zixinn.png[width="150", align="left"]
 {empty}[http://github.com/zixinn[github]] [<<zixinn#, portfolio>>]
 
-Role: Developer +
-Responsibilities: -
+Role: Developer, Code Quality +
+Responsibilities: Facilitator component
 
 '''
 
