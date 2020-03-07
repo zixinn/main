@@ -67,16 +67,17 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
 
-        // multiple tags - all accepted
-        Facilitator expectedFacilitatorMultipleTags = new FacilitatorBuilder(BOB)
+        // multiple module codes - all accepted
+        Facilitator expectedFacilitatorMultipleModuleCodes = new FacilitatorBuilder(BOB)
                 .withModuleCodes(VALID_MODULE_CODE_FRIEND, VALID_MODULE_CODE_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitatorMultipleTags));
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
+                new AddCommand(expectedFacilitatorMultipleModuleCodes));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero module codes
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY,
                 new AddCommand(expectedFacilitator));
@@ -125,7 +126,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_OFFICE_DESC
                 + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, Office.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid module code
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
                 + INVALID_MODULE_CODE_DESC + VALID_MODULE_CODE_FRIEND, ModuleCode.MESSAGE_CONSTRAINTS);
 

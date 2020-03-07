@@ -112,7 +112,7 @@ public class Facilitator {
                 .append(getEmail())
                 .append(" Office: ")
                 .append(getOffice())
-                .append(" Module Codes: ");
+                .append(" Module codes: ");
         getModuleCodes().forEach(builder::append);
         return builder.toString();
     }

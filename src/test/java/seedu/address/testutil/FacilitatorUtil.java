@@ -50,11 +50,11 @@ public class FacilitatorUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getOffice().ifPresent(office -> sb.append(PREFIX_OFFICE).append(office.value).append(" "));
         if (descriptor.getModuleCodes().isPresent()) {
-            Set<ModuleCode> tags = descriptor.getModuleCodes().get();
-            if (tags.isEmpty()) {
+            Set<ModuleCode> moduleCodes = descriptor.getModuleCodes().get();
+            if (moduleCodes.isEmpty()) {
                 sb.append(PREFIX_MODULE_CODE);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.moduleCode).append(" "));
+                moduleCodes.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.moduleCode).append(" "));
             }
         }
         return sb.toString();
