@@ -21,18 +21,18 @@ public class Facilitator {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Office office;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Facilitator(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Facilitator(Name name, Phone phone, Email email, Office office, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, office, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.office = office;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +48,8 @@ public class Facilitator {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Office getOffice() {
+        return office;
     }
 
     /**
@@ -92,14 +92,14 @@ public class Facilitator {
         return otherFacilitator.getName().equals(getName())
                 && otherFacilitator.getPhone().equals(getPhone())
                 && otherFacilitator.getEmail().equals(getEmail())
-                && otherFacilitator.getAddress().equals(getAddress())
+                && otherFacilitator.getOffice().equals(getOffice())
                 && otherFacilitator.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, office, tags);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class Facilitator {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Office: ")
+                .append(getOffice())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

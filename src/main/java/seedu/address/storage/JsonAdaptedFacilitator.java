@@ -10,10 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.facilitator.Address;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -27,7 +27,7 @@ class JsonAdaptedFacilitator {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String office;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -35,12 +35,12 @@ class JsonAdaptedFacilitator {
      */
     @JsonCreator
     public JsonAdaptedFacilitator(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
+                                  @JsonProperty("email") String email, @JsonProperty("office") String office,
                                   @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.office = office;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -53,7 +53,7 @@ class JsonAdaptedFacilitator {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        office = source.getOffice().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,16 +94,16 @@ class JsonAdaptedFacilitator {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (office == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Office.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Office.isValidOffice(office)) {
+            throw new IllegalValueException(Office.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Office modelOffice = new Office(office);
 
         final Set<Tag> modelTags = new HashSet<>(facilitatorTags);
-        return new Facilitator(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Facilitator(modelName, modelPhone, modelEmail, modelOffice, modelTags);
     }
 
 }

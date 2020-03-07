@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFacilitators_throwsDuplicateFacilitatorException() {
         // Two facilitators with the same identity fields
-        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFacilitators);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasFacilitator_facilitatorWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addFacilitator(ALICE);
-        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(addressBook.hasFacilitator(editedAlice));
     }

@@ -35,7 +35,7 @@ public class FacilitatorCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label office;
     @FXML
     private Label email;
     @FXML
@@ -47,7 +47,7 @@ public class FacilitatorCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(facilitator.getName().fullName);
         phone.setText(facilitator.getPhone().value);
-        address.setText(facilitator.getAddress().value);
+        office.setText(facilitator.getOffice().value);
         email.setText(facilitator.getEmail().value);
         facilitator.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

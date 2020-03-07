@@ -2,9 +2,9 @@ package seedu.address.model.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -41,17 +41,17 @@ public class FacilitatorTest {
         assertFalse(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new FacilitatorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new FacilitatorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new FacilitatorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new FacilitatorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withOffice(VALID_OFFICE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new FacilitatorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
     }
 
@@ -85,8 +85,8 @@ public class FacilitatorTest {
         editedAlice = new FacilitatorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new FacilitatorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different office -> returns false
+        editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

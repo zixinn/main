@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.facilitator.Address;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -35,7 +35,7 @@ public class EditFacilitatorDescriptorBuilder {
         descriptor.setName(facilitator.getName());
         descriptor.setPhone(facilitator.getPhone());
         descriptor.setEmail(facilitator.getEmail());
-        descriptor.setAddress(facilitator.getAddress());
+        descriptor.setOffice(facilitator.getOffice());
         descriptor.setTags(facilitator.getTags());
     }
 
@@ -64,10 +64,10 @@ public class EditFacilitatorDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditFacilitatorDescriptor} that we are building.
+     * Sets the {@code Office} of the {@code EditFacilitatorDescriptor} that we are building.
      */
-    public EditFacilitatorDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditFacilitatorDescriptorBuilder withOffice(String office) {
+        descriptor.setOffice(new Office(office));
         return this;
     }
 

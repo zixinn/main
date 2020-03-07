@@ -3,10 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.facilitator.Address;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -19,19 +19,19 @@ public class FacilitatorBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_OFFICE = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
+    private Office office;
     private Set<Tag> tags;
 
     public FacilitatorBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        office = new Office(DEFAULT_OFFICE);
         tags = new HashSet<>();
     }
 
@@ -42,7 +42,7 @@ public class FacilitatorBuilder {
         name = facilitatorToCopy.getName();
         phone = facilitatorToCopy.getPhone();
         email = facilitatorToCopy.getEmail();
-        address = facilitatorToCopy.getAddress();
+        office = facilitatorToCopy.getOffice();
         tags = new HashSet<>(facilitatorToCopy.getTags());
     }
 
@@ -63,10 +63,10 @@ public class FacilitatorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Facilitator} that we are building.
+     * Sets the {@code Office} of the {@code Facilitator} that we are building.
      */
-    public FacilitatorBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public FacilitatorBuilder withOffice(String office) {
+        this.office = new Office(office);
         return this;
     }
 
@@ -87,7 +87,7 @@ public class FacilitatorBuilder {
     }
 
     public Facilitator build() {
-        return new Facilitator(name, phone, email, address, tags);
+        return new Facilitator(name, phone, email, office, tags);
     }
 
 }

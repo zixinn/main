@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
@@ -19,10 +19,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.Address;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_OFFICE + "OFFICE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -97,10 +97,10 @@ public class EditCommand extends Command {
         Name updatedName = editFacilitatorDescriptor.getName().orElse(facilitatorToEdit.getName());
         Phone updatedPhone = editFacilitatorDescriptor.getPhone().orElse(facilitatorToEdit.getPhone());
         Email updatedEmail = editFacilitatorDescriptor.getEmail().orElse(facilitatorToEdit.getEmail());
-        Address updatedAddress = editFacilitatorDescriptor.getAddress().orElse(facilitatorToEdit.getAddress());
+        Office updatedOffice = editFacilitatorDescriptor.getOffice().orElse(facilitatorToEdit.getOffice());
         Set<Tag> updatedTags = editFacilitatorDescriptor.getTags().orElse(facilitatorToEdit.getTags());
 
-        return new Facilitator(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Facilitator(updatedName, updatedPhone, updatedEmail, updatedOffice, updatedTags);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Office office;
         private Set<Tag> tags;
 
         public EditFacilitatorDescriptor() {}
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setOffice(toCopy.office);
             setTags(toCopy.tags);
         }
 
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, office, tags);
         }
 
         public void setName(Name name) {
@@ -177,12 +177,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setOffice(Office office) {
+            this.office = office;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Office> getOffice() {
+            return Optional.ofNullable(office);
         }
 
         /**
@@ -220,7 +220,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getOffice().equals(e.getOffice())
                     && getTags().equals(e.getTags());
         }
     }
