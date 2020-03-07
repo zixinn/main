@@ -8,7 +8,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -25,14 +25,14 @@ public class FacilitatorBuilder {
     private Phone phone;
     private Email email;
     private Office office;
-    private Set<Tag> tags;
+    private Set<ModuleCode> moduleCodes;
 
     public FacilitatorBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         office = new Office(DEFAULT_OFFICE);
-        tags = new HashSet<>();
+        moduleCodes = new HashSet<>();
     }
 
     /**
@@ -43,7 +43,7 @@ public class FacilitatorBuilder {
         phone = facilitatorToCopy.getPhone();
         email = facilitatorToCopy.getEmail();
         office = facilitatorToCopy.getOffice();
-        tags = new HashSet<>(facilitatorToCopy.getTags());
+        moduleCodes = new HashSet<>(facilitatorToCopy.getModuleCodes());
     }
 
     /**
@@ -55,10 +55,11 @@ public class FacilitatorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Facilitator} that we are building.
+     * Parses the {@code moduleCodes} into a {@code Set<ModuleCode>} and set it to the {@code Facilitator}
+     * that we are building.
      */
-    public FacilitatorBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public FacilitatorBuilder withModuleCodes(String ... moduleCodes) {
+        this.moduleCodes = SampleDataUtil.getModuleCodeSet(moduleCodes);
         return this;
     }
 
@@ -87,7 +88,7 @@ public class FacilitatorBuilder {
     }
 
     public Facilitator build() {
-        return new Facilitator(name, phone, email, office, tags);
+        return new Facilitator(name, phone, email, office, moduleCodes);
     }
 
 }

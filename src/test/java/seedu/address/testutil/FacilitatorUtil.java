@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.facilitator.Facilitator;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 
 /**
  * A utility class for Facilitator.
@@ -34,8 +34,8 @@ public class FacilitatorUtil {
         sb.append(PREFIX_PHONE + facilitator.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + facilitator.getEmail().value + " ");
         sb.append(PREFIX_OFFICE + facilitator.getOffice().value + " ");
-        facilitator.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        facilitator.getModuleCodes().stream().forEach(
+            s -> sb.append(PREFIX_MODULE_CODE + s.moduleCode + " ")
         );
         return sb.toString();
     }
@@ -49,12 +49,12 @@ public class FacilitatorUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getOffice().ifPresent(office -> sb.append(PREFIX_OFFICE).append(office.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
+        if (descriptor.getModuleCodes().isPresent()) {
+            Set<ModuleCode> tags = descriptor.getModuleCodes().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_MODULE_CODE);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.moduleCode).append(" "));
             }
         }
         return sb.toString();

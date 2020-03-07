@@ -15,7 +15,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 
 /**
  * Jackson-friendly version of {@link Facilitator}.
@@ -28,7 +28,7 @@ class JsonAdaptedFacilitator {
     private final String phone;
     private final String email;
     private final String office;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedModuleCode> moduleCode = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedFacilitator} with the given facilitator details.
@@ -36,13 +36,13 @@ class JsonAdaptedFacilitator {
     @JsonCreator
     public JsonAdaptedFacilitator(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("office") String office,
-                                  @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                                  @JsonProperty("moduleCode") List<JsonAdaptedModuleCode> moduleCode) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.office = office;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (moduleCode != null) {
+            this.moduleCode.addAll(moduleCode);
         }
     }
 
@@ -54,8 +54,8 @@ class JsonAdaptedFacilitator {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         office = source.getOffice().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        moduleCode.addAll(source.getModuleCodes().stream()
+                .map(JsonAdaptedModuleCode::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +65,9 @@ class JsonAdaptedFacilitator {
      * @throws IllegalValueException if there were any data constraints violated in the adapted facilitator.
      */
     public Facilitator toModelType() throws IllegalValueException {
-        final List<Tag> facilitatorTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            facilitatorTags.add(tag.toModelType());
+        final List<ModuleCode> facilitatorModuleCodes = new ArrayList<>();
+        for (JsonAdaptedModuleCode moduleCode : moduleCode) {
+            facilitatorModuleCodes.add(moduleCode.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +102,8 @@ class JsonAdaptedFacilitator {
         }
         final Office modelOffice = new Office(office);
 
-        final Set<Tag> modelTags = new HashSet<>(facilitatorTags);
-        return new Facilitator(modelName, modelPhone, modelEmail, modelOffice, modelTags);
+        final Set<ModuleCode> modelModuleCodes = new HashSet<>(facilitatorModuleCodes);
+        return new Facilitator(modelName, modelPhone, modelEmail, modelOffice, modelModuleCodes);
     }
 
 }

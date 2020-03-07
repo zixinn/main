@@ -49,9 +49,9 @@ public class FacilitatorCard extends UiPart<Region> {
         phone.setText(facilitator.getPhone().value);
         office.setText(facilitator.getOffice().value);
         email.setText(facilitator.getEmail().value);
-        facilitator.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        facilitator.getModuleCodes().stream()
+                .sorted(Comparator.comparing(moduleCode -> moduleCode.moduleCode))
+                .forEach(moduleCode -> tags.getChildren().add(new Label(moduleCode.moduleCode)));
     }
 
     @Override

@@ -22,14 +22,14 @@ public class JsonAdaptedFacilitatorTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_OFFICE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_MODULE_CODE = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_OFFICE = BENSON.getOffice().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedModuleCode> VALID_MODULE_CODES = BENSON.getModuleCodes().stream()
+            .map(JsonAdaptedModuleCode::new)
             .collect(Collectors.toList());
 
     @Test
@@ -41,7 +41,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator =
-                new JsonAdaptedFacilitator(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_TAGS);
+                new JsonAdaptedFacilitator(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -49,7 +49,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
-                null, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_TAGS);
+                null, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -57,7 +57,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator =
-                new JsonAdaptedFacilitator(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_TAGS);
+                new JsonAdaptedFacilitator(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -65,7 +65,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
-                VALID_NAME, null, VALID_EMAIL, VALID_OFFICE, VALID_TAGS);
+                VALID_NAME, null, VALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -73,7 +73,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator =
-                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_OFFICE, VALID_TAGS);
+                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -81,7 +81,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
-                VALID_NAME, VALID_PHONE, null, VALID_OFFICE, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, null, VALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -89,7 +89,7 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_invalidOffice_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator =
-                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_OFFICE, VALID_TAGS);
+                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_OFFICE, VALID_MODULE_CODES);
         String expectedMessage = Office.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
@@ -97,17 +97,17 @@ public class JsonAdaptedFacilitatorTest {
     @Test
     public void toModelType_nullOffice_throwsIllegalValueException() {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_MODULE_CODES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Office.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+    public void toModelType_invalidModuleCodes_throwsIllegalValueException() {
+        List<JsonAdaptedModuleCode> invalidModuleCodes = new ArrayList<>(VALID_MODULE_CODES);
+        invalidModuleCodes.add(new JsonAdaptedModuleCode(INVALID_MODULE_CODE));
         JsonAdaptedFacilitator facilitator =
-                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, invalidTags);
+                new JsonAdaptedFacilitator(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_OFFICE, invalidModuleCodes);
         assertThrows(IllegalValueException.class, facilitator::toModelType);
     }
 

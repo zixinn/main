@@ -10,7 +10,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 
 /**
  * A utility class to help with building EditFacilitatorDescriptor objects.
@@ -36,7 +36,7 @@ public class EditFacilitatorDescriptorBuilder {
         descriptor.setPhone(facilitator.getPhone());
         descriptor.setEmail(facilitator.getEmail());
         descriptor.setOffice(facilitator.getOffice());
-        descriptor.setTags(facilitator.getTags());
+        descriptor.setModuleCodes(facilitator.getModuleCodes());
     }
 
     /**
@@ -72,12 +72,12 @@ public class EditFacilitatorDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditFacilitatorDescriptor}
+     * Parses the {@code moduleCodes} into a {@code Set<ModuleCode>} and set it to the {@code EditFacilitatorDescriptor}
      * that we are building.
      */
-    public EditFacilitatorDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditFacilitatorDescriptorBuilder withModuleCodes(String... moduleCodes) {
+        Set<ModuleCode> moduleCodeSet = Stream.of(moduleCodes).map(ModuleCode::new).collect(Collectors.toSet());
+        descriptor.setModuleCodes(moduleCodeSet);
         return this;
     }
 

@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
 
 import java.util.Collections;
@@ -24,7 +24,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 
 /**
  * Edits the details of an existing facilitator in the address book.
@@ -41,7 +41,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_OFFICE + "OFFICE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -98,9 +98,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editFacilitatorDescriptor.getPhone().orElse(facilitatorToEdit.getPhone());
         Email updatedEmail = editFacilitatorDescriptor.getEmail().orElse(facilitatorToEdit.getEmail());
         Office updatedOffice = editFacilitatorDescriptor.getOffice().orElse(facilitatorToEdit.getOffice());
-        Set<Tag> updatedTags = editFacilitatorDescriptor.getTags().orElse(facilitatorToEdit.getTags());
+        Set<ModuleCode> updatedModuleCodes = editFacilitatorDescriptor.getModuleCodes()
+                .orElse(facilitatorToEdit.getModuleCodes());
 
-        return new Facilitator(updatedName, updatedPhone, updatedEmail, updatedOffice, updatedTags);
+        return new Facilitator(updatedName, updatedPhone, updatedEmail, updatedOffice, updatedModuleCodes);
     }
 
     @Override
@@ -130,27 +131,27 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Office office;
-        private Set<Tag> tags;
+        private Set<ModuleCode> moduleCodes;
 
         public EditFacilitatorDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code moduleCodes} is used internally.
          */
         public EditFacilitatorDescriptor(EditFacilitatorDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setOffice(toCopy.office);
-            setTags(toCopy.tags);
+            setModuleCodes(toCopy.moduleCodes);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, office, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, office, moduleCodes);
         }
 
         public void setName(Name name) {
@@ -186,20 +187,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code moduleCodes} to this object's {@code moduleCodes}.
+         * A defensive copy of {@code moduleCodes} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setModuleCodes(Set<ModuleCode> moduleCodes) {
+            this.moduleCodes = (moduleCodes != null) ? new HashSet<>(moduleCodes) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable module code set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code moduleCodes} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<ModuleCode>> getModuleCodes() {
+            return (moduleCodes != null) ? Optional.of(Collections.unmodifiableSet(moduleCodes)) : Optional.empty();
         }
 
         @Override
@@ -221,7 +222,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getOffice().equals(e.getOffice())
-                    && getTags().equals(e.getTags());
+                    && getModuleCodes().equals(e.getModuleCodes());
         }
     }
 }

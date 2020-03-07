@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.modulecode.ModuleCode;
 
 /**
  * Represents a Facilitator in the address book.
@@ -22,18 +22,18 @@ public class Facilitator {
 
     // Data fields
     private final Office office;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<ModuleCode> moduleCodes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Facilitator(Name name, Phone phone, Email email, Office office, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, office, tags);
+    public Facilitator(Name name, Phone phone, Email email, Office office, Set<ModuleCode> moduleCodes) {
+        requireAllNonNull(name, phone, email, office, moduleCodes);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.office = office;
-        this.tags.addAll(tags);
+        this.moduleCodes.addAll(moduleCodes);
     }
 
     public Name getName() {
@@ -53,11 +53,11 @@ public class Facilitator {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable module code set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<ModuleCode> getModuleCodes() {
+        return Collections.unmodifiableSet(moduleCodes);
     }
 
     /**
@@ -93,13 +93,13 @@ public class Facilitator {
                 && otherFacilitator.getPhone().equals(getPhone())
                 && otherFacilitator.getEmail().equals(getEmail())
                 && otherFacilitator.getOffice().equals(getOffice())
-                && otherFacilitator.getTags().equals(getTags());
+                && otherFacilitator.getModuleCodes().equals(getModuleCodes());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, office, tags);
+        return Objects.hash(name, phone, email, office, moduleCodes);
     }
 
     @Override
@@ -112,8 +112,8 @@ public class Facilitator {
                 .append(getEmail())
                 .append(" Office: ")
                 .append(getOffice())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Module Codes: ");
+        getModuleCodes().forEach(builder::append);
         return builder.toString();
     }
 

@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +52,8 @@ public class EditFacilitatorDescriptorTest {
         editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY).withOffice(VALID_OFFICE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different module codes -> returns false
+        editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
