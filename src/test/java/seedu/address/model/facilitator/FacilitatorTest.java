@@ -31,14 +31,14 @@ public class FacilitatorTest {
         // null -> returns false
         assertFalse(ALICE.isSameFacilitator(null));
 
-        // different phone and email -> returns false
-        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .build();
+        // different name -> returns false
+        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameFacilitator(editedAlice));
 
-        // different name -> returns false
-        editedAlice = new FacilitatorBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameFacilitator(editedAlice));
+        // same name, different attributes -> returns true
+        editedAlice = new FacilitatorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .build();
+        assertTrue(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new FacilitatorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)

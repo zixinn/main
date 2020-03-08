@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFacilitators.AMY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
 
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Facilitator facilitator = new FacilitatorBuilder().build();
+        Facilitator facilitator = new FacilitatorBuilder(AMY).build();
         AddCommand command = (AddCommand) parser.parseCommand(FacilitatorUtil.getAddCommand(facilitator));
         assertEquals(new AddCommand(facilitator), command);
     }
@@ -54,7 +55,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Facilitator facilitator = new FacilitatorBuilder().build();
+        Facilitator facilitator = new FacilitatorBuilder(AMY).build();
         EditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FACILITATOR.getOneBased() + " "

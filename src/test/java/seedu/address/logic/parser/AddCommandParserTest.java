@@ -77,8 +77,23 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+        // missing phone
+        Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
+                new AddCommand(expectedFacilitator));
+
+        // missing email
+        expectedFacilitator = new FacilitatorBuilder(AMY).withEmail(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
+                new AddCommand(expectedFacilitator));
+
+        // missing office
+        expectedFacilitator = new FacilitatorBuilder(AMY).withOffice(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
+                new AddCommand(expectedFacilitator));
+
         // zero module codes
-        Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
+        expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY,
                 new AddCommand(expectedFacilitator));
     }
@@ -89,18 +104,6 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
-                expectedMessage);
-
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + OFFICE_DESC_BOB,
-                expectedMessage);
-
-        // missing office prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_OFFICE_BOB,
                 expectedMessage);
 
         // all prefixes missing

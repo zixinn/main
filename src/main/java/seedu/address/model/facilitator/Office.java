@@ -1,6 +1,5 @@
 package seedu.address.model.facilitator;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -25,8 +24,7 @@ public class Office {
      * @param office A valid office.
      */
     public Office(String office) {
-        requireNonNull(office);
-        checkArgument(isValidOffice(office), MESSAGE_CONSTRAINTS);
+        checkArgument(office == null || isValidOffice(office), MESSAGE_CONSTRAINTS);
         value = office;
     }
 
@@ -46,7 +44,9 @@ public class Office {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Office // instanceof handles nulls
-                && value.equals(((Office) other).value)); // state check
+                && ((value == null && ((Office) other).value == null)
+                || (value != null && ((Office) other).value != null
+                && value.equals(((Office) other).value)))); // state check
     }
 
     @Override

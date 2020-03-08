@@ -70,8 +70,7 @@ public class Facilitator {
         }
 
         return otherFacilitator != null
-                && otherFacilitator.getName().equals(getName())
-                && (otherFacilitator.getPhone().equals(getPhone()) || otherFacilitator.getEmail().equals(getEmail()));
+                && otherFacilitator.getName().equals(getName());
     }
 
     /**

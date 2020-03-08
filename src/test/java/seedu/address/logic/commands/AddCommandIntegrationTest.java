@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
@@ -27,7 +28,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newFacilitator_success() {
-        Facilitator validFacilitator = new FacilitatorBuilder().build();
+        Facilitator validFacilitator = new FacilitatorBuilder().withName(VALID_NAME_AMY).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addFacilitator(validFacilitator);

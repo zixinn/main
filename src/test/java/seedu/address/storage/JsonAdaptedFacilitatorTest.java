@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedFacilitator.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.BENSON;
+import static seedu.address.testutil.TypicalFacilitators.BENSON_NULL_EMAIL;
+import static seedu.address.testutil.TypicalFacilitators.BENSON_NULL_OFFICE;
+import static seedu.address.testutil.TypicalFacilitators.BENSON_NULL_PHONE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +66,10 @@ public class JsonAdaptedFacilitatorTest {
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
+    public void toModelType_nullPhone_success() throws Exception {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
                 VALID_NAME, null, VALID_EMAIL, VALID_OFFICE, VALID_MODULE_CODES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
+        assertEquals(BENSON_NULL_PHONE, facilitator.toModelType());
     }
 
     @Test
@@ -79,11 +81,10 @@ public class JsonAdaptedFacilitatorTest {
     }
 
     @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
+    public void toModelType_nullEmail_success() throws Exception {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
                 VALID_NAME, VALID_PHONE, null, VALID_OFFICE, VALID_MODULE_CODES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
+        assertEquals(BENSON_NULL_EMAIL, facilitator.toModelType());
     }
 
     @Test
@@ -95,11 +96,10 @@ public class JsonAdaptedFacilitatorTest {
     }
 
     @Test
-    public void toModelType_nullOffice_throwsIllegalValueException() {
+    public void toModelType_nullOffice_success() throws Exception {
         JsonAdaptedFacilitator facilitator = new JsonAdaptedFacilitator(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_MODULE_CODES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Office.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, facilitator::toModelType);
+        assertEquals(BENSON_NULL_OFFICE, facilitator.toModelType());
     }
 
     @Test

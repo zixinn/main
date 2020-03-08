@@ -1,6 +1,5 @@
 package seedu.address.model.facilitator;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -35,8 +34,7 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        checkArgument(email == null || isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
 
@@ -56,7 +54,9 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Email) other).value)); // state check
+                && ((value == null && ((Email) other).value == null)
+                || (value != null && ((Email) other).value != null
+                && value.equals(((Email) other).value)))); // state check
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.model.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -9,8 +10,9 @@ import org.junit.jupiter.api.Test;
 public class PhoneTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Phone(null));
+    public void constructor_null_success() {
+        Phone phone = new Phone(null);
+        assertNull(phone.value);
     }
 
     @Test

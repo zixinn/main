@@ -46,9 +46,25 @@ public class FacilitatorCard extends UiPart<Region> {
         this.facilitator = facilitator;
         id.setText(displayedIndex + ". ");
         name.setText(facilitator.getName().fullName);
-        phone.setText(facilitator.getPhone().value);
-        office.setText(facilitator.getOffice().value);
-        email.setText(facilitator.getEmail().value);
+
+        if (facilitator.getPhone().value != null) {
+            phone.setText(facilitator.getPhone().value);
+        } else {
+            phone.setText("");
+        }
+
+        if (facilitator.getOffice().value != null) {
+            office.setText(facilitator.getOffice().value);
+        } else {
+            office.setText("");
+        }
+
+        if (facilitator.getEmail().value != null) {
+            email.setText(facilitator.getEmail().value);
+        } else {
+            email.setText("");
+        }
+
         facilitator.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.moduleCode))
                 .forEach(moduleCode -> tags.getChildren().add(new Label(moduleCode.moduleCode)));

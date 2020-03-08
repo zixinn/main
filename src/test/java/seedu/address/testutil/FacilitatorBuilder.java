@@ -17,9 +17,6 @@ import seedu.address.model.util.SampleDataUtil;
 public class FacilitatorBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_OFFICE = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
@@ -29,9 +26,9 @@ public class FacilitatorBuilder {
 
     public FacilitatorBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        office = new Office(DEFAULT_OFFICE);
+        phone = new Phone(null);
+        email = new Email(null);
+        office = new Office(null);
         moduleCodes = new HashSet<>();
     }
 

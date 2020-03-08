@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ModuleCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Module codes names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Module codes should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String moduleCode;

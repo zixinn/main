@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Email;
@@ -33,16 +34,32 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_OFFICE, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Office office = ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE).get());
+        Phone phone = new Phone(null);
+        Email email = new Email(null);
+        Office office = new Office(null);
+
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_OFFICE).isPresent()) {
+            office = ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE).get());
+        }
+
         Set<ModuleCode> moduleCodeList = ParserUtil.parseModuleCodes(argMultimap.getAllValues(PREFIX_MODULE_CODE));
+
+        if (!CollectionUtil.isAnyNonNull(phone.value, email.value, office.value)) {
+            throw new ParseException(AddCommand.MESSAGE_NOT_ADDED);
+        }
 
         Facilitator facilitator = new Facilitator(name, phone, email, office, moduleCodeList);
 

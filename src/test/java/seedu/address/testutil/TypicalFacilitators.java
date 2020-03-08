@@ -55,6 +55,16 @@ public class TypicalFacilitators {
             .withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
             .withModuleCodes(VALID_MODULE_CODE_HUSBAND, VALID_MODULE_CODE_FRIEND).build();
 
+    public static final Facilitator BENSON_NULL_PHONE = new FacilitatorBuilder().withName("Benson Meier")
+            .withOffice("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
+            .withModuleCodes("owesMoney", "friends").build();
+    public static final Facilitator BENSON_NULL_EMAIL = new FacilitatorBuilder().withName("Benson Meier")
+            .withOffice("311, Clementi Ave 2, #02-25").withPhone("98765432")
+            .withModuleCodes("owesMoney", "friends").build();
+    public static final Facilitator BENSON_NULL_OFFICE = new FacilitatorBuilder().withName("Benson Meier")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withModuleCodes("owesMoney", "friends").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalFacilitators() {} // prevents instantiation
