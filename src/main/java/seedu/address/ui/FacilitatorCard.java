@@ -33,11 +33,11 @@ public class FacilitatorCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private FlowPane phone;
     @FXML
-    private Label office;
+    private FlowPane office;
     @FXML
-    private Label email;
+    private FlowPane email;
     @FXML
     private FlowPane tags;
 
@@ -48,21 +48,15 @@ public class FacilitatorCard extends UiPart<Region> {
         name.setText(facilitator.getName().fullName);
 
         if (facilitator.getPhone().value != null) {
-            phone.setText(facilitator.getPhone().value);
-        } else {
-            phone.setText("");
+            phone.getChildren().add(new Label(facilitator.getPhone().value));
         }
 
         if (facilitator.getOffice().value != null) {
-            office.setText(facilitator.getOffice().value);
-        } else {
-            office.setText("");
+            office.getChildren().add(new Label(facilitator.getOffice().value));
         }
 
         if (facilitator.getEmail().value != null) {
-            email.setText(facilitator.getEmail().value);
-        } else {
-            email.setText("");
+            email.getChildren().add(new Label(facilitator.getEmail().value));
         }
 
         facilitator.getModuleCodes().stream()
