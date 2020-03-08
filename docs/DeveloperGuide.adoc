@@ -108,7 +108,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
+.  The command execution can affect the `Model` (e.g. adding a facilitator).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -181,18 +181,18 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th facilitator in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new facilitator. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the facilitator was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoState3.png[]
 
@@ -230,7 +230,7 @@ image::CommitActivityDiagram.png[]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the facilitator being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -404,17 +404,15 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 * 2b. The module code is more than 10 characters or the description is more than 60 characters.
 +
 [none]
 ** 2b1. Mod Manager shows an error message.
-** 2b2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC02 - View module
@@ -434,9 +432,8 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC03 - Edit module
@@ -457,17 +454,15 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 * 3a. The new description is more than 60 characters.
 +
 [none]
 ** 3a1. Mod Manager shows an error message.
-** 3a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 3.
+Use case ends.
 
 [discrete]
 === Use case: UC04 - Delete module
@@ -487,9 +482,8 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC05 - Add class
@@ -553,7 +547,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: UC014 - Add facilitator
+=== Use case: UC14 - Add facilitator
 
 *<<mss, MSS>>*
 
@@ -570,9 +564,8 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC15 - View facilitators
@@ -589,7 +582,7 @@ Use case ends.
 [none]
 * 1a. The list of facilitators is empty.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC16 - Find facilitator
@@ -607,11 +600,7 @@ Use case ends.
 [none]
 * 2a. None of the names of the facilitators contain the keyword.
 +
-[none]
-** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
-+
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC17 - Edit facilitator
@@ -632,17 +621,15 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 * 3a. The new description is more than 60 characters.
 +
 [none]
 ** 3a1. Mod Manager shows an error message.
-** 3a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 3.
+Use case ends.
 
 [discrete]
 === Use case: UC18 - Delete facilitator
@@ -662,9 +649,8 @@ Use case ends.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
 === Use case: UC19 - View calendar
@@ -778,15 +764,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a facilitator
 
-. Deleting a person while all persons are listed
+. Deleting a facilitator while all facilitators are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all facilitators using the `list` command. Multiple facilitators in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No facilitator is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

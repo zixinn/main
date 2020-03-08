@@ -3,11 +3,11 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilitators.ALICE;
+import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
+import seedu.address.testutil.FacilitatorBuilder;
 
 public class AddressBookTest {
 
@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getFacilitatorList());
     }
 
     @Test
@@ -44,58 +44,58 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+    public void resetData_withDuplicateFacilitators_throwsDuplicateFacilitatorException() {
+        // Two facilitators with the same identity fields
+        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
+                .withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+        List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newFacilitators);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateFacilitatorException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasFacilitator_nullFacilitator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasFacilitator(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasFacilitator_facilitatorNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasFacilitator(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasFacilitator_facilitatorInAddressBook_returnsTrue() {
+        addressBook.addFacilitator(ALICE);
+        assertTrue(addressBook.hasFacilitator(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+    public void hasFacilitator_facilitatorWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addFacilitator(ALICE);
+        Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
+                .withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+        assertTrue(addressBook.hasFacilitator(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getFacilitatorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getFacilitatorList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose facilitators list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Facilitator> facilitators) {
+            this.facilitators.setAll(facilitators);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Facilitator> getFacilitatorList() {
+            return facilitators;
         }
     }
 
