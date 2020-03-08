@@ -20,18 +20,18 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a facilitator to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_OFFICE + "OFFICE] "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]...\n"
+            + PREFIX_NAME + " NAME "
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_OFFICE + " OFFICE] "
+            + "[" + PREFIX_MODULE_CODE + " MODULE_CODE]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_OFFICE + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_MODULE_CODE + "friends "
-            + PREFIX_MODULE_CODE + "owesMoney";
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_OFFICE + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_MODULE_CODE + " friends "
+            + PREFIX_MODULE_CODE + " owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
     public static final String MESSAGE_NOT_ADDED = "At least one of the optional fields (phone, email, office) "
