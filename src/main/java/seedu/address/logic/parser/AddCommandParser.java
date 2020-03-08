@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Email;
@@ -34,32 +33,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || !argMultimap.getPreamble().isEmpty()
+                || (!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
+                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = new Phone(null);
-        Email email = new Email(null);
-        Office office = new Office(null);
-
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        }
-
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        }
-
-        if (argMultimap.getValue(PREFIX_OFFICE).isPresent()) {
-            office = ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE).get());
-        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE));
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
+        Office office = ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE));
 
         Set<ModuleCode> moduleCodeList = ParserUtil.parseModuleCodes(argMultimap.getAllValues(PREFIX_MODULE_CODE));
-
-        if (!CollectionUtil.isAnyNonNull(phone.value, email.value, office.value)) {
-            throw new ParseException(AddCommand.MESSAGE_NOT_ADDED);
-        }
 
         Facilitator facilitator = new Facilitator(name, phone, email, office, moduleCodeList);
 
@@ -71,7 +57,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix) != null);
     }
 
 }

@@ -80,8 +80,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parsePhone_null_returnsNullPhone() throws Exception {
+        Phone expectedPhone = new Phone(null);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -103,8 +104,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOffice_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOffice((String) null));
+    public void parseOffice_null_returnsNullOffice() throws Exception {
+        Office expectedOffice = new Office(null);
+        assertEquals(expectedOffice, ParserUtil.parseOffice(null));
     }
 
     @Test
@@ -126,8 +128,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseEmail_null_returnsNullEmail() throws Exception {
+        Email expectedEmail = new Email(null);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(null));
     }
 
     @Test

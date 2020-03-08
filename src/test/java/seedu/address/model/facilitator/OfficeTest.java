@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class OfficeTest {
 
     @Test
-    public void constructor_null_success() {
+    public void constructor_null_returnsNullOffice() {
         Office office = new Office(null);
         assertNull(office.value);
     }

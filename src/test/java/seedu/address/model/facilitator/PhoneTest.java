@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class PhoneTest {
 
     @Test
-    public void constructor_null_success() {
+    public void constructor_null_returnsNullPhone() {
         Phone phone = new Phone(null);
         assertNull(phone.value);
     }

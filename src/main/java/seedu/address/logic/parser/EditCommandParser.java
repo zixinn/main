@@ -43,17 +43,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditCommand.EditFacilitatorDescriptor editFacilitatorDescriptor = new EditFacilitatorDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editFacilitatorDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_NAME) != null) {
+            editFacilitatorDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_PHONE) != null) {
+            editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_EMAIL) != null) {
+            editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
         }
-        if (argMultimap.getValue(PREFIX_OFFICE).isPresent()) {
-            editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE).get()));
+        if (argMultimap.getValue(PREFIX_OFFICE) != null) {
+            editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE)));
         }
         parseModuleCodesForEdit(argMultimap.getAllValues(PREFIX_MODULE_CODE))
                 .ifPresent(editFacilitatorDescriptor::setModuleCodes);

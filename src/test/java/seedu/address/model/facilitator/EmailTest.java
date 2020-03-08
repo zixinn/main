@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class EmailTest {
 
     @Test
-    public void constructor_null_success() {
+    public void constructor_null_returnsNullEmail() {
         Email email = new Email(null);
         assertNull(email.value);
     }

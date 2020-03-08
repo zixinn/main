@@ -57,10 +57,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        String trimmedPhone;
+        if (phone == null) {
+            trimmedPhone = null;
+        } else {
+            trimmedPhone = phone.trim();
+            if (!Phone.isValidPhone(trimmedPhone)) {
+                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            }
         }
         return new Phone(trimmedPhone);
     }
@@ -72,10 +76,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code office} is invalid.
      */
     public static Office parseOffice(String office) throws ParseException {
-        requireNonNull(office);
-        String trimmedOffice = office.trim();
-        if (!Office.isValidOffice(trimmedOffice)) {
-            throw new ParseException(Office.MESSAGE_CONSTRAINTS);
+        String trimmedOffice;
+        if (office == null) {
+            trimmedOffice = null;
+        } else {
+            trimmedOffice = office.trim();
+            if (!Office.isValidOffice(trimmedOffice)) {
+                throw new ParseException(Office.MESSAGE_CONSTRAINTS);
+            }
         }
         return new Office(trimmedOffice);
     }
@@ -87,10 +95,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        String trimmedEmail;
+        if (email == null) {
+            trimmedEmail = null;
+        } else {
+            trimmedEmail = email.trim();
+            if (!Email.isValidEmail(trimmedEmail)) {
+                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            }
         }
         return new Email(trimmedEmail);
     }

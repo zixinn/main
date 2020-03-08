@@ -92,6 +92,11 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
                 new AddCommand(expectedFacilitator));
 
+        // multiple optional fields missing
+        expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).withOffice(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
+                new AddCommand(expectedFacilitator));
+
         // zero module codes
         expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY,
@@ -104,6 +109,10 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
+                expectedMessage);
+
+        // missing all optional prefixes
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
                 expectedMessage);
 
         // all prefixes missing
