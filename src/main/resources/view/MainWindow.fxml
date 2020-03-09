@@ -39,6 +39,16 @@
         </MenuBar>
             <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="NEVER">
               <tabs>
+                <Tab text="Modules" >
+                  <content>
+                    <VBox fx:id="moduleList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                      <padding>
+                          <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                      <StackPane fx:id="moduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                    </VBox>
+                  </content>
+                </Tab>
                 <Tab text="Facilitators" >
                   <content>
                     <VBox fx:id="facilitatorList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
