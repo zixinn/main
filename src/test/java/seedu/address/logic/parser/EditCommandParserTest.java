@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_OFFICE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_HUSBAND;
@@ -24,7 +23,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
@@ -38,13 +40,15 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFacilitatorDescriptor;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
-import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
 
 public class EditCommandParserTest {
 
+    private static final String PHONE_EMPTY = " " + PREFIX_PHONE;
+    private static final String EMAIL_EMPTY = " " + PREFIX_EMAIL;
+    private static final String OFFICE_EMPTY = " " + PREFIX_OFFICE;
     private static final String MODULE_CODE_EMPTY = " " + PREFIX_MODULE_CODE;
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -84,7 +88,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_OFFICE_DESC, Office.MESSAGE_CONSTRAINTS); // invalid office
 
         assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
                 ModuleCode.MESSAGE_CONSTRAINTS); // invalid module code
@@ -202,6 +205,39 @@ public class EditCommandParserTest {
         descriptor = new EditFacilitatorDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withOffice(VALID_OFFICE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetPhone_success() {
+        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        String userInput = targetIndex.getOneBased() + PHONE_EMPTY;
+
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder().withPhone(null).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetEmail_success() {
+        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        String userInput = targetIndex.getOneBased() + EMAIL_EMPTY;
+
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder().withEmail(null).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetOffice_success() {
+        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        String userInput = targetIndex.getOneBased() + OFFICE_EMPTY;
+
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder().withOffice(null).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

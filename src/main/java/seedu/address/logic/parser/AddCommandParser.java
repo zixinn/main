@@ -17,7 +17,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -33,11 +33,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()
-                || (!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
-                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE))) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if ((!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
+                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE))) {
+            throw new ParseException(AddCommand.MESSAGE_NOT_ADDED);
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME));

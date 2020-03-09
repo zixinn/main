@@ -8,7 +8,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.SampleDataUtil;
 
 /**

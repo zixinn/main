@@ -39,7 +39,7 @@ public class FacilitatorCard extends UiPart<Region> {
     @FXML
     private FlowPane email;
     @FXML
-    private FlowPane tags;
+    private FlowPane moduleCodes;
 
     public FacilitatorCard(Facilitator facilitator, int displayedIndex) {
         super(FXML);
@@ -61,7 +61,7 @@ public class FacilitatorCard extends UiPart<Region> {
 
         facilitator.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.moduleCode))
-                .forEach(moduleCode -> tags.getChildren().add(new Label(moduleCode.moduleCode)));
+                .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.moduleCode)));
     }
 
     @Override

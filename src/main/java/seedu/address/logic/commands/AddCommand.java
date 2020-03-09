@@ -34,8 +34,8 @@ public class AddCommand extends Command {
             + PREFIX_MODULE_CODE + " owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
-    public static final String MESSAGE_NOT_ADDED = "At least one of the optional fields (phone, email, office) "
-            + "must be provided.";
+    public static final String MESSAGE_NOT_ADDED =
+            "At least one of the optional fields (phone, email, office) must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in the address book";
 
     private final Facilitator toAdd;

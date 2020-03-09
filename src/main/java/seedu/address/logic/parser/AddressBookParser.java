@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,20 +51,32 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
 
         switch(classWord) {
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
         case Facilitator.CLASS_WORD:
-            break;
+            return parseFacilitatorCommand(commandWord, arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
 
+    /**
+     * Parses command word and arguments into facilitator command for execution.
+     * @param commandWord the type of command
+     * @param arguments the arguments for the command
+     * @return the command based on the command word and arguments
+     * @throws ParseException if the input does not conform the expected format
+     */
+    public Command parseFacilitatorCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -75,24 +88,14 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_FACILITATOR_COMMAND);
         }
     }
-
 }
