@@ -58,7 +58,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = Facilitator.CLASS_WORD + " delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
@@ -79,8 +79,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + OFFICE_DESC_AMY;
+        String addCommand = Facilitator.CLASS_WORD + " " + AddCommand.COMMAND_WORD + NAME_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY;
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFacilitator(expectedFacilitator);

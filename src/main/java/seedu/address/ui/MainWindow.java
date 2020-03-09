@@ -45,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane facilitatorListPanelPlaceholder;
 
     @FXML
+    private StackPane calendarViewPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -109,6 +112,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
+
+        CalendarView calendarView = new CalendarView();
+        calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

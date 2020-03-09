@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facilitator.Facilitator;
 
 /**
  * Parses user input.
@@ -23,9 +24,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddressBookParser {
 
     /**
-     * Used for initial separation of command word and args.
+     * Used for initial separation of class word, command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT =
+            Pattern.compile("(?<classWord>\\S+)(\\s*)(?<commandWord>\\S*)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -40,8 +42,28 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
+        //eg facil add /name john...
+        //facil is classWord, add is commandWord, the rest is arguments
+        //for single word command, the command word will be classWord too
+        final String classWord = matcher.group("classWord");
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        switch(classWord) {
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case Facilitator.CLASS_WORD:
+            break;
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:

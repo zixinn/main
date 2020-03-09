@@ -15,6 +15,8 @@ import seedu.address.model.modulecode.ModuleCode;
  */
 public class Facilitator {
 
+    public static final String CLASS_WORD = "facil";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
