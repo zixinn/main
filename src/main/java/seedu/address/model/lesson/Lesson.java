@@ -79,6 +79,26 @@ public class Lesson {
         return getVenue() != null;
     }
 
+    private boolean isSameVenue(Lesson otherLesson) {
+        boolean isSameVenue = false;
+        if (otherLesson.doesVenueExist() && doesVenueExist()) {
+            isSameVenue = otherLesson.getVenue().equals(getVenue());
+        } else if (!otherLesson.doesVenueExist() && !doesVenueExist()) {
+            isSameVenue = true;
+        }
+        return isSameVenue;
+    }
+
+    private boolean isSameFacilitator(Lesson otherLesson) {
+        boolean isSameFacilitator = false;
+        if (otherLesson.doesFacilitatorExist() && doesFacilitatorExist()) {
+            isSameFacilitator = otherLesson.getFacilitator().equals(getFacilitator());
+        } else if (!otherLesson.doesFacilitatorExist() && !doesFacilitatorExist()) {
+            isSameFacilitator = true;
+        }
+        return isSameFacilitator;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -90,28 +110,14 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        boolean isSameVenue = false;
-        boolean isSameFacilitator = false;
-
-        if (otherLesson.doesFacilitatorExist() && doesFacilitatorExist()) {
-            isSameFacilitator = otherLesson.getFacilitator().equals(getFacilitator());
-        } else if (!otherLesson.doesFacilitatorExist() && !doesFacilitatorExist()) {
-            isSameFacilitator = true;
-        }
-
-        if (otherLesson.doesVenueExist() && doesVenueExist()) {
-            isSameVenue = otherLesson.getVenue().equals(getVenue());
-        } else if (!otherLesson.doesVenueExist() && !doesVenueExist()) {
-            isSameVenue = true;
-        }
 
         return otherLesson.getModuleCode().equals(getModuleCode())
                 && otherLesson.getType().equals(getType())
                 && otherLesson.getDay().equals(getDay())
                 && otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())
-                && isSameFacilitator
-                && isSameVenue;
+                && isSameFacilitator(otherLesson)
+                && isSameVenue(otherLesson);
     }
 }
 
