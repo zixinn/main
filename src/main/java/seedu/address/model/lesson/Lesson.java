@@ -79,6 +79,11 @@ public class Lesson {
         return getVenue() != null;
     }
 
+    /**
+     * Checks if the venue of the lessons are the same.
+     * @param otherLesson The other lesson to compare with.
+     * @return True if lessons are at the same venue and false otherwise.
+     */
     private boolean isSameVenue(Lesson otherLesson) {
         boolean isSameVenue = false;
         if (otherLesson.doesVenueExist() && doesVenueExist()) {
@@ -89,6 +94,11 @@ public class Lesson {
         return isSameVenue;
     }
 
+    /**
+     * Checks if the facilitators of the lessons are the same.
+     * @param otherLesson The other lesson to compare with.
+     * @return True if lessons have the same facilitator and false otherwise.
+     */
     private boolean isSameFacilitator(Lesson otherLesson) {
         boolean isSameFacilitator = false;
         if (otherLesson.doesFacilitatorExist() && doesFacilitatorExist()) {
