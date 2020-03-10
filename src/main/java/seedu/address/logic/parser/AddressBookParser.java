@@ -7,15 +7,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_CO
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.facil.FacilDelete;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.facil.FacilFind;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.facil.ListCommand;
+import seedu.address.logic.commands.facil.FacilCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 
@@ -80,17 +79,17 @@ public class AddressBookParser {
     public Command parseFacilitatorCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case FacilCommand.ADD_COMMAND_WORD:
+            return new FacilCommandParser().parse(arguments, commandWord);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case FacilCommand.EDIT_COMMAND_WORD:
+            return new FacilCommandParser().parse(arguments, commandWord);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case FacilDelete.COMMAND_WORD:
+            return new FacilCommandParser().parse(arguments, commandWord);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FacilFind.COMMAND_WORD:
+            return new FacilCommandParser().parse(arguments, commandWord);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

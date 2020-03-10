@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.facil;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -17,6 +17,8 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Email;
@@ -29,7 +31,7 @@ import seedu.address.model.module.ModuleCode;
 /**
  * Edits the details of an existing facilitator in the address book.
  */
-public class EditCommand extends Command {
+public class FacilEdit extends FacilCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -59,7 +61,7 @@ public class EditCommand extends Command {
      * @param index of the facilitator in the filtered facilitator list to edit
      * @param editFacilitatorDescriptor details to edit the facilitator with
      */
-    public EditCommand(Index index, EditFacilitatorDescriptor editFacilitatorDescriptor) {
+    public FacilEdit(Index index, EditFacilitatorDescriptor editFacilitatorDescriptor) {
         requireNonNull(index);
         requireNonNull(editFacilitatorDescriptor);
 
@@ -120,12 +122,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof FacilEdit)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        FacilEdit e = (FacilEdit) other;
         return index.equals(e.index)
                 && editFacilitatorDescriptor.equals(e.editFacilitatorDescriptor);
     }

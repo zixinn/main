@@ -12,4 +12,15 @@ public class CliSyntax {
     public static final Prefix PREFIX_OFFICE = new Prefix("/office");
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("/code");
 
+    public static final Prefix PREFIX_BY = new Prefix("/by");
+    public static final Prefix PREFIX_AT = new Prefix("/at");
+    public static final Prefix PREFIX_DATE = new Prefix("/date");
+    public static final Prefix PREFIX_MONTH = new Prefix("/month");
+    public static final Prefix PREFIX_YEAR = new Prefix("/year");
+    public static final Prefix PREFIX_WEEK = new Prefix("/week");
+
+    public static final Prefix PREFIX_TYPE = new Prefix("/type");
+    public static final Prefix PREFIX_DESC = new Prefix("/desc");
+    public static final Prefix PREFIX_VENUE = new Prefix("/venue");
+
 }

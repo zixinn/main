@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.facil.FacilEdit;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
@@ -17,21 +17,21 @@ import seedu.address.model.module.ModuleCode;
  */
 public class EditFacilitatorDescriptorBuilder {
 
-    private EditCommand.EditFacilitatorDescriptor descriptor;
+    private FacilEdit.EditFacilitatorDescriptor descriptor;
 
     public EditFacilitatorDescriptorBuilder() {
-        descriptor = new EditCommand.EditFacilitatorDescriptor();
+        descriptor = new FacilEdit.EditFacilitatorDescriptor();
     }
 
-    public EditFacilitatorDescriptorBuilder(EditCommand.EditFacilitatorDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditFacilitatorDescriptor(descriptor);
+    public EditFacilitatorDescriptorBuilder(FacilEdit.EditFacilitatorDescriptor descriptor) {
+        this.descriptor = new FacilEdit.EditFacilitatorDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditFacilitatorDescriptor} with fields containing {@code facilitator}'s details
      */
     public EditFacilitatorDescriptorBuilder(Facilitator facilitator) {
-        descriptor = new EditCommand.EditFacilitatorDescriptor();
+        descriptor = new FacilEdit.EditFacilitatorDescriptor();
         descriptor.setName(facilitator.getName());
         descriptor.setPhone(facilitator.getPhone());
         descriptor.setEmail(facilitator.getEmail());
@@ -81,7 +81,7 @@ public class EditFacilitatorDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditFacilitatorDescriptor build() {
+    public FacilEdit.EditFacilitatorDescriptor build() {
         return descriptor;
     }
 }

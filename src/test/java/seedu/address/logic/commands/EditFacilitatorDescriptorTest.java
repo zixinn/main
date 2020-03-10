@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.facil.FacilEdit;
 import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
 
 public class EditFacilitatorDescriptorTest {
@@ -19,8 +20,8 @@ public class EditFacilitatorDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditFacilitatorDescriptor descriptorWithSameValues =
-                new EditCommand.EditFacilitatorDescriptor(DESC_AMY);
+        FacilEdit.EditFacilitatorDescriptor descriptorWithSameValues =
+                new FacilEdit.EditFacilitatorDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +37,7 @@ public class EditFacilitatorDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditCommand.EditFacilitatorDescriptor editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY)
+        FacilEdit.EditFacilitatorDescriptor editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY)
                 .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
