@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalFacilitators.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.facil.AddCommand;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
@@ -40,8 +40,8 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.FacilitatorBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class FacilCommandParserTest {
+    private FacilCommandParser parser = new FacilCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

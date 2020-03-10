@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.facil.FacilDelete;
+import seedu.address.logic.commands.facil.FacilEdit;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.facil.FacilFind;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.facil.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
@@ -37,9 +37,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Facilitator facilitator = new FacilitatorBuilder(AMY).build();
-        AddCommand command = (AddCommand) parser.parseCommand(Facilitator.CLASS_WORD + " "
-                + FacilitatorUtil.getAddCommand(facilitator));
-        assertEquals(new AddCommand(facilitator), command);
+        FacilAdd command = (FacilAdd) parser.parseCommand(Facilitator.CLASS_WORD + " "
+                + FacilitatorUtil.getFacilAdd(facilitator));
+        assertEquals(new FacilAdd(facilitator), command);
     }
 
     @Test
@@ -50,21 +50,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                Facilitator.CLASS_WORD + " " + DeleteCommand.COMMAND_WORD + " "
+        FacilDelete command = (FacilDelete) parser.parseCommand(
+                Facilitator.CLASS_WORD + " " + FacilDelete.COMMAND_WORD + " "
                         + INDEX_FIRST_FACILITATOR.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_FACILITATOR), command);
+        assertEquals(new FacilDelete(INDEX_FIRST_FACILITATOR), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Facilitator facilitator = new FacilitatorBuilder(AMY).build();
-        EditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator).build();
-        EditCommand command = (EditCommand) parser.parseCommand(Facilitator.CLASS_WORD + " "
-                + EditCommand.COMMAND_WORD + " "
+        FacilEdit.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator).build();
+        FacilEdit command = (FacilEdit) parser.parseCommand(Facilitator.CLASS_WORD + " "
+                + FacilEdit.COMMAND_WORD + " "
                 + INDEX_FIRST_FACILITATOR.getOneBased() + " "
                 + FacilitatorUtil.getEditFacilitatorDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_FACILITATOR, descriptor), command);
+        assertEquals(new FacilEdit(INDEX_FIRST_FACILITATOR, descriptor), command);
     }
 
     @Test
@@ -76,9 +76,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(Facilitator.CLASS_WORD + " "
-                + FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FacilFind command = (FacilFind) parser.parseCommand(Facilitator.CLASS_WORD + " "
+                + FacilFind.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FacilFind(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

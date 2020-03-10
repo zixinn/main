@@ -15,13 +15,14 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.facil.FacilFind;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FacilFind}.
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -34,14 +35,14 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FacilFind findFirstCommand = new FacilFind(firstPredicate);
+        FacilFind findSecondCommand = new FacilFind(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FacilFind findFirstCommandCopy = new FacilFind(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,7 +59,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noFacilitatorFound() {
         String expectedMessage = String.format(MESSAGE_FACILITATORS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FacilFind command = new FacilFind(predicate);
         expectedModel.updateFilteredFacilitatorList(predicate);
         assertCommandSuccess(command, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredFacilitatorList());
@@ -68,7 +69,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multipleFacilitatorsFound() {
         String expectedMessage = String.format(MESSAGE_FACILITATORS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        FacilFind command = new FacilFind(predicate);
         expectedModel.updateFilteredFacilitatorList(predicate);
         assertCommandSuccess(command, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredFacilitatorList());

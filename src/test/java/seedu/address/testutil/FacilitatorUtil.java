@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.facil.FacilAdd;
+import seedu.address.logic.commands.facil.FacilEdit;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
 
@@ -21,8 +21,8 @@ public class FacilitatorUtil {
     /**
      * Returns an add command string for adding the {@code facilitator}.
      */
-    public static String getAddCommand(Facilitator facilitator) {
-        return AddCommand.COMMAND_WORD + " " + getFacilitatorDetails(facilitator);
+    public static String getFacilAdd(Facilitator facilitator) {
+        return FacilAdd.COMMAND_WORD + " " + getFacilitatorDetails(facilitator);
     }
 
     /**
@@ -43,7 +43,7 @@ public class FacilitatorUtil {
     /**
      * Returns the part of command string for the given {@code EditFacilitatorDescriptor}'s details.
      */
-    public static String getEditFacilitatorDescriptorDetails(EditCommand.EditFacilitatorDescriptor descriptor) {
+    public static String getEditFacilitatorDescriptorDetails(FacilEdit.EditFacilitatorDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -15,9 +16,9 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.testutil.FacilitatorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FacilAdd}.
  */
-public class AddCommandIntegrationTest {
+public class FacilAddIntegrationTest {
 
     private Model model;
 
@@ -33,14 +34,14 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addFacilitator(validFacilitator);
 
-        assertCommandSuccess(new AddCommand(validFacilitator), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validFacilitator), CommandType.FACILITATOR, expectedModel);
+        assertCommandSuccess(new FacilAdd(validFacilitator), model,
+                String.format(FacilAdd.MESSAGE_SUCCESS, validFacilitator), CommandType.FACILITATOR, expectedModel);
     }
 
     @Test
     public void execute_duplicateFacilitator_throwsCommandException() {
         Facilitator facilitatorInList = model.getAddressBook().getFacilitatorList().get(0);
-        assertCommandFailure(new AddCommand(facilitatorInList), model, AddCommand.MESSAGE_DUPLICATE_FACILITATOR);
+        assertCommandFailure(new FacilAdd(facilitatorInList), model, FacilAdd.MESSAGE_DUPLICATE_FACILITATOR);
     }
 
 }
