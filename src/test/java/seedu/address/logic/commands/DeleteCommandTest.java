@@ -70,7 +70,7 @@ public class DeleteCommandTest {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
 
         Index outOfBoundIndex = INDEX_SECOND_FACILITATOR;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of facilitator list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

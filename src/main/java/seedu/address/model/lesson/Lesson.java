@@ -81,6 +81,7 @@ public class Lesson {
 
     /**
      * Checks if the venue of the lessons are the same.
+     *
      * @param otherLesson The other lesson to compare with.
      * @return True if lessons are at the same venue and false otherwise.
      */
@@ -96,6 +97,7 @@ public class Lesson {
 
     /**
      * Checks if the facilitators of the lessons are the same.
+     *
      * @param otherLesson The other lesson to compare with.
      * @return True if lessons have the same facilitator and false otherwise.
      */

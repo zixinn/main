@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
 import seedu.address.model.Model;
 
 /**
- * Lists all facilitators in the address book to the user.
+ * Lists all facilitators in Mod Manager to the user.
  */
 public class ListCommand extends Command {
 

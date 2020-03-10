@@ -27,7 +27,7 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Edits the details of an existing facilitator in the address book.
+ * Edits the details of an existing facilitator in Mod Manager.
  */
 public class EditCommand extends Command {
 
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FACILITATOR_SUCCESS = "Edited Facilitator: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_ALL_OPTIONAL_FIELDS_DELETED =
             "At least one of phone, email and office should not be empty.";
 

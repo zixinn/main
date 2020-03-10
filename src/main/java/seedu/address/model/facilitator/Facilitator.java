@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Represents a Facilitator in the address book.
+ * Represents a Facilitator in Mod Manager.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Facilitator {

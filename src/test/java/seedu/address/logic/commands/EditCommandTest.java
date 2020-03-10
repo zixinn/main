@@ -146,7 +146,7 @@ public class EditCommandTest {
     public void execute_duplicateFacilitatorFilteredList_failure() {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
 
-        // edit facilitator in filtered list into a duplicate in address book
+        // edit facilitator in filtered list into a duplicate in mod manager
         Facilitator facilitatorInList = model.getAddressBook().getFacilitatorList().get(INDEX_SECOND_FACILITATOR
                 .getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FACILITATOR,
@@ -167,7 +167,7 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of facilitator list
      */
     @Test
     public void execute_invalidFacilitatorIndexFilteredList_failure() {
