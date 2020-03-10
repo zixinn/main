@@ -50,7 +50,7 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        switch(classWord) {
+        switch (classWord) {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -71,6 +71,7 @@ public class AddressBookParser {
 
     /**
      * Parses command word and arguments into facilitator command for execution.
+     *
      * @param commandWord the type of command
      * @param arguments the arguments for the command
      * @return the command based on the command word and arguments

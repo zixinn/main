@@ -39,7 +39,7 @@
         </MenuBar>
             <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="NEVER">
               <tabs>
-                <Tab text="Modules" >
+                <Tab fx:id="module" text="Modules" >
                   <content>
                     <VBox fx:id="moduleList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                       <padding>
@@ -49,7 +49,7 @@
                     </VBox>
                   </content>
                 </Tab>
-                <Tab text="Facilitators" >
+                <Tab fx:id="facilitator" text="Facilitators" >
                   <content>
                     <VBox fx:id="facilitatorList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                       <padding>
@@ -59,7 +59,7 @@
                     </VBox>
                   </content>
                 </Tab>
-                <Tab text="Calendar" >
+                <Tab fx:id="calendar" text="Calendar" >
                   <content>
                     <StackPane fx:id="calendarViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                       <padding>

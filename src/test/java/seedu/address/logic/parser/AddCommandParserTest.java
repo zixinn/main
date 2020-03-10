@@ -24,9 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
@@ -44,10 +41,6 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.FacilitatorBuilder;
 
 public class AddCommandParserTest {
-    private static final String PHONE_EMPTY = " " + PREFIX_PHONE;
-    private static final String EMAIL_EMPTY = " " + PREFIX_EMAIL;
-    private static final String OFFICE_EMPTY = " " + PREFIX_OFFICE;
-
     private AddCommandParser parser = new AddCommandParser();
 
     @Test

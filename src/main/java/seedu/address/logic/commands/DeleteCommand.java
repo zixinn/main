@@ -41,7 +41,8 @@ public class DeleteCommand extends Command {
 
         Facilitator facilitatorToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFacilitator(facilitatorToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete),
+                CommandType.FACILITATOR);
     }
 
     @Override

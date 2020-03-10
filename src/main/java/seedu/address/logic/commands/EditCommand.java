@@ -90,7 +90,8 @@ public class EditCommand extends Command {
 
         model.setFacilitator(facilitatorToEdit, editedFacilitator);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
-        return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator));
+        return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator),
+                CommandType.FACILITATOR);
     }
 
     /**
