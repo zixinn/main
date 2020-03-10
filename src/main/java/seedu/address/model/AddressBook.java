@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// facilitator-level operations
 
     /**
-     * Returns true if a facilitator with the same identity as {@code facilitator} exists in the address book.
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
      */
     public boolean hasFacilitator(Facilitator facilitator) {
         requireNonNull(facilitator);
@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a facilitator to the address book.
-     * The facilitator must not already exist in the address book.
+     * Adds a facilitator to the Mod Manager.
+     * The facilitator must not already exist in Mod Manager.
      */
     public void addFacilitator(Facilitator p) {
         facilitators.add(p);
@@ -76,9 +76,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given facilitator {@code target} in the list with {@code editedFacilitator}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in Mod Manager.
      * The facilitator identity of {@code editedFacilitator} must not be the same as another existing facilitator
-     * in the address book.
+     * in Mod Manager.
      */
     public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
         requireNonNull(editedFacilitator);
@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in Mod Manager.
      */
     public void removeFacilitator(Facilitator key) {
         facilitators.remove(key);

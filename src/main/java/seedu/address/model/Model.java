@@ -53,27 +53,27 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a facilitator with the same identity as {@code facilitator} exists in the address book.
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
      */
     boolean hasFacilitator(Facilitator facilitator);
 
     /**
      * Deletes the given facilitator.
-     * The facilitator must exist in the address book.
+     * The facilitator must exist in Mod Manager.
      */
     void deleteFacilitator(Facilitator target);
 
     /**
      * Adds the given facilitator.
-     * {@code facilitator} must not already exist in the address book.
+     * {@code facilitator} must not already exist in Mod Manager.
      */
     void addFacilitator(Facilitator facilitator);
 
     /**
      * Replaces the given facilitator {@code target} with {@code editedFacilitator}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in Mod Manager.
      * The facilitator identity of {@code editedFacilitator} must not be the same as another existing facilitator
-     * in the address book.
+     * in Mod Manager.
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
 

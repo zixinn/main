@@ -12,13 +12,13 @@ import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 
 /**
- * Adds a facilitator to the address book.
+ * Adds a facilitator to Mod Manager.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a facilitator to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a facilitator to Mod Manager. "
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + "[" + PREFIX_PHONE + " PHONE] "
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
     public static final String MESSAGE_NOT_ADDED =
             "At least one of the optional fields (phone, email, office) must be provided.";
-    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager";
 
     private final Facilitator toAdd;
 
