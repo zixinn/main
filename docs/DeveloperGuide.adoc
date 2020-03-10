@@ -415,7 +415,24 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC02 - View module
+=== Use case: UC02 - List modules
+
+*<<mss, MSS>>*
+
+1.  User requests to list all modules.
+2.  Mod Manager shows the list of all the modules.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. The list of modules is empty.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC03 - View module
 
 *<<mss, MSS>>*
 
@@ -436,13 +453,13 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC03 - Edit module
+=== Use case: UC04 - Edit module
 
 *<<mss, MSS>>*
 
 1.  User requests to edit a module.
-2.  User provides the module code.
-3.  User provides the new description.
+2.  User provides the index.
+3.  User provides the new module code and description.
 4.  Mod Manager edits the module.
 +
 Use case ends.
@@ -450,14 +467,14 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given module code is invalid.
+* 2a. The given index is invalid.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
 Use case ends.
 
-* 3a. The new description is more than 60 characters.
+* 3a. The new module code is more than 10 characters or the new description is more than 60 characters.
 +
 [none]
 ** 3a1. Mod Manager shows an error message.
@@ -465,12 +482,12 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC04 - Delete module
+=== Use case: UC05 - Delete module
 
 *<<mss, MSS>>*
 
 1.  User requests to delete a module.
-2.  User provides the module code.
+2.  User provides the index.
 3.  Mod Manager deletes the module.
 +
 Use case ends.
@@ -478,7 +495,7 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given module code is invalid.
+* 2a. The given index is invalid.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
@@ -486,7 +503,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC05 - Add class
+=== Use case: UC06 - Add class
 *<<mss, MSS>>*
 
 1. User request to add a class.
@@ -506,7 +523,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: UC06 - Edit class
+=== Use case: UC10 - Edit class
 *<<mss, MSS>>*
 
 1. User request to edit a class.
@@ -527,7 +544,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: UC07 - Delete class
+=== Use case: UC11 - Delete class
 *<<mss, MSS>>*
 
 1. User requests to delete a class.
@@ -547,7 +564,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: UC14 - Add facilitator
+=== Use case: UC18 - Add facilitator
 
 *<<mss, MSS>>*
 
@@ -567,12 +584,20 @@ Use case ends.
 +
 Use case ends.
 
+[none]
+* 2a. Fields provided are invalid.
++
+[none]
+** 2a1. Mod Manager shows an error message.
++
+Use case ends.
+
 [discrete]
-=== Use case: UC15 - View facilitators
+=== Use case: UC19 - List facilitators
 
 *<<mss, MSS>>*
 
-1.  User requests to view facilitators.
+1.  User requests to list all facilitators.
 2.  Mod Manager shows the list of all the facilitators.
 +
 Use case ends.
@@ -585,7 +610,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC16 - Find facilitator
+=== Use case: UC20 - Find facilitator
 
 *<<mss, MSS>>*
 
@@ -603,12 +628,12 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC17 - Edit facilitator
+=== Use case: UC21 - Edit facilitator
 
 *<<mss, MSS>>*
 
 1.  User requests to edit a facilitator.
-2.  User provides the facilitator’s name.
+2.  User provides the index.
 3.  User provides the new details.
 4.  Mod Manager edits the facilitator.
 +
@@ -617,27 +642,28 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given facilitator name is invalid.
+* 2a. The given index is invalid.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
 Use case ends.
 
-* 3a. The new description is more than 60 characters.
+[none]
+* 2a. Fields provided are invalid.
 +
 [none]
-** 3a1. Mod Manager shows an error message.
+** 2a1. Mod Manager shows an error message.
 +
 Use case ends.
 
 [discrete]
-=== Use case: UC18 - Delete facilitator
+=== Use case: UC22 - Delete facilitator
 
 *<<mss, MSS>>*
 
 1.  User requests to delete a facilitator.
-2.  User provides the facilitator name.
+2.  User provides the index.
 3.  Mod Manager deletes the facilitator.
 +
 Use case ends.
@@ -645,7 +671,7 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given facilitator name is invalid.
+* 2a. The given index is invalid.
 +
 [none]
 ** 2a1. Mod Manager shows an error message.
@@ -653,7 +679,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC19 - View calendar
+=== Use case: UC23 - View calendar
 *<<mss, MSS>>*
 
 1. User requests to view the calendar for a specified week.
@@ -667,12 +693,11 @@ Use case ends.
 +
 [none]
 ** 1a1. Mod Manager shows an error message.
-** 1a2. Mod Manager requests for correct input.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [discrete]
-=== Use case: UC20 - Find empty slots in calendar
+=== Use case: UC24 - Find empty slots in calendar
 *<<mss, MSS>>*
 
 1. User requests to find empty slots in the calendar.
@@ -686,9 +711,8 @@ Use case ends.
 +
 [none]
 ** 1a1. Mod Manager shows an error message.
-** 1a2. Mod Manager requests for correct input.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [none]
 * 2a. The list of empty slots is empty.

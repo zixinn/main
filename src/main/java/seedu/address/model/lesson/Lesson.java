@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import seedu.address.model.facilitator.Facilitator;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Represents a Lesson in Mod Manager.

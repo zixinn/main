@@ -17,7 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFacilitatorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -47,13 +47,25 @@ public class EditCommandParser implements Parser<EditCommand> {
             editFacilitatorDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)));
         }
         if (argMultimap.getValue(PREFIX_PHONE) != null) {
-            editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)));
+            if (argMultimap.getValue(PREFIX_PHONE).equals("")) {
+                editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(null));
+            } else {
+                editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)));
+            }
         }
         if (argMultimap.getValue(PREFIX_EMAIL) != null) {
-            editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
+            if (argMultimap.getValue(PREFIX_EMAIL).equals("")) {
+                editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(null));
+            } else {
+                editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
+            }
         }
         if (argMultimap.getValue(PREFIX_OFFICE) != null) {
-            editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE)));
+            if (argMultimap.getValue(PREFIX_OFFICE).equals("")) {
+                editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(null));
+            } else {
+                editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE)));
+            }
         }
         parseModuleCodesForEdit(argMultimap.getAllValues(PREFIX_MODULE_CODE))
                 .ifPresent(editFacilitatorDescriptor::setModuleCodes);

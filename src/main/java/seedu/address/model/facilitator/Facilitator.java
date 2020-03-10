@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Represents a Facilitator in the address book.
@@ -106,15 +106,20 @@ public class Facilitator {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Office: ")
-                .append(getOffice())
-                .append(" Module codes: ");
-        getModuleCodes().forEach(builder::append);
+        builder.append(getName());
+        if (getPhone().value != null) {
+            builder.append(" Phone: ").append(getPhone());
+        }
+        if (getEmail().value != null) {
+            builder.append(" Email: ").append(getEmail());
+        }
+        if (getOffice().value != null) {
+            builder.append(" Office: ").append(getOffice());
+        }
+        if (!getModuleCodes().isEmpty()) {
+            builder.append(" Module codes: ");
+            getModuleCodes().forEach(builder::append);
+        }
         return builder.toString();
     }
 

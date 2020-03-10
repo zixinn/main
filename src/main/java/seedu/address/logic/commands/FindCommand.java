@@ -29,9 +29,8 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFacilitatorList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_FACILITATORS_LISTED_OVERVIEW,
-                        model.getFilteredFacilitatorList().size()));
+        return new CommandResult(String.format(Messages.MESSAGE_FACILITATORS_LISTED_OVERVIEW,
+                model.getFilteredFacilitatorList().size()), CommandType.FACILITATOR);
     }
 
     @Override

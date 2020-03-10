@@ -19,6 +19,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.FACILITATOR);
     }
 }

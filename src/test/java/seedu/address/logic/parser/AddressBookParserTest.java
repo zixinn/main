@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
@@ -88,8 +89,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + ListCommand.COMMAND_WORD)
+                instanceof ListCommand);
+        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + ListCommand.COMMAND_WORD + " 3")
+                instanceof ListCommand);
     }
 
     @Test
@@ -101,5 +104,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_unknownFacilitatorCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_FACILITATOR_COMMAND, () -> parser
+                .parseCommand("facil unknownCommand"));
     }
 }

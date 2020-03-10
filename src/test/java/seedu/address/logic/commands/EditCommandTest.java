@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -36,7 +38,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Facilitator editedFacilitator = new FacilitatorBuilder().build();
+        Facilitator editedFacilitator = new FacilitatorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withOffice(VALID_OFFICE_BOB).build();
         EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FACILITATOR, descriptor);
 
@@ -45,7 +48,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
     }
 
     @Test
@@ -66,7 +69,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFacilitator(lastFacilitator, editedFacilitator);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
     }
 
     @Test
@@ -78,7 +81,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
     }
 
     @Test
@@ -97,7 +100,37 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
+    }
+
+    @Test
+    public void execute_allOptionalFieldsDeletedUnfilteredList_failure() {
+        Facilitator editedFacilitator = new FacilitatorBuilder().build();
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_FACILITATOR, descriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+    }
+
+    @Test
+    public void execute_allOptionalFieldsDeletedFilteredList_failure() {
+        showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+
+        Facilitator facilitatorInFilteredList = model.getFilteredFacilitatorList()
+                .get(INDEX_FIRST_FACILITATOR.getZeroBased());
+        Facilitator editedFacilitator = new FacilitatorBuilder(facilitatorInFilteredList).withPhone(null)
+                .withEmail(null).withOffice(null).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_FACILITATOR,
+                new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(null)
+                        .withEmail(null).withOffice(null).build());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
     }
 
     @Test

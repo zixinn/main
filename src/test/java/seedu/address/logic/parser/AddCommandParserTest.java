@@ -37,7 +37,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.FacilitatorBuilder;
 
 public class AddCommandParserTest {
@@ -111,12 +111,20 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
                 expectedMessage);
 
-        // missing all optional prefixes
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
-                expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_allOptionalFieldsMissing_failure() {
+        String expectedMessage = AddCommand.MESSAGE_NOT_ADDED;
+
+        // only name provided
+        assertParseFailure(parser, NAME_DESC_BOB, expectedMessage);
+
+        // all optional prefixes missing
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
                 expectedMessage);
     }
 

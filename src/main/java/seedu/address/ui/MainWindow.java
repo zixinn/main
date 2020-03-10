@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -52,6 +54,18 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private TabPane mainTabPane;
+
+    @FXML
+    private Tab module;
+
+    @FXML
+    private Tab facilitator;
+
+    @FXML
+    private Tab calendar;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -166,6 +180,27 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToFacilitator() {
+        mainTabPane.getSelectionModel().select(facilitator);
+    }
+
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToModule() {
+        mainTabPane.getSelectionModel().select(module);
+    }
+
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToCalendar() {
+        mainTabPane.getSelectionModel().select(calendar);
+    }
+
     public FacilitatorListPanel getFacilitatorListPanel() {
         return facilitatorListPanel;
     }
@@ -181,12 +216,27 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getType()) {
+            case MODULE:
+            case LESSON:
+            case TASK:
+            case CLEAR:
+                handleSwitchToModule();
+                break;
+            case FACILITATOR:
+                handleSwitchToFacilitator();
+                break;
+            case CALENDAR:
+                handleSwitchToCalendar();
+                break;
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                break;
             }
 
             return commandResult;

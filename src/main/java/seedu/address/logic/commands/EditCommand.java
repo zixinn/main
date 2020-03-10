@@ -24,7 +24,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.modulecode.ModuleCode;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Edits the details of an existing facilitator in the address book.
@@ -49,6 +49,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_FACILITATOR_SUCCESS = "Edited Facilitator: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in the address book.";
+    public static final String MESSAGE_ALL_OPTIONAL_FIELDS_DELETED =
+            "At least one of phone, email and office should not be empty.";
 
     private final Index index;
     private final EditFacilitatorDescriptor editFacilitatorDescriptor;
@@ -81,9 +83,15 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITATOR);
         }
 
+        if (editedFacilitator.getPhone().value == null && editedFacilitator.getEmail().value == null
+                && editedFacilitator.getOffice().value == null) {
+            throw new CommandException(MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+        }
+
         model.setFacilitator(facilitatorToEdit, editedFacilitator);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
-        return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator));
+        return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator),
+                CommandType.FACILITATOR);
     }
 
     /**

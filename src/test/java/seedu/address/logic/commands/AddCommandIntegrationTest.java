@@ -34,7 +34,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addFacilitator(validFacilitator);
 
         assertCommandSuccess(new AddCommand(validFacilitator), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validFacilitator), expectedModel);
+                String.format(AddCommand.MESSAGE_SUCCESS, validFacilitator), CommandType.FACILITATOR, expectedModel);
     }
 
     @Test
