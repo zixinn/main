@@ -3,7 +3,7 @@ package seedu.address.model.facilitator;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Facilitator's phone number in the address book.
+ * Represents a Facilitator's phone number in Mod Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

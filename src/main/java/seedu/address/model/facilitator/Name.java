@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Facilitator's name in the address book.
+ * Represents a Facilitator's name in Mod Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
