@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.facil;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.facil.FacilDelete;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,9 +21,9 @@ import seedu.address.model.facilitator.Facilitator;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code FacilDelete}.
+ * {@code FacilDeleteCommand}.
  */
-public class DeleteCommandTest {
+public class FacilDeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -31,9 +31,10 @@ public class DeleteCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Facilitator facilitatorToDelete = model.getFilteredFacilitatorList()
                 .get(INDEX_FIRST_FACILITATOR.getZeroBased());
-        FacilDelete deleteCommand = new FacilDelete(INDEX_FIRST_FACILITATOR);
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
 
-        String expectedMessage = String.format(FacilDelete.MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete);
+        String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
+                facilitatorToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteFacilitator(facilitatorToDelete);
@@ -44,7 +45,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilitatorList().size() + 1);
-        FacilDelete deleteCommand = new FacilDelete(outOfBoundIndex);
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
@@ -55,9 +56,10 @@ public class DeleteCommandTest {
 
         Facilitator facilitatorToDelete = model.getFilteredFacilitatorList()
                 .get(INDEX_FIRST_FACILITATOR.getZeroBased());
-        FacilDelete deleteCommand = new FacilDelete(INDEX_FIRST_FACILITATOR);
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
 
-        String expectedMessage = String.format(FacilDelete.MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete);
+        String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
+                facilitatorToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteFacilitator(facilitatorToDelete);
@@ -74,21 +76,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of facilitator list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
 
-        FacilDelete deleteCommand = new FacilDelete(outOfBoundIndex);
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        FacilDelete deleteFirstCommand = new FacilDelete(INDEX_FIRST_FACILITATOR);
-        FacilDelete deleteSecondCommand = new FacilDelete(INDEX_SECOND_FACILITATOR);
+        FacilDeleteCommand deleteFirstCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
+        FacilDeleteCommand deleteSecondCommand = new FacilDeleteCommand(INDEX_SECOND_FACILITATOR);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        FacilDelete deleteFirstCommandCopy = new FacilDelete(INDEX_FIRST_FACILITATOR);
+        FacilDeleteCommand deleteFirstCommandCopy = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

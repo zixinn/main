@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Module {
 
-    public static final String CLASS_WORD = "mod";
+    public static final String COMMAND_WORD = "mod";
 
     //Identity fields
     private final ModuleCode code;

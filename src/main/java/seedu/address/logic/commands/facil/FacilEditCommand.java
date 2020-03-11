@@ -31,7 +31,7 @@ import seedu.address.model.module.ModuleCode;
 /**
  * Edits the details of an existing facilitator in Mod Manager.
  */
-public class FacilEdit extends FacilCommand {
+public class FacilEditCommand extends FacilCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -61,7 +61,7 @@ public class FacilEdit extends FacilCommand {
      * @param index of the facilitator in the filtered facilitator list to edit
      * @param editFacilitatorDescriptor details to edit the facilitator with
      */
-    public FacilEdit(Index index, EditFacilitatorDescriptor editFacilitatorDescriptor) {
+    public FacilEditCommand(Index index, EditFacilitatorDescriptor editFacilitatorDescriptor) {
         requireNonNull(index);
         requireNonNull(editFacilitatorDescriptor);
 
@@ -122,12 +122,12 @@ public class FacilEdit extends FacilCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FacilEdit)) {
+        if (!(other instanceof FacilEditCommand)) {
             return false;
         }
 
         // state check
-        FacilEdit e = (FacilEdit) other;
+        FacilEditCommand e = (FacilEditCommand) other;
         return index.equals(e.index)
                 && editFacilitatorDescriptor.equals(e.editFacilitatorDescriptor);
     }

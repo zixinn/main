@@ -19,8 +19,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.facil.FacilAdd;
-import seedu.address.logic.commands.facil.FacilList;
+import seedu.address.logic.commands.facil.FacilAddCommand;
+import seedu.address.logic.commands.facil.FacilListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -58,14 +58,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = Facilitator.CLASS_WORD + " delete 9";
+        String deleteCommand = Facilitator.COMMAND_WORD + " delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = Facilitator.CLASS_WORD + " " + FacilList.COMMAND_WORD;
-        assertCommandSuccess(listCommand, FacilList.MESSAGE_SUCCESS, model);
+        String listCommand = Facilitator.COMMAND_WORD + " " + FacilListCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, FacilListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -79,13 +79,13 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String facilAdd = Facilitator.CLASS_WORD + " " + FacilAdd.COMMAND_WORD + NAME_DESC_AMY
+        String facilAddCommand = Facilitator.COMMAND_WORD + " " + FacilAddCommand.COMMAND_WORD + NAME_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY;
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFacilitator(expectedFacilitator);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(facilAdd, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(facilAddCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test

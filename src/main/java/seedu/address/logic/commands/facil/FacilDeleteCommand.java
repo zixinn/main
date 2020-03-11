@@ -15,7 +15,7 @@ import seedu.address.model.facilitator.Facilitator;
 /**
  * Deletes a facilitator identified using it's displayed index from Mod Manager.
  */
-public class FacilDelete extends FacilCommand {
+public class FacilDeleteCommand extends FacilCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -28,7 +28,7 @@ public class FacilDelete extends FacilCommand {
 
     private final Index targetIndex;
 
-    public FacilDelete(Index targetIndex) {
+    public FacilDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -50,7 +50,7 @@ public class FacilDelete extends FacilCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FacilDelete // instanceof handles nulls
-                && targetIndex.equals(((FacilDelete) other).targetIndex)); // state check
+                || (other instanceof FacilDeleteCommand // instanceof handles nulls
+                && targetIndex.equals(((FacilDeleteCommand) other).targetIndex)); // state check
     }
 }

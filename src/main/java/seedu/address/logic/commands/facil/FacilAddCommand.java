@@ -16,7 +16,7 @@ import seedu.address.model.facilitator.Facilitator;
 /**
  * Adds a facilitator to Mod Manager.
  */
-public class FacilAdd extends FacilCommand {
+public class FacilAddCommand extends FacilCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -43,9 +43,9 @@ public class FacilAdd extends FacilCommand {
     private final Facilitator toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Facilitator}
+     * Creates a FacilAddCommand to add the specified {@code Facilitator}
      */
-    public FacilAdd(Facilitator facilitator) {
+    public FacilAddCommand(Facilitator facilitator) {
         requireNonNull(facilitator);
         toAdd = facilitator;
     }
@@ -65,7 +65,7 @@ public class FacilAdd extends FacilCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FacilAdd // instanceof handles nulls
-                && toAdd.equals(((FacilAdd) other).toAdd));
+                || (other instanceof FacilAddCommand // instanceof handles nulls
+                && toAdd.equals(((FacilAddCommand) other).toAdd));
     }
 }
