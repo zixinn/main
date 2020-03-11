@@ -1,11 +1,12 @@
 package seedu.address.model.module;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
 /**
  * Represents a Module in Mod Manager.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Module {
 
@@ -15,10 +16,10 @@ public class Module {
     private final ModuleCode code;
 
     //Data fields
-    private String description;
+    private Description description;
 
-    public Module(ModuleCode code, String description) {
-        requireNonNull(code, description);
+    public Module(ModuleCode code, Description description) {
+        requireAllNonNull(code, description);
         this.code = code;
         this.description = description;
     }
@@ -27,7 +28,7 @@ public class Module {
         return code;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
@@ -50,7 +51,7 @@ public class Module {
      * Returns true if both modules have the same identity and data fields.
      *
      * @param other The other object to compare with.
-     * @return True if both modules are equal.
+     * @return true if both modules are equal.
      */
     @Override
     public boolean equals(Object other) {

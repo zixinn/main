@@ -17,12 +17,9 @@ public class Facilitator {
 
     public static final String COMMAND_WORD = "facil";
 
-    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Office office;
     private final Set<ModuleCode> moduleCodes = new HashSet<>();
 

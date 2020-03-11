@@ -29,7 +29,7 @@ public class Office {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid office.
      */
     public static boolean isValidOffice(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -5,11 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a ModuleCode in the Mod Manager.
- * Guarantees: immutable; name is valid as declared in {@link #isValidModuleCode(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Module codes should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Module codes should be alphanumeric with no spaces and should not exceed 10 characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String moduleCode;
@@ -29,7 +30,7 @@ public class ModuleCode {
      * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 10;
     }
 
     @Override
