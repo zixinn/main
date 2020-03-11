@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalFacilitators.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
@@ -40,8 +40,8 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.FacilitatorBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class FacilCommandParserTest {
+    private FacilCommandParser parser = new FacilCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -49,30 +49,30 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple offices - last office accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple module codes - all accepted
         Facilitator expectedFacilitatorMultipleModuleCodes = new FacilitatorBuilder(BOB)
                 .withModuleCodes(VALID_MODULE_CODE_FRIEND, VALID_MODULE_CODE_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitatorMultipleModuleCodes));
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD,
+                new FacilAdd(expectedFacilitatorMultipleModuleCodes));
     }
 
     @Test
@@ -80,83 +80,86 @@ public class AddCommandParserTest {
         // missing phone
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // missing email
         expectedFacilitator = new FacilitatorBuilder(AMY).withEmail(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // missing office
         expectedFacilitator = new FacilitatorBuilder(AMY).withOffice(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // multiple optional fields missing
         expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).withOffice(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
 
         // zero module codes
         expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY,
-                new AddCommand(expectedFacilitator));
+                FacilAdd.COMMAND_WORD, new FacilAdd(expectedFacilitator));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAdd.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
-                expectedMessage);
+                FacilAdd.COMMAND_WORD, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
-                expectedMessage);
+                FacilAdd.COMMAND_WORD, expectedMessage);
     }
 
     @Test
     public void parse_allOptionalFieldsMissing_failure() {
-        String expectedMessage = AddCommand.MESSAGE_NOT_ADDED;
+        String expectedMessage = FacilAdd.MESSAGE_NOT_ADDED;
 
         // only name provided
-        assertParseFailure(parser, NAME_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB, FacilAdd.COMMAND_WORD, expectedMessage);
 
         // all optional prefixes missing
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_OFFICE_BOB,
-                expectedMessage);
+                FacilAdd.COMMAND_WORD, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + OFFICE_DESC_BOB
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, FacilAdd.COMMAND_WORD, Email.MESSAGE_CONSTRAINTS);
 
         // invalid office
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_OFFICE_DESC
-                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND, Office.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
+                FacilAdd.COMMAND_WORD, Office.MESSAGE_CONSTRAINTS);
 
         // invalid module code
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                + INVALID_MODULE_CODE_DESC + VALID_MODULE_CODE_FRIEND, ModuleCode.MESSAGE_CONSTRAINTS);
+                + INVALID_MODULE_CODE_DESC + VALID_MODULE_CODE_FRIEND,
+                FacilAdd.COMMAND_WORD, ModuleCode.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_OFFICE_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                FacilAdd.COMMAND_WORD, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                FacilAdd.COMMAND_WORD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAdd.MESSAGE_USAGE));
     }
 }

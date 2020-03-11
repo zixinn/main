@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.facil;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
@@ -14,7 +16,7 @@ import seedu.address.model.facilitator.Facilitator;
 /**
  * Adds a facilitator to Mod Manager.
  */
-public class AddCommand extends Command {
+public class FacilAdd extends FacilCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -43,7 +45,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Facilitator}
      */
-    public AddCommand(Facilitator facilitator) {
+    public FacilAdd(Facilitator facilitator) {
         requireNonNull(facilitator);
         toAdd = facilitator;
     }
@@ -63,7 +65,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof FacilAdd // instanceof handles nulls
+                && toAdd.equals(((FacilAdd) other).toAdd));
     }
 }

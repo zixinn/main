@@ -7,15 +7,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_CO
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.facil.FacilCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 
@@ -78,24 +74,9 @@ public class AddressBookParser {
      * @throws ParseException if the input does not conform the expected format
      */
     public Command parseFacilitatorCommand(String commandWord, String arguments) throws ParseException {
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        default:
+        if (FacilCommand.ALL_COMMAND_WORDS.contains(commandWord)) {
+            return new FacilCommandParser().parse(arguments, commandWord);
+        } else {
             throw new ParseException(MESSAGE_UNKNOWN_FACILITATOR_COMMAND);
         }
     }

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,11 +24,11 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.testutil.FacilitatorBuilder;
 
-public class AddCommandTest {
+public class FacilAddTest {
 
     @Test
     public void constructor_nullFacilitator_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new FacilAdd(null));
     }
 
     @Test
@@ -35,34 +36,34 @@ public class AddCommandTest {
         ModelStubAcceptingFacilitatorAdded modelStub = new ModelStubAcceptingFacilitatorAdded();
         Facilitator validFacilitator = new FacilitatorBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validFacilitator).execute(modelStub);
+        CommandResult commandResult = new FacilAdd(validFacilitator).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validFacilitator), commandResult.getFeedbackToUser());
+        assertEquals(String.format(FacilAdd.MESSAGE_SUCCESS, validFacilitator), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validFacilitator), modelStub.facilitatorsAdded);
     }
 
     @Test
     public void execute_duplicateFacilitator_throwsCommandException() {
         Facilitator validFacilitator = new FacilitatorBuilder().build();
-        AddCommand addCommand = new AddCommand(validFacilitator);
+        FacilAdd facilAdd = new FacilAdd(validFacilitator);
         ModelStub modelStub = new ModelStubWithFacilitator(validFacilitator);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_FACILITATOR, () -> addCommand.execute(modelStub));
+                FacilAdd.MESSAGE_DUPLICATE_FACILITATOR, () -> facilAdd.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Facilitator alice = new FacilitatorBuilder().withName("Alice").build();
         Facilitator bob = new FacilitatorBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        FacilAdd addAliceCommand = new FacilAdd(alice);
+        FacilAdd addBobCommand = new FacilAdd(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        FacilAdd addAliceCommandCopy = new FacilAdd(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
