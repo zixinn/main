@@ -9,11 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.facil.FacilDelete;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.facil.FacilFind;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facil.ListCommand;
 import seedu.address.logic.commands.facil.FacilCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
@@ -77,24 +74,9 @@ public class AddressBookParser {
      * @throws ParseException if the input does not conform the expected format
      */
     public Command parseFacilitatorCommand(String commandWord, String arguments) throws ParseException {
-        switch (commandWord) {
-
-        case FacilCommand.ADD_COMMAND_WORD:
+        if (FacilCommand.ALL_COMMAND_WORDS.contains(commandWord)) {
             return new FacilCommandParser().parse(arguments, commandWord);
-
-        case FacilCommand.EDIT_COMMAND_WORD:
-            return new FacilCommandParser().parse(arguments, commandWord);
-
-        case FacilDelete.COMMAND_WORD:
-            return new FacilCommandParser().parse(arguments, commandWord);
-
-        case FacilFind.COMMAND_WORD:
-            return new FacilCommandParser().parse(arguments, commandWord);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        default:
+        } else {
             throw new ParseException(MESSAGE_UNKNOWN_FACILITATOR_COMMAND);
         }
     }

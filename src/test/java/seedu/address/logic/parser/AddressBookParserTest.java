@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.logic.commands.facil.FacilDelete;
 import seedu.address.logic.commands.facil.FacilEdit;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.facil.FacilFind;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facil.ListCommand;
+import seedu.address.logic.commands.facil.FacilList;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
@@ -89,10 +89,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + ListCommand.COMMAND_WORD)
-                instanceof ListCommand);
-        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + ListCommand.COMMAND_WORD + " 3")
-                instanceof ListCommand);
+        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + FacilList.COMMAND_WORD)
+                instanceof FacilList);
+        assertTrue(parser.parseCommand(Facilitator.CLASS_WORD + " " + FacilList.COMMAND_WORD + " 3")
+                instanceof FacilList);
     }
 
     @Test

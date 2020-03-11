@@ -8,13 +8,27 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.facil.*;
+import seedu.address.logic.commands.facil.FacilAdd;
+import seedu.address.logic.commands.facil.FacilCommand;
+import seedu.address.logic.commands.facil.FacilDelete;
+import seedu.address.logic.commands.facil.FacilEdit;
+import seedu.address.logic.commands.facil.FacilFind;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facilitator.*;
+
+import seedu.address.model.facilitator.Email;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
+import seedu.address.model.facilitator.Office;
+import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -22,19 +36,36 @@ import seedu.address.model.module.ModuleCode;
  */
 public class FacilCommandParser implements Parser<FacilCommand> {
 
+    /**
+     * The general parse method, checks which type of parsing is required and call the corresponding one.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public FacilCommand parse(String args, String commandWord) throws ParseException {
         switch (commandWord) {
-            case FacilCommand.ADD_COMMAND_WORD:
-                return parseAdd(args);
-            case FacilCommand.EDIT_COMMAND_WORD:
-                return parseEdit(args);
-            case FacilCommand.DELETE_COMMAND_WORD:
-                return parseDelete(args);
-            case FacilCommand.FIND_COMMAND_WORD:
-                return parseFind(args);
-            default:
-                throw new ParseException("Error");
+
+        case FacilCommand.ADD_COMMAND_WORD:
+            return parseAdd(args);
+
+        case FacilCommand.EDIT_COMMAND_WORD:
+            return parseEdit(args);
+
+        case FacilCommand.DELETE_COMMAND_WORD:
+            return parseDelete(args);
+
+        case FacilCommand.FIND_COMMAND_WORD:
+            return parseFind(args);
+
+        case FacilCommand.LIST_COMMAND_WORD:
+            return parseList();
+
+        default:
+            throw new ParseException("Error");
         }
+    }
+
+    @Override
+    public FacilCommand parse(String userInput) throws ParseException {
+        return null;
     }
 
     /**
@@ -166,6 +197,14 @@ public class FacilCommandParser implements Parser<FacilCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return FacilCommand.find(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the FacilList
+     * and returns a FacilList object for execution.
+     */
+    public FacilCommand parseList() {
+        return FacilCommand.list();
     }
 
     /**

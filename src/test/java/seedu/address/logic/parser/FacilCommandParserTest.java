@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalFacilitators.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.facil.AddCommand;
+import seedu.address.logic.commands.facil.FacilAdd;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
@@ -49,30 +49,30 @@ public class FacilCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new FacilAdd(expectedFacilitator));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new FacilAdd(expectedFacilitator));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new FacilAdd(expectedFacilitator));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new FacilAdd(expectedFacilitator));
 
         // multiple offices - last office accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new AddCommand(expectedFacilitator));
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_FRIEND, new FacilAdd(expectedFacilitator));
 
         // multiple module codes - all accepted
         Facilitator expectedFacilitatorMultipleModuleCodes = new FacilitatorBuilder(BOB)
                 .withModuleCodes(VALID_MODULE_CODE_FRIEND, VALID_MODULE_CODE_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
                 + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitatorMultipleModuleCodes));
+                new FacilAdd(expectedFacilitatorMultipleModuleCodes));
     }
 
     @Test
@@ -80,32 +80,32 @@ public class FacilCommandParserTest {
         // missing phone
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                new FacilAdd(expectedFacilitator));
 
         // missing email
         expectedFacilitator = new FacilitatorBuilder(AMY).withEmail(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                new FacilAdd(expectedFacilitator));
 
         // missing office
         expectedFacilitator = new FacilitatorBuilder(AMY).withOffice(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                new FacilAdd(expectedFacilitator));
 
         // multiple optional fields missing
         expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).withOffice(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND,
-                new AddCommand(expectedFacilitator));
+                new FacilAdd(expectedFacilitator));
 
         // zero module codes
         expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY,
-                new AddCommand(expectedFacilitator));
+                new FacilAdd(expectedFacilitator));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAdd.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB,
@@ -118,7 +118,7 @@ public class FacilCommandParserTest {
 
     @Test
     public void parse_allOptionalFieldsMissing_failure() {
-        String expectedMessage = AddCommand.MESSAGE_NOT_ADDED;
+        String expectedMessage = FacilAdd.MESSAGE_NOT_ADDED;
 
         // only name provided
         assertParseFailure(parser, NAME_DESC_BOB, expectedMessage);
@@ -157,6 +157,6 @@ public class FacilCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_HUSBAND + MODULE_CODE_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAdd.MESSAGE_USAGE));
     }
 }

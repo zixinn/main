@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.facil;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -8,14 +10,17 @@ import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * General type for 'facil' command family
+ */
 public abstract class FacilCommand extends Command {
     public static final String ADD_COMMAND_WORD = "add";
     public static final String EDIT_COMMAND_WORD = "edit";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String FIND_COMMAND_WORD = "find";
     public static final String DELETE_COMMAND_WORD = "delete";
+    public static final List<String> ALL_COMMAND_WORDS = List.of(
+                    ADD_COMMAND_WORD, EDIT_COMMAND_WORD, LIST_COMMAND_WORD, FIND_COMMAND_WORD, DELETE_COMMAND_WORD);
 
 
     public static FacilAdd add(Facilitator facilitator) {
@@ -32,6 +37,10 @@ public abstract class FacilCommand extends Command {
 
     public static FacilFind find(NameContainsKeywordsPredicate predicate) {
         return new FacilFind(predicate);
+    }
+
+    public static FacilList list() {
+        return new FacilList();
     }
 
     @Override

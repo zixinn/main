@@ -45,11 +45,11 @@ public class FacilAddTest {
     @Test
     public void execute_duplicateFacilitator_throwsCommandException() {
         Facilitator validFacilitator = new FacilitatorBuilder().build();
-        FacilAdd FacilAdd = new FacilAdd(validFacilitator);
+        FacilAdd facilAdd = new FacilAdd(validFacilitator);
         ModelStub modelStub = new ModelStubWithFacilitator(validFacilitator);
 
         assertThrows(CommandException.class,
-                FacilAdd.MESSAGE_DUPLICATE_FACILITATOR, () -> FacilAdd.execute(modelStub));
+                FacilAdd.MESSAGE_DUPLICATE_FACILITATOR, () -> facilAdd.execute(modelStub));
     }
 
     @Test

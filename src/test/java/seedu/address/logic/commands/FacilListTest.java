@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.facil.ListCommand;
+import seedu.address.logic.commands.facil.FacilList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class FacilListTest {
 
     private Model model;
     private Model expectedModel;
@@ -29,14 +29,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, CommandType.FACILITATOR,
+        assertCommandSuccess(new FacilList(), model, FacilList.MESSAGE_SUCCESS, CommandType.FACILITATOR,
                 expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, CommandType.FACILITATOR,
+        assertCommandSuccess(new FacilList(), model, FacilList.MESSAGE_SUCCESS, CommandType.FACILITATOR,
                 expectedModel);
     }
 }
