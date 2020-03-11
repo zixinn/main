@@ -1,45 +1,13 @@
 package seedu.address.model.task;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TaskListStub implements TaskListInterface {
-
-    List<TaskInterface> tasks = new ArrayList<TaskInterface>();
-    
-    public void addTask(TaskInterface task) {
-        tasks.add(new TaskStub());
-    }
+public class TaskListStub {
 
     public void printTasks() {
-        System.out.println("Task is printed");
-    }
-
-    public TaskListInterface viewTasksByName() {
-
-    }
-
-    public TaskListInterface viewTasksByDay(int day) {
-
-    }
-    public TaskListInterface viewTasksByMonth(int month) {
-
-    }
-    public TaskListInterface viewTasksByYear(int year) {
-
-    }
-    public TaskListInterface viewUpcomingTasks() {
-
-    }
-
-    public void modifyTask(int taskNumber) {
-
-    }
-    public void makeTaskDone(int taskNumber) {
-
-    }
-
-    public void deleteTask(int taskNumber) {
-
+        // output for Module's class
+        System.out.println(
+                "1. Programming Assignment 1, 21/03/2020 18:00 " + "\n" +
+                "2. Written Assignment 1, 01/03/2020 23:59 " + "\n" +
+                "3. Review Lecture 7, 05/03/2020" + "\n"
+        );
     }
 }
