@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -31,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private FacilitatorListPanel facilitatorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +44,28 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane facilitatorListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarViewPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private TabPane mainTabPane;
+
+    @FXML
+    private Tab module;
+
+    @FXML
+    private Tab facilitator;
+
+    @FXML
+    private Tab calendar;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -107,8 +124,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
+        facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
+
+        CalendarView calendarView = new CalendarView();
+        calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -160,8 +180,29 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToFacilitator() {
+        mainTabPane.getSelectionModel().select(facilitator);
+    }
+
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToModule() {
+        mainTabPane.getSelectionModel().select(module);
+    }
+
+    /**
+     * Switches to facilitator view
+     */
+    public void handleSwitchToCalendar() {
+        mainTabPane.getSelectionModel().select(calendar);
+    }
+
+    public FacilitatorListPanel getFacilitatorListPanel() {
+        return facilitatorListPanel;
     }
 
     /**
@@ -175,12 +216,27 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getType()) {
+            case MODULE:
+            case LESSON:
+            case TASK:
+            case CLEAR:
+                handleSwitchToModule();
+                break;
+            case FACILITATOR:
+                handleSwitchToFacilitator();
+                break;
+            case CALENDAR:
+                handleSwitchToCalendar();
+                break;
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                break;
             }
 
             return commandResult;

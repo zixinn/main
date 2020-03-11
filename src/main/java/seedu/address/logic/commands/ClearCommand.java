@@ -6,7 +6,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the Mod Manager.
  */
 public class ClearCommand extends Command {
 
@@ -18,6 +18,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.CLEAR);
     }
 }

@@ -109,6 +109,11 @@ Format: `mod add /code MOD_CODE /desc DESCRIPTION`
 
 Example: `mod add /code CS2103T /desc Software Engineering`
 
+==== Viewing all modules
+
+Shows a list of modules. +
+Format: `mod list`
+
 ==== Viewing information related to a module
 
 Shows all classes, tasks and facilitators for a module. +
@@ -118,20 +123,28 @@ Example: `mod view /code CS2103T`
 ==== Editing a module's description
 
 Edits the description of the module. +
-Format: `mod edit /code MOD_CODE /desc DESCRIPTION`
+Format: `mod edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
 
 ****
-* DESCRIPTION should not exceed 64 characters.
+* Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* MOD_CODE should not exceed 10 characters.
+* DESCRIPTION should not exceed 64 characters.
 ****
 
-Example: `mod edit /code CS2103T /desc A+ for everyone`
+Example: `mod edit 1 /code CS2103`
 
 ==== Deleting a module
 
 Deletes the module, along with classes, facilitators and tasks for that module. +
-Format: `mod delete /code MOD_CODE` +
-Example: `mod delete /code CS2103T`
+Format: `mod delete INDEX`
+
+****
+* Deletes the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example: `mod delete 2`
 
 === Managing classes : `class`
 
@@ -139,16 +152,33 @@ Example: `mod delete /code CS2103T`
 
 Adds a class to a module. +
 Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]` +
+
 ****
 * VENUE and FACILITATOR_NAME are optional
 ****
 Example: `class add /code CS2103T /type Lec /at Fri 14:00 16:00 /venue i3-Aud /facil Akshay Narayan`
 
+==== Viewing all classes
+
+Shows a list of classes. +
+Format: `class list`
+
+==== Finding classes by day
+
+Find classes occurring on a particular day. +
+Format: `class find /at DAY` +
+Example: `class find /at mon`
+
+==== Finding next class
+
+Find the next class that will start soon. +
+Format: `class find /next`
 
 ==== Editing a class
 
 Edits the information of the class. +
 Format: `class edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]` +
+
 ****
 * VENUE and FACILITATOR_NAME are optional
 ****
@@ -161,7 +191,9 @@ Format: `class delete /code MOD_CODE /type CLASS_TYPE` +
 Example: `class delete /code CS2103T /type Tut`
 
 === Managing tasks : `task`
+
 ==== Adding a task
+
 Adds a task to a module. +
 Format: `task add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
 Example: `task add /code CS2103T /task duke /by 2020-02-20 23:59`
@@ -169,17 +201,7 @@ Example: `task add /code CS2103T /task duke /by 2020-02-20 23:59`
 ==== Viewing all tasks
 
 Shows a list of all tasks. +
-Format: `task view`
-
-==== Editing a task
-Edits the information of a task. +
-Format: `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
-Example: `task edit /code CS2103T /task duke /by 02-03-2020 23:59`
-
-==== Delete a task
-Deletes a task from the module. +
-Format: `task delete /code MOD_CODE /task TASK_NAME` +
-Example: `task delete /code CS2103T /task IP week 4`
+Format: `task list`
 
 ==== Finding tasks by date
 
@@ -188,8 +210,21 @@ Format: `task find [/date DATE] [/month MONTH] [/year YEAR]` +
 Example: `task find /month 02`
 
 ==== Finding upcoming tasks
+
 Finds upcoming tasks. +
 Format: `task find /upcoming` +
+
+==== Editing a task
+
+Edits the information of a task. +
+Format: `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
+Example: `task edit /code CS2103T /task duke /by 02-03-2020 23:59`
+
+==== Deleting a task
+
+Deletes a task from the module. +
+Format: `task delete /code MOD_CODE /task TASK_NAME` +
+Example: `task delete /code CS2103T /task IP week 4`
 
 === Managing facilitators : `facil`
 
@@ -207,39 +242,46 @@ Example: `facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /phone 987654
 
 ==== Viewing all facilitators
 Shows a list of all facilitators. +
-Format: `facil view`
+Format: `facil list`
 
 ==== Finding a facilitator by name
-Finds facilitators whose names contain the given keywords. +
-Format: `facil find /name FACILITATOR_NAME`
+Finds facilitators whose names contain the given name. +
+Format: `facil find FACILITATOR_NAME`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The order of the name does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* Facilitators matching at least one name will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 ****
 
-Example: `facil find /name Akshay Narayan`
+Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-Format: `facil edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+Format: `facil edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 
 ****
+* Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
-* You can remove all module codes linked to the facilitator by typing `/code` without specifying any module code after it.
+* You can remove phone, email, office and module codes linked to the facilitator by typing `/phone`, `/email`, `/office` and `/code` respectively without specifying any input after it.
 ****
 
-Example: `facil edit /name Akshay Narayan /email hisnewemail@nus.edu.sg`
+Example: `facil edit 1 /name Akshay Narayan /email hisnewemail@nus.edu.sg`
 
 ==== Deleting a facilitator
+
 Deletes a facilitator from the module. +
-Format: `facil delete /name FACILITATOR_NAME` +
-Example: `facil delete /name Akshay Narayan`
+Format: `facil delete INDEX`
+
+****
+* Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example: `facil delete 2`
 
 === Managing calendar : `cal`
 
@@ -268,8 +310,8 @@ Format: `command all`
 ==== Listing commands for a specific feature
 
 Lists commands for a specific feature. +
-Format: `command feat COMMAND_NAME` +
-Example: `command feat task`
+Format: `command feature COMMAND_NAME` +
+Example: `command feature task`
 
 === Automatic command guidance
 
@@ -287,6 +329,7 @@ Saves Mod Manager data in the hard disk automatically after any command that cha
 There is no need to save manually.
 
 === Upcoming `[coming in v2.0]`
+
 These features will be available in the next version of Mod Manager.
 
 ==== Using indexing command system `[coming in v2.0]`
@@ -319,31 +362,35 @@ Receive reminders for deadlines and events the next day.
 [%autowidth]
 |=====
 |*Category* |*Commands*
-.4+|Module
+.5+|Module
 | `*mod* add /code MOD_CODE /desc DESCRIPTION`
-| `*mod* delete /code MOD_CODE`
-| `*mod* edit /code MOD_CODE /desc DESCRIPTION`
+| `*mod* list`
 | `*mod* view /code MOD_CODE`
+| `*mod* edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
+| `*mod* delete INDEX`
 
-.3+|Class
+.6+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
+|  `*class* list`
+|  `*class* find /at DAY`
+|  `*class* find /next`
 |  `*class* edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]`
 |  `*class* delete /code MOD_CODE /type CLASS_TYPE`
 
 .6+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
-| `*task* view`
-| `*task* edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
-| `*task* delete /code MOD_CODE /task TASK_NAME`
+| `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
+| `*task* edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* delete /code MOD_CODE /task TASK_NAME`
 
 .5+|Facilitators
 |  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-|  `*facil* delete /name FACILITATOR_NAME`
-|  `*facil* edit /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
-|  `*facil* find /name FACILITATOR_NAME`
-|  `*facil* view`
+|  `*facil* list`
+|  `*facil* find FACILITATOR_NAME`
+|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* delete INDEX`
 
 .3+|Calendar
 |  `*cal* find /type empty`
@@ -352,7 +399,7 @@ Receive reminders for deadlines and events the next day.
 
 .2+|Command
 |  `*command* all`
-|  `*command* feat COMMAND_NAME`
+|  `*command* feature COMMAND_NAME`
 
 .1+|Help
 |  `*help*`

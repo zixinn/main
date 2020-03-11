@@ -5,16 +5,16 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.UniqueFacilitatorList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameFacilitator comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueFacilitatorList facilitators;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        facilitators = new UniqueFacilitatorList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Facilitators in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -40,11 +40,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the facilitator list with {@code facilitators}.
+     * {@code facilitators} must not contain duplicate facilitators.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setFacilitators(List<Facilitator> facilitators) {
+        this.facilitators.setFacilitators(facilitators);
     }
 
     /**
@@ -53,68 +53,69 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setFacilitators(newData.getFacilitatorList());
     }
 
-    //// person-level operations
+    //// facilitator-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
-    }
-
-    /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
-     */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public boolean hasFacilitator(Facilitator facilitator) {
+        requireNonNull(facilitator);
+        return facilitators.contains(facilitator);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Adds a facilitator to the Mod Manager.
+     * The facilitator must not already exist in Mod Manager.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void addFacilitator(Facilitator p) {
+        facilitators.add(p);
+    }
 
-        persons.setPerson(target, editedPerson);
+    /**
+     * Replaces the given facilitator {@code target} in the list with {@code editedFacilitator}.
+     * {@code target} must exist in Mod Manager.
+     * The facilitator identity of {@code editedFacilitator} must not be the same as another existing facilitator
+     * in Mod Manager.
+     */
+    public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
+        requireNonNull(editedFacilitator);
+
+        facilitators.setFacilitator(target, editedFacilitator);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in Mod Manager.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeFacilitator(Facilitator key) {
+        facilitators.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return facilitators.asUnmodifiableObservableList().size() + " facilitators";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Facilitator> getFacilitatorList() {
+        return facilitators.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && facilitators.equals(((AddressBook) other).facilitators));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return facilitators.hashCode();
     }
 }

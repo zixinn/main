@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.facilitator.Facilitator;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Facilitator> PREDICATE_SHOW_ALL_FACILITATORS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,36 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
      */
-    boolean hasPerson(Person person);
+    boolean hasFacilitator(Facilitator facilitator);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given facilitator.
+     * The facilitator must exist in Mod Manager.
      */
-    void deletePerson(Person target);
+    void deleteFacilitator(Facilitator target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given facilitator.
+     * {@code facilitator} must not already exist in Mod Manager.
      */
-    void addPerson(Person person);
+    void addFacilitator(Facilitator facilitator);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given facilitator {@code target} with {@code editedFacilitator}.
+     * {@code target} must exist in Mod Manager.
+     * The facilitator identity of {@code editedFacilitator} must not be the same as another existing facilitator
+     * in Mod Manager.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setFacilitator(Facilitator target, Facilitator editedFacilitator);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered facilitator list */
+    ObservableList<Facilitator> getFilteredFacilitatorList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
 }

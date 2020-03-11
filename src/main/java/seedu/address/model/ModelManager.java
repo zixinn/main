@@ -11,17 +11,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.facilitator.Facilitator;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of Mod Manager data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Facilitator> filteredFacilitators;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -30,11 +30,11 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Mod Manager: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFacilitators = new FilteredList<>(this.addressBook.getFacilitatorList());
     }
 
     public ModelManager() {
@@ -89,44 +89,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasFacilitator(Facilitator facilitator) {
+        requireNonNull(facilitator);
+        return addressBook.hasFacilitator(facilitator);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteFacilitator(Facilitator target) {
+        addressBook.removeFacilitator(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addFacilitator(Facilitator facilitator) {
+        addressBook.addFacilitator(facilitator);
+        updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
+        requireAllNonNull(target, editedFacilitator);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setFacilitator(target, editedFacilitator);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Facilitator List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Facilitator> getFilteredFacilitatorList() {
+        return filteredFacilitators;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredFacilitators.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredFacilitators.equals(other.filteredFacilitators);
     }
 
 }
