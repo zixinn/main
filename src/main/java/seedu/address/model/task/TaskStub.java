@@ -12,22 +12,17 @@ public class TaskStub implements TaskInterface {
     }
 
     @Override
-    public String getDateOutput() {
-        return "21/03/2020";
+    public boolean markAsDone() {
+        return true; // can only call once
     }
 
     @Override
     public String getTimeOutput() {
-        return "18:00";
-    }
-
-    @Override
-    public String toDatabase() {
-        return 0 + " | " + getDescription() + " | " + getDateOutput() + " | " +  getTimeOutput();
+        return "21/03/2020 18:00";
     }
 
     @Override
     public int compareTo(Object o) {
-        return 0;
+        return 0; // ?
     }
 }

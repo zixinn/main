@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,8 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class Task implements TaskInterface {
     protected String description;
     protected boolean isDone;
-    protected LocalDate taskDate;
-    protected LocalTime taskTime;
+    protected LocalDateTime taskTime;
 
     /**
      * Creates a new Task with {@code description} associated with a Module.
@@ -25,20 +25,22 @@ public class Task implements TaskInterface {
         this.isDone = false;
     }
 
-    public Task(String description, String taskDate) {
+    public Task(String description, String date) {
         this.description = description;
-        this.taskDate = LocalDate.parse(taskDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.taskTime = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
     }
 
-    public Task(String description, String taskDate, String taskTime) {
+    public Task(String description, String date, String timeInDay) {
         this.description = description;
-        this.taskDate = LocalDate.parse(taskDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.taskTime = LocalTime.parse(taskTime, DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime timeInTheDay = LocalTime.parse(timeInDay, DateTimeFormatter.ofPattern("HH:mm"));
+        this.taskTime = LocalDateTime.of(LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                timeInTheDay);
     }
 
     /**
      * Retrieves the description of our Task.
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -48,6 +50,7 @@ public class Task implements TaskInterface {
      *
      * @return boolean to indicate whether our Task is completed.
      */
+    @Override
     public boolean isTaskDone() {
         return isDone;
     }
@@ -56,6 +59,7 @@ public class Task implements TaskInterface {
      * Marks our Task as completed.
      * returns true if the Task is marked as done, false if the task has already been marked as done
      */
+    @Override
     public boolean markAsDone() {
         if (isTaskDone()) {
             return false;
@@ -67,22 +71,15 @@ public class Task implements TaskInterface {
     /**
      * Gets the status icon of our Task.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean hasDate() {
-        return taskDate != null;
+    protected LocalDateTime getTime() {
+        return taskTime;
     }
 
-    /**
-     * outputs the Date of the Task (day/month/year) in human readable form.
-     */
-    public String getDateOutput() {
-        return taskDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
-    public boolean hasTime() {
+    protected boolean isTimeAvailable() {
         return taskTime != null;
     }
 
@@ -90,14 +87,14 @@ public class Task implements TaskInterface {
      * outputs the Time of the Task (hour:minute) in human readable form.
      */
     public String getTimeOutput() {
-        return taskTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return taskTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     /**
      * outputs the Date in the week of the task
      */
-    public String getDateInWeek() {
-        DayOfWeek dayInWeek = taskDate.getDayOfWeek();
+    protected String getDateInWeek() {
+        DayOfWeek dayInWeek = taskTime.getDayOfWeek();
         String title = dayInWeek.toString();
         return title.charAt(0) + title.substring(1);
     }
@@ -109,8 +106,9 @@ public class Task implements TaskInterface {
      */
     @Override
     public String toString() {
+        String time = isTimeAvailable() ? getTimeOutput() + "\n" : "";
         return "[" + getStatusIcon() + "]" + " " + description + "\n"
-                + getDateInWeek() + ", " + getDateOutput() + ", " + "at: " + getTimeOutput() + "\n";
+                + time;
     }
 
     /**
@@ -118,9 +116,9 @@ public class Task implements TaskInterface {
      *
      * @return String a Task representation in our database
      */
-    public String toDatabase() {
+    protected String toDatabase() {
         int isDoneInt = (isDone) ? 1 : 0;
-        return isDoneInt + " | " + description + " | " + getDateOutput() + " | " +  getTimeOutput();
+        return isDoneInt + " | " + description + " | " + getTimeOutput() + " | " + getTimeOutput();
     }
 
     /**
@@ -128,9 +126,16 @@ public class Task implements TaskInterface {
      * Nearer deadlines are considered smaller
      */
     @Override
-    public int compareTo(Object o) {
-        assert (o instanceof Task); // can only compare between deadlines
-        return 0; // to be implemented. What if the task has no date?
+    public int compareTo(Object other) {
+        assert (other instanceof Task); // can only compare between Tasks
+        Task otherTask = (Task) other;
+        if (taskTime.isAfter(otherTask.getTime())) {
+            return 1;
+        } else if (taskTime.isBefore(otherTask.getTime())) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -145,9 +150,8 @@ public class Task implements TaskInterface {
 
         Task otherTask = (Task) other;
 
-        return otherTask.getDescription().equals(getDescription())
-                && otherTask.getDateOutput().equals(getDateOutput())
-                && otherTask.getTimeOutput().equals(getTimeOutput());
+        return otherTask.getDescription().equals(getDescription()) // same definition
+                && otherTask.compareTo(this) == 0; // same time
     }
 }
 
