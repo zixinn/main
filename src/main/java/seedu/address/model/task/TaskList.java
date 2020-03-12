@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * TaskList is a wrapper class for a List of Tasks.
  */
 public class TaskList implements TaskListInterface {
+
     private List<Task> tasks;
 
     public TaskList() {
