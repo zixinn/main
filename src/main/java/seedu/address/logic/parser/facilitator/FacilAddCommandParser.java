@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.facil.FacilAddCommand;
+import seedu.address.logic.commands.facilitator.FacilAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;

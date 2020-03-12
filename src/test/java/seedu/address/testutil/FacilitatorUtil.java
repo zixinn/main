@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Set;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.facil.FacilEditCommand;
+import seedu.address.logic.commands.facilitator.FacilEditCommand;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
 

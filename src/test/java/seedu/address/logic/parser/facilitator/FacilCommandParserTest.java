@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facil.FacilAddCommand;
-import seedu.address.logic.commands.facil.FacilDeleteCommand;
-import seedu.address.logic.commands.facil.FacilEditCommand;
-import seedu.address.logic.commands.facil.FacilFindCommand;
-import seedu.address.logic.commands.facil.FacilListCommand;
+import seedu.address.logic.commands.facilitator.FacilAddCommand;
+import seedu.address.logic.commands.facilitator.FacilDeleteCommand;
+import seedu.address.logic.commands.facilitator.FacilEditCommand;
+import seedu.address.logic.commands.facilitator.FacilFindCommand;
+import seedu.address.logic.commands.facilitator.FacilListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;

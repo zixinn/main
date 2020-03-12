@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;

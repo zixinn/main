@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +22,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.facil.FacilEditCommand.EditFacilitatorDescriptor;
+import seedu.address.logic.commands.facilitator.FacilEditCommand.EditFacilitatorDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

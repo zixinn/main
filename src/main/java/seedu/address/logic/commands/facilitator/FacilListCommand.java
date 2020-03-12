@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;

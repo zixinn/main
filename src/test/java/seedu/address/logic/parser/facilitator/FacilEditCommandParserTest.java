@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -36,7 +36,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_FACILITATOR;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.facil.FacilEditCommand;
+import seedu.address.logic.commands.facilitator.FacilEditCommand;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Phone;

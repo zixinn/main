@@ -11,7 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.facil.FacilCommandParser;
+import seedu.address.logic.parser.facilitator.FacilCommandParser;
 import seedu.address.model.facilitator.Facilitator;
 
 /**

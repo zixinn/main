@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import java.util.List;
 
