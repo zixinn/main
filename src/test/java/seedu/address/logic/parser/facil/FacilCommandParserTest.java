@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.facil.FacilAddCommand;
 import seedu.address.logic.commands.facil.FacilDeleteCommand;
@@ -39,7 +40,7 @@ public class FacilCommandParserTest {
 
     @Test
     public void parse_delete() throws Exception {
-        FacilDeleteCommand command = (FacilDeleteCommand) parser.parse(FacilDeleteCommand.COMMAND_WORD + " "
+        FacilDeleteCommand command = (FacilDeleteCommand) parser.parse(Command.COMMAND_WORD_DELETE + " "
                 + INDEX_FIRST_FACILITATOR.getOneBased());
         assertEquals(new FacilDeleteCommand(INDEX_FIRST_FACILITATOR), command);
     }
@@ -49,7 +50,7 @@ public class FacilCommandParserTest {
         Facilitator facilitator = new FacilitatorBuilder(AMY).build();
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator)
                 .build();
-        FacilEditCommand command = (FacilEditCommand) parser.parse(FacilEditCommand.COMMAND_WORD + " "
+        FacilEditCommand command = (FacilEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
                 + INDEX_FIRST_FACILITATOR.getOneBased() + " "
                 + FacilitatorUtil.getEditFacilitatorDescriptorDetails(descriptor));
         assertEquals(new FacilEditCommand(INDEX_FIRST_FACILITATOR, descriptor), command);
@@ -58,16 +59,16 @@ public class FacilCommandParserTest {
     @Test
     public void parse_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FacilFindCommand command = (FacilFindCommand) parser.parse(FacilFindCommand.COMMAND_WORD + " "
+        FacilFindCommand command = (FacilFindCommand) parser.parse(Command.COMMAND_WORD_FIND + " "
                 + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FacilFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parse_list() throws Exception {
-        assertTrue(parser.parse(FacilListCommand.COMMAND_WORD)
+        assertTrue(parser.parse(Command.COMMAND_WORD_LIST)
                 instanceof FacilListCommand);
-        assertTrue(parser.parse(FacilListCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parse(Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilListCommand);
     }
 

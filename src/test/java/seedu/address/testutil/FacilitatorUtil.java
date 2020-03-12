@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.facil.FacilAddCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.facil.FacilEditCommand;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
@@ -22,7 +22,7 @@ public class FacilitatorUtil {
      * Returns an add command string for adding the {@code facilitator}.
      */
     public static String getFacilAdd(Facilitator facilitator) {
-        return FacilAddCommand.COMMAND_WORD + " " + getFacilitatorDetails(facilitator);
+        return Command.COMMAND_WORD_ADD + " " + getFacilitatorDetails(facilitator);
     }
 
     /**

@@ -20,23 +20,23 @@ public class SampleDataUtil {
     public static Facilitator[] getSampleFacilitators() {
         return new Facilitator[] {
             new Facilitator(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Office("Blk 30 Geylang Street 29, #06-40"),
-                getModuleCodeSet("friends")),
+                new Office("COM2-03-04"),
+                getModuleCodeSet("CS2103T")),
             new Facilitator(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Office("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getModuleCodeSet("colleagues", "friends")),
+                new Office("COM1-02-18"),
+                getModuleCodeSet("CS2103T", "CS2101")),
             new Facilitator(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Office("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getModuleCodeSet("neighbours")),
+                new Office("AS6-04-11"),
+                getModuleCodeSet("ES2660")),
             new Facilitator(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Office("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getModuleCodeSet("family")),
+                new Office("S16-04-03"),
+                getModuleCodeSet("MA1521")),
             new Facilitator(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Office("Blk 47 Tampines Street 20, #17-35"),
-                getModuleCodeSet("classmates")),
+                new Office("S17-03-15"),
+                getModuleCodeSet("MA2213")),
             new Facilitator(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Office("Blk 45 Aljunied Street 85, #11-31"),
-                getModuleCodeSet("colleagues"))
+                new Office("AS4-01-13"),
+                getModuleCodeSet("CS2101"))
         };
     }
 

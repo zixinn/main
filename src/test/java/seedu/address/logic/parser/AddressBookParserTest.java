@@ -8,10 +8,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.facil.FacilCommand;
-import seedu.address.logic.commands.facil.FacilListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 
@@ -39,9 +39,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_facil() throws Exception {
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + FacilListCommand.COMMAND_WORD)
+        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST)
                 instanceof FacilCommand);
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + FacilListCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
     }
 

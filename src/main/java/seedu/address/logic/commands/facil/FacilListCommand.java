@@ -12,8 +12,6 @@ import seedu.address.model.Model;
  */
 public class FacilListCommand extends FacilCommand {
 
-    public static final String COMMAND_WORD = "list";
-
     public static final String MESSAGE_SUCCESS = "Listed all facilitators";
 
 

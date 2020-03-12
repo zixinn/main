@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -61,10 +61,10 @@ public class FacilEditCommandTest {
 
         FacilitatorBuilder facilitatorInList = new FacilitatorBuilder(lastFacilitator);
         Facilitator editedFacilitator = facilitatorInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
 
         EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         FacilEditCommand editCommand = new FacilEditCommand(indexLastFacilitator, descriptor);
 
         String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);

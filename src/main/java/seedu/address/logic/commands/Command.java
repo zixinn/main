@@ -8,6 +8,13 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public static final String COMMAND_WORD_ADD = "add";
+    public static final String COMMAND_WORD_DELETE = "delete";
+    public static final String COMMAND_WORD_EDIT = "edit";
+    public static final String COMMAND_WORD_FIND = "find";
+    public static final String COMMAND_WORD_LIST = "list";
+    public static final String COMMAND_WORD_VIEW = "view";
+
     /**
      * Executes the command and returns the result message.
      *
