@@ -45,7 +45,15 @@
                       <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
+                      <StackPane fx:id="moduleDetailsPlaceholder" maxHeight="25" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
+                                 style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);"/>
                       <StackPane fx:id="moduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                      <StackPane fx:id="lessonPanelPlaceholder" minHeight="-Infinity" maxHeight="50" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
+                                 style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);"/>
+
                     </VBox>
                   </content>
                 </Tab>
@@ -70,9 +78,6 @@
                 </Tab>
               </tabs>
             </TabPane>
-
-
-
         <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />

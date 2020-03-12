@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private FacilitatorListPanel facilitatorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ModuleDetailsPanel moduleDetailsPanel;
+    private LessonPanel lessonPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Tab calendar;
+
+    @FXML
+    private StackPane moduleDetailsPlaceholder;
+
+    @FXML
+    private StackPane lessonPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -135,6 +143,12 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        moduleDetailsPanel = new ModuleDetailsPanel("MODULE: MODULE DETAILS");
+        moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
+
+        lessonPanel = new LessonPanel();
+        lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -215,7 +229,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
             switch (commandResult.getType()) {
             case MODULE:
             case LESSON:
