@@ -12,16 +12,18 @@ import java.time.temporal.ChronoField;
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
  */
 public class Task implements TaskInterface {
-    protected String description;
-    protected boolean isDone;
-    protected LocalDateTime taskTime;
-
-    public static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
+    private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
             .toFormatter();
+
+    protected String description;
+    protected boolean isDone;
+    protected LocalDateTime taskTime;
+
+
     /**
      * Creates a new Task with {@code description} associated with a Module.
      * The Task is assumed to be uncompleted when created.

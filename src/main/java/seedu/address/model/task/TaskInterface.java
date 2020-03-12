@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+/**
+ * Interface for Task class.
+ */
 public interface TaskInterface extends Comparable {
     public String getDescription();
 

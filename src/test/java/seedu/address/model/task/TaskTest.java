@@ -1,10 +1,11 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ class TaskTest {
     }
 
     @Test
-    void markAsDone_InitiallyNotDoneTask_success() {
+    void markAsDone_initiallyNotDoneTask_success() {
         Task task = new Task("Tutorial 7");
         assertFalse(task.isTaskDone());
         task.markAsDone();

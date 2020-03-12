@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+/**
+ * Stub class for Task.
+ */
 public class TaskStub implements TaskInterface {
     @Override
     public String getDescription() {

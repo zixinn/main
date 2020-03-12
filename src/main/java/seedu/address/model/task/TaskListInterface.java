@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+/**
+ * Interface for a TaskList, which is a List of Tasks.
+ */
 public interface TaskListInterface {
     void addTask(Task task);
 
