@@ -12,7 +12,7 @@ import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
  * Finds and lists all facilitators in Mod Manager whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FacilFind extends FacilCommand {
+public class FacilFindCommand extends FacilCommand {
 
     public static final String COMMAND_WORD = "find";
 
@@ -23,7 +23,7 @@ public class FacilFind extends FacilCommand {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FacilFind(NameContainsKeywordsPredicate predicate) {
+    public FacilFindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -38,7 +38,7 @@ public class FacilFind extends FacilCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FacilFind // instanceof handles nulls
-                && predicate.equals(((FacilFind) other).predicate)); // state check
+                || (other instanceof FacilFindCommand // instanceof handles nulls
+                && predicate.equals(((FacilFindCommand) other).predicate)); // state check
     }
 }

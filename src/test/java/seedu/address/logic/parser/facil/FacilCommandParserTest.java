@@ -1,0 +1,85 @@
+package seedu.address.logic.parser.facil;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFacilitators.AMY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.facil.FacilAddCommand;
+import seedu.address.logic.commands.facil.FacilDeleteCommand;
+import seedu.address.logic.commands.facil.FacilEditCommand;
+import seedu.address.logic.commands.facil.FacilFindCommand;
+import seedu.address.logic.commands.facil.FacilListCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
+import seedu.address.testutil.FacilitatorBuilder;
+import seedu.address.testutil.FacilitatorUtil;
+
+public class FacilCommandParserTest {
+    private FacilCommandParser parser = new FacilCommandParser();
+
+    @Test
+    public void parse_add() throws Exception {
+        Facilitator facilitator = new FacilitatorBuilder(AMY).build();
+        FacilAddCommand command = (FacilAddCommand) parser.parse(FacilitatorUtil.getFacilAdd(facilitator));
+        assertEquals(new FacilAddCommand(facilitator), command);
+    }
+
+    @Test
+    public void parse_delete() throws Exception {
+        FacilDeleteCommand command = (FacilDeleteCommand) parser.parse(FacilDeleteCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FACILITATOR.getOneBased());
+        assertEquals(new FacilDeleteCommand(INDEX_FIRST_FACILITATOR), command);
+    }
+
+    @Test
+    public void parse_edit() throws Exception {
+        Facilitator facilitator = new FacilitatorBuilder(AMY).build();
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator)
+                .build();
+        FacilEditCommand command = (FacilEditCommand) parser.parse(FacilEditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FACILITATOR.getOneBased() + " "
+                + FacilitatorUtil.getEditFacilitatorDescriptorDetails(descriptor));
+        assertEquals(new FacilEditCommand(INDEX_FIRST_FACILITATOR, descriptor), command);
+    }
+
+    @Test
+    public void parse_find() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FacilFindCommand command = (FacilFindCommand) parser.parse(FacilFindCommand.COMMAND_WORD + " "
+                + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FacilFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parse_list() throws Exception {
+        assertTrue(parser.parse(FacilListCommand.COMMAND_WORD)
+                instanceof FacilListCommand);
+        assertTrue(parser.parse(FacilListCommand.COMMAND_WORD + " 3")
+                instanceof FacilListCommand);
+    }
+
+    @Test
+    public void parse_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parse(""));
+    }
+
+    @Test
+    public void parse_unknownFacilitatorCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_FACILITATOR_COMMAND, () -> parser
+                .parse("facil unknownCommand"));
+    }
+}

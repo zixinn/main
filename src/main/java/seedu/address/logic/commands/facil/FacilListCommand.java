@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 /**
  * Lists all facilitators in Mod Manager to the user.
  */
-public class FacilList extends FacilCommand {
+public class FacilListCommand extends FacilCommand {
 
     public static final String COMMAND_WORD = "list";
 

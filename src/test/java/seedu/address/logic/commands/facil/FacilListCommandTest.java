@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.facil;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.facil.FacilList;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class FacilListTest {
+public class FacilListCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -29,14 +29,14 @@ public class FacilListTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new FacilList(), model, FacilList.MESSAGE_SUCCESS, CommandType.FACILITATOR,
+        assertCommandSuccess(new FacilListCommand(), model, FacilListCommand.MESSAGE_SUCCESS, CommandType.FACILITATOR,
                 expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
-        assertCommandSuccess(new FacilList(), model, FacilList.MESSAGE_SUCCESS, CommandType.FACILITATOR,
+        assertCommandSuccess(new FacilListCommand(), model, FacilListCommand.MESSAGE_SUCCESS, CommandType.FACILITATOR,
                 expectedModel);
     }
 }
