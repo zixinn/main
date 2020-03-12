@@ -1,8 +1,5 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.module.ModuleCode;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,5 +21,4 @@ public class LessonList {
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
     }
-
 }
