@@ -43,13 +43,13 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case ClearCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_EXIT:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_HELP:
             return new HelpCommand();
 
         case Facilitator.COMMAND_WORD:
