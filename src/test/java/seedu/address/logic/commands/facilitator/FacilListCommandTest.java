@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;

@@ -1,10 +1,10 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import seedu.address.logic.commands.facil.FacilFindCommand;
+import seedu.address.logic.commands.facilitator.FacilFindCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;

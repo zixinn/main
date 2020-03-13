@@ -11,7 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.facil.FacilCommandParser;
+import seedu.address.logic.parser.facilitator.FacilCommandParser;
 import seedu.address.model.facilitator.Facilitator;
 
 /**
@@ -43,13 +43,13 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case ClearCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_EXIT:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_HELP:
             return new HelpCommand();
 
         case Facilitator.COMMAND_WORD:

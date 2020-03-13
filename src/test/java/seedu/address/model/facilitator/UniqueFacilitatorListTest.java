@@ -3,7 +3,7 @@ package seedu.address.model.facilitator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
@@ -43,7 +43,7 @@ public class UniqueFacilitatorListTest {
     public void contains_facilitatorWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFacilitatorList.add(ALICE);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         assertTrue(uniqueFacilitatorList.contains(editedAlice));
     }
 
@@ -86,7 +86,7 @@ public class UniqueFacilitatorListTest {
     public void setFacilitator_editedFacilitatorHasSameIdentity_success() {
         uniqueFacilitatorList.add(ALICE);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         uniqueFacilitatorList.setFacilitator(ALICE, editedAlice);
         UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
         expectedUniqueFacilitatorList.add(editedAlice);

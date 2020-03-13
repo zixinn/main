@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
@@ -11,8 +11,6 @@ import seedu.address.model.Model;
  * Lists all facilitators in Mod Manager to the user.
  */
 public class FacilListCommand extends FacilCommand {
-
-    public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all facilitators";
 

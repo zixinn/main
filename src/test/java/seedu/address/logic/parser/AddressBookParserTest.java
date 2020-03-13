@@ -8,10 +8,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facil.FacilCommand;
-import seedu.address.logic.commands.facil.FacilListCommand;
+import seedu.address.logic.commands.facilitator.FacilCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 
@@ -21,27 +21,27 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_CLEAR) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_CLEAR + " 3") instanceof ClearCommand);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_EXIT) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_EXIT + " 3") instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_HELP) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_HELP + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_facil() throws Exception {
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + FacilListCommand.COMMAND_WORD)
+        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST)
                 instanceof FacilCommand);
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + FacilListCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
     }
 

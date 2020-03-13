@@ -1,11 +1,11 @@
-package seedu.address.logic.commands.facil;
+package seedu.address.logic.commands.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -53,7 +53,7 @@ public class EditFacilitatorDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different module codes -> returns false
-        editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_HUSBAND).build();
+        editedAmy = new EditFacilitatorDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

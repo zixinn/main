@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
@@ -6,13 +6,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_CO
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facil.FacilAddCommand;
-import seedu.address.logic.commands.facil.FacilCommand;
-import seedu.address.logic.commands.facil.FacilDeleteCommand;
-import seedu.address.logic.commands.facil.FacilEditCommand;
-import seedu.address.logic.commands.facil.FacilFindCommand;
-import seedu.address.logic.commands.facil.FacilListCommand;
+import seedu.address.logic.commands.facilitator.FacilCommand;
+import seedu.address.logic.commands.facilitator.FacilListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -39,19 +36,19 @@ public class FacilCommandParser implements Parser<FacilCommand> {
 
         switch (commandWord) {
 
-        case FacilAddCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_ADD:
             return new FacilAddCommandParser().parse(arguments);
 
-        case FacilEditCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_EDIT:
             return new FacilEditCommandParser().parse(arguments);
 
-        case FacilDeleteCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_DELETE:
             return new FacilDeleteCommandParser().parse(arguments);
 
-        case FacilFindCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_FIND:
             return new FacilFindCommandParser().parse(arguments);
 
-        case FacilListCommand.COMMAND_WORD:
+        case Command.COMMAND_WORD_LIST:
             return new FacilListCommand();
 
         default:

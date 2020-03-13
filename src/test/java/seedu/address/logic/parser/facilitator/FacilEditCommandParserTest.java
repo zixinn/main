@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.facil;
+package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.OFFICE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.OFFICE_DESC_BOB;
@@ -16,8 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
@@ -36,7 +36,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_FACILITATOR;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.facil.FacilEditCommand;
+import seedu.address.logic.commands.facilitator.FacilEditCommand;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Phone;
@@ -100,12 +100,12 @@ public class FacilEditCommandParserTest {
 
         // while parsing {@code PREFIX_MODULE_CODE} alone will reset the module codes of the {@code Facilitator} being
         // edited, parsing it together with a valid module code results in error
-        assertParseFailure(parser, "1" + MODULE_CODE_DESC_FRIEND + MODULE_CODE_DESC_HUSBAND
+        assertParseFailure(parser, "1" + MODULE_CODE_DESC_CS2101 + MODULE_CODE_DESC_CS2103T
                 + MODULE_CODE_EMPTY, ModuleCode.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + MODULE_CODE_DESC_FRIEND + MODULE_CODE_EMPTY
-                + MODULE_CODE_DESC_HUSBAND, ModuleCode.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + MODULE_CODE_EMPTY + MODULE_CODE_DESC_FRIEND
-                + MODULE_CODE_DESC_HUSBAND, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + MODULE_CODE_DESC_CS2101 + MODULE_CODE_EMPTY
+                + MODULE_CODE_DESC_CS2103T, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + MODULE_CODE_EMPTY + MODULE_CODE_DESC_CS2101
+                + MODULE_CODE_DESC_CS2103T, ModuleCode.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_OFFICE_AMY
@@ -115,12 +115,12 @@ public class FacilEditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_FACILITATOR;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + MODULE_CODE_DESC_HUSBAND
-                + EMAIL_DESC_AMY + OFFICE_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + MODULE_CODE_DESC_CS2103T
+                + EMAIL_DESC_AMY + OFFICE_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_CS2101;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withOffice(VALID_OFFICE_AMY).withModuleCodes(VALID_MODULE_CODE_HUSBAND, VALID_MODULE_CODE_FRIEND)
+                .withOffice(VALID_OFFICE_AMY).withModuleCodes(VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS2101)
                 .build();
         FacilEditCommand expectedCommand = new FacilEditCommand(targetIndex, descriptor);
 
@@ -168,8 +168,8 @@ public class FacilEditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // module codes
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_FRIEND;
-        descriptor = new EditFacilitatorDescriptorBuilder().withModuleCodes(VALID_MODULE_CODE_FRIEND).build();
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_CS2101;
+        descriptor = new EditFacilitatorDescriptorBuilder().withModuleCodes(VALID_MODULE_CODE_CS2101).build();
         expectedCommand = new FacilEditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -178,13 +178,13 @@ public class FacilEditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_FACILITATOR;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY
-                + MODULE_CODE_DESC_FRIEND + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_FRIEND
-                + PHONE_DESC_BOB + OFFICE_DESC_BOB + EMAIL_DESC_BOB + MODULE_CODE_DESC_HUSBAND;
+                + MODULE_CODE_DESC_CS2101 + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2101
+                + PHONE_DESC_BOB + OFFICE_DESC_BOB + EMAIL_DESC_BOB + MODULE_CODE_DESC_CS2103T;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_FRIEND, VALID_MODULE_CODE_HUSBAND).build();
+                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T).build();
         FacilEditCommand expectedCommand = new FacilEditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
