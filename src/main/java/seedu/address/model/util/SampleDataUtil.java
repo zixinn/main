@@ -33,7 +33,7 @@ public class SampleDataUtil {
                 getModuleCodeSet("MA1521")),
             new Facilitator(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Office("S17-03-15"),
-                getModuleCodeSet("MA2213")),
+                getModuleCodeSet("ST2334")),
             new Facilitator(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Office("AS4-01-13"),
                 getModuleCodeSet("CS2101"))

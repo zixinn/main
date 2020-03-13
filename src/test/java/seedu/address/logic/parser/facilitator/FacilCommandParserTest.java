@@ -34,7 +34,7 @@ public class FacilCommandParserTest {
     @Test
     public void parse_add() throws Exception {
         Facilitator facilitator = new FacilitatorBuilder(AMY).build();
-        FacilAddCommand command = (FacilAddCommand) parser.parse(FacilitatorUtil.getFacilAdd(facilitator));
+        FacilAddCommand command = (FacilAddCommand) parser.parse(FacilitatorUtil.getFacilAddCommand(facilitator));
         assertEquals(new FacilAddCommand(facilitator), command);
     }
 

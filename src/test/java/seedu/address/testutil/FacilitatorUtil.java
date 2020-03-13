@@ -21,7 +21,7 @@ public class FacilitatorUtil {
     /**
      * Returns an add command string for adding the {@code facilitator}.
      */
-    public static String getFacilAdd(Facilitator facilitator) {
+    public static String getFacilAddCommand(Facilitator facilitator) {
         return Command.COMMAND_WORD_ADD + " " + getFacilitatorDetails(facilitator);
     }
 

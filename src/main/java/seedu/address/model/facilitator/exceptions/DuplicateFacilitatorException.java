@@ -6,6 +6,6 @@ package seedu.address.model.facilitator.exceptions;
  */
 public class DuplicateFacilitatorException extends RuntimeException {
     public DuplicateFacilitatorException() {
-        super("Operation would result in duplicate facilitators");
+        super("Operation would result in duplicate facilitators.");
     }
 }

@@ -3,11 +3,16 @@ package seedu.address.model.module;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.CS2103T;
+import static seedu.address.testutil.TypicalModules.VALID_DESCRIPTION_CS2101;
+import static seedu.address.testutil.TypicalModules.VALID_MODULE_CODE_CS2101;
 
 import org.junit.jupiter.api.Test;
 
-public class ModuleTest {
+import seedu.address.testutil.ModuleBuilder;
 
+public class ModuleTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Module(null, null));
@@ -15,56 +20,50 @@ public class ModuleTest {
 
     @Test
     public void isSameModule() {
-        Module module = new Module(new ModuleCode("CS2103T"), new Description("Software Engineering"));
-
         //same object -> returns true
-        assertTrue(module.isSameModule(module));
+        assertTrue(CS2103T.isSameModule(CS2103T));
 
         //null -> return false
-        assertFalse(module.isSameModule(null));
+        assertFalse(CS2103T.isSameModule(null));
 
         // different module code -> returns false
-        Module otherModule = new Module(new ModuleCode("CS2101"), new Description("Software Engineering"));
-        assertFalse(module.isSameModule(otherModule));
+        Module otherModule = new ModuleBuilder().withModuleCode(VALID_MODULE_CODE_CS2101).build();
+        assertFalse(CS2103T.isSameModule(otherModule));
 
         // same name, different description -> returns true
-        otherModule = new Module(new ModuleCode("CS2103T"), new Description("SE"));
-        assertTrue(module.isSameModule(otherModule));
+        otherModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
+        assertTrue(CS2103T.isSameModule(otherModule));
 
         // same name, same description -> returns true
-        otherModule = new Module(new ModuleCode("CS2103T"), new Description("Software Engineering"));
-        assertTrue(module.isSameModule(otherModule));
+        otherModule = new ModuleBuilder().build();
+        assertTrue(CS2103T.isSameModule(otherModule));
     }
 
     @Test
     public void equals() {
-        Module module = new Module(new ModuleCode("CS2103T"), new Description("Software Engineering"));
-
         // same values -> returns true
-        Module otherModule = new Module(new ModuleCode("CS2103T"), new Description("Software Engineering"));
-        assertTrue(module.equals(otherModule));
+        Module otherModule = new ModuleBuilder().build();
+        assertTrue(CS2103T.equals(otherModule));
 
         // same object -> returns true
-        assertTrue(module.equals(module));
+        assertTrue(CS2103T.equals(CS2103T));
 
         // null -> returns false
-        assertFalse(module.equals(null));
+        assertFalse(CS2103T.equals(null));
 
         // different type -> returns false
-        assertFalse(module.equals(5));
+        assertFalse(CS2103T.equals(5));
 
         // different facilitator -> returns false
-        otherModule = new Module(new ModuleCode("CS2101"),
-                new Description("Effective Communication for Computing Professionals"));
-        assertFalse(module.equals(otherModule));
+        otherModule = CS2101;
+        assertFalse(CS2103T.equals(otherModule));
 
         // different module code -> returns false
-        otherModule = new Module(new ModuleCode("CS2101"), new Description("Software Engineering"));
-        assertFalse(module.equals(otherModule));
+        otherModule = new ModuleBuilder().withModuleCode(VALID_MODULE_CODE_CS2101).build();
+        assertFalse(CS2103T.equals(otherModule));
 
         // different description -> returns false
-        otherModule = new Module(new ModuleCode("CS2103T"),
-                new Description("Effective Communication for Computing Professionals"));
-        assertFalse(module.equals(otherModule));
+        otherModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
+        assertFalse(CS2103T.equals(otherModule));
     }
 }

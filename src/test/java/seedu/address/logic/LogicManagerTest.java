@@ -58,13 +58,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = Facilitator.COMMAND_WORD + " delete 9";
+        String deleteCommand = Command.COMMAND_WORD_FACIL + " delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST;
+        String listCommand = Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_LIST;
         assertCommandSuccess(listCommand, FacilListCommand.MESSAGE_SUCCESS, model);
     }
 
@@ -79,7 +79,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String facilAddCommand = Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_ADD + NAME_DESC_AMY
+        String facilAddCommand = Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_ADD + NAME_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY;
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
         ModelManager expectedModel = new ModelManager();

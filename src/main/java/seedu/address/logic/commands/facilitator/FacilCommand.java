@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 public abstract class FacilCommand extends Command {
 
     public static final List<String> ALL_COMMAND_WORDS = List.of(
-            COMMAND_WORD_ADD, COMMAND_WORD_EDIT, COMMAND_WORD_LIST, COMMAND_WORD_FIND, COMMAND_WORD_DELETE);
+            COMMAND_WORD_ADD, COMMAND_WORD_LIST, COMMAND_WORD_FIND, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
