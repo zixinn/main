@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.module.ModuleAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,7 +20,7 @@ import seedu.address.model.module.ModuleCode;
 /**
  * Parses input arguments and creates a new ModuleAddCommand object
  */
-public class ModuleAddCommandParser {
+public class ModuleAddCommandParser implements Parser<ModuleAddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ModuleAddCommand

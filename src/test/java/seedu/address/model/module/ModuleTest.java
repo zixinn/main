@@ -2,11 +2,11 @@ package seedu.address.model.module;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2101;
 import static seedu.address.testutil.TypicalModules.CS2103T;
-import static seedu.address.testutil.TypicalModules.VALID_DESCRIPTION_CS2101;
-import static seedu.address.testutil.TypicalModules.VALID_MODULE_CODE_CS2101;
 
 import org.junit.jupiter.api.Test;
 

@@ -22,13 +22,13 @@ import seedu.address.model.module.Description;
 import seedu.address.model.module.ModuleCode;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_MODULE_CODE = "#CS2103T";
     private static final String INVALID_DESCRIPTION = "very very very very"
             + " very very very very very very very very very long description";
+    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_OFFICE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_MODULE_CODE = "#CS2103T";
 
     private static final String VALID_MODULE_CODE_1 = "CS2103T";
     private static final String VALID_MODULE_CODE_2 = "CS2101";

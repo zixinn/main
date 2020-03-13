@@ -3,6 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -10,6 +12,7 @@ import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +25,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.testutil.FacilitatorBuilder;
+import seedu.address.testutil.ModuleBuilder;
 
 public class AddressBookTest {
 
@@ -48,13 +53,45 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFacilitators_throwsDuplicateFacilitatorException() {
         // Two facilitators with the same identity fields
-        List<Module> newModules = Arrays.asList(CS2103T);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newModules, newFacilitators);
+        AddressBookStub newData = new AddressBookStub(new ArrayList<>(), newFacilitators);
 
         assertThrows(DuplicateFacilitatorException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicateModules_throwsDuplicateModuleException() {
+        // Two modules with the same identity fields
+        Module otherModule = new ModuleBuilder(CS2103T).withDescription(VALID_DESCRIPTION_CS2101).build();
+        List<Module> newModules = Arrays.asList(CS2103T, otherModule);
+        AddressBookStub newData = new AddressBookStub(newModules, new ArrayList<>());
+
+        assertThrows(DuplicateModuleException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasModule_nullFacilitator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasModule(null));
+    }
+
+    @Test
+    public void hasModule_moduleNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasModule(CS2103T));
+    }
+
+    @Test
+    public void hasModule_moduleInAddressBook_returnsTrue() {
+        addressBook.addModule(CS2103T);
+        assertTrue(addressBook.hasModule(CS2103T));
+    }
+
+    @Test
+    public void hasModule_moduleWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addModule(CS2103T);
+        Module editedModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
+        assertTrue(addressBook.hasModule(editedModule));
     }
 
     @Test
@@ -79,6 +116,11 @@ public class AddressBookTest {
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         assertTrue(addressBook.hasFacilitator(editedAlice));
+    }
+
+    @Test
+    public void getModuleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getModuleList().remove(0));
     }
 
     @Test

@@ -33,7 +33,7 @@ import seedu.address.testutil.FacilitatorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
- * and unit tests for FacilEditCommand.
+ * and unit tests for {@code FacilEditCommand}.
  */
 public class FacilEditCommandTest {
 
