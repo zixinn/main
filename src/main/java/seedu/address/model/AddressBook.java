@@ -3,17 +3,21 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.UniqueFacilitatorList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameFacilitator comparison)
+ * Duplicates are not allowed (by .isSameModule and .isSameFacilitator comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private final UniqueModuleList modules;
     private final UniqueFacilitatorList facilitators;
 
     /*
@@ -24,13 +28,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        modules = new UniqueModuleList();
         facilitators = new UniqueFacilitatorList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Facilitators in the {@code toBeCopied}
+     * Creates an AddressBook using the Modules and Facilitators in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -38,6 +43,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// list overwrite operations
+
+    /**
+     * Replaces the contents of the module list with {@code modules}.
+     * {@code modules} must not contain duplicate modules.
+     */
+    public void setModules(List<Module> modules) {
+        this.modules.setModules(modules);
+    }
 
     /**
      * Replaces the contents of the facilitator list with {@code facilitators}.
@@ -54,6 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setFacilitators(newData.getFacilitatorList());
+        setModules(newData.getModuleList());
     }
 
     //// facilitator-level operations
@@ -94,12 +108,56 @@ public class AddressBook implements ReadOnlyAddressBook {
         facilitators.remove(key);
     }
 
+    //// module-level operations
+
+    /**
+     * Returns true if a module with the same identity as {@code module} exists in Mod Manager.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
+    }
+
+    /**
+     * Adds a module to the Mod Manager.
+     * The module must not already exist in Mod Manager.
+     */
+    public void addModule(Module p) {
+        modules.add(p);
+    }
+
+    /**
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in Mod Manager.
+     * The module identity of {@code editedModule} must not be the same as another existing module
+     * in Mod Manager.
+     */
+    public void setModule(Module target, Module editedModule) {
+        requireNonNull(editedModule);
+
+        modules.setModule(target, editedModule);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in Mod Manager.
+     */
+    public void removeModule(Module key) {
+        modules.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return facilitators.asUnmodifiableObservableList().size() + " facilitators";
+        return modules.asUnmodifiableObservableList().size() + " modules \n"
+                + facilitators.asUnmodifiableObservableList().size() + " facilitators";
         // TODO: refine later
+    }
+
+    @Override
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
     }
 
     @Override
@@ -111,11 +169,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
+                && modules.equals(((AddressBook) other).modules)
                 && facilitators.equals(((AddressBook) other).facilitators));
     }
 
     @Override
     public int hashCode() {
-        return facilitators.hashCode();
+        return Objects.hash(modules, facilitators);
     }
 }

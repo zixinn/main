@@ -52,7 +52,7 @@ public class Description {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value != null ? value.hashCode() : 0;
     }
 
 }

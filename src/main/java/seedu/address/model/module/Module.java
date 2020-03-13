@@ -75,7 +75,9 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode());
-        builder.append(" Description: ").append(getDescription());
+        if (getDescription().value != null) {
+            builder.append(" Description: ").append(getDescription());
+        }
         return builder.toString();
     }
 

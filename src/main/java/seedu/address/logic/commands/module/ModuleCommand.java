@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.facilitator;
+package seedu.address.logic.commands.module;
 
 import java.util.List;
 
@@ -7,14 +7,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-
 /**
- * Represents a facil command with hidden internal logic and the ability to be executed.
+ * Represents a module command with hidden internal logic and the ability to be executed.
  */
-public abstract class FacilCommand extends Command {
-
+public abstract class ModuleCommand extends Command {
     public static final List<String> ALL_COMMAND_WORDS = List.of(
-            COMMAND_WORD_ADD, COMMAND_WORD_LIST, COMMAND_WORD_FIND, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE);
+            COMMAND_WORD_ADD, COMMAND_WORD_LIST, COMMAND_WORD_VIEW, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
