@@ -43,17 +43,26 @@
                   <content>
                     <VBox fx:id="moduleList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                       <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                      <StackPane fx:id="moduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                    </VBox>
+                  </content>
+                </Tab>
+                <Tab fx:id="oneModule" text="Module" >
+                  <content>
+                    <VBox fx:id="moduleDetails" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                      <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
                       <StackPane fx:id="moduleDetailsPlaceholder" maxHeight="25" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
                                  style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);"/>
-                      <StackPane fx:id="moduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="modulePanelPlaceholder" VBox.vgrow="ALWAYS" />
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
                       <StackPane fx:id="lessonPanelPlaceholder" minHeight="-Infinity" maxHeight="50" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
                                  style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);"/>
-
                     </VBox>
                   </content>
                 </Tab>

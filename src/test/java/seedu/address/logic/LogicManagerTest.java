@@ -89,6 +89,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredModuleList().remove(0));
+    }
+
+    @Test
     public void getFilteredFacilitatorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredFacilitatorList().remove(0));
     }

@@ -18,21 +18,25 @@ import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.module.Description;
 import seedu.address.model.module.ModuleCode;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_DESCRIPTION = "very very very very"
+            + " very very very very very very very very very long description";
     private static final String INVALID_OFFICE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_MODULE_CODE = "#friend";
+    private static final String INVALID_MODULE_CODE = "#CS2103T";
 
+    private static final String VALID_MODULE_CODE_1 = "CS2103T";
+    private static final String VALID_MODULE_CODE_2 = "CS2101";
+    private static final String VALID_DESCRIPTION = "Software Engineering";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_OFFICE = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_MODULE_CODE_1 = "friend";
-    private static final String VALID_MODULE_CODE_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -54,6 +58,53 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_FACILITATOR, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseModuleCode_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
+    }
+
+    @Test
+    public void parseModuleCode_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_MODULE_CODE));
+    }
+
+    @Test
+    public void parseModuleCode_validValueWithoutWhitespace_returnsModuleCode() throws Exception {
+        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE_1);
+        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(VALID_MODULE_CODE_1));
+    }
+
+    @Test
+    public void parseModuleCode_validValueWithWhitespace_returnsTrimmedModuleCode() throws Exception {
+        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE_1 + WHITESPACE;
+        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE_1);
+        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
+    }
+
+    @Test
+    public void parseDescription_null_returnsNullDescription() throws Exception {
+        Description expectedDescription = new Description(null);
+        assertEquals(expectedDescription, ParserUtil.parseDescription(null));
+    }
+
+    @Test
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
+        Description expectedDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(expectedDescription, ParserUtil.parseDescription(VALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        Description expectedDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(expectedDescription, ParserUtil.parseDescription(descriptionWithWhitespace));
     }
 
     @Test
@@ -149,29 +200,6 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    }
-
-    @Test
-    public void parseModuleCode_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
-    }
-
-    @Test
-    public void parseModuleCode_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_MODULE_CODE));
-    }
-
-    @Test
-    public void parseModuleCode_validValueWithoutWhitespace_returnsModuleCode() throws Exception {
-        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE_1);
-        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(VALID_MODULE_CODE_1));
-    }
-
-    @Test
-    public void parseModuleCode_validValueWithWhitespace_returnsTrimmedModuleCode() throws Exception {
-        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE_1 + WHITESPACE;
-        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE_1);
-        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
     }
 
     @Test

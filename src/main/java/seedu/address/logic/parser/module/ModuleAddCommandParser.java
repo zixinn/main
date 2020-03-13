@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.facilitator.FacilAddCommand;
 import seedu.address.logic.commands.module.ModuleAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;

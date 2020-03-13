@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
+import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,11 +36,14 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
 
         switch (commandWord) {
 
-            case Command.COMMAND_WORD_ADD:
-                return new ModuleAddCommandParser().parse(arguments);
+        case Command.COMMAND_WORD_ADD:
+            return new ModuleAddCommandParser().parse(arguments);
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_MODULE_COMMAND);
+        case Command.COMMAND_WORD_LIST:
+            return new ModuleListCommand();
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_MODULE_COMMAND);
         }
     }
 }

@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private ModuleListPanel moduleListPanel;
     private FacilitatorListPanel facilitatorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -44,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane moduleListPanelPlaceholder;
 
     @FXML
     private StackPane facilitatorListPanelPlaceholder;
@@ -62,6 +66,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Tab module;
+
+    @FXML
+    private Tab oneModule;
 
     @FXML
     private Tab facilitator;
@@ -132,6 +139,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
+        moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
+
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
@@ -195,6 +205,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches to module view
+     */
+    public void handleSwitchToModule() {
+        mainTabPane.getSelectionModel().select(module);
+    }
+
+    /**
+     * Switches to module view
+     */
+    public void handleSwitchToOneModule() {
+        mainTabPane.getSelectionModel().select(oneModule);
+    }
+
+    /**
      * Switches to facilitator view
      */
     public void handleSwitchToFacilitator() {
@@ -202,17 +226,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Switches to facilitator view
-     */
-    public void handleSwitchToModule() {
-        mainTabPane.getSelectionModel().select(module);
-    }
-
-    /**
-     * Switches to facilitator view
+     * Switches to calendar view
      */
     public void handleSwitchToCalendar() {
         mainTabPane.getSelectionModel().select(calendar);
+    }
+
+    public ModuleListPanel getModuleListPanel() {
+        return moduleListPanel;
     }
 
     public FacilitatorListPanel getFacilitatorListPanel() {
@@ -231,10 +252,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getType()) {
             case MODULE:
-            case LESSON:
-            case TASK:
             case CLEAR:
                 handleSwitchToModule();
+                break;
+            case LESSON:
+            case TASK:
+                handleSwitchToOneModule();
                 break;
             case FACILITATOR:
                 handleSwitchToFacilitator();

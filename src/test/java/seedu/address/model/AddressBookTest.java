@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.FacilitatorBuilder;
 
 public class AddressBookTest {
@@ -46,10 +48,11 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFacilitators_throwsDuplicateFacilitatorException() {
         // Two facilitators with the same identity fields
+        List<Module> newModules = Arrays.asList(CS2103T);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newFacilitators);
+        AddressBookStub newData = new AddressBookStub(newModules, newFacilitators);
 
         assertThrows(DuplicateFacilitatorException.class, () -> addressBook.resetData(newData));
     }
@@ -84,18 +87,25 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose facilitators list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose modules and facilitators list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
+        private final ObservableList<Module> modules = FXCollections.observableArrayList();
         private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Facilitator> facilitators) {
+        AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators) {
+            this.modules.setAll(modules);
             this.facilitators.setAll(facilitators);
         }
 
         @Override
         public ObservableList<Facilitator> getFacilitatorList() {
             return facilitators;
+        }
+
+        @Override
+        public ObservableList<Module> getModuleList() {
+            return modules;
         }
     }
 
