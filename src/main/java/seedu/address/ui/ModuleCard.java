@@ -14,7 +14,7 @@ public class ModuleCard extends UiPart<Region> {
 
     public final Module module;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label id;

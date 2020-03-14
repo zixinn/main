@@ -36,8 +36,8 @@ public class ModuleAddCommandParser implements Parser<ModuleAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleAddCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));;
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));;
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
 
         Module module = new Module(moduleCode, description);
 
