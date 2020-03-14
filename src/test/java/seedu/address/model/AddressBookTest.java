@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
-import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.ArrayList;

@@ -10,15 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.TypicalModules.getTypicalModules;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.facilitator.Facilitator;
-import seedu.address.model.module.Module;
 
 /**
  * A utility class containing a list of {@code Facilitator} objects to be used in tests.
@@ -70,20 +67,6 @@ public class TypicalFacilitators {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalFacilitators() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical facilitators.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Module module : getTypicalModules()) {
-            ab.addModule(module);
-        }
-        for (Facilitator facilitator : getTypicalFacilitators()) {
-            ab.addFacilitator(facilitator);
-        }
-        return ab;
-    }
 
     public static List<Facilitator> getTypicalFacilitators() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

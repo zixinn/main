@@ -2,7 +2,7 @@ package seedu.address.logic.commands.facilitator;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
-import static seedu.address.testutil.TypicalFacilitators.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
 
 import org.junit.jupiter.api.BeforeEach;
