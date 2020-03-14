@@ -108,6 +108,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         modules.remove(key);
     }
 
+    /**
+     * Returns the list of modules in this {@code AddressBook}.
+     * @return the list of modules.
+     */
+    public List<Module> getModules() {
+        return modules.getModuleList();
+    }
 
     //// facilitator-level operations
 
@@ -147,6 +154,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         facilitators.remove(key);
     }
 
+    /**
+     * Returns the list of modules in this {@code AddressBook}.
+     * @return the list of modules.
+     */
+    public List<Facilitator> getFacilitators() {
+        return facilitators.getFacilitatorList();
+    }
+
     //// util methods
 
     @Override
@@ -154,6 +169,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
                 + facilitators.asUnmodifiableObservableList().size() + " facilitators";
         // TODO: refine later
+    }
+
+    @Override
+    public AddressBook getAddressBook() {
+        return this;
     }
 
     @Override

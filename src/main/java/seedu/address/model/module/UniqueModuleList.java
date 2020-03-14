@@ -105,6 +105,14 @@ public class UniqueModuleList implements Iterable<Module> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the list of modules.
+     * @return the list of modules.
+     */
+    public List<Module> getModuleList() {
+        return internalList;
+    }
+
     @Override
     public Iterator<Module> iterator() {
         return internalList.iterator();

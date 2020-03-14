@@ -14,6 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.testutil.ModuleBuilder;
@@ -165,5 +167,19 @@ public class UniqueModuleListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueModuleList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void getModuleList_emptyList_success() {
+        ObservableList<Module> internalList = FXCollections.observableArrayList();
+        assertEquals(internalList, uniqueModuleList.getModuleList());
+    }
+
+    @Test
+    public void getModuleList_nonEmptyList_success() {
+        ObservableList<Module> internalList = FXCollections.observableArrayList();
+        internalList.add(CS2103T);
+        uniqueModuleList.add(CS2103T);
+        assertEquals(internalList, uniqueModuleList.getModuleList());
     }
 }

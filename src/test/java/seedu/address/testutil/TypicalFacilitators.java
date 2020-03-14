@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.testutil.TypicalModules.getTypicalModules;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.module.Module;
 
 /**
  * A utility class containing a list of {@code Facilitator} objects to be used in tests.
@@ -26,15 +28,15 @@ public class TypicalFacilitators {
     public static final Facilitator ALICE = new FacilitatorBuilder().withName("Alice Pauline")
             .withOffice("COM2-08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withModuleCodes("CS2103").build();
+            .withModuleCodes("CS2103T").build();
     public static final Facilitator BENSON = new FacilitatorBuilder().withName("Benson Meier")
             .withOffice("COM3-02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withModuleCodes("CS2101", "CS2103").build();
+            .withModuleCodes("CS2101", "CS2103T").build();
     public static final Facilitator CARL = new FacilitatorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withOffice("AS6-06-11").build();
     public static final Facilitator DANIEL = new FacilitatorBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withOffice("AS4-06-13").withModuleCodes("CS2103").build();
+            .withEmail("cornelia@example.com").withOffice("AS4-06-13").withModuleCodes("CS2103T").build();
     public static final Facilitator ELLE = new FacilitatorBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withOffice("S16-03-03").build();
     public static final Facilitator FIONA = new FacilitatorBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -57,13 +59,13 @@ public class TypicalFacilitators {
 
     public static final Facilitator BENSON_NULL_PHONE = new FacilitatorBuilder().withName("Benson Meier")
             .withOffice("COM3-02-25").withEmail("johnd@example.com")
-            .withModuleCodes("CS2101", "CS2103").build();
+            .withModuleCodes("CS2101", "CS2103T").build();
     public static final Facilitator BENSON_NULL_EMAIL = new FacilitatorBuilder().withName("Benson Meier")
             .withOffice("COM3-02-25").withPhone("98765432")
-            .withModuleCodes("CS2101", "CS2103").build();
+            .withModuleCodes("CS2101", "CS2103T").build();
     public static final Facilitator BENSON_NULL_OFFICE = new FacilitatorBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withModuleCodes("CS2101", "CS2103").build();
+            .withModuleCodes("CS2101", "CS2103T").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -74,6 +76,9 @@ public class TypicalFacilitators {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        for (Module module : getTypicalModules()) {
+            ab.addModule(module);
+        }
         for (Facilitator facilitator : getTypicalFacilitators()) {
             ab.addFacilitator(facilitator);
         }

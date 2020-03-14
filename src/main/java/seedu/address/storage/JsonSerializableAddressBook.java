@@ -1,9 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -11,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.facilitator.Facilitator;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +14,14 @@ import seedu.address.model.facilitator.Facilitator;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitators list contains duplicate facilitator(s).";
-
-    private final List<JsonAdaptedFacilitator> facilitators = new ArrayList<>();
+    private final JsonAdaptedModManager modManager;
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given facilitators.
+     * Constructs a {@code JsonSerializableAddressBook} with the given mod manager.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators) {
-        this.facilitators.addAll(facilitators);
+    public JsonSerializableAddressBook(@JsonProperty("modManager") JsonAdaptedModManager modManager) {
+        this.modManager = modManager;
     }
 
     /**
@@ -37,8 +30,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        facilitators.addAll(source.getFacilitatorList().stream().map(JsonAdaptedFacilitator::new)
-                .collect(Collectors.toList()));
+        modManager = new JsonAdaptedModManager(source.getAddressBook());
     }
 
     /**
@@ -47,15 +39,6 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedFacilitator jsonAdaptedFacilitator : facilitators) {
-            Facilitator facilitator = jsonAdaptedFacilitator.toModelType();
-            if (addressBook.hasFacilitator(facilitator)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_FACILITATOR);
-            }
-            addressBook.addFacilitator(facilitator);
-        }
-        return addressBook;
+        return modManager.toModelType();
     }
-
 }

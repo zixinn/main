@@ -15,6 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.facilitator.exceptions.FacilitatorNotFoundException;
 import seedu.address.testutil.FacilitatorBuilder;
@@ -168,5 +170,19 @@ public class UniqueFacilitatorListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueFacilitatorList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void getFacilitatorList_emptyList_success() {
+        ObservableList<Facilitator> internalList = FXCollections.observableArrayList();
+        assertEquals(internalList, uniqueFacilitatorList.getFacilitatorList());
+    }
+
+    @Test
+    public void getFacilitatorList_nonEmptyList_success() {
+        ObservableList<Facilitator> internalList = FXCollections.observableArrayList();
+        internalList.add(ALICE);
+        uniqueFacilitatorList.add(ALICE);
+        assertEquals(internalList, uniqueFacilitatorList.getFacilitatorList());
     }
 }

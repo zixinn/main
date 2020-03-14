@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,8 +22,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModuleBuilder;
@@ -95,6 +96,20 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getModules_emptyList_success() {
+        UniqueModuleList modules = new UniqueModuleList();
+        assertEquals(modules.getModuleList(), addressBook.getModules());
+    }
+
+    @Test
+    public void getModules_nonEmptyList_success() {
+        addressBook.addModule(CS2103T);
+        UniqueModuleList modules = new UniqueModuleList();
+        modules.add(CS2103T);
+        assertEquals(modules.getModuleList(), addressBook.getModules());
+    }
+
+    @Test
     public void hasFacilitator_nullFacilitator_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasFacilitator(null));
     }
@@ -119,6 +134,25 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getFacilitators_emptyList_success() {
+        UniqueFacilitatorList facilitators = new UniqueFacilitatorList();
+        assertEquals(facilitators.getFacilitatorList(), addressBook.getFacilitators());
+    }
+
+    @Test
+    public void getFacilitators_nonEmptyList_success() {
+        addressBook.addFacilitator(ALICE);
+        UniqueFacilitatorList facilitators = new UniqueFacilitatorList();
+        facilitators.add(ALICE);
+        assertEquals(facilitators.getFacilitatorList(), addressBook.getFacilitators());
+    }
+
+    @Test
+    public void getAddressBook_emptyAddressBook_success() {
+        assertEquals(new AddressBook(), addressBook);
+    }
+
+    @Test
     public void getModuleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getModuleList().remove(0));
     }
@@ -138,6 +172,11 @@ public class AddressBookTest {
         AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators) {
             this.modules.setAll(modules);
             this.facilitators.setAll(facilitators);
+        }
+
+        @Override
+        public AddressBook getAddressBook() {
+            return new AddressBook();
         }
 
         @Override
