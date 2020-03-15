@@ -14,7 +14,7 @@ import seedu.address.model.Model;
  */
 public class CalViewCommand extends CalCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_CAL + " " + COMMAND_WORD_VIEW
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_CAL + " " + COMMAND_WORD_VIEW
             + ": Views the calendar for a week. "
             + "Parameters: "
             + PREFIX_WEEK + " this OR"

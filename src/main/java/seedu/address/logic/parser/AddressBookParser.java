@@ -59,7 +59,7 @@ public class AddressBookParser {
         case Command.COMMAND_GROUP_FACIL:
             return new FacilCommandParser().parse(arguments);
 
-        case Command.COMMAND_WORD_CAL:
+        case Command.COMMAND_GROUP_CAL:
             return new CalCommandParser().parse(arguments);
 
         default:

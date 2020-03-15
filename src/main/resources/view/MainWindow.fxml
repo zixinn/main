@@ -78,7 +78,7 @@
                 </Tab>
                 <Tab fx:id="calendar" text="Calendar" >
                   <content>
-                    <StackPane fx:id="calendarViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                    <StackPane fx:id="calendarViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                       <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                       </padding>
