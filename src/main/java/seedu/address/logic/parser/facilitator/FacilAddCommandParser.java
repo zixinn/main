@@ -43,8 +43,9 @@ public class FacilAddCommandParser implements Parser<FacilAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAddCommand.MESSAGE_USAGE));
         }
 
-        if ((!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
-                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE))) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
+                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE)
+                && !arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             throw new ParseException(FacilAddCommand.MESSAGE_NOT_ADDED);
         }
 

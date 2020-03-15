@@ -15,12 +15,12 @@ import seedu.address.model.module.Module;
  */
 public class ModuleAddCommand extends ModuleCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_MOD + " " + COMMAND_WORD_ADD
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_ADD
             + ": Adds a module to Mod Manager. "
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] \n"
-            + "Example: " + COMMAND_WORD_MOD + " " + COMMAND_WORD_ADD + " "
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_ADD + " "
             + PREFIX_MODULE_CODE + " CS2103T "
             + PREFIX_DESCRIPTION + " Software Engineering ";
 
