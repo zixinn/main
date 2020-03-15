@@ -1,11 +1,9 @@
 {
-  "modManager" : {
-    "modules" : [ ],
-    "facilitators": [ {
-      "name": "Hans Muster",
-      "phone": "9482424",
-      "email": "invalid@email!3e",
-      "office": "4th street"
-    } ]
-  }
+  "modules" : [ ],
+  "facilitators": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "office": "4th street"
+  } ]
 }

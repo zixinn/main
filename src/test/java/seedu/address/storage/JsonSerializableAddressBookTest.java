@@ -52,7 +52,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicateModules_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonAdaptedModManager.MESSAGE_DUPLICATE_MODULE,
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_MODULE,
                 dataFromFile::toModelType);
     }
 
@@ -60,7 +60,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicateFacilitators_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FACILITATOR_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonAdaptedModManager.MESSAGE_DUPLICATE_FACILITATOR,
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_FACILITATOR,
                 dataFromFile::toModelType);
     }
 }
