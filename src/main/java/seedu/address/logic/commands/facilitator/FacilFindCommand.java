@@ -14,11 +14,11 @@ import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
  */
 public class FacilFindCommand extends FacilCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_FACIL + " " + COMMAND_WORD_FIND
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_FACIL + " " + COMMAND_WORD_FIND
             + ": Finds all facilitators whose names contain "
             + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD_FACIL + " " + COMMAND_WORD_FIND + " alice bob charlie";
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_FIND + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 

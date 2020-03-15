@@ -18,7 +18,7 @@ import seedu.address.model.facilitator.Facilitator;
  */
 public class FacilAddCommand extends FacilCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_FACIL + " " + COMMAND_WORD_ADD
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD
             + ": Adds a facilitator to Mod Manager. "
             + "Parameters: "
             + PREFIX_NAME + " NAME "
@@ -26,7 +26,7 @@ public class FacilAddCommand extends FacilCommand {
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
             + "[" + PREFIX_MODULE_CODE + " MODULE_CODE]...\n"
-            + "Example: " + COMMAND_WORD_FACIL + " " + COMMAND_WORD_ADD + " "
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD + " "
             + PREFIX_NAME + " Martin Henz "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " henz@comp.nus.edu.sg "
