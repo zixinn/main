@@ -41,6 +41,6 @@ public class CalendarCardPanel extends UiPart<Region> {
     }
 
     public double getHeight() {
-        return num * 50;
+        return num * 80;
     }
 }

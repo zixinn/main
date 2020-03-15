@@ -6,9 +6,12 @@
 
 <StackPane fx:id="cardPane" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox style="-fx-background-color: #f9f7f8;" StackPane.alignment="CENTER_LEFT">
-            <Label textFill="white" text="oof" />
-            <Label textFill="white" text="eee" />
+        <VBox fx:id="card" style="-fx-background-color: #f9f7f8; -fx-background-radius: 8" StackPane.alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="15" />
+            </padding>
+            <Label fx:id="description" styleClass="cell_big_label" />
+            <Label fx:id="time" styleClass="cell_big_label" />
             <StackPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </StackPane.margin>

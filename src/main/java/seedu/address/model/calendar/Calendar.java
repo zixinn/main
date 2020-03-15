@@ -1,6 +1,9 @@
 package seedu.address.model.calendar;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import seedu.address.model.task.Task;
 
 /**
  * Represents the Calendar in Mod Manager.
@@ -13,6 +16,20 @@ public class Calendar {
 
     public Calendar(LocalDate localDate) {
         this.localDate = localDate;
+    }
+
+    /**
+     * Returns the calendar with the now date.
+     */
+    public static Calendar getNowCalendar() {
+        return new Calendar(LocalDate.now());
+    }
+
+    /**
+     * Returns the calendar with the date of next week.
+     */
+    public static Calendar getNextWeekCalendar() {
+        return new Calendar(LocalDate.now().plusDays(7));
     }
 
     public LocalDate getLocalDate() {
@@ -46,6 +63,19 @@ public class Calendar {
         }
 
         return week;
+    }
+
+    /**
+     * Checks if task is within the localDate.
+     */
+    public boolean isWithinDate(Task task) {
+        LocalDate date = LocalDate.parse(task.getTimeOutput(),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy[ HH:mm]"));
+        if (localDate.compareTo(date) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
