@@ -11,7 +11,7 @@ import seedu.address.model.module.ModuleCode;
 /**
  * Represents a Lesson in Mod Manager.
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;
@@ -130,6 +130,19 @@ public class Lesson {
                 && otherLesson.getEndTime().equals(getEndTime())
                 && isSameFacilitator(otherLesson)
                 && isSameVenue(otherLesson);
+    }
+
+    public int compareTo(Lesson lesson) {
+        DayOfWeek day = lesson.getDay();
+        LocalTime time = lesson.getStartTime();
+        int val = this.getDay().compareTo(day);
+        if (val > 0) {
+            return 1;
+        } else if (val < 0) {
+            return -1;
+        } else {
+            return this.getStartTime().compareTo(time);
+        }
     }
 }
 
