@@ -18,7 +18,7 @@ import seedu.address.model.facilitator.Facilitator;
  */
 public class FacilAddCommand extends FacilCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_FACIL + " " + COMMAND_WORD_ADD
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD
             + ": Adds a facilitator to Mod Manager. "
             + "Parameters: "
             + PREFIX_NAME + " NAME "
@@ -26,17 +26,16 @@ public class FacilAddCommand extends FacilCommand {
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
             + "[" + PREFIX_MODULE_CODE + " MODULE_CODE]...\n"
-            + "Example: " + COMMAND_WORD_FACIL + " " + COMMAND_WORD_ADD + " "
-            + PREFIX_NAME + " John Doe "
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD + " "
+            + PREFIX_NAME + " Martin Henz "
             + PREFIX_PHONE + " 98765432 "
-            + PREFIX_EMAIL + " johnd@example.com "
-            + PREFIX_OFFICE + " 311, Clementi Ave 2, #02-25 "
-            + PREFIX_MODULE_CODE + " friends "
-            + PREFIX_MODULE_CODE + " owesMoney";
+            + PREFIX_EMAIL + " henz@comp.nus.edu.sg "
+            + PREFIX_OFFICE + " COM2-0356 "
+            + PREFIX_MODULE_CODE + " CS1101S";
 
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
     public static final String MESSAGE_NOT_ADDED =
-            "At least one of the optional fields (phone, email, office) must be provided.";
+            "At least one of the optional fields (phone, email, office, code) must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager";
 
     private final Facilitator toAdd;

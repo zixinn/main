@@ -27,8 +27,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_EXIT) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_EXIT + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_EXIT) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_EXIT + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -39,17 +39,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_mod() throws Exception {
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_MOD + " " + Command.COMMAND_WORD_LIST)
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_MOD + " " + Command.COMMAND_WORD_LIST)
                 instanceof ModuleCommand);
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_MOD + " " + Command.COMMAND_WORD_LIST + " 3")
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_MOD + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof ModuleCommand);
     }
 
     @Test
     public void parseCommand_facil() throws Exception {
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_LIST)
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_LIST)
                 instanceof FacilCommand);
-        assertTrue(parser.parseCommand(Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_LIST + " 3")
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
     }
 

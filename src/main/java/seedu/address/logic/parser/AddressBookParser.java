@@ -47,16 +47,16 @@ public class AddressBookParser {
         case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
 
-        case Command.COMMAND_WORD_EXIT:
+        case Command.COMMAND_GROUP_EXIT:
             return new ExitCommand();
 
         case Command.COMMAND_WORD_HELP:
             return new HelpCommand();
 
-        case Command.COMMAND_WORD_MOD:
+        case Command.COMMAND_GROUP_MOD:
             return new ModuleCommandParser().parse(arguments);
 
-        case Command.COMMAND_WORD_FACIL:
+        case Command.COMMAND_GROUP_FACIL:
             return new FacilCommandParser().parse(arguments);
 
         case Command.COMMAND_WORD_CAL:
