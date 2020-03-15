@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
@@ -152,5 +153,22 @@ public class ParserUtil {
             moduleCodeSet.add(parseModuleCode(moduleCodeName));
         }
         return moduleCodeSet;
+    }
+
+    /**
+     * Parses {@code String week} into a {@code Set<ModuleCode>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static String parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+        String trimmedWeek = week.trim();
+        if (trimmedWeek.equals("this") || trimmedWeek.equals("next")) {
+            return trimmedWeek;
+        } else {
+            throw new ParseException(Calendar.MESSAGE_CONSTRAINTS);
+        }
+
     }
 }
