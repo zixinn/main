@@ -104,7 +104,7 @@ public class Facilitator {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
+        builder.append(getName() + "\n");
         if (getPhone().value != null) {
             builder.append(" Phone: ").append(getPhone());
         }
@@ -116,7 +116,7 @@ public class Facilitator {
         }
         if (!getModuleCodes().isEmpty()) {
             builder.append(" Module codes: ");
-            getModuleCodes().forEach(builder::append);
+            getModuleCodes().forEach(x -> builder.append(x.toString() + " | "));
         }
         return builder.toString();
     }

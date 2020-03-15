@@ -300,18 +300,18 @@ Format: `cal view /week next`
 Finds empty slots in the calendar. +
 Format: `cal find /type empty`
 
-=== Listing commands : `command`
+=== Listing commands : `cmd`
 
 ==== Listing all commands
 
 Lists all valid commands. +
-Format: `command all`
+Format: `cmd all`
 
 ==== Listing commands for a specific feature
 
-Lists commands for a specific feature. +
-Format: `command feature COMMAND_NAME` +
-Example: `command feature task`
+Lists commands for a specific group. +
+Format: `cmd group COMMAND_WORD` +
+Example: `cmd group task`
 
 === Automatic command guidance
 
