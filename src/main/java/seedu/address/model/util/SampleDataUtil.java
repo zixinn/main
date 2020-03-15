@@ -11,12 +11,24 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    public static Module[] getSampleModules() {
+        return new Module[] {
+            new Module(new ModuleCode("CS2103T"), new Description("Software Engineering")),
+            new Module(new ModuleCode("CS2101"), new Description(null)),
+            new Module(new ModuleCode("ES2660"), new Description("Communicating in Information Age")),
+            new Module(new ModuleCode("MA1521"), new Description("Calculus for Computing")),
+            new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics"))
+        };
+    }
     public static Facilitator[] getSampleFacilitators() {
         return new Facilitator[] {
             new Facilitator(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -44,6 +56,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Facilitator sampleFacilitator : getSampleFacilitators()) {
             sampleAb.addFacilitator(sampleFacilitator);
+        }
+        for (Module sampleModule : getSampleModules()) {
+            sampleAb.addModule(sampleModule);
         }
         return sampleAb;
     }
