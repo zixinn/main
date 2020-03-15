@@ -7,7 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("/code");
-    public static final Prefix PREFIX_DESC = new Prefix("/desc");
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("/desc");
 
     public static final Prefix PREFIX_TYPE = new Prefix("/type");
     public static final Prefix PREFIX_VENUE = new Prefix("/venue");

@@ -10,22 +10,20 @@ import java.util.Objects;
  */
 public class Module {
 
-    public static final String COMMAND_WORD = "mod";
+    // Identity fields
+    private final ModuleCode moduleCode;
 
-    //Identity fields
-    private final ModuleCode code;
-
-    //Data fields
+    // Data fields
     private Description description;
 
-    public Module(ModuleCode code, Description description) {
-        requireAllNonNull(code, description);
-        this.code = code;
+    public Module(ModuleCode moduleCode, Description description) {
+        requireAllNonNull(moduleCode, description);
+        this.moduleCode = moduleCode;
         this.description = description;
     }
 
-    public ModuleCode getCode() {
-        return code;
+    public ModuleCode getModuleCode() {
+        return moduleCode;
     }
 
     public Description getDescription() {
@@ -44,7 +42,7 @@ public class Module {
         }
 
         return otherModule != null
-                && otherModule.getCode().equals(getCode());
+                && otherModule.getModuleCode().equals(getModuleCode());
     }
 
     /**
@@ -64,20 +62,22 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return otherModule.getCode().equals(getCode())
+        return otherModule.getModuleCode().equals(getModuleCode())
                 && otherModule.getDescription().equals(getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, description);
+        return Objects.hash(moduleCode, description);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getCode());
-        builder.append(" Description: ").append(getDescription());
+        builder.append(getModuleCode());
+        if (getDescription().value != null) {
+            builder.append(" Description: ").append(getDescription());
+        }
         return builder.toString();
     }
 

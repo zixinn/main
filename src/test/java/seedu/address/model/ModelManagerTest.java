@@ -7,6 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.BENSON;
+import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,6 +75,27 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasModule_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasModule(null));
+    }
+
+    @Test
+    public void hasModule_moduleNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasModule(CS2103T));
+    }
+
+    @Test
+    public void hasModule_moduleInAddressBook_returnsTrue() {
+        modelManager.addModule(CS2103T);
+        assertTrue(modelManager.hasModule(CS2103T));
+    }
+
+    @Test
+    public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+    }
+
+    @Test
     public void hasFacilitator_nullFacilitator_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasFacilitator(null));
     }
@@ -95,7 +118,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
+                .withModule(CS2103T).withModule(CS2101).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

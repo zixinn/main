@@ -405,14 +405,14 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 * 2b. The module code is more than 10 characters or the description is more than 60 characters.
 +
 [none]
 ** 2b1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC02 - List modules
@@ -450,7 +450,7 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC04 - Edit module
@@ -472,14 +472,14 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 * 3a. The new module code is more than 10 characters or the new description is more than 60 characters.
 +
 [none]
 ** 3a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 3.
 
 [discrete]
 === Use case: UC05 - Delete module
@@ -500,7 +500,7 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC06 - Add class
@@ -582,15 +582,15 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [none]
-* 2a. Fields provided are invalid.
+* 2b. Fields provided are invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 2b1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC19 - List facilitators
@@ -647,15 +647,15 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [none]
-* 2a. Fields provided are invalid.
+* 3a. Fields provided are invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 3a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 3.
 
 [discrete]
 === Use case: UC22 - Delete facilitator
@@ -676,7 +676,7 @@ Use case ends.
 [none]
 ** 2a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC23 - View calendar
@@ -694,7 +694,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC24 - Find empty slots in calendar
@@ -712,7 +712,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case ends.
+Use case resumes at step 1.
 
 [none]
 * 2a. The list of empty slots is empty.

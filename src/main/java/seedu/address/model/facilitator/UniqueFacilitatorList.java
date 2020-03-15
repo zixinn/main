@@ -106,6 +106,14 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the list of facilitators.
+     * @return the list of facilitators.
+     */
+    public List<Facilitator> getFacilitatorList() {
+        return internalList;
+    }
+
     @Override
     public Iterator<Facilitator> iterator() {
         return internalList.iterator();

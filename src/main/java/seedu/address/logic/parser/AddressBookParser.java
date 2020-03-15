@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.facilitator.FacilCommandParser;
-import seedu.address.model.facilitator.Facilitator;
+import seedu.address.logic.parser.module.ModuleCommandParser;
 
 /**
  * Parses user input.
@@ -52,7 +52,10 @@ public class AddressBookParser {
         case Command.COMMAND_WORD_HELP:
             return new HelpCommand();
 
-        case Facilitator.COMMAND_WORD:
+        case Command.COMMAND_WORD_MOD:
+            return new ModuleCommandParser().parse(arguments);
+
+        case Command.COMMAND_WORD_FACIL:
             return new FacilCommandParser().parse(arguments);
 
         default:

@@ -25,7 +25,7 @@ public class JsonAdaptedFacilitatorTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_OFFICE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_MODULE_CODE = "#friend";
+    private static final String INVALID_MODULE_CODE = "#cs2103t";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();

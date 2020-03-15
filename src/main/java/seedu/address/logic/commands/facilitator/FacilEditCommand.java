@@ -33,7 +33,8 @@ import seedu.address.model.module.ModuleCode;
  */
 public class FacilEditCommand extends FacilCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_EDIT + ": Edits the details of the facilitator identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_FACIL + " " + COMMAND_WORD_EDIT
+            + ": Edits the details of the facilitator identified "
             + "by the index number used in the displayed facilitator list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -42,7 +43,7 @@ public class FacilEditCommand extends FacilCommand {
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
             + "[" + PREFIX_MODULE_CODE + " MODULE_CODE]...\n"
-            + "Example: " + COMMAND_WORD_EDIT + " 1 "
+            + "Example: " + COMMAND_WORD_FACIL + " " + COMMAND_WORD_EDIT + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

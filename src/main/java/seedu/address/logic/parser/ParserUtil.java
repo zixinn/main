@@ -13,6 +13,7 @@ import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.module.Description;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -33,6 +34,40 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        String trimmedDescription;
+        if (description == null) {
+            trimmedDescription = null;
+        } else {
+            trimmedDescription = description.trim();
+            if (!Description.isValidDescription(trimmedDescription)) {
+                throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -105,21 +140,6 @@ public class ParserUtil {
             }
         }
         return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code moduleCode} is invalid.
-     */
-    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
-        requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
-            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
-        }
-        return new ModuleCode(trimmedModuleCode);
     }
 
     /**

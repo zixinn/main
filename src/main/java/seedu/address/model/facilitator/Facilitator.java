@@ -15,9 +15,10 @@ import seedu.address.model.module.ModuleCode;
  */
 public class Facilitator {
 
-    public static final String COMMAND_WORD = "facil";
-
+    // Identity fields
     private final Name name;
+
+    // Data fields
     private final Phone phone;
     private final Email email;
     private final Office office;
@@ -60,7 +61,7 @@ public class Facilitator {
     }
 
     /**
-     * Returns true if both facilitators of the same name have at least one other identity field that is the same.
+     * Returns true if both facilitators have the same name.
      * This defines a weaker notion of equality between two facilitators.
      */
     public boolean isSameFacilitator(Facilitator otherFacilitator) {

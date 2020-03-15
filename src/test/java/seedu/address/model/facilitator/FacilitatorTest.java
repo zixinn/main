@@ -3,6 +3,7 @@ package seedu.address.model.facilitator;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
@@ -91,7 +92,7 @@ public class FacilitatorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different module codes -> returns false
-        editedAlice = new FacilitatorBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+        editedAlice = new FacilitatorBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2101).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

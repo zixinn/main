@@ -12,8 +12,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.facilitator.FacilCommand;
+import seedu.address.logic.commands.module.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facilitator.Facilitator;
 
 public class AddressBookParserTest {
 
@@ -38,10 +38,18 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_mod() throws Exception {
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_MOD + " " + Command.COMMAND_WORD_LIST)
+                instanceof ModuleCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_MOD + " " + Command.COMMAND_WORD_LIST + " 3")
+                instanceof ModuleCommand);
+    }
+
+    @Test
     public void parseCommand_facil() throws Exception {
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST)
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_LIST)
                 instanceof FacilCommand);
-        assertTrue(parser.parseCommand(Facilitator.COMMAND_WORD + " " + Command.COMMAND_WORD_LIST + " 3")
+        assertTrue(parser.parseCommand(Command.COMMAND_WORD_FACIL + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
     }
 
