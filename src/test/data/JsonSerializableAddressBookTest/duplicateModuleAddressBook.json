@@ -1,12 +1,10 @@
 {
-  "modManager" : {
-    "modules" : [ {
-      "moduleCode" : "CS2103T",
-      "description" : "Software Engineering"
-    }, {
-      "moduleCode" : "CS2103T",
-      "description" : "Effective Communication for Computing Professionals"
-    } ],
-    "facilitators": [ ]
-  }
+  "modules" : [ {
+    "moduleCode" : "CS2103T",
+    "description" : "Software Engineering"
+  }, {
+    "moduleCode" : "CS2103T",
+    "description" : "Effective Communication for Computing Professionals"
+  } ],
+  "facilitators": [ ]
 }

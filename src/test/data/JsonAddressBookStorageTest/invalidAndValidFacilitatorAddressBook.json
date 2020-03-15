@@ -1,16 +1,14 @@
 {
-  "modManager" : {
-    "modules" : [ ],
-    "facilitators": [ {
-      "name": "Valid Facilitator",
-      "phone": "9482424",
-      "email": "hans@example.com",
-      "office": "4th street"
-    }, {
-      "name": "Facilitator With Invalid Phone Field",
-      "phone": "948asdf2424",
-      "email": "hans@example.com",
-      "office": "4th street"
-    } ]
-  }
+  "modules" : [ ],
+  "facilitators": [ {
+    "name": "Valid Facilitator",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "office": "4th street"
+  }, {
+    "name": "Facilitator With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "office": "4th street"
+  } ]
 }

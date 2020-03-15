@@ -175,11 +175,6 @@ public class AddressBookTest {
         }
 
         @Override
-        public AddressBook getAddressBook() {
-            return new AddressBook();
-        }
-
-        @Override
         public ObservableList<Facilitator> getFacilitatorList() {
             return facilitators;
         }

@@ -171,10 +171,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         // TODO: refine later
     }
 
-    @Override
-    public AddressBook getAddressBook() {
-        return this;
-    }
 
     @Override
     public ObservableList<Module> getModuleList() {

@@ -9,10 +9,6 @@ import seedu.address.model.module.Module;
  */
 public interface ReadOnlyAddressBook {
 
-    /**
-     * Returns a view of the address book.
-     */
-    AddressBook getAddressBook();
 
     /**
      * Returns an unmodifiable view of the modules list.
