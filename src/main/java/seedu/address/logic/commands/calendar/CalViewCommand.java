@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandResultUi;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -33,8 +32,15 @@ public class CalViewCommand extends CalCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         return new CommandResultUi(MESSAGE_SUCCESS, CommandType.CALENDAR, week);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CalViewCommand // instanceof handles nulls
+                && week.equals(((CalViewCommand) other).week));
     }
 }
