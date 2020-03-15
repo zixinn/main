@@ -6,11 +6,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.skin.SplitPaneSkin.Content?>
+<?import javafx.scene.control.Label?>
+
 <VBox fx:id="timelineBase" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+        <StackPane>
+            <children>
+                <Label fx:id="calendarTitle" alignment="CENTER" contentDisplay="CENTER" text="Calendar" style="-fx-text-fill: white" >
+                    <StackPane.margin>
+                        <Insets top="8.0" />
+                    </StackPane.margin></Label>
+            </children>
+        </StackPane>
         <ScrollPane fx:id="calendarScrollPane" fitToWidth="true" style="-fx-background-color: #383838;">
             <content>
                 <GridPane fx:id="calendarGrid" alignment="CENTER_LEFT" style="-fx-background-color: #3c3e3f;">

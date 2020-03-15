@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandResultUi;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
+    private CalendarView calendarView;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -145,7 +147,7 @@ public class MainWindow extends UiPart<Stage> {
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
-        CalendarView calendarView = new CalendarView();
+        calendarView = new CalendarView("this");
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -232,6 +234,17 @@ public class MainWindow extends UiPart<Stage> {
         mainTabPane.getSelectionModel().select(calendar);
     }
 
+    /**
+     * Changes the calendar view to the specified week.
+     *
+     * @param week The week to be viewed
+     */
+    public void viewCalendar(String week) {
+        calendarView = new CalendarView(week);
+        calendarViewPlaceholder.getChildren().clear();
+        calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
+    }
+
     public ModuleListPanel getModuleListPanel() {
         return moduleListPanel;
     }
@@ -263,7 +276,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleSwitchToFacilitator();
                 break;
             case CALENDAR:
+                CommandResultUi result = (CommandResultUi) commandResult;
                 handleSwitchToCalendar();
+                viewCalendar(result.getArgForUi());
                 break;
             case HELP:
                 handleHelp();

@@ -7,6 +7,8 @@ import java.time.LocalDate;
  */
 public class Calendar {
 
+    public static final String MESSAGE_CONSTRAINTS = "Week should be 'this' or 'next' only";
+
     private LocalDate localDate;
 
     public Calendar(LocalDate localDate) {
