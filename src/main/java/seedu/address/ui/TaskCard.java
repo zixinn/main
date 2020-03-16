@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -20,12 +21,25 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label description;
+    @FXML
+    private Label taskTime;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        description.setText(task.getTimeOutput());
+
+        if (task.getDescription() != null) {
+            description.setText(task.getDescription());
+        } else {
+            description.setText("");
+        }
+
+        if (!task.getTimeOutput().isEmpty()) {
+            taskTime.setText(task.getTimeOutput());
+        } else {
+            taskTime.setText("");
+        }
     }
 
     @Override

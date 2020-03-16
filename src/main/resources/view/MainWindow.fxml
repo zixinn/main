@@ -75,16 +75,16 @@
                     </VBox>
                   </content>
                 </Tab>
-                <Tab fx:id="task" text="Tasks" >
-                  <content>
-                    <VBox fx:id="TaskList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                      <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                      </padding>
-                      <StackPane fx:id="TaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                    </VBox>
-                  </content>
-                </Tab>
+              <Tab fx:id="task" text="Tasks" >
+                <content>
+                  <VBox fx:id="taskList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <padding>
+                      <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                    <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                  </VBox>
+                </content>
+              </Tab>
                 <Tab fx:id="calendar" text="Calendar" >
                   <content>
                     <StackPane fx:id="calendarViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowSpan="2" GridPane.valignment="CENTER">

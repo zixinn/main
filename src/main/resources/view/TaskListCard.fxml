@@ -24,10 +24,9 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <!--
-        <Label fx:id="desc" styleClass="cell_big_label" /> -->
+        <Label fx:id="description" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="description" styleClass="cell_big_label" />
+      <Label fx:id="taskTime" styleClass="cell_big_label" />
     </VBox>
   </GridPane>
 </HBox>
