@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -13,7 +12,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facilitator.*;
+import seedu.address.model.facilitator.Email;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.Office;
+import seedu.address.model.facilitator.Phone;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Description;
@@ -157,7 +160,10 @@ public class ParserUtil {
         return moduleCodeSet;
     }
 
-    public static LessonType parseLessonType(String lessonType) throws ParseException{
+    /**
+     * Parses {@code String lessonType} into a {@code LessonType}.
+     */
+    public static LessonType parseLessonType(String lessonType) throws ParseException {
         requireNonNull(lessonType);
         String trimmedType = lessonType.trim();
         if (!Lesson.isValidType(lessonType)) {
@@ -166,7 +172,10 @@ public class ParserUtil {
         return Lesson.convertStringToLessonType(lessonType);
     }
 
-    public static DayOfWeek parseDay(String dayAndTime) throws ParseException{
+    /**
+     * Parses {@code String dayAndTime} into a {@code DayOfWeek}.
+     */
+    public static DayOfWeek parseDay(String dayAndTime) throws ParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
         String day = trimmed.split(" ")[0];
@@ -184,6 +193,9 @@ public class ParserUtil {
         return DayOfWeek.valueOf(day);
     }
 
+    /**
+     * Parses {@code String dayAndTime} into {@code LocalTime}.
+     */
     public static LocalTime parseStartTime(String dayAndTime) throws ParseException, DateTimeParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
@@ -195,6 +207,9 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses {@code String dayAndTime} into {@code LocalTime}.
+     */
     public static LocalTime parseEndTime(String dayAndTime) throws ParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
@@ -206,6 +221,9 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses {@code String venue} into {@code String}.
+     */
     public static String parseVenue(String venue) throws ParseException {
         if (venue.equals("")) {
             throw new ParseException("Venue cannot be empty");
@@ -214,4 +232,12 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses {@code String facilName} into {@code Facilitator}.
+     */
+    public static Facilitator parseFacilitator(String facilName) throws ParseException {
+        String facilString = facilName.trim();
+        // for now
+        return null;
+    }
 }

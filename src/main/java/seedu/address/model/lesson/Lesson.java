@@ -134,6 +134,9 @@ public class Lesson implements Comparable<Lesson> {
                 && isSameVenue(otherLesson);
     }
 
+    /**
+     * Compares the instance of lesson to {@code lesson}.
+     */
     public int compareTo(Lesson lesson) {
         DayOfWeek day = lesson.getDay();
         LocalTime time = lesson.getStartTime();

@@ -184,21 +184,38 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.contains(lesson);
     }
 
+    /**
+     * Adds a lesson to the list of lessons.
+     * @param lesson The lesson to be added.
+     */
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         lessons.addLesson(lesson);
     }
 
+    /**
+     * Replaces the given lesson {@code target} in the list with {@code edited}.
+     * {@code target} must exist in Mod Manager.
+     * The lesson identity of {@code edited} must not be the same as another existing lesson
+     * in Mod Manager.
+     */
     public void setLesson(Lesson target, Lesson edited) {
         requireAllNonNull(target, edited);
         lessons.setLesson(target, edited);
     }
 
+    /**
+     * Removes a lesson from the list of lessons.
+     * @param lesson The lesson to be added.
+     */
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         lessons.deleteLesson(lesson);
     }
 
+    /**
+     * Gets the list of lessons.
+     */
     public List<Lesson> getLessons() {
         return lessons.getLessonList();
     }

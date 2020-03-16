@@ -1,21 +1,23 @@
 package seedu.address.logic.commands.lesson;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+
+import java.util.List;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import java.util.List;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
-
-
-
+/**
+ * Represents a lesson command with hidden internal logic and the ability to be executed.
+ */
 public abstract class LessonCommand extends Command {
 
     public static final String ADD_FORMAT =
@@ -27,8 +29,8 @@ public abstract class LessonCommand extends Command {
             COMMAND_GROUP_CLASS, COMMAND_WORD_DELETE, PREFIX_MODULE_CODE, PREFIX_TYPE);
 
     public static final String EDIT_FORMAT =
-            String.format("%s %s %s MOD_CODE %s CLASS_TYPE [%s DAY START_TIME END_TIME] [%s VENUE] " +
-                            "[%s FACILITATOR_NAME]",
+            String.format("%s %s %s MOD_CODE %s CLASS_TYPE [%s DAY START_TIME END_TIME] [%s VENUE] "
+                            + "[%s FACILITATOR_NAME]",
                     COMMAND_GROUP_CLASS, COMMAND_WORD_EDIT,
                     PREFIX_MODULE_CODE, PREFIX_TYPE, PREFIX_AT, PREFIX_VENUE, PREFIX_NAME);
 

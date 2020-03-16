@@ -1,9 +1,7 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.facilitator.UniqueFacilitatorList;
-import seedu.address.model.lesson.exceptions.DuplicateLessonException;
-import seedu.address.model.lesson.exceptions.LessonNotFoundException;
-import seedu.address.model.module.ModuleCode;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -12,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * A list of lessons.
@@ -99,7 +98,7 @@ public class LessonList {
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) >= 0){
+            if (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) >= 0) {
                 return lesson;
             }
         }

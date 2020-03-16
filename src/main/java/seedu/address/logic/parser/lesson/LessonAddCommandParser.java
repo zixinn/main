@@ -1,21 +1,33 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FACIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.lesson.LessonAddCommand;
-import seedu.address.logic.parser.*;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
-
+/**
+ * Adds a lesson to Mod Manager.
+ */
 public class LessonAddCommandParser implements Parser<LessonAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonAddCommand
@@ -24,7 +36,6 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public LessonAddCommand parse(String args) throws ParseException {
-        System.out.println("lesson add parser");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NAME, PREFIX_NEXT);
 
@@ -39,6 +50,10 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         String venue = null;
         if (arePrefixesPresent(argMultimap, PREFIX_VENUE)) {
             venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE));
+        }
+
+        if (arePrefixesPresent(argMultimap, PREFIX_FACIL)) {
+            facilitator = ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_FACIL));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));

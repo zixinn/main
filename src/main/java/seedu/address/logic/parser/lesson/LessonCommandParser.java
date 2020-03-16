@@ -1,16 +1,20 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_LESSON_COMMAND;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.lesson.LessonCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static seedu.address.commons.core.Messages.*;
-
+/**
+ * Parses input arguments and creates a new LessonCommand object
+ */
 public class LessonCommandParser implements Parser<LessonCommand> {
     /**
      * Used for initial separation of command word and args.
@@ -28,14 +32,10 @@ public class LessonCommandParser implements Parser<LessonCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        switch (commandWord) {
-
-            case Command.COMMAND_WORD_ADD:
-                return new LessonAddCommandParser().parse(arguments);
-
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_LESSON_COMMAND);
+        if (commandWord.equals(Command.COMMAND_WORD_ADD)) {
+            return new LessonAddCommandParser().parse(arguments);
+        } else {
+            throw new ParseException(MESSAGE_UNKNOWN_LESSON_COMMAND);
         }
     }
 }
