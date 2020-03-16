@@ -21,7 +21,7 @@ public class Task implements TaskInterface {
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
             .toFormatter();
 
-    protected String description;
+    protected Description description;
     protected boolean isDone;
     protected LocalDateTime taskTime;
 
@@ -33,17 +33,17 @@ public class Task implements TaskInterface {
      * @param description the description/details of our task
      */
     public Task(String description) {
-        this.description = description;
+        this.description = new Description(description);
         this.isDone = false;
     }
 
     public Task(String description, String date) {
-        this.description = description;
+        this.description = new Description(description);
         this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
     }
 
     public Task(String description, String date, String timeInDay) {
-        this.description = description;
+        this.description = new Description(description);
         LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
         this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 timeInTheDay);
@@ -54,7 +54,7 @@ public class Task implements TaskInterface {
      */
     @Override
     public String getDescription() {
-        return description;
+        return description.toString();
     }
 
     /**
