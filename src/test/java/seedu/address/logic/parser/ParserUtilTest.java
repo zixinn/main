@@ -18,7 +18,7 @@ import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.module.Description;
+import seedu.address.model.Description;
 import seedu.address.model.module.ModuleCode;
 
 public class ParserUtilTest {

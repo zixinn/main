@@ -30,6 +30,7 @@ public abstract class Command {
     public static final String COMMAND_WORD_HELP = "help";
     public static final String COMMAND_WORD_LIST = "list";
     public static final String COMMAND_WORD_VIEW = "view";
+    public static final String COMMAND_WORD_TASK = "task";
 
     /**
      * Executes the command and returns the result message.

@@ -14,8 +14,11 @@ import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.module.Description;
+import seedu.address.model.Description;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.TaskDateTime;
+
+import java.time.LocalDateTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -169,6 +172,53 @@ public class ParserUtil {
         } else {
             throw new ParseException(Calendar.MESSAGE_CONSTRAINTS);
         }
+    }
 
+    /**
+     * Parses a {@code String taskTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskTime} is invalid.
+     */
+    public static TaskDateTime parseDateForTask(String taskTime) throws ParseException {
+        String trimmedTime;
+        if (taskTime == null) {
+            trimmedTime = null;
+        } else {
+            trimmedTime = taskTime.trim();
+            if (!Description.isValidDescription(trimmedTime)) {
+                throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return new TaskDateTime(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String taskTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskTime} is invalid.
+     */
+    public static TaskDateTime parseDateTimeForTask(String taskTime, String taskTimeInDay) throws ParseException {
+        String trimmedTime;
+        if (taskTime == null) {
+            trimmedTime = null;
+        } else {
+            trimmedTime = taskTime.trim();
+            if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
+                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
+            }
+        }
+
+        String trimmedTimeInDay;
+        if (taskTimeInDay == null) {
+            trimmedTimeInDay = null;
+        } else {
+            trimmedTimeInDay = taskTime.trim();
+            if (!TaskDateTime.isValidTaskTime(trimmedTimeInDay)) {
+                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return new TaskDateTime(trimmedTime, trimmedTimeInDay);
     }
 }
