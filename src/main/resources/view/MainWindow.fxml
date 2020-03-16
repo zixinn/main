@@ -66,13 +66,13 @@
                     </VBox>
                   </content>
                 </Tab>
-                <Tab fx:id="facilitator" text="Facilitators" >
+                <Tab fx:id="Task" text="Tasks" >
                   <content>
-                    <VBox fx:id="facilitatorList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="TaskList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                      <StackPane fx:id="facilitatorListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="TaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </VBox>
                   </content>
                 </Tab>
@@ -87,7 +87,7 @@
                 </Tab>
                 <Tab fx:id="task" text="Task" >
                   <content>
-                    <StackPane fx:id="taskViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+                    <StackPane fx:id="taskListPanelPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                       <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                       </padding>

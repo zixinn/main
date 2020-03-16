@@ -19,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandResultUi;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.TaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -41,7 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
     private CalendarView calendarView;
-    private TaskView taskView;
+    private TaskListPanel taskListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,7 +66,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane taskViewPlaceholder;
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
     private TabPane mainTabPane;
@@ -169,8 +170,8 @@ public class MainWindow extends UiPart<Stage> {
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
-        taskView = new TaskView();
-        taskViewPlaceholder.getChildren().add(taskView.getRoot());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -268,6 +269,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public FacilitatorListPanel getFacilitatorListPanel() {
         return facilitatorListPanel;
+    }
+
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
     }
 
     /**
