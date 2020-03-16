@@ -22,7 +22,7 @@ public class FacilAddCommand extends FacilCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD
             + ": Adds a facilitator to Mod Manager. "
             + "Parameters: "
-            + PREFIX_NAME + " NAME "
+            + PREFIX_NAME + " FACILITATOR_NAME "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "

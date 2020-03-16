@@ -246,7 +246,7 @@ Format: `facil list`
 
 ==== Finding a facilitator by name
 Finds facilitators whose names contain the given name. +
-Format: `facil find FACILITATOR_NAME`
+Format: `facil find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
@@ -388,7 +388,7 @@ Receive reminders for deadlines and events the next day.
 .5+|Facilitators
 |  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* list`
-|  `*facil* find FACILITATOR_NAME`
+|  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 |  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* delete INDEX`
 

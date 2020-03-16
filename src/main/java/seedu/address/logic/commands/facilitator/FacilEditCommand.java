@@ -38,7 +38,7 @@ public class FacilEditCommand extends FacilCommand {
             + "by the index number used in the displayed facilitator list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
