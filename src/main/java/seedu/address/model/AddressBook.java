@@ -77,6 +77,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// module-level operations
 
     /**
+     * Returns true if a module with the same module code as {@code moduleCode} exists in Mod Manager.
+     */
+    public boolean hasModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        return modules.containsModuleCode(moduleCode);
+    }
+
+    /**
      * Returns true if a module with the same identity as {@code module} exists in Mod Manager.
      */
     public boolean hasModule(Module module) {

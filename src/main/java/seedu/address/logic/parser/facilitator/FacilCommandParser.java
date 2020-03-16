@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.facilitator;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 
 import java.util.regex.Matcher;
@@ -28,7 +27,7 @@ public class FacilCommandParser implements Parser<FacilCommand> {
     public FacilCommand parse(String userInput) throws ParseException {
         final Matcher matcher = BASIC_FACIL_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_FACILITATOR_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -52,7 +51,7 @@ public class FacilCommandParser implements Parser<FacilCommand> {
             return new FacilListCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_FACILITATOR_COMMAND);
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_FACILITATOR_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
     }
 }

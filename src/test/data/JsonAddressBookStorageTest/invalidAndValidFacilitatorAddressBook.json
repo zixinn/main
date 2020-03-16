@@ -4,11 +4,11 @@
     "name": "Valid Facilitator",
     "phone": "9482424",
     "email": "hans@example.com",
-    "office": "4th street"
+    "office": "COM1-01-03"
   }, {
     "name": "Facilitator With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "office": "4th street"
+    "office": "COM1-01-03"
   } ]
 }

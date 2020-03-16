@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -46,6 +48,16 @@ public class FacilAddCommandTest {
 
         assertThrows(CommandException.class,
                 FacilAddCommand.MESSAGE_DUPLICATE_FACILITATOR, () -> facilAddCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_moduleDoesNotExist_throwsCommandException() {
+        Facilitator validFacilitator = new FacilitatorBuilder().withModuleCodes("CS2101").build();
+        FacilAddCommand facilAddCommand = new FacilAddCommand(validFacilitator);
+        ModelStub modelStub = new ModelStubWithoutModule(CS2103T);
+
+        assertThrows(CommandException.class, String.format(
+                FacilAddCommand.MESSAGE_MODULE_DOES_NOT_EXIST, "CS2101"), () -> facilAddCommand.execute(modelStub));
     }
 
     @Test
@@ -111,6 +123,31 @@ public class FacilAddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    /**
+     * A Model stub that contains no modules.
+     */
+    private class ModelStubWithoutModule extends ModelStub {
+        private final ArrayList<Facilitator> facilitatorsAdded = new ArrayList<>();
+        private final Module module;
+
+        ModelStubWithoutModule(Module module) {
+            requireNonNull(module);
+            this.module = module;
+        }
+
+        @Override
+        public boolean hasModuleCode(String moduleCode) {
+            requireNonNull(moduleCode);
+            return module.getModuleCode().moduleCode.equals(moduleCode);
+        }
+
+        @Override
+        public boolean hasFacilitator(Facilitator facilitator) {
+            requireNonNull(facilitator);
+            return facilitatorsAdded.stream().anyMatch(facilitator::isSameFacilitator);
         }
     }
 

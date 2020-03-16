@@ -57,6 +57,11 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns true if a module with the same module code as {@code moduleCode} exists in Mod Manager.
+     */
+    boolean hasModuleCode(String moduleCode);
+
+    /**
      * Returns true if a module with the same identity as {@code module} exists in Mod Manager.
      */
     boolean hasModule(Module module);

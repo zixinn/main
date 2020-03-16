@@ -52,23 +52,6 @@ public class FacilitatorBuilder {
     }
 
     /**
-     * Parses the {@code moduleCodes} into a {@code Set<ModuleCode>} and set it to the {@code Facilitator}
-     * that we are building.
-     */
-    public FacilitatorBuilder withModuleCodes(String ... moduleCodes) {
-        this.moduleCodes = SampleDataUtil.getModuleCodeSet(moduleCodes);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Office} of the {@code Facilitator} that we are building.
-     */
-    public FacilitatorBuilder withOffice(String office) {
-        this.office = new Office(office);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Facilitator} that we are building.
      */
     public FacilitatorBuilder withPhone(String phone) {
@@ -81,6 +64,23 @@ public class FacilitatorBuilder {
      */
     public FacilitatorBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Office} of the {@code Facilitator} that we are building.
+     */
+    public FacilitatorBuilder withOffice(String office) {
+        this.office = new Office(office);
+        return this;
+    }
+
+    /**
+     * Parses the {@code moduleCodes} into a {@code Set<ModuleCode>} and set it to the {@code Facilitator}
+     * that we are building.
+     */
+    public FacilitatorBuilder withModuleCodes(String ... moduleCodes) {
+        this.moduleCodes = SampleDataUtil.getModuleCodeSet(moduleCodes);
         return this;
     }
 

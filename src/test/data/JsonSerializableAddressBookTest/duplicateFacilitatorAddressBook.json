@@ -4,12 +4,13 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "office": "123, Jurong West Ave 6, #08-111",
-    "moduleCode": [ "friends" ]
+    "office": "COM2-08-111",
+    "moduleCode": [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "office": "4th street"
+    "office": "COM1-01-03",
+    "moduleCode": [ ]
   } ]
 }
