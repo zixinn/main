@@ -83,6 +83,9 @@ public class MainWindow extends UiPart<Stage> {
     private Tab calendar;
 
     @FXML
+    private Tab task;
+
+    @FXML
     private StackPane moduleDetailsPlaceholder;
 
     @FXML
@@ -242,6 +245,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches to task view
+     */
+    public void handleSwitchToTask() {
+        mainTabPane.getSelectionModel().select(task);
+    }
+
+    /**
      * Changes the calendar view to the specified week.
      *
      * @param week The week to be viewed
@@ -277,7 +287,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case LESSON:
             case TASK:
-                handleSwitchToOneModule();
+                handleSwitchToTask();
                 break;
             case FACILITATOR:
                 handleSwitchToFacilitator();
