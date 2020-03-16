@@ -14,6 +14,7 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.Task;
 
 
 /**
@@ -52,6 +53,12 @@ public class SampleDataUtil {
         };
     }
 
+    public static Task[] getSampleTasks() {
+        return new Task[] {
+                new Task("Programming Assignment 2", "18/03/2020"),
+                new Task("Programming Assignment 3", "21/03/2020"),
+        };
+    }
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Facilitator sampleFacilitator : getSampleFacilitators()) {

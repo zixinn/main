@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
 
 /**
- * Panel containing the list of Tasks.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
@@ -16,10 +16,10 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> taskListView;
 
-    public TaskListPanel(ObservableList<Task> TaskList) {
+    public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
-        taskListView.setItems(TaskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new TaskListPanel.TaskListViewCell());
     }
 
     /**
@@ -38,5 +38,4 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
