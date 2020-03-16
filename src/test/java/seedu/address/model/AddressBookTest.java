@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
@@ -57,7 +58,7 @@ public class AddressBookTest {
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(new ArrayList<>(), newFacilitators);
+        AddressBookStub newData = new AddressBookStub(new ArrayList<>(), newFacilitators, new ArrayList<>());
 
         assertThrows(DuplicateFacilitatorException.class, () -> addressBook.resetData(newData));
     }
@@ -67,7 +68,7 @@ public class AddressBookTest {
         // Two modules with the same identity fields
         Module otherModule = new ModuleBuilder(CS2103T).withDescription(VALID_DESCRIPTION_CS2101).build();
         List<Module> newModules = Arrays.asList(CS2103T, otherModule);
-        AddressBookStub newData = new AddressBookStub(newModules, new ArrayList<>());
+        AddressBookStub newData = new AddressBookStub(newModules, new ArrayList<>(), new ArrayList<>());
 
         assertThrows(DuplicateModuleException.class, () -> addressBook.resetData(newData));
     }
@@ -184,15 +185,22 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
         private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
+        private List<Lesson> lessons = new ArrayList<>();
 
-        AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators) {
+        AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
             this.modules.setAll(modules);
             this.facilitators.setAll(facilitators);
+            this.lessons = lessons;
         }
 
         @Override
         public ObservableList<Facilitator> getFacilitatorList() {
             return facilitators;
+        }
+
+        @Override
+        public List<Lesson> getLessonList() {
+            return lessons;
         }
 
         @Override

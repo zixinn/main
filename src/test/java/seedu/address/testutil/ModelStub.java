@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 
 /**
@@ -117,6 +119,31 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setLesson(Lesson target, Lesson edited) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void removeLesson(Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public List<Lesson> getLessons() {
         throw new AssertionError("This method should not be called.");
     }
 }

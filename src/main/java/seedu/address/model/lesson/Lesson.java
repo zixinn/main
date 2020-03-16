@@ -1,17 +1,19 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
  * Represents a Lesson in Mod Manager.
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;
@@ -130,6 +132,53 @@ public class Lesson {
                 && otherLesson.getEndTime().equals(getEndTime())
                 && isSameFacilitator(otherLesson)
                 && isSameVenue(otherLesson);
+    }
+
+    /**
+     * Compares the instance of lesson to {@code lesson}.
+     */
+    public int compareTo(Lesson lesson) {
+        DayOfWeek day = lesson.getDay();
+        LocalTime time = lesson.getStartTime();
+        int val = this.getDay().compareTo(day);
+        if (val > 0) {
+            return 1;
+        } else if (val < 0) {
+            return -1;
+        } else {
+            return this.getStartTime().compareTo(time);
+        }
+    }
+
+    /**
+     * Checks if type is a valid lesson type.
+     * @return True if it is valid and false otherwise.
+     */
+    public static boolean isValidType(String type) {
+        requireNonNull(type);
+        for (LessonType t : LessonType.values()) {
+            if (t.name().equals(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Converts string to a lesson type.
+     */
+    public static LessonType convertStringToLessonType(String type) {
+        requireNonNull(type);
+        for (LessonType t : LessonType.values()) {
+            if (t.name().equals(type)) {
+                return t;
+            }
+        }
+        throw new InvalidLessonTypeException();
+    }
+
+    public String toString() {
+        return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime();
     }
 }
 
