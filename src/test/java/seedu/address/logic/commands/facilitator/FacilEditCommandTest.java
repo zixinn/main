@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilitators.IDA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FACILITATOR;
 
@@ -108,33 +109,30 @@ public class FacilEditCommandTest {
     }
 
     @Test
-    public void execute_allOptionalFieldsDeletedUnfilteredList_failure() {
-        Facilitator editedFacilitator = new FacilitatorBuilder().build();
-        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
-        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST_FACILITATOR, descriptor);
+    public void execute_invalidFacilitatorIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilitatorList().size() + 1);
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build();
+        FacilEditCommand editCommand = new FacilEditCommand(outOfBoundIndex, descriptor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
-
-        assertCommandFailure(editCommand, model, FacilEditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of facilitator list
+     */
     @Test
-    public void execute_allOptionalFieldsDeletedFilteredList_failure() {
+    public void execute_invalidFacilitatorIndexFilteredList_failure() {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+        Index outOfBoundIndex = INDEX_SECOND_FACILITATOR;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
 
-        Facilitator facilitatorInFilteredList = model.getFilteredFacilitatorList()
-                .get(INDEX_FIRST_FACILITATOR.getZeroBased());
-        Facilitator editedFacilitator = new FacilitatorBuilder(facilitatorInFilteredList).withPhone(null)
-                .withEmail(null).withOffice(null).build();
-        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST_FACILITATOR,
-                new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(null)
-                        .withEmail(null).withOffice(null).build());
+        FacilEditCommand editCommand = new FacilEditCommand(outOfBoundIndex,
+                new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
-
-        assertCommandFailure(editCommand, model, FacilEditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
     }
 
     @Test
@@ -160,30 +158,55 @@ public class FacilEditCommandTest {
     }
 
     @Test
-    public void execute_invalidFacilitatorIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilitatorList().size() + 1);
-        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
-                .withName(VALID_NAME_BOB).build();
-        FacilEditCommand editCommand = new FacilEditCommand(outOfBoundIndex, descriptor);
+    public void execute_allOptionalFieldsDeletedUnfilteredList_failure() {
+        Facilitator editedFacilitator = new FacilitatorBuilder().build();
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
+        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST_FACILITATOR, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
+
+        assertCommandFailure(editCommand, model, FacilEditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of facilitator list
-     */
     @Test
-    public void execute_invalidFacilitatorIndexFilteredList_failure() {
+    public void execute_allOptionalFieldsDeletedFilteredList_failure() {
         showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
-        Index outOfBoundIndex = INDEX_SECOND_FACILITATOR;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
 
-        FacilEditCommand editCommand = new FacilEditCommand(outOfBoundIndex,
-                new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        Facilitator facilitatorInFilteredList = model.getFilteredFacilitatorList()
+                .get(INDEX_FIRST_FACILITATOR.getZeroBased());
+        Facilitator editedFacilitator = new FacilitatorBuilder(facilitatorInFilteredList).withPhone(null)
+                .withEmail(null).withOffice(null).withModuleCodes().build();
+        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST_FACILITATOR,
+                new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(null)
+                        .withEmail(null).withOffice(null).withModuleCodes().build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
+
+        assertCommandFailure(editCommand, model, FacilEditCommand.MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+    }
+
+    @Test
+    public void execute_moduleDoesNotExistUnfilteredList_failure() {
+        Facilitator editedFacilitator = new FacilitatorBuilder(IDA).withModuleCodes("CS1231").build();
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
+        FacilEditCommand editCommand = new FacilEditCommand(INDEX_SECOND_FACILITATOR, descriptor);
+
+        assertCommandFailure(editCommand, model,
+                String.format(FacilEditCommand.MESSAGE_MODULE_DOES_NOT_EXIST, "CS1231"));
+    }
+
+    @Test
+    public void execute_moduleDoesNotExistFilteredList_failure() {
+        showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+
+        Facilitator editedFacilitator = new FacilitatorBuilder(IDA).withModuleCodes("CS1231").build();
+        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST_FACILITATOR,
+                new EditFacilitatorDescriptorBuilder(editedFacilitator).build());
+
+        assertCommandFailure(editCommand, model,
+                String.format(FacilEditCommand.MESSAGE_MODULE_DOES_NOT_EXIST, "CS1231"));
     }
 
     @Test

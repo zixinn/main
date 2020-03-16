@@ -2,7 +2,6 @@ package seedu.address.logic.parser.module;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -38,13 +37,14 @@ public class ModuleCommandParserTest {
 
     @Test
     public void parse_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_MODULE_COMMAND,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parse(""));
     }
 
     @Test
     public void parse_unknownModuleCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_MODULE_COMMAND, () -> parser
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_MODULE_COMMAND,
+                HelpCommand.MESSAGE_USAGE), () -> parser
                 .parse("mod unknownCommand"));
     }
 }

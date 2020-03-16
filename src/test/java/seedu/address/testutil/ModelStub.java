@@ -58,6 +58,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasModuleCode(String moduleCode) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasModule(Module module) {
         throw new AssertionError("This method should not be called.");
     }
