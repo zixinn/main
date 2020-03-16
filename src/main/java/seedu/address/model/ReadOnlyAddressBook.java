@@ -34,6 +34,7 @@ public interface ReadOnlyAddressBook {
 
     /**
      * Returns a list of lesson list.
+    /** Returns a list of lesson list.
      * This list will not contain any duplicate lessons.
      * @return List of lessons.
      */
