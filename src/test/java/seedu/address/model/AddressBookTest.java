@@ -73,7 +73,23 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasModule_nullFacilitator_throwsNullPointerException() {
+    public void hasModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasModuleCode(null));
+    }
+
+    @Test
+    public void hasModuleCode_moduleCodeNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasModuleCode("CS2103T"));
+    }
+
+    @Test
+    public void hasModuleCode_moduleCodeInAddressBook_returnsTrue() {
+        addressBook.addModule(CS2103T);
+        assertTrue(addressBook.hasModuleCode("CS2103T"));
+    }
+
+    @Test
+    public void hasModule_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasModule(null));
     }
 

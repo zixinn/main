@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,8 +21,10 @@ import seedu.address.model.module.Module;
 @JsonRootName(value = "modmanager")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
+    public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST =
+            "Facilitator list contains facilitator(s) whose module code does not exist in Mod Manager.";
 
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedFacilitator> facilitators = new ArrayList<>();
@@ -69,6 +72,11 @@ class JsonSerializableAddressBook {
             Facilitator facilitator = jsonAdaptedFacilitator.toModelType();
             if (modManager.hasFacilitator(facilitator)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FACILITATOR);
+            }
+            for (ModuleCode moduleCode : facilitator.getModuleCodes()) {
+                if (!modManager.hasModuleCode(moduleCode.moduleCode)) {
+                    throw new IllegalValueException(MESSAGE_MODULE_DOES_NOT_EXIST);
+                }
             }
             modManager.getFacilitators().add(facilitator);
         }

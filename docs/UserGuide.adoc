@@ -120,9 +120,9 @@ Shows all classes, tasks and facilitators for a module. +
 Format: `mod view /code MOD_CODE` +
 Example: `mod view /code CS2103T`
 
-==== Editing a module's description
+==== Editing a module
 
-Edits the description of the module. +
+Edits the information of the module. +
 Format: `mod edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
 
 ****
@@ -231,10 +231,10 @@ Example: `task delete /code CS2103T /task IP week 4`
 ==== Adding a facilitator
 
 Adds a facilitator to the module. +
-Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE ...]`
+Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 
 ****
-* At least one of the optional fields (phone, email, office) must be provided.
+* At least one of the optional fields must be provided.
 * A facilitator can be linked to any number of modules (including 0).
 ****
 
@@ -246,7 +246,7 @@ Format: `facil list`
 
 ==== Finding a facilitator by name
 Finds facilitators whose names contain the given name. +
-Format: `facil find FACILITATOR_NAME`
+Format: `facil find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
@@ -260,7 +260,7 @@ Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-Format: `facil edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE ...]`
+Format: `facil edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 
 ****
 * Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
@@ -388,8 +388,8 @@ Receive reminders for deadlines and events the next day.
 .5+|Facilitators
 |  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* list`
-|  `*facil* find FACILITATOR_NAME`
-|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE ...]`
+|  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
+|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* delete INDEX`
 
 .3+|Calendar

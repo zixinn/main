@@ -94,6 +94,12 @@ public class ModelManager implements Model {
     //=========== Module ================================================================================
 
     @Override
+    public boolean hasModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        return addressBook.hasModuleCode(moduleCode);
+    }
+
+    @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
         return addressBook.hasModule(module);

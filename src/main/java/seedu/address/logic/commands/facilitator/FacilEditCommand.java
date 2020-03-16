@@ -38,7 +38,7 @@ public class FacilEditCommand extends FacilCommand {
             + "by the index number used in the displayed facilitator list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
@@ -51,7 +51,8 @@ public class FacilEditCommand extends FacilCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_ALL_OPTIONAL_FIELDS_DELETED =
-            "At least one of phone, email and office should not be empty.";
+            "At least one of phone, email, office and module code should not be empty.";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     private final Index index;
     private final EditFacilitatorDescriptor editFacilitatorDescriptor;
@@ -85,8 +86,14 @@ public class FacilEditCommand extends FacilCommand {
         }
 
         if (editedFacilitator.getPhone().value == null && editedFacilitator.getEmail().value == null
-                && editedFacilitator.getOffice().value == null) {
+                && editedFacilitator.getOffice().value == null && editedFacilitator.getModuleCodes().isEmpty()) {
             throw new CommandException(MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
+        }
+
+        for (ModuleCode moduleCode : editedFacilitator.getModuleCodes()) {
+            if (!model.hasModuleCode(moduleCode.moduleCode)) {
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.moduleCode));
+            }
         }
 
         model.setFacilitator(facilitatorToEdit, editedFacilitator);

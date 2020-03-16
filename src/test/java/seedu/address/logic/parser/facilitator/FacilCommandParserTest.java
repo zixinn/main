@@ -2,7 +2,6 @@ package seedu.address.logic.parser.facilitator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
@@ -74,13 +73,14 @@ public class FacilCommandParserTest {
 
     @Test
     public void parse_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_FACILITATOR_COMMAND,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parse(""));
     }
 
     @Test
     public void parse_unknownFacilitatorCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_FACILITATOR_COMMAND, () -> parser
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_FACILITATOR_COMMAND,
+                HelpCommand.MESSAGE_USAGE), () -> parser
                 .parse("facil unknownCommand"));
     }
 }

@@ -23,7 +23,8 @@ public class SampleDataUtil {
     public static Module[] getSampleModules() {
         return new Module[] {
             new Module(new ModuleCode("CS2103T"), new Description("Software Engineering")),
-            new Module(new ModuleCode("CS2101"), new Description(null)),
+            new Module(new ModuleCode("CS2101"),
+                    new Description("Effective Communication for Computing Professionals")),
             new Module(new ModuleCode("ES2660"), new Description("Communicating in Information Age")),
             new Module(new ModuleCode("MA1521"), new Description("Calculus for Computing")),
             new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics"))
