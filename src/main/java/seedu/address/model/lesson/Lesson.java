@@ -1,11 +1,13 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -143,6 +145,37 @@ public class Lesson implements Comparable<Lesson> {
         } else {
             return this.getStartTime().compareTo(time);
         }
+    }
+
+    /**
+     * Checks if type is a valid lesson type.
+     * @return True if it is valid and false otherwise.
+     */
+    public static boolean isValidType(String type) {
+        requireNonNull(type);
+        for (LessonType t : LessonType.values()) {
+            if (t.name().equals(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Converts string to a lesson type.
+     */
+    public static LessonType convertStringToLessonType(String type) {
+        requireNonNull(type);
+        for (LessonType t : LessonType.values()) {
+            if (t.name().equals(type)) {
+                return t;
+            }
+        }
+        throw new InvalidLessonTypeException();
+    }
+
+    public String toString() {
+        return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime();
     }
 }
 

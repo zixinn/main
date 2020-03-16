@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX =
             "The facilitator index provided is invalid";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
+    public static final String MESSAGE_UNKNOWN_LESSON_COMMAND = "Unknown lesson command";
 
 }

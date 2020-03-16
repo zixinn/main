@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +13,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facilitator.Email;
-import seedu.address.model.facilitator.Name;
-import seedu.address.model.facilitator.Office;
-import seedu.address.model.facilitator.Phone;
+import seedu.address.model.facilitator.*;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModuleCode;
 
@@ -153,4 +156,62 @@ public class ParserUtil {
         }
         return moduleCodeSet;
     }
+
+    public static LessonType parseLessonType(String lessonType) throws ParseException{
+        requireNonNull(lessonType);
+        String trimmedType = lessonType.trim();
+        if (!Lesson.isValidType(lessonType)) {
+            throw new ParseException("Class types should be either LEC, TUT, SEC, REC or LAB");
+        }
+        return Lesson.convertStringToLessonType(lessonType);
+    }
+
+    public static DayOfWeek parseDay(String dayAndTime) throws ParseException{
+        requireNonNull(dayAndTime);
+        String trimmed = dayAndTime.trim();
+        String day = trimmed.split(" ")[0];
+        boolean isDayValid = false;
+        DayOfWeek assignedDay;
+        for (int i = 0; i < 7; i++) {
+            if (DayOfWeek.values()[i].toString().equals(day)) {
+                isDayValid = true;
+                break;
+            }
+        }
+        if (!isDayValid) {
+            throw new ParseException("Day provided should be its full name and in capital");
+        }
+        return DayOfWeek.valueOf(day);
+    }
+
+    public static LocalTime parseStartTime(String dayAndTime) throws ParseException, DateTimeParseException {
+        requireNonNull(dayAndTime);
+        String trimmed = dayAndTime.trim();
+        String timeString = trimmed.split(" ")[1];
+        try {
+            return LocalTime.parse(timeString);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Time provided is in the wrong format");
+        }
+    }
+
+    public static LocalTime parseEndTime(String dayAndTime) throws ParseException {
+        requireNonNull(dayAndTime);
+        String trimmed = dayAndTime.trim();
+        String timeString = trimmed.split(" ")[2];
+        try {
+            return LocalTime.parse(timeString);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Time provided is in the wrong format");
+        }
+    }
+
+    public static String parseVenue(String venue) throws ParseException {
+        if (venue.equals("")) {
+            throw new ParseException("Venue cannot be empty");
+        } else {
+            return venue.trim();
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.module.ModuleCode;
@@ -54,6 +55,15 @@ public class LessonList {
         }
     }
 
+    public void setLessons(List<Lesson> replacement) {
+        requireNonNull(replacement);
+        lessons = replacement;
+    }
+
+    public List<Lesson> getLessonList() {
+        return lessons;
+    }
+
     /**
      * Deletes a lesson from the list of lessons.
      * @param lesson The lesson to be deleted.
@@ -89,10 +99,7 @@ public class LessonList {
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().compareTo(curDay) < 0
-                    || (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) < 0)) {
-                continue;
-            } else if (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) >= 0){
+            if (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) >= 0){
                 return lesson;
             }
         }
