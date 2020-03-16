@@ -13,7 +13,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.Description;
+import seedu.address.model.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 
