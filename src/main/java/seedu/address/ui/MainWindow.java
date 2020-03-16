@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
     private CalendarView calendarView;
+    private TaskView taskView;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane taskViewPlaceholder;
 
     @FXML
     private TabPane mainTabPane;
@@ -161,6 +165,9 @@ public class MainWindow extends UiPart<Stage> {
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+
+        taskView = new TaskView();
+        taskViewPlaceholder.getChildren().add(taskView.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
