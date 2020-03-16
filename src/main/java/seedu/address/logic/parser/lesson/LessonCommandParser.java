@@ -34,6 +34,8 @@ public class LessonCommandParser implements Parser<LessonCommand> {
 
         if (commandWord.equals(Command.COMMAND_WORD_ADD)) {
             return new LessonAddCommandParser().parse(arguments);
+        } else if (commandWord.equals(Command.COMMAND_WORD_EDIT)) {
+            return new LessonEditCommandParser().parse(arguments);
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_LESSON_COMMAND);
         }
