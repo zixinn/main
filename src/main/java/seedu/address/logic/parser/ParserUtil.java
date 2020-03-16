@@ -242,7 +242,7 @@ public class ParserUtil {
         return null;
     }
 
-   /**
+    /**
      * Parses {@code String week} into a {@code Set<ModuleCode>} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
