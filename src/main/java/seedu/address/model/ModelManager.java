@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.task.Task;
 
@@ -184,6 +186,36 @@ public class ModelManager implements Model {
     public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
         requireNonNull(predicate);
         filteredFacilitators.setPredicate(predicate);
+    }
+
+    //=========== Lesson =========================================================================================
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        addressBook.addLesson(lesson);
+    }
+
+    @Override
+    public void setLesson(Lesson target, Lesson edited) {
+        requireAllNonNull(target, edited);
+        addressBook.setLesson(target, edited);
+    }
+
+    @Override
+    public void removeLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        addressBook.removeLesson(lesson);
+    }
+
+    @Override
+    public List<Lesson> getLessons() {
+        return addressBook.getLessons();
     }
 
     @Override
