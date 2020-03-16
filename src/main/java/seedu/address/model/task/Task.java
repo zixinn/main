@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
+import seedu.address.model.module.Module;
+
 /**
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
  */
@@ -142,6 +144,21 @@ public class Task implements TaskInterface {
         return isDoneInt + " | " + description + " | " + getTimeOutput() + " | " + getTimeOutput();
     }
 
+    /**
+     * Returns true if both tasks are the same
+     *
+     * @param otherTask The other task to compare with.
+     * @return true if both tasks have the same description and time slot
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getDescription().equals(getDescription())
+                && otherTask.getTime().equals(getTime());
+    }
     /**
      * Compares the two Deadlines for order.
      * Nearer deadlines are considered smaller
