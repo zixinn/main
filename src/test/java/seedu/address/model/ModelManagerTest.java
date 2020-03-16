@@ -75,6 +75,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasModuleCode(null));
+    }
+
+    @Test
+    public void hasModuleCode_moduleCodeNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasModuleCode("CS2103T"));
+    }
+
+    @Test
+    public void hasModuleCode_moduleCodeInAddressBook_returnsTrue() {
+        modelManager.addModule(CS2103T);
+        assertTrue(modelManager.hasModuleCode("CS2103T"));
+    }
+
+    @Test
     public void hasModule_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasModule(null));
     }

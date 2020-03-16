@@ -25,7 +25,7 @@ public class ModuleAddCommand extends ModuleCommand {
             + PREFIX_DESCRIPTION + " Software Engineering ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
 
     private final Module toAdd;
 

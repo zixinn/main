@@ -104,19 +104,19 @@ public class Facilitator {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName() + "\n");
+        builder.append(getName()).append("\n");
         if (getPhone().value != null) {
-            builder.append(" Phone: ").append(getPhone());
+            builder.append("Phone: ").append(getPhone()).append("\n");
         }
         if (getEmail().value != null) {
-            builder.append(" Email: ").append(getEmail());
+            builder.append("Email: ").append(getEmail()).append("\n");
         }
         if (getOffice().value != null) {
-            builder.append(" Office: ").append(getOffice());
+            builder.append("Office: ").append(getOffice()).append("\n");
         }
         if (!getModuleCodes().isEmpty()) {
-            builder.append(" Module codes: ");
-            getModuleCodes().forEach(x -> builder.append(x.toString() + " | "));
+            builder.append("Module codes: ");
+            getModuleCodes().forEach(builder::append);
         }
         return builder.toString();
     }

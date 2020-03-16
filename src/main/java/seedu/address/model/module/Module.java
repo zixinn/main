@@ -74,9 +74,9 @@ public class Module {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getModuleCode());
+        builder.append(getModuleCode()).append("\n");
         if (getDescription().value != null) {
-            builder.append(" Description: ").append(getDescription());
+            builder.append("Description: ").append(getDescription());
         }
         return builder.toString();
     }

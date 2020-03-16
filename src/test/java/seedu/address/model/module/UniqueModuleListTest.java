@@ -25,6 +25,22 @@ public class UniqueModuleListTest {
     private final UniqueModuleList uniqueModuleList = new UniqueModuleList();
 
     @Test
+    public void containsModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueModuleList.containsModuleCode(null));
+    }
+
+    @Test
+    public void containsModuleCode_moduleCodeNotInList_returnsFalse() {
+        assertFalse(uniqueModuleList.containsModuleCode("CS2103T"));
+    }
+
+    @Test
+    public void containsModuleCode_moduleCodeInList_returnsTrue() {
+        uniqueModuleList.add(CS2103T);
+        assertTrue(uniqueModuleList.containsModuleCode("CS2103T"));
+    }
+
+    @Test
     public void contains_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueModuleList.contains(null));
     }

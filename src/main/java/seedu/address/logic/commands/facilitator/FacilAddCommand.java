@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Adds a facilitator to Mod Manager.
@@ -34,9 +35,9 @@ public class FacilAddCommand extends FacilCommand {
             + PREFIX_MODULE_CODE + " CS1101S";
 
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
-    public static final String MESSAGE_NOT_ADDED =
-            "At least one of the optional fields (phone, email, office, code) must be provided.";
-    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager";
+    public static final String MESSAGE_NOT_ADDED = "At least one of the optional fields must be provided.";
+    public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     private final Facilitator toAdd;
 
@@ -54,6 +55,12 @@ public class FacilAddCommand extends FacilCommand {
 
         if (model.hasFacilitator(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITATOR);
+        }
+
+        for (ModuleCode moduleCode : toAdd.getModuleCodes()) {
+            if (!model.hasModuleCode(moduleCode.moduleCode)) {
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.moduleCode));
+            }
         }
 
         model.addFacilitator(toAdd);

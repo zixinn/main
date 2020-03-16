@@ -24,6 +24,8 @@ public class JsonSerializableAddressBookTest {
             .resolve("duplicateFacilitatorAddressBook.json");
     private static final Path DUPLICATE_MODULE_FILE = TEST_DATA_FOLDER
             .resolve("duplicateModuleAddressBook.json");
+    private static final Path MODULE_DOES_NOT_EXIST_FILE = TEST_DATA_FOLDER
+            .resolve("moduleDoesNotExistAddressBook.json");
 
     @Test
     public void toModelType_typicalAddressBookFile_success() throws Exception {
@@ -61,6 +63,14 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FACILITATOR_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_FACILITATOR,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_moduleDoesNotExist_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(MODULE_DOES_NOT_EXIST_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_MODULE_DOES_NOT_EXIST,
                 dataFromFile::toModelType);
     }
 }

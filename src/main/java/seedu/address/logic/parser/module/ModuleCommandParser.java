@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.module;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
 
 import java.util.regex.Matcher;
@@ -28,7 +27,7 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
     public ModuleCommand parse(String userInput) throws ParseException {
         final Matcher matcher = BASIC_MODULE_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_MODULE_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -43,7 +42,7 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
             return new ModuleListCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_MODULE_COMMAND);
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_MODULE_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
     }
 }
