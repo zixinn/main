@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -37,6 +38,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of facilitators */
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
     /**
      * Returns the user prefs' address book file path.
      */

@@ -10,15 +10,18 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameModule and .isSameFacilitator comparison)
+ * Duplicates are not allowed (by .isSameModule and .isSameFacilitator and .isSameTask comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueModuleList modules;
     private final UniqueFacilitatorList facilitators;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         modules = new UniqueModuleList();
         facilitators = new UniqueFacilitatorList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -162,19 +166,59 @@ public class AddressBook implements ReadOnlyAddressBook {
         return facilitators.getFacilitatorList();
     }
 
+    //// task-level operations
+
+    /**
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
+     * Adds a task to the Mod Manager.
+     * The task must not already exist in Mod Manager.
+     */
+    public void addTask(Task p) {
+        tasks.add(p);
+    }
+
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in Mod Manager.
+     * The task identity of {@code editedTask} must not be the same as another existing task
+     * in Mod Manager.
+     */
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in Mod Manager.
+     */
+    public void removeTask(Task key) {
+        tasks.remove(key);
+    }
+
+    /**
+     * Returns the list of modules in this {@code AddressBook}.
+     * @return the list of modules.
+     */
+    public List<Task> getTasks() {
+        return tasks.getTaskList();
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
-                + facilitators.asUnmodifiableObservableList().size() + " facilitators";
+                + tasks.asUnmodifiableObservableList().size() + " tasks";
         // TODO: refine later
-    }
-
-
-    @Override
-    public ObservableList<Module> getModuleList() {
-        return modules.asUnmodifiableObservableList();
     }
 
     @Override
@@ -183,15 +227,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && modules.equals(((AddressBook) other).modules)
-                && facilitators.equals(((AddressBook) other).facilitators));
+                && facilitators.equals(((AddressBook) other).facilitators)
+                && tasks.equals(((AddressBook) other).tasks));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(modules, facilitators);
+        return Objects.hash(modules, facilitators, tasks);
     }
 }

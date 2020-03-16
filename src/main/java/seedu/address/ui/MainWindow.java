@@ -153,6 +153,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
+        //System.out.println(facilitatorListPanel);
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
         calendarView = new CalendarView("this");
@@ -170,8 +171,8 @@ public class MainWindow extends UiPart<Stage> {
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        //taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        //taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

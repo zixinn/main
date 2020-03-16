@@ -11,6 +11,5 @@ public interface TaskInterface extends Comparable {
 
     String getTimeOutput();
 
-    boolean isSameTask(Task task);
     String toString();
 }
