@@ -13,8 +13,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.calendar.CalCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.facilitator.FacilCommandParser;
-import seedu.address.logic.parser.task.TaskCommandParser;
 import seedu.address.logic.parser.module.ModuleCommandParser;
+import seedu.address.logic.parser.task.TaskCommandParser;
 
 /**
  * Parses user input.
@@ -44,7 +44,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
         case Command.COMMAND_WORD_CLEAR:
-             return new ClearCommand();
+            return new ClearCommand();
 
         case Command.COMMAND_GROUP_EXIT:
             return new ExitCommand();

@@ -15,13 +15,6 @@ import java.time.temporal.ChronoField;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskDateTime implements Comparable {
-    private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
-            .appendPattern("dd/MM/yyyy[ HH:mm]")
-            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-            .toFormatter();
-
     public static final String MESSAGE_CONSTRAINTS =
             "Task can take any values, and it should not be more than 64 characters";
 
@@ -31,7 +24,15 @@ public class TaskDateTime implements Comparable {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*"; // to impose stricter requirements!!
 
+    private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
+            .appendPattern("dd/MM/yyyy[ HH:mm]")
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+            .toFormatter();
+
     public final LocalDateTime taskTime;
+
 
     /**
      * Constructs a {@code LocalDateTime}.

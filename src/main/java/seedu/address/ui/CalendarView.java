@@ -108,7 +108,8 @@ public class CalendarView extends UiPart<Region> {
             LocalDate date = now.getLocalDate().plusDays(i);
             Lesson lesson = new Lesson(code, LessonType.LAB, date.getDayOfWeek(), startTime, endTime);
             lessons.add(lesson);
-            tasks.add(new Task(new Description("read"), new TaskDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
+            tasks.add(new Task(new Description("read"),
+                    new TaskDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
         }
         Task task = new Task(new Description("HW"), new TaskDateTime("15/03/2020", "18:00"));
         tasks.add(task);

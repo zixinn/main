@@ -1,14 +1,13 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
@@ -29,8 +28,10 @@ public class TaskAddCommand extends TaskCommand {
             + "[" + PREFIX_AT + " 23/59] \n";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager. Please choose another name, or another time slot. Thanks!";
-    public static final String MESSAGE_NOT_ADDED = "Unable to add this task. There is no information received. Please try again!";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager. "
+            + "Please choose another name, or another time slot. Thanks!";
+    public static final String MESSAGE_NOT_ADDED = "Unable to add this task. "
+            + "There is no information received. Please try again!";
     private final Task toAdd;
 
     /**

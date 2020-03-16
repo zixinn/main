@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.task;
 
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_TASK_COMMAND;
 
 import java.util.regex.Matcher;

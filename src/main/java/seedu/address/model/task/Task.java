@@ -1,11 +1,10 @@
 package seedu.address.model.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+
 import seedu.address.model.Description;
 
 /**
@@ -22,7 +21,6 @@ public class Task implements TaskInterface {
     protected Description description;
     protected boolean isDone;
     protected TaskDateTime taskTime;
-
 
     /**
      * Creates a new Task with {@code description} associated with a Module.

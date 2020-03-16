@@ -24,7 +24,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
-    public static final String MESSAGE_DUPLICATE_TASK= "Task list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Task list contains duplicate task(s).";
 
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST =
             "Facilitator list contains facilitator(s) whose module code does not exist in Mod Manager.";
