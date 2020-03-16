@@ -65,6 +65,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -72,6 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setFacilitators(newData.getFacilitatorList());
         setModules(newData.getModuleList());
+        setTasks(newData.getTaskList());
     }
 
     //// module-level operations
