@@ -1,14 +1,10 @@
 package seedu.address.model.task;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
-
-import seedu.address.model.module.Module;
+import seedu.address.model.Description;
 
 /**
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
@@ -23,7 +19,7 @@ public class Task implements TaskInterface {
 
     protected Description description;
     protected boolean isDone;
-    protected LocalDateTime taskTime;
+    protected TaskDateTime taskTime;
 
 
     /**
@@ -39,14 +35,13 @@ public class Task implements TaskInterface {
 
     public Task(String description, String date) {
         this.description = new Description(description);
-        this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
+        this.taskTime = new TaskDateTime(date);
     }
 
     public Task(String description, String date, String timeInDay) {
         this.description = new Description(description);
         LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
-        this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                timeInTheDay);
+        this.taskTime = new TaskDateTime(date, timeInDay);
     }
 
     /**
@@ -87,7 +82,7 @@ public class Task implements TaskInterface {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    protected LocalDateTime getTime() {
+    protected TaskDateTime getTime() {
         return taskTime;
     }
 
@@ -99,27 +94,14 @@ public class Task implements TaskInterface {
      * outputs the Time of the Task (hour:minute) in human readable form.
      */
     public String getTimeOutput() {
-        if (taskTime == null) {
-            return "";
-        }
-        // note for Command
-        // prevent users from creating 00:00 time. For this time period, the user should create an all day Task instead.
-        if (taskTime.isEqual(taskTime.toLocalDate().atStartOfDay())) { // no time in day
-            return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy[ HH:mm]"));
+        return taskTime.toString();
     }
 
     /**
      * outputs the Date in the week of the task
      */
     protected String getDateInWeek() {
-        if (taskTime == null) {
-            return "";
-        }
-        DayOfWeek dayInWeek = taskTime.getDayOfWeek();
-        String title = dayInWeek.toString();
-        return title.charAt(0) + title.substring(1).toLowerCase();
+        return taskTime.getDateInWeek();
     }
 
     /**
@@ -165,15 +147,9 @@ public class Task implements TaskInterface {
      */
     @Override
     public int compareTo(Object other) {
-        assert (other instanceof Task); // can only compare between Tasks
+        assert (other instanceof Task);
         Task otherTask = (Task) other;
-        if (taskTime.isAfter(otherTask.getTime())) {
-            return 1;
-        } else if (taskTime.isBefore(otherTask.getTime())) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return getTime().compareTo(otherTask.getTime());
     }
 
     @Override
