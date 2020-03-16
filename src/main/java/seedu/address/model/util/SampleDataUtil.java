@@ -15,6 +15,7 @@ import seedu.address.model.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDateTime;
 
 
 /**
@@ -56,8 +57,8 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-                new Task("Programming Assignment 2", "18/03/2020"),
-                new Task("Programming Assignment 3", "21/03/2020"),
+                new Task(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020")),
+                new Task(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020")),
         };
     }
     public static ReadOnlyAddressBook getSampleAddressBook() {

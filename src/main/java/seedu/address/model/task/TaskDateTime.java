@@ -12,7 +12,7 @@ import java.time.temporal.ChronoField;
 
 /**
  * Represents a Module's taskTime in Mod Manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidTask(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskDateTime implements Comparable {
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
@@ -39,7 +39,7 @@ public class TaskDateTime implements Comparable {
      * @param date A valid date.
      */
     public TaskDateTime(String date) {
-        checkArgument(date == null || isValidTask(date), MESSAGE_CONSTRAINTS);
+        checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
         this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
     }
 
@@ -50,7 +50,7 @@ public class TaskDateTime implements Comparable {
      * @param timeInDay time period in day
      */
     public TaskDateTime(String date, String timeInDay) {
-        checkArgument(date == null || isValidTask(date), MESSAGE_CONSTRAINTS);
+        checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
         LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
         this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 timeInTheDay);
@@ -59,7 +59,7 @@ public class TaskDateTime implements Comparable {
     /**
      * Returns true if a given string is a valid taskTime.
      */
-    public static boolean isValidTask(String test) {
+    public static boolean isValidTaskTime(String test) {
         // to have further check on this!
         return test.matches(VALIDATION_REGEX) && test.length() <= 64;
     }
@@ -76,7 +76,9 @@ public class TaskDateTime implements Comparable {
         return title.charAt(0) + title.substring(1).toLowerCase();
     }
 
-
+    public LocalDateTime getLocalDateTime() {
+        return taskTime;
+    }
     /**
      * Compares the two Deadlines for order.
      * Nearer deadlines are considered smaller

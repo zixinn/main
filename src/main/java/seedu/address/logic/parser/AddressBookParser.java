@@ -13,7 +13,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.calendar.CalCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.facilitator.FacilCommandParser;
-import seedu.address.logic.parser.facilitator.TaskCommandParser;
+import seedu.address.logic.parser.task.TaskCommandParser;
 import seedu.address.logic.parser.module.ModuleCommandParser;
 
 /**

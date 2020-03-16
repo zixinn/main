@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -28,20 +30,14 @@ public class Task implements TaskInterface {
      *
      * @param description the description/details of our task
      */
-    public Task(String description) {
-        this.description = new Description(description);
+    public Task(Description description) {
+        this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, String date) {
-        this.description = new Description(description);
-        this.taskTime = new TaskDateTime(date);
-    }
-
-    public Task(String description, String date, String timeInDay) {
-        this.description = new Description(description);
-        LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
-        this.taskTime = new TaskDateTime(date, timeInDay);
+    public Task(Description description, TaskDateTime taskTime) {
+        this.description = description;
+        this.taskTime = taskTime;
     }
 
     /**
@@ -82,8 +78,8 @@ public class Task implements TaskInterface {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    protected TaskDateTime getTime() {
-        return taskTime;
+    protected LocalDateTime getTime() {
+        return taskTime.getLocalDateTime();
     }
 
     protected boolean isTimeAvailable() {
