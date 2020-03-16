@@ -75,8 +75,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
-    
-    /*
+    }
+    /**
      * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
      */
@@ -240,6 +240,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public List<Task> getTasks() {
         return tasks.getTaskList();
+    }
     /**
      * Returns true if a lesson with the same identity as {@code lesson} exists in Mod Manager.
      */
@@ -290,7 +291,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
                 + tasks.asUnmodifiableObservableList().size() + " tasks";
-    // TODO: refine later
     }
 
     @Override
