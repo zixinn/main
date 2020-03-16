@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.task.Task;
 
@@ -161,4 +163,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+    boolean hasLesson(Lesson lesson);
+
+    void addLesson(Lesson lesson);
+
+    void setLesson(Lesson target, Lesson edited);
+
+    void removeLesson(Lesson lesson);
+
+    List<Lesson> getLessons();
 }

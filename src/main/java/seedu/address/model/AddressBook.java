@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +9,8 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.UniqueFacilitatorList;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.task.Task;
@@ -22,6 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueModuleList modules;
     private final UniqueFacilitatorList facilitators;
     private final UniqueTaskList tasks;
+    private final LessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,6 +38,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         modules = new UniqueModuleList();
         facilitators = new UniqueFacilitatorList();
         tasks = new UniqueTaskList();
+        lessons = new LessonList();
     }
 
     public AddressBook() {}
@@ -70,6 +75,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
+    
+    /*
+     * Replaces the contents of the lesson list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons.setLessons(lessons);
     }
 
     /**
@@ -81,6 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setFacilitators(newData.getFacilitatorList());
         setModules(newData.getModuleList());
         setTasks(newData.getTaskList());
+        setLessons(newData.getLessonList());
     }
 
     //// module-level operations
@@ -227,6 +240,48 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public List<Task> getTasks() {
         return tasks.getTaskList();
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in Mod Manager.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.contains(lesson);
+    }
+
+    /**
+     * Adds a lesson to the list of lessons.
+     * @param lesson The lesson to be added.
+     */
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessons.addLesson(lesson);
+    }
+
+    /**
+     * Replaces the given lesson {@code target} in the list with {@code edited}.
+     * {@code target} must exist in Mod Manager.
+     * The lesson identity of {@code edited} must not be the same as another existing lesson
+     * in Mod Manager.
+     */
+    public void setLesson(Lesson target, Lesson edited) {
+        requireAllNonNull(target, edited);
+        lessons.setLesson(target, edited);
+    }
+
+    /**
+     * Removes a lesson from the list of lessons.
+     * @param lesson The lesson to be added.
+     */
+    public void removeLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessons.deleteLesson(lesson);
+    }
+
+    /**
+     * Gets the list of lessons.
+     */
+    public List<Lesson> getLessons() {
+        return lessons.getLessonList();
     }
 
     //// util methods
@@ -235,7 +290,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
                 + tasks.asUnmodifiableObservableList().size() + " tasks";
-        // TODO: refine later
+    // TODO: refine later
     }
 
     @Override
@@ -251,6 +306,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public List<Lesson> getLessonList() {
+        return lessons.getLessonList();
     }
 
     @Override
