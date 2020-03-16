@@ -14,17 +14,19 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import seedu.address.model.Description;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
-import seedu.address.model.Description;
 import seedu.address.model.module.ModuleCode;
 
 public class ParserUtilTest {
     private static final String INVALID_MODULE_CODE = "#CS2103T";
     private static final String INVALID_DESCRIPTION = "very very very very"
-            + " very very very very very very very very very long description";
+            + " very very very very very very"
+            + " very very very long description";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_OFFICE = " ";
