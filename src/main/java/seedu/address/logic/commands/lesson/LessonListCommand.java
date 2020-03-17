@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
 /**
- * Lists all facilitators in Mod Manager to the user.
+ * Lists all lessons in Mod Manager to the user.
  */
 public class LessonListCommand extends LessonCommand {
 
