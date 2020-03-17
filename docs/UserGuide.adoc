@@ -377,7 +377,7 @@ Receive reminders for deadlines and events the next day.
 |  `*class* edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]`
 |  `*class* delete /code MOD_CODE /type CLASS_TYPE`
 
-.6+|Task
+.7+|Task
 | `*task* add /code MOD_CODE /desc TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
 | `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
