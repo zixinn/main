@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="calendarBase" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="calendarBase" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <StackPane>
             <children>
@@ -20,12 +20,12 @@
                 </Label>
             </children>
         </StackPane>
-        <ScrollPane fx:id="calendarScrollPane" fitToWidth="true" style="-fx-background-color: #383838;">
+        <ScrollPane fx:id="calendarScrollPane" fitToHeight="true" fitToWidth="true" pannable="true" style="-fx-background-color: #383838;">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
          <content>
-            <GridPane minHeight="-Infinity" minWidth="-Infinity">
+            <GridPane fx:id="calendarGrid" alignment="TOP_CENTER" gridLinesVisible="true" style="-fx-background-color: #3c3e3f;">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,8 +36,8 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+                  <RowConstraints valignment="TOP" vgrow="ALWAYS" />
               </rowConstraints>
             </GridPane>
          </content>
