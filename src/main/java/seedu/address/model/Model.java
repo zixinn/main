@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -136,6 +137,10 @@ public interface Model {
     void setLesson(Lesson target, Lesson edited);
 
     void removeLesson(Lesson lesson);
+
+    Lesson findNextLesson();
+
+    List<Lesson> findLessonByDay(DayOfWeek day);
 
     List<Lesson> getLessons();
 }

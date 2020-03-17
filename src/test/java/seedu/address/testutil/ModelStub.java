@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -144,6 +145,16 @@ public class ModelStub implements Model {
 
     @Override
     public List<Lesson> getLessons() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Lesson findNextLesson() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public List<Lesson> findLessonByDay(DayOfWeek day) {
         throw new AssertionError("This method should not be called.");
     }
 }

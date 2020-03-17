@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
 
@@ -222,10 +223,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Gets the list of lessons.
+     * Finds the next lesson in Mod Manager that is going to happen.
      */
-    public List<Lesson> getLessons() {
-        return lessons.getLessonList();
+    public Lesson findNextLesson() {
+        return lessons.findNextLesson();
+    }
+
+    /**
+     * Finds lessons that is happening on a particular day.
+     */
+    public List<Lesson> findLessonByDay(DayOfWeek day) {
+        return lessons.findLessonsByDay(day);
+    }
+
+
+    /**
+     * Gets the LessonList.
+     */
+    public LessonList getLessons() {
+        return lessons;
     }
 
     //// util methods
