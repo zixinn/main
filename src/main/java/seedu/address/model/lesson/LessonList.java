@@ -92,13 +92,15 @@ public class LessonList {
      * Finds next lesson that is going to happen.
      * @return The next lesson happening.
      */
-    public Lesson findNextLessson() {
+    public Lesson findNextLesson() {
         Collections.sort(lessons);
         LocalDate curDate = LocalDate.now();
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().compareTo(curDay) >= 0 && lesson.getStartTime().compareTo(curTime) >= 0) {
+            if (lesson.getDay().compareTo(curDay) == 0 && lesson.getStartTime().compareTo(curTime) >= 0) {
+                return lesson;
+            } else if (lesson.getDay().compareTo(curDay) > 0) {
                 return lesson;
             }
         }
