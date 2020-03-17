@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
 import seedu.address.model.task.Task;
 
@@ -214,8 +216,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Lesson findNextLesson() {
+        LessonList lessons = addressBook.getLessons();
+        return lessons.findNextLesson();
+    }
+
+    @Override
+    public List<Lesson> findLessonByDay(DayOfWeek day) {
+        return addressBook.getLessons().findLessonsByDay(day);
+    }
+
+    @Override
     public List<Lesson> getLessons() {
-        return addressBook.getLessons();
+        return addressBook.getLessonList();
     }
 
     @Override
