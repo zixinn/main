@@ -7,7 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Description;
+import seedu.address.model.util.Description;
 
 public class DescriptionTest {
     @Test

@@ -1,16 +1,19 @@
 package seedu.address.model.task;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Optional;
 
-import seedu.address.model.Description;
+import seedu.address.model.util.DailySchedulableInterface;
+import seedu.address.model.util.Description;
 
 /**
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
  */
-public class Task implements TaskInterface {
+public class Task implements TaskInterface, DailySchedulableInterface {
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -135,9 +138,10 @@ public class Task implements TaskInterface {
                 && otherTask.getDescription().equals(getDescription())
                 && otherTask.getTime().equals(getTime());
     }
+
     /**
-     * Compares the two Deadlines for order.
-     * Nearer deadlines are considered smaller
+     * Compares the two timestamps for order.
+     * Earlier timestamps are considered smaller
      */
     @Override
     public int compareTo(Object other) {
@@ -160,6 +164,11 @@ public class Task implements TaskInterface {
 
         return otherTask.getDescription().equals(getDescription()) // same definition
                 && otherTask.compareTo(this) == 0; // same time
+    }
+
+    @Override
+    public Optional<LocalTime> getComparableTime() {
+        return Optional.of(taskTime.toLocalTime());
     }
 }
 

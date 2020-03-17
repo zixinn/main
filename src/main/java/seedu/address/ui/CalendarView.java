@@ -11,14 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import seedu.address.model.Description;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
-
+import seedu.address.model.util.DailySchedulableComparator;
+import seedu.address.model.util.DailySchedulableInterface;
+import seedu.address.model.util.Description;
 
 /**
  * The view for the calendar.
@@ -39,7 +40,7 @@ public class CalendarView extends UiPart<Region> {
     /**
      * Constructs the CalendarView.
      */
-    public CalendarView(String week) {
+    public CalendarView(String week, List<Task> tasks, List<Lesson> lessons) {
         super(FXML);
 
         calendarTitle.setText(String.format("Viewing: %s week", week));
@@ -55,8 +56,7 @@ public class CalendarView extends UiPart<Region> {
             calendarGrid.add(calendarCardPanel.getRoot(), 1, row);
         }
 
-        addDummyCard(week);
-
+        addCards(week, tasks, lessons);
     }
 
     /**
@@ -71,22 +71,29 @@ public class CalendarView extends UiPart<Region> {
         }
         Calendar[] calendars = calendar.getWeek();
         for (int i = 0; i < 7; i++) {
+            final int cnt = i;
             CalendarCardPanel panel = cardPanels.get(i);
             Calendar c = calendars[i];
-            for (int j = 0; j < lessons.size(); j++) {
-                Lesson l = lessons.get(j);
-                if (l.getDay().getValue() == i) {
-                    CalendarCard card = new CalendarCard(l);
-                    panel.addCard(card);
+            List<DailySchedulableInterface> items = new ArrayList<>();
+
+            lessons.forEach(x -> {
+                if (x.getDay().getValue() == cnt) {
+                    items.add(x);
                 }
-            }
-            for (int j = 0; j < tasks.size(); j++) {
-                Task t = tasks.get(j);
-                if (c.isWithinDate(t)) {
-                    CalendarCard card = new CalendarCard(t);
-                    panel.addCard(card);
+            });
+
+            tasks.forEach(x -> {
+                if (c.isWithinDate(x)) {
+                    items.add(x);
                 }
+            });
+
+            items.sort(new DailySchedulableComparator());
+
+            for (DailySchedulableInterface item : items) {
+                panel.addCard(new CalendarCard(item));
             }
+
             RowConstraints rowConstraints = calendarGrid.getRowConstraints().get(i);
             rowConstraints.setPrefHeight(panel.getHeight() + 50);
         }

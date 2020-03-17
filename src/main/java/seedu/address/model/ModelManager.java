@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Task> filteredTasks;
+    private final List<Lesson> filteredLesson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
         filteredFacilitators = new FilteredList<>(this.addressBook.getFacilitatorList());
         filteredModules = new FilteredList<>(this.addressBook.getModuleList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredLesson = this.addressBook.getLessonList();
     }
 
     public ModelManager() {
@@ -250,7 +252,6 @@ public class ModelManager implements Model {
                 && filteredModules.equals(other.filteredModules)
                 && filteredFacilitators.equals(other.filteredFacilitators);
     }
-
 
     //=========== Task ================================================================================
 

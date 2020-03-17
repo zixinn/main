@@ -65,6 +65,10 @@ public class TaskDateTime implements Comparable {
         return test.matches(VALIDATION_REGEX) && test.length() <= 64;
     }
 
+    public LocalTime toLocalTime() {
+        return taskTime.toLocalTime();
+    }
+
     /**
      * outputs the Date in the week of the task
      */

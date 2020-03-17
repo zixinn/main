@@ -178,4 +178,5 @@ public interface Model {
     List<Lesson> findLessonByDay(DayOfWeek day);
 
     List<Lesson> getLessons();
+
 }
