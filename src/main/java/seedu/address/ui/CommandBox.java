@@ -15,6 +15,7 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private String cached = "";
 
     private final CommandExecutor commandExecutor;
 
@@ -37,7 +38,11 @@ public class CommandBox extends UiPart<Region> {
             commandExecutor.execute(commandTextField.getText());
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
-            commandTextField.setText("");
+            String txt = commandTextField.getText();
+            if (txt.equals(cached)) {
+                commandTextField.setText("");
+            }
+            cached = txt;
             setStyleToIndicateCommandFailure();
         }
     }

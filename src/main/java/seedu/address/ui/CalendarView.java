@@ -48,12 +48,12 @@ public class CalendarView extends UiPart<Region> {
         String[] daysOfWeek = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday", "Sunday"};
 
-        for (int row = 0; row < 7; row++) {
-            CalendarLabel calendarLabel = new CalendarLabel(daysOfWeek[row]);
-            calendarGrid.add(calendarLabel.getRoot(), 0, row);
+        for (int col = 0; col < 7; col++) {
+            CalendarLabel calendarLabel = new CalendarLabel(daysOfWeek[col]);
+            calendarGrid.add(calendarLabel.getRoot(), col, 0);
             CalendarCardPanel calendarCardPanel = new CalendarCardPanel();
             cardPanels.add(calendarCardPanel);
-            calendarGrid.add(calendarCardPanel.getRoot(), 1, row);
+            calendarGrid.add(calendarCardPanel.getRoot(), col, 1);
         }
 
         addCards(week, tasks, lessons);
@@ -98,28 +98,5 @@ public class CalendarView extends UiPart<Region> {
             rowConstraints.setPrefHeight(panel.getHeight() + 50);
         }
 
-    }
-
-    /**
-     * Adds dummy cards to the calendar panel.
-     * This method will be removed in the future.
-     */
-    public void addDummyCard(String week) {
-        Calendar now = Calendar.getNowCalendar();
-        List<Lesson> lessons = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            ModuleCode code = new ModuleCode(String.format("CS210%d", i));
-            LocalTime startTime = LocalTime.parse("14:00");
-            LocalTime endTime = LocalTime.parse("16:00");
-            LocalDate date = now.getLocalDate().plusDays(i);
-            Lesson lesson = new Lesson(code, LessonType.LAB, date.getDayOfWeek(), startTime, endTime);
-            lessons.add(lesson);
-            tasks.add(new Task(new Description("read"),
-                    new TaskDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
-        }
-        Task task = new Task(new Description("HW"), new TaskDateTime("15/03/2020", "18:00"));
-        tasks.add(task);
-        addCards(week, tasks, lessons);
     }
 }
