@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="60e4aefb-5a17-4da5-b7a9-e00747df0cab" name="Default Changelist" comment="Update based on PR reviews">
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyleidea-libs/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/addressbook.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/preferences.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/data/sandbox/serialize.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/address_book_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/calendar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/clock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/fail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/help_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/images/info_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/AppParameters.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/MainApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/GuiSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/LogsCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/Messages.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/Version.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/core/index/Index.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/exceptions/DataConversionException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/exceptions/IllegalValueException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/AppUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/CollectionUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/ConfigUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/FileUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/JsonUtil$LevelDeserializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/JsonUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/commons/util/StringUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/Logic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/LogicManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/ClearCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/CommandResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/CommandResultUi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/CommandType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/ExitCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/HelpCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/calendar/CalCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/calendar/CalViewCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/cmd/CmdAllCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/cmd/CmdCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/cmd/CmdGroupCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/exceptions/CommandException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilAddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilDeleteCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilEditCommand$EditFacilitatorDescriptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilEditCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilFindCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/facilitator/FacilListCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/lesson/LessonAddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/lesson/LessonCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/module/ModuleAddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/module/ModuleCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/module/ModuleListCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/task/TaskAddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/commands/task/TaskCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/AddressBookParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/ArgumentMultimap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/ArgumentTokenizer$PrefixPosition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/ArgumentTokenizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/CliSyntax.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/ParserUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/Prefix.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/calendar/CalCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/calendar/CalViewCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/exceptions/ParseException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/facilitator/FacilAddCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/facilitator/FacilCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/facilitator/FacilDeleteCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/facilitator/FacilEditCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/facilitator/FacilFindCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/lesson/LessonAddCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/lesson/LessonCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/module/ModuleAddCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/module/ModuleCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/task/TaskAddCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/task/TaskCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/task/TaskDeleteCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/task/TaskEditCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/logic/parser/task/TaskFindCommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/AddressBook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/Description.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/ModelManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/ReadOnlyAddressBook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/ReadOnlyUserPrefs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/UserPrefs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/calendar/Calendar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/Email.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/Facilitator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/ModuleCodesContainKeywordPredicate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/Name.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/NameContainsKeywordsPredicate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/Office.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/Phone.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/UniqueFacilitatorList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/exceptions/DuplicateFacilitatorException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/facilitator/exceptions/FacilitatorNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/Lesson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/LessonList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/LessonType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/exceptions/DuplicateLessonException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/exceptions/InvalidLessonTypeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/lesson/exceptions/LessonNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/module/Module.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/module/ModuleCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/module/UniqueModuleList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/module/exceptions/DuplicateModuleException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/module/exceptions/ModuleNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskDateTime.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskListInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskListStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/TaskStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/UniqueTaskList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/exceptions/DuplicateTaskException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/task/exceptions/TaskNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/model/util/SampleDataUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/AddressBookStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonAdaptedFacilitator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonAdaptedModule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonAdaptedModuleCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonAdaptedTask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonAddressBookStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonSerializableAddressBook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/JsonUserPrefsStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/Storage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/StorageManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/storage/UserPrefsStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CalendarCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CalendarCardPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CalendarLabel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CalendarView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CommandBox$CommandExecutor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/CommandBox.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/FacilitatorCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/FacilitatorListPanel$FacilitatorListViewCell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/FacilitatorListPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/HelpWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/LessonPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/MainWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/ModuleCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/ModuleDetailsPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/ModuleListPanel$ModuleListViewCell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/ModuleListPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/ResultDisplay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/StatusBarFooter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/TaskCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/TaskDetailsPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/TaskListPanel$TaskListViewCell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/TaskListPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/Ui.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/UiManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/seedu/address/ui/UiPart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/Calendar.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/CalendarCard.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/CalendarCardPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/CalendarLabel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/CommandBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/DarkTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/Extensions.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/FacilitatorListCard.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/FacilitatorListPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/HelpWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/LessonPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/MainWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/ModuleDetailsPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/ModuleListCard.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/ModuleListPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/ResultDisplay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/StatusBarFooter.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/TabTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/TaskDetailsPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/TaskListCard.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main/view/TaskListPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/AppParametersTest$ParametersStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/AppParametersTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/core/ConfigTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/core/VersionTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/core/index/IndexTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/AppUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/CollectionUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/ConfigUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/FileUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/JsonUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/commons/util/StringUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/LogicManagerTest$JsonAddressBookIoExceptionThrowingStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/LogicManagerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/ClearCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/CommandResultTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/CommandTestUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/ExitCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/HelpCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/calendar/CalViewCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/EditFacilitatorDescriptorTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilAddCommandIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilAddCommandTest$ModelStubAcceptingFacilitatorAdded.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilAddCommandTest$ModelStubWithFacilitator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilAddCommandTest$ModelStubWithoutModule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilAddCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilDeleteCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilEditCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilFindCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/facilitator/FacilListCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/module/ModuleAddCommandTest$ModelStubAcceptingModuleAdded.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/module/ModuleAddCommandTest$ModelStubWithModule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/module/ModuleAddCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/commands/module/ModuleListCommandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/AddressBookParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/ArgumentTokenizerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/CommandParserTestUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/ParserUtilTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/calendar/CalCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/calendar/CalViewCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/facilitator/FacilAddCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/facilitator/FacilCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/facilitator/FacilDeleteCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/facilitator/FacilEditCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/facilitator/FacilFindCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/module/ModuleAddCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/logic/parser/module/ModuleCommandParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/AddressBookTest$AddressBookStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/AddressBookTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/ModelManagerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/UserPrefsTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/calendar/CalendarTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/EmailTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/FacilitatorTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/ModuleCodesContainKeywordPredicateTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/NameContainsKeywordsPredicateTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/NameTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/OfficeTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/PhoneTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/facilitator/UniqueFacilitatorListTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/module/DescriptionTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/module/ModuleCodeTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/module/ModuleTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/module/UniqueModuleListTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/task/TaskListTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/model/task/TaskTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/JsonAdaptedFacilitatorTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/JsonAdaptedModuleTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/JsonAddressBookStorageTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/JsonSerializableAddressBookTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/JsonUserPrefsStorageTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/storage/StorageManagerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/AddressBookBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/Assert.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/EditFacilitatorDescriptorBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/FacilitatorBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/FacilitatorUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/ModelStub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/ModuleBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/ModuleUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/SerializableTestClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/TestUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/TypicalAddressBook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/TypicalFacilitators.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/TypicalIndexes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/testutil/TypicalModules.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/ui/TestFxmlObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/ui/UiPartTest$TestUiPart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/seedu/address/ui/UiPartTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/view/UiPartTest/invalidFile.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/view/UiPartTest/validFile.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/view/UiPartTest/validFileWithFxRoot.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/task/TaskCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/task/TaskCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/AddressBookParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/AddressBookParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/AddressBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/ModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/ReadOnlyAddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/ReadOnlyAddressBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/storage/JsonSerializableAddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/storage/JsonSerializableAddressBook.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="main" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Yz0JE5CuBk76cKrIYeXND9zBbM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
+    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/config/checkstyle/appveyor.xml" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="seedu.address.model.task" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="seedu.address.logic.commands.task" />
+      <recent name="seedu.address.model.task.exceptions" />
+      <recent name="seedu.address.model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="seedu.address.ui" />
+      <recent name="seedu.address.storage" />
+      <recent name="seedu.address.model.task" />
+      <recent name="seedu.address.logic.commands.task" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nhobao\Desktop\CS2103T-tP\main\src\main\resources\view" />
+      <recent name="C:\Users\nhobao\Desktop\CS2103T-tP\main\src\main\java\seedu\address\logic\commands\task" />
+      <recent name="C:\Users\nhobao\Desktop\CS2103T-tP\main\src\main\java\seedu\address\model\task" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="seedu.address.Main" />
+      <module name="main.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="seedu.address.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;seedu.address.model.task.TaskTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TaskTest" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60e4aefb-5a17-4da5-b7a9-e00747df0cab" name="Default Changelist" comment="" />
+      <created>1583930041484</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583930041484</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add TaskStub instance">
+      <created>1583935605506</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583935605506</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Use LocalDateTime instead of LocalDate and LocalTime">
+      <created>1583943979956</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583943979956</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Implement basic functionalities for TaskList">
+      <created>1583944059208</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1583944059208</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Create stub for TaskList">
+      <created>1583945526426</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583945526426</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Create tests for Task">
+      <created>1583985181205</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1583985181205</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix Checkstyle">
+      <created>1583990628682</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1583990628682</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implement minimal .fxml and .java for Task UI">
+      <created>1584349566458</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1584349566458</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Handle switch to Task">
+      <created>1584349935664</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1584349935664</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update UI for TaskList">
+      <created>1584354909426</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1584354909426</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update Task implementation adhere to AB3">
+      <created>1584355260245</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1584355260245</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implement Logic and Storage for Task component">
+      <created>1584359885224</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1584359885224</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Implement basic UI for Task component">
+      <created>1584363531664</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1584363531664</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Change String description to class Description">
+      <created>1584365644778</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1584365644778</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Move Description to outer Model folder">
+      <created>1584366412935</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1584366412935</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Put DateTime attribute in a class">
+      <created>1584369112218</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1584369112218</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Move Description class, part 2">
+      <created>1584369656472</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1584369656472</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add Parser for Task">
+      <created>1584369991206</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1584369991206</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Change Calendar's dummy test cases">
+      <created>1584375711420</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1584375711420</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Complete Task's add without Storage">
+      <created>1584376027231</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1584376027231</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Complete Task's add command with Storage">
+      <created>1584378812230</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1584378812230</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Implement basic UI for Tasks tab">
+      <created>1584381176148</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1584381176148</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Implement skeleton files for Command">
+      <created>1584381251781</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1584381251781</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fix Checkstyle 1">
+      <created>1584383604394</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1584383604394</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Resolve Merge conflict and fix Checkstyle 2">
+      <created>1584384771887</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1584384771887</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fix Checkstyle after merge">
+      <created>1584385343944</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1584385343944</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update .gitignore">
+      <created>1584418939906</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1584418939906</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="file:$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Paths">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="file:$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="dir:C:/Users/nhobao/Desktop/CS2103T-tP/main/src/main/java/seedu/address/storage" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="heidicrq" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Implement basic functionalities for TaskList" />
+    <MESSAGE value="Create stub for TaskList" />
+    <MESSAGE value="Create tests for Task" />
+    <MESSAGE value="Fix Checkstyle" />
+    <MESSAGE value="Implement minimal .fxml and .java for Task UI" />
+    <MESSAGE value="Handle switch to Task" />
+    <MESSAGE value="Update UI for TaskList" />
+    <MESSAGE value="Update Task implementation adhere to AB3" />
+    <MESSAGE value="Implement Logic and Storage for Task component" />
+    <MESSAGE value="Implement basic UI for Task component" />
+    <MESSAGE value="Change String description to class Description" />
+    <MESSAGE value="Move Description to outer Model folder" />
+    <MESSAGE value="Put DateTime attribute in a class" />
+    <MESSAGE value="Move Description class, part 2" />
+    <MESSAGE value="Add Parser for Task" />
+    <MESSAGE value="Change Calendar's dummy test cases" />
+    <MESSAGE value="Complete Task's add without Storage" />
+    <MESSAGE value="Complete Task's add command with Storage" />
+    <MESSAGE value="Implement basic UI for Tasks tab" />
+    <MESSAGE value="Implement skeleton files for Command" />
+    <MESSAGE value="Fix Checkstyle 1" />
+    <MESSAGE value="Resolve Merge conflict and fix Checkstyle 2" />
+    <MESSAGE value="Fix Checkstyle after merge" />
+    <MESSAGE value="Update .gitignore" />
+    <MESSAGE value="Update based on PR reviews" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update based on PR reviews" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583976613355">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1583976613355" />
+    <state x="692" y="342" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584420115492">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="692" y="342" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584420115492" />
+    <state x="928" y="381" key="#com.intellij.ide.util.MemberChooser" timestamp="1584386318409">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="928" y="381" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584386318409" />
+    <state x="690" y="315" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1584353074198">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="690" y="315" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584353074198" />
+    <state x="756" y="399" width="407" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584378782341">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="756" y="399" width="407" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1080@0.0.1920.1080" timestamp="1584378782341" />
+    <state x="761" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584364373300">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="761" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584364373300" />
+    <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584420071659">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584420071659" />
+    <state x="974" y="140" key="CommitChangelistDialog2" timestamp="1584420430256">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="974" y="140" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1584420430256" />
+    <state x="51" y="136" width="1456" height="900" maximized="true" key="DiffContextDialog" timestamp="1584383546444">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="51" y="136" width="1456" height="900" maximized="true" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584383546444" />
+    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1584381820057">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="740" y="294" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1584381820057" />
+    <state width="1626" height="427" key="GridCell.Tab.0.bottom" timestamp="1584386629503">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1626" height="427" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584386629503" />
+    <state width="1626" height="427" key="GridCell.Tab.0.center" timestamp="1584386629503">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1626" height="427" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584386629503" />
+    <state width="1626" height="427" key="GridCell.Tab.0.left" timestamp="1584386629503">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1626" height="427" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584386629503" />
+    <state width="1626" height="427" key="GridCell.Tab.0.right" timestamp="1584386629503">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1626" height="427" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584386629503" />
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1584378335780">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584378335780" />
+    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1584378335780">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="363" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584378335780" />
+    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1584378335780">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="363" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584378335780" />
+    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1584378335780">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="363" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584378335780" />
+    <state x="267" y="115" key="MergeDialog" timestamp="1584384989412">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="267" y="115" key="MergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584384989412" />
+    <state x="672" y="255" key="MultipleFileMergeDialog" timestamp="1584384989417">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="672" y="255" key="MultipleFileMergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584384989417" />
+    <state x="706" y="250" key="RollbackChangesDialog" timestamp="1584420481943">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="706" y="250" key="RollbackChangesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584420481943" />
+    <state x="880" y="196" key="SettingsEditor" timestamp="1584383246616">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="880" y="196" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1584383246616" />
+    <state x="500" y="258" key="Vcs.Push.Dialog.v2" timestamp="1584418942641">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="500" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1584418942641" />
+    <state x="685" y="416" key="com.intellij.ide.util.TipDialog" timestamp="1584418757157">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="685" y="416" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584418757157" />
+    <state x="841" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1584374897453">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="841" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584374897453" />
+    <state x="724" y="258" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1583976271157">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="724" y="258" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1583976271157" />
+    <state x="678" y="461" width="898" height="619" key="find.popup" timestamp="1584420306064">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="678" y="461" width="898" height="619" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584420306064" />
+    <state x="740" y="344" key="git4idea.history.wholeTree.VcsStructureChooser" timestamp="1584383523434">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="740" y="344" key="git4idea.history.wholeTree.VcsStructureChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584383523434" />
+    <state x="616" y="250" key="run.anything.popup" timestamp="1583984192348">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1583984192348" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1584420554758">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584420554758" />
+  </component>
+  <component name="com.vaadin.designer2.intellij.settings.SizePresetsSettingsComponent">
+    <option name="sizePresets">
+      <list>
+        <SizePreset>
+          <option name="caption" value="Phone" />
+          <option name="height" value="568" />
+          <option name="width" value="320" />
+        </SizePreset>
+        <SizePreset>
+          <option name="caption" value="Tablet" />
+          <option name="height" value="1024" />
+          <option name="width" value="768" />
+        </SizePreset>
+        <SizePreset>
+          <option name="caption" value="Desktop" />
+          <option name="height" value="900" />
+          <option name="width" value="1440" />
+        </SizePreset>
+      </list>
+    </option>
+  </component>
+</project>

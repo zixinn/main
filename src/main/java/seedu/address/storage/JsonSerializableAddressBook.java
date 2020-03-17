@@ -48,7 +48,6 @@ class JsonSerializableAddressBook {
         if (facilitators != null) {
             this.facilitators.addAll(facilitators);
         }
-        System.out.println("randsnkdnsk");
         if (tasks != null) {
             this.tasks.addAll(tasks);
         }

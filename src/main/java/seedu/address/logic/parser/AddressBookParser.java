@@ -65,7 +65,7 @@ public class AddressBookParser {
         case Command.COMMAND_GROUP_CAL:
             return new CalCommandParser().parse(arguments);
 
-        case Command.COMMAND_WORD_TASK:
+        case Command.COMMAND_GROUP_TASK:
             return new TaskCommandParser().parse(arguments);
 
         default:

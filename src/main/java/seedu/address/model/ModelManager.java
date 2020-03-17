@@ -259,10 +259,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTask(Task target, Task editedModule) {
-        requireAllNonNull(target, editedModule);
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
 
-        addressBook.setTask(target, editedModule);
+        addressBook.setTask(target, editedTask);
     }
 
     //=========== Filtered Task List Accessors =============================================================

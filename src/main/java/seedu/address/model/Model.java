@@ -126,18 +126,18 @@ public interface Model {
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in Mod Manager.
+     * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
      */
     boolean hasTask(Task module);
 
     /**
-     * Deletes the given module.
+     * Deletes the given task.
      * The module must exist in Mod Manager.
      */
     void deleteTask(Task target);
 
     /**
-     * Adds the given module.
+     * Adds the given task.
      * {@code module} must not already exist in Mod Manager.
      */
     void addTask(Task module);
