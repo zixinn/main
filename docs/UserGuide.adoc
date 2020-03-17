@@ -378,11 +378,12 @@ Receive reminders for deadlines and events the next day.
 |  `*class* delete /code MOD_CODE /type CLASS_TYPE`
 
 .6+|Task
-| `*task* add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* add /code MOD_CODE /desc TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
 | `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
-| `*task* edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* find /desc TASK_NAME`
+| `*task* edit /code MOD_CODE /desc TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
 .5+|Facilitators
