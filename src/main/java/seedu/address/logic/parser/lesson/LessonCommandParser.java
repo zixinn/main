@@ -44,6 +44,9 @@ public class LessonCommandParser implements Parser<LessonCommand> {
         case Command.COMMAND_WORD_LIST:
             return new LessonListCommand();
 
+        case Command.COMMAND_WORD_DELETE:
+            return new LessonDeleteCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_LESSON_COMMAND);
         }
