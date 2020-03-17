@@ -52,5 +52,43 @@
     "office" : "AS4-01-13",
     "moduleCode" : [ "CS2101" ]
   } ],
+<<<<<<< HEAD:data\addressbook.json
   "tasks" : [ ]
 }
+=======
+  "tasks" : [ {
+    "description" : "duke9",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke10",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke11",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke12",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke13",
+    "taskTime" : "20/02/2020"
+  }, {
+    "description" : "duke14",
+    "taskTime" : "21/02/2020"
+  }, {
+    "description" : "duke",
+    "taskTime" : "20/02/2020 11:00"
+  }, {
+    "description" : "duke",
+    "taskTime" : "20/02/2020 11:01"
+  }, {
+    "description" : "duke11",
+    "taskTime" : "20/02/2020 23:59"
+  }, {
+    "description" : "duke",
+    "taskTime" : "20/02/2020 23:59"
+  } ]
+}
+>>>>>>> be28267cda748502e54552de319f001d515b4164:data/addressbook.json
