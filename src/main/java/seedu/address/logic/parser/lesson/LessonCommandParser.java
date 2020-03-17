@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.lesson.LessonCommand;
+import seedu.address.logic.commands.lesson.LessonListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,9 +33,18 @@ public class LessonCommandParser implements Parser<LessonCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        if (commandWord.equals(Command.COMMAND_WORD_ADD)) {
+        switch (commandWord) {
+
+        case Command.COMMAND_WORD_ADD:
             return new LessonAddCommandParser().parse(arguments);
-        } else {
+
+        case Command.COMMAND_WORD_EDIT:
+            return new LessonEditCommandParser().parse(arguments);
+
+        case Command.COMMAND_WORD_LIST:
+            return new LessonListCommand();
+
+        default:
             throw new ParseException(MESSAGE_UNKNOWN_LESSON_COMMAND);
         }
     }
