@@ -23,7 +23,7 @@ public abstract class Command {
     public static final String COMMAND_WORD_ADD = "add";
     public static final String COMMAND_WORD_ALL = "all";
     public static final String COMMAND_WORD_CLEAR = "clear";
-    public static final String COMMAND_WORD_DELETE = "deleta";
+    public static final String COMMAND_WORD_DELETE = "delete";
     public static final String COMMAND_WORD_EDIT = "edit";
     public static final String COMMAND_WORD_FIND = "find";
     public static final String COMMAND_WORD_GROUP = "group";
