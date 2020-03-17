@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import seedu.address.model.util.Description;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.Description;
 
 public class ParserUtilTest {
     private static final String INVALID_MODULE_CODE = "#CS2103T";

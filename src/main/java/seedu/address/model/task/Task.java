@@ -5,14 +5,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Optional;
 
-import seedu.address.model.util.DailySchedule;
+import seedu.address.model.util.DailySchedulableInterface;
 import seedu.address.model.util.Description;
 
 /**
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
  */
-public class Task implements TaskInterface, DailySchedule {
+public class Task implements TaskInterface, DailySchedulableInterface {
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -166,13 +167,8 @@ public class Task implements TaskInterface, DailySchedule {
     }
 
     @Override
-    public LocalTime getStartTime() {
-        return null;
-    }
-
-    @Override
-    public LocalTime getEndTime() {
-        return null;
+    public Optional<LocalTime> getComparableTime() {
+        return Optional.of(taskTime.toLocalTime());
     }
 }
 

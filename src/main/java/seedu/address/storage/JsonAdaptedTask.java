@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.util.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.util.Description;
 
 /**
  * Jackson-friendly version of {@link Task}.

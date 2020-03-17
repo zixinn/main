@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.util.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.Description;
 
 /**
  * A utility class to help with building Module objects.

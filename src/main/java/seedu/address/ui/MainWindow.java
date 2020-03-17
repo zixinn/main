@@ -155,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
         //System.out.println(facilitatorListPanel);
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
-        calendarView = new CalendarView("this");
+        calendarView = new CalendarView("this", logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -260,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param week The week to be viewed
      */
     public void viewCalendar(String week) {
-        calendarView = new CalendarView(week);
+        calendarView = new CalendarView(week, logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().clear();
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
     }

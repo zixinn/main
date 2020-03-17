@@ -8,9 +8,9 @@ import static seedu.address.testutil.TypicalModules.CS2103T;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.util.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.Description;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_MODULE_CODE = "#CS2103T";

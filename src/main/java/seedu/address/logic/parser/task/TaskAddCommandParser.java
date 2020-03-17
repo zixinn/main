@@ -3,8 +3,8 @@ package seedu.address.logic.parser.task;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
@@ -15,10 +15,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.util.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
-
+import seedu.address.model.util.Description;
 /**
  * Parses input arguments and creates a new TaskAddCommand object
  */

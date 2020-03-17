@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Task> filteredTasks;
+    private final List<Lesson> filteredLesson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         filteredFacilitators = new FilteredList<>(this.addressBook.getFacilitatorList());
         filteredModules = new FilteredList<>(this.addressBook.getModuleList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredLesson = this.addressBook.getLessonList();
     }
 
     public ModelManager() {
@@ -214,11 +216,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Lesson> getLessons() {
-        return addressBook.getLessons();
-    }
-
-    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -238,6 +235,16 @@ public class ModelManager implements Model {
                 && filteredFacilitators.equals(other.filteredFacilitators);
     }
 
+    //=========== Filtered Lesson List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public List<Lesson> getLessons() {
+        return filteredLesson;
+    }
 
     //=========== Task ================================================================================
 

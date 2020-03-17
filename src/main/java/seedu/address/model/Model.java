@@ -173,4 +173,5 @@ public interface Model {
     void removeLesson(Lesson lesson);
 
     List<Lesson> getLessons();
+
 }
