@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -17,6 +18,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Facilitator> PREDICATE_SHOW_ALL_FACILITATORS = unused -> true;
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -124,10 +126,43 @@ public interface Model {
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
     /**
+     * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
+     */
+    boolean hasTask(Task module);
+
+    /**
+     * Deletes the given task.
+     * The module must exist in Mod Manager.
+     */
+    void deleteTask(Task target);
+
+    /**
+     * Adds the given task.
+     * {@code module} must not already exist in Mod Manager.
+     */
+    void addTask(Task module);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in Mod Manager.
+     * The task identity of {@code editedTask} must not be the same as another existing task
+     * in Mod Manager.
+     */
+    void setTask(Task target, Task editedTask);
+    /** Returns an unmodifiable view of the filtered task list */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
      * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
 
     boolean hasLesson(Lesson lesson);
 

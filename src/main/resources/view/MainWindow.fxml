@@ -38,7 +38,6 @@
           </Menu>
         </MenuBar>
             <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="NEVER">
-              <tabs>
                 <Tab fx:id="module" text="Modules" >
                   <content>
                     <VBox fx:id="moduleList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
@@ -76,6 +75,16 @@
                     </VBox>
                   </content>
                 </Tab>
+              <Tab fx:id="task" text="Tasks" >
+                <content>
+                  <VBox fx:id="taskList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <padding>
+                      <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                    <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                  </VBox>
+                </content>
+              </Tab>
                 <Tab fx:id="calendar" text="Calendar" >
                   <content>
                     <StackPane fx:id="calendarViewPlaceholder" alignment="BOTTOM_LEFT" GridPane.halignment="LEFT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
@@ -85,15 +94,12 @@
                     </StackPane>
                   </content>
                 </Tab>
-              </tabs>
             </TabPane>
         <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
-
         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />

@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.facilitator.FacilCommandParser;
 import seedu.address.logic.parser.lesson.LessonCommandParser;
 import seedu.address.logic.parser.module.ModuleCommandParser;
+import seedu.address.logic.parser.task.TaskCommandParser;
 
 /**
  * Parses user input.
@@ -42,9 +43,7 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
         switch (commandWord) {
-
         case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
 
@@ -65,6 +64,9 @@ public class AddressBookParser {
 
         case Command.COMMAND_GROUP_CAL:
             return new CalCommandParser().parse(arguments);
+
+        case Command.COMMAND_GROUP_TASK:
+            return new TaskCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

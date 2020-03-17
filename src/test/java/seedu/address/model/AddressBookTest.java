@@ -28,6 +28,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 
@@ -185,6 +186,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
         private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private List<Lesson> lessons = new ArrayList<>();
 
         AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
@@ -196,6 +198,15 @@ public class AddressBookTest {
         @Override
         public ObservableList<Facilitator> getFacilitatorList() {
             return facilitators;
+        }
+
+        /**
+         * Returns an unmodifiable view of the tasks list.
+         * This list will not contain any duplicate tasks.
+         */
+        @Override
+        public ObservableList<Task> getTaskList() {
+            return tasks;
         }
 
         @Override

@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.task.Task;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -118,7 +119,63 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    /**
+     * Returns true if a module with the same identity as {@code module} exists in Mod Manager.
+     *
+     * @param module
+     */
+    @Override
+    public boolean hasTask(Task module) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    /**
+     * Deletes the given module.
+     * The module must exist in Mod Manager.
+     *
+     * @param target
+     */
+    @Override
+    public void deleteTask(Task target) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    /**
+     * Adds the given module.
+     * {@code module} must not already exist in Mod Manager.
+     *
+     * @param module
+     */
+    @Override
+    public void addTask(Task module) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in Mod Manager.
+     * The task identity of {@code editedTask} must not be the same as another existing task
+     * in Mod Manager.
+     *
+     * @param target
+     * @param editedTask
+     */
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
     public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 

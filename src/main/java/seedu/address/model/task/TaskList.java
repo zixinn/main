@@ -77,6 +77,7 @@ public class TaskList implements TaskListInterface {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public TaskList viewUpcomingTasks() {
         List<Task> sortedResult = new ArrayList<Task>(tasks);
         Collections.sort(sortedResult);

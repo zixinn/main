@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
     private CalendarView calendarView;
+    private TaskListPanel taskListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,6 +65,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
+    private StackPane taskListPanelPlaceholder;
+
+    @FXML
     private TabPane mainTabPane;
 
     @FXML
@@ -77,6 +81,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Tab calendar;
+
+    @FXML
+    private Tab task;
 
     @FXML
     private StackPane moduleDetailsPlaceholder;
@@ -145,6 +152,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
+        //System.out.println(facilitatorListPanel);
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
         calendarView = new CalendarView("this");
@@ -161,6 +169,11 @@ public class MainWindow extends UiPart<Stage> {
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        System.out.println("Tasks available");
+        System.out.println(logic.getFilteredTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -235,6 +248,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches to task view
+     */
+    public void handleSwitchToTask() {
+        mainTabPane.getSelectionModel().select(task);
+    }
+
+    /**
      * Changes the calendar view to the specified week.
      *
      * @param week The week to be viewed
@@ -251,6 +271,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public FacilitatorListPanel getFacilitatorListPanel() {
         return facilitatorListPanel;
+    }
+
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
     }
 
     /**
@@ -270,7 +294,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case LESSON:
             case TASK:
-                handleSwitchToOneModule();
+                handleSwitchToTask();
                 break;
             case FACILITATOR:
                 handleSwitchToFacilitator();

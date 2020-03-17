@@ -11,11 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import seedu.address.model.Description;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDateTime;
 
 
 /**
@@ -106,9 +108,10 @@ public class CalendarView extends UiPart<Region> {
             LocalDate date = now.getLocalDate().plusDays(i);
             Lesson lesson = new Lesson(code, LessonType.LAB, date.getDayOfWeek(), startTime, endTime);
             lessons.add(lesson);
-            tasks.add(new Task("read", date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+            tasks.add(new Task(new Description("read"),
+                    new TaskDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
         }
-        Task task = new Task("HW", "15/03/2020", "18:00");
+        Task task = new Task(new Description("HW"), new TaskDateTime("15/03/2020", "18:00"));
         tasks.add(task);
         addCards(week, tasks, lessons);
     }
