@@ -9,11 +9,12 @@ import java.time.LocalTime;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.DailySchedule;
 
 /**
  * Represents a Lesson in Mod Manager.
  */
-public class Lesson implements Comparable<Lesson> {
+public class Lesson implements Comparable<Lesson>, DailySchedule {
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;

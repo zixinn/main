@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import seedu.address.model.Description;
+import seedu.address.model.util.Description;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;

@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import seedu.address.model.Description;
+import seedu.address.model.util.Description;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;

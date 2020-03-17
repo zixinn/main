@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Description;
+import seedu.address.model.util.Description;
 
 class TaskTest {
 
