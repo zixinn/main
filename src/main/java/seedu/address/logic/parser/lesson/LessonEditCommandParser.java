@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
@@ -60,10 +59,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (argMultimap.getValue(PREFIX_VENUE) != null) {
             editLessonDescriptor.setVenue(ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE)));
         }
-
-//        if (argMultimap.getValue(PREFIX_NAME) != null) {
-//            editLessonDescriptor.setFacilitator(ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_NAME)));
-//        }
 
         return new LessonEditCommand(index, editLessonDescriptor);
 
