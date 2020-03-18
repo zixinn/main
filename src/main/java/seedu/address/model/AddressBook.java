@@ -151,6 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Returns the module with the specified {@code moduleCode}.
      */
     public Optional<Module> findModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
         return modules.find(moduleCode);
     }
 

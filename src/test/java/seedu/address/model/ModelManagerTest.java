@@ -13,11 +13,13 @@ import static seedu.address.testutil.TypicalModules.CS2103T;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -104,6 +106,28 @@ public class ModelManagerTest {
     public void hasModule_moduleInAddressBook_returnsTrue() {
         modelManager.addModule(CS2103T);
         assertTrue(modelManager.hasModule(CS2103T));
+    }
+
+    @Test
+    public void getModule_emptyModule_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), modelManager.getModule());
+    }
+
+    @Test
+    public void getModule_nonEmptyModule_returnsModule() {
+        modelManager.updateModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), modelManager.getModule());
+    }
+
+    @Test
+    public void findModule_moduleNotFound_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), modelManager.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
+    public void findModule_moduleFound_returnsModule() {
+        modelManager.addModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), modelManager.findModule(new ModuleCode("CS2103T")));
     }
 
     @Test

@@ -9,9 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.OFFICE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +98,17 @@ public class LogicManagerTest {
     @Test
     public void getFilteredFacilitatorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredFacilitatorList().remove(0));
+    }
+
+    @Test
+    public void getModule_emptyModule_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), model.getModule());
+    }
+
+    @Test
+    public void getModule_nonEmptyModule_returnsModule() {
+        model.updateModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), model.getModule());
     }
 
     /**
