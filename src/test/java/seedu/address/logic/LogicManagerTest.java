@@ -111,6 +111,11 @@ public class LogicManagerTest {
         assertEquals(Optional.of(CS2103T), model.getModule());
     }
 
+    @Test
+    public void getFacilitatorListForModule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFacilitatorListForModule().remove(0));
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>

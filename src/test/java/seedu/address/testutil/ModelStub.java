@@ -137,7 +137,17 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Task> getFilteredTaskList() {
+    public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Facilitator> getFacilitatorListForModule() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -188,7 +198,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
+    public ObservableList<Task> getFilteredTaskList() {
         throw new AssertionError("This method should not be called.");
     }
 

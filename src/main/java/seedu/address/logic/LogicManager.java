@@ -87,6 +87,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Facilitator> getFacilitatorListForModule() {
+        return model.getFacilitatorListForModule();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

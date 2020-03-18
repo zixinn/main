@@ -50,6 +50,9 @@ public interface Logic {
     /** Returns the module to be viewed */
     Optional<Module> getModule();
 
+    /** Returns an unmodifiable view of the filtered list of facilitators */
+    ObservableList<Facilitator> getFacilitatorListForModule();
+
     /**
      * Returns the user prefs' address book file path.
      */

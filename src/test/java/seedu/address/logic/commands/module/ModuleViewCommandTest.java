@@ -113,7 +113,7 @@ public class ModuleViewCommandTest {
         }
 
         @Override
-        public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
+        public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
             ModuleCode toCheck;
             if (module.isEmpty()) {
                 facilitatorList.clear();

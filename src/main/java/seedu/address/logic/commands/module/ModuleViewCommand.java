@@ -45,7 +45,7 @@ public class ModuleViewCommand extends ModuleCommand {
         }
 
         model.updateModule(module.get());
-        model.updateFilteredFacilitatorList(new ModuleCodesContainKeywordPredicate(toView.moduleCode));
+        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toView.moduleCode));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toView), CommandType.MODULE_VIEW);
     }
 

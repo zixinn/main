@@ -22,6 +22,7 @@ public interface Model {
     Predicate<Facilitator> PREDICATE_SHOW_ALL_FACILITATORS = unused -> true;
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Facilitator> PREDICATE_SHOW_NO_FACILITATORS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -138,6 +139,21 @@ public interface Model {
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
     /**
+     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
+
+    /** Returns an unmodifiable view of the filtered facilitator list. */
+    ObservableList<Facilitator> getFacilitatorListForModule();
+
+    /**
+     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFacilitatorListForModule(Predicate<Facilitator> predicate);
+
+    /**
      * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
      */
     boolean hasTask(Task module);
@@ -163,12 +179,6 @@ public interface Model {
     void setTask(Task target, Task editedTask);
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
-
-    /**
-     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
