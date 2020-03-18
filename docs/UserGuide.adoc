@@ -178,7 +178,7 @@ Format: `class find /next`
 
 Edits the information of the class. Class is selected by its index in the class list. +
 Format: `class edit INDEX [/code MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
-Example: `class edit 1 /code CS2103T /type Lec /at Fri 14:00 16:00 /venue I3_AUD`
+Example: `class edit 1 /venue Home`
 
 ==== Deleting a class
 
