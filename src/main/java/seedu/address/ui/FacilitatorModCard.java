@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.facilitator.Facilitator;
 
 /**
@@ -19,6 +20,8 @@ public class FacilitatorModCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private VBox cardbox;
     @FXML
     private Label id;
     @FXML
@@ -47,6 +50,8 @@ public class FacilitatorModCard extends UiPart<Region> {
         if (facilitator.getOffice().value != null) {
             office.getChildren().add(new Label(facilitator.getOffice().value));
         }
+
+        cardbox.setMinHeight(0);
 
     }
 
