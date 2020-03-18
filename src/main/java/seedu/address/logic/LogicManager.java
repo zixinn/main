@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -78,6 +79,11 @@ public class LogicManager implements Logic {
     @Override
     public List<Lesson> getLessons() {
         return model.getLessons();
+    }
+
+    @Override
+    public Optional<Module> getModule() {
+        return model.getModule();
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -81,6 +83,21 @@ public class ModelStub implements Model {
 
     @Override
     public void setModule(Module target, Module editedModule) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<Module> getModule() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<Module> findModule(ModuleCode moduleCode) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateModule(Module module) {
         throw new AssertionError("This method should not be called.");
     }
 

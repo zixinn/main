@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -89,8 +91,17 @@ public interface Model {
      */
     void setModule(Module target, Module editedModule);
 
-    /** Returns an unmodifiable view of the filtered module list */
+    /** Returns an unmodifiable view of the filtered module list. */
     ObservableList<Module> getFilteredModuleList();
+
+    /** Returns the module to be viewed. */
+    Optional<Module> getModule();
+
+    /** Finds the module with the given {@code moduleCode}. */
+    Optional<Module> findModule(ModuleCode moduleCode);
+
+    /** Updates the module in the model to the given {@code module}. */
+    void updateModule(Module module);
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
@@ -123,7 +134,7 @@ public interface Model {
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
 
-    /** Returns an unmodifiable view of the filtered facilitator list */
+    /** Returns an unmodifiable view of the filtered facilitator list. */
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
     /**

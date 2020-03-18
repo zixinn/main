@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -45,6 +46,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of lessons */
     List<Lesson> getLessons();
+
+    /** Returns the module to be viewed */
+    Optional<Module> getModule();
 
     /**
      * Returns the user prefs' address book file path.

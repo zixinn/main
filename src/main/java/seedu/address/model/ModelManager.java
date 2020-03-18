@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,6 +18,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -31,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Task> filteredTasks;
     private final List<Lesson> filteredLesson;
+    private Optional<Module> module;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,6 +50,7 @@ public class ModelManager implements Model {
         filteredModules = new FilteredList<>(this.addressBook.getModuleList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredLesson = this.addressBook.getLessonList();
+        module = Optional.empty();
     }
 
     public ModelManager() {
@@ -130,6 +134,22 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedModule);
 
         addressBook.setModule(target, editedModule);
+    }
+
+    @Override
+    public Optional<Module> getModule() {
+        return module;
+    }
+
+    @Override
+    public Optional<Module> findModule(ModuleCode moduleCode) {
+        return addressBook.findModule(moduleCode);
+    }
+
+    @Override
+    public void updateModule(Module module) {
+        requireNonNull(module);
+        this.module = Optional.of(module);
     }
 
     //=========== Filtered Module List Accessors =============================================================

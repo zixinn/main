@@ -9,13 +9,14 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FacilDeleteCommand object
+ * Parses input arguments and creates a new FacilDeleteCommand object.
  */
 public class FacilDeleteCommandParser implements Parser<FacilDeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FacilDeleteCommand
      * and returns a FacilDeleteCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FacilDeleteCommand parse(String args) throws ParseException {
         try {

@@ -12,7 +12,7 @@ import seedu.address.model.Model;
  */
 public abstract class ModuleCommand extends Command {
     public static final List<String> ALL_COMMAND_WORDS = List.of(
-            COMMAND_WORD_ADD, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE, COMMAND_WORD_VIEW, COMMAND_WORD_LIST);
+            COMMAND_WORD_ADD, COMMAND_WORD_DELETE, COMMAND_WORD_EDIT, COMMAND_WORD_LIST, COMMAND_WORD_VIEW);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
