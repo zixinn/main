@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.calendar.Calendar;
@@ -87,8 +86,6 @@ public class CalendarView extends UiPart<Region> {
                 panel.addCard(new CalendarCard(item));
             }
 
-            ColumnConstraints columnConstraints = calendarGrid.getColumnConstraints().get(i);
-            columnConstraints.setPrefWidth(panel.getHeight() + 50);
         }
 
     }

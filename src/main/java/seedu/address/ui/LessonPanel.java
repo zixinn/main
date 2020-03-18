@@ -1,9 +1,10 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Lesson;
 
 
 /**
@@ -16,16 +17,13 @@ public class LessonPanel extends UiPart<Region> {
     private Label title;
 
     @FXML
-    private Label lessons;
+    private ListView<Lesson> lessons;
 
     public LessonPanel() {
         super(FXML);
-        title.setText("Classes: ");
-        title.setPadding(new Insets(5, 5, 5, 20));
-        lessons.setPadding(new Insets(0, 5, 10, 50));
     }
 
     public void updateLessonPanel() {
-        lessons.setText("\u2022 lessons .... ");
+        //lessons.setText("\u2022 lessons .... ");
     }
 }

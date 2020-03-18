@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.layout.ColumnConstraints?>
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Mod Manager" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
@@ -53,8 +54,16 @@
                           <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
                       <StackPane fx:id="moduleDetailsPlaceholder" maxHeight="25" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-                      <StackPane fx:id="modulePanelPlaceholder" VBox.vgrow="ALWAYS" />
-                      <StackPane fx:id="lessonPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                      <GridPane fx:id="modbase">
+                        <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" />
+                          <ColumnConstraints hgrow="SOMETIMES" />
+                          <ColumnConstraints hgrow="SOMETIMES" />
+                        </columnConstraints>
+                        <StackPane fx:id="lessonPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" GridPane.columnIndex="0" />
+                        <StackPane fx:id="taskPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" GridPane.columnIndex="1" />
+                        <StackPane fx:id="facilitatorPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" GridPane.columnIndex="2" />
+                      </GridPane>
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
