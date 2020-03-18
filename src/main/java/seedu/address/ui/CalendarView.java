@@ -87,8 +87,6 @@ public class CalendarView extends UiPart<Region> {
                 panel.addCard(new CalendarCard(item));
             }
 
-            ColumnConstraints columnConstraints = calendarGrid.getColumnConstraints().get(i);
-            columnConstraints.setPrefWidth(panel.getHeight() + 50);
         }
 
     }
