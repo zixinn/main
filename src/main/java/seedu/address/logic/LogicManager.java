@@ -19,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
@@ -79,6 +80,11 @@ public class LogicManager implements Logic {
     @Override
     public List<Lesson> getLessons() {
         return model.getLessons();
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
+        return model.getLessonListForModule(moduleCode);
     }
 
     @Override

@@ -272,6 +272,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
+        return addressBook.getLessonListForModule(moduleCode);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

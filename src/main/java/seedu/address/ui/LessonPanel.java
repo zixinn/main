@@ -1,7 +1,12 @@
 package seedu.address.ui;
 
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
@@ -19,11 +24,26 @@ public class LessonPanel extends UiPart<Region> {
     @FXML
     private ListView<Lesson> lessons;
 
-    public LessonPanel() {
+    public LessonPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
+        lessons.setItems(lessonList);
+        lessons.setCellFactory(listView -> new LessonPanel.LessonListViewCell());
     }
 
-    public void updateLessonPanel() {
-        //lessons.setText("\u2022 lessons .... ");
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
+     */
+    class LessonListViewCell extends ListCell<Lesson> {
+        @Override
+        protected void updateItem(Lesson lesson, boolean empty) {
+            super.updateItem(lesson, empty);
+
+            if (empty || lesson == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new LessonModCard(lesson, getIndex() + 1).getRoot());
+            }
+        }
     }
 }
