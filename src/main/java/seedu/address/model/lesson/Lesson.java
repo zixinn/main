@@ -7,6 +7,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
+import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -20,19 +21,12 @@ public class Lesson implements Comparable<Lesson> {
     private LocalTime endTime;
     private String venue; // optional
 
-    public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime) {
-        requireAllNonNull(moduleCode, type, day, startTime, endTime);
-        this.moduleCode = moduleCode;
-        this.type = type;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.venue = null;
-    }
-
     public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime,
-                  String venue) {
+                  String venue) throws InvalidTimeRangeException {
         requireAllNonNull(moduleCode, type, day, startTime, endTime);
+        if (startTime.compareTo(endTime) >= 0) {
+            throw new InvalidTimeRangeException();
+        }
         this.moduleCode = moduleCode;
         this.type = type;
         this.day = day;
