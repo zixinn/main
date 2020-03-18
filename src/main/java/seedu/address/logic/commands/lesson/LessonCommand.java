@@ -2,7 +2,6 @@ package seedu.address.logic.commands.lesson;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
@@ -21,18 +20,17 @@ import seedu.address.model.Model;
 public abstract class LessonCommand extends Command {
 
     public static final String ADD_FORMAT =
-            String.format("%s %s %s MOD_CODE %s CLASS_TYPE %s DAY START_TIME END_TIME [%s VENUE] [%s FACILITATOR_NAME]",
+            String.format("%s %s %s MOD_CODE %s CLASS_TYPE %s DAY START_TIME END_TIME [%s VENUE]",
                     COMMAND_GROUP_CLASS, COMMAND_WORD_ADD,
-                    PREFIX_MODULE_CODE, PREFIX_TYPE, PREFIX_AT, PREFIX_VENUE, PREFIX_NAME);
+                    PREFIX_MODULE_CODE, PREFIX_TYPE, PREFIX_AT, PREFIX_VENUE);
 
     public static final String DELETE_FORMAT = String.format("%s %s %s MOD_CODE %s CLASS_TYPE",
             COMMAND_GROUP_CLASS, COMMAND_WORD_DELETE, PREFIX_MODULE_CODE, PREFIX_TYPE);
 
     public static final String EDIT_FORMAT =
-            String.format("%s %s %s MOD_CODE %s CLASS_TYPE [%s DAY START_TIME END_TIME] [%s VENUE] "
-                            + "[%s FACILITATOR_NAME]",
+            String.format("%s %s %s MOD_CODE %s CLASS_TYPE [%s DAY START_TIME END_TIME] [%s VENUE] ",
                     COMMAND_GROUP_CLASS, COMMAND_WORD_EDIT,
-                    PREFIX_MODULE_CODE, PREFIX_TYPE, PREFIX_AT, PREFIX_VENUE, PREFIX_NAME);
+                    PREFIX_MODULE_CODE, PREFIX_TYPE, PREFIX_AT, PREFIX_VENUE);
 
     public static final String FIND_FORMAT =
             String.format("%s %s [%s] [%s DAY]", COMMAND_GROUP_CLASS, COMMAND_WORD_FIND, PREFIX_NEXT, PREFIX_AT);

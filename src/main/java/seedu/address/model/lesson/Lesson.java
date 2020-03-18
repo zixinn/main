@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.module.ModuleCode;
 
@@ -20,7 +19,6 @@ public class Lesson implements Comparable<Lesson> {
     private LocalTime startTime;
     private LocalTime endTime;
     private String venue; // optional
-    private Facilitator facilitator; // optional
 
     public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(moduleCode, type, day, startTime, endTime);
@@ -30,11 +28,10 @@ public class Lesson implements Comparable<Lesson> {
         this.startTime = startTime;
         this.endTime = endTime;
         this.venue = null;
-        this.facilitator = null;
     }
 
     public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime,
-                  String venue, Facilitator facilitator) {
+                  String venue) {
         requireAllNonNull(moduleCode, type, day, startTime, endTime);
         this.moduleCode = moduleCode;
         this.type = type;
@@ -42,7 +39,6 @@ public class Lesson implements Comparable<Lesson> {
         this.startTime = startTime;
         this.endTime = endTime;
         this.venue = venue;
-        this.facilitator = facilitator;
     }
 
     public ModuleCode getModuleCode() {
@@ -69,14 +65,6 @@ public class Lesson implements Comparable<Lesson> {
         return venue;
     }
 
-    public Facilitator getFacilitator() {
-        return facilitator;
-    }
-
-    public boolean doesFacilitatorExist() {
-        return getFacilitator() != null;
-    }
-
     public boolean doesVenueExist() {
         return getVenue() != null;
     }
@@ -97,22 +85,6 @@ public class Lesson implements Comparable<Lesson> {
         return isSameVenue;
     }
 
-    /**
-     * Checks if the facilitators of the lessons are the same.
-     *
-     * @param otherLesson The other lesson to compare with.
-     * @return True if lessons have the same facilitator and false otherwise.
-     */
-    private boolean isSameFacilitator(Lesson otherLesson) {
-        boolean isSameFacilitator = false;
-        if (otherLesson.doesFacilitatorExist() && doesFacilitatorExist()) {
-            isSameFacilitator = otherLesson.getFacilitator().equals(getFacilitator());
-        } else if (!otherLesson.doesFacilitatorExist() && !doesFacilitatorExist()) {
-            isSameFacilitator = true;
-        }
-        return isSameFacilitator;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -130,7 +102,6 @@ public class Lesson implements Comparable<Lesson> {
                 && otherLesson.getDay().equals(getDay())
                 && otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())
-                && isSameFacilitator(otherLesson)
                 && isSameVenue(otherLesson);
     }
 
@@ -178,6 +149,10 @@ public class Lesson implements Comparable<Lesson> {
     }
 
     public String toString() {
+        if (doesVenueExist()) {
+            return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime()
+                    + " at " + venue;
+        }
         return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime();
     }
 }

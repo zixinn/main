@@ -37,7 +37,7 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
      */
     public LessonAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NAME, PREFIX_NEXT);
+                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NEXT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
                 || !arePrefixesPresent(argMultimap, PREFIX_TYPE)
@@ -46,15 +46,15 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
-        Facilitator facilitator = null;
+//        Facilitator facilitator = null;
         String venue = null;
         if (arePrefixesPresent(argMultimap, PREFIX_VENUE)) {
             venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE));
         }
 
-        if (arePrefixesPresent(argMultimap, PREFIX_FACIL)) {
-            facilitator = ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_FACIL));
-        }
+//        if (arePrefixesPresent(argMultimap, PREFIX_FACIL)) {
+//            facilitator = ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_FACIL));
+//        }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
         LessonType lessonType = ParserUtil.parseLessonType(argMultimap.getValue(PREFIX_TYPE));
@@ -64,7 +64,7 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
 
 
 
-        Lesson lesson = new Lesson(moduleCode, lessonType, day, startTime, endTime, venue, facilitator);
+        Lesson lesson = new Lesson(moduleCode, lessonType, day, startTime, endTime, venue);
 
         return new LessonAddCommand(lesson);
     }

@@ -29,7 +29,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NAME, PREFIX_NEXT);
+                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NEXT);
 
         Index index;
 
@@ -61,9 +61,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setVenue(ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE)));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME) != null) {
-            editLessonDescriptor.setFacilitator(ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_NAME)));
-        }
+//        if (argMultimap.getValue(PREFIX_NAME) != null) {
+//            editLessonDescriptor.setFacilitator(ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_NAME)));
+//        }
 
         return new LessonEditCommand(index, editLessonDescriptor);
 
