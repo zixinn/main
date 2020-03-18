@@ -350,3 +350,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#facilitatorsView .list-cell {
+    -fx-background-color: rgba(232, 236, 241, .05);
+}

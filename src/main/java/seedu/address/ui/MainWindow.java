@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
+    private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
     private TaskListPanel taskListPanel;
 
@@ -90,6 +91,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane lessonPanelPlaceholder;
+
+    @FXML
+    private StackPane facilitatorPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -169,6 +173,9 @@ public class MainWindow extends UiPart<Stage> {
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
+        facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
+        facilitatorPanelPlaceholder.getChildren().add(facilitatorPanel.getRoot());
+
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         System.out.println("Tasks available");
         System.out.println(logic.getFilteredTaskList());
@@ -232,6 +239,7 @@ public class MainWindow extends UiPart<Stage> {
         mainTabPane.getSelectionModel().select(oneModule);
         moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
         moduleDetailsPlaceholder.getChildren().setAll(moduleDetailsPanel.getRoot());
+        oneModule.setText(logic.getModule().get().getModuleCode().moduleCode);
     }
 
     /**

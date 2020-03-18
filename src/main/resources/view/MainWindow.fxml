@@ -53,8 +53,9 @@
                           <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
                       <StackPane fx:id="moduleDetailsPlaceholder" maxHeight="25" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-                      <StackPane fx:id="modulePanelPlaceholder" VBox.vgrow="ALWAYS" />
                       <StackPane fx:id="lessonPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="taskPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="facilitatorPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
