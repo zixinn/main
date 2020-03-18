@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,18 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.RowConstraints;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonType;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.util.DailySchedulableComparator;
 import seedu.address.model.util.DailySchedulableInterface;
-import seedu.address.model.util.Description;
 
 /**
  * The view for the calendar.
