@@ -42,7 +42,7 @@ public class FacilAddCommand extends FacilCommand {
     private final Facilitator toAdd;
 
     /**
-     * Creates a FacilAddCommand to add the specified {@code Facilitator}
+     * Creates a FacilAddCommand to add the specified {@code facilitator}.
      */
     public FacilAddCommand(Facilitator facilitator) {
         requireNonNull(facilitator);

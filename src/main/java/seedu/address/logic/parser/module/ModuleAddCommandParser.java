@@ -13,12 +13,12 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.Description;
 
 /**
- * Parses input arguments and creates a new ModuleAddCommand object
+ * Parses input arguments and creates a new ModuleAddCommand object.
  */
 public class ModuleAddCommandParser implements Parser<ModuleAddCommand> {
 
@@ -26,7 +26,7 @@ public class ModuleAddCommandParser implements Parser<ModuleAddCommand> {
      * Parses the given {@code String} of arguments in the context of the ModuleAddCommand
      * and returns a ModuleAddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public ModuleAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION);

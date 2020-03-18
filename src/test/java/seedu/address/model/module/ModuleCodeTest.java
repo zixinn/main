@@ -25,6 +25,7 @@ public class ModuleCodeTest {
         assertThrows(NullPointerException.class, () -> ModuleCode.isValidModuleCode(null));
 
         // invalid module codes
+        assertFalse(ModuleCode.isValidModuleCode("")); // empty string
         assertFalse(ModuleCode.isValidModuleCode("CS 2103T")); // contains space
         assertFalse(ModuleCode.isValidModuleCode("longModuleCode")); // long module code
         assertFalse(ModuleCode.isValidModuleCode("^")); // only non-alphanumeric characters

@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -9,7 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -36,6 +40,18 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of facilitators */
     ObservableList<Facilitator> getFilteredFacilitatorList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the filtered list of lessons */
+    List<Lesson> getLessons();
+
+    /** Returns the module to be viewed */
+    Optional<Module> getModule();
+
+    /** Returns an unmodifiable view of the filtered list of facilitators */
+    ObservableList<Facilitator> getFacilitatorListForModule();
 
     /**
      * Returns the user prefs' address book file path.

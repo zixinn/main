@@ -1,17 +1,19 @@
 package seedu.address.model.task;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Optional;
+
+import seedu.address.model.util.DailySchedulableInterface;
+import seedu.address.model.util.Description;
 
 /**
  * Represents a Task in Mod Manager. A Task in Mod Manager is strictly composed in a Module.
  */
-public class Task implements TaskInterface {
+public class Task implements TaskInterface, DailySchedulableInterface {
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -19,10 +21,9 @@ public class Task implements TaskInterface {
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
             .toFormatter();
 
-    protected String description;
+    protected Description description;
     protected boolean isDone;
-    protected LocalDateTime taskTime;
-
+    protected TaskDateTime taskTime;
 
     /**
      * Creates a new Task with {@code description} associated with a Module.
@@ -30,21 +31,14 @@ public class Task implements TaskInterface {
      *
      * @param description the description/details of our task
      */
-    public Task(String description) {
+    public Task(Description description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, String date) {
+    public Task(Description description, TaskDateTime taskTime) {
         this.description = description;
-        this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
-    }
-
-    public Task(String description, String date, String timeInDay) {
-        this.description = description;
-        LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
-        this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                timeInTheDay);
+        this.taskTime = taskTime;
     }
 
     /**
@@ -52,7 +46,7 @@ public class Task implements TaskInterface {
      */
     @Override
     public String getDescription() {
-        return description;
+        return description.toString();
     }
 
     /**
@@ -86,7 +80,7 @@ public class Task implements TaskInterface {
     }
 
     protected LocalDateTime getTime() {
-        return taskTime;
+        return taskTime.getLocalDateTime();
     }
 
     protected boolean isTimeAvailable() {
@@ -97,27 +91,14 @@ public class Task implements TaskInterface {
      * outputs the Time of the Task (hour:minute) in human readable form.
      */
     public String getTimeOutput() {
-        if (taskTime == null) {
-            return "";
-        }
-        // note for Command
-        // prevent users from creating 00:00 time. For this time period, the user should create an all day Task instead.
-        if (taskTime.isEqual(taskTime.toLocalDate().atStartOfDay())) { // no time in day
-            return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy[ HH:mm]"));
+        return taskTime.toString();
     }
 
     /**
      * outputs the Date in the week of the task
      */
     protected String getDateInWeek() {
-        if (taskTime == null) {
-            return "";
-        }
-        DayOfWeek dayInWeek = taskTime.getDayOfWeek();
-        String title = dayInWeek.toString();
-        return title.charAt(0) + title.substring(1).toLowerCase();
+        return taskTime.getDateInWeek();
     }
 
     /**
@@ -143,20 +124,30 @@ public class Task implements TaskInterface {
     }
 
     /**
-     * Compares the two Deadlines for order.
-     * Nearer deadlines are considered smaller
+     * Returns true if both tasks are the same
+     *
+     * @param otherTask The other task to compare with.
+     * @return true if both tasks have the same description and time slot
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getDescription().equals(getDescription())
+                && otherTask.getTime().equals(getTime());
+    }
+
+    /**
+     * Compares the two timestamps for order.
+     * Earlier timestamps are considered smaller
      */
     @Override
     public int compareTo(Object other) {
-        assert (other instanceof Task); // can only compare between Tasks
+        assert (other instanceof Task);
         Task otherTask = (Task) other;
-        if (taskTime.isAfter(otherTask.getTime())) {
-            return 1;
-        } else if (taskTime.isBefore(otherTask.getTime())) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return getTime().compareTo(otherTask.getTime());
     }
 
     @Override
@@ -173,6 +164,11 @@ public class Task implements TaskInterface {
 
         return otherTask.getDescription().equals(getDescription()) // same definition
                 && otherTask.compareTo(this) == 0; // same time
+    }
+
+    @Override
+    public Optional<LocalTime> getComparableTime() {
+        return Optional.of(taskTime.toLocalTime());
     }
 }
 

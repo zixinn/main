@@ -23,13 +23,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Parses input arguments and creates a new FacilEditCommand object
+ * Parses input arguments and creates a new FacilEditCommand object.
  */
 public class FacilEditCommandParser implements Parser<FacilEditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FacilEditCommand
      * and returns an FacilEditCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FacilEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -91,8 +92,8 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
      * Parses the given {@code String} of arguments and returns the {@code String} for the field for execution.
      * If the given {@code String} of arguments is an empty string, it will be parsed into a null Object.
      *
-     * @param args the arguments for the field
-     * @return the {@code String} for the field
+     * @param args the arguments for the field.
+     * @return the {@code String} for the field.
      */
     private String parseFieldForEdit(String args) {
         if (args.equals("")) {

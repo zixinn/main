@@ -25,7 +25,7 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Parses input arguments and creates a new FacilAddCommand object
+ * Parses input arguments and creates a new FacilAddCommand object.
  */
 public class FacilAddCommandParser implements Parser<FacilAddCommand> {
 
@@ -33,7 +33,7 @@ public class FacilAddCommandParser implements Parser<FacilAddCommand> {
      * Parses the given {@code String} of arguments in the context of the FacilAddCommand
      * and returns a FacilAddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FacilAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(

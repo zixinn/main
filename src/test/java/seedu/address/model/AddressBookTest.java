@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +27,10 @@ import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 
@@ -113,6 +116,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void findModule_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.findModule(null));
+    }
+
+    @Test
+    public void findModule_moduleNotInAddressBook_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), addressBook.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
+    public void findModule_moduleInAddressBook_returnsModule() {
+        addressBook.addModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), addressBook.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
     public void getModules_emptyList_success() {
         UniqueModuleList modules = new UniqueModuleList();
         assertEquals(modules.getModuleList(), addressBook.getModules());
@@ -185,6 +204,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
         private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private List<Lesson> lessons = new ArrayList<>();
 
         AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
@@ -196,6 +216,15 @@ public class AddressBookTest {
         @Override
         public ObservableList<Facilitator> getFacilitatorList() {
             return facilitators;
+        }
+
+        /**
+         * Returns an unmodifiable view of the tasks list.
+         * This list will not contain any duplicate tasks.
+         */
+        @Override
+        public ObservableList<Task> getTaskList() {
+            return tasks;
         }
 
         @Override

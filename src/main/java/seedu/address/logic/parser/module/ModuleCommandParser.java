@@ -13,7 +13,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ModuleCommand object
+ * Parses input arguments and creates a new ModuleCommand object.
  */
 public class ModuleCommandParser implements Parser<ModuleCommand> {
 
@@ -40,6 +40,9 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
 
         case Command.COMMAND_WORD_LIST:
             return new ModuleListCommand();
+
+        case Command.COMMAND_WORD_VIEW:
+            return new ModuleViewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_MODULE_COMMAND, HelpCommand.MESSAGE_USAGE));

@@ -37,7 +37,7 @@ public class ModuleCodesContainKeywordPredicateTest {
     }
 
     @Test
-    public void test_moduleCodesContainsKeyword_returnsTrue() {
+    public void test_moduleCodesContainKeyword_returnsTrue() {
         // One module code
         ModuleCodesContainKeywordPredicate predicate = new ModuleCodesContainKeywordPredicate("CS2103T");
         assertTrue(predicate.test(new FacilitatorBuilder().withModuleCodes("CS2103T").build()));

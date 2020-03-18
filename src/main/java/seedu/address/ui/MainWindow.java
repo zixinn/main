@@ -40,7 +40,10 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
+    private TaskDetailsPanel taskPanel;
+    private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
+    private TaskListPanel taskListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
+    private StackPane taskListPanelPlaceholder;
+
+    @FXML
     private TabPane mainTabPane;
 
     @FXML
@@ -79,10 +85,19 @@ public class MainWindow extends UiPart<Stage> {
     private Tab calendar;
 
     @FXML
+    private Tab task;
+
+    @FXML
     private StackPane moduleDetailsPlaceholder;
 
     @FXML
     private StackPane lessonPanelPlaceholder;
+
+    @FXML
+    private StackPane taskPanelPlaceholder;
+
+    @FXML
+    private StackPane facilitatorPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -147,7 +162,7 @@ public class MainWindow extends UiPart<Stage> {
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
-        calendarView = new CalendarView("this");
+        calendarView = new CalendarView("this", logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -156,11 +171,22 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        moduleDetailsPanel = new ModuleDetailsPanel("MODULE: MODULE DETAILS");
+        moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+
+        taskPanel = new TaskDetailsPanel();
+        taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
+
+        facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
+        facilitatorPanelPlaceholder.getChildren().add(facilitatorPanel.getRoot());
+
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        System.out.println("Tasks available");
+        System.out.println(logic.getFilteredTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -218,6 +244,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleSwitchToOneModule() {
         mainTabPane.getSelectionModel().select(oneModule);
+        moduleDetailsPanel.changeDisplayModule(logic.getModule());
     }
 
     /**
@@ -235,12 +262,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switches to task view
+     */
+    public void handleSwitchToTask() {
+        mainTabPane.getSelectionModel().select(task);
+    }
+
+    /**
      * Changes the calendar view to the specified week.
      *
      * @param week The week to be viewed
      */
     public void viewCalendar(String week) {
-        calendarView = new CalendarView(week);
+        calendarView = new CalendarView(week, logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().clear();
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
     }
@@ -253,6 +287,10 @@ public class MainWindow extends UiPart<Stage> {
         return facilitatorListPanel;
     }
 
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -263,14 +301,18 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            viewCalendar("this");
             switch (commandResult.getType()) {
-            case MODULE:
             case CLEAR:
+            case MODULE:
                 handleSwitchToModule();
                 break;
+            case MODULE_VIEW:
             case LESSON:
-            case TASK:
                 handleSwitchToOneModule();
+                break;
+            case TASK:
+                handleSwitchToTask();
                 break;
             case FACILITATOR:
                 handleSwitchToFacilitator();

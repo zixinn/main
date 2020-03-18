@@ -5,15 +5,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.DailySchedulableInterface;
 
 /**
  * Represents a Lesson in Mod Manager.
  */
-public class Lesson implements Comparable<Lesson> {
+public class Lesson implements Comparable<Lesson>, DailySchedulableInterface {
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;
@@ -148,6 +150,11 @@ public class Lesson implements Comparable<Lesson> {
                     + " at " + venue;
         }
         return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime();
+    }
+
+    @Override
+    public Optional<LocalTime> getComparableTime() {
+        return Optional.of(getStartTime());
     }
 }
 

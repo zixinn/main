@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
@@ -13,16 +14,20 @@ import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameModule and .isSameFacilitator comparison)
+ * Duplicates are not allowed (by .isSameModule and .isSameFacilitator and .isSameTask comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueModuleList modules;
     private final UniqueFacilitatorList facilitators;
+    private final UniqueTaskList tasks;
     private final LessonList lessons;
 
     /*
@@ -35,6 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         modules = new UniqueModuleList();
         facilitators = new UniqueFacilitatorList();
+        tasks = new UniqueTaskList();
         lessons = new LessonList();
     }
 
@@ -67,7 +73,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
+    /**
      * Replaces the contents of the lesson list with {@code lessons}.
+
+      * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
@@ -82,6 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setFacilitators(newData.getFacilitatorList());
         setModules(newData.getModuleList());
+        setTasks(newData.getTaskList());
         setLessons(newData.getLessonList());
     }
 
@@ -129,6 +145,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+    }
+
+    /**
+     * Returns the module with the specified {@code moduleCode}.
+     */
+    public Optional<Module> findModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return modules.find(moduleCode);
     }
 
     /**
@@ -183,6 +207,52 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public List<Facilitator> getFacilitators() {
         return facilitators.getFacilitatorList();
+    }
+
+    //// task-level operations
+
+    /**
+     * Returns true if a facilitator with the same identity as {@code facilitator} exists in Mod Manager.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
+     * Adds a task to the Mod Manager.
+     * The task must not already exist in Mod Manager.
+     */
+    public void addTask(Task p) {
+        tasks.add(p);
+    }
+
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in Mod Manager.
+     * The task identity of {@code editedTask} must not be the same as another existing task
+     * in Mod Manager.
+     */
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in Mod Manager.
+     */
+    public void removeTask(Task key) {
+        tasks.remove(key);
+    }
+
+    /**
+     * Returns the list of modules in this {@code AddressBook}.
+     * @return the list of modules.
+     */
+    public List<Task> getTasks() {
+        return tasks.getTaskList();
     }
 
     /**
@@ -249,10 +319,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
-                + facilitators.asUnmodifiableObservableList().size() + " facilitators";
-        // TODO: refine later
+                + facilitators.asUnmodifiableObservableList().size() + " facilitators \n"
+                + tasks.asUnmodifiableObservableList().size() + " tasks";
     }
 
+    @Override
+    public ObservableList<Facilitator> getFacilitatorList() {
+        return facilitators.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Module> getModuleList() {
@@ -260,8 +334,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Facilitator> getFacilitatorList() {
-        return facilitators.asUnmodifiableObservableList();
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
     }
 
     @Override
@@ -274,11 +348,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && modules.equals(((AddressBook) other).modules)
-                && facilitators.equals(((AddressBook) other).facilitators));
+                && facilitators.equals(((AddressBook) other).facilitators)
+                && tasks.equals(((AddressBook) other).tasks));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(modules, facilitators);
+        return Objects.hash(modules, facilitators, tasks);
     }
 }

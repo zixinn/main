@@ -14,6 +14,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -23,23 +24,32 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Task list contains duplicate task(s).";
+
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST =
             "Facilitator list contains facilitator(s) whose module code does not exist in Mod Manager.";
+    public static final String MESSAGE_TASK_DOES_NOT_EXIST =
+            "Task list contains task(s) whose does not belong to any module in Mod Manager.";
 
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedFacilitator> facilitators = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given modules and facilitators.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("modules") List<JsonAdaptedModule> modules,
-                                       @JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators) {
+                                       @JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators,
+                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         if (modules != null) {
             this.modules.addAll(modules);
         }
         if (facilitators != null) {
             this.facilitators.addAll(facilitators);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -51,6 +61,8 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
         facilitators.addAll(source.getFacilitatorList().stream().map(JsonAdaptedFacilitator::new)
+                .collect(Collectors.toList()));
+        tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
     }
 
@@ -79,6 +91,20 @@ class JsonSerializableAddressBook {
                 }
             }
             modManager.getFacilitators().add(facilitator);
+        }
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            Task task = jsonAdaptedTask.toModelType();
+            if (modManager.hasTask(task)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+            /* to check later, 17 Mar 00:43
+            for (ModuleCode moduleCode : tasks.getModuleCodes()) {
+                if (!modManager.hasModuleCode(moduleCode.moduleCode)) {
+                    throw new IllegalValueException(MESSAGE_MODULE_DOES_NOT_EXIST);
+                }
+            }
+            */
+            modManager.getTasks().add(task);
         }
         return modManager;
     }

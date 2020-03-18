@@ -14,8 +14,6 @@ public class CalendarCardPanel extends UiPart<Region> {
     @FXML
     private VBox cardHolder;
 
-    private int num = 0;
-
     /**
      * Constructs the CalendarCardPanel.
      */
@@ -30,7 +28,6 @@ public class CalendarCardPanel extends UiPart<Region> {
      */
     public void addCard(CalendarCard card) {
         cardHolder.getChildren().add(card.getRoot());
-        num++;
     }
 
     /**
@@ -40,7 +37,6 @@ public class CalendarCardPanel extends UiPart<Region> {
         cardHolder.getChildren().clear();
     }
 
-    public double getHeight() {
-        return num * 80;
-    }
+
+
 }

@@ -58,8 +58,10 @@ public class FacilEditCommand extends FacilCommand {
     private final EditFacilitatorDescriptor editFacilitatorDescriptor;
 
     /**
-     * @param index of the facilitator in the filtered facilitator list to edit
-     * @param editFacilitatorDescriptor details to edit the facilitator with
+     * Creates a FacilEditCommand to edit the facilitator at the specified {@code index}.
+     *
+     * @param index of the facilitator in the filtered facilitator list to edit.
+     * @param editFacilitatorDescriptor details to edit the facilitator with.
      */
     public FacilEditCommand(Index index, EditFacilitatorDescriptor editFacilitatorDescriptor) {
         requireNonNull(index);

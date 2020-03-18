@@ -18,9 +18,9 @@ import static seedu.address.testutil.TypicalModules.CS2101;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.module.ModuleAddCommand;
-import seedu.address.model.module.Description;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.Description;
 import seedu.address.testutil.ModuleBuilder;
 
 public class ModuleAddCommandParserTest {

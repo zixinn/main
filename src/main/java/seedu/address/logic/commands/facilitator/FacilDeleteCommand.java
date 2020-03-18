@@ -26,6 +26,9 @@ public class FacilDeleteCommand extends FacilCommand {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a FacilDeleteCommand to delete the facilitator the specified {@code index}.
+     */
     public FacilDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
