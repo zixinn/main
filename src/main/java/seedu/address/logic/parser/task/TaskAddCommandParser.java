@@ -2,7 +2,7 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -31,30 +31,36 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
      */
     public TaskAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_BY, PREFIX_AT);
+                args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE) || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION) && !arePrefixesPresent(argMultimap, PREFIX_BY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION) && !arePrefixesPresent(argMultimap, PREFIX_ON)
                 && !arePrefixesPresent(argMultimap, PREFIX_AT)) {
             throw new ParseException(TaskAddCommand.MESSAGE_NOT_ADDED);
         }
 
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_BY)) { // date not supplied
+        if (!arePrefixesPresent(argMultimap, PREFIX_ON)) { // date not supplied
             return new TaskAddCommand(new Task(description));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_AT)) { // time not supplied, only date
-            return new TaskAddCommand((new Task(description, new TaskDateTime(argMultimap.getValue(PREFIX_BY)))));
+            return new TaskAddCommand((new Task(description, new TaskDateTime(argMultimap.getValue(PREFIX_ON)))));
         }
+
         // time and date supplied
-        return new TaskAddCommand((new Task(description,
-                new TaskDateTime(argMultimap.getValue(PREFIX_BY),
-                        argMultimap.getValue(PREFIX_AT)))));
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
+            return new TaskAddCommand(new Task(description,
+                    new TaskDateTime(argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT))));
+        } else {
+            return new TaskAddCommand(new Task(description,
+                    new TaskDateTime(argMultimap.getValue(PREFIX_ON),
+                            argMultimap.getValue(PREFIX_AT)), argMultimap.getValue(PREFIX_MODULE_CODE)));
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ package seedu.address.model.task;
  */
 public interface TaskInterface extends Comparable {
     String getDescription();
+    String getModCode();
 
     boolean isTaskDone();
     boolean markAsDone();

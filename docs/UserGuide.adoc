@@ -195,8 +195,8 @@ Example: `class delete /code CS2103T /type Tut`
 ==== Adding a task
 
 Adds a task to a module. +
-Format: `task add /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
-Example: `task add /code CS2103T /task duke /by 2020-02-20 23:59`
+Format: `task add /code MOD_CODE /task TASK_NAME {[/on DATE TIME] | [/at DATE TIME]}` +
+Example: `task add /code CS2103T /task duke /on 2020-02-20 23:59`
 
 ==== Viewing all tasks
 
@@ -217,8 +217,8 @@ Format: `task find /upcoming` +
 ==== Editing a task
 
 Edits the information of a task. +
-Format: `task edit /code MOD_CODE /task TASK_NAME {[/by DATE TIME] | [/at DATE TIME]}` +
-Example: `task edit /code CS2103T /task duke /by 02-03-2020 23:59`
+Format: `task edit /code MOD_CODE /task TASK_NAME {[/on DATE TIME] | [/at DATE TIME]}` +
+Example: `task edit /code CS2103T /task duke /on 02-03-2020 23:59`
 
 ==== Deleting a task
 
@@ -378,12 +378,12 @@ Receive reminders for deadlines and events the next day.
 |  `*class* delete /code MOD_CODE /type CLASS_TYPE`
 
 .7+|Task
-| `*task* add /code MOD_CODE /desc TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* add /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
 | `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
 | `*task* find /desc TASK_NAME`
-| `*task* edit /code MOD_CODE /desc TASK_NAME {[/by DATE TIME] [/at DATE TIME]}`
+| `*task* edit /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
 .5+|Facilitators

@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.model.util.DailySchedulableInterface;
@@ -24,6 +25,7 @@ public class Task implements TaskInterface, DailySchedulableInterface {
     protected Description description;
     protected boolean isDone;
     protected TaskDateTime taskTime;
+    protected String modCode;
 
     /**
      * Creates a new Task with {@code description} associated with a Module.
@@ -39,6 +41,13 @@ public class Task implements TaskInterface, DailySchedulableInterface {
     public Task(Description description, TaskDateTime taskTime) {
         this.description = description;
         this.taskTime = taskTime;
+        this.modCode = "";
+    }
+
+    public Task(Description description, TaskDateTime taskTime, String modCode) {
+        this.description = description;
+        this.taskTime = taskTime;
+        this.modCode = modCode;
     }
 
     /**
@@ -49,6 +58,10 @@ public class Task implements TaskInterface, DailySchedulableInterface {
         return description.toString();
     }
 
+    @Override
+    public String getModCode() {
+        return this.modCode;
+    }
     /**
      * checks if our Task is completed.
      *
@@ -108,8 +121,9 @@ public class Task implements TaskInterface, DailySchedulableInterface {
      */
     @Override
     public String toString() {
+        String modShow = !modCode.isEmpty() ? "[" + modCode + "] " : "";
         String time = isTimeAvailable() ? " " + getTimeOutput() + "\n" : "\n";
-        return "[" + getStatusIcon() + "]" + " " + description
+        return "[" + getStatusIcon() + "]" + " " + modShow + description
                 + time;
     }
 
@@ -164,6 +178,11 @@ public class Task implements TaskInterface, DailySchedulableInterface {
 
         return otherTask.getDescription().equals(getDescription()) // same definition
                 && otherTask.compareTo(this) == 0; // same time
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, taskTime, modCode);
     }
 
     @Override
