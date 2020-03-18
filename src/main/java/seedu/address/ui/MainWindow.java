@@ -289,14 +289,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getType()) {
-            case MODULE:
             case CLEAR:
+            case MODULE:
                 handleSwitchToModule();
                 break;
             case MODULE_VIEW:
+            case LESSON:
                 handleSwitchToOneModule();
                 break;
-            case LESSON:
             case TASK:
                 handleSwitchToTask();
                 break;
