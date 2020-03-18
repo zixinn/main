@@ -40,6 +40,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
+    private TaskDetailsPanel taskPanel;
+    private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
     private TaskListPanel taskListPanel;
 
@@ -90,6 +92,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane lessonPanelPlaceholder;
+
+    @FXML
+    private StackPane taskPanelPlaceholder;
+
+    @FXML
+    private StackPane facilitatorPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -163,11 +171,17 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
+        moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+
+        taskPanel = new TaskDetailsPanel();
+        taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
+
+        facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
+        facilitatorPanelPlaceholder.getChildren().add(facilitatorPanel.getRoot());
 
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         System.out.println("Tasks available");
@@ -230,8 +244,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleSwitchToOneModule() {
         mainTabPane.getSelectionModel().select(oneModule);
-        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
-        moduleDetailsPlaceholder.getChildren().setAll(moduleDetailsPanel.getRoot());
+        moduleDetailsPanel.changeDisplayModule(logic.getModule());
     }
 
     /**
@@ -288,6 +301,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            viewCalendar("this");
             switch (commandResult.getType()) {
             case CLEAR:
             case MODULE:
