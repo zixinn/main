@@ -18,18 +18,17 @@ public class ModuleDetailsPanel extends UiPart<Region> {
     @FXML
     private Label moduleDetails;
 
-    public ModuleDetailsPanel(Optional<Module> module) {
+    public ModuleDetailsPanel() {
         super(FXML);
-        if (module.isEmpty()) {
-            moduleDetails.setText("");
-        } else {
-            moduleDetails.setText(module.get().getModuleCode().moduleCode + " "
-                    + module.get().getDescription().value);
-        }
+        moduleDetails.setText("");
         GridPane.setHalignment(moduleDetails, HPos.CENTER);
     }
 
-    public void changeDisplayModule(String string) {
-        moduleDetails.setText(string);
+    /**
+     * Sets the module code and description of the module to be displayed.
+     */
+    public void changeDisplayModule(Optional<Module> module) {
+        module.ifPresent(value -> moduleDetails.setText(value.getModuleCode().moduleCode + " "
+                + value.getDescription().value));
     }
 }

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane styleClass="module-details-panel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
-    </columnConstraints>
-    <Label fx:id="setTaskDetails" wrapText="true" style="-fx-text-fill: white; -fx-font: bold 12pt Default;"/>
-</GridPane>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="title" wrapText="true" style="-fx-text-fill: white; -fx-font: 12pt Default; -fx-font-weight: bold;" text="Tasks" >
+        <padding>
+            <Insets top="5" right="5" bottom="5" left="20"/>
+        </padding>
+    </Label>
+
+    <ListView fx:id="tasksView" VBox.vgrow="ALWAYS" />
+</VBox>

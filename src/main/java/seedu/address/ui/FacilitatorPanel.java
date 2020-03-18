@@ -7,6 +7,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.facilitator.Facilitator;
 
+/**
+ * Panel containing the list of facilitators for a module.
+ */
 public class FacilitatorPanel extends UiPart<Region> {
     private static final String FXML = "FacilitatorPanel.fxml";
 

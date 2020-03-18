@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
+    private TaskDetailsPanel taskPanel;
     private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
     private TaskListPanel taskListPanel;
@@ -91,6 +92,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane lessonPanelPlaceholder;
+
+    @FXML
+    private StackPane taskPanelPlaceholder;
 
     @FXML
     private StackPane facilitatorPanelPlaceholder;
@@ -167,11 +171,14 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
+        moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+
+        taskPanel = new TaskDetailsPanel();
+        taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
 
         facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
         facilitatorPanelPlaceholder.getChildren().add(facilitatorPanel.getRoot());
@@ -237,9 +244,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleSwitchToOneModule() {
         mainTabPane.getSelectionModel().select(oneModule);
-        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
-        moduleDetailsPlaceholder.getChildren().setAll(moduleDetailsPanel.getRoot());
-        oneModule.setText(logic.getModule().get().getModuleCode().moduleCode);
+        moduleDetailsPanel.changeDisplayModule(logic.getModule());
     }
 
     /**
