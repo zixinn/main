@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.task;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 

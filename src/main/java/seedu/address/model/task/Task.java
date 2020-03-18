@@ -36,6 +36,7 @@ public class Task implements TaskInterface, DailySchedulableInterface {
     public Task(Description description) {
         this.description = description;
         this.isDone = false;
+        this.modCode = "";
     }
 
     public Task(Description description, TaskDateTime taskTime) {

@@ -2,9 +2,9 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
