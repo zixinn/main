@@ -30,7 +30,7 @@ public class ModuleAddCommand extends ModuleCommand {
     private final Module toAdd;
 
     /**
-     * Creates a ModuleAddCommand to add the specified {@code Module}
+     * Creates a ModuleAddCommand to add the specified {@code module}.
      */
     public ModuleAddCommand(Module module) {
         requireNonNull(module);

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.BENSON;
@@ -13,11 +14,14 @@ import static seedu.address.testutil.TypicalModules.CS2103T;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -107,6 +111,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getModule_emptyModule_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), modelManager.getModule());
+    }
+
+    @Test
+    public void getModule_nonEmptyModule_returnsModule() {
+        modelManager.updateModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), modelManager.getModule());
+    }
+
+    @Test
+    public void findModule_moduleNotFound_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), modelManager.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
+    public void findModule_moduleFound_returnsModule() {
+        modelManager.addModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), modelManager.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
     }
@@ -133,6 +159,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFacilitatorListForModule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFacilitatorListForModule().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
                 .withModule(CS2103T).withModule(CS2101).build();
@@ -156,13 +187,21 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredFacilitatorList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredFacilitatorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+
+        // different facilitatorListForModule -> returns false
+        String keyword = CS2103T.getModuleCode().moduleCode;
+        modelManager.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(keyword));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

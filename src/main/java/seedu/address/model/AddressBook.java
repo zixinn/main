@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
@@ -13,6 +14,7 @@ import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -143,6 +145,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+    }
+
+    /**
+     * Returns the module with the specified {@code moduleCode}.
+     */
+    public Optional<Module> findModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return modules.find(moduleCode);
     }
 
     /**

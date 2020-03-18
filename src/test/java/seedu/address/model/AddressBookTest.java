@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,7 @@ import seedu.address.model.facilitator.UniqueFacilitatorList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.task.Task;
@@ -111,6 +113,22 @@ public class AddressBookTest {
         addressBook.addModule(CS2103T);
         Module editedModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
         assertTrue(addressBook.hasModule(editedModule));
+    }
+
+    @Test
+    public void findModule_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.findModule(null));
+    }
+
+    @Test
+    public void findModule_moduleNotInAddressBook_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), addressBook.findModule(new ModuleCode("CS2103T")));
+    }
+
+    @Test
+    public void findModule_moduleInAddressBook_returnsModule() {
+        addressBook.addModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), addressBook.findModule(new ModuleCode("CS2103T")));
     }
 
     @Test

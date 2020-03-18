@@ -152,7 +152,6 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
-        //System.out.println(facilitatorListPanel);
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
         calendarView = new CalendarView("this", logic.getFilteredTaskList(), logic.getLessons());
@@ -164,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        moduleDetailsPanel = new ModuleDetailsPanel("MODULE: MODULE DETAILS");
+        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
         lessonPanel = new LessonPanel();
@@ -231,6 +230,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleSwitchToOneModule() {
         mainTabPane.getSelectionModel().select(oneModule);
+        moduleDetailsPanel = new ModuleDetailsPanel(logic.getModule());
+        moduleDetailsPlaceholder.getChildren().setAll(moduleDetailsPanel.getRoot());
     }
 
     /**
@@ -289,11 +290,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             viewCalendar("this");
             switch (commandResult.getType()) {
-            case MODULE:
             case CLEAR:
+            case MODULE:
                 handleSwitchToModule();
                 break;
+            case MODULE_VIEW:
             case LESSON:
+                handleSwitchToOneModule();
+                break;
             case TASK:
                 handleSwitchToTask();
                 break;
