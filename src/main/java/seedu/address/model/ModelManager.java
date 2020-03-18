@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,6 +18,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -31,6 +33,8 @@ public class ModelManager implements Model {
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Task> filteredTasks;
     private final List<Lesson> filteredLesson;
+    private Optional<Module> module;
+    private final FilteredList<Facilitator> facilitatorsForModule;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,6 +51,9 @@ public class ModelManager implements Model {
         filteredModules = new FilteredList<>(this.addressBook.getModuleList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredLesson = this.addressBook.getLessonList();
+        module = Optional.empty();
+        facilitatorsForModule = new FilteredList<>(this.addressBook.getFacilitatorList());
+        facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
     }
 
     public ModelManager() {
@@ -132,6 +139,22 @@ public class ModelManager implements Model {
         addressBook.setModule(target, editedModule);
     }
 
+    @Override
+    public Optional<Module> getModule() {
+        return module;
+    }
+
+    @Override
+    public Optional<Module> findModule(ModuleCode moduleCode) {
+        return addressBook.findModule(moduleCode);
+    }
+
+    @Override
+    public void updateModule(Module module) {
+        requireNonNull(module);
+        this.module = Optional.of(module);
+    }
+
     //=========== Filtered Module List Accessors =============================================================
 
     /**
@@ -192,6 +215,21 @@ public class ModelManager implements Model {
         filteredFacilitators.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Facilitator> getFacilitatorListForModule() {
+        return facilitatorsForModule;
+    }
+
+    @Override
+    public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
+        requireNonNull(predicate);
+        facilitatorsForModule.setPredicate(predicate);
+    }
+
     //=========== Lesson =========================================================================================
     @Override
     public boolean hasLesson(Lesson lesson) {
@@ -250,7 +288,8 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredModules.equals(other.filteredModules)
-                && filteredFacilitators.equals(other.filteredFacilitators);
+                && filteredFacilitators.equals(other.filteredFacilitators)
+                && facilitatorsForModule.equals(other.facilitatorsForModule);
     }
 
     //=========== Task ================================================================================

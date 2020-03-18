@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,6 +87,19 @@ public class UniqueModuleList implements Iterable<Module> {
         if (!internalList.remove(toRemove)) {
             throw new ModuleNotFoundException();
         }
+    }
+
+    /**
+     * Returns the module with the specified {@code moduleCode}.
+     */
+    public Optional<Module> find(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        for (Module module : internalList) {
+            if (module.getModuleCode().equals(moduleCode)) {
+                return Optional.of(module);
+            }
+        }
+        return Optional.empty();
     }
 
     public void setModules(UniqueModuleList replacement) {

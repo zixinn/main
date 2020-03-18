@@ -3,6 +3,7 @@ package seedu.address.logic.parser.module;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleAddCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
+import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModuleUtil;
 
@@ -33,6 +36,14 @@ public class ModuleCommandParserTest {
                 instanceof ModuleListCommand);
         assertTrue(parser.parse(Command.COMMAND_WORD_LIST + " 3")
                 instanceof ModuleListCommand);
+    }
+
+    @Test
+    public void parse_view() throws Exception {
+        ModuleCode moduleCode = new ModuleCode("CS2103T");
+        ModuleViewCommand command = (ModuleViewCommand) parser.parse(
+                Command.COMMAND_WORD_VIEW + " " + PREFIX_MODULE_CODE + " " + moduleCode.moduleCode);
+        assertEquals(new ModuleViewCommand(moduleCode), command);
     }
 
     @Test

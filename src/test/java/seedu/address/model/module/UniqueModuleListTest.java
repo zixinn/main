@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalModules.CS2103T;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -140,6 +141,22 @@ public class UniqueModuleListTest {
         uniqueModuleList.remove(CS2103T);
         UniqueModuleList expectedUniqueModuleList = new UniqueModuleList();
         assertEquals(expectedUniqueModuleList, uniqueModuleList);
+    }
+
+    @Test
+    public void find_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueModuleList.find(null));
+    }
+
+    @Test
+    public void find_moduleNotFound_returnsOptionalEmpty() {
+        assertEquals(Optional.empty(), uniqueModuleList.find(new ModuleCode("CS2103T")));
+    }
+
+    @Test
+    public void find_moduleFound_returnsModule() {
+        uniqueModuleList.add(CS2103T);
+        assertEquals(Optional.of(CS2103T), uniqueModuleList.find(new ModuleCode("CS2103T")));
     }
 
     @Test

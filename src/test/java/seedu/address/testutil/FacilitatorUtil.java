@@ -30,12 +30,12 @@ public class FacilitatorUtil {
      */
     public static String getFacilitatorDetails(Facilitator facilitator) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + facilitator.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + facilitator.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + facilitator.getEmail().value + " ");
-        sb.append(PREFIX_OFFICE + facilitator.getOffice().value + " ");
+        sb.append(PREFIX_NAME + " " + facilitator.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + " " + facilitator.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + " " + facilitator.getEmail().value + " ");
+        sb.append(PREFIX_OFFICE + " " + facilitator.getOffice().value + " ");
         facilitator.getModuleCodes().stream().forEach(
-            s -> sb.append(PREFIX_MODULE_CODE + s.moduleCode + " ")
+            s -> sb.append(PREFIX_MODULE_CODE + " " + s.moduleCode + " ")
         );
         return sb.toString();
     }

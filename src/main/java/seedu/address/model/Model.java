@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -20,6 +22,7 @@ public interface Model {
     Predicate<Facilitator> PREDICATE_SHOW_ALL_FACILITATORS = unused -> true;
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Facilitator> PREDICATE_SHOW_NO_FACILITATORS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -89,8 +92,17 @@ public interface Model {
      */
     void setModule(Module target, Module editedModule);
 
-    /** Returns an unmodifiable view of the filtered module list */
+    /** Returns an unmodifiable view of the filtered module list. */
     ObservableList<Module> getFilteredModuleList();
+
+    /** Returns the module to be viewed. */
+    Optional<Module> getModule();
+
+    /** Finds the module with the given {@code moduleCode}. */
+    Optional<Module> findModule(ModuleCode moduleCode);
+
+    /** Updates the module in the model to the given {@code module}. */
+    void updateModule(Module module);
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
@@ -123,8 +135,23 @@ public interface Model {
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
 
-    /** Returns an unmodifiable view of the filtered facilitator list */
+    /** Returns an unmodifiable view of the filtered facilitator list. */
     ObservableList<Facilitator> getFilteredFacilitatorList();
+
+    /**
+     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
+
+    /** Returns an unmodifiable view of the filtered facilitator list. */
+    ObservableList<Facilitator> getFacilitatorListForModule();
+
+    /**
+     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFacilitatorListForModule(Predicate<Facilitator> predicate);
 
     /**
      * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
@@ -152,12 +179,6 @@ public interface Model {
     void setTask(Task target, Task editedTask);
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
-
-    /**
-     * Updates the filter of the filtered facilitator list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredFacilitatorList(Predicate<Facilitator> predicate);
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
