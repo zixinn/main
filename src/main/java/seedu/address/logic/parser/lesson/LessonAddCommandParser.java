@@ -2,9 +2,7 @@ package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FACIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
@@ -20,9 +18,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
+import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -37,7 +35,7 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
      */
     public LessonAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NAME, PREFIX_NEXT);
+                args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NEXT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
                 || !arePrefixesPresent(argMultimap, PREFIX_TYPE)
@@ -46,14 +44,9 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
-        Facilitator facilitator = null;
         String venue = null;
         if (arePrefixesPresent(argMultimap, PREFIX_VENUE)) {
             venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE));
-        }
-
-        if (arePrefixesPresent(argMultimap, PREFIX_FACIL)) {
-            facilitator = ParserUtil.parseFacilitator(argMultimap.getValue(PREFIX_FACIL));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
@@ -63,8 +56,12 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_AT));
 
 
-
-        Lesson lesson = new Lesson(moduleCode, lessonType, day, startTime, endTime, venue, facilitator);
+        Lesson lesson;
+        try {
+            lesson = new Lesson(moduleCode, lessonType, day, startTime, endTime, venue);
+        } catch (InvalidTimeRangeException e) {
+            throw new ParseException("Start time should be earlier than end time", e);
+        }
 
         return new LessonAddCommand(lesson);
     }

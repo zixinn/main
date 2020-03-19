@@ -151,12 +151,12 @@ Example: `mod delete 2`
 ==== Adding a class
 
 Adds a class to a module. +
-Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]` +
+Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]` +
 
 ****
-* VENUE and FACILITATOR_NAME are optional
+* VENUE is optional
 ****
-Example: `class add /code CS2103T /type Lec /at Fri 14:00 16:00 /venue i3-Aud /facil Akshay Narayan`
+Example: `class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
 
 ==== Viewing all classes
 
@@ -167,7 +167,7 @@ Format: `class list`
 
 Find classes occurring on a particular day. +
 Format: `class find /at DAY` +
-Example: `class find /at mon`
+Example: `class find /at MONDAY`
 
 ==== Finding next class
 
@@ -176,19 +176,15 @@ Format: `class find /next`
 
 ==== Editing a class
 
-Edits the information of the class. +
-Format: `class edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]` +
-
-****
-* VENUE and FACILITATOR_NAME are optional
-****
-Example: `class edit /code CS2103T /type Lec /at Fri 14:00 16:00 /venue I3_AUD /facil Akshay Narayan`
+Edits the information of the class. Class is selected by its index in the class list. +
+Format: `class edit INDEX [/code MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
+Example: `class edit 1 /venue Home`
 
 ==== Deleting a class
 
-Deletes the class from the module. +
-Format: `class delete /code MOD_CODE /type CLASS_TYPE` +
-Example: `class delete /code CS2103T /type Tut`
+Deletes the class from the module. Class is selected by its index in the class list. +
+Format: `class delete INDEX` +
+Example: `class delete INDEX`
 
 === Managing tasks : `task`
 

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.UniqueFacilitatorList;
@@ -312,6 +313,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public LessonList getLessons() {
         return lessons;
+    }
+
+    /**
+     * Gets the lesson list for a module.
+     */
+    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
+        return FXCollections
+                .observableArrayList(lessons.findLessonByModuleCode(moduleCode));
     }
 
     //// util methods

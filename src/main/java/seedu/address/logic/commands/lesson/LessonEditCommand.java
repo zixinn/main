@@ -3,7 +3,6 @@ package seedu.address.logic.commands.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FACIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
@@ -19,7 +18,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
@@ -36,8 +34,7 @@ public class LessonEditCommand extends LessonCommand {
             + "[" + PREFIX_MODULE_CODE + " MOD_CODE] "
             + "[" + PREFIX_TYPE + " CLASS_TYPE] "
             + "[" + PREFIX_AT + " DAY START_TIME END_TIME] "
-            + "[" + PREFIX_VENUE + " VENUE] "
-            + "[" + PREFIX_FACIL + " FACILITATOR_NAME]...\n"
+            + "[" + PREFIX_VENUE + " VENUE] \n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_EDIT + " 1 "
             + PREFIX_MODULE_CODE + " CS9000 "
             + PREFIX_AT + " TUESDAY 01:00 02:00";
@@ -90,10 +87,9 @@ public class LessonEditCommand extends LessonCommand {
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
         String updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
-        Facilitator updatedFacilitator = editLessonDescriptor.getFacilitator().orElse(lessonToEdit.getFacilitator());
 
         return new Lesson(updatedModuleCode, updatedLessonType, updatedDay, updatedStartTime, updatedEndTime,
-                updatedVenue, updatedFacilitator);
+                updatedVenue);
     }
 
     @Override
@@ -125,7 +121,6 @@ public class LessonEditCommand extends LessonCommand {
         private LocalTime startTime;
         private LocalTime endTime;
         private String venue; // optional
-        private Facilitator facilitator; // optional
 
         public EditLessonDescriptor() {}
 
@@ -136,11 +131,10 @@ public class LessonEditCommand extends LessonCommand {
             setStartTime(copy.startTime);
             setEndTime(copy.endTime);
             setVenue(copy.venue);
-            setFacilitator(copy.facilitator);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(moduleCode, type, day, startTime, endTime, venue, facilitator);
+            return CollectionUtil.isAnyNonNull(moduleCode, type, day, startTime, endTime, venue);
         }
 
         public void setModuleCode(ModuleCode moduleCode) {
@@ -191,14 +185,6 @@ public class LessonEditCommand extends LessonCommand {
             return Optional.ofNullable(venue);
         }
 
-        public void setFacilitator(Facilitator facilitator) {
-            this.facilitator = facilitator;
-        }
-
-        public Optional<Facilitator> getFacilitator() {
-            return Optional.ofNullable(facilitator);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -216,8 +202,7 @@ public class LessonEditCommand extends LessonCommand {
                     && getDay().equals(e.getDay())
                     && getStartTime().equals(e.getStartTime())
                     && getEndTime().equals(e.getEndTime())
-                    && getVenue().equals(e.getVenue())
-                    && getFacilitator().equals(e.getFacilitator());
+                    && getVenue().equals(e.getVenue());
         }
     }
 }

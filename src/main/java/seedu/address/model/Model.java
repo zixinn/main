@@ -200,4 +200,5 @@ public interface Model {
 
     List<Lesson> getLessons();
 
+    ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
 }

@@ -2,7 +2,6 @@ package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FACIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
@@ -23,14 +22,12 @@ public class LessonAddCommand extends LessonCommand {
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + PREFIX_TYPE + " CLASS_TYPE "
             + PREFIX_AT + " DAY START_TIME END_TIME "
-            + "[" + PREFIX_VENUE + " VENUE] "
-            + "[" + PREFIX_FACIL + "FACILITATOR_NAME] \n"
+            + "[" + PREFIX_VENUE + " VENUE]\n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_ADD + " "
             + PREFIX_MODULE_CODE + " CS2103T "
             + PREFIX_TYPE + " LEC "
             + PREFIX_AT + " FRIDAY 14:00 16:00 "
-            + PREFIX_VENUE + " I3-AUD "
-            + PREFIX_FACIL + " Akshay Narayan ";
+            + PREFIX_VENUE + " I3-AUD ";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";

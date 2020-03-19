@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -174,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
-        lessonPanel = new LessonPanel();
+        lessonPanel = new LessonPanel(FXCollections.observableArrayList(logic.getLessons()));
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
         taskPanel = new TaskDetailsPanel();

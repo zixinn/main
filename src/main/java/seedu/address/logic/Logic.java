@@ -13,6 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -46,6 +47,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of lessons */
     List<Lesson> getLessons();
+
+    /** Returns an unmodifiable view of the filtered list of lessons */
+    ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
 
     /** Returns the module to be viewed */
     Optional<Module> getModule();
