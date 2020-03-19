@@ -69,10 +69,10 @@ public class Calendar {
      * Checks if task is within the localDate.
      */
     public boolean isWithinDate(Task task) {
-        if (task.getTimeOutput().equals("")) {
+        if (task.getTimeString().equals("")) {
             return false;
         }
-        LocalDate date = LocalDate.parse(task.getTimeOutput(),
+        LocalDate date = LocalDate.parse(task.getTimeString(),
                 DateTimeFormatter.ofPattern("dd/MM/yyyy[ HH:mm]"));
         if (localDate.compareTo(date) == 0) {
             return true;

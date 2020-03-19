@@ -10,12 +10,12 @@ import java.util.Optional;
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.util.DailySchedulableInterface;
+import seedu.address.model.util.DailySchedulable;
 
 /**
  * Represents a Lesson in Mod Manager.
  */
-public class Lesson implements Comparable<Lesson>, DailySchedulableInterface {
+public class Lesson implements Comparable<Lesson>, DailySchedulable {
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;

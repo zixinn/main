@@ -7,10 +7,10 @@ import java.util.Optional;
 /**
  * A comparator to compare two items in a Calendar day
  */
-public class DailySchedulableComparator implements Comparator<DailySchedulableInterface> {
+public class DailySchedulableComparator implements Comparator<DailySchedulable> {
 
     @Override
-    public int compare(DailySchedulableInterface o1, DailySchedulableInterface o2) {
+    public int compare(DailySchedulable o1, DailySchedulable o2) {
         Optional<LocalTime> o1Time = o1.getComparableTime();
         Optional<LocalTime> o2Time = o2.getComparableTime();
 

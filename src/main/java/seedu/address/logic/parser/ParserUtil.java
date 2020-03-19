@@ -21,7 +21,7 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 
 /**

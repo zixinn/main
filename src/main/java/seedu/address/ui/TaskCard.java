@@ -29,13 +29,13 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         if (task.getDescription() != null) {
-            description.setText(task.getDescription());
+            description.setText(task.getDescription().toString());
         } else {
             description.setText("");
         }
 
-        if (!task.getTimeOutput().isEmpty()) {
-            taskTime.setText(task.getTimeOutput());
+        if (!task.getTimeString().isEmpty()) {
+            taskTime.setText(task.getTimeString());
         } else {
             taskTime.setText("");
         }
