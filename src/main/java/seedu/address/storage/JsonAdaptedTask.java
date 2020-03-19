@@ -16,15 +16,18 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String taskTime;
+    private final String modCode;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given module details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description,
-                           @JsonProperty("taskTime") String taskTime) {
+                           @JsonProperty("taskTime") String taskTime,
+                           @JsonProperty("modCode") String modCode) {
         this.description = description;
         this.taskTime = taskTime;
+        this.modCode = modCode;
     }
 
     /**
@@ -33,6 +36,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription();
         this.taskTime = source.getTimeOutput();
+        this.modCode = source.getModCode();
     }
 
     /**
@@ -60,6 +64,6 @@ public class JsonAdaptedTask {
         }
         final Description modelDescription = new Description(description);
         System.out.println("time received " + modelTaskTime);
-        return new Task(modelDescription, modelTaskTime);
+        return new Task(modelDescription, modelTaskTime, modCode);
     }
 }

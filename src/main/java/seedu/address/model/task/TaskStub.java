@@ -10,6 +10,11 @@ public class TaskStub implements TaskInterface {
     }
 
     @Override
+    public String getModCode() {
+        return "CS3230";
+    }
+
+    @Override
     public boolean isTaskDone() {
         return false;
     }
@@ -21,7 +26,7 @@ public class TaskStub implements TaskInterface {
 
     @Override
     public String getTimeOutput() {
-        return "21/03/2020 18:00";
+        return "21/04/2020 18:00";
     }
 
     @Override

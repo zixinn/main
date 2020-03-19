@@ -14,7 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_VENUE = new Prefix("/venue");
 
     public static final Prefix PREFIX_NEXT = new Prefix("/next");
-    public static final Prefix PREFIX_BY = new Prefix("/by");
+    public static final Prefix PREFIX_ON = new Prefix("/on");
     public static final Prefix PREFIX_AT = new Prefix("/at");
     public static final Prefix PREFIX_DATE = new Prefix("/date");
     public static final Prefix PREFIX_MONTH = new Prefix("/month");
