@@ -144,6 +144,7 @@ public class Lesson implements Comparable<Lesson>, DailySchedulableInterface {
         throw new InvalidLessonTypeException();
     }
 
+    @Override
     public String toString() {
         if (doesVenueExist()) {
             return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime()

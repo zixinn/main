@@ -24,7 +24,7 @@ public class TaskDetailsPanel extends UiPart<Region> {
     }
 
     public void changeDisplayModule(String string) {
-//        setTaskDetails.setText(string);
+        // setTaskDetails.setText(string);
     }
 
 }
