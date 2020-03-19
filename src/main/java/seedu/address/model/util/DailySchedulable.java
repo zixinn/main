@@ -8,6 +8,6 @@ import java.util.Optional;
  * Objects of this type should return information to compare within the same date,
  * i.e. beginning time and ending time.
  */
-public interface DailySchedulableInterface {
+public interface DailySchedulable {
     Optional<LocalTime> getComparableTime();
 }

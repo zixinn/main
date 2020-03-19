@@ -15,8 +15,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 /**
  * Parses input arguments and creates a new TaskAddCommand object
@@ -37,29 +38,27 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION) && !arePrefixesPresent(argMultimap, PREFIX_ON)
-                && !arePrefixesPresent(argMultimap, PREFIX_AT)) {
-            throw new ParseException(TaskAddCommand.MESSAGE_NOT_ADDED);
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
         }
 
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ON)) { // date not supplied
-            return new TaskAddCommand(new Task(description));
-        }
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_AT)) { // time not supplied, only date
-            return new TaskAddCommand((new Task(description, new TaskDateTime(argMultimap.getValue(PREFIX_ON)))));
-        }
-
-        // time and date supplied
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
-            return new TaskAddCommand(new Task(description,
-                    new TaskDateTime(argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT))));
+        if (!arePrefixesPresent(argMultimap, PREFIX_ON)) {
+            if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
+                throw new ParseException("/at but no /on? Really? You're in trouble lah.");
+            }
+            return new TaskAddCommand(Task.makeNonScheduledTask(description, moduleCode));
         } else {
-            return new TaskAddCommand(new Task(description,
-                    new TaskDateTime(argMultimap.getValue(PREFIX_ON),
-                            argMultimap.getValue(PREFIX_AT)), argMultimap.getValue(PREFIX_MODULE_CODE)));
+            TaskDateTime taskDateTime;
+            String date = argMultimap.getValue(PREFIX_ON);
+            if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
+                taskDateTime = new TaskDateTime(date, argMultimap.getValue(PREFIX_AT));
+            } else {
+                taskDateTime = new TaskDateTime(date);
+            }
+            return new TaskAddCommand(Task.makeScheduledTask(description, taskDateTime, moduleCode));
         }
     }
 

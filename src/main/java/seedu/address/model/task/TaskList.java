@@ -1,7 +1,6 @@
 package seedu.address.model.task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ public class TaskList implements TaskListInterface {
 
     /*
     protected TaskList(Storage storage) throws FileNotFoundException {
-        this.tasks = storage.getAllTasksFromFile();
+        this.tasks = storage.getAllDatedTasksFromFile();
     }
     */
 
@@ -48,40 +47,44 @@ public class TaskList implements TaskListInterface {
     @Override
     public TaskList viewTasksByName(String word) {
         return new TaskList(tasks.stream()
-                .filter(task -> task.getDescription().contains(word))
+                .filter(task -> task.getDescription().toString().contains(word))
                 .collect(Collectors.toList()));
     }
 
     @Override
     public TaskList viewTasksByDay(int day) {
-        return new TaskList(tasks.stream()
-                .filter(task -> task.isTimeAvailable())
-                .filter(task -> task.getTime().getDayOfMonth() == day)
-                .collect(Collectors.toList()));
+        //        return new TaskList(tasks.stream()
+        //                .filter(task -> task.isTimeAvailable())
+        //                .filter(task -> task.getTime().getDayOfMonth() == day)
+        //                .collect(Collectors.toList()));
+        return null;
     }
 
     @Override
     public TaskList viewTasksByMonth(int month) {
-        return new TaskList(tasks.stream()
-                .filter(task -> task.isTimeAvailable())
-                .filter(task -> task.getTime().getMonthValue() == month)
-                .collect(Collectors.toList()));
+        //        return new TaskList(tasks.stream()
+        //                .filter(task -> task.isTimeAvailable())
+        //                .filter(task -> task.getTime().getMonthValue() == month)
+        //                .collect(Collectors.toList()));
+        return null;
     }
 
     @Override
     public TaskList viewTasksByYear(int year) {
-        return new TaskList(tasks.stream()
-                .filter(task -> task.isTimeAvailable())
-                .filter(task -> task.getTime().getYear() == year)
-                .collect(Collectors.toList()));
+        //        return new TaskList(tasks.stream()
+        //                .filter(task -> task.isTimeAvailable())
+        //                .filter(task -> task.getTime().getYear() == year)
+        //                .collect(Collectors.toList()));
+        return null;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public TaskList viewUpcomingTasks() {
-        List<Task> sortedResult = new ArrayList<Task>(tasks);
-        Collections.sort(sortedResult);
-        return new TaskList(sortedResult);
+        List<Task> sortedResult = new ArrayList<>(tasks);
+        //        Collections.sort(sortedResult);
+        //        return new TaskList(sortedResult);
+        return null;
     }
 
     protected List<Task> viewAllTasks() {

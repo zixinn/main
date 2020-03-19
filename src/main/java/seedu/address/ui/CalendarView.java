@@ -7,11 +7,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.DailySchedulable;
 import seedu.address.model.util.DailySchedulableComparator;
-import seedu.address.model.util.DailySchedulableInterface;
+
 
 /**
  * The view for the calendar.
@@ -66,7 +69,7 @@ public class CalendarView extends UiPart<Region> {
             final int cnt = i;
             CalendarCardPanel panel = cardPanels.get(i);
             Calendar c = calendars[i];
-            List<DailySchedulableInterface> items = new ArrayList<>();
+            List<DailySchedulable> items = new ArrayList<>();
 
             lessons.forEach(x -> {
                 if (x.getDay().getValue() == cnt) {
@@ -74,19 +77,17 @@ public class CalendarView extends UiPart<Region> {
                 }
             });
 
-            tasks.forEach(x -> {
-                if (c.isWithinDate(x)) {
-                    items.add(x);
+            tasks.forEach(task -> {
+                if (task instanceof ScheduledTask && c.isWithinDate(task)) {
+                    items.add(task);
                 }
             });
 
             items.sort(new DailySchedulableComparator());
 
-            for (DailySchedulableInterface item : items) {
+            for (DailySchedulable item : items) {
                 panel.addCard(new CalendarCard(item));
             }
-
         }
-
     }
 }

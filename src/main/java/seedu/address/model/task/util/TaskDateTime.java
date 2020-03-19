@@ -1,4 +1,4 @@
-package seedu.address.model.task;
+package seedu.address.model.task.util;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -84,6 +84,7 @@ public class TaskDateTime implements Comparable {
     public LocalDateTime getLocalDateTime() {
         return taskTime;
     }
+
     /**
      * Compares the two Deadlines for order.
      * Nearer deadlines are considered smaller
@@ -100,6 +101,7 @@ public class TaskDateTime implements Comparable {
             return 0;
         }
     }
+
     @Override
     public String toString() {
         if (taskTime == null) {
@@ -111,15 +113,6 @@ public class TaskDateTime implements Comparable {
             return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
         return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy[ HH:mm]"));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Task // instanceof handles nulls
-                && ((taskTime == null && ((Task) other).taskTime == null)
-                || (taskTime != null && ((Task) other).taskTime != null
-                && taskTime.equals(((Task) other).taskTime)))); // state check
     }
 
     @Override

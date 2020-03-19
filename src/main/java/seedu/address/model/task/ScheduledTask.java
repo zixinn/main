@@ -1,0 +1,93 @@
+package seedu.address.model.task;
+
+import java.time.LocalTime;
+import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.util.Description;
+
+/**
+ * Task with a Date and Time (Hours)
+ */
+public class ScheduledTask extends Task {
+    private Description description;
+    private Optional<ModuleCode> moduleCode;
+    private TaskDateTime taskDateTime;
+    private boolean isDone;
+
+    protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
+        this.description = description;
+        this.moduleCode = Optional.of(moduleCode);
+        this.taskDateTime = taskDateTime;
+        this.isDone = false;
+    }
+
+    /**
+     * Gets the status icon of our Task.
+     */
+    private String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    @Override
+    public String getTimeString() {
+        return taskDateTime.toString();
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
+    }
+
+    @Override
+    public Optional<ModuleCode> getModuleCode() {
+        return moduleCode;
+    }
+
+    @Override
+    public Optional<TaskDateTime> getTaskDateTime() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean isTaskDone() {
+        return isDone;
+    }
+
+    @Override
+    public boolean markAsDone() {
+        boolean old = isDone;
+        isDone = true;
+        return !old;
+    }
+
+    @Override
+    public boolean isSameTask(Task other) {
+        if (other instanceof NonScheduledTask) {
+            return false;
+        }
+
+        return this.description.equals(other.getDescription())
+                && this.taskDateTime.equals(other.getTaskDateTime())
+                && this.moduleCode.equals(other.getModuleCode());
+    }
+
+    @Override
+    public Optional<LocalTime> getComparableTime() {
+        return Optional.of(taskDateTime.getLocalDateTime().toLocalTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, taskDateTime, moduleCode, isDone);
+    }
+
+    @Override
+    public String toString() {
+        String modShow = moduleCode.map(code -> " [" + code.toString() + "] ").orElse("");
+        return "[" + getStatusIcon() + "]" + " " + modShow + description.toString()
+                + " " + taskDateTime.toString();
+    }
+}

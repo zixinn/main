@@ -1,12 +1,9 @@
 package seedu.address.logic.commands.task;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-
-import java.util.List;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -19,22 +16,12 @@ import seedu.address.model.Model;
  */
 public abstract class TaskCommand extends Command {
 
-    public static final String ADD_FORMAT =
-            String.format("%s %s %s TASK_NAME [%s EMAIL] [%s PHONE_NUMBER] [%s OFFICE] [%s MODULE_CODE ...]",
+    public static final String ADD_FORMAT = String.format("%s %s %s MOD_CODE %s DESCRIPTION %s DATE %s TIME",
             COMMAND_GROUP_TASK, COMMAND_WORD_ADD,
-                    PREFIX_DESCRIPTION, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_OFFICE, PREFIX_MODULE_CODE);
-    public static final String DELETE_FORMAT = String.format("%s %s INDEX", COMMAND_GROUP_FACIL, COMMAND_WORD_LIST);
-    public static final String EDIT_FORMAT =
-            String.format("%s %s %s TASK_NAME [%s EMAIL] [%s PHONE_NUMBER] [%s OFFICE] [%s MODULE_CODE ...]",
-                    COMMAND_GROUP_TASK, COMMAND_WORD_EDIT,
-                    PREFIX_DESCRIPTION, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_OFFICE, PREFIX_MODULE_CODE);
-    public static final String FIND_FORMAT =
-            String.format("%s %s TASK_NAME", COMMAND_GROUP_FACIL, COMMAND_WORD_FIND);
-    public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_FACIL, COMMAND_WORD_LIST);
-    public static final List<String> ALL_COMMAND_WORDS = List.of(
-            COMMAND_WORD_ADD, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE, COMMAND_WORD_FIND, COMMAND_WORD_LIST);
-    public static final List<String> ALL_COMMAND_FORMATS = List.of(
-        ADD_FORMAT, DELETE_FORMAT, EDIT_FORMAT, FIND_FORMAT, LIST_FORMAT);
+            PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
+    public static final String EDIT_FORMAT = String.format("%s %s %s MOD_CODE %s DESCRIPTION %s DATE %s TIME",
+            COMMAND_GROUP_TASK, COMMAND_WORD_EDIT,
+            PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
