@@ -150,9 +150,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateModule(Module module) {
-        requireNonNull(module);
-        this.module = Optional.of(module);
+    public void updateModule(Optional<Module> module) {
+        this.module = module;
     }
 
     //=========== Filtered Module List Accessors =============================================================
@@ -196,6 +195,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFacilitator);
 
         addressBook.setFacilitator(target, editedFacilitator);
+    }
+
+    @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        addressBook.removeModuleCodeFromFacilitatorList(target);
+    }
+
+    @Override
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
+        addressBook.setModuleCodeInFacilitatorList(target, editedModuleCode);
     }
 
     //=========== Filtered Facilitator List Accessors =============================================================

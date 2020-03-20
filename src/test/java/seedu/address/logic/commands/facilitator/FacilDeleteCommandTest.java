@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FACILITATOR;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +31,8 @@ public class FacilDeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Facilitator facilitatorToDelete = model.getFilteredFacilitatorList()
-                .get(INDEX_FIRST_FACILITATOR.getZeroBased());
-        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
+                .get(INDEX_FIRST.getZeroBased());
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
                 facilitatorToDelete);
@@ -52,11 +53,11 @@ public class FacilDeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+        showFacilitatorAtIndex(model, INDEX_FIRST);
 
         Facilitator facilitatorToDelete = model.getFilteredFacilitatorList()
-                .get(INDEX_FIRST_FACILITATOR.getZeroBased());
-        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
+                .get(INDEX_FIRST.getZeroBased());
+        FacilDeleteCommand deleteCommand = new FacilDeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
                 facilitatorToDelete);
@@ -70,9 +71,9 @@ public class FacilDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+        showFacilitatorAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_FACILITATOR;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of facilitator list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
 
@@ -83,14 +84,14 @@ public class FacilDeleteCommandTest {
 
     @Test
     public void equals() {
-        FacilDeleteCommand deleteFirstCommand = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
-        FacilDeleteCommand deleteSecondCommand = new FacilDeleteCommand(INDEX_SECOND_FACILITATOR);
+        FacilDeleteCommand deleteFirstCommand = new FacilDeleteCommand(INDEX_FIRST);
+        FacilDeleteCommand deleteSecondCommand = new FacilDeleteCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        FacilDeleteCommand deleteFirstCommandCopy = new FacilDeleteCommand(INDEX_FIRST_FACILITATOR);
+        FacilDeleteCommand deleteFirstCommandCopy = new FacilDeleteCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -107,7 +108,7 @@ public class FacilDeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoFacilitator(Model model) {
-        model.updateFilteredFacilitatorList(p -> false);
+        model.updateFilteredFacilitatorList(PREDICATE_SHOW_NO_FACILITATORS);
 
         assertTrue(model.getFilteredFacilitatorList().isEmpty());
     }

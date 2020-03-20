@@ -45,16 +45,17 @@ public class FacilitatorUtil {
      */
     public static String getEditFacilitatorDescriptorDetails(FacilEditCommand.EditFacilitatorDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getOffice().ifPresent(office -> sb.append(PREFIX_OFFICE).append(office.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(" ").append(name.fullName).append(" "));
+        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(" ").append(phone.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(" ").append(email.value).append(" "));
+        descriptor.getOffice().ifPresent(office -> sb.append(PREFIX_OFFICE).append(" ").append(office.value)
+                .append(" "));
         if (descriptor.getModuleCodes().isPresent()) {
             Set<ModuleCode> moduleCodes = descriptor.getModuleCodes().get();
             if (moduleCodes.isEmpty()) {
-                sb.append(PREFIX_MODULE_CODE);
+                sb.append(PREFIX_MODULE_CODE).append(" ");
             } else {
-                moduleCodes.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.value).append(" "));
+                moduleCodes.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(" ").append(s.value).append(" "));
             }
         }
         return sb.toString();

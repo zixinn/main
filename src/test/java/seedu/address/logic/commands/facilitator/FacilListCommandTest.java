@@ -3,7 +3,7 @@ package seedu.address.logic.commands.facilitator;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class FacilListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showFacilitatorAtIndex(model, INDEX_FIRST_FACILITATOR);
+        showFacilitatorAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new FacilListCommand(), model, FacilListCommand.MESSAGE_SUCCESS, CommandType.FACILITATOR,
                 expectedModel);
     }

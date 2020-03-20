@@ -97,7 +97,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateModule(Module module) {
+    public void updateModule(Optional<Module> module) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -128,6 +128,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
         throw new AssertionError("This method should not be called.");
     }
 

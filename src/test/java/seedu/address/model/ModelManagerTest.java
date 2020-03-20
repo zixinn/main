@@ -117,7 +117,7 @@ public class ModelManagerTest {
 
     @Test
     public void getModule_nonEmptyModule_returnsModule() {
-        modelManager.updateModule(CS2103T);
+        modelManager.updateModule(Optional.of(CS2103T));
         assertEquals(Optional.of(CS2103T), modelManager.getModule());
     }
 

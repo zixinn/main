@@ -108,8 +108,8 @@ public class ModuleViewCommandTest {
         }
 
         @Override
-        public void updateModule(Module module) {
-            this.module = Optional.of(module);
+        public void updateModule(Optional<Module> module) {
+            this.module = module;
         }
 
         @Override

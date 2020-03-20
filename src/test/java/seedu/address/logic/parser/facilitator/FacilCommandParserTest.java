@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FACILITATOR_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,8 +40,8 @@ public class FacilCommandParserTest {
     @Test
     public void parse_delete() throws Exception {
         FacilDeleteCommand command = (FacilDeleteCommand) parser.parse(Command.COMMAND_WORD_DELETE + " "
-                + INDEX_FIRST_FACILITATOR.getOneBased());
-        assertEquals(new FacilDeleteCommand(INDEX_FIRST_FACILITATOR), command);
+                + INDEX_FIRST.getOneBased());
+        assertEquals(new FacilDeleteCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class FacilCommandParserTest {
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(facilitator)
                 .build();
         FacilEditCommand command = (FacilEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
-                + INDEX_FIRST_FACILITATOR.getOneBased() + " "
+                + INDEX_FIRST.getOneBased() + " "
                 + FacilitatorUtil.getEditFacilitatorDescriptorDetails(descriptor));
-        assertEquals(new FacilEditCommand(INDEX_FIRST_FACILITATOR, descriptor), command);
+        assertEquals(new FacilEditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
