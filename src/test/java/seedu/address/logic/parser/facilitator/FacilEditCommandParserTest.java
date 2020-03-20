@@ -244,16 +244,4 @@ public class FacilEditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
-    @Test
-    public void parse_resetModuleCodes_success() {
-        Index targetIndex = INDEX_THIRD;
-        String userInput = targetIndex.getOneBased() + MODULE_CODE_EMPTY;
-
-        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
-                .withModuleCodes().build();
-        FacilEditCommand expectedCommand = new FacilEditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 }

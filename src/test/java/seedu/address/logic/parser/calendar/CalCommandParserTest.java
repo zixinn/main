@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.calendar;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_CALENDAR_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -14,13 +13,13 @@ public class CalCommandParserTest {
 
     @Test
     public void parse_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_CALENDAR_COMMAND,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parse(""));
     }
 
     @Test
     public void parse_unknownCalendarCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_CALENDAR_COMMAND, () -> parser
-                .parse("cal unknownCommand"));
+        assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_CALENDAR_COMMAND,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parse("cal unknownCommand"));
     }
 }

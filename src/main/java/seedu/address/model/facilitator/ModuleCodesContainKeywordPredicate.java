@@ -17,7 +17,7 @@ public class ModuleCodesContainKeywordPredicate implements Predicate<Facilitator
     @Override
     public boolean test(Facilitator facilitator) {
         return facilitator.getModuleCodes().stream()
-                .anyMatch(moduleCode -> StringUtil.containsWordIgnoreCase(moduleCode.moduleCode, keyword));
+                .anyMatch(moduleCode -> StringUtil.containsWordIgnoreCase(moduleCode.value, keyword));
     }
 
     @Override

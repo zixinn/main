@@ -22,8 +22,8 @@ public class ModuleUtil {
      */
     public static String getModuleDetails(Module module) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_MODULE_CODE + " " + module.getModuleCode().moduleCode + " ");
-        sb.append(PREFIX_DESCRIPTION + " " + module.getDescription().value + " ");
+        sb.append(PREFIX_MODULE_CODE).append(" ").append(module.getModuleCode().value).append(" ");
+        sb.append(PREFIX_DESCRIPTION).append(" ").append(module.getDescription().value).append(" ");
         return sb.toString();
     }
 }

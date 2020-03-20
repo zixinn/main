@@ -34,7 +34,7 @@ public class UniqueModuleList implements Iterable<Module> {
      */
     public boolean containsModuleCode(String toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(module -> module.getModuleCode().moduleCode.equals(toCheck));
+        return internalList.stream().anyMatch(module -> module.getModuleCode().value.equals(toCheck));
     }
 
     /**

@@ -3,7 +3,6 @@ package seedu.address.logic.parser.module;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -51,7 +50,7 @@ public class ModuleCommandParserTest {
     public void parse_view() throws Exception {
         ModuleCode moduleCode = new ModuleCode("CS2103T");
         ModuleViewCommand command = (ModuleViewCommand) parser.parse(
-                Command.COMMAND_WORD_VIEW + " " + PREFIX_MODULE_CODE + " " + moduleCode.moduleCode);
+                Command.COMMAND_WORD_VIEW + " " + moduleCode.value);
         assertEquals(new ModuleViewCommand(moduleCode), command);
     }
 

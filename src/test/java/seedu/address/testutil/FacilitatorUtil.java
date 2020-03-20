@@ -30,12 +30,12 @@ public class FacilitatorUtil {
      */
     public static String getFacilitatorDetails(Facilitator facilitator) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + " " + facilitator.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + " " + facilitator.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + " " + facilitator.getEmail().value + " ");
-        sb.append(PREFIX_OFFICE + " " + facilitator.getOffice().value + " ");
+        sb.append(PREFIX_NAME).append(" ").append(facilitator.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(" ").append(facilitator.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(" ").append(facilitator.getEmail().value).append(" ");
+        sb.append(PREFIX_OFFICE).append(" ").append(facilitator.getOffice().value).append(" ");
         facilitator.getModuleCodes().stream().forEach(
-            s -> sb.append(PREFIX_MODULE_CODE + " " + s.moduleCode + " ")
+            s -> sb.append(PREFIX_MODULE_CODE).append(" ").append(s.value).append(" ")
         );
         return sb.toString();
     }
@@ -54,7 +54,7 @@ public class FacilitatorUtil {
             if (moduleCodes.isEmpty()) {
                 sb.append(PREFIX_MODULE_CODE);
             } else {
-                moduleCodes.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.moduleCode).append(" "));
+                moduleCodes.forEach(s -> sb.append(PREFIX_MODULE_CODE).append(s.value).append(" "));
             }
         }
         return sb.toString();
