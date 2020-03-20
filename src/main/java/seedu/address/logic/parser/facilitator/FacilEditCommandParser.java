@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -74,8 +73,6 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
 
     /**
      * Parses {@code Collection<String> moduleCodes} into a {@code Set<ModuleCode>} if {@code moduleCodes} is non-empty.
-     * If {@code moduleCodes} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<ModuleCode>} containing zero module codes.
      */
     private Optional<Set<ModuleCode>> parseModuleCodesForEdit(Collection<String> moduleCodes) throws ParseException {
         assert moduleCodes != null;
@@ -83,9 +80,7 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         if (moduleCodes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> moduleCodeSet = moduleCodes.size() == 1 && moduleCodes.contains("")
-                ? Collections.emptySet() : moduleCodes;
-        return Optional.of(ParserUtil.parseModuleCodes(moduleCodeSet));
+        return Optional.of(ParserUtil.parseModuleCodes(moduleCodes));
     }
 
     /**

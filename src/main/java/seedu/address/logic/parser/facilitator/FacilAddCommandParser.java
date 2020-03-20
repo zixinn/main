@@ -39,13 +39,13 @@ public class FacilAddCommandParser implements Parser<FacilAddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilAddCommand.MESSAGE_USAGE));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
-                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE)
-                && !arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
+                && !arePrefixesPresent(argMultimap, PREFIX_OFFICE)) {
             throw new ParseException(FacilAddCommand.MESSAGE_NOT_ADDED);
         }
 

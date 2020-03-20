@@ -51,7 +51,7 @@ public class FacilEditCommand extends FacilCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_ALL_OPTIONAL_FIELDS_DELETED =
-            "At least one of phone, email, office and module code should not be empty.";
+            "At least one of phone, email and office should not be empty.";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     private final Index index;
@@ -88,7 +88,7 @@ public class FacilEditCommand extends FacilCommand {
         }
 
         if (editedFacilitator.getPhone().value == null && editedFacilitator.getEmail().value == null
-                && editedFacilitator.getOffice().value == null && editedFacilitator.getModuleCodes().isEmpty()) {
+                && editedFacilitator.getOffice().value == null) {
             throw new CommandException(MESSAGE_ALL_OPTIONAL_FIELDS_DELETED);
         }
 

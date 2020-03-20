@@ -31,7 +31,7 @@ public class FacilAddCommandTest {
     @Test
     public void execute_facilitatorAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingFacilitatorAdded modelStub = new ModelStubAcceptingFacilitatorAdded();
-        Facilitator validFacilitator = new FacilitatorBuilder().build();
+        Facilitator validFacilitator = new FacilitatorBuilder().withModuleCodes().build();
 
         CommandResult commandResult = new FacilAddCommand(validFacilitator).execute(modelStub);
 

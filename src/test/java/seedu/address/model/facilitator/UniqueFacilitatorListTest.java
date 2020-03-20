@@ -88,7 +88,7 @@ public class UniqueFacilitatorListTest {
     public void setFacilitator_editedFacilitatorHasSameIdentity_success() {
         uniqueFacilitatorList.add(ALICE);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+                .build();
         uniqueFacilitatorList.setFacilitator(ALICE, editedAlice);
         UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
         expectedUniqueFacilitatorList.add(editedAlice);
