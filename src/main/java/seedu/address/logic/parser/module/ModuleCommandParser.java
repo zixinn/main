@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
+import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -40,6 +41,9 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
 
         case Command.COMMAND_WORD_DELETE:
             return new ModuleDeleteCommandParser().parse(arguments);
+
+        case Command.COMMAND_WORD_EDIT:
+            return new ModuleEditCommandParser().parse(arguments);
 
         case Command.COMMAND_WORD_LIST:
             return new ModuleListCommand();
