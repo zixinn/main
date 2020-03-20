@@ -135,6 +135,12 @@ public interface Model {
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
 
+    /**
+     * Deletes the given module code from the facilitator list.
+     * A module with the module code must exist in Mod Manager.
+     */
+    void deleteModuleCodeFromFacilitatorList(ModuleCode target);
+
     /** Returns an unmodifiable view of the filtered facilitator list. */
     ObservableList<Facilitator> getFilteredFacilitatorList();
 

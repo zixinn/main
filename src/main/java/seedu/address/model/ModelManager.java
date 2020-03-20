@@ -198,6 +198,11 @@ public class ModelManager implements Model {
         addressBook.setFacilitator(target, editedFacilitator);
     }
 
+    @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        addressBook.removeModuleCodeFromFacilitatorList(target);
+    }
+
     //=========== Filtered Facilitator List Accessors =============================================================
 
     /**

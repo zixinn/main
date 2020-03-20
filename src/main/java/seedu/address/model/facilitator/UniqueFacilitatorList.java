@@ -3,13 +3,17 @@ package seedu.address.model.facilitator;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.facilitator.exceptions.FacilitatorNotFoundException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * A list of facilitators that enforces uniqueness between its elements and does not allow nulls.
@@ -78,6 +82,35 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new FacilitatorNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the equivalent module code from the list.
+     * The module code must exist in the list.
+     */
+    public void removeModuleCode(ModuleCode toRemove) {
+        requireNonNull(toRemove);
+        List<Facilitator> facilitatorsToDelete = new ArrayList<>();
+        List<Facilitator> facilitatorsToEdit = new ArrayList<>();
+        for (Facilitator facilitator : internalList) {
+            if (facilitator.getModuleCodes().contains(toRemove)) {
+                if (facilitator.getModuleCodes().size() == 1) {
+                    facilitatorsToDelete.add(facilitator);
+                } else {
+                    facilitatorsToEdit.add(facilitator);
+                }
+            }
+        }
+        for (Facilitator facilitator : facilitatorsToDelete) {
+            remove(facilitator);
+        }
+        for (Facilitator facilitator : facilitatorsToEdit) {
+            Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
+            moduleCodes.remove(toRemove);
+            Facilitator editedFacilitator = new Facilitator(facilitator.getName(), facilitator.getPhone(),
+                    facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
+            setFacilitator(facilitator, editedFacilitator);
         }
     }
 

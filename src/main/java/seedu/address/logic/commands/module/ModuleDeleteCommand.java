@@ -44,6 +44,8 @@ public class ModuleDeleteCommand extends ModuleCommand {
 
         Module moduleToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteModule(moduleToDelete);
+        model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete),
                 CommandType.MODULE);
     }

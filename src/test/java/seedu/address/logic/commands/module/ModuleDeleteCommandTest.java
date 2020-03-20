@@ -32,6 +32,7 @@ public class ModuleDeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
+        expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }

@@ -210,6 +210,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return facilitators.getFacilitatorList();
     }
 
+    /**
+     * Removes {@code key} from the facilitators of from this {@code AddressBook}.
+     * {@code key} must exist in Mod Manager.
+     */
+    public void removeModuleCodeFromFacilitatorList(ModuleCode key) {
+        facilitators.removeModuleCode(key);
+    }
+
     //// task-level operations
 
     /**

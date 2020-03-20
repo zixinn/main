@@ -132,6 +132,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Facilitator> getFilteredFacilitatorList() {
         throw new AssertionError("This method should not be called.");
     }

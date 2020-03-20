@@ -3,10 +3,12 @@ package seedu.address.model.facilitator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
+import static seedu.address.testutil.TypicalFacilitators.BENSON;
 import static seedu.address.testutil.TypicalFacilitators.BOB;
 
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facilitator.exceptions.DuplicateFacilitatorException;
 import seedu.address.model.facilitator.exceptions.FacilitatorNotFoundException;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.FacilitatorBuilder;
 
 public class UniqueFacilitatorListTest {
@@ -126,6 +129,32 @@ public class UniqueFacilitatorListTest {
         uniqueFacilitatorList.add(ALICE);
         uniqueFacilitatorList.remove(ALICE);
         UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
+        assertEquals(expectedUniqueFacilitatorList, uniqueFacilitatorList);
+    }
+
+    @Test
+    public void removeModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilitatorList.removeModuleCode(null));
+    }
+
+    @Test
+    public void removeModuleCode_facilitatorWithSingleModuleCode_removesFacilitator() {
+        uniqueFacilitatorList.add(ALICE);
+        uniqueFacilitatorList.removeModuleCode(new ModuleCode(VALID_MODULE_CODE_CS2103T));
+        UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
+        assertEquals(expectedUniqueFacilitatorList, uniqueFacilitatorList);
+    }
+
+    @Test
+    public void removeModuleCode_facilitatorWithMultipleModuleCodes_removesModuleCodeOfFacilitator() {
+        uniqueFacilitatorList.add(BENSON);
+        uniqueFacilitatorList.removeModuleCode(new ModuleCode(VALID_MODULE_CODE_CS2103T));
+
+        Facilitator expectedFacilitator = new FacilitatorBuilder(BENSON).withModuleCodes(VALID_MODULE_CODE_CS2101)
+                .build();
+        UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
+        expectedUniqueFacilitatorList.add(expectedFacilitator);
+
         assertEquals(expectedUniqueFacilitatorList, uniqueFacilitatorList);
     }
 
