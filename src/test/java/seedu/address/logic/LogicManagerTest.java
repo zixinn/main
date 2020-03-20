@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.OFFICE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
@@ -40,7 +42,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Logic logic;
 
     @BeforeEach
@@ -82,9 +84,9 @@ public class LogicManagerTest {
 
         // Execute add command
         String facilAddCommand = Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_ADD + NAME_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY;
-        Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).withModuleCodes().build();
-        ModelManager expectedModel = new ModelManager();
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_CS2101;
+        Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).build();
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addFacilitator(expectedFacilitator);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(facilAddCommand, CommandException.class, expectedMessage, expectedModel);

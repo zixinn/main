@@ -28,7 +28,7 @@ public class ModuleDetailsPanel extends UiPart<Region> {
      * Sets the module code and description of the module to be displayed.
      */
     public void changeDisplayModule(Optional<Module> module) {
-        module.ifPresent(value -> moduleDetails.setText(value.getModuleCode().moduleCode + " "
+        module.ifPresent(value -> moduleDetails.setText(value.getModuleCode().value + " "
                 + value.getDescription().value));
     }
 }

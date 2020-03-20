@@ -26,7 +26,8 @@ public class FacilAddCommand extends FacilCommand {
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
-            + "[" + PREFIX_MODULE_CODE + " MODULE_CODE]...\n"
+            + PREFIX_MODULE_CODE + " MOD_CODE "
+            + "[" + PREFIX_MODULE_CODE + " MORE_MOD_CODES]...\n"
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD + " "
             + PREFIX_NAME + " Martin Henz "
             + PREFIX_PHONE + " 98765432 "
@@ -58,8 +59,8 @@ public class FacilAddCommand extends FacilCommand {
         }
 
         for (ModuleCode moduleCode : toAdd.getModuleCodes()) {
-            if (!model.hasModuleCode(moduleCode.moduleCode)) {
-                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.moduleCode));
+            if (!model.hasModuleCode(moduleCode.value)) {
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.value));
             }
         }
 

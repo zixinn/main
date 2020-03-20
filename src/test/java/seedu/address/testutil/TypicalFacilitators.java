@@ -31,15 +31,15 @@ public class TypicalFacilitators {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withModuleCodes("CS2101", "CS2103T").build();
     public static final Facilitator CARL = new FacilitatorBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withOffice("AS6-06-11").build();
+            .withEmail("heinz@example.com").withOffice("AS6-06-11").withModuleCodes("ES2660").build();
     public static final Facilitator DANIEL = new FacilitatorBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withOffice("AS4-06-13").withModuleCodes("CS2103T").build();
+            .withEmail("cornelia@example.com").withOffice("AS4-06-13").withModuleCodes("CS2101").build();
     public static final Facilitator ELLE = new FacilitatorBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withOffice("S16-03-03").build();
+            .withEmail("werner@example.com").withOffice("S16-03-03").withModuleCodes("ST2334").build();
     public static final Facilitator FIONA = new FacilitatorBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withOffice("S12-02-03").build();
+            .withEmail("lydia@example.com").withOffice("S12-02-03").withModuleCodes("MA1521").build();
     public static final Facilitator GEORGE = new FacilitatorBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withOffice("TP-SR4").build();
+            .withEmail("anna@example.com").withOffice("TP-SR4").withModuleCodes("GEQ1000").build();
 
     // Manually added
     public static final Facilitator HOON = new FacilitatorBuilder().withName("Hoon Meier").withPhone("8482424")

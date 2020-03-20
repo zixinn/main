@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -43,17 +42,17 @@ public class FacilitatorTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new FacilitatorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+                .build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new FacilitatorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+                .build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+                .build();
         assertTrue(ALICE.isSameFacilitator(editedAlice));
     }
 

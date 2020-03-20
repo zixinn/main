@@ -6,6 +6,18 @@
   }, {
     "moduleCode" : "CS2101",
     "description" : "Effective Communication for Computing Professionals"
+  }, {
+    "moduleCode" : "ES2660",
+    "description" : "Communicating in the Information Age"
+  }, {
+    "moduleCode" : "ST2334",
+    "description" : "Probability and Statistics"
+  }, {
+    "moduleCode" : "MA1521",
+    "description" : "Calculus for Computing"
+  }, {
+    "moduleCode" : "GEQ1000",
+    "description" : "Asking Questions"
   } ],
   "facilitators" : [ {
     "name" : "Alice Pauline",
@@ -24,30 +36,30 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "office" : "AS6-06-11",
-    "moduleCode" : [ ]
+    "moduleCode" : [ "ES2660" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "office" : "AS4-06-13",
-    "moduleCode" : [ "CS2103T" ]
+    "moduleCode" : [ "CS2101" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "office" : "S16-03-03",
-    "moduleCode" : [ ]
+    "moduleCode" : [ "ST2334" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "office" : "S12-02-03",
-    "moduleCode" : [ ]
+    "moduleCode" : [ "MA1521" ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "office" : "TP-SR4",
-    "moduleCode" : [ ]
+    "moduleCode" : [ "GEQ1000" ]
   } ]
 }

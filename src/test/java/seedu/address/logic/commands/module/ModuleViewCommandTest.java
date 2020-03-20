@@ -51,7 +51,7 @@ public class ModuleViewCommandTest {
 
         assertThrows(CommandException.class,
                 String.format(ModuleViewCommand.MESSAGE_MODULE_DOES_NOT_EXIST,
-                CS2103T.getModuleCode().moduleCode), () -> moduleViewCommand.execute(modelStub));
+                CS2103T.getModuleCode().value), () -> moduleViewCommand.execute(modelStub));
     }
 
     @Test

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.Optional;
 
@@ -20,10 +19,8 @@ public class ModuleViewCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW
             + ": Views a module in Mod Manager. "
-            + "Parameters: "
-            + PREFIX_MODULE_CODE + " MOD_CODE \n"
-            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " "
-            + PREFIX_MODULE_CODE + " CS2103T ";
+            + "Parameters: MOD_CODE \n"
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " CS2103T ";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     public static final String MESSAGE_SUCCESS = "Viewed module: %1$s";
@@ -41,11 +38,11 @@ public class ModuleViewCommand extends ModuleCommand {
 
         Optional<Module> module = model.findModule(toView);
         if (module.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, toView.moduleCode));
+            throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, toView.value));
         }
 
         model.updateModule(module.get());
-        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toView.moduleCode));
+        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toView.value));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toView), CommandType.MODULE_VIEW);
     }
 

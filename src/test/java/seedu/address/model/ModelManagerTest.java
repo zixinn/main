@@ -196,7 +196,7 @@ public class ModelManagerTest {
         modelManager.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
 
         // different facilitatorListForModule -> returns false
-        String keyword = CS2103T.getModuleCode().moduleCode;
+        String keyword = CS2103T.getModuleCode().value;
         modelManager.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(keyword));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

@@ -13,7 +13,7 @@ public class ModuleCode {
             "Module codes should be alphanumeric with no spaces and should not exceed 10 characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String moduleCode;
+    public final String value;
 
     /**
      * Constructs a {@code ModuleCode}.
@@ -23,7 +23,7 @@ public class ModuleCode {
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
-        this.moduleCode = moduleCode.toUpperCase();
+        value = moduleCode.toUpperCase();
     }
 
     /**
@@ -37,19 +37,19 @@ public class ModuleCode {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ModuleCode // instanceof handles nulls
-                && moduleCode.equals(((ModuleCode) other).moduleCode)); // state check
+                && value.equals(((ModuleCode) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return moduleCode.hashCode();
+        return value.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return moduleCode;
+        return value;
     }
 
 }
