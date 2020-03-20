@@ -6,10 +6,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandResultUi;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.calendar.Calendar;
 
 public class CalViewCommandTest {
     private Model model = new ModelManager();
@@ -22,8 +22,9 @@ public class CalViewCommandTest {
 
     @Test
     public void execute_calView_success() {
-        CommandResult expectedCommandResult = new CommandResultUi(
-                CalViewCommand.MESSAGE_SUCCESS, CommandType.CALENDAR, "this");
-        assertCommandSuccess(new CalViewCommand("this"), model, expectedCommandResult, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(
+                CalViewCommand.MESSAGE_SUCCESS, CommandType.CALENDAR);
+        assertCommandSuccess(new CalViewCommand(
+                Calendar.getNowCalendar()), model, expectedCommandResult, expectedModel);
     }
 }

@@ -244,16 +244,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String week} into a {@code Set<ModuleCode>} and returns it.
+     * Parses {@code String week} into a {@code Calendar} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code week} is invalid.
      */
-    public static String parseWeek(String week) throws ParseException {
+    public static Calendar parseWeek(String week) throws ParseException {
         requireNonNull(week);
         String trimmedWeek = week.trim();
-        if (trimmedWeek.equals("this") || trimmedWeek.equals("next")) {
-            return trimmedWeek;
+        if (trimmedWeek.equals("this")) {
+            return Calendar.getNowCalendar();
+        } else if (trimmedWeek.equals("next")) {
+            return Calendar.getNextWeekCalendar();
         } else {
             throw new ParseException(Calendar.MESSAGE_CONSTRAINTS);
         }
