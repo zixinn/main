@@ -77,9 +77,6 @@ public class MainWindow extends UiPart<Stage> {
     private Tab module;
 
     @FXML
-    private Tab oneModule;
-
-    @FXML
     private Tab facilitator;
 
     @FXML
@@ -233,18 +230,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+
+
     /**
      * Switches to module view
      */
     public void handleSwitchToModule() {
         mainTabPane.getSelectionModel().select(module);
-    }
-
-    /**
-     * Switches to module view
-     */
-    public void handleSwitchToOneModule() {
-        mainTabPane.getSelectionModel().select(oneModule);
         moduleDetailsPanel.changeDisplayModule(logic.getModule());
     }
 
@@ -306,11 +298,9 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandResult.getType()) {
             case CLEAR:
             case MODULE:
-                handleSwitchToModule();
-                break;
             case MODULE_VIEW:
             case LESSON:
-                handleSwitchToOneModule();
+                handleSwitchToModule();
                 break;
             case TASK:
                 handleSwitchToTask();
