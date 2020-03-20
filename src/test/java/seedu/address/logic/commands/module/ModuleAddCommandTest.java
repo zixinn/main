@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
@@ -106,6 +108,11 @@ public class ModuleAddCommandTest {
         public void addModule(Module module) {
             requireNonNull(module);
             modulesAdded.add(module);
+        }
+
+        @Override
+        public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
+
         }
 
         @Override

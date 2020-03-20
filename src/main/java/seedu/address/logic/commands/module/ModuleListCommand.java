@@ -2,6 +2,7 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -18,6 +19,7 @@ public class ModuleListCommand extends ModuleCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+        model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
         return new CommandResult(MESSAGE_SUCCESS, CommandType.MODULE);
     }
 }

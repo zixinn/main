@@ -12,11 +12,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleAddCommand;
 import seedu.address.logic.commands.module.ModuleDeleteCommand;
+import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.testutil.EditModuleDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModuleUtil;
 
@@ -36,6 +38,16 @@ public class ModuleCommandParserTest {
         ModuleDeleteCommand command = (ModuleDeleteCommand) parser.parse(Command.COMMAND_WORD_DELETE + " "
                 + INDEX_FIRST.getOneBased());
         assertEquals(new ModuleDeleteCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parse_edit() throws Exception {
+        Module module = new ModuleBuilder().build();
+        ModuleEditCommand.EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
+        ModuleEditCommand command = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
+                + INDEX_FIRST.getOneBased() + " "
+                + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+        assertEquals(new ModuleEditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test

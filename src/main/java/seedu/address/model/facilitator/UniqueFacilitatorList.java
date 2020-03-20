@@ -114,6 +114,28 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         }
     }
 
+    /**
+     * Removes the equivalent module code from the list.
+     * The module code must exist in the list.
+     */
+    public void setModuleCode(ModuleCode target, ModuleCode editedModuleCode) {
+        requireAllNonNull(target, editedModuleCode);
+        List<Facilitator> facilitatorsToEdit = new ArrayList<>();
+        for (Facilitator facilitator : internalList) {
+            if (facilitator.getModuleCodes().contains(target)) {
+                facilitatorsToEdit.add(facilitator);
+            }
+        }
+        for (Facilitator facilitator : facilitatorsToEdit) {
+            Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
+            moduleCodes.remove(target);
+            moduleCodes.add(editedModuleCode);
+            Facilitator editedFacilitator = new Facilitator(facilitator.getName(), facilitator.getPhone(),
+                    facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
+            setFacilitator(facilitator, editedFacilitator);
+        }
+    }
+
     public void setFacilitators(UniqueFacilitatorList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

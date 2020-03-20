@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class ModuleDeleteCommand extends ModuleCommand {
         Module moduleToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteModule(moduleToDelete);
         model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete),
                 CommandType.MODULE);

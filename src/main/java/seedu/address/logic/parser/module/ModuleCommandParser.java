@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
-import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;

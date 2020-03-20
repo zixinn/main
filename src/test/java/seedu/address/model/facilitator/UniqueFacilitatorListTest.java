@@ -10,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.BENSON;
 import static seedu.address.testutil.TypicalFacilitators.BOB;
+import static seedu.address.testutil.TypicalFacilitators.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -151,6 +152,42 @@ public class UniqueFacilitatorListTest {
         uniqueFacilitatorList.removeModuleCode(new ModuleCode(VALID_MODULE_CODE_CS2103T));
 
         Facilitator expectedFacilitator = new FacilitatorBuilder(BENSON).withModuleCodes(VALID_MODULE_CODE_CS2101)
+                .build();
+        UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
+        expectedUniqueFacilitatorList.add(expectedFacilitator);
+
+        assertEquals(expectedUniqueFacilitatorList, uniqueFacilitatorList);
+    }
+
+    @Test
+    public void setModuleCode_nullTargetModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilitatorList
+                .setModuleCode(null, new ModuleCode(VALID_MODULE_CODE_CS2103T)));
+    }
+
+    @Test
+    public void setModuleCode_nullEditedModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilitatorList
+                .setModuleCode(new ModuleCode(VALID_MODULE_CODE_CS2103T), null));
+    }
+
+    @Test
+    public void setModuleCode_noFacilitatorWithModuleCode_success() {
+        uniqueFacilitatorList.add(CARL);
+        uniqueFacilitatorList.setModuleCode(
+                new ModuleCode(VALID_MODULE_CODE_CS2103T), new ModuleCode(VALID_MODULE_CODE_CS2101));
+        UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
+        expectedUniqueFacilitatorList.add(CARL);
+        assertEquals(expectedUniqueFacilitatorList, uniqueFacilitatorList);
+    }
+
+    @Test
+    public void setModuleCode_facilitatorWithModuleCodeExist_success() {
+        uniqueFacilitatorList.add(ALICE);
+        uniqueFacilitatorList.setModuleCode(
+                new ModuleCode(VALID_MODULE_CODE_CS2103T), new ModuleCode(VALID_MODULE_CODE_CS2101));
+
+        Facilitator expectedFacilitator = new FacilitatorBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2101)
                 .build();
         UniqueFacilitatorList expectedUniqueFacilitatorList = new UniqueFacilitatorList();
         expectedUniqueFacilitatorList.add(expectedFacilitator);

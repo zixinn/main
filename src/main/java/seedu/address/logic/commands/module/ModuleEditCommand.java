@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +74,9 @@ public class ModuleEditCommand extends ModuleCommand {
 
         model.setModule(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+        model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+        model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule),
                 CommandType.MODULE);
     }

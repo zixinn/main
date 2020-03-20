@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -238,6 +239,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleSwitchToModule() {
         mainTabPane.getSelectionModel().select(module);
+        moduleDetailsPanel.changeDisplayModule(Optional.empty());
     }
 
     /**

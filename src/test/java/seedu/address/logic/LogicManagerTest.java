@@ -109,7 +109,7 @@ public class LogicManagerTest {
 
     @Test
     public void getModule_nonEmptyModule_returnsModule() {
-        model.updateModule(CS2103T);
+        model.updateModule(Optional.of(CS2103T));
         assertEquals(Optional.of(CS2103T), model.getModule());
     }
 

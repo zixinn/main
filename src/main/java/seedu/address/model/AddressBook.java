@@ -218,6 +218,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         facilitators.removeModuleCode(key);
     }
 
+    /**
+     * Replaces the given module code {@code target} in the list with {@code editedModuleCode}.
+     * {@code target} must exist in Mod Manager.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
+        facilitators.setModuleCode(target, editedModuleCode);
+    }
+
     //// task-level operations
 
     /**
