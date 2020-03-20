@@ -227,14 +227,14 @@ Example: `task delete /code CS2103T /task IP week 4`
 ==== Adding a facilitator
 
 Adds a facilitator to the module. +
-Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+Format: `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
 ****
 * At least one of the optional fields must be provided.
-* A facilitator can be linked to any number of modules (including 0).
+* A facilitator can be linked to 1 or more modules.
 ****
 
-Example: `facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /phone 98765432 /code CS2103T`
+Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T`
 
 ==== Viewing all facilitators
 Shows a list of all facilitators. +
@@ -256,14 +256,14 @@ Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-Format: `facil edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
 
 ****
 * Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
-* You can remove phone, email, office and module codes linked to the facilitator by typing `/phone`, `/email`, `/office` and `/code` respectively without specifying any input after it.
+* You can remove phone, email or office linked to the facilitator by typing `/phone`, `/email` or `/office` respectively without specifying any input after it.
 ****
 
 Example: `facil edit 1 /name Akshay Narayan /email hisnewemail@nus.edu.sg`
@@ -382,11 +382,11 @@ Receive reminders for deadlines and events the next day.
 | `*task* edit /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
-.5+|Facilitators
-|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+.5+|Facilitator
+|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 |  `*facil* list`
 |  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
-|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* delete INDEX`
 
 .3+|Calendar

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.IllformedLocaleException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,8 @@ class JsonSerializableAddressBook {
             "Facilitator list contains facilitator(s) whose module code does not exist in Mod Manager.";
     public static final String MESSAGE_TASK_DOES_NOT_EXIST =
             "Task list contains task(s) whose does not belong to any module in Mod Manager.";
+    public static final String MESSAGE_FACILITATOR_WITHOUT_MODULE_CODE =
+            "Facilitator list contains facilitator(s) whose module code is empty.";
 
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedFacilitator> facilitators = new ArrayList<>();
@@ -84,6 +87,9 @@ class JsonSerializableAddressBook {
             Facilitator facilitator = jsonAdaptedFacilitator.toModelType();
             if (modManager.hasFacilitator(facilitator)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FACILITATOR);
+            }
+            if (facilitator.getModuleCodes().isEmpty()) {
+                throw new IllformedLocaleException(MESSAGE_FACILITATOR_WITHOUT_MODULE_CODE);
             }
             for (ModuleCode moduleCode : facilitator.getModuleCodes()) {
                 if (!modManager.hasModuleCode(moduleCode.moduleCode)) {
