@@ -112,7 +112,7 @@ public class ModuleAddCommandTest {
 
         @Override
         public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
-
+            //empty method body
         }
 
         @Override

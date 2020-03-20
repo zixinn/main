@@ -45,10 +45,10 @@ import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
 
 public class FacilEditCommandParserTest {
 
-    private static final String PHONE_EMPTY = " " + PREFIX_PHONE;
-    private static final String EMAIL_EMPTY = " " + PREFIX_EMAIL;
-    private static final String OFFICE_EMPTY = " " + PREFIX_OFFICE;
-    private static final String MODULE_CODE_EMPTY = " " + PREFIX_MODULE_CODE;
+    private static final String PHONE_EMPTY = " " + PREFIX_PHONE + " ";
+    private static final String EMAIL_EMPTY = " " + PREFIX_EMAIL + " ";
+    private static final String OFFICE_EMPTY = " " + PREFIX_OFFICE + " ";
+    private static final String MODULE_CODE_EMPTY = " " + PREFIX_MODULE_CODE + " ";
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE);

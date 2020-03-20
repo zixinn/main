@@ -34,9 +34,9 @@ public class ModuleUtil {
     public static String getEditModuleDescriptorDetails(ModuleEditCommand.EditModuleDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getModuleCode().ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE)
-                .append(moduleCode.value).append(" "));
+                .append(" ").append(moduleCode.value).append(" "));
         descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION)
-                .append(description.value).append(" "));
+                .append(" ").append(description.value).append(" "));
         return sb.toString();
     }
 }
