@@ -115,8 +115,10 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
     }
 
     /**
-     * Removes the equivalent module code from the list.
-     * The module code must exist in the list.
+     * Replaces the module code {@code target} in the list with {@code editedModuleCode}.
+     * {@code target} must exist in the list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in the list.
      */
     public void setModuleCode(ModuleCode target, ModuleCode editedModuleCode) {
         requireAllNonNull(target, editedModuleCode);
