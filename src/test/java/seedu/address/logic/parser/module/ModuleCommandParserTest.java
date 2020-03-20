@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.module.ModuleAddCommand;
+import seedu.address.logic.commands.module.ModuleDeleteCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,6 +30,13 @@ public class ModuleCommandParserTest {
         ModuleAddCommand command = (ModuleAddCommand) parser.parse(ModuleUtil.getModuleAddCommand(module));
 
         assertEquals(new ModuleAddCommand(module), command);
+    }
+
+    @Test
+    public void parse_delete() throws Exception {
+        ModuleDeleteCommand command = (ModuleDeleteCommand) parser.parse(Command.COMMAND_WORD_DELETE + " "
+                + INDEX_FIRST.getOneBased());
+        assertEquals(new ModuleDeleteCommand(INDEX_FIRST), command);
     }
 
     @Test

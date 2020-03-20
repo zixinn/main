@@ -29,9 +29,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FACILITATOR;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FACILITATOR;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_FACILITATOR;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
@@ -114,7 +114,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + MODULE_CODE_DESC_CS2103T
                 + EMAIL_DESC_AMY + OFFICE_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_CS2101;
 
@@ -129,7 +129,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_FACILITATOR;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
@@ -142,7 +142,7 @@ public class FacilEditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_FACILITATOR;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
                 .withName(VALID_NAME_AMY).build();
@@ -176,7 +176,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_FACILITATOR;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY
                 + MODULE_CODE_DESC_CS2101 + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2101
                 + PHONE_DESC_BOB + OFFICE_DESC_BOB + EMAIL_DESC_BOB + MODULE_CODE_DESC_CS2103T;
@@ -193,7 +193,7 @@ public class FacilEditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_FACILITATOR;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).build();
@@ -211,7 +211,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_resetPhone_success() {
-        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + PHONE_EMPTY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
@@ -223,7 +223,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_resetEmail_success() {
-        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + EMAIL_EMPTY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
@@ -235,7 +235,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_resetOffice_success() {
-        Index targetIndex = INDEX_SECOND_FACILITATOR;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + OFFICE_EMPTY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
@@ -247,7 +247,7 @@ public class FacilEditCommandParserTest {
 
     @Test
     public void parse_resetModuleCodes_success() {
-        Index targetIndex = INDEX_THIRD_FACILITATOR;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + MODULE_CODE_EMPTY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
