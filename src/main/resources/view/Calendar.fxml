@@ -25,7 +25,7 @@
                 <Insets />
             </VBox.margin>
          <content>
-            <GridPane fx:id="calendarGrid" alignment="TOP_CENTER" gridLinesVisible="true" style="-fx-background-color: #3c3e3f;">
+            <GridPane fx:id="calendarGrid" alignment="TOP_CENTER" style="-fx-background-color: #383838;">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -37,7 +37,7 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="30.0" prefHeight="30.0" valignment="TOP" />
-                  <RowConstraints valignment="TOP" vgrow="ALWAYS" />
+                  <RowConstraints valignment="TOP" vgrow="ALWAYS" prefHeight="500" maxHeight="Infinity"/>
               </rowConstraints>
             </GridPane>
          </content>
