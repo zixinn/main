@@ -92,7 +92,7 @@ class JsonSerializableAddressBook {
                 throw new IllformedLocaleException(MESSAGE_FACILITATOR_WITHOUT_MODULE_CODE);
             }
             for (ModuleCode moduleCode : facilitator.getModuleCodes()) {
-                if (!modManager.hasModuleCode(moduleCode.moduleCode)) {
+                if (!modManager.hasModuleCode(moduleCode.value)) {
                     throw new IllegalValueException(MESSAGE_MODULE_DOES_NOT_EXIST);
                 }
             }

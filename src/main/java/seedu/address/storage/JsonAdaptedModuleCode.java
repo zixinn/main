@@ -25,7 +25,7 @@ class JsonAdaptedModuleCode {
      * Converts a given {@code ModuleCode} into this class for Jackson use.
      */
     public JsonAdaptedModuleCode(ModuleCode source) {
-        moduleCode = source.moduleCode;
+        moduleCode = source.value;
     }
 
     @JsonValue

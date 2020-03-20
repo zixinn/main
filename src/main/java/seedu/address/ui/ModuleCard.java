@@ -28,7 +28,7 @@ public class ModuleCard extends UiPart<Region> {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
-        moduleCode.setText(module.getModuleCode().moduleCode);
+        moduleCode.setText(module.getModuleCode().value);
 
         if (module.getDescription().value != null) {
             description.getChildren().add(new Label(module.getDescription().value));

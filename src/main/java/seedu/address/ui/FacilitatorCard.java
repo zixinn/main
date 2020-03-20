@@ -60,8 +60,8 @@ public class FacilitatorCard extends UiPart<Region> {
         }
 
         facilitator.getModuleCodes().stream()
-                .sorted(Comparator.comparing(moduleCode -> moduleCode.moduleCode))
-                .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.moduleCode)));
+                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
+                .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.value)));
     }
 
     @Override

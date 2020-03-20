@@ -141,7 +141,7 @@ public class FacilAddCommandTest {
         @Override
         public boolean hasModuleCode(String moduleCode) {
             requireNonNull(moduleCode);
-            return module.getModuleCode().moduleCode.equals(moduleCode);
+            return module.getModuleCode().value.equals(moduleCode);
         }
 
         @Override

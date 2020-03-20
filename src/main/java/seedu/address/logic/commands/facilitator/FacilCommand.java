@@ -25,9 +25,9 @@ public abstract class FacilCommand extends Command {
             PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE, PREFIX_MODULE_CODE);
     public static final String DELETE_FORMAT = String.format("%s %s INDEX", COMMAND_GROUP_FACIL, COMMAND_WORD_DELETE);
     public static final String EDIT_FORMAT = String.format(
-            "%s %s %s FACILITATOR_NAME [%s PHONE] [%s EMAIL] [%s OFFICE] %s MOD_CODE [%s MORE_MOD_CODES]...",
+            "%s %s [%s FACILITATOR_NAME] [%s PHONE] [%s EMAIL] [%s OFFICE] [%s MOD_CODE]...",
             COMMAND_GROUP_FACIL, COMMAND_WORD_EDIT,
-            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE, PREFIX_MODULE_CODE);
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
     public static final String FIND_FORMAT =
             String.format("%s %s FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...", COMMAND_GROUP_FACIL, COMMAND_WORD_FIND);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_FACIL, COMMAND_WORD_LIST);

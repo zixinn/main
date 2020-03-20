@@ -88,6 +88,7 @@ image::foo.png[]
 * Items in square brackets are optional. Items in curly brackets are mutually exclusive.
 * Items with `…`​ after them can be used multiple times including zero times.
 * Parameters can be in any order.
+* Module codes are case-insensitive.
 ====
 
 === Viewing help : `help`
@@ -117,8 +118,8 @@ Format: `mod list`
 ==== Viewing information related to a module
 
 Shows all classes, tasks and facilitators for a module. +
-Format: `mod view /code MOD_CODE` +
-Example: `mod view /code CS2103T`
+Format: `mod view MOD_CODE` +
+Example: `mod view CS2103T`
 
 ==== Editing a module
 
@@ -361,7 +362,7 @@ Receive reminders for deadlines and events the next day.
 .5+|Module
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
-| `*mod* view /code MOD_CODE`
+| `*mod* view MOD_CODE`
 | `*mod* edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
 | `*mod* delete INDEX`
 

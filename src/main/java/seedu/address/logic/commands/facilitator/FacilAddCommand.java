@@ -59,8 +59,8 @@ public class FacilAddCommand extends FacilCommand {
         }
 
         for (ModuleCode moduleCode : toAdd.getModuleCodes()) {
-            if (!model.hasModuleCode(moduleCode.moduleCode)) {
-                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.moduleCode));
+            if (!model.hasModuleCode(moduleCode.value)) {
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.value));
             }
         }
 
