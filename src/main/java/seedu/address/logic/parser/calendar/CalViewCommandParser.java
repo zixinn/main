@@ -12,6 +12,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.calendar.Calendar;
 
 /**
  * Parses input arguments and creates a new CalViewCommand object
@@ -32,9 +33,9 @@ public class CalViewCommandParser implements Parser<CalViewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalViewCommand.MESSAGE_USAGE));
         }
 
-        String week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK));
+        Calendar calendar = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK));
 
-        return new CalViewCommand(week);
+        return new CalViewCommand(calendar);
     }
 
     /**

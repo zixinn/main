@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -18,9 +17,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandResultUi;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.calendar.Calendar;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -76,9 +75,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Tab module;
-
-    @FXML
-    private Tab oneModule;
 
     @FXML
     private Tab facilitator;
@@ -164,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         facilitatorListPanel = new FacilitatorListPanel(logic.getFilteredFacilitatorList());
         facilitatorListPanelPlaceholder.getChildren().add(facilitatorListPanel.getRoot());
 
-        calendarView = new CalendarView("this", logic.getFilteredTaskList(), logic.getLessons());
+        calendarView = new CalendarView(logic.getCalendar(), logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -234,19 +230,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+
+
     /**
      * Switches to module view
      */
     public void handleSwitchToModule() {
         mainTabPane.getSelectionModel().select(module);
-        moduleDetailsPanel.changeDisplayModule(Optional.empty());
-    }
-
-    /**
-     * Switches to module view
-     */
-    public void handleSwitchToOneModule() {
-        mainTabPane.getSelectionModel().select(oneModule);
         moduleDetailsPanel.changeDisplayModule(logic.getModule());
     }
 
@@ -276,7 +266,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param week The week to be viewed
      */
-    public void viewCalendar(String week) {
+    public void viewCalendar(Calendar week) {
         calendarView = new CalendarView(week, logic.getFilteredTaskList(), logic.getLessons());
         calendarViewPlaceholder.getChildren().clear();
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
@@ -304,15 +294,13 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            viewCalendar("this");
+            viewCalendar(logic.getCalendar());
             switch (commandResult.getType()) {
             case CLEAR:
             case MODULE:
-                handleSwitchToModule();
-                break;
             case MODULE_VIEW:
             case LESSON:
-                handleSwitchToOneModule();
+                handleSwitchToModule();
                 break;
             case TASK:
                 handleSwitchToTask();
@@ -321,9 +309,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleSwitchToFacilitator();
                 break;
             case CALENDAR:
-                CommandResultUi result = (CommandResultUi) commandResult;
                 handleSwitchToCalendar();
-                viewCalendar(result.getArgForUi());
+                viewCalendar(logic.getCalendar());
                 break;
             case HELP:
                 handleHelp();

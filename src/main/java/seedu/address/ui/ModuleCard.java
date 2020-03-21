@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
@@ -22,7 +21,7 @@ public class ModuleCard extends UiPart<Region> {
     @FXML
     private Label moduleCode;
     @FXML
-    private FlowPane description;
+    private Label description;
 
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
@@ -31,7 +30,7 @@ public class ModuleCard extends UiPart<Region> {
         moduleCode.setText(module.getModuleCode().value);
 
         if (module.getDescription().value != null) {
-            description.getChildren().add(new Label(module.getDescription().value));
+            description.setText(module.getDescription().value);
         }
     }
 

@@ -35,10 +35,14 @@ public class CalendarView extends UiPart<Region> {
     /**
      * Constructs the CalendarView.
      */
-    public CalendarView(String week, List<Task> tasks, List<Lesson> lessons) {
+    public CalendarView(Calendar calendar, List<Task> tasks, List<Lesson> lessons) {
         super(FXML);
 
-        calendarTitle.setText(String.format("Viewing: %s week", week));
+        if (calendar.equals(Calendar.getNowCalendar())) {
+            calendarTitle.setText(String.format("Viewing: %s week", "this"));
+        } else {
+            calendarTitle.setText(String.format("Viewing: %s week", "next"));
+        }
 
         String[] daysOfWeek = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday", "Sunday"};
@@ -51,19 +55,13 @@ public class CalendarView extends UiPart<Region> {
             calendarGrid.add(calendarCardPanel.getRoot(), col, 1);
         }
 
-        addCards(week, tasks, lessons);
+        addCards(calendar, tasks, lessons);
     }
 
     /**
      * Adds cards to the calendar.
      */
-    public void addCards(String week, List<Task> tasks, List<Lesson> lessons) {
-        Calendar calendar;
-        if (week.equals("this")) {
-            calendar = Calendar.getNowCalendar();
-        } else {
-            calendar = Calendar.getNextWeekCalendar();
-        }
+    public void addCards(Calendar calendar, List<Task> tasks, List<Lesson> lessons) {
         Calendar[] calendars = calendar.getWeek();
         for (int i = 0; i < 7; i++) {
             final int cnt = i;

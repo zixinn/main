@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
@@ -214,4 +215,9 @@ public interface Model {
     List<Lesson> getLessons();
 
     ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
+
+    /** Updates the calendar in the model to the given {@code calendar}. */
+    void updateCalendar(Calendar calendar);
+
+    Calendar getCalendar();
 }

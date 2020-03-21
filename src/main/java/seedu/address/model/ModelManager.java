@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
     private final List<Lesson> filteredLesson;
     private Optional<Module> module;
     private final FilteredList<Facilitator> facilitatorsForModule;
+    private Calendar calendar;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,6 +56,7 @@ public class ModelManager implements Model {
         module = Optional.empty();
         facilitatorsForModule = new FilteredList<>(this.addressBook.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
+        calendar = Calendar.getNowCalendar();
     }
 
     public ModelManager() {
@@ -347,5 +350,18 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    //=========== Calendar =================================================================================
+
+    @Override
+    public void updateCalendar(Calendar calendar) {
+        requireNonNull(calendar);
+        this.calendar = calendar;
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return calendar;
     }
 }
