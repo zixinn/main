@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
-import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +15,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.Description;
@@ -75,7 +75,12 @@ public class ModuleEditCommand extends ModuleCommand {
         model.setModule(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
-        model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
+
+        if (model.getModule().isPresent() && model.getModule().get().equals(moduleToEdit)) {
+            model.updateModule(Optional.of(editedModule));
+            model.updateFacilitatorListForModule(
+                    new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
+        }
 
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule),
                 CommandType.MODULE);
