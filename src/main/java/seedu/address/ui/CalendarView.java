@@ -8,12 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
+import seedu.address.logic.commands.calendar.CalFindCommand;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.DailySchedulable;
 import seedu.address.model.util.DailySchedulableComparator;
+
+import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
 
 
 /**
@@ -22,7 +25,6 @@ import seedu.address.model.util.DailySchedulableComparator;
 public class CalendarView extends UiPart<Region> {
 
     private static final String FXML = "Calendar.fxml";
-    private static final int DAYS_IN_WEEK = 7;
 
     private List<CalendarCardPanel> cardPanels = new ArrayList<>();
 
@@ -58,6 +60,7 @@ public class CalendarView extends UiPart<Region> {
         }
         Calendar[] calendars = calendar.getWeek();
         addCards(calendars, tasks, lessons);
+
     }
 
     /**
