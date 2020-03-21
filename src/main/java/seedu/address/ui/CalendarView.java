@@ -22,7 +22,7 @@ import seedu.address.model.util.DailySchedulableComparator;
 public class CalendarView extends UiPart<Region> {
 
     private static final String FXML = "Calendar.fxml";
-    private static int DAYS_IN_WEEK = 7;
+    private static final int DAYS_IN_WEEK = 7;
 
     private List<CalendarCardPanel> cardPanels = new ArrayList<>();
 

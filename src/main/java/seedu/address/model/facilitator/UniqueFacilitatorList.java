@@ -51,6 +51,7 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
             throw new DuplicateFacilitatorException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
@@ -72,6 +73,7 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         }
 
         internalList.set(index, editedFacilitator);
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
@@ -83,6 +85,7 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         if (!internalList.remove(toRemove)) {
             throw new FacilitatorNotFoundException();
         }
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
@@ -112,6 +115,7 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
                     facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
             setFacilitator(facilitator, editedFacilitator);
         }
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
@@ -136,11 +140,13 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
                     facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
             setFacilitator(facilitator, editedFacilitator);
         }
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     public void setFacilitators(UniqueFacilitatorList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
@@ -154,6 +160,7 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         }
 
         internalList.setAll(facilitators);
+        FXCollections.sort(internalList, new FacilitatorNameComparator());
     }
 
     /**
