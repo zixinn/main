@@ -29,11 +29,11 @@ public class FacilAddCommand extends FacilCommand {
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + "[" + PREFIX_MODULE_CODE + " MORE_MOD_CODES]...\n"
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD + " "
-            + PREFIX_NAME + " Martin Henz "
+            + PREFIX_NAME + " Akshay Narayan "
             + PREFIX_PHONE + " 98765432 "
-            + PREFIX_EMAIL + " henz@comp.nus.edu.sg "
-            + PREFIX_OFFICE + " COM2-0356 "
-            + PREFIX_MODULE_CODE + " CS1101S";
+            + PREFIX_EMAIL + " akshay@comp.nus.edu.sg "
+            + PREFIX_OFFICE + " COM2-03-56 "
+            + PREFIX_MODULE_CODE + " CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New facilitator added: %1$s";
     public static final String MESSAGE_NOT_ADDED = "At least one of the optional fields must be provided.";

@@ -103,7 +103,7 @@ public interface Model {
     Optional<Module> findModule(ModuleCode moduleCode);
 
     /** Updates the module in the model to the given {@code module}. */
-    void updateModule(Module module);
+    void updateModule(Optional<Module> module);
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
@@ -135,6 +135,19 @@ public interface Model {
      * in Mod Manager.
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
+
+    /**
+     * Deletes the given module code from the facilitator list.
+     * A module with the module code must exist in Mod Manager.
+     */
+    void deleteModuleCodeFromFacilitatorList(ModuleCode target);
+
+    /**
+     * Replaces the given module code {@code target} with {@code editedModuleCode} in the facilitator list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode);
 
     /** Returns an unmodifiable view of the filtered facilitator list. */
     ObservableList<Facilitator> getFilteredFacilitatorList();

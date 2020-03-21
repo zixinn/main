@@ -3,6 +3,7 @@ package seedu.address.logic.commands.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -46,6 +47,8 @@ public class ModuleAddCommand extends ModuleCommand {
         }
 
         model.addModule(toAdd);
+        model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.MODULE);
     }
 
