@@ -7,6 +7,7 @@ import seedu.address.logic.commands.module.ModuleDeleteCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new ModuleDeleteCommand object.
@@ -19,12 +20,28 @@ public class ModuleDeleteCommandParser implements Parser<ModuleDeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ModuleDeleteCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
+        }
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new ModuleDeleteCommand(index);
         } catch (ParseException pe) {
+            /*
+             This part is left empty intentionally
+             Kinda hack-ish
+             */
+        }
+
+        try {
+            ModuleCode moduleCode = ParserUtil.parseModuleCode(trimmedArgs);
+            return new ModuleDeleteCommand(moduleCode);
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
         }
     }
 }
