@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
+import java.util.List;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,6 +24,11 @@ public abstract class TaskCommand extends Command {
     public static final String EDIT_FORMAT = String.format("%s %s %s MOD_CODE %s DESCRIPTION %s DATE %s TIME",
             COMMAND_GROUP_TASK, COMMAND_WORD_EDIT,
             PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
+    public static final String DELETE_FORMAT = String.format("%s %s %s DESCRIPTION",
+            COMMAND_GROUP_TASK, COMMAND_WORD_DELETE,
+            PREFIX_DESCRIPTION);
+
+    public static final List<String> ALL_COMMAND_FORMATS = List.of(ADD_FORMAT, EDIT_FORMAT, DELETE_FORMAT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
