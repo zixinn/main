@@ -3,11 +3,14 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -78,6 +81,19 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!internalList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+    }
+
+    /**
+     * Removes tasks with the target ModuleCode.
+     */
+    public void removeWithModuleCode(final ModuleCode target) {
+        Optional<ModuleCode> toCompare = Optional.of(target);
+        List<Task> replacementList = new ArrayList<>();
+        internalList.stream()
+                .filter(task -> task.getModuleCode().equals(toCompare))
+                .forEach(replacementList::add);
+
+        setTasks(replacementList);
     }
 
     public void setTasks(UniqueTaskList replacement) {

@@ -194,6 +194,11 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called");
     }
 
+    @Override
+    public void deleteTasksWithModuleCode(ModuleCode target) {
+        throw new AssertionError("This method should not be called");
+    }
+
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in Mod Manager.
