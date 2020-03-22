@@ -90,7 +90,7 @@ public class UniqueTaskList implements Iterable<Task> {
         Optional<ModuleCode> toCompare = Optional.of(target);
         List<Task> replacementList = new ArrayList<>();
         internalList.stream()
-                .filter(task -> task.getModuleCode().equals(toCompare))
+                .filter(task -> !task.getModuleCode().equals(toCompare))
                 .forEach(replacementList::add);
 
         setTasks(replacementList);

@@ -72,6 +72,7 @@ public class ModuleDeleteCommand extends ModuleCommand {
         assert moduleToDelete != null;
         model.deleteModule(moduleToDelete);
         model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        model.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
