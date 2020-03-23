@@ -21,7 +21,7 @@ import seedu.address.logic.parser.task.TaskCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ModManagerParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -44,6 +44,7 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        
         switch (commandWord) {
         case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
