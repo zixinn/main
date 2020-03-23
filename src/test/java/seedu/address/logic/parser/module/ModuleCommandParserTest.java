@@ -15,7 +15,6 @@ import seedu.address.logic.commands.module.ModuleDeleteCommand;
 import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.commands.module.ModuleListCommand;
 import seedu.address.logic.commands.module.ModuleViewCommand;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
@@ -50,8 +49,7 @@ public class ModuleCommandParserTest {
                 + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
         assertEquals(new ModuleEditCommand(INDEX_FIRST, descriptor), command);
 
-        ModuleEditCommand command1 = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
-                + CliSyntax.PREFIX_MODULE_CODE + " CS2030 "
+        ModuleEditCommand command1 = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " CS2030 "
                 + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
         assertEquals(new ModuleEditCommand(new ModuleCode("CS2030"), descriptor), command1);
     }
