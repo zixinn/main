@@ -40,7 +40,7 @@ public class ModuleEditCommand extends ModuleCommand {
             + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "The description to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
     public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
     public static final String MESSAGE_CANNOT_EDIT_MODULE_CODE = "Cannot edit a module's code.";
