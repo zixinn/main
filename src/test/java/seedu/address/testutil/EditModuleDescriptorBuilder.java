@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.Description;
 
 /**
@@ -25,16 +24,7 @@ public class EditModuleDescriptorBuilder {
      */
     public EditModuleDescriptorBuilder(Module module) {
         descriptor = new ModuleEditCommand.EditModuleDescriptor();
-        descriptor.setModuleCode(module.getModuleCode());
         descriptor.setDescription(module.getDescription());
-    }
-
-    /**
-     * Sets the {@code ModuleCode} of the {@code EditModuleDescriptor} that we are building.
-     */
-    public EditModuleDescriptorBuilder withModuleCode(String moduleCode) {
-        descriptor.setModuleCode(new ModuleCode(moduleCode));
-        return this;
     }
 
     /**

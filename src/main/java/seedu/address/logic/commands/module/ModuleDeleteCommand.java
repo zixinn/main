@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Deletes a module identified using it's displayed index from Mod Manager.
@@ -22,31 +23,61 @@ public class ModuleDeleteCommand extends ModuleCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE
             + ": Deletes the module identified by the index number used in the displayed module list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE + " 1";
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE + " 1\n"
+            + "Parameters: MODULE_CODE (must be a valid module code)\n"
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE + " CS4215";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted module: %1$s";
 
+    public static final String MESSAGE_DELETE_NON_EXISTENT_MODULE = "%s does not exist.";
+
     private final Index targetIndex;
+    private final ModuleCode moduleCode;
 
     /**
      * Creates a ModuleDeleteCommand to delete the module the specified {@code index}.
      */
     public ModuleDeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
+
         this.targetIndex = targetIndex;
+        this.moduleCode = null;
+    }
+
+    public ModuleDeleteCommand(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+
+        this.moduleCode = moduleCode;
+        this.targetIndex = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
+        Module moduleToDelete = null;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex != null && targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+        } else if (targetIndex != null) {
+            moduleToDelete = lastShownList.get(targetIndex.getZeroBased());
+        } else { // index == null
+            assert moduleCode != null;
+            for (Module mod : lastShownList) {
+                if (mod.getModuleCode().equals(moduleCode)) {
+                    moduleToDelete = mod;
+                    break;
+                }
+            }
         }
 
-        Module moduleToDelete = lastShownList.get(targetIndex.getZeroBased());
+        if (moduleToDelete == null) {
+            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode.toString()));
+        }
+
         model.deleteModule(moduleToDelete);
         model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        model.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
@@ -59,8 +90,24 @@ public class ModuleDeleteCommand extends ModuleCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ModuleDeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((ModuleDeleteCommand) other).targetIndex)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ModuleDeleteCommand)) {
+            return false;
+        }
+
+        ModuleDeleteCommand e = (ModuleDeleteCommand) other;
+
+        // similar nullability check
+        boolean indexNull = (targetIndex == null && e.targetIndex == null)
+                || (targetIndex != null && e.targetIndex != null);
+        boolean moduleCodeNull = (moduleCode == null && e.moduleCode == null)
+                || (moduleCode != null && e.moduleCode != null);
+
+        return indexNull && moduleCodeNull
+                && (targetIndex == null || targetIndex.equals(e.targetIndex))
+                && (moduleCode == null || moduleCode.equals(e.moduleCode));
     }
 }

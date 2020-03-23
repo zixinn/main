@@ -36,6 +36,7 @@ public class ModelManager implements Model {
     private final List<Lesson> filteredLesson;
     private Optional<Module> module;
     private final FilteredList<Facilitator> facilitatorsForModule;
+    private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
 
     /**
@@ -56,6 +57,8 @@ public class ModelManager implements Model {
         module = Optional.empty();
         facilitatorsForModule = new FilteredList<>(this.addressBook.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
+        tasksForModule = new FilteredList<>(this.addressBook.getTaskList());
+        tasksForModule.setPredicate(PREDICATE_SHOW_NO_TASKS);
         calendar = Calendar.getNowCalendar();
     }
 
@@ -333,6 +336,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTask);
 
         addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void deleteTasksWithModuleCode(ModuleCode moduleCode) {
+        requireAllNonNull(moduleCode);
+
+        addressBook.removeTasksWithModuleCode(moduleCode);
     }
 
     //=========== Filtered Task List Accessors =============================================================

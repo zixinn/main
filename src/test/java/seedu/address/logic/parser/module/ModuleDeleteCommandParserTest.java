@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.module.ModuleDeleteCommand;
+import seedu.address.model.module.ModuleCode;
 
 public class ModuleDeleteCommandParserTest {
     private ModuleDeleteCommandParser parser = new ModuleDeleteCommandParser();
@@ -15,11 +16,19 @@ public class ModuleDeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new ModuleDeleteCommand(INDEX_FIRST));
+        assertParseSuccess(parser, "CS2030", new ModuleDeleteCommand(new ModuleCode("CS2030")));
+        assertParseSuccess(parser, "CS2040S", new ModuleDeleteCommand(new ModuleCode("CS2040S")));
+        assertParseSuccess(parser, "PCS2030", new ModuleDeleteCommand(new ModuleCode("PCS2030")));
+        assertParseSuccess(parser, "PCS2030T", new ModuleDeleteCommand(new ModuleCode("PCS2030T")));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-123",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "CS 324",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
     }
 }

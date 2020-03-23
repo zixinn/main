@@ -92,30 +92,49 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
      * Removes the equivalent module code from the list.
      * The module code must exist in the list.
      */
-    public void removeModuleCode(ModuleCode toRemove) {
+    public void removeModuleCode(final ModuleCode toRemove) {
         requireNonNull(toRemove);
-        List<Facilitator> facilitatorsToDelete = new ArrayList<>();
-        List<Facilitator> facilitatorsToEdit = new ArrayList<>();
-        for (Facilitator facilitator : internalList) {
-            if (facilitator.getModuleCodes().contains(toRemove)) {
-                if (facilitator.getModuleCodes().size() == 1) {
-                    facilitatorsToDelete.add(facilitator);
-                } else {
-                    facilitatorsToEdit.add(facilitator);
-                }
-            }
-        }
-        for (Facilitator facilitator : facilitatorsToDelete) {
-            remove(facilitator);
-        }
-        for (Facilitator facilitator : facilitatorsToEdit) {
-            Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
-            moduleCodes.remove(toRemove);
-            Facilitator editedFacilitator = new Facilitator(facilitator.getName(), facilitator.getPhone(),
-                    facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
-            setFacilitator(facilitator, editedFacilitator);
-        }
+        //        List<Facilitator> facilitatorsToDelete = new ArrayList<>();
+        //        List<Facilitator> facilitatorsToEdit = new ArrayList<>();
+        //        for (Facilitator facilitator : internalList) {
+        //            if (facilitator.getModuleCodes().contains(toRemove)) {
+        //                if (facilitator.getModuleCodes().size() == 1) {
+        //                    facilitatorsToDelete.add(facilitator);
+        //                } else {
+        //                    facilitatorsToEdit.add(facilitator);
+        //                }
+        //            }
+        //        }
+        //        for (Facilitator facilitator : facilitatorsToDelete) {
+        //            remove(facilitator);
+        //        }
+        //        for (Facilitator facilitator : facilitatorsToEdit) {
+        //            Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
+        //            moduleCodes.remove(toRemove);
+        //            Facilitator editedFacilitator = new Facilitator(facilitator.getName(), facilitator.getPhone(),
+        //                    facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
+        //            setFacilitator(facilitator, editedFacilitator);
+        //        }
+
+        List<Facilitator> replacementList = new ArrayList<>();
+        internalList.stream()
+                .filter(facilitator -> {
+                    Set<ModuleCode> temp = facilitator.getModuleCodes();
+                    return !temp.contains(toRemove) || temp.size() > 1;
+                })
+                .map(facilitator -> {
+                    Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
+                    boolean hadToRemove = moduleCodes.remove(toRemove);
+                    return hadToRemove
+                            ? new Facilitator(facilitator.getName(), facilitator.getPhone(),
+                            facilitator.getEmail(), facilitator.getOffice(), moduleCodes)
+                            : facilitator;
+                })
+                .forEach(replacementList::add);
+
+        setFacilitators(replacementList);
         FXCollections.sort(internalList, new FacilitatorNameComparator());
+
     }
 
     /**

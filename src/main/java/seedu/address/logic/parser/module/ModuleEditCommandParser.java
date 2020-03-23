@@ -12,6 +12,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new ModuleEditCommand object.
@@ -27,19 +28,23 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION);
 
-        Index index;
+        int mode = 0;
+        Index index = null;
+        ParseException invalidFormatException = null;
+        String preamble = argMultimap.getPreamble();
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ModuleEditCommand.MESSAGE_USAGE), pe);
+            invalidFormatException = pe;
+            mode = 1;
+        }
+
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) { // mod code exists
+            throw new ParseException(ModuleEditCommand.MESSAGE_CANNOT_EDIT_MODULE_CODE);
         }
 
         ModuleEditCommand.EditModuleDescriptor editModuleDescriptor = new ModuleEditCommand.EditModuleDescriptor();
-        if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) {
-            editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
-        }
         if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
             editModuleDescriptor.setDescription(ParserUtil.parseDescription(
                     parseFieldForEdit(argMultimap.getValue(PREFIX_DESCRIPTION))));
@@ -49,7 +54,16 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
             throw new ParseException(ModuleEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new ModuleEditCommand(index, editModuleDescriptor);
+        if (mode == 0) {
+            return new ModuleEditCommand(index, editModuleDescriptor);
+        } else { // User uses no index
+            if (preamble.equals("") || !ModuleCode.isValidModuleCode(preamble)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ModuleEditCommand.MESSAGE_USAGE), invalidFormatException);
+            }
+
+            return new ModuleEditCommand(new ModuleCode(preamble), editModuleDescriptor);
+        }
     }
 
     /**
