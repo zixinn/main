@@ -124,7 +124,7 @@ Example: `mod view CS2103T`
 ==== Editing a module
 
 Edits the information of the module. +
-Format: `mod edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
+Format: `mod edit INDEX [/desc DESCRIPTION]` or `mod edit MOD_CODE [/desc DESCRIPTION]`
 
 ****
 * Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
@@ -134,18 +134,18 @@ Format: `mod edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
 * DESCRIPTION should not exceed 64 characters.
 ****
 
-Example: `mod edit 1 /code CS2103`
+Example: `mod edit 1 /desc Software Engineering` or `mod edit CS2103T /desc Software Engineering`
 
 ==== Deleting a module
 
 Deletes the module, along with classes, facilitators and tasks for that module. +
-Format: `mod delete INDEX`
+Format: `mod delete INDEX` or `mod delete MOD_CODE`
 
 ****
 * Deletes the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: `mod delete 2`
+Example: `mod delete 2` or `mod delete CS2103T`
 
 === Managing classes : `class`
 
@@ -294,8 +294,8 @@ Format: `cal view /week next`
 
 ==== Finding empty slots
 
-Finds empty slots in the calendar. +
-Format: `cal find /type empty`
+Finds and lists empty slots from current day to end of the week of the current day. +
+Format: `cal find empty`
 
 === Listing commands : `cmd`
 
@@ -363,8 +363,8 @@ Receive reminders for deadlines and events the next day.
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
 | `*mod* view MOD_CODE`
-| `*mod* edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
-| `*mod* delete INDEX`
+| `*mod* edit INDEX [/desc DESCRIPTION]` or `*mod* edit MOD_CODE [/desc DESCRIPTION]`
+| `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
 .6+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]`
@@ -391,7 +391,7 @@ Receive reminders for deadlines and events the next day.
 |  `*facil* delete INDEX`
 
 .3+|Calendar
-|  `*cal* find /type empty`
+|  `*cal* find empty`
 |  `*cal* view /week next`
 |  `*cal* view /week this`
 

@@ -17,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ModManagerParser parser = new ModManagerParser();
 
     @Test
     public void parseCommand_clear() throws Exception {
