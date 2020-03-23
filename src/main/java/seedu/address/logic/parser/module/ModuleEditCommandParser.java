@@ -29,19 +29,18 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION);
 
         int mode = 0;
-
         Index index = null;
-
         ParseException invalidFormatException = null;
+        String preamble = argMultimap.getPreamble();
+
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
             invalidFormatException = pe;
             mode = 1;
         }
 
-        String possibleModCode = argMultimap.getValue(PREFIX_MODULE_CODE);
-        if (mode == 0 && possibleModCode != null) { // using index but mod code exists
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) { // mod code exists
             throw new ParseException(ModuleEditCommand.MESSAGE_CANNOT_EDIT_MODULE_CODE);
         }
 
@@ -58,15 +57,12 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         if (mode == 0) {
             return new ModuleEditCommand(index, editModuleDescriptor);
         } else { // User uses no index
-            if (possibleModCode == null) {
+            if (preamble.equals("") || !ModuleCode.isValidModuleCode(preamble)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ModuleEditCommand.MESSAGE_USAGE), invalidFormatException);
             }
-            if (!ModuleCode.isValidModuleCode(possibleModCode)) {
-                throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
-            }
 
-            return new ModuleEditCommand(new ModuleCode(possibleModCode), editModuleDescriptor);
+            return new ModuleEditCommand(new ModuleCode(preamble), editModuleDescriptor);
         }
     }
 
