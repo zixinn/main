@@ -58,6 +58,15 @@ public class CmdGroupCommand extends CmdCommand {
         case COMMAND_GROUP_TASK:
             return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
                     getCommands(TaskCommand.ALL_COMMAND_FORMATS)), CommandType.CMD);
+
+        case COMMAND_GROUP_CMD:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(CmdCommand.ALL_COMMAND_FORMATS)), CommandType.CMD);
+
+        case COMMAND_GROUP_EXIT:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(List.of("exit"))), CommandType.CMD);
+
         default:
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_CMD_GROUP, commandGroup));
         }

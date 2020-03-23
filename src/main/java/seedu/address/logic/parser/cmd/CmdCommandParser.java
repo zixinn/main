@@ -35,6 +35,8 @@ public class CmdCommandParser implements Parser<CmdCommand> {
         switch (commandWord) {
         case Command.COMMAND_WORD_GROUP:
             return new CmdGroupCommandParser().parse(arguments);
+        case Command.COMMAND_WORD_ALL:
+            return new CmdAllCommandParser().parse(arguments);
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_CMD_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
