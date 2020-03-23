@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
@@ -26,6 +27,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
     public static final String MESSAGE_DUPLICATE_TASK = "Task list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lesson list contains duplicate lesson(s).";
 
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST =
             "Facilitator list contains facilitator(s) whose module code does not exist in Mod Manager.";
@@ -37,6 +39,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedFacilitator> facilitators = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given modules and facilitators.
@@ -44,7 +47,8 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("modules") List<JsonAdaptedModule> modules,
                                        @JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators,
-                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+                                       @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         if (modules != null) {
             this.modules.addAll(modules);
         }
@@ -53,6 +57,10 @@ class JsonSerializableAddressBook {
         }
         if (tasks != null) {
             this.tasks.addAll(tasks);
+        }
+
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
     }
 
@@ -67,6 +75,7 @@ class JsonSerializableAddressBook {
                 .collect(Collectors.toList()));
         tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
+        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -112,6 +121,17 @@ class JsonSerializableAddressBook {
             */
             modManager.getTasks().add(task);
         }
+
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+            System.out.println("LESSON");
+            System.out.println(lesson.toString());
+            if (modManager.hasLesson(lesson)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+            }
+            modManager.getLessonList().add(lesson);
+        }
+
         return modManager;
     }
 }

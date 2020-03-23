@@ -5,7 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
+
+import javax.sound.midi.SysexMessage;
 
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
@@ -22,6 +25,12 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
     private LocalTime startTime;
     private LocalTime endTime;
     private String venue; // optional
+
+    public static final String MESSAGE_CONSTRAINTS_DAY =
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
+
+    public static final String MESSAGE_CONSTRAINTS_TIME =
+            "Time should be in HH:MM 24 hours format";
 
     public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime,
                   String venue) throws InvalidTimeRangeException {
@@ -129,6 +138,17 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
             }
         }
         return false;
+    }
+
+    public static boolean isValidTimeFormat(String time) {
+        System.out.println("TIME");
+        System.out.println(time);
+        try {
+            LocalTime.parse(time);
+        } catch (DateTimeParseException | NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
