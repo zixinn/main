@@ -6,11 +6,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
+import java.util.Optional;
+
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.module.Module;
 
 /**
  * Adds a lesson to Mod Manager.
@@ -31,6 +37,7 @@ public class LessonAddCommand extends LessonCommand {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
     private final Lesson toAdd;
 
     public LessonAddCommand(Lesson lesson) {
@@ -41,6 +48,10 @@ public class LessonAddCommand extends LessonCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.findModule(toAdd.getModuleCode()).isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        }
+
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }

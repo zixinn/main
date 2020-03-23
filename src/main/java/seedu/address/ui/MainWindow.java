@@ -277,7 +277,11 @@ public class MainWindow extends UiPart<Stage> {
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
     }
 
-    public void viewModule(Optional<Module> module) {
+    /**
+     * Changes the module view to the specified module.
+     * @param module The module to be viewed.
+     */
+    public void refreshModuleTab(Optional<Module> module) {
         if (module.isEmpty()) {
             return;
         }
@@ -316,7 +320,7 @@ public class MainWindow extends UiPart<Stage> {
             case MODULE_VIEW:
             case LESSON:
                 handleSwitchToModule();
-                viewModule(logic.getModule());
+                refreshModuleTab(logic.getModule());
                 break;
             case TASK:
                 handleSwitchToTask();
