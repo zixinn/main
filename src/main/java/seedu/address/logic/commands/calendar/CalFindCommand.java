@@ -41,6 +41,7 @@ public class CalFindCommand extends CalCommand {
         });
 
         tasks.forEach(task -> {
+            //adding tasks with time only
             if (task instanceof ScheduledTask && date.isWithinDate(task)
                 && !task.getComparableTime().get().equals(LocalTime.parse("00:00"))) {
                 schedulables.add(task);
@@ -111,5 +112,10 @@ public class CalFindCommand extends CalCommand {
 
         }
         return new CommandResult(result.toString(), CommandType.CALENDAR);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || other instanceof CalFindCommand;
     }
 }

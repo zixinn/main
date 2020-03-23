@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.calendar.CalCommand;
-import seedu.address.logic.commands.calendar.CalFindCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -38,7 +37,7 @@ public class CalCommandParser implements Parser<CalCommand> {
         case Command.COMMAND_WORD_VIEW:
             return new CalViewCommandParser().parse(arguments);
         case Command.COMMAND_WORD_FIND:
-            return new CalFindCommand();
+            return new CalFindCommandParser().parse(arguments);
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_CALENDAR_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
