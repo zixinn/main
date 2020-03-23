@@ -36,6 +36,8 @@ public class CalCommandParser implements Parser<CalCommand> {
 
         case Command.COMMAND_WORD_VIEW:
             return new CalViewCommandParser().parse(arguments);
+        case Command.COMMAND_WORD_FIND:
+            return new CalFindCommandParser().parse(arguments);
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_CALENDAR_COMMAND, HelpCommand.MESSAGE_USAGE));
         }

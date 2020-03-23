@@ -2,7 +2,6 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.List;
@@ -33,17 +32,16 @@ public class ModuleEditCommand extends ModuleCommand {
             + PREFIX_DESCRIPTION + " DESCRIPTION\n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT + " 1 "
             + PREFIX_DESCRIPTION + " new description\n"
-            + "Parameters: " + PREFIX_MODULE_CODE + " MOD_CODE "
+            + "Parameters: MOD_CODE "
             + PREFIX_DESCRIPTION + " DESCRIPTION\n"
-            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT + " "
-            + PREFIX_MODULE_CODE + " CS2103T "
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT
+            + " CS2103T "
             + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "The description to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
     public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
-    public static final String MESSAGE_CANNOT_EDIT_MODULE_CODE = "Cannot edit a module's code.";
 
     private final Index index;
     private final ModuleCode moduleCode;

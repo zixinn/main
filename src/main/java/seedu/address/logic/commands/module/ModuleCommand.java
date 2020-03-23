@@ -26,8 +26,8 @@ public abstract class ModuleCommand extends Command {
             "%s %s INDEX %s DESCRIPTION",
             COMMAND_GROUP_MOD, COMMAND_WORD_EDIT, PREFIX_DESCRIPTION);
     public static final String EDIT_FORMAT_MOD_CODE = String.format(
-            "%s %s %s MOD_CODE %s DESCRIPTION",
-            COMMAND_GROUP_MOD, COMMAND_WORD_EDIT, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION);
+            "%s %s MOD_CODE %s DESCRIPTION",
+            COMMAND_GROUP_MOD, COMMAND_WORD_EDIT, PREFIX_DESCRIPTION);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_MOD, COMMAND_WORD_LIST);
     public static final String VIEW_FORMAT = String.format("%s %s MOD_CODE",
             COMMAND_GROUP_MOD, COMMAND_WORD_VIEW);

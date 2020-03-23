@@ -22,6 +22,17 @@ public class DailySchedulableComparator implements Comparator<DailySchedulable> 
             return 1;
         }
 
+        LocalTime firstTime = o1Time.get();
+        LocalTime secondTime = o2Time.get();
+        LocalTime noTime = LocalTime.parse("00:00");
+        //put all day task (ie task with no time) behind those with actual time
+        if (firstTime.equals(noTime) && !secondTime.equals(noTime)) {
+            return 1;
+        }
+        if (secondTime.equals(noTime) && !firstTime.equals(noTime)) {
+            return -1;
+        }
+
         return o1Time.get().compareTo(o2Time.get());
     }
 }

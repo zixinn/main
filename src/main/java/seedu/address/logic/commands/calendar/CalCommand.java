@@ -15,10 +15,11 @@ import seedu.address.model.Model;
  */
 public abstract class CalCommand extends Command {
 
-    public static final List<String> ALL_COMMAND_WORDS = List.of(COMMAND_WORD_VIEW, COMMAND_WORD_FIND);
     public static final String CAL_VIEW_FORMAT = COMMAND_GROUP_CAL + " " + COMMAND_WORD_VIEW + " "
             + PREFIX_WEEK + " this/next";
-    public static final List<String> ALL_COMMAND_FORMATS = List.of(CAL_VIEW_FORMAT);
+    public static final String CAL_FIND_FORMAT = COMMAND_GROUP_CAL + " " + COMMAND_WORD_FIND
+            + " empty";
+    public static final List<String> ALL_COMMAND_FORMATS = List.of(CAL_VIEW_FORMAT, CAL_FIND_FORMAT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

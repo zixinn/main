@@ -11,6 +11,7 @@ import seedu.address.model.task.Task;
 public class Calendar {
 
     public static final String MESSAGE_CONSTRAINTS = "Week should be 'this' or 'next' only";
+    public static final int DAYS_IN_WEEK = 7;
 
     private LocalDate localDate;
 

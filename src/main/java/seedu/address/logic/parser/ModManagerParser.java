@@ -21,7 +21,7 @@ import seedu.address.logic.parser.task.TaskCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ModManagerParser {
 
     /**
      * Used for initial separation of command word and args.

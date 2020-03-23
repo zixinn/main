@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class CalendarView extends UiPart<Region> {
 
     private List<CalendarCardPanel> cardPanels = new ArrayList<>();
 
+
     @FXML
     private Label calendarTitle;
 
@@ -47,23 +50,23 @@ public class CalendarView extends UiPart<Region> {
         String[] daysOfWeek = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday", "Sunday"};
 
-        for (int col = 0; col < 7; col++) {
+        for (int col = 0; col < DAYS_IN_WEEK; col++) {
             CalendarLabel calendarLabel = new CalendarLabel(daysOfWeek[col]);
             calendarGrid.add(calendarLabel.getRoot(), col, 0);
             CalendarCardPanel calendarCardPanel = new CalendarCardPanel();
             cardPanels.add(calendarCardPanel);
             calendarGrid.add(calendarCardPanel.getRoot(), col, 1);
         }
+        Calendar[] calendars = calendar.getWeek();
+        addCards(calendars, tasks, lessons);
 
-        addCards(calendar, tasks, lessons);
     }
 
     /**
      * Adds cards to the calendar.
      */
-    public void addCards(Calendar calendar, List<Task> tasks, List<Lesson> lessons) {
-        Calendar[] calendars = calendar.getWeek();
-        for (int i = 0; i < 7; i++) {
+    public void addCards(Calendar[] calendars, List<Task> tasks, List<Lesson> lessons) {
+        for (int i = 0; i < DAYS_IN_WEEK; i++) {
             final int cnt = i;
             CalendarCardPanel panel = cardPanels.get(i);
             Calendar c = calendars[i];
