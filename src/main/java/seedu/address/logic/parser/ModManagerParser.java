@@ -44,7 +44,6 @@ public class ModManagerParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        
         switch (commandWord) {
         case Command.COMMAND_WORD_CLEAR:
             return new ClearCommand();
