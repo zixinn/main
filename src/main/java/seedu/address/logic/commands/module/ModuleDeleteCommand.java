@@ -29,6 +29,8 @@ public class ModuleDeleteCommand extends ModuleCommand {
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted module: %1$s";
 
+    public static final String MESSAGE_DELETE_NON_EXISTENT_MODULE = "%s does not exist.";
+
     private final Index targetIndex;
     private final ModuleCode moduleCode;
 
@@ -69,7 +71,10 @@ public class ModuleDeleteCommand extends ModuleCommand {
             }
         }
 
-        assert moduleToDelete != null;
+        if (moduleToDelete == null) {
+            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode.toString()));
+        }
+
         model.deleteModule(moduleToDelete);
         model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
         model.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());

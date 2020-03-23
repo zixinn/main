@@ -117,13 +117,15 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
         internalList.stream()
                 .filter(facilitator -> {
                     Set<ModuleCode> temp = facilitator.getModuleCodes();
-                    return temp.contains(toRemove) && temp.size() > 1;
+                    return !temp.contains(toRemove) || temp.size() > 1;
                 })
                 .map(facilitator -> {
                     Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
-                    moduleCodes.remove(toRemove);
-                    return new Facilitator(facilitator.getName(), facilitator.getPhone(),
-                            facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
+                    boolean hadToRemove = moduleCodes.remove(toRemove);
+                    return hadToRemove
+                            ? new Facilitator(facilitator.getName(), facilitator.getPhone(),
+                            facilitator.getEmail(), facilitator.getOffice(), moduleCodes)
+                            : facilitator;
                 })
                 .forEach(replacementList::add);
 
