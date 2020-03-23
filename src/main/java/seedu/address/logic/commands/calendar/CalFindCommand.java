@@ -1,5 +1,11 @@
 package seedu.address.logic.commands.calendar;
 
+import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,12 +16,6 @@ import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.DailySchedulable;
 import seedu.address.model.util.DailySchedulableComparator;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
 
 /**
  * Finds empty slots in calendar to user.

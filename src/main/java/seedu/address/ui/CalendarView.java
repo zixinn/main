@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,15 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
-import seedu.address.logic.commands.calendar.CalFindCommand;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.DailySchedulable;
 import seedu.address.model.util.DailySchedulableComparator;
-
-import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
 
 
 /**
