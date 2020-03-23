@@ -3,8 +3,6 @@ package seedu.address.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -22,7 +20,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 
@@ -338,9 +335,7 @@ public class MainWindow extends UiPart<Stage> {
             case EXIT:
                 handleExit();
                 break;
-                case CMD:
-                    break;
-                default:
+            default:
                 break;
             }
 

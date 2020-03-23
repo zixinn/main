@@ -6,17 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
-import java.util.Optional;
-
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.module.Module;
 
 /**
  * Adds a lesson to Mod Manager.
