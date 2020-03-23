@@ -8,8 +8,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-import javax.sound.midi.SysexMessage;
-
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
@@ -19,18 +17,18 @@ import seedu.address.model.util.DailySchedulable;
  * Represents a Lesson in Mod Manager.
  */
 public class Lesson implements Comparable<Lesson>, DailySchedulable {
+    public static final String MESSAGE_CONSTRAINTS_DAY =
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
+
+    public static final String MESSAGE_CONSTRAINTS_TIME =
+            "Time should be in HH:MM 24 hours format";
+
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;
     private LocalTime startTime;
     private LocalTime endTime;
     private String venue; // optional
-
-    public static final String MESSAGE_CONSTRAINTS_DAY =
-            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
-
-    public static final String MESSAGE_CONSTRAINTS_TIME =
-            "Time should be in HH:MM 24 hours format";
 
     public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime,
                   String venue) throws InvalidTimeRangeException {
@@ -140,9 +138,10 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
         return false;
     }
 
+    /**
+     * Checks if time is a valid time.
+     */
     public static boolean isValidTimeFormat(String time) {
-        System.out.println("TIME");
-        System.out.println(time);
         try {
             LocalTime.parse(time);
         } catch (DateTimeParseException | NullPointerException e) {

@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.util.TaskDateTime;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -85,7 +85,7 @@ public class JsonAdaptedLesson {
                     DayOfWeek.class.getSimpleName()));
         }
 
-        if (!Arrays.stream(DayOfWeek.values()).anyMatch(x -> x.toString().equals(day))) {
+        if (Arrays.stream(DayOfWeek.values()).noneMatch(x -> x.toString().equals(day))) {
             throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS_DAY);
         }
 

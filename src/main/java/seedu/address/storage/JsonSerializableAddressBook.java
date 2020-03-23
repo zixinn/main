@@ -124,8 +124,6 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType();
-            System.out.println("LESSON");
-            System.out.println(lesson.toString());
             if (modManager.hasLesson(lesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
