@@ -12,6 +12,7 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_TYPE = new Prefix("/type");
     public static final Prefix PREFIX_VENUE = new Prefix("/venue");
+    public static final Prefix PREFIX_INDEX = new Prefix("/num");
 
     public static final Prefix PREFIX_NEXT = new Prefix("/next");
     public static final Prefix PREFIX_ON = new Prefix("/on");
