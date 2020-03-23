@@ -30,16 +30,23 @@ public class ModuleEditCommand extends ModuleCommand {
             + "by the index number used in the displayed module list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MODULE_CODE + " MOD_CODE] "
-            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
+            + PREFIX_DESCRIPTION + " DESCRIPTION\n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT + " 1 "
-            + PREFIX_DESCRIPTION + "new description";
+            + PREFIX_DESCRIPTION + " new description\n"
+            + "Parameters: " + PREFIX_MODULE_CODE + " MOD_CODE "
+            + PREFIX_DESCRIPTION + " DESCRIPTION\n"
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT + " "
+            + PREFIX_MODULE_CODE + " CS2103T "
+            + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "The description to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
+    public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
+    public static final String MESSAGE_CANNOT_EDIT_MODULE_CODE = "Cannot edit a module's code.";
 
     private final Index index;
+    private final ModuleCode moduleCode;
     private final ModuleEditCommand.EditModuleDescriptor editModuleDescriptor;
 
     /**
@@ -54,18 +61,41 @@ public class ModuleEditCommand extends ModuleCommand {
 
         this.index = index;
         this.editModuleDescriptor = new ModuleEditCommand.EditModuleDescriptor(editModuleDescriptor);
+        this.moduleCode = null;
+    }
+
+    public ModuleEditCommand(ModuleCode moduleCode, ModuleEditCommand.EditModuleDescriptor editModuleDescriptor) {
+        requireNonNull(moduleCode);
+        requireNonNull(editModuleDescriptor);
+
+        this.index = null;
+        this.moduleCode = moduleCode;
+        this.editModuleDescriptor = editModuleDescriptor;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
+        Module moduleToEdit = null;
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index != null && index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+        } else if (index != null) {
+            moduleToEdit = lastShownList.get(index.getZeroBased());
+        } else { // index == null
+            assert moduleCode != null;
+            for (Module mod : lastShownList) {
+                if (mod.getModuleCode().equals(moduleCode)) {
+                    moduleToEdit = mod;
+                    break;
+                }
+            }
         }
 
-        Module moduleToEdit = lastShownList.get(index.getZeroBased());
+        if (moduleToEdit == null) {
+            throw new CommandException(String.format(MESSAGE_NON_EXISTENT_MODULE, moduleCode.toString()));
+        }
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
 
         if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
@@ -114,7 +144,16 @@ public class ModuleEditCommand extends ModuleCommand {
 
         // state check
         ModuleEditCommand e = (ModuleEditCommand) other;
-        return index.equals(e.index)
+
+        // mutual nullability field
+        boolean indexNull = (index == null && e.index == null)
+                || (index != null && e.index != null);
+        boolean moduleCodeNull = (moduleCode == null && e.moduleCode == null)
+                || (moduleCode != null && e.moduleCode != null);
+
+        return indexNull && moduleCodeNull
+                && (index == null || index.equals(e.index))
+                && (moduleCode == null || moduleCode.equals(e.moduleCode))
                 && editModuleDescriptor.equals(e.editModuleDescriptor);
     }
 

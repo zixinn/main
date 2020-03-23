@@ -24,6 +24,7 @@ public interface Model {
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
     Predicate<Facilitator> PREDICATE_SHOW_NO_FACILITATORS = unused -> false;
+    Predicate<Task> PREDICATE_SHOW_NO_TASKS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -183,6 +184,12 @@ public interface Model {
      * {@code module} must not already exist in Mod Manager.
      */
     void addTask(Task module);
+
+    /**
+     * Removes all tasks with the specified ModuleCode.
+     * The Module associated with that code is guaranteed to exist before removal.
+     */
+    void deleteTasksWithModuleCode(ModuleCode target);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

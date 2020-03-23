@@ -266,6 +266,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(key);
     }
 
+    public void removeTasksWithModuleCode(ModuleCode target) {
+        tasks.removeWithModuleCode(target);
+    }
+
     /**
      * Returns the list of modules in this {@code AddressBook}.
      * @return the list of modules.

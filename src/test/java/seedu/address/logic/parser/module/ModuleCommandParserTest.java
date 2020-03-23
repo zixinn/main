@@ -48,6 +48,10 @@ public class ModuleCommandParserTest {
                 + INDEX_FIRST.getOneBased() + " "
                 + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
         assertEquals(new ModuleEditCommand(INDEX_FIRST, descriptor), command);
+
+        ModuleEditCommand command1 = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " CS2030 "
+                + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+        assertEquals(new ModuleEditCommand(new ModuleCode("CS2030"), descriptor), command1);
     }
 
     @Test
