@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
@@ -16,6 +17,12 @@ import seedu.address.model.util.DailySchedulable;
  * Represents a Lesson in Mod Manager.
  */
 public class Lesson implements Comparable<Lesson>, DailySchedulable {
+    public static final String MESSAGE_CONSTRAINTS_DAY =
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
+
+    public static final String MESSAGE_CONSTRAINTS_TIME =
+            "Time should be in HH:MM 24 hours format";
+
     private ModuleCode moduleCode;
     private LessonType type;
     private DayOfWeek day;
@@ -129,6 +136,18 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if time is a valid time.
+     */
+    public static boolean isValidTimeFormat(String time) {
+        try {
+            LocalTime.parse(time);
+        } catch (DateTimeParseException | NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

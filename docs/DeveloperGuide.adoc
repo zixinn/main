@@ -506,62 +506,107 @@ Use case resumes at step 2.
 === Use case: UC06 - Add class
 *<<mss, MSS>>*
 
-1. User request to add a class.
-2. User provides the details of the class.
-3. Mod Manager adds a class.
+1. User request to add a class and provides the details of the new class.
+2. Mod Manager adds a class.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 [none]
-* 2a. Compulsory fields are not provided or none of the optional fields provided.
+* 1a. Compulsory fields are not provided or fields provided are invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for the correct data.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: UC07 - List classes
+*<<mss, MSS>>*
+
+1. User request to list all the classes.
+2. Mod Manager replies with the list of all classes.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. The list of classes is empty.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC08 - Find class by day
+*<<mss, MSS>>*
+
+1. User request to list all the classes by day and provides the day.
+2. Mod Manager replies with the list of classes.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. Day provided is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes at step 1.
++
+* 1b. No class on the day provided.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC09 - Find next class
+*<<mss, MSS>>*
+
+1. User request to find the next class.
+2. Mod Manager replies with the next class.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. No next class.
++
+Use case ends.
 
 [discrete]
 === Use case: UC10 - Edit class
 *<<mss, MSS>>*
 
-1. User request to edit a class.
-2. User provides the module code and class type of the class to be edited.
-3. User provides the new details of the class.
-4. Mod Manager edits the class.
+1. User request to edit a class and provides the index and necessary details to be edited.
+2. Mod Manager edits the class.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 [none]
-* 2a. Compulsory fields are not provided or fields provided are not valid.
+* 1a. Index is not provided or invalid, or details are not provided or invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for valid data.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC11 - Delete class
 *<<mss, MSS>>*
 
-1. User requests to delete a class.
-2. User provides module code and class type.
-3. Mod Manager deletes the class.
+1. User requests to delete a class and provides the index.
+2. Mod Manager deletes the class.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 [none]
-* 2a. Module code or class type provided is invalid.
+* 1a. Index is not provided or is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
-** 2a2. Mod Manager requests for valid data.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC18 - Add facilitator
