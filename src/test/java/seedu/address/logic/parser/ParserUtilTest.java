@@ -206,7 +206,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseModuleCodes_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCodes(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCodes((String) null));
     }
 
     @Test

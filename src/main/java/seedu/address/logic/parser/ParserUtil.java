@@ -157,6 +157,22 @@ public class ParserUtil {
         requireNonNull(moduleCodes);
         final Set<ModuleCode> moduleCodeSet = new HashSet<>();
         for (String moduleCode : moduleCodes) {
+            if (moduleCode.length() > 10) {
+                moduleCodeSet.addAll(parseModuleCodes(moduleCode.split("\\s+")));
+            } else {
+                moduleCodeSet.add(parseModuleCode(moduleCode));
+            }
+        }
+        return moduleCodeSet;
+    }
+
+    /**
+     * Parses {@code String... moduleCodes} into a {@code Set<ModuleCode>}.
+     */
+    public static Set<ModuleCode> parseModuleCodes(String... moduleCodes) throws ParseException {
+        requireNonNull(moduleCodes);
+        final Set<ModuleCode> moduleCodeSet = new HashSet<>();
+        for (String moduleCode : moduleCodes) {
             moduleCodeSet.add(parseModuleCode(moduleCode));
         }
         return moduleCodeSet;

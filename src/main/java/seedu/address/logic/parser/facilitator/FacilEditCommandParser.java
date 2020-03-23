@@ -75,7 +75,7 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
      * Parses {@code Collection<String> moduleCodes} into a {@code Set<ModuleCode>} if {@code moduleCodes} is non-empty.
      */
     private Optional<Set<ModuleCode>> parseModuleCodesForEdit(Collection<String> moduleCodes) throws ParseException {
-        assert moduleCodes != null;
+        requireNonNull(moduleCodes);
 
         if (moduleCodes.isEmpty()) {
             return Optional.empty();
