@@ -116,7 +116,7 @@ public class Facilitator {
         }
         if (!getModuleCodes().isEmpty()) {
             builder.append("Module codes: ");
-            getModuleCodes().forEach(builder::append);
+            getModuleCodes().forEach(moduleCode -> builder.append(moduleCode).append(" "));
         }
         return builder.toString();
     }

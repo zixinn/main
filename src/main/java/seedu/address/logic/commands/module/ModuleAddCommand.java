@@ -46,6 +46,7 @@ public class ModuleAddCommand extends ModuleCommand {
         }
 
         model.addModule(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.MODULE);
     }
 

@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
@@ -23,6 +24,7 @@ public interface Model {
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
     Predicate<Facilitator> PREDICATE_SHOW_NO_FACILITATORS = unused -> false;
+    Predicate<Task> PREDICATE_SHOW_NO_TASKS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -102,7 +104,7 @@ public interface Model {
     Optional<Module> findModule(ModuleCode moduleCode);
 
     /** Updates the module in the model to the given {@code module}. */
-    void updateModule(Module module);
+    void updateModule(Optional<Module> module);
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
@@ -134,6 +136,19 @@ public interface Model {
      * in Mod Manager.
      */
     void setFacilitator(Facilitator target, Facilitator editedFacilitator);
+
+    /**
+     * Deletes the given module code from the facilitator list.
+     * A module with the module code must exist in Mod Manager.
+     */
+    void deleteModuleCodeFromFacilitatorList(ModuleCode target);
+
+    /**
+     * Replaces the given module code {@code target} with {@code editedModuleCode} in the facilitator list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode);
 
     /** Returns an unmodifiable view of the filtered facilitator list. */
     ObservableList<Facilitator> getFilteredFacilitatorList();
@@ -171,6 +186,12 @@ public interface Model {
     void addTask(Task module);
 
     /**
+     * Removes all tasks with the specified ModuleCode.
+     * The Module associated with that code is guaranteed to exist before removal.
+     */
+    void deleteTasksWithModuleCode(ModuleCode target);
+
+    /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in Mod Manager.
      * The task identity of {@code editedTask} must not be the same as another existing task
@@ -201,4 +222,9 @@ public interface Model {
     List<Lesson> getLessons();
 
     ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
+
+    /** Updates the calendar in the model to the given {@code calendar}. */
+    void updateCalendar(Calendar calendar);
+
+    Calendar getCalendar();
 }

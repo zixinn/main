@@ -11,6 +11,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
@@ -97,7 +98,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateModule(Module module) {
+    public void updateModule(Optional<Module> module) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -128,6 +129,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -180,6 +191,11 @@ public class ModelStub implements Model {
      */
     @Override
     public void addTask(Task module) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public void deleteTasksWithModuleCode(ModuleCode target) {
         throw new AssertionError("This method should not be called");
     }
 
@@ -246,4 +262,16 @@ public class ModelStub implements Model {
     public List<Lesson> findLessonByDay(DayOfWeek day) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void updateCalendar(Calendar calendar) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+
 }

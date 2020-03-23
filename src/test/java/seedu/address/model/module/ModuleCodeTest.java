@@ -32,10 +32,12 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidModuleCode("cs2103t*")); // contains non-alphanumeric characters
 
         // valid module codes
-        assertTrue(ModuleCode.isValidModuleCode("cs")); // alphabets only
-        assertTrue(ModuleCode.isValidModuleCode("2103T")); // numbers only
-        assertTrue(ModuleCode.isValidModuleCode("cs2103t")); // alphanumeric characters
-        assertTrue(ModuleCode.isValidModuleCode("CS2103T")); // with capital letters
+        // standard NUS module codes
+        assertTrue(ModuleCode.isValidModuleCode("CS1010"));
+        assertTrue(ModuleCode.isValidModuleCode("CS2040S"));
+        assertTrue(ModuleCode.isValidModuleCode("PCS1010"));
+        assertTrue(ModuleCode.isValidModuleCode("PCS1010R"));
+        assertTrue(ModuleCode.isValidModuleCode("CS2103T"));
     }
 
 }

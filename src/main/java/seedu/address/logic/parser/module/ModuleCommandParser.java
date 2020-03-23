@@ -38,6 +38,12 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
         case Command.COMMAND_WORD_ADD:
             return new ModuleAddCommandParser().parse(arguments);
 
+        case Command.COMMAND_WORD_DELETE:
+            return new ModuleDeleteCommandParser().parse(arguments);
+
+        case Command.COMMAND_WORD_EDIT:
+            return new ModuleEditCommandParser().parse(arguments);
+
         case Command.COMMAND_WORD_LIST:
             return new ModuleListCommand();
 

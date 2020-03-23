@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
@@ -35,6 +36,8 @@ public class ModelManager implements Model {
     private final List<Lesson> filteredLesson;
     private Optional<Module> module;
     private final FilteredList<Facilitator> facilitatorsForModule;
+    private final FilteredList<Task> tasksForModule;
+    private Calendar calendar;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,6 +57,9 @@ public class ModelManager implements Model {
         module = Optional.empty();
         facilitatorsForModule = new FilteredList<>(this.addressBook.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
+        tasksForModule = new FilteredList<>(this.addressBook.getTaskList());
+        tasksForModule.setPredicate(PREDICATE_SHOW_NO_TASKS);
+        calendar = Calendar.getNowCalendar();
     }
 
     public ModelManager() {
@@ -150,9 +156,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateModule(Module module) {
-        requireNonNull(module);
-        this.module = Optional.of(module);
+    public void updateModule(Optional<Module> module) {
+        this.module = module;
     }
 
     //=========== Filtered Module List Accessors =============================================================
@@ -196,6 +201,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFacilitator);
 
         addressBook.setFacilitator(target, editedFacilitator);
+    }
+
+    @Override
+    public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
+        addressBook.removeModuleCodeFromFacilitatorList(target);
+    }
+
+    @Override
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
+        addressBook.setModuleCodeInFacilitatorList(target, editedModuleCode);
     }
 
     //=========== Filtered Facilitator List Accessors =============================================================
@@ -323,6 +338,13 @@ public class ModelManager implements Model {
         addressBook.setTask(target, editedTask);
     }
 
+    @Override
+    public void deleteTasksWithModuleCode(ModuleCode moduleCode) {
+        requireAllNonNull(moduleCode);
+
+        addressBook.removeTasksWithModuleCode(moduleCode);
+    }
+
     //=========== Filtered Task List Accessors =============================================================
 
     /**
@@ -338,5 +360,18 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    //=========== Calendar =================================================================================
+
+    @Override
+    public void updateCalendar(Calendar calendar) {
+        requireNonNull(calendar);
+        this.calendar = calendar;
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return calendar;
     }
 }

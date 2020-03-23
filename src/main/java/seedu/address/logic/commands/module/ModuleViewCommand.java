@@ -41,7 +41,7 @@ public class ModuleViewCommand extends ModuleCommand {
             throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, toView.value));
         }
 
-        model.updateModule(module.get());
+        model.updateModule(module);
         model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toView.value));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toView), CommandType.MODULE_VIEW);
     }

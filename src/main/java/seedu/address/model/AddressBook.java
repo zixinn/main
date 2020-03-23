@@ -210,6 +210,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         return facilitators.getFacilitatorList();
     }
 
+    /**
+     * Removes {@code key} from the facilitators of from this {@code AddressBook}.
+     * {@code key} must exist in Mod Manager.
+     */
+    public void removeModuleCodeFromFacilitatorList(ModuleCode key) {
+        facilitators.removeModuleCode(key);
+    }
+
+    /**
+     * Replaces the given module code {@code target} in the list with {@code editedModuleCode}.
+     * {@code target} must exist in Mod Manager.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
+        facilitators.setModuleCode(target, editedModuleCode);
+    }
+
     //// task-level operations
 
     /**
@@ -246,6 +264,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
+    }
+
+    public void removeTasksWithModuleCode(ModuleCode target) {
+        tasks.removeWithModuleCode(target);
     }
 
     /**
