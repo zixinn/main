@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -20,6 +22,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -172,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
-        lessonPanel = new LessonPanel(FXCollections.observableArrayList(logic.getLessons()));
+        lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
         taskPanel = new TaskDetailsPanel();
@@ -272,6 +277,16 @@ public class MainWindow extends UiPart<Stage> {
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
     }
 
+    public void viewModule(Optional<Module> module) {
+        if (module.isEmpty()) {
+            return;
+        }
+        ModuleCode moduleCode = module.get().getModuleCode();
+        lessonPanel = new LessonPanel(logic.getLessonListForModule(moduleCode));
+        lessonPanelPlaceholder.getChildren().clear();
+        lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+    }
+
     public ModuleListPanel getModuleListPanel() {
         return moduleListPanel;
     }
@@ -301,6 +316,7 @@ public class MainWindow extends UiPart<Stage> {
             case MODULE_VIEW:
             case LESSON:
                 handleSwitchToModule();
+                viewModule(logic.getModule());
                 break;
             case TASK:
                 handleSwitchToTask();
@@ -318,7 +334,9 @@ public class MainWindow extends UiPart<Stage> {
             case EXIT:
                 handleExit();
                 break;
-            default:
+                case CMD:
+                    break;
+                default:
                 break;
             }
 

@@ -38,6 +38,7 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
+    private Optional<ModuleCode> moduleCode;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -256,24 +257,37 @@ public class ModelManager implements Model {
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.addLesson(lesson);
+        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
+        module = Optional.ofNullable(filteredModules.get(0));
+        filteredModules.setPredicate(x -> true);
     }
 
     @Override
     public void setLesson(Lesson target, Lesson edited) {
         requireAllNonNull(target, edited);
         addressBook.setLesson(target, edited);
+        filteredModules.setPredicate(x -> x.getModuleCode().equals(edited.getModuleCode()));
+        module = Optional.ofNullable(filteredModules.get(0));
+        filteredModules.setPredicate(x -> true);
     }
 
     @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.removeLesson(lesson);
+        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
+        module = Optional.ofNullable(filteredModules.get(0));
+        filteredModules.setPredicate(x -> true);
     }
 
     @Override
     public Lesson findNextLesson() {
         LessonList lessons = addressBook.getLessons();
-        return lessons.findNextLesson();
+        Lesson lesson = lessons.findNextLesson();
+        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
+        module = Optional.ofNullable(filteredModules.get(0));
+        filteredModules.setPredicate(x -> true);
+        return lesson;
     }
 
     @Override
