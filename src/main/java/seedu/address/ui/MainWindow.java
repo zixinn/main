@@ -279,7 +279,11 @@ public class MainWindow extends UiPart<Stage> {
      * @param module The module to be viewed.
      */
     public void refreshModuleTab(Optional<Module> module) {
+        moduleDetailsPanel.changeDisplayModule(module);
         if (module.isEmpty()) {
+            lessonPanel = new LessonPanel();
+            lessonPanelPlaceholder.getChildren().clear();
+            lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
             return;
         }
         ModuleCode moduleCode = module.get().getModuleCode();
@@ -315,6 +319,8 @@ public class MainWindow extends UiPart<Stage> {
             case CLEAR:
             case MODULE:
             case MODULE_VIEW:
+                refreshModuleTab(logic.getModule());
+                break;
             case LESSON:
                 handleSwitchToModule();
                 refreshModuleTab(logic.getModule());
