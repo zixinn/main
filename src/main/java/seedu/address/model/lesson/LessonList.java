@@ -72,6 +72,14 @@ public class LessonList {
         lessons.remove(lesson);
     }
 
+    public void deleteLessonsFromModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        List<Lesson> lessonsToDelete = findLessonByModuleCode(moduleCode);
+        for (Lesson lesson : lessonsToDelete) {
+            lessons.remove(lesson);
+        }
+    }
+
     /**
      * Finds a list of lessons by day.
      * @param day The day of the lessons.
