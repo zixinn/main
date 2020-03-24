@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
-    private TaskDetailsPanel taskPanel;
+    private TaskPanel taskPanel;
     private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
     private TaskListPanel taskListPanel;
@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
-        taskPanel = new TaskDetailsPanel();
+        taskPanel = new TaskPanel(logic.getTaskListForModule());
         taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
 
         facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
@@ -318,9 +318,6 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandResult.getType()) {
             case CLEAR:
             case MODULE:
-            case MODULE_VIEW:
-                refreshModuleTab(logic.getModule());
-                break;
             case LESSON:
                 handleSwitchToModule();
                 refreshModuleTab(logic.getModule());

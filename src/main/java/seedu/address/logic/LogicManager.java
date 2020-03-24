@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveModManager(model.getAddressBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -96,6 +96,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Facilitator> getFacilitatorListForModule() {
         return model.getFacilitatorListForModule();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskListForModule() {
+        return model.getTaskListForModule();
     }
 
     @Override

@@ -19,8 +19,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
-public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+public class JsonModManagerStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonModManagerStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -31,7 +31,7 @@ public class JsonAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonModManagerStorage(Paths.get(filePath)).readModManager(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -47,53 +47,53 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatModManager.json"));
     }
 
     @Test
     public void readAddressBook_invalidModuleAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidModuleAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidModuleModManager.json"));
     }
 
     @Test
     public void readAddressBook_invalidFacilitatorAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidFacilitatorAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidFacilitatorModManager.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidModuleAddressBook_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readAddressBook(
-                "invalidAndValidModuleAddressBook.json"));
+                "invalidAndValidModuleModManager.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidFacilitatorAddressBook_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readAddressBook(
-                "invalidAndValidFacilitatorAddressBook.json"));
+                "invalidAndValidFacilitatorModManager.json"));
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempModManager.json");
         AddressBook original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+        JsonModManagerStorage jsonModManagerStorage = new JsonModManagerStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonModManagerStorage.saveModManager(original, filePath);
+        ReadOnlyAddressBook readBack = jsonModManagerStorage.readModManager(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addFacilitator(HOON);
         original.removeFacilitator(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonModManagerStorage.saveModManager(original, filePath);
+        readBack = jsonModManagerStorage.readModManager(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
         original.addFacilitator(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonModManagerStorage.saveModManager(original); // file path not specified
+        readBack = jsonModManagerStorage.readModManager().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
 
     }
@@ -108,8 +108,8 @@ public class JsonAddressBookStorageTest {
      */
     private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonModManagerStorage(Paths.get(filePath))
+                    .saveModManager(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

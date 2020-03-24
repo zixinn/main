@@ -143,14 +143,14 @@ image:BetterModelClassDiagram.png[]
 === Storage component
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[]
+image::StorageClassDiagram1.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in json format and read it back.
+* can save the Mod Manager data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -160,6 +160,247 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+=== Module feature
+The module feature manages the modules in Mod Manager and is represented by the `Module` class.
+A module has a `ModuleCode` and an optional `Description`.
+
+It supports the following operations:
+
+* add - Adds a module to Mod Manager.
+* list - Lists all modules in Mod Manager.
+* view - View information of a module in Mod Manager.
+* edit - Edits a module in Mod Manager.
+* delete - Deletes a module in Mod Manager.
+
+==== Implementation
+
+===== Adding a module
+The add module feature allows users to add a module to Mod Manager.
+This feature is facilitated by `ModuleCommandParser`, `ModuleAddCommandParser` and `ModuleAddCommand`.
+The operation is exposed in the `Model` interface as `Model#addModule()`.
+
+Given below is an example usage scenario and how the module add mechanism behaves at each step.
+
+1. The user executes the module add command and provides the module code and description of the module to be added.
+2. `ModuleAddCommandParser` creates a new `Module` based on the module code and description.
+3. `ModuleAddCommandParser` creates a new `ModuleAddCommand` based on the module.
+4. `LogicManager` executes the `ModuleAddCommand`.
+5. `ModManager` adds the module to the `UniqueModuleList`.
+6. `ModelManager` updates the `filteredModules` in `ModelManager`.
+
+The following sequence diagram shows how the module add command works:
+
+.Sequence diagram for `mod add` command
+image::ModuleAddSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleAddCommandParser` and `ModuleAddCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a module add command:
+
+.Activity diagram for `mod add` command
+image::ModuleAddActivityDiagram.png[]
+
+===== Listing all modules
+The list module feature allows users to list all modules in Mod Manager.
+This feature is facilitated by `ModuleCommandParser` and `ModuleListCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredModuleList()`.
+
+Given below is an example usage scenario and how the module list mechanism behaves at each step.
+
+1. The user executes the module list command.
+2. `ModuleCommandParser` creates a new `ModuleListCommand`.
+3. `LogicManager` executes the `ModuleListCommand`.
+4. `ModelManager` updates the `filteredModules` in `ModelManager`.
+
+The following sequence diagram shows how the module list command works:
+
+.Sequence diagram for `mod list` command
+image::ModuleListSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser` and `ModuleListCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a module list command:
+
+.Activity diagram for `mod list` command
+image::ModuleListActivityDiagram.png[]
+
+==== Design considerations
+
+===== Aspect: Whether to support editing of module code
+* **Alternative 1 (current choice):** Allow users to only edit the description of a module.
+** Pros: Easier to implement.
+** Cons: More rigid for users.
+* **Alternative 2:** Allow users to edit the module code of a module.
+** Pros: Provides more flexibility for users.
+** Cons: Implementation is more complex as the classes, tasks and facilitators all store module codes and have to be edited too.
+
+=== Facilitator feature
+The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
+A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
+A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
+
+It supports the following operations:
+
+* add - Adds a facilitator to Mod Manager.
+* list - Lists all facilitators in Mod Manager.
+* view - Finds a facilitator in Mod Manager by name.
+* edit - Edits a facilitator in Mod Manager.
+* delete - Deletes a facilitator in Mod Manager.
+
+==== Implementation
+
+===== Adding a facilitator
+The add facilitator feature allows users to add a facilitator to Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilAddCommandParser` and `FacilAddCommand`.
+The operation is exposed in the `Model` interface as `Model#addFacilitator()`.
+
+Given below is an example usage scenario and how the facilitator add mechanism behaves at each step.
+
+1. The user executes the facilitator add command and provides the name, phone, email, office and module code of the facilitator to be added.
+2. `FacilitatorAddCommandParser` creates a new `Facilitator` based on the name, phone, email, office and module code.
+3. `FacilitatorAddCommandParser` creates a new `FacilitatorAddCommand` based on the facilitator.
+4. `LogicManager` executes the `FacilitatorAddCommand`.
+5. `ModManager` adds the facilitator to the `UniqueFacilitatorList`.
+6. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator add command works:
+
+.Sequence diagram for `facil add` command
+image::FacilitatorAddSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilitatorCommandParser`, `FacilitatorAddCommandParser` and `FacilitatorAddCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator add command:
+
+.Activity diagram for `facil add` command
+image::FacilitatorAddActivityDiagram.png[]
+
+===== Listing all facilitators
+The list facilitator feature allows users to list all facilitators in Mod Manager.
+This feature is facilitated by `FacilCommandParser` and `FacilListCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
+
+Given below is an example usage scenario and how the facilitator list mechanism behaves at each step.
+
+1. The user executes the facilitator list command.
+2. `FacilCommandParser` creates a new `FacilListCommand`.
+3. `LogicManager` executes the `FacilListCommand`.
+4. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator list command works:
+
+.Sequence diagram for `facil list` command
+image::FacilitatorListSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser` and `FacilListCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator list command:
+
+.Activity diagram for `facil list` command
+image::FacilitatorListActivityDiagram.png[]
+
+===== Finding facilitators
+The find facilitator feature allows users to find a facilitator by name in Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilFindCommandParser` and `FacilFindCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
+
+Given below is an example usage scenario and how the facilitator find mechanism behaves at each step.
+
+1. The user executes the facilitator find command and provides the names of the facilitators to search for.
+2. `FacilFindCommandParser` creates a new `FacilFindCommand` based on the names.
+3. `LogicManager` executes the `FacilFindCommand`.
+4. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator find command works:
+
+.Sequence diagram for `facil find` command
+image::FacilitatorFindSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser`, `FacilFindCommandParser`, `FacilFindCommand` and `NameContainsKeyword` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator find command:
+
+.Activity diagram for `facil find` command
+image::FacilitatorFindActivityDiagram.png[]
+
+===== Editing a facilitator
+The edit facilitator feature allows users to edit a facilitator from Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilEditCommandParser` and `FacilEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
+
+Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step.
+
+1. The user executes the facilitator edit command and provides the index of the facilitator to be edited and the fields to be edited.
+2. `FacilEditCommandParser` creates a new `EditFacilitatorDescriptor` with the fields to be edited.
+3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index and `EditFacilitatorDescriptor`.
+4. `LogicManager` executes the `FacilEditCommand`.
+5. `FacilEditCommand` retrieves the facilitator to be edited.
+6. `FacilEditCommand` creates a new `Facilitator`.
+7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
+8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator edits command works:
+
+.Sequence diagram for `facil edit` command
+image::FacilitatorEditSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser`, `FacilEditCommandParser`, `EditFacilitatorDescriptor` and `FacilEditCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator edit command:
+
+.Activity diagram for `facil edt` command
+image::FacilitatorEditActivityDiagram.png[]
+
+===== Deleting a facilitator
+The delete facilitator feature allows users to delete a facilitator from Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`.
+
+Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step.
+
+1. The user executes the facilitator delete command and provides the index of the facilitator to be deleted.
+2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index.
+3. `LogicManager` executes the `FacilDeleteCommand`.
+4. `FacilDeleteCommand` retrieves the facilitator to be deleted.
+5. `ModManager` deletes the facilitator from the `UniqueFacilitatorList`.
+
+The following sequence diagram shows how the facilitator delete command works:
+
+.Sequence diagram for `facil delete` command
+image::FacilitatorDeleteSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator delete command:
+
+.Activity diagram for `facil delete` command
+image::FacilitatorDeleteActivityDiagram.png[]
+
+==== Design considerations
+
+===== Aspect: How the facilitator is edited
+* **Alternative 1 (current choice):** Create a new facilitator with the edited fields and replace the existing facilitator with the new facilitator.
+** Pros: Preserves the immutability of the `Facilitator` object.
+** Cons: Overhead in creating a new `Facilitator` object for every edit operation.
+* **Alternative 2:** Modify the existing facilitator directly.
+** Pros: More convenient and lower overhead to edit a facilitator by setting the relevant fields without creating a new `Facilitator` object.
+** Cons: The `Facilitator` object has to be mutable and may be edited unintentionally.
+
+===== Aspect: How the facilitator list is stored
+* **Alternative 1 (current choice):** Store all facilitators in a single facilitator list.
+** Pros: Will not have to maintain multiple lists. Less memory usage as each facilitator is represented once. Will not have to iterate through multiple lists to find all instances of a particular facilitator when executing facilitator commands.
+** Cons: Have to iterate through the whole list to find facilitators for a particular module when executing module commands.
+* **Alternative 2:** Store facilitators for each module in a separate list.
+** Pros: Able to find facilitators for a particular module easily when executing module commands.
+** Cons: May contain duplicates as some facilitators may have multiple module codes. Have to iterate through multiple lists when executing facilitator commands.
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
@@ -391,28 +632,27 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *<<mss, MSS>>*
 
-1.  User requests to add a module.
-2.  User provides the module code and description of the module.
-3.  Mod Manager adds the module.
+1.  User requests to add a module and provides the module code and description of the module.
+2.  Mod Manager adds the module.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. Compulsory fields are not provided.
+* 1a. Compulsory fields are not provided.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
-* 2b. The module code is more than 10 characters or the description is more than 60 characters.
+* 1b. The module code or description is invalid.
 +
 [none]
-** 2b1. Mod Manager shows an error message.
+** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC02 - List modules
@@ -436,71 +676,67 @@ Use case ends.
 
 *<<mss, MSS>>*
 
-1.  User requests to view a module.
-2.  User provides the module code.
-3.  Mod Manager shows all information related to the module.
+1.  User requests to view a module and provides the module code.
+2.  Mod Manager shows all information related to the module.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given module code is invalid.
+* 1a. The given module code is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC04 - Edit module
 
 *<<mss, MSS>>*
 
-1.  User requests to edit a module.
-2.  User provides the index.
-3.  User provides the new module code and description.
-4.  Mod Manager edits the module.
+1.  User requests to edit a module and provides the index or module code and the new description.
+2.  Mod Manager edits the module.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given index is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
-* 3a. The new module code is more than 10 characters or the new description is more than 60 characters.
+* 1b. The new description is invalid.
 +
 [none]
-** 3a1. Mod Manager shows an error message.
+** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 3.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC05 - Delete module
 
 *<<mss, MSS>>*
 
-1.  User requests to delete a module.
-2.  User provides the index.
-3.  Mod Manager deletes the module.
+1.  User requests to delete a module and provides the index or module code.
+2.  Mod Manager deletes the module.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given index is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC06 - Add class
@@ -613,29 +849,28 @@ Use case resumes at step 1.
 
 *<<mss, MSS>>*
 
-1.  User requests to add a facilitator.
-2.  User provides the details of the facilitator.
-3.  Mod Manager adds the facilitator.
+1.  User requests to add a facilitator and provides the details of the facilitator.
+2.  Mod Manager adds the facilitator.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. Compulsory fields are not provided or none of the optional fields provided.
+* 1a. Compulsory fields are not provided or none of the optional fields provided.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [none]
-* 2b. Fields provided are invalid.
+* 1b. Fields provided are invalid.
 +
 [none]
-** 2b1. Mod Manager shows an error message.
+** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC19 - List facilitators
@@ -659,16 +894,15 @@ Use case ends.
 
 *<<mss, MSS>>*
 
-1.  User requests to find a facilitator.
-2.  User enters a keyword.
-3.  Mod Manager shows the list of facilitators whose names contain the keyword.
+1.  User requests to find a facilitator and provides a keyword.
+2.  Mod Manager shows the list of facilitators whose names contain the keyword.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. None of the names of the facilitators contain the keyword.
+* 1a. None of the names of the facilitators contain the keyword.
 +
 Use case ends.
 
@@ -677,51 +911,48 @@ Use case ends.
 
 *<<mss, MSS>>*
 
-1.  User requests to edit a facilitator.
-2.  User provides the index.
-3.  User provides the new details.
-4.  Mod Manager edits the facilitator.
+1.  User requests to edit a facilitator and provides the index or module code and new details.
+2.  Mod Manager edits the facilitator.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given index is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [none]
-* 3a. Fields provided are invalid.
+* 1a. Fields provided are invalid.
 +
 [none]
-** 3a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 3.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC22 - Delete facilitator
 
 *<<mss, MSS>>*
 
-1.  User requests to delete a facilitator.
-2.  User provides the index.
-3.  Mod Manager deletes the facilitator.
+1.  User requests to delete a facilitator and provides the index or module code.
+2.  Mod Manager deletes the facilitator.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 2a. The given index is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
-** 2a1. Mod Manager shows an error message.
+** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: UC23 - View calendar

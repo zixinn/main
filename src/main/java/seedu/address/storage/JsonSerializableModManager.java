@@ -19,10 +19,10 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ModManager that is serializable to JSON format.
  */
 @JsonRootName(value = "modmanager")
-class JsonSerializableAddressBook {
+class JsonSerializableModManager {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "Facilitator list contains duplicate facilitator(s).";
@@ -42,13 +42,13 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given modules and facilitators.
+     * Constructs a {@code JsonSerializableModManager} with the given modules and facilitators.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("modules") List<JsonAdaptedModule> modules,
-                                       @JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators,
-                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
-                                       @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+    public JsonSerializableModManager(@JsonProperty("modules") List<JsonAdaptedModule> modules,
+                                      @JsonProperty("facilitators") List<JsonAdaptedFacilitator> facilitators,
+                                      @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+                                      @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         if (modules != null) {
             this.modules.addAll(modules);
         }
@@ -67,9 +67,9 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableModManager}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableModManager(ReadOnlyAddressBook source) {
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
         facilitators.addAll(source.getFacilitatorList().stream().map(JsonAdaptedFacilitator::new)
                 .collect(Collectors.toList()));
@@ -79,7 +79,7 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code ModManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
