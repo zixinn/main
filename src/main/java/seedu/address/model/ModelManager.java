@@ -30,8 +30,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Module> filteredModules;
+    private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Task> filteredTasks;
     private final List<Lesson> filteredLesson;
     private Optional<Module> module;
@@ -380,6 +380,21 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getTaskListForModule() {
+        return tasksForModule;
+    }
+
+    @Override
+    public void updateTaskListForModule(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        tasksForModule.setPredicate(predicate);
     }
 
     //=========== Calendar =================================================================================

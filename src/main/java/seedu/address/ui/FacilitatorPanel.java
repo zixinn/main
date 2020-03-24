@@ -23,7 +23,7 @@ public class FacilitatorPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Facilitator} using a {@code FacilitatorCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Facilitator} using a {@code FacilitatorModCard}.
      */
     class FacilitatorListViewCell extends ListCell<Facilitator> {
         @Override

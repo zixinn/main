@@ -1,0 +1,11 @@
+@startuml
+start
+:User executes facilitator find command;
+:Parser parses keywords;
+if () then ([keyword is not empty])
+    :Logic executes command;
+    :Model updates filtered facilitator list;
+else ([else])
+endif
+stop
+@enduml

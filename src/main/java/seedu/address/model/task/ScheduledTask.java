@@ -17,7 +17,7 @@ public class ScheduledTask extends Task {
     private TaskDateTime taskDateTime;
     private boolean isDone;
 
-    protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
+    public ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
         this.description = description;
         this.moduleCode = Optional.of(moduleCode);
         this.taskDateTime = taskDateTime;
