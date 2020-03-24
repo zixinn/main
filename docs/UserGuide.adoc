@@ -232,12 +232,11 @@ Parameter constraints:
 * Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assignment homework` will return `Programming Assignment 2`, `Homework 3`.
 ****
 
-==== Finding tasks by date
+==== Filter tasks by date
 
-Finds tasks occurring on a specific date, month or year. +
-Format: `task find [/date DATE] [/month MONTH] [/year YEAR]` +
+Filters tasks occurring on a specific date, month or year. +
+Format: `task filter [/date DATE] [/month MONTH] [/year YEAR]` +
 Example: `task find /month 02`
-
 
 ==== Finding upcoming tasks
 
