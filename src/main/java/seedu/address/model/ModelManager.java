@@ -281,6 +281,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeLessonFromModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        addressBook.removeLessonFromModule(moduleCode);
+    }
+
+    @Override
     public Lesson findNextLesson() {
         LessonList lessons = addressBook.getLessons();
         Lesson lesson = lessons.findNextLesson();
