@@ -72,6 +72,10 @@ public class LessonList {
         lessons.remove(lesson);
     }
 
+    /**
+     * Delete lessons with {@code moduleCode}.
+     * @param moduleCode The targeted module code.
+     */
     public void deleteLessonsFromModule(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
         List<Lesson> lessonsToDelete = findLessonByModuleCode(moduleCode);
