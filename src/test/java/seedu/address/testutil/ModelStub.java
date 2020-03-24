@@ -244,6 +244,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void removeLessonFromModule(ModuleCode moduleCode) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public List<Lesson> getLessons() {
         throw new AssertionError("This method should not be called.");
     }
