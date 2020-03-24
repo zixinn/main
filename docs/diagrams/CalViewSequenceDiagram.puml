@@ -106,8 +106,6 @@ deactivate CalViewCommand
 CalViewCommand -[hidden]-> LogicManager
 destroy CalViewCommand
 
-
-
 [<--LogicManager
 deactivate LogicManager
 @enduml

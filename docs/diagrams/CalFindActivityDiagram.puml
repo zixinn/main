@@ -7,7 +7,7 @@ start
 
 if () then ([else])
     :Logic executes the command;
-    :Ui displays a list of empty slots to user;
+    :Ui displays a list of empty slots in calendar to user;
 else ([argument is not specified or invalid])
 endif
 stop

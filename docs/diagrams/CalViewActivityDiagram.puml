@@ -7,6 +7,7 @@ start
 
 if () then ([else])
     :Logic executes the command;
+    :Model updates calendar;
     if () then ([week equals "this"])
         :Ui shows calendar for this week;
     else ([else])
