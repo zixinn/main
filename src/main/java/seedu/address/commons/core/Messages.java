@@ -19,5 +19,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX =
             "The facilitator index provided is invalid!";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
+    public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_INVALID_CMD_GROUP = "%s group does not exist.";
 }
