@@ -224,6 +224,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Task> getTaskListForModule() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateTaskListForModule(Predicate<Task> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasLesson(Lesson lesson) {
         throw new AssertionError("This method should not be called.");
     }

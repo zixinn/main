@@ -99,6 +99,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getTaskListForModule() {
+        return model.getTaskListForModule();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
