@@ -403,7 +403,7 @@ image::FacilitatorDeleteActivityDiagram.png[]
 ** Cons: May contain duplicates as some facilitators may have multiple module codes. Have to iterate through multiple lists when executing facilitator commands.
 
 // tag::undoredo[]
-=== Class Feature
+=== Class feature
 The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
 A class has a `ModuleCode`, `LessonType`, `day` which is a `DayOfWeek` object, `startTime`, `endTime` which are `LocalTime` objects and `venue` which is a `String`.
 
@@ -437,6 +437,14 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity diagram for `class add` command
 image::LessonAddActivityDiagram.png[]
 
+==== Design considerations
+===== Aspect: Prefix of day and time
+* **Alternative 1: (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
+** Pros: User types less.
+** Cons: When user wants to edit one field only, user have to key in other unnecessary details.
+* **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
+** Pros: Easier to parse and less invalid inputs to take note of. User can also edit any field.
+** Cons: More prefixes to remember and command will be very lengthy.
 
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
