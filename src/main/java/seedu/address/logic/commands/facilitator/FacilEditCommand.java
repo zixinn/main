@@ -42,7 +42,7 @@ public class FacilEditCommand extends FacilCommand {
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
-            + "[" + PREFIX_MODULE_CODE + " MOD_CODE]...\n"
+            + "[" + PREFIX_MODULE_CODE + " MOD_CODES]...\n"
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

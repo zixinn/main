@@ -26,8 +26,7 @@ public class FacilAddCommand extends FacilCommand {
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
-            + PREFIX_MODULE_CODE + " MOD_CODE "
-            + "[" + PREFIX_MODULE_CODE + " MORE_MOD_CODES]...\n"
+            + PREFIX_MODULE_CODE + " MOD_CODE  + [MORE_MOD_CODES]...\n"
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_ADD + " "
             + PREFIX_NAME + " Akshay Narayan "
             + PREFIX_PHONE + " 98765432 "
@@ -39,6 +38,7 @@ public class FacilAddCommand extends FacilCommand {
     public static final String MESSAGE_NOT_ADDED = "At least one of the optional fields must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
+    public static final String MESSAGE_NO_MODULE_CODES_FOUND = "No module codes found";
 
     private final Facilitator toAdd;
 

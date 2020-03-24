@@ -15,7 +15,7 @@ public abstract class CmdCommand extends Command {
     public static final String ALL_FORMAT = String.format("%s %s", COMMAND_GROUP_CMD, COMMAND_WORD_ALL);
     public static final String GROUP_FORMAT =
             String.format("%s %s COMMAND_GROUP", COMMAND_GROUP_CMD, COMMAND_WORD_GROUP);
-    public static final List<String> ALL_FORMATS = List.of(
+    public static final List<String> ALL_COMMAND_FORMATS = List.of(
             ALL_FORMAT, GROUP_FORMAT);
 
     @Override

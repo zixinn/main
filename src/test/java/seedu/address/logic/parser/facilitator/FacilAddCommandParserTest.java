@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_OFFICE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_CHAIN;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -21,6 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS3230;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS4215;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -68,11 +71,13 @@ public class FacilAddCommandParserTest {
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
 
         // multiple module codes - all accepted
-        Facilitator expectedFacilitatorMultipleModuleCodes = new FacilitatorBuilder(BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T).build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_BOB
-                        + MODULE_CODE_DESC_CS2103T + MODULE_CODE_DESC_CS2101,
-                new FacilAddCommand(expectedFacilitatorMultipleModuleCodes));
+        // chain of modules
+        Facilitator expectedWithChain = new FacilitatorBuilder(BOB)
+                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T,
+                        VALID_MODULE_CODE_CS4215, VALID_MODULE_CODE_CS3230)
+                .build();
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + OFFICE_DESC_BOB + MODULE_CODE_CHAIN, new FacilAddCommand(expectedWithChain));
     }
 
     @Test
