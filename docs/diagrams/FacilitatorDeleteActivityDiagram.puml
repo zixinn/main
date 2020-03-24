@@ -1,0 +1,15 @@
+@startuml
+start
+:User executes facilitator delete command;
+:Parser parses index;
+if () then ([index is valid])
+    :Logic executes command;
+    if () then ([index is not out of bounds])
+        :Model deletes facilitator from UniqueFacilitatorList;
+        :Logic saves ModManager to Storage;
+    else ([else])
+    endif
+else ([else])
+endif
+stop
+@enduml
