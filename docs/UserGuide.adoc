@@ -115,7 +115,7 @@ Example: `mod add /code CS2103T /desc Software Engineering`
 Shows a list of modules. +
 Format: `mod list`
 
-==== Viewing information related to a module
+==== Viewing information of a module
 
 Shows all classes, tasks and facilitators for a module. +
 Format: `mod view MOD_CODE` +
@@ -124,14 +124,14 @@ Example: `mod view CS2103T`
 ==== Editing a module
 
 Edits the information of the module. +
-Format: `mod edit INDEX [/desc DESCRIPTION]` or `mod edit MOD_CODE [/desc DESCRIPTION]`
+Format: `mod edit INDEX /desc DESCRIPTION` or `mod edit MOD_CODE /desc DESCRIPTION`
 
 ****
-* Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * Existing values will be updated to the input values.
 * MOD_CODE should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
+* You can remove description linked to the facilitator by typing `/desc` without specifying any input after it.
 ****
 
 Example: `mod edit 1 /desc Software Engineering` or `mod edit CS2103T /desc Software Engineering`
@@ -142,7 +142,7 @@ Deletes the module, along with classes, facilitators and tasks for that module. 
 Format: `mod delete INDEX` or `mod delete MOD_CODE`
 
 ****
-* Deletes the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Example: `mod delete 2` or `mod delete CS2103T`
@@ -236,14 +236,16 @@ Example: `task delete /code CS2103T /task IP week 4`
 ==== Adding a facilitator
 
 Adds a facilitator to the module. +
-Format: `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
+Format: `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
+or `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
 ****
-* At least one of the optional fields must be provided.
+* At least one of the optional fields (phone, email, office) must be provided.
 * A facilitator can be linked to 1 or more modules.
 ****
 
-Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T`
+Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T CS2101`
+or `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T /code CS2101`
 
 ==== Viewing all facilitators
 Shows a list of all facilitators. +
@@ -265,7 +267,8 @@ Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
+Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
+or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
 
 ****
 * Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
@@ -371,7 +374,7 @@ Receive reminders for deadlines and events the next day.
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
 | `*mod* view MOD_CODE`
-| `*mod* edit INDEX [/desc DESCRIPTION]` or `*mod* edit MOD_CODE [/desc DESCRIPTION]`
+| `*mod* edit INDEX /desc DESCRIPTION` or `*mod* edit MOD_CODE /desc DESCRIPTION`
 | `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
 .7+|Class
@@ -393,10 +396,12 @@ Receive reminders for deadlines and events the next day.
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
 .5+|Facilitator
-|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
+|  `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
+or `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 |  `*facil* list`
 |  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
-|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE...]`
+or `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* delete INDEX`
 
 .3+|Calendar

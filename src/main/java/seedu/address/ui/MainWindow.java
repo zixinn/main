@@ -319,8 +319,6 @@ public class MainWindow extends UiPart<Stage> {
             case CLEAR:
             case MODULE:
             case MODULE_VIEW:
-                refreshModuleTab(logic.getModule());
-                break;
             case LESSON:
                 handleSwitchToModule();
                 refreshModuleTab(logic.getModule());
