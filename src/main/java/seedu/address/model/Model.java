@@ -215,6 +215,8 @@ public interface Model {
 
     void removeLesson(Lesson lesson);
 
+    void removeLessonFromModule(ModuleCode moduleCode);
+
     Lesson findNextLesson();
 
     List<Lesson> findLessonByDay(DayOfWeek day);

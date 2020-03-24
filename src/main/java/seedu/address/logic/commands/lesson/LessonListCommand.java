@@ -25,8 +25,10 @@ public class LessonListCommand extends LessonCommand {
             lessonListString = "There is currently no lessons";
         } else {
             lessonListString = "Lessons include:\n";
+            int index = 1;
             for (Lesson lesson : lessons) {
-                lessonListString = lessonListString + "\u2022 " + lesson + "\n";
+                lessonListString = lessonListString + index + ". " + lesson + "\n";
+                index++;
             }
         }
         return new CommandResult(lessonListString, CommandType.LESSON);

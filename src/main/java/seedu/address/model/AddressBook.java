@@ -316,6 +316,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes lessons with {@code moduleCode}
+     */
+    public void removeLessonFromModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        lessons.deleteLessonsFromModule(moduleCode);
+    }
+
+    /**
      * Finds the next lesson in Mod Manager that is going to happen.
      */
     public Lesson findNextLesson() {

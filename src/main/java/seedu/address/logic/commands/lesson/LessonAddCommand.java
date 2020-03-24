@@ -31,6 +31,7 @@ public class LessonAddCommand extends LessonCommand {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
     private final Lesson toAdd;
 
     public LessonAddCommand(Lesson lesson) {
@@ -41,6 +42,10 @@ public class LessonAddCommand extends LessonCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.findModule(toAdd.getModuleCode()).isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        }
+
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }

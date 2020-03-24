@@ -27,6 +27,10 @@ public class LessonPanel extends UiPart<Region> {
         lessons.setCellFactory(listView -> new LessonPanel.LessonListViewCell());
     }
 
+    public LessonPanel() {
+        super(FXML);
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
      */

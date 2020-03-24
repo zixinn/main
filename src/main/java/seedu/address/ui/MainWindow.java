@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -20,6 +20,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -172,7 +174,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
 
-        lessonPanel = new LessonPanel(FXCollections.observableArrayList(logic.getLessons()));
+        lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
         taskPanel = new TaskDetailsPanel();
@@ -272,6 +274,24 @@ public class MainWindow extends UiPart<Stage> {
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
     }
 
+    /**
+     * Changes the module view to the specified module.
+     * @param module The module to be viewed.
+     */
+    public void refreshModuleTab(Optional<Module> module) {
+        moduleDetailsPanel.changeDisplayModule(module);
+        if (module.isEmpty()) {
+            lessonPanel = new LessonPanel();
+            lessonPanelPlaceholder.getChildren().clear();
+            lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+            return;
+        }
+        ModuleCode moduleCode = module.get().getModuleCode();
+        lessonPanel = new LessonPanel(logic.getLessonListForModule(moduleCode));
+        lessonPanelPlaceholder.getChildren().clear();
+        lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+    }
+
     public ModuleListPanel getModuleListPanel() {
         return moduleListPanel;
     }
@@ -299,8 +319,11 @@ public class MainWindow extends UiPart<Stage> {
             case CLEAR:
             case MODULE:
             case MODULE_VIEW:
+                refreshModuleTab(logic.getModule());
+                break;
             case LESSON:
                 handleSwitchToModule();
+                refreshModuleTab(logic.getModule());
                 break;
             case TASK:
                 handleSwitchToTask();
