@@ -37,7 +37,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         this.description = source.getDescription().toString();
         this.taskTime = source.getTimeString();
-        this.moduleCode = source.getModuleCode().map(x -> x.toString()).orElse("");
+        this.moduleCode = source.getModuleCode().toString();
     }
 
     /**

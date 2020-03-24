@@ -13,7 +13,7 @@ import seedu.address.model.util.Description;
  */
 public abstract class Task implements DailySchedulable {
     public abstract Description getDescription();
-    public abstract Optional<ModuleCode> getModuleCode();
+    public abstract ModuleCode getModuleCode();
     public abstract Optional<TaskDateTime> getTaskDateTime();
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();

@@ -12,12 +12,12 @@ import seedu.address.model.util.Description;
  */
 public class NonScheduledTask extends Task {
     private Description description;
-    private Optional<ModuleCode> moduleCode;
+    private ModuleCode moduleCode;
     private boolean isDone;
 
     protected NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = Optional.of(moduleCode);
+        this.moduleCode = moduleCode;
     }
 
     /**
@@ -33,7 +33,7 @@ public class NonScheduledTask extends Task {
     }
 
     @Override
-    public Optional<ModuleCode> getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -71,7 +71,7 @@ public class NonScheduledTask extends Task {
 
     @Override
     public String toString() {
-        String modShow = moduleCode.map(code -> " [" + code.toString() + "] ").orElse("");
+        String modShow = " [" + moduleCode.toString() + "] ";
         return "[" + getStatusIcon() + "]" + " " + modShow + description.toString();
     }
 }

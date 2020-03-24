@@ -6,10 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
@@ -19,8 +23,8 @@ public class TaskAddCommand extends TaskCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_ADD
             + ": Adds a task to Mod Manager. "
-            + "Parameters: ["
-            + PREFIX_MODULE_CODE + "] MOD_CODE "
+            + "Parameters: "
+            + PREFIX_MODULE_CODE + " MOD_CODE "
             + PREFIX_DESCRIPTION + " TASK_DESCRIPTION "
             + "[" + PREFIX_ON + " DD/MM/YYYY] "
             + "[" + PREFIX_AT + " hh/mm] \n"
@@ -35,6 +39,7 @@ public class TaskAddCommand extends TaskCommand {
             + "Please choose another name, or another time slot. Thanks!";
     public static final String MESSAGE_NOT_ADDED = "Unable to add this task. "
             + "There is no information received. Please try again!";
+    public static final String MESSAGE_MODULE_NOT_EXISTENT = "%s is not an existing module!.";
     private final Task toAdd;
 
     /**
@@ -50,6 +55,13 @@ public class TaskAddCommand extends TaskCommand {
         requireNonNull(model);
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+        ModuleCode taskMod = toAdd.getModuleCode();
+        Optional<Module> mod = model.findModule(taskMod);
+
+        if (mod.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_MODULE_NOT_EXISTENT, taskMod.toString()));
         }
 
         model.addTask(toAdd);

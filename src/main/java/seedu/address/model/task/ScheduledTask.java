@@ -13,13 +13,13 @@ import seedu.address.model.util.Description;
  */
 public class ScheduledTask extends Task {
     private Description description;
-    private Optional<ModuleCode> moduleCode;
+    private ModuleCode moduleCode;
     private TaskDateTime taskDateTime;
     private boolean isDone;
 
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = Optional.of(moduleCode);
+        this.moduleCode = moduleCode;
         this.taskDateTime = taskDateTime;
         this.isDone = false;
     }
@@ -42,7 +42,7 @@ public class ScheduledTask extends Task {
     }
 
     @Override
-    public Optional<ModuleCode> getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -88,7 +88,7 @@ public class ScheduledTask extends Task {
 
     @Override
     public String toString() {
-        String modShow = moduleCode.map(code -> " [" + code.toString() + "] ").orElse("");
+        String modShow = " [" + moduleCode.toString() + "] ";
         return "[" + getStatusIcon() + "]" + " " + modShow + description.toString()
                 + " " + taskDateTime.toString();
     }
