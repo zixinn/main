@@ -4,6 +4,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.List;
 
@@ -27,9 +30,12 @@ public abstract class TaskCommand extends Command {
     public static final String DELETE_FORMAT = String.format("%s %s %s DESCRIPTION",
             COMMAND_GROUP_TASK, COMMAND_WORD_DELETE,
             PREFIX_DESCRIPTION);
+    public static final String FILTER_FORMAT = String.format("%s %s %s DAY %s MONTH %s YEAR",
+            COMMAND_GROUP_TASK, COMMAND_WORD_FILTER,
+            PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_LIST);
 
-    public static final List<String> ALL_COMMAND_FORMATS = List.of(ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT);
+    public static final List<String> ALL_COMMAND_FORMATS = List.of(ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, FILTER_FORMAT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

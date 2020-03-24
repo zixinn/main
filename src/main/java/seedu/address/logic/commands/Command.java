@@ -26,6 +26,7 @@ public abstract class Command {
     public static final String COMMAND_WORD_DELETE = "delete";
     public static final String COMMAND_WORD_EDIT = "edit";
     public static final String COMMAND_WORD_FIND = "find";
+    public static final String COMMAND_WORD_FILTER = "filter";
     public static final String COMMAND_WORD_GROUP = "group";
     public static final String COMMAND_WORD_HELP = "help";
     public static final String COMMAND_WORD_LIST = "list";
