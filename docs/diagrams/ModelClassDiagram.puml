@@ -27,6 +27,9 @@ Package Lesson {
 Package Task {
 }
 
+Package Calendar {
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
@@ -43,7 +46,7 @@ AddressBook *--> "1" UniqueFacilitatorList
 AddressBook *--> "1" UniqueTaskList
 AddressBook *--> "1" LessonList
 
-
+ModelManager -->"1" Calendar
 ModelManager -->"1" Module : filtered list
 ModelManager -->"1" Facilitator : filtered list
 ModelManager -->"1" Task : filtered list
