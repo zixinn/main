@@ -225,7 +225,7 @@ Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 
 Parameter constraints:
 ****
-* The search works across modules. For example, you may want to find all the `assignment` currently due.
+* The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
 * Search for description is case insensitive. e.g `programming` will match `Programming`.
 * The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
 * Tasks are only searched in the description.
@@ -242,12 +242,15 @@ Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
 
 Parameter constraints:
 ****
+* The search works across modules, and no `/code` commands are required.
+* Tasks are only searched for its date. Tasks that do not have dates or times
+will not be found in this list.
 * If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
 * An invalid day, month, or year number can be provided, e.g.
 `/day 32`, `/month 13`, `year -1`, however, no matching tasks
 will be returned by the search. On the other hand, Invalid inputs such as
 `/day monday`, `/month December`, `/year this year` are not allowed,
-and you will have to to follow the input requirements using valid numbers for
+and you will have to follow the input requirements using valid numbers for
 `/day`, `/month`, and `/year` instead.
 * Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
 match only tasks that are on 10 April in any year.
