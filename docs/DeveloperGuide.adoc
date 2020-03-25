@@ -425,7 +425,7 @@ Given below is an example usage scenario and how the taskitator add mechanism be
 The following sequence diagram shows how the taskitator add command works:
 
 .Sequence diagram for `facil add` command
-image::FacilitatorAddSequenceDiagram.png[]
+image::TaskAddSequenceDiagram.png[]
 
 NOTE: The lifeline for `FacilitatorCommandParser`, `FacilitatorAddCommandParser` and `FacilitatorAddCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -433,7 +433,7 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 The following activity diagram summarizes what happens when a user executes a facilitator add command:
 
 .Activity diagram for `facil add` command
-image::FacilitatorAddActivityDiagram.png[]
+image::TaskAddActivityDiagram.png[]
 
 ===== Listing all facilitators
 The list facilitator feature allows users to list all facilitators in Mod Manager.
@@ -573,17 +573,47 @@ It's very complex to implement the method `compareTo` of `Comparable` interface 
 when one, or both of the `TaskDateTime` attributes can be `null`.
 
 ===== Aspect: The association between `Module` and `Task`
-* **Alternative 1 (current choice):** Each `Task`
-** Pros: Will not have to maintain multiple lists. Less memory usage as each facilitator is represented once. Will not have to iterate through multiple lists to find all instances of a particular facilitator when executing facilitator commands.
-** Cons: Have to iterate through the whole list to find facilitators for a particular module when executing module commands.
+* **Alternative 1 (current choice):** Aggregation: Each `Task` can have an unique `ModuleCode` tag, which uniquely identifies which `Module` the task belongs to.
+This is a aggregation relationship, which is weaker than composition in our second approach.
+
+.Class diagram, a `Task` acts as a container for `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
+
+image::ModuleTaskAggregationDiagram.png[]
+
+** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
+to be aware that there are a list of `Task` s for it.
+** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
+our second approach, but this is a trade-off given the time constraints.
+
 * **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
 If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
-[diagram]
+
+.Class diagram, a `Module` consists of `Task` objects.
+image::ModuleTaskCompositionDiagram.png[]
+
 ** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
 For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
 such as assignments, homework, term tests, and exams.
-** Cons: Difficulty in implementation due to time constraints, and strong content and data coupling. More overhead in communicating
+** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
 and collaborating with the team member responsible for the `Module` component, as mentioned above.
+
+//===== Aspect: FooBar
+//* **Alternative 1 (current choice):** Aggregation: Each `Task` has an unique `ModuleCode` tag to indicate which `Module` the task belongs to.
+//This is a aggregation relationship, which is weaker than composition in our second approach.
+//diagram]
+//** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
+//to be aware that there are a list of `Task` s for it.
+//** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
+//our second approach, but this is a trade-off given the time constraints.
+
+//* **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
+//If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
+//[diagram]
+//** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
+//For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
+//such as assignments, homework, term tests, and exams.
+//** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
+//and collaborating with the team member responsible for the `Module` component, as mentioned above.
 
 //ta
 === Calendar Feature
