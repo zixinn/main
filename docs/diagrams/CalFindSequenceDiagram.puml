@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+skinparam ArrowFontSize 50
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -14,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("cal find empty")
+[-> LogicManager : execute\n("cal find empty")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("cal find empty")
+LogicManager -> ModManagerParser : parseCommand\n("cal find empty")
 activate ModManagerParser
 
 create CalCommandParser
@@ -27,7 +28,7 @@ activate CalCommandParser
 CalCommandParser --> ModManagerParser
 deactivate CalCommandParser
 
-ModManagerParser -> CalCommandParser : parse("find empty")
+ModManagerParser -> CalCommandParser : parse\n("find empty")
 activate CalCommandParser
 
 create CalFindCommandParser
@@ -37,7 +38,7 @@ activate CalFindCommandParser
 CalFindCommandParser --> CalCommandParser
 deactivate CalFindCommandParser
 
-CalCommandParser -> CalFindCommandParser : parse("empty")
+CalCommandParser -> CalFindCommandParser : parse\n("empty")
 activate CalFindCommandParser
 
 create CalFindCommand

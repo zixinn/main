@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
@@ -183,7 +184,7 @@ public interface Model {
      * Adds the given task.
      * {@code module} must not already exist in Mod Manager.
      */
-    void addTask(Task module);
+    void addTask(Task module) throws ParseException;
 
     /**
      * Removes all tasks with the specified ModuleCode.
@@ -206,7 +207,7 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredTaskList(Predicate<Task> predicate);
+    void updateFilteredTaskList(Predicate<Task> predicate) throws ParseException;
 
     /** Returns an unmodifiable view of the filtered task list. */
     ObservableList<Task> getTaskListForModule();

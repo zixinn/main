@@ -1,5 +1,8 @@
 @startuml
+scale 0.6
 !include style.puml
+
+skinparam ArrowFontSize 55
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -17,10 +20,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("facil add /name Akshay \n/phone 98765432 /code CS2103T")
+[-> LogicManager : execute("facil add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("facil add /name Akshay \n/phone 98765432 /code CS2103T")
+LogicManager -> ModManagerParser : parseCommand("facil add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate ModManagerParser
 
 create FacilCommandParser
@@ -30,7 +33,7 @@ activate FacilCommandParser
 FacilCommandParser --> ModManagerParser
 deactivate FacilCommandParser
 
-ModManagerParser -> FacilCommandParser : parse("add /name Akshay \n/phone 98765432 /code CS2103T")
+ModManagerParser -> FacilCommandParser : parse("add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate FacilCommandParser
 
 create FacilAddCommandParser
@@ -40,11 +43,11 @@ activate FacilAddCommandParser
 FacilAddCommandParser --> FacilCommandParser
 deactivate FacilAddCommandParser
 
-FacilCommandParser -> FacilAddCommandParser : parse("/name Akshay \n/phone 98765432 /code CS2103T")
+FacilCommandParser -> FacilAddCommandParser : parse("/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate FacilAddCommandParser
 
 create Facilitator
-FacilAddCommandParser -> Facilitator : Facilitator(Akshay, 98765432, null, null, [CS2103T])
+FacilAddCommandParser -> Facilitator : Facilitator(Akshay, \n98765432,\n null,\n null, \n[CS2103T])
 activate Facilitator
 
 Facilitator --> FacilAddCommandParser : f
