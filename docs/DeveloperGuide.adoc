@@ -180,7 +180,7 @@ The add module feature allows users to add a module to Mod Manager.
 This feature is facilitated by `ModuleCommandParser`, `ModuleAddCommandParser` and `ModuleAddCommand`.
 The operation is exposed in the `Model` interface as `Model#addModule()`.
 
-Given below is an example usage scenario and how the module add mechanism behaves at each step.
+Given below is an example usage scenario and how the module add mechanism behaves at each step:
 
 1. The user executes the module add command and provides the module code and description of the module to be added.
 2. `ModuleAddCommandParser` creates a new `Module` based on the module code and description.
@@ -207,7 +207,7 @@ The list module feature allows users to list all modules in Mod Manager.
 This feature is facilitated by `ModuleCommandParser` and `ModuleListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredModuleList()`.
 
-Given below is an example usage scenario and how the module list mechanism behaves at each step.
+Given below is an example usage scenario and how the module list mechanism behaves at each step:
 
 1. The user executes the module list command.
 2. `ModuleCommandParser` creates a new `ModuleListCommand`.
@@ -257,7 +257,7 @@ The add facilitator feature allows users to add a facilitator to Mod Manager.
 This feature is facilitated by `FacilCommandParser`, `FacilAddCommandParser` and `FacilAddCommand`.
 The operation is exposed in the `Model` interface as `Model#addFacilitator()`.
 
-Given below is an example usage scenario and how the facilitator add mechanism behaves at each step.
+Given below is an example usage scenario and how the facilitator add mechanism behaves at each step:
 
 1. The user executes the facilitator add command and provides the name, phone, email, office and module code of the facilitator to be added.
 2. `FacilitatorAddCommandParser` creates a new `Facilitator` based on the name, phone, email, office and module code.
@@ -284,7 +284,7 @@ The list facilitator feature allows users to list all facilitators in Mod Manage
 This feature is facilitated by `FacilCommandParser` and `FacilListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
 
-Given below is an example usage scenario and how the facilitator list mechanism behaves at each step.
+Given below is an example usage scenario and how the facilitator list mechanism behaves at each step:
 
 1. The user executes the facilitator list command.
 2. `FacilCommandParser` creates a new `FacilListCommand`.
@@ -309,7 +309,7 @@ The find facilitator feature allows users to find a facilitator by name in Mod M
 This feature is facilitated by `FacilCommandParser`, `FacilFindCommandParser` and `FacilFindCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
 
-Given below is an example usage scenario and how the facilitator find mechanism behaves at each step.
+Given below is an example usage scenario and how the facilitator find mechanism behaves at each step:
 
 1. The user executes the facilitator find command and provides the names of the facilitators to search for.
 2. `FacilFindCommandParser` creates a new `FacilFindCommand` based on the names.
@@ -334,7 +334,7 @@ The edit facilitator feature allows users to edit a facilitator from Mod Manager
 This feature is facilitated by `FacilCommandParser`, `FacilEditCommandParser` and `FacilEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
 
-Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step.
+Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step:
 
 1. The user executes the facilitator edit command and provides the index of the facilitator to be edited and the fields to be edited.
 2. `FacilEditCommandParser` creates a new `EditFacilitatorDescriptor` with the fields to be edited.
@@ -363,7 +363,7 @@ The delete facilitator feature allows users to delete a facilitator from Mod Man
 This feature is facilitated by `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand`.
 The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`.
 
-Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step.
+Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step:
 
 1. The user executes the facilitator delete command and provides the index of the facilitator to be deleted.
 2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index.
@@ -401,6 +401,91 @@ image::FacilitatorDeleteActivityDiagram.png[]
 * **Alternative 2:** Store facilitators for each module in a separate list.
 ** Pros: Able to find facilitators for a particular module easily when executing module commands.
 ** Cons: May contain duplicates as some facilitators may have multiple module codes. Have to iterate through multiple lists when executing facilitator commands.
+
+//tag::calendar[]
+=== Calendar Feature
+The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
+
+It supports the following operations:
+
+* view - Views the schedules and tasks in a whole week in Mod Manager.
+* find - Finds empty slots in a week from current day to end of the week in Mod Manager.
+
+==== Implementation
+
+===== Viewing the calendar
+The view calendar feature allows users to view the calendar for a week in Mod Manager.
+This feature is facilitated by `CalCommandParser`, `CalViewCommandParser` and `CalViewCommand`. The calendar is exposed in the `Model` interface in `Module#updateCalendar()` and it is retrieved in `MainWindow` to show the timeline for the specified week to users.
+
+Given below is an example usage scenario and how the calendar view mechanism behaves at each step:
+
+1. The user executes the calendar view command and provides which week to be viewed. The week to be viewed can be this or next week.
+2. `CalViewCommandParser` creates a new `Calendar` based on the specified week.
+3. `CalViewCommandParser` creates a new `CalViewCommand` based on the `Calendar`.
+4. `LogicManager` executes the `CalViewCommand`.
+5. `ModelManager` updates the calendar in `ModelManager`.
+6. `MainWindow` retrieves the calendar from `LogicManager` which retrieves from `ModelManager`.
+7. `MainWindow` shows the calendar.
+
+The following sequence diagram shows how the calendar view command works:
+
+.Sequence diagram for `cal view` command
+image::CalViewSequenceDiagram.png[]
+
+NOTE: The lifeline for `CalCommandParser`, `CalViewCommandParser` and `CalViewCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a calendar view command:
+
+.Activity diagram for 'cal view command'
+image::CalViewActivityDiagram.png[]
+
+===== Finding empty slots in calendar
+The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by CalCommandParser, CalFindCommandParser and CalFindCommand.
+
+Given below is an example usage scenario and how the calendar find mechanism behaves at each step:
+
+1. The user executes the calendar find command.
+2. CalFindCommandParser creates a new CalFindCommand.
+3. LogicManager executes the CalFindCommand.
+
+The following sequence diagram shows how the calendar find command works:
+
+.Sequence diagram for `cal find` command
+image::CalFindSequenceDiagram.png[]
+
+NOTE: The lifeline for CalCommandParser, CalFindCommandParser and CalFindCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a calendar find command:
+
+.Activity diagram for `cal find command`
+image::CalFindActivityDiagram.png[]
+
+==== Design considerations
+
+===== Aspect: Calendar appearance
+* **Alternative 1 (current choice):** Displaying the days of a week in calendar from left to right.
+** Pros: The whole week can be seen on one screen without having users to scroll down for a particular day.
+** Cons: Words that are long in number of characters may not be able to be displayed in a single line.
+* **Alternative 2:** Displaying the days of a week in the calendar from top to bottom.
+** Pros: Tasks and schedules that have description that are long can be displayed in a single line.
+** Cons: There is a need for users to scroll down to see a particular day.
+If there are many tasks and schedules in a day, the other days after it will be pushed downwards and this requires even more scrolling for users.
+
+Alternative 1 is chosen as it is better that people are able to see their whole schedules and tasks for a week in one look.
+It makes better use of space than alternative 2 where the right side is usually not used.
+
+===== Aspect: Command syntax for calendar find command
+* **Alternative 1 (current choice):** User is required to input `cal find empty`.
+** Pros: It is short in command length.
+** Cons: Since there is only one type of calendar find, `empty` may seem redundant.
+* **Alternative 2:** User is required to input `cal find /type empty`.
+** Pros: With the need to input `/type`, it can be clear about the type of find the command is trying to do.
+This is because without the `/type`, it is possible that users thought that the command is finding the word `empty`.
+** Cons: It can be tedious for users to type `/type` and this increases the command length.
+
+Alternative 1 is chosen because it is shorter than alternative 2 and hence it can be easier for users to type.
+It is easier to implement too. The word `empty` is kept to allow users to know what the find command is for.
+
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
@@ -483,8 +568,6 @@ image::CommitActivityDiagram.png[]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-=== Calendar Feature
 
 
 // tag::dataencryption[]
