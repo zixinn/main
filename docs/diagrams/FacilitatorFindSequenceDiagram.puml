@@ -1,5 +1,8 @@
 @startuml
+scale 0.6
 !include style.puml
+
+skinparam ArrowFontSize 60
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -15,10 +18,10 @@ participant "p:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate M
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("facil find Akshay")
+[-> LogicManager : execute\n("facil find Akshay")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("facil find Akshay")
+LogicManager -> ModManagerParser : parseCommand\n("facil find Akshay")
 activate ModManagerParser
 
 create FacilCommandParser

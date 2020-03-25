@@ -1,5 +1,7 @@
 @startuml
+scale 0.65
 !include style.puml
+skinparam ArrowFontSize 50
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -17,10 +19,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueModuleList" as UniqueModuleList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("mod add /code CS2103T")
+[-> LogicManager : execute("mod add\n /code CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("mod add /code CS2103T")
+LogicManager -> ModManagerParser : parseCommand("mod add\n /code CS2103T")
 activate ModManagerParser
 
 create ModuleCommandParser
@@ -30,7 +32,7 @@ activate ModuleCommandParser
 ModuleCommandParser --> ModManagerParser
 deactivate ModuleCommandParser
 
-ModManagerParser -> ModuleCommandParser : parse("add /code CS2103T")
+ModManagerParser -> ModuleCommandParser : parse("add\n /code CS2103T")
 activate ModuleCommandParser
 
 create ModuleAddCommandParser

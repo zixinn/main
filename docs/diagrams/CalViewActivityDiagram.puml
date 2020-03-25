@@ -1,4 +1,5 @@
 @startuml
+scale 1.2
 start
 :User enters cal view command;
 :Parser parses the command;
