@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.lesson.LessonAddCommand;
 import seedu.address.logic.commands.lesson.LessonEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -31,15 +32,14 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                 args, PREFIX_MODULE_CODE, PREFIX_AT, PREFIX_VENUE, PREFIX_TYPE, PREFIX_NEXT);
 
         Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    LessonEditCommand.MESSAGE_USAGE), pe));
-        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         LessonEditCommand.EditLessonDescriptor editLessonDescriptor = new LessonEditCommand.EditLessonDescriptor();
+
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) == null && argMultimap.getValue(PREFIX_TYPE) == null
+                && argMultimap.getValue(PREFIX_AT) == null && argMultimap.getValue(PREFIX_VENUE) == null) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) {
             editLessonDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
