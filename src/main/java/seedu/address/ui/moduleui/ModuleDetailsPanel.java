@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.moduleui;
 
 import java.util.Optional;
 
@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
+import seedu.address.ui.UiPart;
 
 /**
  * A ui for the module details bar that is displayed at the top of the module tab.

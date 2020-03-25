@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.taskui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of tasks.
