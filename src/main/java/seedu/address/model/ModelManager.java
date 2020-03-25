@@ -43,13 +43,13 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given modManager and userPrefs.
      */
-    public ModelManager(ReadOnlyModManager addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModManager modManager, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(modManager, userPrefs);
 
-        logger.fine("Initializing with Mod Manager: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Mod Manager: " + modManager + " and user prefs " + userPrefs);
 
-        this.modManager = new ModManager(addressBook);
+        this.modManager = new ModManager(modManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFacilitators = new FilteredList<>(this.modManager.getFacilitatorList());
         filteredModules = new FilteredList<>(this.modManager.getModuleList());

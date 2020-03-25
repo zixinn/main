@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyModManager> addressBookOptional;
+        Optional<ReadOnlyModManager> modManagerOptional;
         ReadOnlyModManager initialData;
         try {
-            addressBookOptional = storage.readModManager();
-            if (!addressBookOptional.isPresent()) {
+            modManagerOptional = storage.readModManager();
+            if (!modManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Mod Manager");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = modManagerOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Mod Manager");
             initialData = new ModManager();
