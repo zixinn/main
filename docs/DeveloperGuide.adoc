@@ -451,7 +451,8 @@ image::CalFindActivityDiagram.png[]
 .New design for calendar appearance (alternative 1)
 image::NewCalendar.png[]
 
-.Old design for calendar appearnce (alternative 2)
+
+.Old design for calendar appearance (alternative 2)
 image::OldCalendar.png[]
 
 * **Alternative 1 (current choice):** Displaying the days of a week in calendar from left to right.

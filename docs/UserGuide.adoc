@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
-* *`command all`* : lists all available commands in our Mod Manager.
+* *`cmd all`* : lists all available commands in our Mod Manager.
 * *`mod add /code CS2103T /desc Software Engineering`* : adds our module CS2103T to our module list.
 * *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this conveniently.
 * *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module.
@@ -54,30 +54,45 @@ Here are some example commands that you can try:
 === Using Mod Manager
 This section offers an overview of Mod Manager's layout so that you can find what you need easily.
 
-There are three main areas in Mod Manager:
+There are two main areas in Mod Manager:
 
-. A __task bar with all the module codes__ at the top of the screen.
 . A __command box__ and __result display box__ at the bottom of the screen.
-. A __dashboard__ that occupies most of the screen, which tells you the module code and name,
-facilitators' information, classes information, and tasks or deadlines that you need to complete.
-
-The *_taskbar_* at the top of the screen lists all of the modules that you are taking this semester.
-Clicking in one of these tabs will lead you to the section related to that module.
-
-.The taskbar
-image::foo.png[]
+. A __main viewing area__ that occupies most of the screen.
 
 The *_command box_* is the area for you to enter commands. The result of each command will be shown
-in the *_result display box_*, immediately below the command box.
+in the *_result display box_*, immediately above the command box.
 
 .The command box and result display box
-image::foo.png[]
+image::commandAndResultBox.png[]
 
-The *_dashboard_* shows all the contents and task for your module. It contains information about
-the module, facilitators' information, classes information, and tasks or deadlines that you need to complete.
+The *_main viewing area_* shows all the contents for one of the four tabs at any point in time.
+The four tabs are **Module**, **Facilitators**, **Tasks** and **Calendar**
 
-.The dashboard
-image::foo.png[]
+* **Module** tab contains information about lessons, tasks and facilitators for a particular module.
+It also shows the list of modules you currently have.
++
+
+.Module tab
+image::Ui.png[]
+
+* **Facilitators** tab contains information about all the facilitators you currently have.
++
+
+.Facilitators tab
+image::Facil.png[]
+
+* **Tasks** tab contains information about all the tasks you currently have.
++
+
+.Tasks tab
+image::Task.png[]
+
+* **Calendar** tab shows tasks and lessons in a week.
++
+
+.Calendar tab
+image::Calendar.png[]
+
 [[Features]]
 == Features
 
@@ -119,8 +134,8 @@ Format: `mod list`
 ==== Viewing information of a module
 
 Shows all classes, tasks and facilitators for a module. +
-Format: `mod view /code MOD_CODE` +
-Example: `mod view /code CS2103T`
+Format: `mod view MOD_CODE` +
+Example: `mod view CS2103T`
 
 ==== Editing a module
 
@@ -136,19 +151,19 @@ Parameter constraints:
 * You can remove description linked to the facilitator by typing `/desc` without specifying any input after it.
 ****
 
-Example: `mod edit 1 /code CS2103`
+Example: `mod edit 1 /desc Software Engineering` or `mod edit CS2103T /desc Software Engineering`
 
 ==== Deleting a module
 
 Deletes the module, along with classes, facilitators and tasks for that module. +
-Format: `mod delete INDEX`
+Format: `mod delete INDEX` or `mod delete MOD_CODE`
 
 Parameter constraints:
 ****
 * Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: `mod delete 2`
+Example: `mod delete 2` or `mod delete CS2103T`
 
 === Managing classes : `class`
 
@@ -187,9 +202,17 @@ Example: `class edit 1 /code CS9000 /venue Home`
 
 ==== Deleting a class
 
-Deletes the class from the module. Class is selected by its index in the class list. +
+Deletes the class from the module. There are 2 ways you can delete a class. +
+
+Select a class by its index in the full class list. You can see the full class list by using `class list`. +
+
 Format: `class delete INDEX` +
-Example: `class delete INDEX`
+Example: `class delete 1` +
+
+Select a class by its index in the module's class list. +
+
+Format: `class delete /code MOD_CODE /num INDEX` +
+Example: `class delete /code CS2103T /num 1` +
 
 === Managing tasks : `task`
 
@@ -282,9 +305,8 @@ or `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFI
 
 Parameter constraints:
 ****
-=======
 * At least one of the optional fields (phone, email, office) must be provided.
-* A facilitator can be linked to 1 or more modules.
+* A facilitator can be linked to one or more modules.
 ****
 
 Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T CS2101`
@@ -311,7 +333,6 @@ Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-=======
 Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
 
@@ -321,7 +342,7 @@ Parameter constraints:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
-* You can remove phone, email, office and module codes linked to the facilitator by typing `/phone`, `/email`, `/office` and `/code` respectively without specifying any input after it.
+* You can remove phone, email or office linked to the facilitator by typing `/phone`, `/email` or `/office` respectively without specifying any input after it.
 ****
 
 Example: `facil edit 1 /name Akshay Narayan /email hisnewemail@nus.edu.sg`
@@ -352,8 +373,8 @@ Format: `cal view /week next`
 
 ==== Finding empty slots
 
-Finds empty slots in the calendar. +
-Format: `cal find /type empty`
+Finds and lists empty slots from current day to end of the week of the current day. +
+Format: `cal find empty`
 
 === Listing commands : `cmd`
 
@@ -375,7 +396,7 @@ The command(s) closest to your mistyped one will be shown: both the syntax forma
 
 === Clearing all entries : `clear`
 
-Clears all entries from Mod Manager
+Clears all entries from Mod Manager. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -420,7 +441,6 @@ Receive reminders for deadlines and events the next day.
 
 .Summary of command formats
 [%autowidth]
-[%autowidth]
 |=====
 |*Category* |*Commands*
 .5+|Module
@@ -430,8 +450,8 @@ Receive reminders for deadlines and events the next day.
 | `*mod* edit INDEX /desc DESCRIPTION` or `*mod* edit MOD_CODE /desc DESCRIPTION`
 | `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
-.6+|Class
-|  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
+.7+|Class
+|  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]`
 |  `*class* list`
 |  `*class* find /at DAY`
 |  `*class* find /next`
@@ -448,7 +468,6 @@ Receive reminders for deadlines and events the next day.
 | `*task* edit /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
-=======
 .5+|Facilitator
 |  `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
 or `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
@@ -459,17 +478,19 @@ or `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/
 |  `*facil* delete INDEX`
 
 .3+|Calendar
-|  `*cal* find /type empty`
+|  `*cal* find empty`
 |  `*cal* view /week next`
 |  `*cal* view /week this`
 
 .2+|Command
-|  `*command* all`
-|  `*command* feature COMMAND_NAME`
+|  `*cmd* all`
+|  `*cmd* group COMMAND_WORD`
+
+.1+|Clear
+|  `*clear*`
 
 .1+|Help
 |  `*help*`
 
 .1+|Exit
 |  `*exit*`
-
