@@ -1,43 +1,43 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ModManager;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withFacilitator("John", "Doe").build();}
+ *     {@code ModManager ab = new AddressBookBuilder().withFacilitator("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private ModManager modManager;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        modManager = new ModManager();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(ModManager modManager) {
+        this.modManager = modManager;
     }
 
     /**
-     * Adds a new {@code Module} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Module} to the {@code ModManager} that we are building.
      */
     public AddressBookBuilder withModule(Module module) {
-        addressBook.addModule(module);
+        modManager.addModule(module);
         return this;
     }
 
     /**
-     * Adds a new {@code Facilitator} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Facilitator} to the {@code ModManager} that we are building.
      */
     public AddressBookBuilder withFacilitator(Facilitator facilitator) {
-        addressBook.addFacilitator(facilitator);
+        modManager.addFacilitator(facilitator);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public ModManager build() {
+        return modManager;
     }
 }

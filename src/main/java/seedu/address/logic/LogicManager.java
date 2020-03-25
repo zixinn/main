@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ModManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
@@ -33,12 +33,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final ModManagerParser addressBookParser;
+    private final ModManagerParser modManagerParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new ModManagerParser();
+        modManagerParser = new ModManagerParser();
     }
 
     @Override
@@ -46,11 +46,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = modManagerParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveModManager(model.getAddressBook());
+            storage.saveModManager(model.getModManager());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -59,8 +59,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyModManager getModManager() {
+        return model.getModManager();
     }
 
     @Override

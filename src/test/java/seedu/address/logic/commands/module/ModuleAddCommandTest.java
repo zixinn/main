@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 import seedu.address.testutil.ModelStub;
@@ -116,8 +116,8 @@ public class ModuleAddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyModManager getModManager() {
+            return new ModManager();
         }
     }
 }

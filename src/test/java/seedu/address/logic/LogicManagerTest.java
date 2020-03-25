@@ -28,7 +28,7 @@ import seedu.address.logic.commands.facilitator.FacilListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.storage.JsonModManagerStorage;
@@ -154,7 +154,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -180,7 +180,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveModManager(ReadOnlyAddressBook modManager, Path filePath) throws IOException {
+        public void saveModManager(ReadOnlyModManager modManager, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

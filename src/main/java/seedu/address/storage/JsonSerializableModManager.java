@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
@@ -65,11 +65,11 @@ class JsonSerializableModManager {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyModManager} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableModManager}.
      */
-    public JsonSerializableModManager(ReadOnlyAddressBook source) {
+    public JsonSerializableModManager(ReadOnlyModManager source) {
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
         facilitators.addAll(source.getFacilitatorList().stream().map(JsonAdaptedFacilitator::new)
                 .collect(Collectors.toList()));
@@ -83,8 +83,8 @@ class JsonSerializableModManager {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook modManager = new AddressBook();
+    public ModManager toModelType() throws IllegalValueException {
+        ModManager modManager = new ModManager();
         for (JsonAdaptedModule jsonAdaptedModule : modules) {
             Module module = jsonAdaptedModule.toModelType();
             if (modManager.hasModule(module)) {

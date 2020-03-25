@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 
 public class JsonModManagerStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonModManagerStorageTest");
@@ -30,7 +30,7 @@ public class JsonModManagerStorageTest {
         assertThrows(NullPointerException.class, () -> readAddressBook(null));
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyModManager> readAddressBook(String filePath) throws Exception {
         return new JsonModManagerStorage(Paths.get(filePath)).readModManager(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -75,26 +75,26 @@ public class JsonModManagerStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempModManager.json");
-        AddressBook original = getTypicalAddressBook();
+        ModManager original = getTypicalAddressBook();
         JsonModManagerStorage jsonModManagerStorage = new JsonModManagerStorage(filePath);
 
         // Save in new file and read back
         jsonModManagerStorage.saveModManager(original, filePath);
-        ReadOnlyAddressBook readBack = jsonModManagerStorage.readModManager(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        ReadOnlyModManager readBack = jsonModManagerStorage.readModManager(filePath).get();
+        assertEquals(original, new ModManager(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addFacilitator(HOON);
         original.removeFacilitator(ALICE);
         jsonModManagerStorage.saveModManager(original, filePath);
         readBack = jsonModManagerStorage.readModManager(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new ModManager(readBack));
 
         // Save and read without specifying file path
         original.addFacilitator(IDA);
         jsonModManagerStorage.saveModManager(original); // file path not specified
         readBack = jsonModManagerStorage.readModManager().get(); // file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new ModManager(readBack));
 
     }
 
@@ -106,7 +106,7 @@ public class JsonModManagerStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyModManager addressBook, String filePath) {
         try {
             new JsonModManagerStorage(Paths.get(filePath))
                     .saveModManager(addressBook, addToTestDataPathIfNotNull(filePath));
@@ -117,6 +117,6 @@ public class JsonModManagerStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
+        assertThrows(NullPointerException.class, () -> saveAddressBook(new ModManager(), null));
     }
 }

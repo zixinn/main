@@ -34,25 +34,25 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 
-public class AddressBookTest {
+public class ModManagerTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final ModManager modManager = new ModManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getFacilitatorList());
+        assertEquals(Collections.emptyList(), modManager.getFacilitatorList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> modManager.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        ModManager newData = getTypicalAddressBook();
+        modManager.resetData(newData);
+        assertEquals(newData, modManager);
     }
 
     @Test
@@ -61,9 +61,9 @@ public class AddressBookTest {
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(new ArrayList<>(), newFacilitators, new ArrayList<>());
+        ModManagerStub newData = new ModManagerStub(new ArrayList<>(), newFacilitators, new ArrayList<>());
 
-        assertThrows(DuplicateFacilitatorException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateFacilitatorException.class, () -> modManager.resetData(newData));
     }
 
     @Test
@@ -71,143 +71,143 @@ public class AddressBookTest {
         // Two modules with the same identity fields
         Module otherModule = new ModuleBuilder(CS2103T).withDescription(VALID_DESCRIPTION_CS2101).build();
         List<Module> newModules = Arrays.asList(CS2103T, otherModule);
-        AddressBookStub newData = new AddressBookStub(newModules, new ArrayList<>(), new ArrayList<>());
+        ModManagerStub newData = new ModManagerStub(newModules, new ArrayList<>(), new ArrayList<>());
 
-        assertThrows(DuplicateModuleException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateModuleException.class, () -> modManager.resetData(newData));
     }
 
     @Test
     public void hasModuleCode_nullModuleCode_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasModuleCode(null));
+        assertThrows(NullPointerException.class, () -> modManager.hasModuleCode(null));
     }
 
     @Test
     public void hasModuleCode_moduleCodeNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasModuleCode("CS2103T"));
+        assertFalse(modManager.hasModuleCode("CS2103T"));
     }
 
     @Test
     public void hasModuleCode_moduleCodeInAddressBook_returnsTrue() {
-        addressBook.addModule(CS2103T);
-        assertTrue(addressBook.hasModuleCode("CS2103T"));
+        modManager.addModule(CS2103T);
+        assertTrue(modManager.hasModuleCode("CS2103T"));
     }
 
     @Test
     public void hasModule_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasModule(null));
+        assertThrows(NullPointerException.class, () -> modManager.hasModule(null));
     }
 
     @Test
     public void hasModule_moduleNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasModule(CS2103T));
+        assertFalse(modManager.hasModule(CS2103T));
     }
 
     @Test
     public void hasModule_moduleInAddressBook_returnsTrue() {
-        addressBook.addModule(CS2103T);
-        assertTrue(addressBook.hasModule(CS2103T));
+        modManager.addModule(CS2103T);
+        assertTrue(modManager.hasModule(CS2103T));
     }
 
     @Test
     public void hasModule_moduleWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addModule(CS2103T);
+        modManager.addModule(CS2103T);
         Module editedModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
-        assertTrue(addressBook.hasModule(editedModule));
+        assertTrue(modManager.hasModule(editedModule));
     }
 
     @Test
     public void findModule_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.findModule(null));
+        assertThrows(NullPointerException.class, () -> modManager.findModule(null));
     }
 
     @Test
     public void findModule_moduleNotInAddressBook_returnsOptionalEmpty() {
-        assertEquals(Optional.empty(), addressBook.findModule(new ModuleCode("CS2103T")));
+        assertEquals(Optional.empty(), modManager.findModule(new ModuleCode("CS2103T")));
     }
 
     @Test
     public void findModule_moduleInAddressBook_returnsModule() {
-        addressBook.addModule(CS2103T);
-        assertEquals(Optional.of(CS2103T), addressBook.findModule(new ModuleCode("CS2103T")));
+        modManager.addModule(CS2103T);
+        assertEquals(Optional.of(CS2103T), modManager.findModule(new ModuleCode("CS2103T")));
     }
 
     @Test
     public void getModules_emptyList_success() {
         UniqueModuleList modules = new UniqueModuleList();
-        assertEquals(modules.getModuleList(), addressBook.getModules());
+        assertEquals(modules.getModuleList(), modManager.getModules());
     }
 
     @Test
     public void getModules_nonEmptyList_success() {
-        addressBook.addModule(CS2103T);
+        modManager.addModule(CS2103T);
         UniqueModuleList modules = new UniqueModuleList();
         modules.add(CS2103T);
-        assertEquals(modules.getModuleList(), addressBook.getModules());
+        assertEquals(modules.getModuleList(), modManager.getModules());
     }
 
     @Test
     public void hasFacilitator_nullFacilitator_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasFacilitator(null));
+        assertThrows(NullPointerException.class, () -> modManager.hasFacilitator(null));
     }
 
     @Test
     public void hasFacilitator_facilitatorNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasFacilitator(ALICE));
+        assertFalse(modManager.hasFacilitator(ALICE));
     }
 
     @Test
     public void hasFacilitator_facilitatorInAddressBook_returnsTrue() {
-        addressBook.addFacilitator(ALICE);
-        assertTrue(addressBook.hasFacilitator(ALICE));
+        modManager.addFacilitator(ALICE);
+        assertTrue(modManager.hasFacilitator(ALICE));
     }
 
     @Test
     public void hasFacilitator_facilitatorWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addFacilitator(ALICE);
+        modManager.addFacilitator(ALICE);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
-        assertTrue(addressBook.hasFacilitator(editedAlice));
+        assertTrue(modManager.hasFacilitator(editedAlice));
     }
 
     @Test
     public void getFacilitators_emptyList_success() {
         UniqueFacilitatorList facilitators = new UniqueFacilitatorList();
-        assertEquals(facilitators.getFacilitatorList(), addressBook.getFacilitators());
+        assertEquals(facilitators.getFacilitatorList(), modManager.getFacilitators());
     }
 
     @Test
     public void getFacilitators_nonEmptyList_success() {
-        addressBook.addFacilitator(ALICE);
+        modManager.addFacilitator(ALICE);
         UniqueFacilitatorList facilitators = new UniqueFacilitatorList();
         facilitators.add(ALICE);
-        assertEquals(facilitators.getFacilitatorList(), addressBook.getFacilitators());
+        assertEquals(facilitators.getFacilitatorList(), modManager.getFacilitators());
     }
 
     @Test
     public void getAddressBook_emptyAddressBook_success() {
-        assertEquals(new AddressBook(), addressBook);
+        assertEquals(new ModManager(), modManager);
     }
 
     @Test
     public void getModuleList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getModuleList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modManager.getModuleList().remove(0));
     }
 
     @Test
     public void getFacilitatorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getFacilitatorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modManager.getFacilitatorList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose modules and facilitators list can violate interface constraints.
+     * A stub ReadOnlyModManager whose modules and facilitators list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ModManagerStub implements ReadOnlyModManager {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
         private final ObservableList<Facilitator> facilitators = FXCollections.observableArrayList();
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private List<Lesson> lessons = new ArrayList<>();
 
-        AddressBookStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
+        ModManagerStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
             this.modules.setAll(modules);
             this.facilitators.setAll(facilitators);
             this.lessons = lessons;

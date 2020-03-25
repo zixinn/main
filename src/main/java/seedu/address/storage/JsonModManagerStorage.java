@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 
 /**
  * A class to access ModManager data stored as a json file on the hard disk.
@@ -32,7 +32,7 @@ public class JsonModManagerStorage implements ModManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readModManager() throws DataConversionException {
+    public Optional<ReadOnlyModManager> readModManager() throws DataConversionException {
         return readModManager(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonModManagerStorage implements ModManagerStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readModManager(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyModManager> readModManager(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableModManager> jsonModManager = JsonUtil.readJsonFile(
@@ -60,16 +60,16 @@ public class JsonModManagerStorage implements ModManagerStorage {
     }
 
     @Override
-    public void saveModManager(ReadOnlyAddressBook modManager) throws IOException {
+    public void saveModManager(ReadOnlyModManager modManager) throws IOException {
         saveModManager(modManager, filePath);
     }
 
     /**
-     * Similar to {@link #saveModManager(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveModManager(ReadOnlyModManager)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveModManager(ReadOnlyAddressBook modManager, Path filePath) throws IOException {
+    public void saveModManager(ReadOnlyModManager modManager, Path filePath) throws IOException {
         requireNonNull(modManager);
         requireNonNull(filePath);
 

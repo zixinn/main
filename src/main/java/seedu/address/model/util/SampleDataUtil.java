@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
@@ -18,7 +18,7 @@ import seedu.address.model.task.util.TaskDateTime;
 
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ModManager} with sample data.
  */
 public class SampleDataUtil {
     public static Module[] getSampleModules() {
@@ -65,8 +65,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyModManager getSampleAddressBook() {
+        ModManager sampleAb = new ModManager();
         for (Facilitator sampleFacilitator : getSampleFacilitators()) {
             sampleAb.addFacilitator(sampleFacilitator);
         }
