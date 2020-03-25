@@ -494,6 +494,49 @@ It is easier to implement too. The word `empty` is kept to allow users to know w
 
 
 // tag::undoredo[]
+=== Class feature
+The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
+A class has a `ModuleCode`, `LessonType`, `day` which is a `DayOfWeek` object, `startTime`, `endTime` which are `LocalTime` objects and `venue` which is a `String`.
+
+It supports the following operations:
+
+* add - Adds a class to Mod Manager.
+* list - Lists all classes in Mod Manager.
+* edit - Edits a class in Mod Manager.
+* delete - Deletes a class in Mod Manager.
+
+==== Implementation
+===== Adding a class
+The add class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonAddCommandParser` and `LessonAddCommand`. The operation is exposed in the `Model` interface as `Model#addLesson()`.
+
+Given below is an example usage scenario and how the lesson add mechanism behaves at each step.
+
+1. The user executes the lesson add command and provides the module code, lesson type, day, start time, end time and venue of the lesson to be added.
+2. `LessonAddCommandParser` creates a new `Lesson`, then a new `LessonAddCommand`.
+3. `LogicManager` executes the `LessonAddCommand`.
+4. `ModManager` adds the `Lesson` to `LessonList`.
+
+The following sequence diagram shows how the lesson add command works:
+
+.Sequence diagram for `class add` command
+image::LessonAddSequenceDiagram.png[]
+
+NOTE: The lifeline for LessonCommandParser, LessonAddCommandParser and LessonAddCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a lesson add command:
+
+.Activity diagram for `class add` command
+image::LessonAddActivityDiagram.png[]
+
+==== Design considerations
+===== Aspect: Prefix of day and time
+* **Alternative 1: (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
+** Pros: User types less.
+** Cons: When user wants to edit one field only, user have to key in other unnecessary details.
+* **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
+** Pros: Easier to parse and less invalid inputs to take note of. User can also edit any field.
+** Cons: More prefixes to remember and command will be very lengthy.
+
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
 

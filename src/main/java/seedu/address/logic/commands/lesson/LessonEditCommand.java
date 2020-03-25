@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -31,7 +30,8 @@ public class LessonEditCommand extends LessonCommand {
             + "by the index number used in the displayed lesson list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MODULE_CODE + " MOD_CODE] "
+            + PREFIX_MODULE_CODE + " MOD_CODE "
+            + "[" + PREFIX_MODULE_CODE + " NEW_MOD_CODE] "
             + "[" + PREFIX_TYPE + " CLASS_TYPE] "
             + "[" + PREFIX_AT + " DAY START_TIME END_TIME] "
             + "[" + PREFIX_VENUE + " VENUE] \n"
@@ -42,33 +42,40 @@ public class LessonEditCommand extends LessonCommand {
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
             "The lesson index provided is invalid";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
+    private final ModuleCode target;
 
     /**
      * @param index of the lesson in the lesson list to edit
      * @param editLessonDescriptor details to edit the lesson with
      */
-    public LessonEditCommand(Index index, EditLessonDescriptor editLessonDescriptor) {
+    public LessonEditCommand(ModuleCode target, Index index, EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(index, editLessonDescriptor);
         this.index = index;
+        this.target = target;
         this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Lesson> lessons = model.getLessons();
-        if (index.getZeroBased() >= lessons.size() || index.getZeroBased() < 0) {
+        if (index.getZeroBased() >= model.getLessons().size() || index.getZeroBased() < 0) {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        Lesson lessonToEdit = lessons.get(index.getZeroBased());
+        Lesson lessonToEdit = model.getLessonListForModule(target).get(index.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (!lessonToEdit.equals(editedLesson) && model.hasLesson(editedLesson)) {
-            throw new CommandException("This lesson already exists in Mod Manager");
+        if (lessonToEdit.equals(editedLesson) || model.hasLesson(editedLesson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        if (model.findModule(editedLesson.getModuleCode()).isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
         }
 
         model.setLesson(lessonToEdit, editedLesson);

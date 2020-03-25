@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes lesson add command;
+if () then ([module code, lesson type, start and end time are present])
+    if () then([all the arguments are valid])
+        :Parser parses the arguments;
+        :Logic executes command;
+        if () then ([ModManager does not contain lesson])
+            :Model adds lesson to LessonList;
+            :Logic saves ModManager to Storage;
+        else ([else])
+        endif
+    else([else])
+    endif
+
+else([else])
+endif
+stop
+@enduml

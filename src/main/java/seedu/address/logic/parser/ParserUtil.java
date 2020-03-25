@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -11,10 +12,10 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.lesson.LessonEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Email;
-import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
@@ -185,7 +186,7 @@ public class ParserUtil {
         requireNonNull(lessonType);
         String trimmedType = lessonType.trim();
         if (!Lesson.isValidType(lessonType)) {
-            throw new ParseException("Class types should be either LEC, TUT, SEC, REC or LAB");
+            throw new ParseException(LessonType.MESSAGE_CONSTRAINTS);
         }
         return Lesson.convertStringToLessonType(lessonType);
     }
@@ -196,7 +197,11 @@ public class ParserUtil {
     public static DayOfWeek parseDay(String dayAndTime) throws ParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
-        String day = trimmed.split(" ")[0];
+        String[] splitted = trimmed.split(" ");
+        if (splitted.length != 3) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
+        }
+        String day = splitted[0];
         boolean isDayValid = false;
         DayOfWeek assignedDay;
         for (int i = 0; i < 7; i++) {
@@ -206,7 +211,7 @@ public class ParserUtil {
             }
         }
         if (!isDayValid) {
-            throw new ParseException("Day provided should be its full name and in capital");
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_DAY);
         }
         return DayOfWeek.valueOf(day);
     }
@@ -221,7 +226,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(timeString);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Time provided is in the wrong format");
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_TIME);
         }
     }
 
@@ -235,7 +240,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(timeString);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Time provided is in the wrong format");
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_TIME);
         }
     }
 
@@ -244,19 +249,10 @@ public class ParserUtil {
      */
     public static String parseVenue(String venue) throws ParseException {
         if (venue.equals("")) {
-            throw new ParseException("Venue cannot be empty");
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_VENUE);
         } else {
             return venue.trim();
         }
-    }
-
-    /**
-     * Parses {@code String facilName} into {@code Facilitator}.
-     */
-    public static Facilitator parseFacilitator(String facilName) throws ParseException {
-        String facilString = facilName.trim();
-        // for now
-        return null;
     }
 
     /**
