@@ -36,14 +36,15 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE));
         }
 
-        HashMap<String, Integer> keywords = new HashMap();
+        HashMap<String, Integer> keywords = new HashMap<String, Integer>();
 
         if (arePrefixesPresent(argMultimap, PREFIX_DAY)) {
             int day;
             try {
                 day = Integer.parseInt(argMultimap.getValue(PREFIX_DAY));
             } catch (NumberFormatException error) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
             }
             keywords.put("day", day);
         }
@@ -53,7 +54,8 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             try {
                 month = Integer.parseInt(argMultimap.getValue(PREFIX_MONTH));
             } catch (NumberFormatException error) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
             }
             keywords.put("month", month);
         }
@@ -63,7 +65,8 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             try {
                 year = Integer.parseInt(argMultimap.getValue(PREFIX_YEAR));
             } catch (NumberFormatException error) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
             }
             keywords.put("year", year);
         }
@@ -77,9 +80,5 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix) != null);
-    }
-
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 }

@@ -5,7 +5,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.model.Model;
 
 /**

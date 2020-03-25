@@ -1,11 +1,11 @@
 package seedu.address.logic.commands.task;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.List;
@@ -34,7 +34,8 @@ public abstract class TaskCommand extends Command {
             COMMAND_GROUP_TASK, COMMAND_WORD_SEARCH,
             PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_LIST);
-    public static final List<String> ALL_COMMAND_FORMATS = List.of(ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, SEARCH_FORMAT);
+    public static final List<String> ALL_COMMAND_FORMATS = List.of(
+            ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, SEARCH_FORMAT);
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
 }

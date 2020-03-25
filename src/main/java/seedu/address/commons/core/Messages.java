@@ -20,6 +20,7 @@ public class Messages {
             "The facilitator index provided is invalid!";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
-    public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! Type `task list` to return to the main task list.";
+    public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! "
+            + "Type `task list` to return to the main task list.";
     public static final String MESSAGE_INVALID_CMD_GROUP = "%s group does not exist.";
 }

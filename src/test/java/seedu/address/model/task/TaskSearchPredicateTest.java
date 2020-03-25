@@ -10,7 +10,7 @@ import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 
 class TaskSearchPredicateTest {
-    static HashMap<String, Integer> keywords = new HashMap<>();
+    private static HashMap<String, Integer> keywords = new HashMap<>();
 
     @BeforeEach
     void setUp() {

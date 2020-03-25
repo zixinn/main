@@ -17,7 +17,8 @@ import seedu.address.model.task.TaskSearchPredicate;
  */
 public class TaskSearchCommand extends TaskCommand {
 
-    public static final String MESSAGE_COMMAND_EXAMPLE = "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_SEARCH + " "
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example: "
+            + COMMAND_GROUP_TASK + " " + COMMAND_WORD_SEARCH + " "
             + PREFIX_MONTH + " 5 "
             + PREFIX_YEAR + " 2020\n";
 
@@ -30,7 +31,9 @@ public class TaskSearchCommand extends TaskCommand {
             + "[" + PREFIX_YEAR + " yy] \n"
             + MESSAGE_COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_INVALID_DAY_MONTH_YEAR = "The provided day, month, or year must be a valid number. It cannot contain letters or words. Please try again. \n"
+    public static final String MESSAGE_INVALID_DAY_MONTH_YEAR = "The provided day, month, or year "
+            + "must be a valid number. "
+            + "It cannot contain letters or words. Please try again. \n"
             + MESSAGE_COMMAND_EXAMPLE;
 
     private final TaskSearchPredicate predicate;
