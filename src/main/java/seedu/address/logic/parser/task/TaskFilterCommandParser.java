@@ -32,11 +32,7 @@ public class TaskFilterCommandParser implements Parser<TaskFilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
 
-        //if (!argMultimap.getPreamble().isEmpty()) {
-            //throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
-        //}
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR)) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskFilterCommand.MESSAGE_USAGE));
         }
 
@@ -53,12 +49,7 @@ public class TaskFilterCommandParser implements Parser<TaskFilterCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_YEAR)) {
             keywords.put("year", Integer.parseInt(argMultimap.getValue(PREFIX_YEAR)));
         }
-        System.out.println("dasdsadsa");
-        System.out.println(keywords);
-
-        System.out.println(new TaskFilterPredicate(keywords));
         return new TaskFilterCommand(new TaskFilterPredicate(keywords));
-
     }
 
 

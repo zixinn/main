@@ -20,8 +20,8 @@ public class TaskFilterPredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
 
-        if (task.getTaskDateTime().isEmpty()) {
-            return false; // no time
+        if (task.getTaskDateTime().isEmpty()) { // not a ScheduledTask
+            return false;
         }
 
         boolean checkDay = true;
@@ -31,12 +31,12 @@ public class TaskFilterPredicate implements Predicate<Task> {
             checkDay = (task.getTaskDateTime().get().isDateOnThisDay(keywords.get("day")));
         }
 
-        if (keywords.containsKey("day")) {
+        if (keywords.containsKey("month")) {
             checkMonth = (task.getTaskDateTime().get().isDateOnThisMonth(keywords.get("month")));
 
         }
 
-        if (keywords.containsKey("day")) {
+        if (keywords.containsKey("year")) {
             checkYear = (task.getTaskDateTime().get().isDateOnThisYear(keywords.get("year")));
         }
         System.out.println(checkDay);

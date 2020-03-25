@@ -26,9 +26,9 @@ public class TaskFilterCommand extends TaskCommand {
             + ": Finds all tasks that occur on your specified date, month, or year "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_DAY + "] dd "
-            + "[" + PREFIX_MONTH + "] MM "
-            + "[" + PREFIX_YEAR + "] yy \n"
+            + "[" + PREFIX_DAY + " dd] "
+            + "[" + PREFIX_MONTH + " MM] "
+            + "[" + PREFIX_YEAR + " yy] \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_FILTER + " "
             + PREFIX_MONTH + " 5 "
             + PREFIX_YEAR + " 2020\n";
