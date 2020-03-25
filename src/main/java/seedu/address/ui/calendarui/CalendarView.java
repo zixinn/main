@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.calendarui;
 
 import static seedu.address.model.calendar.Calendar.DAYS_IN_WEEK;
 
@@ -16,6 +16,7 @@ import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.DailySchedulable;
 import seedu.address.model.util.DailySchedulableComparator;
+import seedu.address.ui.UiPart;
 
 
 /**

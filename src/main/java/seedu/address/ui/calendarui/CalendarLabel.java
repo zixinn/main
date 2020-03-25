@@ -1,8 +1,9 @@
-package seedu.address.ui;
+package seedu.address.ui.calendarui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.ui.UiPart;
 
 /**
  * Label for the days of the week on the calendar.

@@ -1,8 +1,9 @@
-package seedu.address.ui;
+package seedu.address.ui.calendarui;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel to contain the list of cards of tasks and classes.
