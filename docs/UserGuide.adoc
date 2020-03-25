@@ -116,7 +116,7 @@ Example: `mod add /code CS2103T /desc Software Engineering`
 Shows a list of modules. +
 Format: `mod list`
 
-==== Viewing information related to a module
+==== Viewing information of a module
 
 Shows all classes, tasks and facilitators for a module. +
 Format: `mod view /code MOD_CODE` +
@@ -125,15 +125,15 @@ Example: `mod view /code CS2103T`
 ==== Editing a module
 
 Edits the information of the module. +
-Format: `mod edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
+Format: `mod edit INDEX /desc DESCRIPTION` or `mod edit MOD_CODE /desc DESCRIPTION`
 
 Parameter constraints:
 ****
-* Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * Existing values will be updated to the input values.
 * MOD_CODE should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
+* You can remove description linked to the facilitator by typing `/desc` without specifying any input after it.
 ****
 
 Example: `mod edit 1 /code CS2103`
@@ -145,7 +145,7 @@ Format: `mod delete INDEX`
 
 Parameter constraints:
 ****
-* Deletes the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Example: `mod delete 2`
@@ -181,9 +181,9 @@ Format: `class find /next`
 
 ==== Editing a class
 
-Edits the information of the class. Class is selected by its index in the class list. +
-Format: `class edit INDEX [/code MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
-Example: `class edit 1 /venue Home`
+Edits the information of the class. Class is selected by its index in the class list of a module. +
+Format: `class edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
+Example: `class edit 1 /code CS9000 /venue Home`
 
 ==== Deleting a class
 
@@ -277,15 +277,18 @@ Example: `task delete /code CS2103T /task IP week 4`
 ==== Adding a facilitator
 
 Adds a facilitator to the module. +
-Format: `facil add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+Format: `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
+or `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
 Parameter constraints:
 ****
-* At least one of the optional fields must be provided.
-* A facilitator can be linked to any number of modules (including 0).
+=======
+* At least one of the optional fields (phone, email, office) must be provided.
+* A facilitator can be linked to 1 or more modules.
 ****
 
-Example: `facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /phone 98765432 /code CS2103T`
+Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T CS2101`
+or `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T /code CS2101`
 
 ==== Viewing all facilitators
 Shows a list of all facilitators. +
@@ -308,7 +311,9 @@ Example: `facil find Akshay`
 
 ==== Editing a facilitator
 Edits the information of a facilitator. +
-Format: `facil edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+=======
+Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
+or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
 
 Parameter constraints:
 ****
@@ -368,6 +373,11 @@ Example: `cmd group task`
 Provides guidance for mistyped commands by showing a list of possible valid commands. +
 The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
+=== Clearing all entries : `clear`
+
+Clears all entries from Mod Manager
+Format: `clear`
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -416,17 +426,18 @@ Receive reminders for deadlines and events the next day.
 .5+|Module
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
-| `*mod* view /code MOD_CODE`
-| `*mod* edit INDEX [/code MOD_CODE] [/desc DESCRIPTION]`
-| `*mod* delete INDEX`
+| `*mod* view MOD_CODE`
+| `*mod* edit INDEX /desc DESCRIPTION` or `*mod* edit MOD_CODE /desc DESCRIPTION`
+| `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
 .6+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE] [/facil FACILITATOR_NAME]`
 |  `*class* list`
 |  `*class* find /at DAY`
 |  `*class* find /next`
-|  `*class* edit /code MOD_CODE /type CLASS_TYPE [/at DAY START_TIME END_TIME] [/venue VENUE] [/facil FACILITATOR_NAME]`
-|  `*class* delete /code MOD_CODE /type CLASS_TYPE`
+|  `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]`
+|  `*class* delete INDEX`
+|  `*class* delete /code MOD_CODE /num INDEX`
 
 .7+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME [/on DATE TIME] [/at DATE TIME]`
@@ -437,11 +448,14 @@ Receive reminders for deadlines and events the next day.
 | `*task* edit /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
-.5+|Facilitators
-|  `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+=======
+.5+|Facilitator
+|  `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
+or `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 |  `*facil* list`
 |  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
-|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE_NUMBER] [/office OFFICE] [/code MOD_CODE]...`
+|  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE...]`
+or `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE]...`
 |  `*facil* delete INDEX`
 
 .3+|Calendar

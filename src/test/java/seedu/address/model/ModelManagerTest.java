@@ -32,7 +32,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ModManager(), new ModManager(modelManager.getModManager()));
     }
 
     @Test
@@ -165,14 +165,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
+        ModManager modManager = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
                 .withModule(CS2103T).withModule(CS2101).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ModManager differentModManager = new ModManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(modManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(modManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -184,13 +184,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different modManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentModManager, userPrefs)));
 
         // different filteredFacilitatorList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredFacilitatorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(modManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
@@ -198,7 +198,7 @@ public class ModelManagerTest {
         // different facilitatorListForModule -> returns false
         String keyword = CS2103T.getModuleCode().value;
         modelManager.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(keyword));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(modManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
@@ -206,6 +206,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(modManager, differentUserPrefs)));
     }
 }

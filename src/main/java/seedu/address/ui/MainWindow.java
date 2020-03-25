@@ -22,6 +22,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.ui.calendarui.CalendarView;
+import seedu.address.ui.facilitatorui.FacilitatorListPanel;
+import seedu.address.ui.facilitatorui.FacilitatorPanel;
+import seedu.address.ui.lessonui.LessonPanel;
+import seedu.address.ui.moduleui.ModuleDetailsPanel;
+import seedu.address.ui.moduleui.ModuleListPanel;
+import seedu.address.ui.taskui.TaskListPanel;
+import seedu.address.ui.taskui.TaskPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,10 +51,11 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ModuleDetailsPanel moduleDetailsPanel;
     private LessonPanel lessonPanel;
-    private TaskDetailsPanel taskPanel;
+    private TaskPanel taskPanel;
     private FacilitatorPanel facilitatorPanel;
     private CalendarView calendarView;
     private TaskListPanel taskListPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -177,7 +186,7 @@ public class MainWindow extends UiPart<Stage> {
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
 
-        taskPanel = new TaskDetailsPanel();
+        taskPanel = new TaskPanel(logic.getTaskListForModule());
         taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
 
         facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
@@ -188,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
         System.out.println(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -318,9 +327,6 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandResult.getType()) {
             case CLEAR:
             case MODULE:
-            case MODULE_VIEW:
-                refreshModuleTab(logic.getModule());
-                break;
             case LESSON:
                 handleSwitchToModule();
                 refreshModuleTab(logic.getModule());

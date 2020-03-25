@@ -31,7 +31,7 @@ public class FacilAddCommandIntegrationTest {
     public void execute_newFacilitator_success() {
         Facilitator validFacilitator = new FacilitatorBuilder().withName(VALID_NAME_AMY).build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.addFacilitator(validFacilitator);
 
         assertCommandSuccess(new FacilAddCommand(validFacilitator), model,
@@ -41,7 +41,7 @@ public class FacilAddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateFacilitator_throwsCommandException() {
-        Facilitator facilitatorInList = model.getAddressBook().getFacilitatorList().get(0);
+        Facilitator facilitatorInList = model.getModManager().getFacilitatorList().get(0);
         assertCommandFailure(new FacilAddCommand(facilitatorInList), model,
                 FacilAddCommand.MESSAGE_DUPLICATE_FACILITATOR);
     }

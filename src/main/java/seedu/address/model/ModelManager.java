@@ -31,10 +31,10 @@ import seedu.address.model.util.Description;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ModManager modManager;
     private final UserPrefs userPrefs;
-    private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Module> filteredModules;
+    private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Task> filteredTasks;
     private final List<Lesson> filteredLesson;
     private Optional<Module> module;
@@ -44,30 +44,30 @@ public class ModelManager implements Model {
     private Optional<ModuleCode> moduleCode;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given modManager and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModManager modManager, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(modManager, userPrefs);
 
-        logger.fine("Initializing with Mod Manager: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Mod Manager: " + modManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.modManager = new ModManager(modManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFacilitators = new FilteredList<>(this.addressBook.getFacilitatorList());
-        filteredModules = new FilteredList<>(this.addressBook.getModuleList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        filteredLesson = this.addressBook.getLessonList();
+        filteredFacilitators = new FilteredList<>(this.modManager.getFacilitatorList());
+        filteredModules = new FilteredList<>(this.modManager.getModuleList());
+        filteredTasks = new FilteredList<>(this.modManager.getTaskList());
+        filteredLesson = this.modManager.getLessonList();
         module = Optional.empty();
-        facilitatorsForModule = new FilteredList<>(this.addressBook.getFacilitatorList());
+        facilitatorsForModule = new FilteredList<>(this.modManager.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
-        tasksForModule = new FilteredList<>(this.addressBook.getTaskList());
+        tasksForModule = new FilteredList<>(this.modManager.getTaskList());
         tasksForModule.setPredicate(PREDICATE_SHOW_NO_TASKS);
         calendar = Calendar.getNowCalendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ModManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -105,16 +105,16 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ModManager ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setModManager(ReadOnlyModManager modManager) {
+        this.modManager.resetData(modManager);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyModManager getModManager() {
+        return modManager;
     }
 
     //=========== Module ================================================================================
@@ -122,23 +122,23 @@ public class ModelManager implements Model {
     @Override
     public boolean hasModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        return addressBook.hasModuleCode(moduleCode);
+        return modManager.hasModuleCode(moduleCode);
     }
 
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
-        return addressBook.hasModule(module);
+        return modManager.hasModule(module);
     }
 
     @Override
     public void deleteModule(Module target) {
-        addressBook.removeModule(target);
+        modManager.removeModule(target);
     }
 
     @Override
     public void addModule(Module module) {
-        addressBook.addModule(module);
+        modManager.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
-        addressBook.setModule(target, editedModule);
+        modManager.setModule(target, editedModule);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
     @Override
     public Optional<Module> findModule(ModuleCode moduleCode) {
-        return addressBook.findModule(moduleCode);
+        return modManager.findModule(moduleCode);
     }
 
     @Override
@@ -186,17 +186,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasFacilitator(Facilitator facilitator) {
         requireNonNull(facilitator);
-        return addressBook.hasFacilitator(facilitator);
+        return modManager.hasFacilitator(facilitator);
     }
 
     @Override
     public void deleteFacilitator(Facilitator target) {
-        addressBook.removeFacilitator(target);
+        modManager.removeFacilitator(target);
     }
 
     @Override
     public void addFacilitator(Facilitator facilitator) {
-        addressBook.addFacilitator(facilitator);
+        modManager.addFacilitator(facilitator);
         updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
     }
 
@@ -204,17 +204,17 @@ public class ModelManager implements Model {
     public void setFacilitator(Facilitator target, Facilitator editedFacilitator) {
         requireAllNonNull(target, editedFacilitator);
 
-        addressBook.setFacilitator(target, editedFacilitator);
+        modManager.setFacilitator(target, editedFacilitator);
     }
 
     @Override
     public void deleteModuleCodeFromFacilitatorList(ModuleCode target) {
-        addressBook.removeModuleCodeFromFacilitatorList(target);
+        modManager.removeModuleCodeFromFacilitatorList(target);
     }
 
     @Override
     public void setModuleCodeInFacilitatorList(ModuleCode target, ModuleCode editedModuleCode) {
-        addressBook.setModuleCodeInFacilitatorList(target, editedModuleCode);
+        modManager.setModuleCodeInFacilitatorList(target, editedModuleCode);
     }
 
     //=========== Filtered Facilitator List Accessors =============================================================
@@ -253,13 +253,13 @@ public class ModelManager implements Model {
     @Override
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return addressBook.hasLesson(lesson);
+        return modManager.hasLesson(lesson);
     }
 
     @Override
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
-        addressBook.addLesson(lesson);
+        modManager.addLesson(lesson);
         filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
         module = Optional.ofNullable(filteredModules.get(0));
         filteredModules.setPredicate(x -> true);
@@ -268,7 +268,7 @@ public class ModelManager implements Model {
     @Override
     public void setLesson(Lesson target, Lesson edited) {
         requireAllNonNull(target, edited);
-        addressBook.setLesson(target, edited);
+        modManager.setLesson(target, edited);
         filteredModules.setPredicate(x -> x.getModuleCode().equals(edited.getModuleCode()));
         module = Optional.ofNullable(filteredModules.get(0));
         filteredModules.setPredicate(x -> true);
@@ -277,7 +277,7 @@ public class ModelManager implements Model {
     @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
-        addressBook.removeLesson(lesson);
+        modManager.removeLesson(lesson);
         filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
         module = Optional.ofNullable(filteredModules.get(0));
         filteredModules.setPredicate(x -> true);
@@ -286,12 +286,12 @@ public class ModelManager implements Model {
     @Override
     public void removeLessonFromModule(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
-        addressBook.removeLessonFromModule(moduleCode);
+        modManager.removeLessonFromModule(moduleCode);
     }
 
     @Override
     public Lesson findNextLesson() {
-        LessonList lessons = addressBook.getLessons();
+        LessonList lessons = modManager.getLessons();
         Lesson lesson = lessons.findNextLesson();
         filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
         module = Optional.ofNullable(filteredModules.get(0));
@@ -301,17 +301,17 @@ public class ModelManager implements Model {
 
     @Override
     public List<Lesson> findLessonByDay(DayOfWeek day) {
-        return addressBook.getLessons().findLessonsByDay(day);
+        return modManager.getLessons().findLessonsByDay(day);
     }
 
     @Override
     public List<Lesson> getLessons() {
-        return addressBook.getLessonList();
+        return modManager.getLessonList();
     }
 
     @Override
     public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
-        return addressBook.getLessonListForModule(moduleCode);
+        return modManager.getLessonListForModule(moduleCode);
     }
 
     @Override
@@ -328,7 +328,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return modManager.equals(other.modManager)
                 && userPrefs.equals(other.userPrefs)
                 && filteredModules.equals(other.filteredModules)
                 && filteredFacilitators.equals(other.filteredFacilitators)
@@ -340,17 +340,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return modManager.hasTask(task);
     }
 
     @Override
     public void deleteTask(Task task) {
-        addressBook.removeTask(task);
+        modManager.removeTask(task);
     }
 
     @Override
     public void addTask(Task task) {
-        addressBook.addTask(task);
+        modManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -358,14 +358,14 @@ public class ModelManager implements Model {
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
-        addressBook.setTask(target, editedTask);
+        modManager.setTask(target, editedTask);
     }
 
     @Override
     public void deleteTasksWithModuleCode(ModuleCode moduleCode) {
         requireAllNonNull(moduleCode);
 
-        addressBook.removeTasksWithModuleCode(moduleCode);
+        modManager.removeTasksWithModuleCode(moduleCode);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -386,6 +386,21 @@ public class ModelManager implements Model {
         System.out.println(predicate.test(new ScheduledTask(new Description("d"),
                 new TaskDateTime("01/04/2020"), new ModuleCode("CS2103T"))));
         filteredTasks.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getTaskListForModule() {
+        return tasksForModule;
+    }
+
+    @Override
+    public void updateTaskListForModule(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        tasksForModule.setPredicate(predicate);
     }
 
     //=========== Calendar =================================================================================
