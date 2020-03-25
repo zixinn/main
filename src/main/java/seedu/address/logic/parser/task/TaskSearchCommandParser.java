@@ -18,13 +18,13 @@ import seedu.address.model.task.TaskSearchPredicate;
 
 
 /**
- * Parses input arguments and creates a new TaskAddCommand object
+ * Parses input arguments and creates a new TaskSearchCommand object
  */
 public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the TaskAddCommand
-     * and returns a TaskAddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the TaskSearchCommand
+     * and returns a TaskSearchCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
