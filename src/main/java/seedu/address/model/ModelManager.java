@@ -20,10 +20,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.util.Description;
 
 /**
  * Represents the in-memory model of Mod Manager data.
@@ -260,9 +257,6 @@ public class ModelManager implements Model {
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         modManager.addLesson(lesson);
-        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
-        module = Optional.ofNullable(filteredModules.get(0));
-        filteredModules.setPredicate(x -> true);
     }
 
     @Override
@@ -383,8 +377,6 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         System.out.println("current predicate");
-        System.out.println(predicate.test(new ScheduledTask(new Description("d"),
-                new TaskDateTime("01/04/2020"), new ModuleCode("CS2103T"))));
         filteredTasks.setPredicate(predicate);
     }
 
