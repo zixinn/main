@@ -463,6 +463,12 @@ image::CalFindActivityDiagram.png[]
 ==== Design considerations
 
 ===== Aspect: Calendar appearance
+.New design for calendar appearance (alternative 1)
+image::NewCalendar.png[]
+
+.Old design for calendar appearnce (alternative 2)
+image::OldCalendar.png[]
+
 * **Alternative 1 (current choice):** Displaying the days of a week in calendar from left to right.
 ** Pros: The whole week can be seen on one screen without having users to scroll down for a particular day.
 ** Cons: Words that are long in number of characters may not be able to be displayed in a single line.
