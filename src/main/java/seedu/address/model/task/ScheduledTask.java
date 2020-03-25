@@ -48,7 +48,7 @@ public class ScheduledTask extends Task {
 
     @Override
     public Optional<TaskDateTime> getTaskDateTime() {
-        return Optional.empty();
+        return Optional.of(taskDateTime);
     }
 
     @Override
