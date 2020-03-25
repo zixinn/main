@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
@@ -53,12 +53,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook newData) {
+    public void setModManager(ReadOnlyModManager newData) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyModManager getModManager() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -220,6 +220,16 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Task> getTaskListForModule() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateTaskListForModule(Predicate<Task> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 

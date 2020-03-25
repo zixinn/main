@@ -1,0 +1,7 @@
+@startuml
+start
+:User executes facilitator list command;
+:Logic executes command;
+:Model updates filtered facilitator list;
+stop
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+start
+:User executes facilitator add command;
+if () then ([name and module code are present])
+    :Parser parses name, phone, email, office and module code;
+    if () then ([arguments are valid])
+        :Logic executes command;
+        if () then ([ModManager does not contain facilitator])
+            :Model adds facilitator to UniqueFacilitatorList;
+            :Logic saves ModManager to Storage;
+        else ([else])
+        endif
+    else ([else])
+    endif
+else([else])
+endif
+stop
+@enduml

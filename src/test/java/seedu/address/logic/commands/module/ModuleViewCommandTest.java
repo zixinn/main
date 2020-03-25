@@ -21,6 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.NonScheduledTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.util.Description;
 import seedu.address.testutil.ModelStub;
 
 public class ModuleViewCommandTest {
@@ -32,8 +35,9 @@ public class ModuleViewCommandTest {
 
     @Test
     public void execute_moduleCodeExist_success() throws Exception {
+        Task task = new NonScheduledTask(new Description("Assignment"), new ModuleCode("CS2103T"));
         ModuleViewCommandTest.ModelStubWithModule modelStub =
-                new ModuleViewCommandTest.ModelStubWithModule(CS2103T, ALICE);
+                new ModuleViewCommandTest.ModelStubWithModule(CS2103T, ALICE, task);
         ModuleCode validModuleCode = CS2103T.getModuleCode();
 
         CommandResult commandResult = new ModuleViewCommand(validModuleCode).execute(modelStub);
@@ -41,6 +45,7 @@ public class ModuleViewCommandTest {
         assertEquals(String.format(ModuleViewCommand.MESSAGE_SUCCESS, validModuleCode),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(ALICE), modelStub.facilitatorList);
+        assertEquals(Arrays.asList(task), modelStub.taskList);
     }
 
     @Test
@@ -82,12 +87,14 @@ public class ModuleViewCommandTest {
     private class ModelStubWithModule extends ModelStub {
         private final ArrayList<Module> moduleList = new ArrayList<>();
         private final ArrayList<Facilitator> facilitatorList = new ArrayList<>();
+        private final ArrayList<Task> taskList = new ArrayList<>();
         private Optional<Module> module;
 
-        ModelStubWithModule(Module module, Facilitator facilitator) {
+        ModelStubWithModule(Module module, Facilitator facilitator, Task task) {
             requireAllNonNull(module, facilitator);
             this.moduleList.add(module);
             this.facilitatorList.add(facilitator);
+            this.taskList.add(task);
             this.module = Optional.empty();
         }
 
@@ -120,6 +127,17 @@ public class ModuleViewCommandTest {
             } else {
                 toCheck = module.get().getModuleCode();
                 facilitatorList.removeIf(facilitator -> !facilitator.getModuleCodes().contains(toCheck));
+            }
+        }
+
+        @Override
+        public void updateTaskListForModule(Predicate<Task> predicate) {
+            ModuleCode toCheck;
+            if (module.isEmpty()) {
+                facilitatorList.clear();
+            } else {
+                toCheck = module.get().getModuleCode();
+                taskList.removeIf(task -> !task.getModuleCode().get().equals(toCheck));
             }
         }
     }

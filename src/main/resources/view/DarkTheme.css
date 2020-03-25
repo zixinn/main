@@ -354,3 +354,11 @@
 #facilitatorsView .list-cell {
     -fx-background-color: rgba(232, 236, 241, .05);
 }
+
+#lessons .list-cell {
+    -fx-background-color: rgba(232, 236, 241, .05);
+}
+
+#tasksView .list-cell {
+    -fx-background-color: rgba(232, 236, 241, .05);
+}

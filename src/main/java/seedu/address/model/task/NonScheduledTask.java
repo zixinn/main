@@ -15,7 +15,7 @@ public class NonScheduledTask extends Task {
     private Optional<ModuleCode> moduleCode;
     private boolean isDone;
 
-    protected NonScheduledTask(Description description, ModuleCode moduleCode) {
+    public NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
         this.moduleCode = Optional.of(moduleCode);
     }

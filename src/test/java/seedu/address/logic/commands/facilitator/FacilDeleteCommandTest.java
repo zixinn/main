@@ -37,7 +37,7 @@ public class FacilDeleteCommandTest {
         String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
                 facilitatorToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteFacilitator(facilitatorToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
@@ -62,7 +62,7 @@ public class FacilDeleteCommandTest {
         String expectedMessage = String.format(FacilDeleteCommand.MESSAGE_DELETE_FACILITATOR_SUCCESS,
                 facilitatorToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteFacilitator(facilitatorToDelete);
         showNoFacilitator(expectedModel);
 
@@ -75,7 +75,7 @@ public class FacilDeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of facilitator list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilitatorList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getModManager().getFacilitatorList().size());
 
         FacilDeleteCommand deleteCommand = new FacilDeleteCommand(outOfBoundIndex);
 

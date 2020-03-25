@@ -57,12 +57,12 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code modManager}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setModManager(ReadOnlyModManager modManager);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the ModManager */
+    ReadOnlyModManager getModManager();
 
     /**
      * Returns true if a module with the same module code as {@code moduleCode} exists in Mod Manager.
@@ -198,6 +198,7 @@ public interface Model {
      * in Mod Manager.
      */
     void setTask(Task target, Task editedTask);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
@@ -206,6 +207,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /** Returns an unmodifiable view of the filtered task list. */
+    ObservableList<Task> getTaskListForModule();
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateTaskListForModule(Predicate<Task> predicate);
 
     boolean hasLesson(Lesson lesson);
 
