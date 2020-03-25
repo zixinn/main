@@ -15,7 +15,7 @@ import seedu.address.logic.commands.facilitator.FacilCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class AddressBookParserTest {
+public class ModManagerParserTest {
 
     private final ModManagerParser parser = new ModManagerParser();
 

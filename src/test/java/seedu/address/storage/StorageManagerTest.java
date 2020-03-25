@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -54,10 +54,10 @@ public class StorageManagerTest {
          * {@link JsonModManagerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonModManagerStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        ModManager original = getTypicalAddressBook();
         storageManager.saveModManager(original);
-        ReadOnlyAddressBook retrieved = storageManager.readModManager().get();
-        assertEquals(original, new AddressBook(retrieved));
+        ReadOnlyModManager retrieved = storageManager.readModManager().get();
+        assertEquals(original, new ModManager(retrieved));
     }
 
     @Test

@@ -24,7 +24,7 @@ import seedu.address.model.task.UniqueTaskList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameModule and .isSameFacilitator and .isSameTask comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ModManager implements ReadOnlyModManager {
 
     private final UniqueModuleList modules;
     private final UniqueFacilitatorList facilitators;
@@ -45,12 +45,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         lessons = new LessonList();
     }
 
-    public AddressBook() {}
+    public ModManager() {}
 
     /**
-     * Creates an AddressBook using the Modules and Facilitators in the {@code toBeCopied}
+     * Creates an ModManager using the Modules and Facilitators in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ModManager(ReadOnlyModManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -91,9 +91,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ModManager} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyModManager newData) {
         requireNonNull(newData);
 
         setFacilitators(newData.getFacilitatorList());
@@ -141,7 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ModManager}.
      * {@code key} must exist in Mod Manager.
      */
     public void removeModule(Module key) {
@@ -157,7 +157,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns the list of modules in this {@code AddressBook}.
+     * Returns the list of modules in this {@code ModManager}.
      * @return the list of modules.
      */
     public List<Module> getModules() {
@@ -195,7 +195,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ModManager}.
      * {@code key} must exist in Mod Manager.
      */
     public void removeFacilitator(Facilitator key) {
@@ -203,7 +203,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns the list of modules in this {@code AddressBook}.
+     * Returns the list of modules in this {@code ModManager}.
      * @return the list of modules.
      */
     public List<Facilitator> getFacilitators() {
@@ -211,7 +211,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from the facilitators of from this {@code AddressBook}.
+     * Removes {@code key} from the facilitators of from this {@code ModManager}.
      * {@code key} must exist in Mod Manager.
      */
     public void removeModuleCodeFromFacilitatorList(ModuleCode key) {
@@ -259,7 +259,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ModManager}.
      * {@code key} must exist in Mod Manager.
      */
     public void removeTask(Task key) {
@@ -271,7 +271,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns the list of modules in this {@code AddressBook}.
+     * Returns the list of modules in this {@code ModManager}.
      * @return the list of modules.
      */
     public List<Task> getTasks() {
@@ -385,10 +385,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && modules.equals(((AddressBook) other).modules)
-                && facilitators.equals(((AddressBook) other).facilitators)
-                && tasks.equals(((AddressBook) other).tasks));
+                || (other instanceof ModManager // instanceof handles nulls
+                && modules.equals(((ModManager) other).modules)
+                && facilitators.equals(((ModManager) other).facilitators)
+                && tasks.equals(((ModManager) other).tasks));
     }
 
     @Override

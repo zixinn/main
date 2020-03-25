@@ -5,10 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModManager;
+import seedu.address.model.ReadOnlyModManager;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link ModManager}.
  */
 public interface ModManagerStorage {
 
@@ -18,28 +19,28 @@ public interface ModManagerStorage {
     Path getModManagerFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns ModManager data as a {@link ReadOnlyModManager}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readModManager() throws DataConversionException, IOException;
+    Optional<ReadOnlyModManager> readModManager() throws DataConversionException, IOException;
 
     /**
      * @see #getModManagerFilePath()
      */
-    Optional<ReadOnlyAddressBook> readModManager(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyModManager> readModManager(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     * Saves the given {@link ReadOnlyModManager} to the storage.
      * @param modManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveModManager(ReadOnlyAddressBook modManager) throws IOException;
+    void saveModManager(ReadOnlyModManager modManager) throws IOException;
 
     /**
-     * @see #saveModManager(ReadOnlyAddressBook)
+     * @see #saveModManager(ReadOnlyModManager)
      */
-    void saveModManager(ReadOnlyAddressBook modManager, Path filePath) throws IOException;
+    void saveModManager(ReadOnlyModManager modManager, Path filePath) throws IOException;
 
 }

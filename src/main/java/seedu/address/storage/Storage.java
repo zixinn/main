@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends ModManagerStorage, UserPrefsStorage {
     Path getModManagerFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readModManager() throws DataConversionException, IOException;
+    Optional<ReadOnlyModManager> readModManager() throws DataConversionException, IOException;
 
     @Override
-    void saveModManager(ReadOnlyAddressBook modManager) throws IOException;
+    void saveModManager(ReadOnlyModManager modManager) throws IOException;
 
 }

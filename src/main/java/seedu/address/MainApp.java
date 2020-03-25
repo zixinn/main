@@ -15,10 +15,10 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -74,20 +74,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyModManager> modManagerOptional;
+        ReadOnlyModManager initialData;
         try {
-            addressBookOptional = storage.readModManager();
-            if (!addressBookOptional.isPresent()) {
+            modManagerOptional = storage.readModManager();
+            if (!modManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Mod Manager");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = modManagerOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Mod Manager");
-            initialData = new AddressBook();
+            initialData = new ModManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Mod Manager");
-            initialData = new AddressBook();
+            initialData = new ModManager();
         }
 
         return new ModelManager(initialData, userPrefs);

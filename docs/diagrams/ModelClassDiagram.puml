@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyModManager <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class ModManager
+Class ReadOnlyModManager
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -33,18 +33,18 @@ Package Calendar {
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModManager .up.|> ReadOnlyModManager
 
 ModelManager .up.|> Model
 Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
+ModelManager o--> "1" ModManager
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueModuleList
-AddressBook *--> "1" UniqueFacilitatorList
-AddressBook *--> "1" UniqueTaskList
-AddressBook *--> "1" LessonList
+ModManager *--> "1" UniqueModuleList
+ModManager *--> "1" UniqueFacilitatorList
+ModManager *--> "1" UniqueTaskList
+ModManager *--> "1" LessonList
 
 ModelManager -->"1" Calendar
 ModelManager -->"1" Module : filtered list

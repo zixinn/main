@@ -326,6 +326,11 @@ Example: `cmd group task`
 Provides guidance for mistyped commands by showing a list of possible valid commands. +
 The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
+=== Clearing all entries : `clear`
+
+Clears all entries from Mod Manager
+Format: `clear`
+
 === Exiting the program : `exit`
 
 Exits the program. +

@@ -9,9 +9,9 @@ import seedu.address.model.module.Module;
 import seedu.address.model.task.Task;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a mod manager.
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyModManager {
 
 
     /**

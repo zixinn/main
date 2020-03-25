@@ -30,7 +30,7 @@ public class ModuleDeleteCommandTest {
         String expectedMessage = String.format(ModuleDeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
                 moduleToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
         expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
 

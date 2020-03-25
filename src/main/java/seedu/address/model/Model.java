@@ -57,12 +57,12 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code modManager}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setModManager(ReadOnlyModManager modManager);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the ModManager */
+    ReadOnlyModManager getModManager();
 
     /**
      * Returns true if a module with the same module code as {@code moduleCode} exists in Mod Manager.
