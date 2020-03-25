@@ -47,15 +47,15 @@ MainWindow *-right-> TaskUI
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
-CalendarUI --> UiPart
-FacilitatorUI --> UiPart
-LessonUI --> UiPart
-ModuleUI --> UiPart
-TaskUI --> UiPart
+ResultDisplay -down--|> UiPart
+CommandBox -down--|> UiPart
+StatusBarFooter -down--|> UiPart
+HelpWindow -down---|> UiPart
+CalendarUI -down---|> UiPart
+FacilitatorUI -down---|> UiPart
+LessonUI -down---|> UiPart
+ModuleUI -down---|> UiPart
+TaskUI -down---|> UiPart
 
 UiManager --up-> Logic
 MainWindow --up-> Logic
