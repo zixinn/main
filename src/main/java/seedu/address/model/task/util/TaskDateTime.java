@@ -103,6 +103,18 @@ public class TaskDateTime implements Comparable {
         return taskTime;
     }
 
+    public boolean isDateOnThisDay(int day) {
+        return taskTime.getDayOfMonth() == day;
+    }
+
+    public boolean isDateOnThisMonth(int month) {
+        return taskTime.getMonthValue() == month;
+    }
+
+    public boolean isDateOnThisYear(int year) {
+        return taskTime.getYear() == year;
+    }
+
     /**
      * Compares the two Deadlines for order.
      * Nearer deadlines are considered smaller
