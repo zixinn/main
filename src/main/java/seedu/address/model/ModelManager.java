@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
@@ -349,7 +350,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTask(Task task) {
+    public void addTask(Task task) throws ParseException {
         modManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
@@ -380,7 +381,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) {
+    public void updateFilteredTaskList(Predicate<Task> predicate) throws ParseException {
         requireNonNull(predicate);
         System.out.println("current predicate");
         System.out.println(predicate.test(new ScheduledTask(new Description("d"),

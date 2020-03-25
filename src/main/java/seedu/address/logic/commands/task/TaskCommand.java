@@ -13,6 +13,7 @@ import java.util.List;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 
@@ -37,5 +38,5 @@ public abstract class TaskCommand extends Command {
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
             ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, SEARCH_FORMAT);
     @Override
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult execute(Model model) throws CommandException, ParseException;
 }
