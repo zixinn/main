@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
@@ -16,11 +17,13 @@ import seedu.address.model.util.Description;
 class TaskTest {
     private ModuleCode sampleModCode = new ModuleCode("CS4246");
     private Description sampleDescription = new Description("Project pain");
-    private TaskDateTime sampleTaskDateOnly = new TaskDateTime("18/03/2020");
-    private TaskDateTime sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
+    private TaskDateTime sampleTaskDateOnly;
+    private TaskDateTime sampleTaskDateTime;
 
     @Test
-    void testGetDescription_success() {
+    void testGetDescription_success() throws ParseException {
+        sampleTaskDateOnly = new TaskDateTime("18/03/2020");
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("Project pain",
                 Task.makeNonScheduledTask(sampleDescription, sampleModCode).getDescription().toString());
         assertEquals("Project pain",
@@ -32,7 +35,8 @@ class TaskTest {
     }
 
     @Test
-    void markAsDone_initiallyNotDoneTask_success() {
+    void markAsDone_initiallyNotDoneTask_success() throws ParseException {
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         Task task = Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode);
         assertFalse(task.isTaskDone());
         task.markAsDone();
@@ -40,7 +44,8 @@ class TaskTest {
     }
 
     @Test
-    void markAsDone_alreadyDoneTask_notifyTaskMarkedAsDone() {
+    void markAsDone_alreadyDoneTask_notifyTaskMarkedAsDone() throws ParseException {
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         Task task = Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode);
         assertFalse(task.isTaskDone());
         task.markAsDone();
@@ -48,7 +53,9 @@ class TaskTest {
     }
 
     @Test
-    void isTaskDone_newlyCreatedTask_false() {
+    void isTaskDone_newlyCreatedTask_false() throws ParseException {
+        sampleTaskDateOnly = new TaskDateTime("18/03/2020");
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertFalse(
                 Task.makeNonScheduledTask(sampleDescription, sampleModCode).isTaskDone());
         assertFalse(
@@ -59,7 +66,9 @@ class TaskTest {
     }
 
     @Test
-    void isTaskDone_markedAsDoneTask_true() {
+    void isTaskDone_markedAsDoneTask_true() throws ParseException {
+        sampleTaskDateOnly = new TaskDateTime("18/03/2020");
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         List<Task> tasks = new ArrayList<>();
         tasks.add(Task.makeNonScheduledTask(sampleDescription, sampleModCode));
         tasks.add(Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode));
@@ -83,13 +92,15 @@ class TaskTest {
     }
 
     @Test
-    void isTimeStringOnlyDate() {
+    void isTimeStringOnlyDate() throws ParseException {
+        sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         assertEquals("18/03/2020",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode).getTimeString());
     }
 
     @Test
-    void isTimeStringDateTime() {
+    void isTimeStringDateTime() throws ParseException {
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("18/03/2020 18:30",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode).getTimeString());
     }
@@ -101,13 +112,15 @@ class TaskTest {
     }
 
     @Test
-    void testToString_onlyTaskDateAvailable_success() {
+    void testToString_onlyTaskDateAvailable_success() throws ParseException {
+        sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         assertEquals("[\u2718]  [CS4246] Project pain 18/03/2020",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode).toString());
     }
 
     @Test
-    void testToString_bothTaskDateAndTimeAvailable_success() {
+    void testToString_bothTaskDateAndTimeAvailable_success() throws ParseException {
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("[\u2718]  [CS4246] Project pain 18/03/2020 18:30",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode).toString());
     }
