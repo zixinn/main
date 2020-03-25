@@ -1,5 +1,7 @@
 @startuml
+scale 0.6
 !include style.puml
+skinparam ArrowFontSize 60
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -17,10 +19,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":LessonList" as LessonList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("class add /code CS9000 /type LEC /at MONDAY 16:00 18:00")
+[-> LogicManager : execute\n("class add \n/code CS9000 \n/type LEC \n/at MONDAY \n16:00 18:00")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("class add /code CS9000 /type LEC /at MONDAY 16:00 18:00")
+LogicManager -> ModManagerParser : parseCommand("class add \n/code CS9000 \n/type LEC \n/at MONDAY \n16:00 18:00")
 activate ModManagerParser
 
 create LessonCommandParser
@@ -30,7 +32,7 @@ activate LessonCommandParser
 LessonCommandParser --> ModManagerParser
 deactivate LessonCommandParser
 
-ModManagerParser -> LessonCommandParser : parse("add /code CS9000 /type LEC /at MONDAY 16:00 18:00")
+ModManagerParser -> LessonCommandParser : parse\n("add \n/code CS9000 \n/type LEC \n/at MONDAY \n16:00 18:00")
 activate LessonCommandParser
 
 create LessonAddCommandParser
@@ -40,7 +42,7 @@ activate LessonAddCommandParser
 LessonAddCommandParser --> LessonCommandParser
 deactivate LessonAddCommandParser
 
-LessonCommandParser -> LessonAddCommandParser : parse("/code CS9000 /type LEC /at MONDAY 16:00 18:00")
+LessonCommandParser -> LessonAddCommandParser : parse\n("/code CS9000 \n/type LEC \n/at MONDAY \n16:00 18:00")
 activate LessonAddCommandParser
 
 create Lesson
