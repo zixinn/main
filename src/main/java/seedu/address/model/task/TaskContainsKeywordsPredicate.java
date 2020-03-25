@@ -17,7 +17,7 @@ public class TaskContainsKeywordsPredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(task.getDescription().toString(), keyword));
     }
 
     @Override
