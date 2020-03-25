@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.lesson.LessonEditCommand;
@@ -51,7 +50,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             if (mods.size() == 2) {
                 editLessonDescriptor.setModuleCode(ParserUtil.parseModuleCode(mods.get(1)));
                 target = ParserUtil.parseModuleCode(mods.get(0));
-            } else if (mods.size() > 2){
+            } else if (mods.size() > 2) {
                 throw new ParseException(LessonEditCommand.MESSAGE_USAGE);
             }
         }
