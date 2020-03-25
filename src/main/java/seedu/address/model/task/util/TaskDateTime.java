@@ -8,7 +8,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Represents a Module's taskTime in Mod Manager.
@@ -39,9 +44,13 @@ public class TaskDateTime implements Comparable {
      *
      * @param date A valid date.
      */
-    public TaskDateTime(String date) {
+    public TaskDateTime(String date) throws ParseException {
         checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
-        this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
+        try {
+            this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
+        } catch (DateTimeParseException dateError) {
+            throw new ParseException(String.format("Invalid date: %s.", date));
+        }
     }
 
     /**
@@ -50,11 +59,20 @@ public class TaskDateTime implements Comparable {
      * @param date A valid date.
      * @param timeInDay time period in day
      */
-    public TaskDateTime(String date, String timeInDay) {
+    public TaskDateTime(String date, String timeInDay) throws ParseException {
         checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
-        LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
-        this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                timeInTheDay);
+        LocalTime timeInTheDay = null;
+        try {
+            timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
+        } catch (DateTimeParseException timeError) {
+            throw new ParseException(String.format("Invalid task time: %s.", timeInDay));
+        }
+        try {
+            this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    timeInTheDay);
+        } catch (DateTimeParseException dateError) {
+            throw new ParseException(String.format("Invalid date: %s.", date));
+        }
     }
 
     /**
@@ -83,6 +101,18 @@ public class TaskDateTime implements Comparable {
 
     public LocalDateTime getLocalDateTime() {
         return taskTime;
+    }
+
+    public boolean isDateOnThisDay(int day) {
+        return taskTime.getDayOfMonth() == day;
+    }
+
+    public boolean isDateOnThisMonth(int month) {
+        return taskTime.getMonthValue() == month;
+    }
+
+    public boolean isDateOnThisYear(int year) {
+        return taskTime.getYear() == year;
     }
 
     /**

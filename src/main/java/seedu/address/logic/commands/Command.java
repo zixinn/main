@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
@@ -26,6 +27,7 @@ public abstract class Command {
     public static final String COMMAND_WORD_DELETE = "delete";
     public static final String COMMAND_WORD_EDIT = "edit";
     public static final String COMMAND_WORD_FIND = "find";
+    public static final String COMMAND_WORD_SEARCH = "search";
     public static final String COMMAND_WORD_GROUP = "group";
     public static final String COMMAND_WORD_HELP = "help";
     public static final String COMMAND_WORD_LIST = "list";
@@ -38,7 +40,7 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult execute(Model model) throws CommandException, ParseException;
 
     public static String getModCommands() {
 

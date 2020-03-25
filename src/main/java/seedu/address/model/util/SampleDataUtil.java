@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModManager;
 import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Email;
@@ -56,12 +57,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static Task[] getSampleTasks() {
+    public static Task[] getSampleTasks() throws ParseException {
         return new Task[]{
-            Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020"),
-                    new ModuleCode("CS3233")),
-            Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
-                    new ModuleCode("CS5330"))
+                Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020"),
+                        new ModuleCode("CS3233")),
+                Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
+                        new ModuleCode("CS5330"))
         };
     }
 

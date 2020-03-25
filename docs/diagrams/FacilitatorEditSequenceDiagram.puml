@@ -1,5 +1,7 @@
 @startuml
+scale 0.6
 !include style.puml
+skinparam ArrowFontSize 60
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -19,10 +21,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("facil edit 1 \n/phone 87654321")
+[-> LogicManager : execute\n("facil edit 1 \n/phone\n 87654321")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("facil edit 1 \n/phone 87654321")
+LogicManager -> ModManagerParser : parseCommand\n("facil edit 1 \n/phone 87654321")
 activate ModManagerParser
 
 create FacilCommandParser
@@ -32,7 +34,7 @@ activate FacilCommandParser
 FacilCommandParser --> ModManagerParser
 deactivate FacilCommandParser
 
-ModManagerParser -> FacilCommandParser : parse("edit 1 \n/phone 87654321")
+ModManagerParser -> FacilCommandParser : parse\n("edit 1 \n/phone 87654321")
 activate FacilCommandParser
 
 create FacilEditCommandParser
@@ -42,7 +44,7 @@ activate FacilEditCommandParser
 FacilEditCommandParser --> FacilCommandParser
 deactivate FacilEditCommandParser
 
-FacilCommandParser -> FacilEditCommandParser : parse("1 /phone 87654321")
+FacilCommandParser -> FacilEditCommandParser : parse\n("1 \n/phone 87654321")
 activate FacilEditCommandParser
 
 create EditFacilitatorDescriptor
@@ -52,7 +54,7 @@ activate EditFacilitatorDescriptor
 EditFacilitatorDescriptor --> FacilEditCommandParser
 deactivate EditFacilitatorDescriptor
 
-FacilEditCommandParser -> EditFacilitatorDescriptor : setPhone(87654321)
+FacilEditCommandParser -> EditFacilitatorDescriptor : setPhone\n(87654321)
 activate EditFacilitatorDescriptor
 
 EditFacilitatorDescriptor --> FacilEditCommandParser
@@ -110,7 +112,7 @@ FacilEditCommand -> ModelManager : setFacilitator(f, n)
 ModelManager -> ModManager : setFacilitator(f, n)
 activate ModManager
 
-ModManager -> UniqueFacilitatorList : setFacilitator(f, n)
+ModManager -> UniqueFacilitatorList : setFacilitator\n(f, n)
 activate UniqueFacilitatorList
 
 UniqueFacilitatorList --> ModManager

@@ -34,8 +34,36 @@ public class StringUtil {
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
+        System.out.println(preppedSentence);
+        System.out.println(Arrays.toString(wordsInPreppedSentence));
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code word}.
+     *   Ignores case, and only a partial word match is required.
+     *   <br>examples:<pre>
+     *       containsPartialWordIgnoreCase("ABc def", "bc") == true
+     *       containsPartialWordIgnoreCase("ABc def", "D") == true
+     *       containsPartialWordIgnoreCase("ABc def", "g") == false // "g" is neither in "ABc" or "def"
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsPartialWordIgnoreCase(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedWord = word.trim().toLowerCase();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+
+        String preppedSentence = sentence.toLowerCase();
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(wordInPreppedSentence -> wordInPreppedSentence.contains(preppedWord));
     }
 
     /**

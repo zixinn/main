@@ -6,11 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.module.Module;
 
 /**
  * Adds a lesson to Mod Manager.
@@ -42,13 +46,19 @@ public class LessonAddCommand extends LessonCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.findModule(toAdd.getModuleCode()).isEmpty()) {
-            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
-        }
-
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+
+        Optional<Module> module = model.findModule(toAdd.getModuleCode());
+        if (module.isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        }
+
+        model.updateModule(module);
+        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toAdd.getModuleCode().value));
+        model.updateTaskListForModule(x -> x.getModuleCode().get().equals(toAdd.getModuleCode()));
+
         model.addLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.LESSON);
     }

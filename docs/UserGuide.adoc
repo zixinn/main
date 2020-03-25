@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
-* *`command all`* : lists all available commands in our Mod Manager.
+* *`cmd all`* : lists all available commands in our Mod Manager.
 * *`mod add /code CS2103T /desc Software Engineering`* : adds our module CS2103T to our module list.
 * *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds our Lecturer information to the module. If you are rushing to write an e-mail to our Lecturer, you can refer to this conveniently.
 * *`task add /code CS2103T /task Complete tP tasks`*: adds a task to our CS2103T module.
@@ -54,30 +54,45 @@ Here are some example commands that you can try:
 === Using Mod Manager
 This section offers an overview of Mod Manager's layout so that you can find what you need easily.
 
-There are three main areas in Mod Manager:
+There are two main areas in Mod Manager:
 
-. A __task bar with all the module codes__ at the top of the screen.
 . A __command box__ and __result display box__ at the bottom of the screen.
-. A __dashboard__ that occupies most of the screen, which tells you the module code and name,
-facilitators' information, classes information, and tasks or deadlines that you need to complete.
-
-The *_taskbar_* at the top of the screen lists all of the modules that you are taking this semester.
-Clicking in one of these tabs will lead you to the section related to that module.
-
-.The taskbar
-image::foo.png[]
+. A __main viewing area__ that occupies most of the screen.
 
 The *_command box_* is the area for you to enter commands. The result of each command will be shown
-in the *_result display box_*, immediately below the command box.
+in the *_result display box_*, immediately above the command box.
 
 .The command box and result display box
-image::foo.png[]
+image::commandAndResultBox.png[]
 
-The *_dashboard_* shows all the contents and task for your module. It contains information about
-the module, facilitators' information, classes information, and tasks or deadlines that you need to complete.
+The *_main viewing area_* shows all the contents for one of the four tabs at any point in time.
+The four tabs are **Module**, **Facilitators**, **Tasks** and **Calendar**
 
-.The dashboard
-image::foo.png[]
+* **Module** tab contains information about lessons, tasks and facilitators for a particular module.
+It also shows the list of modules you currently have.
++
+
+.Module tab
+image::Ui.png[]
+
+* **Facilitators** tab contains information about all the facilitators you currently have.
++
+
+.Facilitators tab
+image::Facil.png[]
+
+* **Tasks** tab contains information about all the tasks you currently have.
++
+
+.Tasks tab
+image::Task.png[]
+
+* **Calendar** tab shows tasks and lessons in a week.
++
+
+.Calendar tab
+image::Calendar.png[]
+
 [[Features]]
 == Features
 
@@ -103,6 +118,7 @@ Format: `help`
 Adds a module to the module list. +
 Format: `mod add /code MOD_CODE [/desc DESCRIPTION]`
 
+Parameter constraints:
 ****
 * MOD_CODE should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
@@ -126,6 +142,7 @@ Example: `mod view CS2103T`
 Edits the information of the module. +
 Format: `mod edit INDEX /desc DESCRIPTION` or `mod edit MOD_CODE /desc DESCRIPTION`
 
+Parameter constraints:
 ****
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * Existing values will be updated to the input values.
@@ -141,6 +158,7 @@ Example: `mod edit 1 /desc Software Engineering` or `mod edit CS2103T /desc Soft
 Deletes the module, along with classes, facilitators and tasks for that module. +
 Format: `mod delete INDEX` or `mod delete MOD_CODE`
 
+Parameter constraints:
 ****
 * Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -154,6 +172,7 @@ Example: `mod delete 2` or `mod delete CS2103T`
 Adds a class to a module. +
 Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]` +
 
+Parameter constraints:
 ****
 * VENUE is optional
 ****
@@ -200,20 +219,65 @@ Example: `class delete /code CS2103T /num 1` +
 ==== Adding a task
 
 Adds a task to a module. +
-Format: `task add /code MOD_CODE /task TASK_NAME {[/on DATE TIME] | [/at DATE TIME]}` +
-Example: `task add /code CS2103T /task duke /on 2020-02-20 23:59`
+Format: `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]` +
+Example: `*task* add /code CS3230 /desc Programming Assignment 2 /on 20/02/2020 /at 23:59`
+
+Parameter constraints:
+****
+* MOD_CODE must be an existing and valid module code in the list of modules.
+* A module can be linked to any number of tasks (including 0).
+* `DATE` and `TIME` are optional fields, however, there can only be a `TIME` field
+if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is not allowed.
+* `DATE` follows `_dd/MM/yyyy_` format. It should be a valid date,
+e.g. Day 32 or Month 13 is not allowed.
+* `TIME` follows `_HHmm_` format. It should be a valid time period,
+e.g. 24:00 is not allowed.
+* Duplicate task descriptions in the same module or across modules are allowed, however,
+these tasks cannot be in the same time period, for example, in the same day.
+****
 
 ==== Viewing all tasks
 
-Shows a list of all tasks. +
-Format: `task list`
+Shows a list of all tasks across all modules in the Mod Manager. +
+Format: `*task* list`
 
-==== Finding tasks by date
+==== Finding a task by description
 
-Finds tasks occurring on a specific date, month or year. +
-Format: `task find [/date DATE] [/month MONTH] [/year YEAR]` +
-Example: `task find /month 02`
+With this command, you can find tasks that contain any of the given keywords in their description.
+Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 
+Parameter constraints:
+****
+* The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
+* Search for description is case insensitive. e.g `programming` will match `Programming`.
+* The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
+* Tasks are only searched in the description.
+* Words can be partially matched e.g. `A` will match `Assignment`.
+* Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
+****
+
+==== Search tasks by date
+
+Searches all tasks that occur on your specified date, month, or year.
+
+Format: `*task* search [/day DAY] [/month MONTH] [/year YEAR]` +
+Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
+
+Parameter constraints:
+****
+* The search works across modules, and no `/code` commands are required.
+* Tasks are only searched for its date. Tasks that do not have dates or times
+will not be found in this list.
+* If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
+* An invalid day, month, or year number can be provided, e.g.
+`/day 32`, `/month 13`, `year -1`, however, no matching tasks
+will be returned by the search. On the other hand, Invalid inputs such as
+`/day monday`, `/month December`, `/year this year` are not allowed,
+and you will have to follow the input requirements using valid numbers for
+`/day`, `/month`, and `/year` instead.
+* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
+match only tasks that are on 10 April in any year.
+****
 ==== Finding upcoming tasks
 
 Finds upcoming tasks. +
@@ -239,9 +303,10 @@ Adds a facilitator to the module. +
 Format: `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
 or `facil add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
+Parameter constraints:
 ****
 * At least one of the optional fields (phone, email, office) must be provided.
-* A facilitator can be linked to 1 or more modules.
+* A facilitator can be linked to one or more modules.
 ****
 
 Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T CS2101`
@@ -255,6 +320,7 @@ Format: `facil list`
 Finds facilitators whose names contain the given name. +
 Format: `facil find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 
+Parameter constraints:
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
 * The order of the name does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -270,6 +336,7 @@ Edits the information of a facilitator. +
 Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
 
+Parameter constraints:
 ****
 * Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -285,6 +352,7 @@ Example: `facil edit 1 /name Akshay Narayan /email hisnewemail@nus.edu.sg`
 Deletes a facilitator from the module. +
 Format: `facil delete INDEX`
 
+Parameter constraints:
 ****
 * Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -328,7 +396,7 @@ The command(s) closest to your mistyped one will be shown: both the syntax forma
 
 === Clearing all entries : `clear`
 
-Clears all entries from Mod Manager
+Clears all entries from Mod Manager. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -392,7 +460,7 @@ Receive reminders for deadlines and events the next day.
 |  `*class* delete /code MOD_CODE /num INDEX`
 
 .7+|Task
-| `*task* add /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
+| `*task* add /code MOD_CODE /task TASK_NAME [/on DATE TIME] [/at DATE TIME]`
 | `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
@@ -415,12 +483,14 @@ or `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/
 |  `*cal* view /week this`
 
 .2+|Command
-|  `*command* all`
-|  `*command* feature COMMAND_NAME`
+|  `*cmd* all`
+|  `*cmd* group COMMAND_WORD`
+
+.1+|Clear
+|  `*clear*`
 
 .1+|Help
 |  `*help*`
 
 .1+|Exit
 |  `*exit*`
-
