@@ -15,18 +15,16 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-Package Person {
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class UniquePersonList
+Package Module {
 }
 
-Package Tag {
-Class Tag
+Package Facilitator {
 }
+
+Package Lesson {
+}
+
+Package Task {
 }
 
 Class HiddenOutside #FFFFFF
@@ -40,17 +38,14 @@ ModelManager o--> "1" AddressBook
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList o--> "*" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueModuleList
+AddressBook *--> "1" UniqueFacilitatorList
+AddressBook *--> "1" UniqueTaskList
+AddressBook *--> "1" LessonList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"1" Person : filtered list
+ModelManager -->"1" Module : filtered list
+ModelManager -->"1" Facilitator : filtered list
+ModelManager -->"1" Task : filtered list
+ModelManager -->"1" Lesson : filtered list
 @enduml
