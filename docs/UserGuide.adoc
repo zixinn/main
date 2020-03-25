@@ -219,8 +219,9 @@ Shows a list of all tasks across all modules in the Mod Manager. +
 Format: `*task* list`
 
 ==== Finding a task by description
+
 With this command, you can find tasks that contain any of the given keywords in their description.
-Format: `task find DESCRIPTION [MORE_DESCRIPTIONS]...`
+Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 
 Parameter constraints:
 ****
@@ -232,12 +233,25 @@ Parameter constraints:
 * Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
 ****
 
-==== Filter tasks by date
+==== Search tasks by date
 
-Filters tasks occurring on a specific date, month or year. +
-Format: `task filter [/date DATE] [/month MONTH] [/year YEAR]` +
-Example: `task find /month 02`
+Searches all tasks that occur on your specified date, month, or year.
 
+Format: `*task* search [/day DAY] [/month MONTH] [/year YEAR]` +
+Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
+
+Parameter constraints:
+****
+* If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
+* An invalid day, month, or year number can be provided, e.g.
+`/day 32`, `/month 13`, `year -1`, however, no matching tasks
+will be returned by the search. On the other hand, Invalid inputs such as
+`/day monday`, `/month December`, `/year this year` are not allowed,
+and you will have to to follow the input requirements using valid numbers for
+`/day`, `/month`, and `/year` instead.
+* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
+match only tasks that are on 10 April in any year.
+****
 ==== Finding upcoming tasks
 
 Finds upcoming tasks. +

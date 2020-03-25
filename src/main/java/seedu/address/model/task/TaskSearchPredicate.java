@@ -1,19 +1,16 @@
 package seedu.address.model.task;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Task}'s {@code Description} matches any of the keywords given.
  */
-public class TaskFilterPredicate implements Predicate<Task> {
+public class TaskSearchPredicate implements Predicate<Task> {
 
     private final HashMap<String, Integer> keywords;
 
-    public TaskFilterPredicate(HashMap<String, Integer> keywords) {
+    public TaskSearchPredicate(HashMap<String, Integer> keywords) {
         this.keywords = keywords;
     }
 
@@ -27,21 +24,18 @@ public class TaskFilterPredicate implements Predicate<Task> {
         boolean checkDay = true;
         boolean checkMonth = true;
         boolean checkYear = true;
+
         if (keywords.containsKey("day")) {
             checkDay = (task.getTaskDateTime().get().isDateOnThisDay(keywords.get("day")));
         }
 
         if (keywords.containsKey("month")) {
             checkMonth = (task.getTaskDateTime().get().isDateOnThisMonth(keywords.get("month")));
-
         }
 
         if (keywords.containsKey("year")) {
             checkYear = (task.getTaskDateTime().get().isDateOnThisYear(keywords.get("year")));
         }
-        System.out.println(checkDay);
-        System.out.println(checkMonth);
-        System.out.println(checkYear);
 
         return checkDay && checkMonth && checkYear;
     }
@@ -49,8 +43,8 @@ public class TaskFilterPredicate implements Predicate<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskFilterPredicate // instanceof handles nulls
-                && keywords.equals(((TaskFilterPredicate) other).keywords)); // state check
+                || (other instanceof TaskSearchPredicate // instanceof handles nulls
+                && keywords.equals(((TaskSearchPredicate) other).keywords)); // state check
     }
 
 }

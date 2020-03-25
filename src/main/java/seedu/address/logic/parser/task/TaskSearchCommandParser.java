@@ -8,19 +8,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import java.util.HashMap;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.task.TaskFilterCommand;
+import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.TaskFilterPredicate;
+import seedu.address.model.task.TaskSearchPredicate;
 
 
 /**
  * Parses input arguments and creates a new TaskAddCommand object
  */
-public class TaskFilterCommandParser implements Parser<TaskFilterCommand> {
+public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the TaskAddCommand
@@ -28,28 +28,46 @@ public class TaskFilterCommandParser implements Parser<TaskFilterCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public TaskFilterCommand parse(String args) throws ParseException {
+    public TaskSearchCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskFilterCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE));
         }
 
         HashMap<String, Integer> keywords = new HashMap();
 
         if (arePrefixesPresent(argMultimap, PREFIX_DAY)) {
-            keywords.put("day", Integer.parseInt(argMultimap.getValue(PREFIX_DAY)));
+            int day;
+            try {
+                day = Integer.parseInt(argMultimap.getValue(PREFIX_DAY));
+            } catch (NumberFormatException error) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+            }
+            keywords.put("day", day);
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_MONTH)) {
-            keywords.put("month", Integer.parseInt(argMultimap.getValue(PREFIX_MONTH)));
+            int month;
+            try {
+                month = Integer.parseInt(argMultimap.getValue(PREFIX_MONTH));
+            } catch (NumberFormatException error) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+            }
+            keywords.put("month", month);
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_YEAR)) {
-            keywords.put("year", Integer.parseInt(argMultimap.getValue(PREFIX_YEAR)));
+            int year;
+            try {
+                year = Integer.parseInt(argMultimap.getValue(PREFIX_YEAR));
+            } catch (NumberFormatException error) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));
+            }
+            keywords.put("year", year);
         }
-        return new TaskFilterCommand(new TaskFilterPredicate(keywords));
+        return new TaskSearchCommand(new TaskSearchPredicate(keywords));
     }
 
 
@@ -59,5 +77,9 @@ public class TaskFilterCommandParser implements Parser<TaskFilterCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix) != null);
+    }
+
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 }

@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +9,7 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 
-class TaskFilterPredicateTest {
+class TaskSearchPredicateTest {
     static HashMap<String, Integer> keywords = new HashMap<>();
 
     @BeforeEach
@@ -23,7 +21,7 @@ class TaskFilterPredicateTest {
 
     @Test
     void test1() {
-        TaskFilterPredicate predicate = new TaskFilterPredicate(keywords);
+        TaskSearchPredicate predicate = new TaskSearchPredicate(keywords);
         Task task = new ScheduledTask(new Description("1"), new TaskDateTime("01/04/2020"), new ModuleCode("CS2103T"));
         System.out.println(predicate.test(task));
         System.out.println(task.getTaskDateTime());
