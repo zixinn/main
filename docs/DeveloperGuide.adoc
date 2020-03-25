@@ -1087,6 +1087,24 @@ Use case resumes at step 1.
 +
 Use case ends.
 
+[discrete]
+=== Use case: UC25 - Clear all entries in Mod Manager
+*<<mss, MSS>>*
+
+1. User requests to clear all entries.
+2. Mod Manager clears all entries.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. The given input is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes at step 1.
+
 [appendix]
 == Non Functional Requirements
 
