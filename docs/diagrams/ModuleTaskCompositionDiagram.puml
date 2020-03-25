@@ -1,0 +1,10 @@
+@startuml
+!include style.puml
+skinparam ArrowFontSize 20
+skinparam BoxFontSize 20
+skinparam ParticipantFontSize 20
+skinparam classBackgroundColor MODEL_COLOR
+skinparam ArrowFontSize 24
+
+Module "1" *---> "*" Task
+@enduml

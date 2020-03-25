@@ -1,0 +1,16 @@
+@startuml
+scale 1.2
+start
+:User executes task find command;
+:Parser parses keywords;
+if () then ([else])
+    :Logic executes command;
+    :Model updates filtered task list;
+    :Ui displays a list of tasks occuring on
+    the specified day, month, or year;
+else ([there is some text before the first valid prefix
+| | the User provides String arguments
+for day, month, or year])
+endif
+stop
+@enduml

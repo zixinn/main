@@ -388,6 +388,240 @@ image::FacilitatorDeleteActivityDiagram.png[]
 ** Cons: May contain duplicates as some facilitators may have multiple module codes. Have to iterate through multiple lists when executing facilitator commands.
 
 //tag::calendar[]
+
+=== Task feature
+The task feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
+`ScheduledTask` for a `Task` with a time period and `NonScheduledTask` for a `Task` with no specified time period.
+A task has a `Description`, an optional `TaskDateTime`, and one and only one `ModuleCode`.
+A `Module` with that `ModuleCode` of the task should exist in Mod Manager.
+
+It supports the following operations:
+
+* `*add*` - Adds a task to a `Module` in Mod Manager.
+* `*list*` - Shows a list of all tasks across all `Module` s in Mod Manager.
+* `*find*` - Finds a task in Mod Manager by its description.
+* `*upcoming*` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager.
+* `*search*`- Searches for tasks that occur on your specified date, month, or year in Mod Manager.
+* `*edit*` - Edits the information of a task in Mod Manager.
+* `*delete*` - Deletes a task from the `Module` and Mod Manager.
+
+
+==== Implementation
+
+===== Adding a task
+
+// to extend on Task, ScheduledTask and NonScheduledTask
+The add task feature allows users to add a task to Mod Manager.
+This feature is facilitated by `TaskCommandParser`, `TaskAddCommandParser` and `
+TaskAddCommand`.
+The operation is exposed in the `Model` interface as `Model#addTask()`.
+
+Given below is an example usage scenario and how the `*task* add` mechanism behaves at each step:
+
+1. The user executes the `*task* add` command and provides the module code, the description of the task (both compulsory),
+and a time period (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
+2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time period (if provided).
+3. `TaskAddCommandParser` creates a new `TaskAddCommand` based on the task.
+4. `LogicManager` executes the `TaskAddCommand`.
+5. `ModManager` adds the task to the `UniqueTaskList`.
+6. `ModelManager` updates the `filteredTasks` in `ModelManager`.
+
+The following sequence diagram shows how the `*task* add` command works:
+
+.Sequence diagram for `task add` command
+image::TaskAddSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser`, `TaskAddCommandParser` and `TaskAddCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a `*task* add` command:
+
+.Activity diagram for `task add` command
+image::TaskAddActivityDiagram.png[]
+
+===== Search tasks by date
+The search task feature allows users to search all tasks that occur on the specified date, month, or year.
+This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
+TaskSearchCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario and how the `*task* search` mechanism behaves at each step:
+
+1. The user executes the `*task* search` command and provides the day, month, or year, or any combination of which
+that they want to search for search for.
+2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
+3. `LogicManager` executes the `TaskSearchCommand`.
+4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
+
+The following sequence diagram shows how the `*task* search` command works:
+
+.Sequence diagram for `*task* search` command
+image::TaskSearchSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser`, `TaskSearchCommandParser`, `TaskSearchCommand` and `TaskSearch` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a task find command:
+
+.Activity diagram for `*task* search` command
+image::TaskSearchActivityDiagram.png[]
+////
+===== Listing all facilitators
+The list facilitator feature allows users to list all facilitators in Mod Manager.
+This feature is facilitated by `FacilCommandParser` and `FacilListCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
+
+Given below is an example usage scenario and how the facilitator list mechanism behaves at each step:
+
+1. The user executes the facilitator list command.
+2. `FacilCommandParser` creates a new `FacilListCommand`.
+3. `LogicManager` executes the `FacilListCommand`.
+4. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator list command works:
+
+.Sequence diagram for `facil list` command
+image::FacilitatorListSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser` and `FacilListCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator list command:
+
+.Activity diagram for `facil list` command
+image::FacilitatorListActivityDiagram.png[]
+
+===== Editing a facilitator
+The edit facilitator feature allows users to edit a facilitator from Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilEditCommandParser` and `FacilEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
+
+Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step:
+
+1. The user executes the facilitator edit command and provides the index of the facilitator to be edited and the fields to be edited.
+2. `FacilEditCommandParser` creates a new `EditFacilitatorDescriptor` with the fields to be edited.
+3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index and `EditFacilitatorDescriptor`.
+4. `LogicManager` executes the `FacilEditCommand`.
+5. `FacilEditCommand` retrieves the facilitator to be edited.
+6. `FacilEditCommand` creates a new `Facilitator`.
+7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
+8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+
+The following sequence diagram shows how the facilitator edits command works:
+
+.Sequence diagram for `facil edit` command
+image::FacilitatorEditSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser`, `FacilEditCommandParser`, `EditFacilitatorDescriptor` and `FacilEditCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator edit command:
+
+.Activity diagram for `facil edt` command
+image::FacilitatorEditActivityDiagram.png[]
+
+===== Deleting a facilitator
+The delete facilitator feature allows users to delete a facilitator from Mod Manager.
+This feature is facilitated by `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`.
+
+Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step:
+
+1. The user executes the facilitator delete command and provides the index of the facilitator to be deleted.
+2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index.
+3. `LogicManager` executes the `FacilDeleteCommand`.
+4. `FacilDeleteCommand` retrieves the facilitator to be deleted.
+5. `ModManager` deletes the facilitator from the `UniqueFacilitatorList`.
+
+The following sequence diagram shows how the facilitator delete command works:
+
+.Sequence diagram for `facil delete` command
+image::FacilitatorDeleteSequenceDiagram.png[]
+
+NOTE: The lifeline for `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a facilitator delete command:
+
+.Activity diagram for `facil delete` command
+image::FacilitatorDeleteActivityDiagram.png[]
+////
+==== Design considerations
+
+===== Aspect: How the optional attribute of `TaskDateTime` is managed
+* **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
+A task with a specified time period will be created as a `ScheduledTask`, while a task with no
+time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
+`NonScheduledTask` are concrete subclasses of `Task`.
+** Pros: Utilises Object-Oriented Programming. Easy to implement `*search*` functionality,
+which we need to search for tasks that occur on a specified date, month, or year,
+and `*upcoming*` functionality, which we need to find the upcoming tasks in Mod Manager.
+For these two features, we only need to work on `ScheduledTask` instances, which reduces the
+burden of checking for `null` `TaskDateTime` instances as the second approach below.
+** Cons: More difficulty in implementation due to time constraints. Moreover, command
+`*edit*` that allows us to edits the information of the task will be troublesome, when
+a user decides to add a time period to a `NonScheduledTask`.
+In this case, we have to re-create a new `ScheduledTask` with the same description and its time provided.
+If we need to maintain a `List<ScheduledTask>` or `List<Task>` somewhere in the code, for example,
+in our `Module` instance, we also have to update the list contents in our `Module` s too.
+This requires the association between `Module` and `Task` to be bi-directional, which
+increases content and data coupling and make it harder for us to maintain and conduct tests. There is also extra overhead time
+communicating and collaborating with another member in our team who is doing the `Module` component, Because of these challenges,
+we decide to weaken the association between `Task` and `Module`, which is elaborated in our next aspect.
+
+* **Alternative 2:** Implement `Task` as a concrete class in Mod Manager. `Task` s without a specified time period
+will have its `TaskDateTime` set to `null`, while `Task` s with a given time period will be assign a `TaskDateTime` attribute, which
+is a wrapper class for Java's `LocalDateTime`.
+** Pros: Easier to implement, as we only need to create one class `Task`.
+** Cons: We must handle `null` cases every time we query something about the time of a `Task`.
+For example, it's more challenging to implement the `*search*` and `*upcoming*` command, since we have to handle the cases when the `TaskDateTime` instance is `null`.
+It's very complex to implement the method `compareTo` of `Comparable` interface for `Task` to compare the time between tasks,
+when one, or both of the `TaskDateTime` attributes can be `null`.
+
+===== Aspect: The association between `Module` and `Task`
+* **Alternative 1 (current choice):** Aggregation: Each `Task` can have an unique `ModuleCode` tag, which uniquely identifies which `Module` the task belongs to.
+This is a aggregation relationship, which is weaker than composition in our second approach.
+
+.Class diagram, a `Task` acts as a container for `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
+
+image::ModuleTaskAggregationDiagram.png[]
+
+** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
+to be aware that there are a list of `Task` s for it.
+** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
+our second approach, but this is a trade-off given the time constraints.
+
+* **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
+If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
+
+.Class diagram, a `Module` consists of `Task` objects.
+image::ModuleTaskCompositionDiagram.png[]
+
+** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
+For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
+such as assignments, homework, term tests, and exams.
+** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
+and collaborating with the team member responsible for the `Module` component, as mentioned above.
+
+//===== Aspect: FooBar
+//* **Alternative 1 (current choice):** Aggregation: Each `Task` has an unique `ModuleCode` tag to indicate which `Module` the task belongs to.
+//This is a aggregation relationship, which is weaker than composition in our second approach.
+//diagram]
+//** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
+//to be aware that there are a list of `Task` s for it.
+//** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
+//our second approach, but this is a trade-off given the time constraints.
+
+//* **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
+//If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
+//[diagram]
+//** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
+//For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
+//such as assignments, homework, term tests, and exams.
+//** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
+//and collaborating with the team member responsible for the `Module` component, as mentioned above.
+
+//ta
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
 
