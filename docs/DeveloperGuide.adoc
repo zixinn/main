@@ -146,7 +146,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-=== Modules Management feature
+=== Modules Management Feature
 The module feature manages the modules in Mod Manager and is represented by the `Module` class.
 A module has a `ModuleCode` and an optional `Description`.
 
@@ -158,7 +158,7 @@ It supports the following operations:
 * edit - Edits a module in Mod Manager.
 * delete - Deletes a module in Mod Manager.
 
-==== Implementation
+==== Implementation Details
 
 ===== Adding a module
 The add module feature allows users to add a module to Mod Manager.
@@ -212,7 +212,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity diagram for `mod list` command
 image::ModuleListActivityDiagram.png[]
 
-==== Design considerations
+==== Design Considerations
 
 ===== Aspect: Whether to support editing of module code
 * **Alternative 1 (current choice):** Allow users to only edit the description of a module.
@@ -222,7 +222,7 @@ image::ModuleListActivityDiagram.png[]
 ** Pros: Provides more flexibility for users.
 ** Cons: Implementation is more complex as the classes, tasks and facilitators all store module codes and have to be edited too.
 
-=== Facilitators Management feature
+=== Facilitators Management Feature
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
 A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
@@ -235,7 +235,7 @@ It supports the following operations:
 * edit - Edits a facilitator in Mod Manager.
 * delete - Deletes a facilitator in Mod Manager.
 
-==== Implementation
+==== Implementation Details
 
 ===== Adding a facilitator
 The add facilitator feature allows users to add a facilitator to Mod Manager.
@@ -369,7 +369,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity diagram for `facil delete` command
 image::FacilitatorDeleteActivityDiagram.png[]
 
-==== Design considerations
+==== Design Considerations
 
 ===== Aspect: How the facilitator is edited
 * **Alternative 1 (current choice):** Create a new facilitator with the edited fields and replace the existing facilitator with the new facilitator.
@@ -396,7 +396,7 @@ It supports the following operations:
 * view - Views the schedules and tasks in a whole week in Mod Manager.
 * find - Finds empty slots in a week from current day to end of the week in Mod Manager.
 
-==== Implementation
+==== Implementation Details
 
 ===== Viewing the calendar
 The view calendar feature allows users to view the calendar for a week in Mod Manager.
@@ -445,7 +445,7 @@ The following activity diagram summarizes what happens when a user executes a ca
 .Activity diagram for `cal find command`
 image::CalFindActivityDiagram.png[]
 
-==== Design considerations
+==== Design Considerations
 
 ===== Aspect: Calendar appearance
 .New design for calendar appearance (alternative 1)
@@ -490,7 +490,7 @@ It supports the following operations:
 * edit - Edits a class in Mod Manager.
 * delete - Deletes a class in Mod Manager.
 
-==== Implementation
+==== Implementation Details
 ===== Adding a class
 The add class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonAddCommandParser` and `LessonAddCommand`. The operation is exposed in the `Model` interface as `Model#addLesson()`.
 
@@ -513,7 +513,7 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity diagram for `class add` command
 image::LessonAddActivityDiagram.png[]
 
-==== Design considerations
+==== Design Considerations
 ===== Aspect: Prefix of day and time
 * **Alternative 1: (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
 ** Pros: User types less.
