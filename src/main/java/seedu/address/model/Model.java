@@ -184,7 +184,7 @@ public interface Model {
      * Adds the given task.
      * {@code module} must not already exist in Mod Manager.
      */
-    void addTask(Task module) throws ParseException;
+    void addTask(Task task) throws ParseException;
 
     /**
      * Removes all tasks with the specified ModuleCode.

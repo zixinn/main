@@ -409,32 +409,63 @@ It supports the following operations:
 ==== Implementation
 
 ===== Adding a task
+
+// to extend on Task, ScheduledTask and NonScheduledTask
 The add task feature allows users to add a task to Mod Manager.
-This feature is taskitated by `FacilCommandParser`, `FacilAddCommandParser` and `FacilAddCommand`.
-The operation is exposed in the `Model` interface as `Model#addFacilitator()`.
+This feature is facilitated by `TaskCommandParser`, `TaskAddCommandParser` and `
+TaskAddCommand`.
+The operation is exposed in the `Model` interface as `Model#addTask()`.
 
-Given below is an example usage scenario and how the taskitator add mechanism behaves at each step:
+Given below is an example usage scenario and how the `*task* add` mechanism behaves at each step:
 
-1. The user executes the taskitator add command and provides the name, phone, email, office and module code of the taskitator to be added.
-2. `FacilitatorAddCommandParser` creates a new `Facilitator` based on the name, phone, email, office and module code.
-3. `FacilitatorAddCommandParser` creates a new `FacilitatorAddCommand` based on the taskitator.
-4. `LogicManager` executes the `FacilitatorAddCommand`.
-5. `ModManager` adds the taskitator to the `UniqueFacilitatorList`.
-6. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
+1. The user executes the `*task* add` command and provides the module code, the description of the task (both compulsory),
+and a time period (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
+2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time period (if provided).
+3. `TaskAddCommandParser` creates a new `TaskAddCommand` based on the task.
+4. `LogicManager` executes the `TaskAddCommand`.
+5. `ModManager` adds the task to the `UniqueTaskList`.
+6. `ModelManager` updates the `filteredTasks` in `ModelManager`.
 
-The following sequence diagram shows how the taskitator add command works:
+The following sequence diagram shows how the `*task* add` command works:
 
-.Sequence diagram for `facil add` command
+.Sequence diagram for `task add` command
 image::TaskAddSequenceDiagram.png[]
 
-NOTE: The lifeline for `FacilitatorCommandParser`, `FacilitatorAddCommandParser` and `FacilitatorAddCommand` should end at
+NOTE: The lifeline for `TaskCommandParser`, `TaskAddCommandParser` and `TaskAddCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following activity diagram summarizes what happens when a user executes a facilitator add command:
+The following activity diagram summarizes what happens when a user executes a `*task* add` command:
 
-.Activity diagram for `facil add` command
+.Activity diagram for `task add` command
 image::TaskAddActivityDiagram.png[]
 
+===== Search tasks by date
+The search task feature allows users to search all tasks that occur on the specified date, month, or year.
+This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
+TaskSearchCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario and how the `*task* search` mechanism behaves at each step:
+
+1. The user executes the `*task* search` command and provides the day, month, or year, or any combination of which
+that they want to search for search for.
+2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
+3. `LogicManager` executes the `TaskSearchCommand`.
+4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
+
+The following sequence diagram shows how the `*task* search` command works:
+
+.Sequence diagram for `*task* search` command
+image::TaskSearchSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser`, `TaskSearchCommandParser`, `TaskSearchCommand` and `TaskSearch` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a task find command:
+
+.Activity diagram for `*task* search` command
+image::TaskSearchActivityDiagram.png[]
+////
 ===== Listing all facilitators
 The list facilitator feature allows users to list all facilitators in Mod Manager.
 This feature is facilitated by `FacilCommandParser` and `FacilListCommand`.
@@ -459,31 +490,6 @@ The following activity diagram summarizes what happens when a user executes a fa
 
 .Activity diagram for `facil list` command
 image::FacilitatorListActivityDiagram.png[]
-
-===== Finding facilitators
-The find facilitator feature allows users to find a facilitator by name in Mod Manager.
-This feature is facilitated by `FacilCommandParser`, `FacilFindCommandParser` and `FacilFindCommand`.
-The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
-
-Given below is an example usage scenario and how the facilitator find mechanism behaves at each step:
-
-1. The user executes the facilitator find command and provides the names of the facilitators to search for.
-2. `FacilFindCommandParser` creates a new `FacilFindCommand` based on the names.
-3. `LogicManager` executes the `FacilFindCommand`.
-4. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
-
-The following sequence diagram shows how the facilitator find command works:
-
-.Sequence diagram for `facil find` command
-image::FacilitatorFindSequenceDiagram.png[]
-
-NOTE: The lifeline for `FacilCommandParser`, `FacilFindCommandParser`, `FacilFindCommand` and `NameContainsKeyword` should end at
-the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
-The following activity diagram summarizes what happens when a user executes a facilitator find command:
-
-.Activity diagram for `facil find` command
-image::FacilitatorFindActivityDiagram.png[]
 
 ===== Editing a facilitator
 The edit facilitator feature allows users to edit a facilitator from Mod Manager.
@@ -539,7 +545,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 
 .Activity diagram for `facil delete` command
 image::FacilitatorDeleteActivityDiagram.png[]
-
+////
 ==== Design considerations
 
 ===== Aspect: How the optional attribute of `TaskDateTime` is managed
