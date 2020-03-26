@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
 
 import java.util.List;
 import java.util.Optional;
@@ -72,7 +71,7 @@ public class ModuleDeleteCommand extends ModuleCommand {
         }
 
         if (moduleToDelete == null) {
-            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode.toString()));
+            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode));
         }
 
         model.deleteModule(moduleToDelete);
@@ -81,7 +80,6 @@ public class ModuleDeleteCommand extends ModuleCommand {
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
-            model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
             model.removeLessonFromModule(moduleToDelete.getModuleCode());
         }
 

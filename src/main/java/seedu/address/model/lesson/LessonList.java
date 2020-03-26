@@ -151,6 +151,27 @@ public class LessonList {
     }
 
     /**
+     * Replaces the module code {@code target} in the list with {@code editedModuleCode}.
+     * {@code target} must exist in the list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in the list.
+     */
+    public void setModuleCode(ModuleCode target, ModuleCode editedModuleCode) {
+        requireAllNonNull(target, editedModuleCode);
+        List<Lesson> lessonsToEdit = new ArrayList<>();
+        for (Lesson lesson : lessons) {
+            if (lesson.getModuleCode().equals(target)) {
+                lessonsToEdit.add(lesson);
+            }
+        }
+        for (Lesson lesson : lessonsToEdit) {
+            Lesson editedLesson = new Lesson(editedModuleCode, lesson.getType(), lesson.getDay(), lesson.getStartTime(),
+                    lesson.getEndTime(), lesson.getVenue());
+            setLesson(lesson, editedLesson);
+        }
+    }
+
+    /**
      * Finds the index of a lesson in the list.
      * @param lesson Lesson to be checked.
      * @return The index found.

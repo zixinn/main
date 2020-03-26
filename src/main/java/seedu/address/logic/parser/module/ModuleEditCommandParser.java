@@ -3,6 +3,7 @@ package seedu.address.logic.parser.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.module.ModuleEditCommand;
@@ -25,7 +26,7 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
      */
     public ModuleEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION);
 
         int mode = 0;
         Index index = null;
@@ -39,11 +40,13 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
             mode = 1;
         }
 
-
         ModuleEditCommand.EditModuleDescriptor editModuleDescriptor = new ModuleEditCommand.EditModuleDescriptor();
         if (mode == 1 && (preamble.equals("") || !ModuleCode.isValidModuleCode(preamble))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ModuleEditCommand.MESSAGE_USAGE), invalidFormatException);
+        }
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) {
+            editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
             editModuleDescriptor.setDescription(ParserUtil.parseDescription(

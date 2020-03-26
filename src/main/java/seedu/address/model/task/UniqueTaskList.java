@@ -96,6 +96,31 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacementList);
     }
 
+    /**
+     * Replaces the module code {@code target} in the list with {@code editedModuleCode}.
+     * {@code target} must exist in the list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in the list.
+     */
+    public void setModuleCode(ModuleCode target, ModuleCode editedModuleCode) {
+        requireAllNonNull(target, editedModuleCode);
+        List<Task> tasksToEdit = new ArrayList<>();
+        for (Task task : internalList) {
+            if (task.getModuleCode().get().equals(target)) {
+                tasksToEdit.add(task);
+            }
+        }
+        for (Task task : tasksToEdit) {
+            Task editedTask;
+            if (task instanceof ScheduledTask) {
+                editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode);
+            } else {
+                editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode);
+            }
+            setTask(task, editedTask);
+        }
+    }
+
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

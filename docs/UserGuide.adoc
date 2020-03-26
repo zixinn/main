@@ -134,24 +134,25 @@ Format: `mod list`
 ==== Viewing information of a module
 
 Shows all classes, tasks and facilitators for a module. +
-Format: `mod view MOD_CODE` +
-Example: `mod view CS2103T`
+Format: `mod view INDEX` or `mod view MOD_CODE` +
+Example: `mod view 1` or `mod view CS2103T`
 
 ==== Editing a module
 
 Edits the information of the module. +
-Format: `mod edit INDEX /desc DESCRIPTION` or `mod edit MOD_CODE /desc DESCRIPTION`
+Format: `mod edit INDEX [/code NEW_MODE_CODE] [/desc DESCRIPTION]` or `mod edit MOD_CODE [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 
 Parameter constraints:
 ****
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * MOD_CODE should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
 * You can remove description linked to the facilitator by typing `/desc` without specifying any input after it.
 ****
 
-Example: `mod edit 1 /desc Software Engineering` or `mod edit CS2103T /desc Software Engineering`
+Example: `mod edit 1 /code cs2113t` or `mod edit CS2103T /desc Software Engineering`
 
 ==== Deleting a module
 
@@ -185,13 +186,13 @@ Format: `class list`
 
 ==== Finding classes by day
 
-Find classes occurring on a particular day. +
+Finds classes occurring on a particular day. +
 Format: `class find /at DAY` +
 Example: `class find /at MONDAY`
 
 ==== Finding next class
 
-Find the next class that will start soon. +
+Finds the next class that will start soon. +
 Format: `class find /next`
 
 ==== Editing a class
@@ -204,12 +205,12 @@ Example: `class edit 1 /code CS9000 /venue Home`
 
 Deletes the class from the module. There are 2 ways you can delete a class. +
 
-Select a class by its index in the full class list. You can see the full class list by using `class list`. +
+Selects a class by its index in the full class list. You can see the full class list by using `class list`. +
 
 Format: `class delete INDEX` +
 Example: `class delete 1` +
 
-Select a class by its index in the module's class list. +
+Selects a class by its index in the module's class list. +
 
 Format: `class delete /code MOD_CODE /num INDEX` +
 Example: `class delete /code CS2103T /num 1` +
@@ -313,7 +314,7 @@ Example: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.
 or `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T /code CS2101`
 
 ==== Viewing all facilitators
-Shows a list of all facilitators. +
+Shows a list of all facilitators sorted in alphabetical order. +
 Format: `facil list`
 
 ==== Finding a facilitator by name
@@ -325,7 +326,7 @@ Parameter constraints:
 * The search is case insensitive. e.g `hans` will match `Hans`.
 * The order of the name does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Partial words will be matched e.g. `Han` will match `Hans`.
 * Facilitators matching at least one name will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 ****
 
@@ -446,8 +447,8 @@ Receive reminders for deadlines and events the next day.
 .5+|Module
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
-| `*mod* view MOD_CODE`
-| `*mod* edit INDEX /desc DESCRIPTION` or `*mod* edit MOD_CODE /desc DESCRIPTION`
+| `*mod* view INDEX` or `*mod* view MOD_CODE`
+| `*mod* edit INDEX [/code NEW_MODE_CODE] [/desc DESCRIPTION]` or `*mod* edit MOD_CODE [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 | `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
 .7+|Class

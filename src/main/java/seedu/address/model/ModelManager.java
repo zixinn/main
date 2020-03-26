@@ -310,6 +310,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setModuleCodeInLessonList(ModuleCode target, ModuleCode editedModuleCode) {
+        modManager.setModuleCodeInLessonList(target, editedModuleCode);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -361,6 +366,11 @@ public class ModelManager implements Model {
         requireAllNonNull(moduleCode);
 
         modManager.removeTasksWithModuleCode(moduleCode);
+    }
+
+    @Override
+    public void setModuleCodeInTaskList(ModuleCode target, ModuleCode editedModuleCode) {
+        modManager.setModuleCodeInTaskList(target, editedModuleCode);
     }
 
     //=========== Filtered Task List Accessors =============================================================

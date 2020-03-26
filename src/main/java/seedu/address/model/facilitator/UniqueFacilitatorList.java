@@ -94,28 +94,6 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
      */
     public void removeModuleCode(final ModuleCode toRemove) {
         requireNonNull(toRemove);
-        //        List<Facilitator> facilitatorsToDelete = new ArrayList<>();
-        //        List<Facilitator> facilitatorsToEdit = new ArrayList<>();
-        //        for (Facilitator facilitator : internalList) {
-        //            if (facilitator.getModuleCodes().contains(toRemove)) {
-        //                if (facilitator.getModuleCodes().size() == 1) {
-        //                    facilitatorsToDelete.add(facilitator);
-        //                } else {
-        //                    facilitatorsToEdit.add(facilitator);
-        //                }
-        //            }
-        //        }
-        //        for (Facilitator facilitator : facilitatorsToDelete) {
-        //            remove(facilitator);
-        //        }
-        //        for (Facilitator facilitator : facilitatorsToEdit) {
-        //            Set<ModuleCode> moduleCodes = new HashSet<>(facilitator.getModuleCodes());
-        //            moduleCodes.remove(toRemove);
-        //            Facilitator editedFacilitator = new Facilitator(facilitator.getName(), facilitator.getPhone(),
-        //                    facilitator.getEmail(), facilitator.getOffice(), moduleCodes);
-        //            setFacilitator(facilitator, editedFacilitator);
-        //        }
-
         List<Facilitator> replacementList = new ArrayList<>();
         internalList.stream()
                 .filter(facilitator -> {
@@ -134,7 +112,6 @@ public class UniqueFacilitatorList implements Iterable<Facilitator> {
 
         setFacilitators(replacementList);
         FXCollections.sort(internalList, new FacilitatorNameComparator());
-
     }
 
     /**

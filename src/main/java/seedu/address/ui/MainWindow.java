@@ -241,8 +241,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-
-
     /**
      * Switches to module view
      */

@@ -2,6 +2,7 @@ package seedu.address.logic.parser.module;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -26,8 +27,19 @@ public class ModuleViewCommandParser implements Parser<ModuleViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(trimmedArgs);
+        try {
+            Index index = ParserUtil.parseIndex(trimmedArgs);
+            return new ModuleViewCommand(index);
+        } catch (ParseException pe) {
+            // intentionally left empty
+        }
 
-        return new ModuleViewCommand(moduleCode);
+        try {
+            ModuleCode moduleCode = ParserUtil.parseModuleCode(trimmedArgs);
+            return new ModuleViewCommand(moduleCode);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
+        }
     }
 }
