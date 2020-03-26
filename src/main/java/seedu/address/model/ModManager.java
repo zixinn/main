@@ -219,7 +219,7 @@ public class ModManager implements ReadOnlyModManager {
     }
 
     /**
-     * Replaces the given module code {@code target} in the list with {@code editedModuleCode}.
+     * Replaces the given module code {@code target} in the facilitator list with {@code editedModuleCode}.
      * {@code target} must exist in Mod Manager.
      * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
      * in Mod Manager.
@@ -268,6 +268,16 @@ public class ModManager implements ReadOnlyModManager {
 
     public void removeTasksWithModuleCode(ModuleCode target) {
         tasks.removeWithModuleCode(target);
+    }
+
+    /**
+     * Replaces the given module code {@code target} in the task list with {@code editedModuleCode}.
+     * {@code target} must exist in Mod Manager.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    public void setModuleCodeInTaskList(ModuleCode target, ModuleCode editedModuleCode) {
+        tasks.setModuleCode(target, editedModuleCode);
     }
 
     /**
@@ -351,6 +361,16 @@ public class ModManager implements ReadOnlyModManager {
     public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
         return FXCollections
                 .observableArrayList(lessons.findLessonByModuleCode(moduleCode));
+    }
+
+    /**
+     * Replaces the given module code {@code target} in the lesson list with {@code editedModuleCode}.
+     * {@code target} must exist in Mod Manager.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    public void setModuleCodeInLessonList(ModuleCode target, ModuleCode editedModuleCode) {
+        lessons.setModuleCode(target, editedModuleCode);
     }
 
     //// util methods

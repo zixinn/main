@@ -103,11 +103,14 @@ public class ModuleEditCommand extends ModuleCommand {
         model.setModule(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+        model.setModuleCodeInTaskList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+        model.setModuleCodeInLessonList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToEdit)) {
             model.updateModule(Optional.of(editedModule));
             model.updateFacilitatorListForModule(
                     new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
+            model.updateTaskListForModule(x -> x.getModuleCode().get().equals(editedModule.getModuleCode()));
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule),

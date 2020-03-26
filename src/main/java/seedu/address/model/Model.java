@@ -193,6 +193,13 @@ public interface Model {
     void deleteTasksWithModuleCode(ModuleCode target);
 
     /**
+     * Replaces the given module code {@code target} with {@code editedModuleCode} in the task list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    void setModuleCodeInTaskList(ModuleCode target, ModuleCode editedModuleCode);
+
+    /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in Mod Manager.
      * The task identity of {@code editedTask} must not be the same as another existing task
@@ -235,6 +242,13 @@ public interface Model {
     List<Lesson> getLessons();
 
     ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
+
+    /**
+     * Replaces the given module code {@code target} with {@code editedModuleCode} in the lesson list.
+     * The module code identity of {@code editedModuleCode} must not be the same as another existing module code
+     * in Mod Manager.
+     */
+    void setModuleCodeInLessonList(ModuleCode target, ModuleCode editedModuleCode);
 
     /** Updates the calendar in the model to the given {@code calendar}. */
     void updateCalendar(Calendar calendar);

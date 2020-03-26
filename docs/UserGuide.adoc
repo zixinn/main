@@ -185,13 +185,13 @@ Format: `class list`
 
 ==== Finding classes by day
 
-Find classes occurring on a particular day. +
+Finds classes occurring on a particular day. +
 Format: `class find /at DAY` +
 Example: `class find /at MONDAY`
 
 ==== Finding next class
 
-Find the next class that will start soon. +
+Finds the next class that will start soon. +
 Format: `class find /next`
 
 ==== Editing a class
@@ -204,12 +204,12 @@ Example: `class edit 1 /code CS9000 /venue Home`
 
 Deletes the class from the module. There are 2 ways you can delete a class. +
 
-Select a class by its index in the full class list. You can see the full class list by using `class list`. +
+Selects a class by its index in the full class list. You can see the full class list by using `class list`. +
 
 Format: `class delete INDEX` +
 Example: `class delete 1` +
 
-Select a class by its index in the module's class list. +
+Selects a class by its index in the module's class list. +
 
 Format: `class delete /code MOD_CODE /num INDEX` +
 Example: `class delete /code CS2103T /num 1` +
