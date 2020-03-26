@@ -70,7 +70,7 @@ public class ModuleAddCommandTest {
         // null -> returns false
         assertFalse(addCs2103tCommand.equals(null));
 
-        // different facilitator -> returns false
+        // different module code -> returns false
         assertFalse(addCs2103tCommand.equals(addCs2101Command));
     }
 

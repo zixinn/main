@@ -167,9 +167,16 @@ public class FacilEditCommandParserTest {
         expectedCommand = new FacilEditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // module codes
+        // single module code
         userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_CS2101;
         descriptor = new EditFacilitatorDescriptorBuilder().withModuleCodes(VALID_MODULE_CODE_CS2101).build();
+        expectedCommand = new FacilEditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple module codes
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_CS2101 + " " + VALID_MODULE_CODE_CS2103T;
+        descriptor = new EditFacilitatorDescriptorBuilder()
+                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T).build();
         expectedCommand = new FacilEditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -71,7 +71,7 @@ public class ModuleDeleteCommand extends ModuleCommand {
         }
 
         if (moduleToDelete == null) {
-            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode.toString()));
+            throw new CommandException(String.format(MESSAGE_DELETE_NON_EXISTENT_MODULE, moduleCode));
         }
 
         model.deleteModule(moduleToDelete);

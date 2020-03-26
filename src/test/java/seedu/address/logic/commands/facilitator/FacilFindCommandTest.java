@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_FACILITATORS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilitators.BENSON;
 import static seedu.address.testutil.TypicalFacilitators.CARL;
 import static seedu.address.testutil.TypicalFacilitators.ELLE;
 import static seedu.address.testutil.TypicalFacilitators.FIONA;
+import static seedu.address.testutil.TypicalFacilitators.GEORGE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,6 +75,16 @@ public class FacilFindCommandTest {
         expectedModel.updateFilteredFacilitatorList(predicate);
         assertCommandSuccess(command, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredFacilitatorList());
+    }
+
+    @Test
+    public void execute_partialMatchKeywords_multipleFacilitatorsFound() {
+        String expectedMessage = String.format(MESSAGE_FACILITATORS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Be");
+        FacilFindCommand command = new FacilFindCommand(predicate);
+        expectedModel.updateFilteredFacilitatorList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
+        assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredFacilitatorList());
     }
 
     /**

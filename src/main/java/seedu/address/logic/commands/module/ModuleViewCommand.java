@@ -58,7 +58,7 @@ public class ModuleViewCommand extends ModuleCommand {
         } else {
             module = model.findModule(moduleCode);
             if (module.isEmpty()) {
-                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.value));
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode));
             }
         }
 
@@ -66,7 +66,7 @@ public class ModuleViewCommand extends ModuleCommand {
         model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
                 module.get().getModuleCode().value));
         model.updateTaskListForModule(x -> x.getModuleCode().get().equals(module.get().getModuleCode()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module.get().getModuleCode()), CommandType.MODULE);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, module.get()), CommandType.MODULE);
     }
 
     @Override

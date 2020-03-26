@@ -70,8 +70,7 @@ public class FacilAddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
 
-        // multiple module codes - all accepted
-        // chain of modules
+        // chain of multiple module codes - all accepted
         Facilitator expectedWithChain = new FacilitatorBuilder(BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T,
                         VALID_MODULE_CODE_CS4215, VALID_MODULE_CODE_CS3230)
