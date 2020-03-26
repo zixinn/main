@@ -2,6 +2,7 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.List;
@@ -29,17 +30,19 @@ public class ModuleEditCommand extends ModuleCommand {
             + "by the index number used in the displayed module list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DESCRIPTION + " DESCRIPTION\n"
+            + "[" + PREFIX_MODULE_CODE + " NEW_MOD_CODE] "
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT + " 1 "
-            + PREFIX_DESCRIPTION + " new description\n"
+            + PREFIX_MODULE_CODE + " cs2113t\n"
             + "Parameters: MOD_CODE "
-            + PREFIX_DESCRIPTION + " DESCRIPTION\n"
+            + "[" + PREFIX_MODULE_CODE + " NEW_MOD_CODE] "
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT
             + " CS2103T "
             + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "The description to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
     public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
 
@@ -102,9 +105,12 @@ public class ModuleEditCommand extends ModuleCommand {
 
         model.setModule(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-        model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
-        model.setModuleCodeInTaskList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
-        model.setModuleCodeInLessonList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+
+        if (!moduleToEdit.getModuleCode().equals(editedModule.getModuleCode())) {
+            model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+            model.setModuleCodeInTaskList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+            model.setModuleCodeInLessonList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
+        }
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToEdit)) {
             model.updateModule(Optional.of(editedModule));
