@@ -70,7 +70,11 @@ public class LessonEditCommand extends LessonCommand {
         Lesson lessonToEdit = model.getLessonListForModule(target).get(index.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (lessonToEdit.equals(editedLesson) || model.hasLesson(editedLesson)) {
+        if (lessonToEdit.equals(editedLesson)) {
+            throw new CommandException(MESSAGE_USAGE);
+        }
+
+        if (model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
@@ -114,6 +118,7 @@ public class LessonEditCommand extends LessonCommand {
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
         return index.equals(e.index)
+                && target.equals(e.target)
                 && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 

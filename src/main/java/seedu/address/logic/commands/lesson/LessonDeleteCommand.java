@@ -29,6 +29,8 @@ public class LessonDeleteCommand extends LessonCommand {
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module code provided is invalid";
+
     private final Index targetIndex;
     private Optional<ModuleCode> moduleCode;
 
@@ -51,6 +53,11 @@ public class LessonDeleteCommand extends LessonCommand {
             return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete),
                     CommandType.LESSON);
         } else {
+            System.out.println("EY");
+            System.out.println(model.hasModuleCode(moduleCode.get().toString()));
+            if (!model.hasModuleCode(moduleCode.get().toString())) {
+                throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+            }
             ObservableList<Lesson> lessons = model.getLessonListForModule(moduleCode.get());
             if (targetIndex.getZeroBased() >= lessons.size()) {
                 throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
