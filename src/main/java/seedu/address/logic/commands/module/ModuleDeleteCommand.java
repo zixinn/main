@@ -81,7 +81,6 @@ public class ModuleDeleteCommand extends ModuleCommand {
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
-            model.updateFacilitatorListForModule(PREDICATE_SHOW_NO_FACILITATORS);
             model.removeLessonFromModule(moduleToDelete.getModuleCode());
         }
 
