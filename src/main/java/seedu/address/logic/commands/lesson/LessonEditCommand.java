@@ -70,7 +70,11 @@ public class LessonEditCommand extends LessonCommand {
         Lesson lessonToEdit = model.getLessonListForModule(target).get(index.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (lessonToEdit.equals(editedLesson) || model.hasLesson(editedLesson)) {
+        if (lessonToEdit.equals(editedLesson)) {
+            throw new CommandException(MESSAGE_USAGE);
+        }
+
+        if (model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
@@ -93,7 +97,12 @@ public class LessonEditCommand extends LessonCommand {
         DayOfWeek updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
-        String updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
+        String updatedVenue = "";
+        if (editLessonDescriptor.getVenue().equals("")) {
+            updatedVenue = null;
+        } else {
+            updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
+        }
 
         return new Lesson(updatedModuleCode, updatedLessonType, updatedDay, updatedStartTime, updatedEndTime,
                 updatedVenue);
@@ -114,6 +123,7 @@ public class LessonEditCommand extends LessonCommand {
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
         return index.equals(e.index)
+                && target.equals(e.target)
                 && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 

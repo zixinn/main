@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -31,6 +32,10 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
         Index index;
         Optional<ModuleCode> moduleCode = Optional.empty();
         if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        LessonDeleteCommand.MESSAGE_USAGE));
+            }
             index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX));
             moduleCode = Optional.of(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
         } else {
