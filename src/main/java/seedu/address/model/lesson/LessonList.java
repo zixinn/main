@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
@@ -56,6 +58,12 @@ public class LessonList {
 
     public void setLessons(List<Lesson> replacement) {
         requireNonNull(replacement);
+        Set<Lesson> set = new HashSet<>();
+        for (Lesson l : replacement) {
+            if (!set.add(l)) {
+                throw new DuplicateLessonException();
+            }
+        }
         lessons = replacement;
     }
 
@@ -69,7 +77,12 @@ public class LessonList {
      */
     public void deleteLesson(Lesson lesson) {
         requireNonNull(lesson);
-        lessons.remove(lesson);
+        if (lessons.contains(lesson)) {
+            lessons.remove(lesson);
+        } else {
+            throw new LessonNotFoundException();
+        }
+
     }
 
     /**
@@ -165,5 +178,26 @@ public class LessonList {
             index++;
         }
         throw new LessonNotFoundException();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other instanceof LessonList) {
+            LessonList otherList = (LessonList) other;
+            if (lessons.size() != otherList.getLessonList().size()) {
+                return false;
+            } else {
+                for (int i = 0; i < lessons.size(); i++) {
+                    if (!lessons.get(i).equals(otherList.getLessonList().get(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }
