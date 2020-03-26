@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.lesson.LessonAddCommand;
+import seedu.address.logic.commands.lesson.LessonEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -51,7 +52,14 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
         LessonType lessonType = ParserUtil.parseLessonType(argMultimap.getValue(PREFIX_TYPE));
+
+        String trimmed = argMultimap.getValue(PREFIX_AT).trim();
+        String[] splitted = trimmed.split(" ");
+        if (splitted.length != 3) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
+        }
         DayOfWeek day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_AT));
+
         LocalTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_AT));
         LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_AT));
 

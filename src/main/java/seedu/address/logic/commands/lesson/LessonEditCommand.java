@@ -97,7 +97,12 @@ public class LessonEditCommand extends LessonCommand {
         DayOfWeek updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
-        String updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
+        String updatedVenue = "";
+        if (editLessonDescriptor.getVenue().equals("")) {
+            updatedVenue = null;
+        } else {
+            updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
+        }
 
         return new Lesson(updatedModuleCode, updatedLessonType, updatedDay, updatedStartTime, updatedEndTime,
                 updatedVenue);

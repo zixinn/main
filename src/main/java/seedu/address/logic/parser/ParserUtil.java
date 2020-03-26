@@ -198,9 +198,6 @@ public class ParserUtil {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
         String[] splitted = trimmed.split(" ");
-        if (splitted.length != 3) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
-        }
         String day = splitted[0];
         boolean isDayValid = false;
         DayOfWeek assignedDay;
