@@ -2,8 +2,11 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,39 +21,74 @@ import seedu.address.model.module.ModuleCode;
 public class ModuleViewCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW
-            + ": Views a module in Mod Manager. "
+            + ": Views a module in Mod Manager. \n"
             + "Parameters: MOD_CODE \n"
-            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " CS2103T ";
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " CS2103T \n"
+            + "Parameters: INDEX \n"
+            + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " 1 ";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     public static final String MESSAGE_SUCCESS = "Viewed module: %1$s";
 
-    private final ModuleCode toView;
+    private final Index targetIndex;
+    private final ModuleCode moduleCode;
 
-    public ModuleViewCommand(ModuleCode toView) {
-        requireNonNull(toView);
-        this.toView = toView;
+    public ModuleViewCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
+        this.targetIndex = targetIndex;
+        this.moduleCode = null;
+    }
+
+    public ModuleViewCommand(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        this.targetIndex = null;
+        this.moduleCode = moduleCode;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Module> lastShownList = model.getFilteredModuleList();
+        Optional<Module> module;
 
-        Optional<Module> module = model.findModule(toView);
-        if (module.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, toView.value));
+        if (targetIndex != null && targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+        } else if (targetIndex != null) {
+            module = Optional.of(lastShownList.get(targetIndex.getZeroBased()));
+        } else {
+            module = model.findModule(moduleCode);
+            if (module.isEmpty()) {
+                throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.value));
+            }
         }
 
         model.updateModule(module);
-        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toView.value));
-        model.updateTaskListForModule(x -> x.getModuleCode().get().equals(toView));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toView), CommandType.MODULE);
+        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
+                module.get().getModuleCode().value));
+        model.updateTaskListForModule(x -> x.getModuleCode().get().equals(module.get().getModuleCode()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, module.get().getModuleCode()), CommandType.MODULE);
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ModuleViewCommand // instanceof handles nulls
-                && toView.equals(((ModuleViewCommand) other).toView));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ModuleViewCommand)) {
+            return false;
+        }
+
+        ModuleViewCommand command = (ModuleViewCommand) other;
+
+        // similar nullability check
+        boolean indexNull = (targetIndex == null && command.targetIndex == null)
+                || (targetIndex != null && command.targetIndex != null);
+        boolean moduleCodeNull = (moduleCode == null && command.moduleCode == null)
+                || (moduleCode != null && command.moduleCode != null);
+
+        return indexNull && moduleCodeNull
+                && (targetIndex == null || targetIndex.equals(command.targetIndex))
+                && (moduleCode == null || moduleCode.equals(command.moduleCode));
     }
 }

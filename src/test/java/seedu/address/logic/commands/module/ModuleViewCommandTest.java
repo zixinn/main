@@ -16,6 +16,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.facilitator.Facilitator;
@@ -27,11 +29,6 @@ import seedu.address.model.util.Description;
 import seedu.address.testutil.ModelStub;
 
 public class ModuleViewCommandTest {
-
-    @Test
-    public void constructor_nullModuleCode_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ModuleViewCommand(null));
-    }
 
     @Test
     public void execute_moduleCodeExist_success() throws Exception {
@@ -120,6 +117,11 @@ public class ModuleViewCommandTest {
         }
 
         @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return FXCollections.observableArrayList();
+        }
+
+        @Override
         public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
             ModuleCode toCheck;
             if (module.isEmpty()) {
@@ -161,5 +163,11 @@ public class ModuleViewCommandTest {
             }
             return Optional.empty();
         }
+
+        @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return FXCollections.observableArrayList();
+        }
+
     }
 }

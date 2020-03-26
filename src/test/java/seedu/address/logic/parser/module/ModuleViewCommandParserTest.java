@@ -34,9 +34,11 @@ public class ModuleViewCommandParserTest {
     @Test
     public void parse_invalidArgs_failure() {
         // invalid module code
-        assertParseFailure(parser, " cs2103*", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " cs2103*",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
 
         // multiple module codes
-        assertParseFailure(parser, "CS2101 CS2103T", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "CS2101 CS2103T",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
     }
 }

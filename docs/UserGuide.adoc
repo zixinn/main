@@ -134,8 +134,8 @@ Format: `mod list`
 ==== Viewing information of a module
 
 Shows all classes, tasks and facilitators for a module. +
-Format: `mod view MOD_CODE` +
-Example: `mod view CS2103T`
+Format: `mod view INDEX` or `mod view MOD_CODE` +
+Example: `mod view 1` or `mod view CS2103T`
 
 ==== Editing a module
 
@@ -447,7 +447,7 @@ Receive reminders for deadlines and events the next day.
 .5+|Module
 | `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 | `*mod* list`
-| `*mod* view MOD_CODE`
+| `*mod* view INDEX` or `*mod* view MOD_CODE`
 | `*mod* edit INDEX [/code NEW_MODE_CODE] [/desc DESCRIPTION]` or `*mod* edit MOD_CODE [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 | `*mod* delete INDEX` or `*mod* delete MOD_CODE`
 
