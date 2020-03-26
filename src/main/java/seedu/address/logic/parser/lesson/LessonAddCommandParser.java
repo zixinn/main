@@ -12,7 +12,6 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.lesson.LessonAddCommand;
-import seedu.address.logic.commands.lesson.LessonEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;

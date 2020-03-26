@@ -59,7 +59,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                 editLessonDescriptor.setModuleCode(ParserUtil.parseModuleCode(mods.get(1)));
                 target = ParserUtil.parseModuleCode(mods.get(0));
             } else if (mods.size() > 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        LessonEditCommand.MESSAGE_USAGE));
             }
         }
 
@@ -72,7 +73,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             String trimmed = argMultimap.getValue(PREFIX_AT).trim();
             String[] splitted = trimmed.split(" ");
             if (splitted.length != 3) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        LessonEditCommand.MESSAGE_USAGE));
             }
 
             editLessonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_AT)));

@@ -12,11 +12,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.lesson.LessonEditCommand;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
-import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
@@ -110,8 +108,8 @@ public class LessonEditCommandParserTest {
                 .withStartTime("04:00")
                 .withEndTime("05:00")
                 .withVenue("Home").build();
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 
@@ -124,8 +122,8 @@ public class LessonEditCommandParserTest {
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withModuleCode("GEQ1000")
                 .build();
 
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
 
         // lesson type only
@@ -135,8 +133,8 @@ public class LessonEditCommandParserTest {
         descriptor = new EditLessonDescriptorBuilder()
                 .withLessonType("REC").build();
 
-        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
 
         // day and time only
@@ -146,8 +144,8 @@ public class LessonEditCommandParserTest {
         descriptor = new EditLessonDescriptorBuilder()
                 .withDay("SATURDAY").withStartTime("06:00").withEndTime("07:00").build();
 
-        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
 
         // venue only
@@ -157,8 +155,8 @@ public class LessonEditCommandParserTest {
         descriptor = new EditLessonDescriptorBuilder()
                 .withVenue("somewhere").build();
 
-        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 
@@ -170,8 +168,8 @@ public class LessonEditCommandParserTest {
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withModuleCode("GEQ1000")
                 .withLessonType("SEC").build();
 
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 
@@ -184,8 +182,8 @@ public class LessonEditCommandParserTest {
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withLessonType("SEC").build();
 
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 
@@ -198,8 +196,8 @@ public class LessonEditCommandParserTest {
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withLessonType("SEC").build();
 
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 
@@ -208,8 +206,8 @@ public class LessonEditCommandParserTest {
         String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " " + PREFIX_VENUE
                 + " ";
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withVenue("").build();
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE)
-                , INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
+                INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
     }
 }

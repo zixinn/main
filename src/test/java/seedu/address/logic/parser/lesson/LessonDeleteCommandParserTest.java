@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.lesson.LessonDeleteCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.module.ModuleCode;
@@ -19,7 +20,7 @@ import seedu.address.model.module.ModuleCode;
  * therefore should be covered by the ParserUtilTest.
  */
 public class LessonDeleteCommandParserTest {
-    LessonDeleteCommandParser parser = new LessonDeleteCommandParser();
+    private LessonDeleteCommandParser parser = new LessonDeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
