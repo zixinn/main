@@ -27,7 +27,7 @@ public class TaskAddCommand extends TaskCommand {
             + "[" + PREFIX_AT + " hh/mm] \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_ADD + " "
             + PREFIX_MODULE_CODE + " CS3230 "
-            + PREFIX_DESCRIPTION + " CS3230 Programming Assignment 2 "
+            + PREFIX_DESCRIPTION + " Programming Assignment 2 "
             + PREFIX_ON + " 01/04/2020 "
             + PREFIX_AT + " 23:59\n";
 

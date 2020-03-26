@@ -51,10 +51,6 @@ public class JsonAdaptedTask {
                     Description.class.getSimpleName()));
         }
 
-        if (!TaskDateTime.isValidTaskTime(taskTime)) {
-            throw new IllegalValueException(TaskDateTime.MESSAGE_CONSTRAINTS);
-        }
-
         final Description modelDescription = new Description(description);
         if (description != null && !Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -69,6 +65,11 @@ public class JsonAdaptedTask {
         if (taskTime.isEmpty()) {
             return Task.makeNonScheduledTask(modelDescription, modelModuleCode);
         }
+
+        if (!TaskDateTime.isValidTaskTime(taskTime)) {
+            throw new IllegalValueException(TaskDateTime.MESSAGE_CONSTRAINTS);
+        }
+
         if (taskTime.length() <= 10) {
             modelTaskTime = new TaskDateTime(taskTime);
         } else {
