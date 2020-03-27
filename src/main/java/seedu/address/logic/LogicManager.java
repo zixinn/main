@@ -104,8 +104,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getModManagerFilePath() {
+        return model.getModManagerFilePath();
     }
 
     @Override
