@@ -57,7 +57,10 @@ public class CalendarCard extends UiPart<Region> {
         if (!task.getTimeString().equals("")) {
             time.setText(task.getTimeString());
         }
-        card.setStyle("-fx-background-color: #ffffd1; -fx-background-radius: 8;");
+        description.setStyle("-fx-text-fill: #010504;");
+        time.setStyle("-fx-text-fill: #010504;");
+        card.setStyle("-fx-background-color: #ffffd1;-fx-background-radius: 15; -fx-background-insets: 3px, 0px; "
+                + "-fx-padding: 10px;");
     }
 
     /**

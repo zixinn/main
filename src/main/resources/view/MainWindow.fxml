@@ -42,7 +42,7 @@
                 <Tab fx:id="module" text="Module">
                   <content>
                     <HBox>
-                      <VBox fx:id="moduleList" minWidth="300" prefWidth="300" styleClass="pane-with-border" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+                      <VBox fx:id="moduleList" minWidth="300" prefWidth="300" maxHeight="Infinity" prefHeight="500" styleClass="pane-with-border" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
                         <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
@@ -59,9 +59,9 @@
                             <ColumnConstraints hgrow="SOMETIMES" />
                             <ColumnConstraints hgrow="SOMETIMES" />
                           </columnConstraints>
-                          <StackPane fx:id="lessonPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="0" VBox.vgrow="ALWAYS" />
-                          <StackPane fx:id="taskPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="1" VBox.vgrow="ALWAYS" />
-                          <StackPane fx:id="facilitatorPanelPlaceholder" maxHeight="50" minHeight="-Infinity" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="2" VBox.vgrow="ALWAYS" />
+                          <StackPane fx:id="lessonPanelPlaceholder" maxHeight="Infinity" prefHeight="500" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="0" VBox.vgrow="ALWAYS" />
+                          <StackPane fx:id="taskPanelPlaceholder" maxHeight="Infinity" prefHeight="500" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="1" VBox.vgrow="ALWAYS" />
+                          <StackPane fx:id="facilitatorPanelPlaceholder" maxHeight="Infinity" prefHeight="500" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: rgba(232, 236, 241, .05);" styleClass="pane-with-border" GridPane.columnIndex="2" VBox.vgrow="ALWAYS" />
                                 <rowConstraints>
                                    <RowConstraints />
                                 </rowConstraints>
