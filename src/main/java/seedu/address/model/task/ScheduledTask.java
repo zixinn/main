@@ -9,6 +9,8 @@ import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.task.util.TaskIDManager;
 import seedu.address.model.util.Description;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Task with a Date and Time (Hours)
  */
@@ -77,16 +79,17 @@ public class ScheduledTask extends Task {
     }
 
     @Override
-    public boolean isSameTask(Task obj) {
-        if (obj instanceof NonScheduledTask) {
+    public boolean isSameTask(Task other) {
+        if (!(other instanceof ScheduledTask)) {
             return false;
         }
 
-        ScheduledTask other = (ScheduledTask) obj;
+        assert other.getTaskDateTime().isPresent();
 
         return this.description.equals(other.getDescription())
-                && this.taskDateTime.equals(other.taskDateTime)
-                && this.moduleCode.equals(other.getModuleCode());
+                && this.taskDateTime.equals(other.getTaskDateTime().get())
+                && this.moduleCode.equals(other.getModuleCode())
+                && this.taskID == other.getTaskID();
     }
 
     @Override

@@ -67,12 +67,13 @@ public class NonScheduledTask extends Task {
 
     @Override
     public boolean isSameTask(Task other) {
-        if (other instanceof ScheduledTask) {
+        if (!(other instanceof NonScheduledTask)) {
             return false;
         }
 
         return this.description.equals(other.getDescription())
-                && this.moduleCode.equals(other.getModuleCode());
+                && this.moduleCode.equals(other.getModuleCode())
+                && this.taskID == other.getTaskID();
     }
 
     @Override
