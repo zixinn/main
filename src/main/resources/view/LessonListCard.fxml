@@ -25,9 +25,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="type" styleClass="cell_big_label" />
+                <Label fx:id="type" styleClass="cell_big_label"/>
             </HBox>
-            <FlowPane fx:id="day" styleClass="cell_small_label" />
+            <FlowPane fx:id="day" styleClass="cell_small_label"/>
             <FlowPane fx:id="time" styleClass="cell_small_label" />
             <FlowPane fx:id="venue" styleClass="cell_small_label" />
         </VBox>

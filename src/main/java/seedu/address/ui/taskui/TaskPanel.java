@@ -2,6 +2,7 @@ package seedu.address.ui.taskui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -22,6 +23,7 @@ public class TaskPanel extends UiPart<Region> {
         super(FXML);
         tasksView.setItems(taskList);
         tasksView.setCellFactory(listView -> new TaskPanel.TaskListViewCell());
+        tasksView.setPadding(new Insets(0));
     }
 
     /**
@@ -37,6 +39,8 @@ public class TaskPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setStyle("-fx-background-color: #9d6365; -fx-background-radius: 15px; "
+                        + "-fx-background-insets: 3px, 0px; -fx-padding: 10px");
             }
         }
     }

@@ -36,6 +36,9 @@ public class ModuleListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new ModuleCard(module, getIndex() + 1).getRoot());
+                setStyle("-fx-background-color: #424659; -fx-background-radius: 15px;"
+                        + " -fx-background-insets: 3px, 0px; -fx-padding: 7px");
+
             }
         }
     }
