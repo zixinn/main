@@ -20,7 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.task.util.TaskIDManager;
+import seedu.address.model.task.util.TaskNumManager;
 
 /**
  * Parses input arguments and creates a new TaskEditCommand object
@@ -35,17 +35,17 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
-        String taskIDString = argMultimap.getPreamble();
+        String taskNumString = argMultimap.getPreamble();
 
-        if (taskIDString.isEmpty()) {
+        if (taskNumString.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskEditCommand.MESSAGE_USAGE));
         }
 
         int present = 0;
 
-        Pair<ModuleCode, Integer> pair = parseTaskIDString(taskIDString);
+        Pair<ModuleCode, Integer> pair = parseTaskNumString(taskNumString);
         ModuleCode moduleCode = pair.getKey();
-        int taskID = pair.getValue();
+        int taskNum = pair.getValue();
 
         TaskEditCommand.EditTaskDescriptor editTaskDescriptor =
                 new TaskEditCommand.EditTaskDescriptor();
@@ -60,7 +60,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
             present++;
             TaskDateTime taskDateTime;
             if (argMultimap.getValue(PREFIX_ON).trim().equals(TaskEditCommand.SPECIAL_VALUE_NON)) {
-                taskDateTime = Task.tabooDateTime;
+                taskDateTime = Task.TABOO_DATE_TIME;
                 if (argMultimap.getValue(PREFIX_AT) != null) {
                     throw new ParseException(TaskEditCommand.MESSAGE_NON_HAS_NO_TAILS);
                 }
@@ -79,10 +79,13 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskEditCommand.MESSAGE_USAGE));
         }
 
-        return new TaskEditCommand(moduleCode, taskID, editTaskDescriptor);
+        return new TaskEditCommand(moduleCode, taskNum, editTaskDescriptor);
     }
 
-    private Pair<ModuleCode, Integer> parseTaskIDString(String inp) throws ParseException {
+    /**
+     * Takes the String and parses the ModuleCode and TaskNum from it.
+     */
+    private Pair<ModuleCode, Integer> parseTaskNumString(String inp) throws ParseException {
         assert !inp.isEmpty();
 
         Scanner sc = new Scanner(inp);
@@ -93,16 +96,16 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         ModuleCode moduleCode = new ModuleCode(modCodeString);
 
         if (!sc.hasNextInt()) {
-            throw new ParseException(TaskIDManager.MESSAGE_USAGE_CONSTRAINTS);
+            throw new ParseException(TaskNumManager.MESSAGE_USAGE_CONSTRAINTS);
         }
-        int taskID = sc.nextInt();
+        int taskNum = sc.nextInt();
 
         if (sc.hasNext()) {
-            throw new ParseException(TaskIDManager.MESSAGE_USAGE_CONSTRAINTS);
+            throw new ParseException(TaskNumManager.MESSAGE_USAGE_CONSTRAINTS);
         }
         sc.close();
 
-        return new Pair<ModuleCode, Integer>(moduleCode, taskID);
+        return new Pair<ModuleCode, Integer>(moduleCode, taskNum);
     }
 
     /**

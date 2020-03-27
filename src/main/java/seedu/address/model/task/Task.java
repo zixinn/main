@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -13,7 +12,7 @@ import seedu.address.model.util.Description;
  * Interface for Task class.
  */
 public abstract class Task implements DailySchedulable {
-    public static final TaskDateTime tabooDateTime = new TaskDateTime(TaskDateTime.specialDateTime);
+    public static final TaskDateTime TABOO_DATE_TIME = new TaskDateTime(TaskDateTime.SPECIAL_DATE_TIME);
 
     public abstract Description getDescription();
     public abstract ModuleCode getModuleCode();
@@ -21,7 +20,7 @@ public abstract class Task implements DailySchedulable {
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();
     public abstract boolean isSameTask(Task other);
-    public abstract int getTaskID();
+    public abstract int getTaskNum();
 
     public static ScheduledTask makeScheduledTask(Description description,
                                            TaskDateTime taskDateTime,
@@ -32,8 +31,8 @@ public abstract class Task implements DailySchedulable {
     public static ScheduledTask makeScheduledTask(Description description,
                                                   TaskDateTime taskDateTime,
                                                   ModuleCode moduleCode,
-                                                  int taskID) {
-        return new ScheduledTask(description, taskDateTime, moduleCode, taskID);
+                                                  int taskNum) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum);
     }
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
@@ -43,8 +42,8 @@ public abstract class Task implements DailySchedulable {
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                         ModuleCode moduleCode,
-                                                        int taskID) {
-        return new NonScheduledTask(description, moduleCode, taskID);
+                                                        int taskNum) {
+        return new NonScheduledTask(description, moduleCode, taskNum);
     }
 
     public String getTimeString() {

@@ -6,10 +6,8 @@ import java.util.Optional;
 
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.task.util.TaskIDManager;
+import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Task with a Date and Time (Hours)
@@ -19,24 +17,24 @@ public class ScheduledTask extends Task {
     private ModuleCode moduleCode;
     private TaskDateTime taskDateTime;
     private boolean isDone;
-    private int taskID;
+    private int taskNum;
 
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskDateTime = taskDateTime;
         this.isDone = false;
-        this.taskID = TaskIDManager.getID(moduleCode);
-        TaskIDManager.addID(moduleCode, taskID);
+        this.taskNum = TaskNumManager.getNum(moduleCode);
+        TaskNumManager.addNum(moduleCode, taskNum);
     }
 
-    protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskID) {
+    protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskNum) {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskDateTime = taskDateTime;
         this.isDone = false;
-        this.taskID = taskID;
-        TaskIDManager.addID(moduleCode, taskID);
+        this.taskNum = taskNum;
+        TaskNumManager.addNum(moduleCode, taskNum);
     }
 
     /**
@@ -89,12 +87,12 @@ public class ScheduledTask extends Task {
         return this.description.equals(other.getDescription())
                 && this.taskDateTime.equals(other.getTaskDateTime().get())
                 && this.moduleCode.equals(other.getModuleCode())
-                && this.taskID == other.getTaskID();
+                && this.taskNum == other.getTaskNum();
     }
 
     @Override
-    public int getTaskID() {
-        return this.taskID;
+    public int getTaskNum() {
+        return this.taskNum;
     }
 
     @Override
@@ -109,8 +107,8 @@ public class ScheduledTask extends Task {
 
     @Override
     public String toString() {
-        String modShow = String.format("[%s %d]", moduleCode.toString(), taskID);
-        return "[" + getStatusIcon() + "]" + " " + modShow + description.toString()
+        String modShow = String.format("[%s %d]", moduleCode.toString(), taskNum);
+        return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString()
                 + " " + taskDateTime.toString();
     }
 
@@ -127,6 +125,6 @@ public class ScheduledTask extends Task {
         ScheduledTask e = (ScheduledTask) o;
 
         return this.moduleCode.equals(e.moduleCode)
-                && this.taskID == e.taskID;
+                && this.taskNum == e.taskNum;
     }
 }

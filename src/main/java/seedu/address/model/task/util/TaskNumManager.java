@@ -9,8 +9,8 @@ import seedu.address.model.module.ModuleCode;
 /**
  * Manages IDs of all tasks across all modules.
  */
-public class TaskIDManager {
-    public static String MESSAGE_USAGE_CONSTRAINTS =
+public class TaskNumManager {
+    public static final String MESSAGE_USAGE_CONSTRAINTS =
             "A task must be identified by inputting a valid module code followed by a 3-digit number.\n"
             + "For example: CS2103T 848.";
 
@@ -20,7 +20,10 @@ public class TaskIDManager {
     private static final int RANGE = 899;
     private static final int BOUND = RANGE + 1;
 
-    public static int getID(ModuleCode moduleCode) {
+    /**
+     * Generates a taskNum number according to the exiisting ones of a Module.
+     */
+    public static int getNum(ModuleCode moduleCode) {
         HashSet<Integer> inPlace;
         if (usedValues.containsKey(moduleCode)) {
             inPlace = usedValues.get(moduleCode);
@@ -37,7 +40,10 @@ public class TaskIDManager {
         return value + OFFSET;
     }
 
-    public static boolean doesIdExist(ModuleCode moduleCode, Integer id) {
+    /**
+     * Checks if taskNum exist with module.
+     */
+    public static boolean doesNumExist(ModuleCode moduleCode, Integer id) {
         if (!usedValues.containsKey(moduleCode)) {
             return false;
         }
@@ -45,7 +51,10 @@ public class TaskIDManager {
         return usedValues.get(moduleCode).contains(id);
     }
 
-    public static void removeID(ModuleCode moduleCode, Integer id) {
+    /**
+     * Removes the taskNum.
+     */
+    public static void removeNum(ModuleCode moduleCode, Integer id) {
         assert usedValues.containsKey(moduleCode);
 
         usedValues.get(moduleCode).remove(id);
@@ -55,7 +64,10 @@ public class TaskIDManager {
         }
     }
 
-    public static void addID(ModuleCode moduleCode, Integer id) {
+    /**
+     * Adds the taskNum to database.
+     */
+    public static void addNum(ModuleCode moduleCode, Integer id) {
         if (usedValues.containsKey(moduleCode)) {
             assert !usedValues.get(moduleCode).contains(id);
         } else {

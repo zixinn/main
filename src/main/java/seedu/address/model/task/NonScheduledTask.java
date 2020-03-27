@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.task.util.TaskIDManager;
+import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
 
 /**
@@ -15,20 +15,20 @@ public class NonScheduledTask extends Task {
     private Description description;
     private ModuleCode moduleCode;
     private boolean isDone;
-    private int taskID;
+    private int taskNum;
 
     protected NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
         this.moduleCode = moduleCode;
-        this.taskID = TaskIDManager.getID(moduleCode);
-        TaskIDManager.addID(moduleCode, taskID);
+        this.taskNum = TaskNumManager.getNum(moduleCode);
+        TaskNumManager.addNum(moduleCode, taskNum);
     }
 
-    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskID) {
+    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
         this.description = description;
         this.moduleCode = moduleCode;
-        this.taskID = taskID;
-        TaskIDManager.addID(moduleCode, taskID);
+        this.taskNum = taskNum;
+        TaskNumManager.addNum(moduleCode, taskNum);
     }
 
     /**
@@ -73,12 +73,12 @@ public class NonScheduledTask extends Task {
 
         return this.description.equals(other.getDescription())
                 && this.moduleCode.equals(other.getModuleCode())
-                && this.taskID == other.getTaskID();
+                && this.taskNum == other.getTaskNum();
     }
 
     @Override
-    public int getTaskID() {
-        return this.taskID;
+    public int getTaskNum() {
+        return this.taskNum;
     }
 
     @Override
@@ -88,8 +88,8 @@ public class NonScheduledTask extends Task {
 
     @Override
     public String toString() {
-        String modShow = String.format("[%s %d]", moduleCode.toString(), taskID);
-        return "[" + getStatusIcon() + "]" + " " + modShow + description.toString();
+        String modShow = String.format("[%s %d]", moduleCode.toString(), taskNum);
+        return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString();
     }
 
     @Override
@@ -105,6 +105,6 @@ public class NonScheduledTask extends Task {
         NonScheduledTask e = (NonScheduledTask) o;
 
         return this.moduleCode.equals(e.moduleCode)
-                && this.taskID == e.taskID;
+                && this.taskNum == e.taskNum;
     }
 }

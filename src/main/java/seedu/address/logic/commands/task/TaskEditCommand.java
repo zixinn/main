@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.task.util.TaskIDManager;
+import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
 
 /**
@@ -51,15 +49,15 @@ public class TaskEditCommand extends TaskCommand {
     public static final String SPECIAL_VALUE_NON = "non";
 
     private final ModuleCode moduleCode;
-    private final int taskID;
+    private final int taskNum;
     private final EditTaskDescriptor editTaskDescriptor;
 
-    public TaskEditCommand(ModuleCode moduleCode, int taskID, EditTaskDescriptor editTaskDescriptor) {
+    public TaskEditCommand(ModuleCode moduleCode, int taskNum, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(moduleCode);
         requireNonNull(editTaskDescriptor);
 
         this.moduleCode = moduleCode;
-        this.taskID = taskID;
+        this.taskNum = taskNum;
         this.editTaskDescriptor = editTaskDescriptor;
     }
 
@@ -73,12 +71,12 @@ public class TaskEditCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode.toString()));
         }
 
-        if (!TaskIDManager.doesIdExist(moduleCode, taskID)) {
-            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskID));
+        if (!TaskNumManager.doesNumExist(moduleCode, taskNum)) {
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskNum));
         }
 
         Task taskToEdit = current.stream().reduce(null, (x, y) -> {
-            if (y.getTaskID() == this.taskID) {
+            if (y.getTaskNum() == this.taskNum) {
                 return y;
             } else {
                 return x;
@@ -111,29 +109,30 @@ public class TaskEditCommand extends TaskCommand {
      */
     private static Task createEditedTask(Task toEdit, EditTaskDescriptor editTaskDescriptor) {
         assert toEdit != null;
-        assert toEdit.getTaskID() == editTaskDescriptor.getTaskID();
+        assert toEdit.getTaskNum() == editTaskDescriptor.getTaskNum();
         assert toEdit.getModuleCode().equals(editTaskDescriptor.getModuleCode());
 
         final Description updatedDescription = editTaskDescriptor.getDescription().orElse(toEdit.getDescription());
         final Optional<TaskDateTime> updatedTaskDateTime = editTaskDescriptor.getTaskDateTime();
         final ModuleCode modCode = toEdit.getModuleCode();
-        final int taskId = toEdit.getTaskID();
+        final int taskId = toEdit.getTaskNum();
 
         if (updatedTaskDateTime.isPresent()) {
             TaskDateTime value = updatedTaskDateTime.get();
 
-            return value.equals(Task.tabooDateTime)
+            return value.equals(Task.TABOO_DATE_TIME)
                     ? Task.makeNonScheduledTask(updatedDescription, modCode, taskId)
                     : Task.makeScheduledTask(updatedDescription, value,
-                    toEdit.getModuleCode(), toEdit.getTaskID());
+                    toEdit.getModuleCode(), toEdit.getTaskNum());
         } else {
             final Task[] toReturn = new Task[1];
             toEdit.getTaskDateTime()
-                    .ifPresentOrElse(
-                            taskDateTime -> toReturn[0] = Task.makeScheduledTask(updatedDescription, taskDateTime,
-                                    modCode, taskId),
-                            () -> toReturn[0] = Task.makeNonScheduledTask(updatedDescription,
-                                    modCode, taskId));
+                    .ifPresentOrElse(taskDateTime
+                        -> toReturn[0] = Task.makeScheduledTask(updatedDescription, taskDateTime,
+                            modCode, taskId), ()
+                        -> toReturn[0] = Task.makeNonScheduledTask(updatedDescription,
+                                modCode, taskId)
+                );
 
             return toReturn[0];
         }
@@ -145,7 +144,7 @@ public class TaskEditCommand extends TaskCommand {
      */
     public static class EditTaskDescriptor {
         private ModuleCode moduleCode;
-        private int taskID;
+        private int taskNum;
         private Description description;
         private TaskDateTime taskDateTime;
 
@@ -156,7 +155,7 @@ public class TaskEditCommand extends TaskCommand {
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.moduleCode = toCopy.moduleCode;
-            this.taskID = toCopy.taskID;
+            this.taskNum = toCopy.taskNum;
             this.description = toCopy.description;
             this.taskDateTime = toCopy.taskDateTime;
         }
@@ -165,8 +164,8 @@ public class TaskEditCommand extends TaskCommand {
             return this.moduleCode;
         }
 
-        public int getTaskID() {
-            return this.taskID;
+        public int getTaskNum() {
+            return this.taskNum;
         }
 
         public void setDescription(Description description) {
@@ -198,7 +197,7 @@ public class TaskEditCommand extends TaskCommand {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return this.moduleCode.equals(e.moduleCode)
-                    && this.taskID == e.taskID
+                    && this.taskNum == e.taskNum
                     && this.description.equals(e.description)
                     && this.taskDateTime.equals(e.taskDateTime);
         }

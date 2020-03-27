@@ -29,7 +29,7 @@ public class TaskListCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
 
-        String describing = String.format("[%s %d] %s", task.getModuleCode(), task.getTaskID(), task.getDescription());
+        String describing = String.format("[%s %d] %s", task.getModuleCode(), task.getTaskNum(), task.getDescription());
         description.setText(describing);
 
         if (!task.getTimeString().isEmpty()) {
