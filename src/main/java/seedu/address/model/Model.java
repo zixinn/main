@@ -50,12 +50,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getModManagerFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setModManagerFilePath(Path modManagerFilePath);
 
     /**
      * Replaces address book data with the data in {@code modManager}.
