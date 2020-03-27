@@ -48,12 +48,9 @@ public class CalendarCard extends UiPart<Region> {
      * Initializes a Calendar Card for a task
      */
     private void initTaskCard(Task task) {
-        if (task.getModuleCode().isPresent()) {
-            description.setText(task.getModuleCode().get().toString()
-                    + " " + task.getDescription().toString());
-        } else {
-            description.setText(task.getDescription().toString());
-        }
+        String describing = String.format("[%s %d] %s", task.getModuleCode(), task.getTaskID(), task.getDescription());
+        description.setText(describing);
+
         if (!task.getTimeString().equals("")) {
             time.setText(task.getTimeString());
         }

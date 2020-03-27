@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import seedu.address.model.util.Description;
  * Interface for Task class.
  */
 public abstract class Task implements DailySchedulable {
+    public static final TaskDateTime tabooDateTime = new TaskDateTime(TaskDateTime.specialDateTime);
+
     public abstract Description getDescription();
     public abstract ModuleCode getModuleCode();
     public abstract Optional<TaskDateTime> getTaskDateTime();

@@ -10,6 +10,10 @@ import seedu.address.model.module.ModuleCode;
  * Manages IDs of all tasks across all modules.
  */
 public class TaskIDManager {
+    public static String MESSAGE_USAGE_CONSTRAINTS =
+            "A task must be identified by inputting a valid module code followed by a 3-digit number.\n"
+            + "For example: CS2103T 848.";
+
     private static HashMap<ModuleCode, HashSet<Integer>> usedValues = new HashMap<>();
     private static final HashSet<Integer> emptySet = new HashSet<>();
     private static final int OFFSET = 100;

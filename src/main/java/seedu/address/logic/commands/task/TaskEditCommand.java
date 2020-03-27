@@ -24,7 +24,7 @@ import seedu.address.model.util.Description;
 /**
  * Represents a command that edits an existing task in Mod Manager.
  */
-public class TaskEditCommand extends Command {
+public class TaskEditCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_EDIT
             + ": Edits the details of the task identified "
             + "by the unique ID of the task found in the both the general tasks list and module specific list. "
@@ -47,6 +47,8 @@ public class TaskEditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager.";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task of module %s with ID %d does not exist in Mod Manager.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "The module %s does not exist in Mod Manager.";
+    public static final String MESSAGE_NON_HAS_NO_TAILS = "If /on value is 'non', there shall not be an /at value.";
+    public static final String SPECIAL_VALUE_NON = "non";
 
     private final ModuleCode moduleCode;
     private final int taskID;
@@ -75,10 +77,15 @@ public class TaskEditCommand extends Command {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskID));
         }
 
-        Task[] querry = (Task[]) current.stream().filter(task -> task.getTaskID() == this.taskID).toArray();
-        assert querry.length == 1;
+        Task taskToEdit = current.stream().reduce(null, (x, y) -> {
+            if (y.getTaskID() == this.taskID) {
+                return y;
+            } else {
+                return x;
+            }
+        });
+        assert taskToEdit != null;
 
-        Task taskToEdit = querry[0];
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
@@ -97,6 +104,11 @@ public class TaskEditCommand extends Command {
                 CommandType.TASK);
     }
 
+    /**
+     * Creates and returns a {@code Task} with the details of {@code toEdit}
+     * edited with {@code editTaskDescriptor}.
+     * Lambdas might not be the best way to do this, but would avoid nested if-else.
+     */
     private static Task createEditedTask(Task toEdit, EditTaskDescriptor editTaskDescriptor) {
         assert toEdit != null;
         assert toEdit.getTaskID() == editTaskDescriptor.getTaskID();
@@ -108,7 +120,11 @@ public class TaskEditCommand extends Command {
         final int taskId = toEdit.getTaskID();
 
         if (updatedTaskDateTime.isPresent()) {
-            return Task.makeScheduledTask(updatedDescription, updatedTaskDateTime.get(),
+            TaskDateTime value = updatedTaskDateTime.get();
+
+            return value.equals(Task.tabooDateTime)
+                    ? Task.makeNonScheduledTask(updatedDescription, modCode, taskId)
+                    : Task.makeScheduledTask(updatedDescription, value,
                     toEdit.getModuleCode(), toEdit.getTaskID());
         } else {
             final Task[] toReturn = new Task[1];
@@ -139,7 +155,10 @@ public class TaskEditCommand extends Command {
          * Copy constructor.
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-
+            this.moduleCode = toCopy.moduleCode;
+            this.taskID = toCopy.taskID;
+            this.description = toCopy.description;
+            this.taskDateTime = toCopy.taskDateTime;
         }
 
         public ModuleCode getModuleCode() {
@@ -148,10 +167,6 @@ public class TaskEditCommand extends Command {
 
         public int getTaskID() {
             return this.taskID;
-        }
-
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, taskDateTime);
         }
 
         public void setDescription(Description description) {

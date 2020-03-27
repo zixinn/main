@@ -116,7 +116,7 @@ public class ModuleEditCommand extends ModuleCommand {
             model.updateModule(Optional.of(editedModule));
             model.updateFacilitatorListForModule(
                     new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
-            model.updateTaskListForModule(x -> x.getModuleCode().get().equals(editedModule.getModuleCode()));
+            model.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule),

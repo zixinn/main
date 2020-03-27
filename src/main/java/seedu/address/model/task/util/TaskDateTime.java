@@ -36,6 +36,9 @@ public class TaskDateTime implements Comparable {
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
             .toFormatter();
 
+    public static final LocalDateTime specialDateTime =
+            LocalDate.parse("01/01/1970", dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
+
     public final LocalDateTime taskTime;
 
 
@@ -73,6 +76,10 @@ public class TaskDateTime implements Comparable {
         } catch (DateTimeParseException dateError) {
             throw new ParseException(String.format("Invalid date: %s.", date));
         }
+    }
+
+    public TaskDateTime(LocalDateTime localDateTime) {
+        this.taskTime = localDateTime;
     }
 
     /**

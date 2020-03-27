@@ -280,8 +280,8 @@ public class ParserUtil {
             trimmedTime = null;
         } else {
             trimmedTime = taskTime.trim();
-            if (!Description.isValidDescription(trimmedTime)) {
-                throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
+                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
             }
         }
         return new TaskDateTime(trimmedTime);
