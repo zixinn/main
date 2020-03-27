@@ -13,7 +13,7 @@
     <children>
         <StackPane>
             <children>
-                <Label fx:id="calendarTitle" alignment="TOP_CENTER" contentDisplay="TOP" style="-fx-text-fill: white" text="Calendar"> >
+                <Label fx:id="calendarTitle" alignment="TOP_CENTER" contentDisplay="TOP" style="-fx-text-fill: white; -fx-font-family: Titillium Web Bold;" text="Calendar"> >
                     <StackPane.margin>
                         <Insets top="8.0" />
                     </StackPane.margin>

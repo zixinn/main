@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane styleClass="module-details-panel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane styleClass="module-details-panel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" style = "-fx-background-color: #424659; -fx-background-radius: 15px; -fx-border-color: transparent; -fx-effect: null;">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
     </columnConstraints>
-    <Label fx:id="moduleDetails" wrapText="true" style="-fx-text-fill: white; -fx-font: bold 12pt Default;"/>
+    <Label fx:id="moduleDetails" wrapText="true" style="-fx-text-fill: white; -fx-font-family: Titillium Web Bold; -fx-font-size: 14pt; -fx-font-weight: bold; -fx-padding: 3px;"/>
 </GridPane>

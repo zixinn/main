@@ -47,7 +47,6 @@ public class LessonModCard extends UiPart<Region> {
         }
 
         cardbox.setMinHeight(0);
-
     }
 
     @Override

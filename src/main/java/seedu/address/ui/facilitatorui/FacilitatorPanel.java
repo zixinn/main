@@ -2,6 +2,7 @@ package seedu.address.ui.facilitatorui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -21,6 +22,7 @@ public class FacilitatorPanel extends UiPart<Region> {
         super(FXML);
         facilitatorsView.setItems(facilitatorList);
         facilitatorsView.setCellFactory(listView -> new FacilitatorListViewCell());
+        facilitatorsView.setPadding(new Insets(0));
     }
 
     /**
@@ -36,6 +38,7 @@ public class FacilitatorPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new FacilitatorModCard(facilitator, getIndex() + 1).getRoot());
+                setStyle("-fx-background-color: #865E6E; -fx-background-radius: 15px; -fx-background-insets: 3px, 0px; -fx-padding: 10px");
             }
         }
     }

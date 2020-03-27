@@ -182,15 +182,19 @@ public class MainWindow extends UiPart<Stage> {
 
         moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
+        moduleDetailsPlaceholder.setStyle("-fx-background-insets: 3px, 0px;  -fx-background-radius: 15px; -fx-border-color: transparent;");
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+        lessonPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
 
         taskPanel = new TaskPanel(logic.getTaskListForModule());
         taskPanelPlaceholder.getChildren().add(taskPanel.getRoot());
+        taskPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
 
         facilitatorPanel = new FacilitatorPanel(logic.getFacilitatorListForModule());
         facilitatorPanelPlaceholder.getChildren().add(facilitatorPanel.getRoot());
+        facilitatorPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
 
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         System.out.println("Tasks available");
@@ -291,12 +295,14 @@ public class MainWindow extends UiPart<Stage> {
             lessonPanel = new LessonPanel();
             lessonPanelPlaceholder.getChildren().clear();
             lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+            lessonPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
             return;
         }
         ModuleCode moduleCode = module.get().getModuleCode();
         lessonPanel = new LessonPanel(logic.getLessonListForModule(moduleCode));
         lessonPanelPlaceholder.getChildren().clear();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
+        lessonPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
     }
 
     public ModuleListPanel getModuleListPanel() {
