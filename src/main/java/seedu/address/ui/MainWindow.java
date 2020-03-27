@@ -182,7 +182,8 @@ public class MainWindow extends UiPart<Stage> {
 
         moduleDetailsPanel = new ModuleDetailsPanel();
         moduleDetailsPlaceholder.getChildren().add(moduleDetailsPanel.getRoot());
-        moduleDetailsPlaceholder.setStyle("-fx-background-insets: 3px, 0px;  -fx-background-radius: 15px; -fx-border-color: transparent;");
+        moduleDetailsPlaceholder.setStyle("-fx-background-insets: 3px, 0px;  -fx-background-radius: 15px; "
+                + "-fx-border-color: transparent;");
 
         lessonPanel = new LessonPanel();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());

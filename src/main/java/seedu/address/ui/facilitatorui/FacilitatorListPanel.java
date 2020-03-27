@@ -37,7 +37,8 @@ public class FacilitatorListPanel extends UiPart<Region> {
                 setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new FacilitatorCard(facilitator, getIndex() + 1).getRoot());
-                setStyle("-fx-background-color: #865E6E; -fx-background-radius: 15px; -fx-background-insets: 3px, 0px; -fx-padding: 2px");
+                setStyle("-fx-background-color: #865E6E; -fx-background-radius: 15px; "
+                        + "-fx-background-insets: 3px, 0px; -fx-padding: 2px");
 
             }
         }
