@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.task.util.TaskIDManager;
 import seedu.address.model.util.Description;
 
 /**
@@ -12,12 +13,22 @@ import seedu.address.model.util.Description;
  */
 public class NonScheduledTask extends Task {
     private Description description;
-    private Optional<ModuleCode> moduleCode;
+    private ModuleCode moduleCode;
     private boolean isDone;
+    private int taskID;
 
-    public NonScheduledTask(Description description, ModuleCode moduleCode) {
+    protected NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = Optional.of(moduleCode);
+        this.moduleCode = moduleCode;
+        this.taskID = TaskIDManager.getID(moduleCode);
+        TaskIDManager.addID(moduleCode, taskID);
+    }
+
+    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskID) {
+        this.description = description;
+        this.moduleCode = moduleCode;
+        this.taskID = taskID;
+        TaskIDManager.addID(moduleCode, taskID);
     }
 
     /**
@@ -33,7 +44,7 @@ public class NonScheduledTask extends Task {
     }
 
     @Override
-    public Optional<ModuleCode> getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -65,13 +76,34 @@ public class NonScheduledTask extends Task {
     }
 
     @Override
+    public int getTaskID() {
+        return this.taskID;
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(description, moduleCode, isDone);
     }
 
     @Override
     public String toString() {
-        String modShow = moduleCode.map(code -> " [" + code.toString() + "] ").orElse("");
+        String modShow = String.format("[%s %d]", moduleCode.toString(), taskID);
         return "[" + getStatusIcon() + "]" + " " + modShow + description.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof NonScheduledTask)) {
+            return false;
+        }
+
+        NonScheduledTask e = (NonScheduledTask) o;
+
+        return this.moduleCode.equals(e.moduleCode)
+                && this.taskID == e.taskID;
     }
 }

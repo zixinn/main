@@ -13,11 +13,12 @@ import seedu.address.model.util.Description;
  */
 public abstract class Task implements DailySchedulable {
     public abstract Description getDescription();
-    public abstract Optional<ModuleCode> getModuleCode();
+    public abstract ModuleCode getModuleCode();
     public abstract Optional<TaskDateTime> getTaskDateTime();
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();
     public abstract boolean isSameTask(Task other);
+    public abstract int getTaskID();
 
     public static ScheduledTask makeScheduledTask(Description description,
                                            TaskDateTime taskDateTime,
@@ -25,9 +26,22 @@ public abstract class Task implements DailySchedulable {
         return new ScheduledTask(description, taskDateTime, moduleCode);
     }
 
+    public static ScheduledTask makeScheduledTask(Description description,
+                                                  TaskDateTime taskDateTime,
+                                                  ModuleCode moduleCode,
+                                                  int taskID) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskID);
+    }
+
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                  ModuleCode moduleCode) {
         return new NonScheduledTask(description, moduleCode);
+    }
+
+    public static NonScheduledTask makeNonScheduledTask(Description description,
+                                                        ModuleCode moduleCode,
+                                                        int taskID) {
+        return new NonScheduledTask(description, moduleCode, taskID);
     }
 
     public String getTimeString() {
