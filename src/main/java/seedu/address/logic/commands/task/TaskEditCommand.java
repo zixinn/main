@@ -90,9 +90,14 @@ public class TaskEditCommand extends TaskCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        if (editTaskDescriptor.getDescription().isEmpty()
-                && editTaskDescriptor.getTaskDateTime().equals(taskToEdit.getTaskDateTime())) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+        if (editTaskDescriptor.getDescription().isEmpty()) {
+            if (editTaskDescriptor.getTaskDateTime().equals(taskToEdit.getTaskDateTime())
+                    || (taskToEdit.getTaskDateTime().isEmpty()
+                    && editTaskDescriptor.getTaskDateTime().equals(Optional.of(Task.TABOO_DATE_TIME)))
+            ) {
+                throw new CommandException(MESSAGE_NOT_EDITED);
+            }
+
         }
 
         model.setTask(taskToEdit, editedTask);

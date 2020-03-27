@@ -70,7 +70,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
                 taskDateTime = new TaskDateTime(argMultimap.getValue(PREFIX_ON));
             }
             editTaskDescriptor.setTaskDateTime(taskDateTime);
-            assert editTaskDescriptor.getTaskDateTime().equals(Optional.ofNullable(taskDateTime));
+            assert editTaskDescriptor.getTaskDateTime().equals(Optional.of(taskDateTime));
         } else if (argMultimap.getValue(PREFIX_AT) != null) {
             throw new ParseException(MESSAGE_AT_WITHOUT_ON_ERROR);
         }
