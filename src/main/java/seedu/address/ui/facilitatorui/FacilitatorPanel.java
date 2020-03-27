@@ -36,6 +36,7 @@ public class FacilitatorPanel extends UiPart<Region> {
             if (empty || facilitator == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new FacilitatorModCard(facilitator, getIndex() + 1).getRoot());
                 setStyle("-fx-background-color: #865E6E; -fx-background-radius: 15px; "

@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getModManagerFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         moduleDetailsPanel = new ModuleDetailsPanel();
@@ -296,14 +296,12 @@ public class MainWindow extends UiPart<Stage> {
             lessonPanel = new LessonPanel();
             lessonPanelPlaceholder.getChildren().clear();
             lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
-            lessonPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
             return;
         }
         ModuleCode moduleCode = module.get().getModuleCode();
         lessonPanel = new LessonPanel(logic.getLessonListForModule(moduleCode));
         lessonPanelPlaceholder.getChildren().clear();
         lessonPanelPlaceholder.getChildren().add(lessonPanel.getRoot());
-        lessonPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
     }
 
     public ModuleListPanel getModuleListPanel() {
