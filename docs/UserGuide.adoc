@@ -287,8 +287,8 @@ Format: `task find /upcoming` +
 ==== Editing a task
 
 Edits the information of a task. +
-Format: `task edit /code MOD_CODE /task TASK_NAME {[/on DATE TIME] | [/at DATE TIME]}` +
-Example: `task edit /code CS2103T /task duke /on 02-03-2020 23:59`
+Format: `task edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]` +
+Example: `task edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59` or `task edit CS2103T 848 /on non`
 
 ==== Deleting a task
 
@@ -339,7 +339,7 @@ or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/of
 
 Parameter constraints:
 ****
-* Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the facilitator tab. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
@@ -461,12 +461,12 @@ Receive reminders for deadlines and events the next day.
 |  `*class* delete /code MOD_CODE /num INDEX`
 
 .7+|Task
-| `*task* add /code MOD_CODE /task TASK_NAME [/on DATE TIME] [/at DATE TIME]`
+| `*task* add /code MOD_CODE /task TASK_NAME [/on DATE] [/at TIME]`
 | `*task* list`
 | `*task* find [/date DATE] [/month MONTH] [/year YEAR]`
 | `*task* find /upcoming`
 | `*task* find /desc TASK_NAME`
-| `*task* edit /code MOD_CODE /desc TASK_NAME {[/on DATE TIME] [/at DATE TIME]}`
+| `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
 | `*task* delete /code MOD_CODE /task TASK_NAME`
 
 .5+|Facilitator

@@ -7,11 +7,13 @@
   "tasks" : [ {
     "description" : "Update DG",
     "taskTime" : "",
-    "moduleCode" : "CS2103T"
+    "moduleCode" : "CS2103T",
+    "taskNum" : 111
   } , {
     "description" : "Update DG",
     "taskTime" : "",
-    "moduleCode" : "CS2103T"
+    "moduleCode" : "CS2103T",
+    "taskNum" : 222
   } ],
   "lessons" : [ ]
 }

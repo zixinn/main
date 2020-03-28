@@ -56,24 +56,26 @@ public class ModManagerTest {
     }
 
     @Test
+    public void resetData_withDuplicateModules_throwsDuplicateModuleException() {
+        // Two modules with the same identity fields
+        Module otherModule = new ModuleBuilder(CS2103T).withDescription(VALID_DESCRIPTION_CS2101).build();
+        List<Module> newModules = Arrays.asList(CS2103T, otherModule);
+        ModManagerStub newData = new ModManagerStub(newModules, new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>());
+
+        assertThrows(DuplicateModuleException.class, () -> modManager.resetData(newData));
+    }
+
+    @Test
     public void resetData_withDuplicateFacilitators_throwsDuplicateFacilitatorException() {
         // Two facilitators with the same identity fields
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
         List<Facilitator> newFacilitators = Arrays.asList(ALICE, editedAlice);
-        ModManagerStub newData = new ModManagerStub(new ArrayList<>(), newFacilitators, new ArrayList<>());
+        ModManagerStub newData = new ModManagerStub(new ArrayList<>(), newFacilitators, new ArrayList<>(),
+                new ArrayList<>());
 
         assertThrows(DuplicateFacilitatorException.class, () -> modManager.resetData(newData));
-    }
-
-    @Test
-    public void resetData_withDuplicateModules_throwsDuplicateModuleException() {
-        // Two modules with the same identity fields
-        Module otherModule = new ModuleBuilder(CS2103T).withDescription(VALID_DESCRIPTION_CS2101).build();
-        List<Module> newModules = Arrays.asList(CS2103T, otherModule);
-        ModManagerStub newData = new ModManagerStub(newModules, new ArrayList<>(), new ArrayList<>());
-
-        assertThrows(DuplicateModuleException.class, () -> modManager.resetData(newData));
     }
 
     @Test
@@ -199,7 +201,7 @@ public class ModManagerTest {
     }
 
     /**
-     * A stub ReadOnlyModManager whose modules and facilitators list can violate interface constraints.
+     * A stub ReadOnlyModManager whose modules, facilitators, tasks and lessons list can violate interface constraints.
      */
     private static class ModManagerStub implements ReadOnlyModManager {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
@@ -207,9 +209,11 @@ public class ModManagerTest {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private List<Lesson> lessons = new ArrayList<>();
 
-        ModManagerStub(Collection<Module> modules, Collection<Facilitator> facilitators, List<Lesson> lessons) {
+        ModManagerStub(Collection<Module> modules, Collection<Facilitator> facilitators, Collection<Task> tasks,
+                       List<Lesson> lessons) {
             this.modules.setAll(modules);
             this.facilitators.setAll(facilitators);
+            this.tasks.setAll(tasks);
             this.lessons = lessons;
         }
 

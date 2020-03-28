@@ -42,7 +42,7 @@ class JsonSerializableModManager {
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableModManager} with the given modules and facilitators.
+     * Constructs a {@code JsonSerializableModManager} with the given modules, facilitators, tasks and lessons.
      */
     @JsonCreator
     public JsonSerializableModManager(@JsonProperty("modules") List<JsonAdaptedModule> modules,

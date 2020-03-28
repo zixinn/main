@@ -17,8 +17,7 @@ import seedu.address.model.ModManager;
 public class JsonSerializableModManagerTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableModManagerTest");
-    private static final Path TYPICAL_ADDRESS_BOOK_FILE = TEST_DATA_FOLDER
-            .resolve("typicalModManager.json");
+    private static final Path TYPICAL_ADDRESS_BOOK_FILE = TEST_DATA_FOLDER.resolve("typicalModManager.json");
     private static final Path INVALID_MODULE_FILE = TEST_DATA_FOLDER.resolve("invalidModuleModManager.json");
     private static final Path INVALID_FACILITATOR_FILE = TEST_DATA_FOLDER.resolve("invalidFacilitatorModManager.json");
     private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskModManager.json");
