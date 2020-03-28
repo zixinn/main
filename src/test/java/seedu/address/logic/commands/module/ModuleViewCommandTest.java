@@ -35,7 +35,6 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.NonScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Description;
 import seedu.address.testutil.ModelStub;
@@ -45,7 +44,7 @@ public class ModuleViewCommandTest {
 
     @Test
     public void execute_moduleCodeExist_success() throws Exception {
-        Task task = new NonScheduledTask(new Description("Assignment"), new ModuleCode("CS2103T"));
+        Task task = Task.makeNonScheduledTask(new Description("Assignment"), new ModuleCode("CS2103T"));
         ModuleViewCommandTest.ModelStubWithModule modelStub =
                 new ModuleViewCommandTest.ModelStubWithModule(CS2103T, ALICE, task);
         ModuleCode moduleCode = CS2103T.getModuleCode();
@@ -81,7 +80,7 @@ public class ModuleViewCommandTest {
         expectedModel.updateModule(Optional.of(moduleToView));
         expectedModel.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
                 moduleToView.getModuleCode().value));
-        expectedModel.updateTaskListForModule(x -> x.getModuleCode().get().equals(moduleToView.getModuleCode()));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(moduleToView.getModuleCode()));
 
         assertCommandSuccess(viewCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }
@@ -190,7 +189,7 @@ public class ModuleViewCommandTest {
                 facilitatorList.clear();
             } else {
                 toCheck = module.get().getModuleCode();
-                taskList.removeIf(task -> !task.getModuleCode().get().equals(toCheck));
+                taskList.removeIf(task -> !task.getModuleCode().equals(toCheck));
             }
         }
     }

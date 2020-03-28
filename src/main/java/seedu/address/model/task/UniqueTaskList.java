@@ -106,7 +106,7 @@ public class UniqueTaskList implements Iterable<Task> {
         requireAllNonNull(target, editedModuleCode);
         List<Task> tasksToEdit = new ArrayList<>();
         for (Task task : internalList) {
-            if (task.getModuleCode().get().equals(target)) {
+            if (task.getModuleCode().equals(target)) {
                 tasksToEdit.add(task);
             }
         }

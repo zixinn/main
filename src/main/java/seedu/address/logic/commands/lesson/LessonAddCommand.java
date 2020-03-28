@@ -57,7 +57,7 @@ public class LessonAddCommand extends LessonCommand {
 
         model.updateModule(module);
         model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toAdd.getModuleCode().value));
-        model.updateTaskListForModule(x -> x.getModuleCode().get().equals(toAdd.getModuleCode()));
+        model.updateTaskListForModule(x -> x.getModuleCode().equals(toAdd.getModuleCode()));
 
         model.addLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.LESSON);

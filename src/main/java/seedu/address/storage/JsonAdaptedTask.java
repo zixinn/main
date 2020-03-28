@@ -18,6 +18,7 @@ public class JsonAdaptedTask {
     private final String description;
     private final String taskTime;
     private final String moduleCode;
+    private final int taskNum;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given module details.
@@ -25,10 +26,12 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description,
                            @JsonProperty("taskTime") String taskTime,
-                           @JsonProperty("moduleCode") String moduleCode) {
+                           @JsonProperty("moduleCode") String moduleCode,
+                           @JsonProperty("taskNum") int taskNum) {
         this.description = description;
         this.taskTime = taskTime;
         this.moduleCode = moduleCode;
+        this.taskNum = taskNum;
     }
 
     /**
@@ -37,7 +40,8 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         this.description = source.getDescription().toString();
         this.taskTime = source.getTimeString();
-        this.moduleCode = source.getModuleCode().map(x -> x.toString()).orElse("");
+        this.moduleCode = source.getModuleCode().toString();
+        this.taskNum = source.getTaskNum();
     }
 
     /**
@@ -63,7 +67,7 @@ public class JsonAdaptedTask {
 
         final TaskDateTime modelTaskTime;
         if (taskTime.isEmpty()) {
-            return Task.makeNonScheduledTask(modelDescription, modelModuleCode);
+            return Task.makeNonScheduledTask(modelDescription, modelModuleCode, taskNum);
         }
 
         if (!TaskDateTime.isValidTaskTime(taskTime)) {
@@ -77,6 +81,6 @@ public class JsonAdaptedTask {
         }
         System.out.println("time received " + modelTaskTime);
 
-        return Task.makeScheduledTask(modelDescription, modelTaskTime, modelModuleCode);
+        return Task.makeScheduledTask(modelDescription, modelTaskTime, modelModuleCode, taskNum);
     }
 }
