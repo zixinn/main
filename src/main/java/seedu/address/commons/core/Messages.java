@@ -23,4 +23,5 @@ public class Messages {
     public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! "
             + "Type `task list` to return to the main task list.";
     public static final String MESSAGE_INVALID_CMD_GROUP = "%s group does not exist.";
+    public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
 }

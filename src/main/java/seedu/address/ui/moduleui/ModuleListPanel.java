@@ -34,6 +34,7 @@ public class ModuleListPanel extends UiPart<Region> {
             if (empty || module == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new ModuleCard(module, getIndex() + 1).getRoot());
                 setStyle("-fx-background-color: #424659; -fx-background-radius: 15px;"

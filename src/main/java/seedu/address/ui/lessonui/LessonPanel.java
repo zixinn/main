@@ -45,6 +45,7 @@ public class LessonPanel extends UiPart<Region> {
             if (empty || lesson == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new LessonModCard(lesson, getIndex() + 1).getRoot());
                 setStyle("-fx-background-color: #215360; -fx-background-radius: 15px; "

@@ -164,7 +164,7 @@ public class ModuleEditCommandTest {
         expectedModel.updateModule(Optional.of(editedModule));
         expectedModel.updateFacilitatorListForModule(
                 new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
-        expectedModel.updateTaskListForModule(x -> x.getModuleCode().get().equals(editedModule.getModuleCode()));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }
@@ -189,7 +189,7 @@ public class ModuleEditCommandTest {
         expectedModel.updateModule(Optional.of(editedModule));
         expectedModel.updateFacilitatorListForModule(
                 new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
-        expectedModel.updateTaskListForModule(x -> x.getModuleCode().get().equals(editedModule.getModuleCode()));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }

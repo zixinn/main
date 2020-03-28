@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
 
 class TaskTest {
@@ -107,21 +108,27 @@ class TaskTest {
 
     @Test
     void testToString_taskHasNoTime_success() {
-        assertEquals("[\u2718]  [CS4246] Project pain",
-                Task.makeNonScheduledTask(sampleDescription, sampleModCode).toString());
+        int num = TaskNumManager.getNum(sampleModCode);
+        assertEquals("[\u2718] [CS4246 " + num + "] Project pain",
+                Task.makeNonScheduledTask(sampleDescription, sampleModCode, num).toString());
+        TaskNumManager.removeNum(sampleModCode, num);
     }
 
     @Test
     void testToString_onlyTaskDateAvailable_success() throws ParseException {
+        int num = TaskNumManager.getNum(sampleModCode);
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
-        assertEquals("[\u2718]  [CS4246] Project pain 18/03/2020",
-                Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode).toString());
+        assertEquals("[\u2718] [CS4246 " + num + "] Project pain 18/03/2020",
+                Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode, num).toString());
+        TaskNumManager.removeNum(sampleModCode, num);
     }
 
     @Test
     void testToString_bothTaskDateAndTimeAvailable_success() throws ParseException {
+        int num = TaskNumManager.getNum(sampleModCode);
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
-        assertEquals("[\u2718]  [CS4246] Project pain 18/03/2020 18:30",
-                Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode).toString());
+        assertEquals("[\u2718] [CS4246 " + num + "] Project pain 18/03/2020 18:30",
+                Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode, num).toString());
+        TaskNumManager.removeNum(sampleModCode, num);
     }
 }

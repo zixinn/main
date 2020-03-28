@@ -93,14 +93,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getModManagerFilePath() {
+        return userPrefs.getModManagerFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setModManagerFilePath(Path modManagerFilePath) {
+        requireNonNull(modManagerFilePath);
+        userPrefs.setModManagerFilePath(modManagerFilePath);
     }
 
     //=========== ModManager ================================================================================

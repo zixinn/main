@@ -48,16 +48,16 @@ public class CalendarCard extends UiPart<Region> {
      * Initializes a Calendar Card for a task
      */
     private void initTaskCard(Task task) {
-        if (task.getModuleCode().isPresent()) {
-            description.setText(task.getModuleCode().get().toString()
-                    + " " + task.getDescription().toString());
-        } else {
-            description.setText(task.getDescription().toString());
-        }
+        String describing = String.format("[%s %d] %s", task.getModuleCode(), task.getTaskNum(), task.getDescription());
+        description.setText(describing);
+
         if (!task.getTimeString().equals("")) {
             time.setText(task.getTimeString());
         }
-        card.setStyle("-fx-background-color: #ffffd1; -fx-background-radius: 8;");
+        description.setStyle("-fx-text-fill: #010504;");
+        time.setStyle("-fx-text-fill: #010504;");
+        card.setStyle("-fx-background-color: #ffffd1;-fx-background-radius: 15; -fx-background-insets: 3px, 0px; "
+                + "-fx-padding: 10px;");
     }
 
     /**

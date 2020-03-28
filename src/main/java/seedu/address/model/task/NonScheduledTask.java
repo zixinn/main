@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
 
 /**
@@ -12,12 +13,22 @@ import seedu.address.model.util.Description;
  */
 public class NonScheduledTask extends Task {
     private Description description;
-    private Optional<ModuleCode> moduleCode;
+    private ModuleCode moduleCode;
     private boolean isDone;
+    private int taskNum;
 
-    public NonScheduledTask(Description description, ModuleCode moduleCode) {
+    protected NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = Optional.of(moduleCode);
+        this.moduleCode = moduleCode;
+        this.taskNum = TaskNumManager.getNum(moduleCode);
+        TaskNumManager.addNum(moduleCode, taskNum);
+    }
+
+    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
+        this.description = description;
+        this.moduleCode = moduleCode;
+        this.taskNum = taskNum;
+        TaskNumManager.addNum(moduleCode, taskNum);
     }
 
     /**
@@ -33,7 +44,7 @@ public class NonScheduledTask extends Task {
     }
 
     @Override
-    public Optional<ModuleCode> getModuleCode() {
+    public ModuleCode getModuleCode() {
         return moduleCode;
     }
 
@@ -56,12 +67,18 @@ public class NonScheduledTask extends Task {
 
     @Override
     public boolean isSameTask(Task other) {
-        if (other instanceof ScheduledTask) {
+        if (!(other instanceof NonScheduledTask)) {
             return false;
         }
 
         return this.description.equals(other.getDescription())
-                && this.moduleCode.equals(other.getModuleCode());
+                && this.moduleCode.equals(other.getModuleCode())
+                && this.taskNum == other.getTaskNum();
+    }
+
+    @Override
+    public int getTaskNum() {
+        return this.taskNum;
     }
 
     @Override
@@ -71,7 +88,23 @@ public class NonScheduledTask extends Task {
 
     @Override
     public String toString() {
-        String modShow = moduleCode.map(code -> " [" + code.toString() + "] ").orElse("");
-        return "[" + getStatusIcon() + "]" + " " + modShow + description.toString();
+        String modShow = String.format("[%s %d]", moduleCode.toString(), taskNum);
+        return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof NonScheduledTask)) {
+            return false;
+        }
+
+        NonScheduledTask e = (NonScheduledTask) o;
+
+        return this.moduleCode.equals(e.moduleCode)
+                && this.taskNum == e.taskNum;
     }
 }

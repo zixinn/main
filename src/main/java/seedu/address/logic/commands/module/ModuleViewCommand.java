@@ -65,7 +65,7 @@ public class ModuleViewCommand extends ModuleCommand {
         model.updateModule(module);
         model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
                 module.get().getModuleCode().value));
-        model.updateTaskListForModule(x -> x.getModuleCode().get().equals(module.get().getModuleCode()));
+        model.updateTaskListForModule(x -> x.getModuleCode().equals(module.get().getModuleCode()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, module.get()), CommandType.MODULE);
     }
 
