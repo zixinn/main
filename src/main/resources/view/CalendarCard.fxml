@@ -11,7 +11,7 @@
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
             <Label fx:id="description" styleClass="cell_small_label" textOverrun="CLIP" wrapText="true"/>
-            <Label fx:id="time" styleClass="cell_small_label" />
+            <Label fx:id="time" styleClass="cell_small_label" textOverrun="CLIP" wrapText="true" />
             <StackPane.margin>
                 <Insets bottom="2.0" top="2.0" />
             </StackPane.margin>
