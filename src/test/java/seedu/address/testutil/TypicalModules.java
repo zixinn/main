@@ -28,6 +28,10 @@ public class TypicalModules {
     public static final Module GEQ1000 = new ModuleBuilder().withModuleCode("GEQ1000")
             .withDescription("Asking Questions").build();
 
+    // Manually added - Module's details found in {@code CommandTestUtil}
+    public static final Module CS1101S = new ModuleBuilder().withModuleCode("CS1101S")
+            .withDescription("Programming Methodology").build();
+
     private TypicalModules() {} // prevents instantiation
 
     public static List<Module> getTypicalModules() {

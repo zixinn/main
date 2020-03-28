@@ -17,12 +17,14 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.facilitator.FacilEditCommand;
+import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
+import seedu.address.testutil.EditModuleDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -31,11 +33,13 @@ public class CommandTestUtil {
 
     public static final String VALID_MODULE_CODE_CS2103T = "CS2103T";
     public static final String VALID_MODULE_CODE_CS2101 = "CS2101";
+    public static final String VALID_MODULE_CODE_CS1101S = "CS1101S";
     public static final String VALID_MODULE_CODE_CS4215 = "CS3230";
     public static final String VALID_MODULE_CODE_CS3230 = "CS4215";
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS4215 CS3230";
     public static final String VALID_DESCRIPTION_CS2103T = "Software Engineering";
     public static final String VALID_DESCRIPTION_CS2101 = "Effective Communication for Computing Professionals";
+    public static final String VALID_DESCRIPTION_CS1101S = "Programming Methodology";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -47,9 +51,11 @@ public class CommandTestUtil {
 
     public static final String MODULE_CODE_DESC_CS2103T = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS2103T;
     public static final String MODULE_CODE_DESC_CS2101 = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS2101;
+    public static final String MODULE_CODE_DESC_CS1101S = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS1101S;
     public static final String MODULE_CODE_CHAIN = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODES_CHAIN;
     public static final String DESCRIPTION_DESC_CS2103T = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2103T;
     public static final String DESCRIPTION_DESC_CS2101 = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2101;
+    public static final String DESCRIPTION_DESC_CS1101S = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS1101S;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
@@ -73,6 +79,8 @@ public class CommandTestUtil {
 
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_AMY;
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_BOB;
+    public static final ModuleEditCommand.EditModuleDescriptor DESC_CS2101;
+    public static final ModuleEditCommand.EditModuleDescriptor DESC_CS1101S;
 
     static {
         DESC_AMY = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -81,6 +89,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS2101).build();
+        DESC_CS2101 = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS2101)
+                .withDescription(VALID_DESCRIPTION_CS2101).build();
+        DESC_CS1101S = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS1101S)
+                .withDescription(VALID_DESCRIPTION_CS1101S).build();
     }
 
     /**

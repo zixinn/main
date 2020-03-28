@@ -164,6 +164,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void getTaskListForModule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getTaskListForModule().remove(0));
+    }
+
+    @Test
     public void equals() {
         ModManager modManager = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
                 .withModule(CS2103T).withModule(CS2101).build();

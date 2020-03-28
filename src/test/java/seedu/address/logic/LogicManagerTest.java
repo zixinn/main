@@ -103,6 +103,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
+    }
+
+    @Test
     public void getModule_emptyModule_returnsOptionalEmpty() {
         assertEquals(Optional.empty(), model.getModule());
     }
@@ -116,6 +121,11 @@ public class LogicManagerTest {
     @Test
     public void getFacilitatorListForModule_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFacilitatorListForModule().remove(0));
+    }
+
+    @Test
+    public void getTaskListForModule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getTaskListForModule().remove(0));
     }
 
     /**

@@ -45,8 +45,7 @@ public class ModuleCommandParserTest {
         Module module = new ModuleBuilder().build();
         ModuleEditCommand.EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
         ModuleEditCommand command = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
-                + INDEX_FIRST.getOneBased() + " "
-                + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+                + INDEX_FIRST.getOneBased() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
         assertEquals(new ModuleEditCommand(INDEX_FIRST, descriptor), command);
 
         ModuleEditCommand command1 = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " CS2030 "
@@ -56,10 +55,8 @@ public class ModuleCommandParserTest {
 
     @Test
     public void parse_list() throws Exception {
-        assertTrue(parser.parse(Command.COMMAND_WORD_LIST)
-                instanceof ModuleListCommand);
-        assertTrue(parser.parse(Command.COMMAND_WORD_LIST + " 3")
-                instanceof ModuleListCommand);
+        assertTrue(parser.parse(Command.COMMAND_WORD_LIST) instanceof ModuleListCommand);
+        assertTrue(parser.parse(Command.COMMAND_WORD_LIST + " 3") instanceof ModuleListCommand);
     }
 
     @Test
@@ -79,7 +76,6 @@ public class ModuleCommandParserTest {
     @Test
     public void parse_unknownModuleCommand_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_UNKNOWN_MODULE_COMMAND,
-                HelpCommand.MESSAGE_USAGE), () -> parser
-                .parse("mod unknownCommand"));
+                HelpCommand.MESSAGE_USAGE), () -> parser.parse("mod unknownCommand"));
     }
 }

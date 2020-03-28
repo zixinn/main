@@ -7,14 +7,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "office": "COM2-08-111",
-    "moduleCode": [ "CS2103T" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "office": "COM1-01-03",
-    "moduleCode": [ "CS2103T" ]
+    "office": "COM2-08-111"
   } ],
   "tasks": [ ],
   "lessons": [ ]

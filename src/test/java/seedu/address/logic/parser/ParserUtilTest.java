@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,10 +17,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.Description;
 
@@ -229,4 +233,125 @@ public class ParserUtilTest {
 
         assertEquals(expectedModuleCodeSet, actualModuleCodeSet);
     }
+
+    @Test
+    public void parseLessonType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonType(null));
+    }
+
+    @Test
+    public void parseLessonType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonType("ABC"));
+    }
+
+    @Test
+    public void parseLessonType_validValueWithoutWhitespace_returnsLessonType() throws Exception {
+        assertEquals(LessonType.LEC, ParserUtil.parseLessonType("LEC"));
+    }
+
+    @Test
+    public void parseLessonType_validValueWithWhitespace_returnsTrimmedLessonType() throws Exception {
+        assertEquals(LessonType.TUT, ParserUtil.parseLessonType("  TUT  "));
+    }
+
+    @Test
+    public void parseDay_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDay(null));
+    }
+
+    @Test
+    public void parseDay_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDay("ABC 08:00 10:00"));
+    }
+
+    @Test
+    public void parseDay_validValueWithoutWhitespace_returnsDay() throws Exception {
+        assertEquals(DayOfWeek.valueOf("MONDAY"), ParserUtil.parseDay("MONDAY 08:00 10:00"));
+    }
+
+    @Test
+    public void parseDay_validValueWithWhitespace_returnsTrimmedDay() throws Exception {
+        assertEquals(DayOfWeek.valueOf("SUNDAY"), ParserUtil.parseDay("  SUNDAY  08:00  10:00  "));
+    }
+
+    @Test
+    public void parseStartTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStartTime(null));
+    }
+
+    @Test
+    public void parseStartTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStartTime("MONDAY 08:60 10:00"));
+    }
+
+    @Test
+    public void parseStartTime_validValueWithoutWhitespace_returnsStartTime() throws Exception {
+        assertEquals(LocalTime.parse("08:00"), ParserUtil.parseStartTime("MONDAY 08:00 10:00"));
+    }
+
+    @Test
+    public void parseStartTime_validValueWithWhitespace_returnsTrimmedStartTime() throws Exception {
+        assertEquals(LocalTime.parse("08:00"), ParserUtil.parseStartTime("  SUNDAY  08:00  10:00  "));
+    }
+
+    @Test
+    public void parseEndTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndTime(null));
+    }
+
+    @Test
+    public void parseEndTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEndTime("MONDAY 23:00 25:00"));
+    }
+
+    @Test
+    public void parseEndTime_validValueWithoutWhitespace_returnsEndTime() throws Exception {
+        assertEquals(LocalTime.parse("10:00"), ParserUtil.parseEndTime("MONDAY 08:00 10:00"));
+    }
+
+    @Test
+    public void parseEndTime_validValueWithWhitespace_returnsTrimmedEndTime() throws Exception {
+        assertEquals(LocalTime.parse("10:00"), ParserUtil.parseEndTime("  SUNDAY  08:00  10:00  "));
+    }
+
+    @Test
+    public void parseVenue_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue(null));
+    }
+
+    @Test
+    public void parseVenue_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVenue(""));
+    }
+
+    @Test
+    public void parseVenue_validValueWithoutWhitespace_returnsVenue() throws Exception {
+        assertEquals("COM2-01-01", ParserUtil.parseVenue("COM2-01-01"));
+    }
+
+    @Test
+    public void parseVenue_validValueWithWhitespace_returnsTrimmedVenue() throws Exception {
+        assertEquals("COM2-01-01", ParserUtil.parseVenue("  COM2-01-01  "));
+    }
+
+    @Test
+    public void parseWeek_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseWeek(null));
+    }
+
+    @Test
+    public void parseWeek_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek("prev"));
+    }
+
+    @Test
+    public void parseWeek_validValueWithoutWhitespace_returnsWeek() throws Exception {
+        assertEquals(Calendar.getNowCalendar(), ParserUtil.parseWeek("this"));
+    }
+
+    @Test
+    public void parseWeek_validValueWithWhitespace_returnsTrimmedWeek() throws Exception {
+        assertEquals(Calendar.getNextWeekCalendar(), ParserUtil.parseWeek("  next  "));
+    }
+
 }

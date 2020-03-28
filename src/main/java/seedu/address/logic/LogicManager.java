@@ -84,11 +84,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
-        return model.getLessonListForModule(moduleCode);
-    }
-
-    @Override
     public Optional<Module> getModule() {
         return model.getModule();
     }
@@ -101,6 +96,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Task> getTaskListForModule() {
         return model.getTaskListForModule();
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
+        return model.getLessonListForModule(moduleCode);
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return model.getCalendar();
     }
 
     @Override
@@ -118,8 +123,4 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
-    @Override
-    public Calendar getCalendar() {
-        return model.getCalendar();
-    }
 }
