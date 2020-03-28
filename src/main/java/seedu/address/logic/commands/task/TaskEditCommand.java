@@ -27,9 +27,9 @@ public class TaskEditCommand extends TaskCommand {
             + ": Edits the details of the task identified "
             + "by the unique ID of the task found in the both the general tasks list and module specific list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "If you simply want to remove the DateTime field, input 'non' as parameter for " + PREFIX_AT
-            + " without adding " + PREFIX_DESCRIPTION + " and " + PREFIX_ON + " parameters.\n"
-            + "Parameters: MODULE_CODE ID_NUMBER "
+            + "If you simply want to remove the DateTime field, input 'non' as parameter for " + PREFIX_ON
+            + " without adding " + PREFIX_AT + " parameters.\n"
+            + "Parameters: MOD_CODE ID_NUMBER "
             + "[ " + PREFIX_DESCRIPTION + " DESCRIPTION] "
             + "[ " + PREFIX_ON + " DATE/non] "
             + "[ " + PREFIX_AT + " TIME]\n"
@@ -38,7 +38,7 @@ public class TaskEditCommand extends TaskCommand {
             + PREFIX_ON + " 12/04/2020 "
             + PREFIX_AT + " 23:59\n"
             + COMMAND_GROUP_TASK + " " + COMMAND_WORD_EDIT + " CS2103T 848 "
-            + PREFIX_AT + " non";
+            + PREFIX_ON + " non";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

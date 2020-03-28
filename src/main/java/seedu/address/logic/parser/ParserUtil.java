@@ -183,10 +183,10 @@ public class ParserUtil {
     public static LessonType parseLessonType(String lessonType) throws ParseException {
         requireNonNull(lessonType);
         String trimmedType = lessonType.trim();
-        if (!Lesson.isValidType(lessonType)) {
+        if (!Lesson.isValidType(trimmedType)) {
             throw new ParseException(LessonType.MESSAGE_CONSTRAINTS);
         }
-        return Lesson.convertStringToLessonType(lessonType);
+        return Lesson.convertStringToLessonType(trimmedType);
     }
 
     /**
@@ -217,7 +217,9 @@ public class ParserUtil {
     public static LocalTime parseStartTime(String dayAndTime) throws ParseException, DateTimeParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
-        String timeString = trimmed.split(" ")[1];
+        String[] splitted = trimmed.split(" ", 2);
+        trimmed = splitted[1].trim();
+        String timeString = trimmed.split(" ")[0];
         try {
             return LocalTime.parse(timeString);
         } catch (DateTimeParseException e) {
@@ -231,7 +233,11 @@ public class ParserUtil {
     public static LocalTime parseEndTime(String dayAndTime) throws ParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
-        String timeString = trimmed.split(" ")[2];
+        String[] splitted = trimmed.split(" ", 2);
+        trimmed = splitted[1].trim();
+        splitted = trimmed.split(" ", 2);
+        trimmed = splitted[1].trim();
+        String timeString = trimmed.split(" ")[0];
         try {
             return LocalTime.parse(timeString);
         } catch (DateTimeParseException e) {

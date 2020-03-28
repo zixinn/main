@@ -51,20 +51,6 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns all values of {@code prefix}.
-     * If the prefix does not exist or has no values, this will return an empty list.
-     * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
-     */
-    public String getAllValuesConcat(Prefix prefix) {
-        if (!argMultimap.containsKey(prefix)) {
-            return null;
-        }
-        ArrayList<String> temp = new ArrayList<>(argMultimap.get(prefix));
-
-        return temp.stream().reduce("", (x, y) -> x + " " + y);
-    }
-
-    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {

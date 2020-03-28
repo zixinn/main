@@ -84,11 +84,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
-        return model.getLessonListForModule(moduleCode);
-    }
-
-    @Override
     public Optional<Module> getModule() {
         return model.getModule();
     }
@@ -104,6 +99,15 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode) {
+        return model.getLessonListForModule(moduleCode);
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return model.getCalendar();
+    }
+
     public Path getModManagerFilePath() {
         return model.getModManagerFilePath();
     }
@@ -118,8 +122,4 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
-    @Override
-    public Calendar getCalendar() {
-        return model.getCalendar();
-    }
 }

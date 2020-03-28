@@ -86,8 +86,7 @@ public class ScheduledTask extends Task {
 
         return this.description.equals(other.getDescription())
                 && this.taskDateTime.equals(other.getTaskDateTime().get())
-                && this.moduleCode.equals(other.getModuleCode())
-                && this.taskNum == other.getTaskNum();
+                && this.moduleCode.equals(other.getModuleCode());
     }
 
     @Override

@@ -95,7 +95,7 @@ public class ModuleEditCommand extends ModuleCommand {
         }
 
         if (moduleToEdit == null) {
-            throw new CommandException(String.format(MESSAGE_NON_EXISTENT_MODULE, moduleCode.toString()));
+            throw new CommandException(String.format(MESSAGE_NON_EXISTENT_MODULE, moduleCode));
         }
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
 
@@ -119,8 +119,7 @@ public class ModuleEditCommand extends ModuleCommand {
             model.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
         }
 
-        return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule),
-                CommandType.MODULE);
+        return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule), CommandType.MODULE);
     }
 
     /**

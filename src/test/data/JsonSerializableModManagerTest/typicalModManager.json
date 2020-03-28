@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Module and Facilitator values as in TypicalAddressBook#getTypicalAddressBook()",
+  "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalAddressBook#getTypicalAddressBook()",
   "modules" : [ {
     "moduleCode" : "CS2103T",
     "description" : "Software Engineering"
@@ -61,5 +61,21 @@
     "email" : "anna@example.com",
     "office" : "TP-SR4",
     "moduleCode" : [ "GEQ1000" ]
+  } ],
+  "tasks": [ ],
+  "lessons": [ {
+    "moduleCode" : "CS2103T",
+    "type" : "LEC",
+    "day" : "FRIDAY",
+    "startTime" : "14:00",
+    "endTime" : "16:00",
+    "venue" : "i3-Aud"
+  } , {
+    "moduleCode" : "GEQ1000",
+    "type" : "LAB",
+    "day" : "WEDNESDAY",
+    "startTime" : "14:00",
+    "endTime" : "16:00",
+    "venue" : "i3-Aud"
   } ]
 }
