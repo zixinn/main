@@ -128,7 +128,7 @@ The `Model`,
 === Storage Component
 
 .Structure of the Storage Component
-image::StorageClassDiagram1.png[]
+image::StorageClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -221,6 +221,8 @@ image::ModuleListActivityDiagram.png[]
 * **Alternative 2:** Allow users to only edit the description of a module.
 ** Pros: Easier to implement.
 ** Cons: More rigid for users.
+
+Alternative 1 is chosen as it gives users more flexibility and is more user-friendly.
 
 === Class Management Feature
 The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
@@ -655,6 +657,8 @@ image::FacilitatorDeleteActivityDiagram.png[]
 ** Pros: More convenient and lower overhead to edit a facilitator by setting the relevant fields without creating a new `Facilitator` object.
 ** Cons: Unintentional modification of the `Facilitator` object.
 
+Alternative 1 is chosen to preserve the immutability of the Facilitator object to avoid unintentional modification.
+
 ===== Aspect: Storage of facilitators
 * **Alternative 1 (current choice):** Store all facilitators in a single facilitator list.
 ** Pros: Will not have to maintain multiple lists. Less memory usage as each facilitator is represented once. Will not have to iterate through multiple lists to find all instances of a particular facilitator when executing facilitator commands.
@@ -663,6 +667,8 @@ image::FacilitatorDeleteActivityDiagram.png[]
 ** Pros: Able to find facilitators for a particular module easily when executing module commands.
 ** Cons: May contain duplicates as some facilitators may have multiple module codes. Have to iterate through multiple lists when executing facilitator commands.
 
+Alternative 1 is chosen as the design is simpler without the need to maintain multiple lists and can also avoid duplicates in the storage.
+
 ===== Aspect: Reference of `ModuleCode` in `Facilitator` object
 * **Alternative 1 (current choice):** Create a new `ModuleCode` object for each `Facilitator`.
 ** Pros: Easier to implement.
@@ -670,6 +676,8 @@ image::FacilitatorDeleteActivityDiagram.png[]
 * **Alternative 2:** Reference each `Facilitator` to the `ModuleCode` in the `Module` list.
 ** Pros: Only require one `ModuleCode` object per unique `ModuleCode`. Can support editing of module codes more easily.
 ** Cons: Have to iterate through the module list to find the module code for the facilitator.
+
+Alternative 1 is chosen because of ease of implementation due to time constraint.
 
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.

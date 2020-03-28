@@ -120,7 +120,7 @@ Format: `mod add /code MOD_CODE [/desc DESCRIPTION]`
 
 Parameter constraints:
 ****
-* MOD_CODE should not exceed 10 characters.
+* MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces and should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
 ****
 
@@ -147,7 +147,7 @@ Parameter constraints:
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* MOD_CODE should not exceed 10 characters.
+* * MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces and should not exceed 10 characters.
 * DESCRIPTION should not exceed 64 characters.
 * You can remove description linked to the facilitator by typing `/desc` without specifying any input after it.
 ****
