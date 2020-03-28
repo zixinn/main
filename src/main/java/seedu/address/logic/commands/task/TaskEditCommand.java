@@ -34,8 +34,8 @@ public class TaskEditCommand extends TaskCommand {
             + "[ " + PREFIX_ON + " DATE/non] "
             + "[ " + PREFIX_AT + " TIME]\n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_EDIT + " CS2103T 848 "
-            + PREFIX_DESCRIPTION + "UG submission "
-            + PREFIX_ON + " 12/04/2020"
+            + PREFIX_DESCRIPTION + " UG submission "
+            + PREFIX_ON + " 12/04/2020 "
             + PREFIX_AT + " 23:59\n"
             + COMMAND_GROUP_TASK + " " + COMMAND_WORD_EDIT + " CS2103T 848 "
             + PREFIX_AT + " non";
