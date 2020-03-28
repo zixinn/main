@@ -40,10 +40,9 @@ public class TaskCommandParser implements Parser<TaskCommand> {
 
         case Command.COMMAND_WORD_EDIT:
             return new TaskEditCommandParser().parse(arguments);
-        /*
+
         case Command.COMMAND_WORD_DELETE:
             return new TaskDeleteCommandParser().parse(arguments);
-        */
 
         case Command.COMMAND_WORD_SEARCH:
             return new TaskSearchCommandParser().parse(arguments);
