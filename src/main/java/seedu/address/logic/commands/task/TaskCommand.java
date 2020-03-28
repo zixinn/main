@@ -25,9 +25,9 @@ public abstract class TaskCommand extends Command {
     public static final String ADD_FORMAT = String.format("%s %s %s MOD_CODE %s DESCRIPTION %s DATE %s TIME",
             COMMAND_GROUP_TASK, COMMAND_WORD_ADD,
             PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
-    public static final String EDIT_FORMAT = String.format("%s %s %s MOD_CODE %s DESCRIPTION %s DATE %s TIME",
-            COMMAND_GROUP_TASK, COMMAND_WORD_EDIT,
-            PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
+    public static final String EDIT_FORMAT = String.format(
+            "%s %s MOD_CODE ID_NUMBER [%s DESCRIPTION] [%s DATE/non] [%s TIME]",
+            COMMAND_GROUP_TASK, COMMAND_WORD_EDIT, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
     public static final String DELETE_FORMAT = String.format("%s %s %s DESCRIPTION",
             COMMAND_GROUP_TASK, COMMAND_WORD_DELETE,
             PREFIX_DESCRIPTION);

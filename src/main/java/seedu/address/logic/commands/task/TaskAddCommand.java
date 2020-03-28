@@ -28,7 +28,7 @@ public class TaskAddCommand extends TaskCommand {
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + PREFIX_DESCRIPTION + " TASK_DESCRIPTION "
             + "[" + PREFIX_ON + " DD/MM/YYYY] "
-            + "[" + PREFIX_AT + " hh/mm] \n"
+            + "[" + PREFIX_AT + " hh:mm] \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_ADD + " "
             + PREFIX_MODULE_CODE + " CS3230 "
             + PREFIX_DESCRIPTION + " Programming Assignment 2 "

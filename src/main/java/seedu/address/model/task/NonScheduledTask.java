@@ -72,8 +72,7 @@ public class NonScheduledTask extends Task {
         }
 
         return this.description.equals(other.getDescription())
-                && this.moduleCode.equals(other.getModuleCode())
-                && this.taskNum == other.getTaskNum();
+                && this.moduleCode.equals(other.getModuleCode());
     }
 
     @Override

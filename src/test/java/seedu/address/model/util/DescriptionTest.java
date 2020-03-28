@@ -39,6 +39,5 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("^")); // only non-alphanumeric characters
         assertTrue(Description.isValidDescription("software engineering*")); // contains non-alphanumeric characters
-
     }
 }

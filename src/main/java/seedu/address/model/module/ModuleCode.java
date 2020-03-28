@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ModuleCode {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module codes should be 2-3 letters followed by 4 numbers (and a special letter) "
+            "Module codes should be 2-3 letters followed by 4 numbers (and a letter) "
                     + "with no spaces and should not exceed 10 characters";
     public static final String VALIDATION_REGEX = "([a-z,A-Z]{2,3})(\\d{4})([a-z,A-Z]?)";
 

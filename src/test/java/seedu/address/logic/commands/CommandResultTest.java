@@ -8,6 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void getType() {
+        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT);
+        assertEquals(CommandType.EXIT, commandResult.getType());
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT);

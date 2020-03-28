@@ -13,7 +13,7 @@ Participant ":Storage" as storage STORAGE_COLOR
 user -[USER_COLOR]> ui : "some command"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("some command)
+ui -[UI_COLOR]> logic : execute("some command")
 activate logic LOGIC_COLOR
 
 logic -[LOGIC_COLOR]> model : action(r)
@@ -22,7 +22,7 @@ activate model MODEL_COLOR
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveAddressBook(modManager)
+logic -[LOGIC_COLOR]> storage : saveModManager(modManager)
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file

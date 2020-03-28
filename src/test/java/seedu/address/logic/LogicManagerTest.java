@@ -47,10 +47,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonModManagerStorage addressBookStorage =
+        JsonModManagerStorage modManagerStorage =
                 new JsonModManagerStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(modManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -75,11 +75,11 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonModManagerIoExceptionThrowingStub
-        JsonModManagerStorage addressBookStorage =
+        JsonModManagerStorage modManagerStorage =
                 new JsonModManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(modManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -103,6 +103,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
+    }
+
+    @Test
     public void getModule_emptyModule_returnsOptionalEmpty() {
         assertEquals(Optional.empty(), model.getModule());
     }
@@ -116,6 +121,11 @@ public class LogicManagerTest {
     @Test
     public void getFacilitatorListForModule_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFacilitatorListForModule().remove(0));
+    }
+
+    @Test
+    public void getTaskListForModule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getTaskListForModule().remove(0));
     }
 
     /**

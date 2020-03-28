@@ -16,7 +16,7 @@ public class LessonBuilder {
     public static final String DEFAULT_DAY = "FRIDAY";
     public static final String DEFAULT_START_TIME = "14:00";
     public static final String DEFAULT_END_TIME = "16:00";
-    public static final String DEFAULT_VENUE = "I3";
+    public static final String DEFAULT_VENUE = "i3-Aud";
 
     private ModuleCode moduleCode;
     private LessonType lessonType;
