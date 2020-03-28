@@ -23,6 +23,9 @@ import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.module.Module;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
@@ -83,16 +86,16 @@ public class CommandTestUtil {
     public static final ModuleEditCommand.EditModuleDescriptor DESC_CS1101S;
 
     static {
+        DESC_CS2101 = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS2101)
+                .withDescription(VALID_DESCRIPTION_CS2101).build();
+        DESC_CS1101S = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS1101S)
+                .withDescription(VALID_DESCRIPTION_CS1101S).build();
         DESC_AMY = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withOffice(VALID_OFFICE_AMY)
                 .withModuleCodes(VALID_MODULE_CODE_CS2101).build();
         DESC_BOB = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS2101).build();
-        DESC_CS2101 = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS2101)
-                .withDescription(VALID_DESCRIPTION_CS2101).build();
-        DESC_CS1101S = new EditModuleDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_CS1101S)
-                .withDescription(VALID_DESCRIPTION_CS1101S).build();
     }
 
     /**
@@ -125,17 +128,24 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered facilitator list and selected facilitator in {@code actualModel} remain unchanged
+     * - the address book, filtered module list, filtered facilitator list, filtered task list and lesson list
+     * in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         ModManager expectedModManager = new ModManager(actualModel.getModManager());
-        List<Facilitator> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFacilitatorList());
+        List<Module> expectedModuleList = new ArrayList<>(actualModel.getFilteredModuleList());
+        List<Facilitator> expectedFacilitatorList = new ArrayList<>(actualModel.getFilteredFacilitatorList());
+        List<Task> expectedTaskList = new ArrayList<>(actualModel.getFilteredTaskList());
+        List<Lesson> expectedLessonList = new ArrayList<>(actualModel.getLessons());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedModManager, actualModel.getModManager());
-        assertEquals(expectedFilteredList, actualModel.getFilteredFacilitatorList());
+        assertEquals(expectedModuleList, actualModel.getFilteredModuleList());
+        assertEquals(expectedFacilitatorList, actualModel.getFilteredFacilitatorList());
+        assertEquals(expectedTaskList, actualModel.getFilteredTaskList());
+        assertEquals(expectedLessonList, actualModel.getLessons());
     }
 
     /**

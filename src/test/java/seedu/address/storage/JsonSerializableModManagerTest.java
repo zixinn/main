@@ -17,7 +17,7 @@ import seedu.address.model.ModManager;
 public class JsonSerializableModManagerTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableModManagerTest");
-    private static final Path TYPICAL_ADDRESS_BOOK_FILE = TEST_DATA_FOLDER.resolve("typicalModManager.json");
+    private static final Path TYPICAL_MOD_MANAGER_FILE = TEST_DATA_FOLDER.resolve("typicalModManager.json");
     private static final Path INVALID_MODULE_FILE = TEST_DATA_FOLDER.resolve("invalidModuleModManager.json");
     private static final Path INVALID_FACILITATOR_FILE = TEST_DATA_FOLDER.resolve("invalidFacilitatorModManager.json");
     private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskModManager.json");
@@ -36,8 +36,8 @@ public class JsonSerializableModManagerTest {
             .resolve("moduleDoesNotExistModManager.json");
 
     @Test
-    public void toModelType_typicalAddressBookFile_success() throws Exception {
-        JsonSerializableModManager dataFromFile = JsonUtil.readJsonFile(TYPICAL_ADDRESS_BOOK_FILE,
+    public void toModelType_typicalModManagerFile_success() throws Exception {
+        JsonSerializableModManager dataFromFile = JsonUtil.readJsonFile(TYPICAL_MOD_MANAGER_FILE,
                 JsonSerializableModManager.class).get();
         ModManager modManagerFromFile = dataFromFile.toModelType();
         ModManager typicalModManager = getTypicalAddressBook();

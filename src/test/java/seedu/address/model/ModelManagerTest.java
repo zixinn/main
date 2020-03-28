@@ -67,12 +67,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setModManagerFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setModManagerFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setModManagerFilePath_validPath_setsModManagerFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setModManagerFilePath(path);
         assertEquals(path, modelManager.getModManagerFilePath());
@@ -84,12 +84,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasModuleCode_moduleCodeNotInAddressBook_returnsFalse() {
+    public void hasModuleCode_moduleCodeNotInModManager_returnsFalse() {
         assertFalse(modelManager.hasModuleCode("CS2103T"));
     }
 
     @Test
-    public void hasModuleCode_moduleCodeInAddressBook_returnsTrue() {
+    public void hasModuleCode_moduleCodeInModManager_returnsTrue() {
         modelManager.addModule(CS2103T);
         assertTrue(modelManager.hasModuleCode("CS2103T"));
     }
@@ -100,12 +100,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasModule_moduleNotInAddressBook_returnsFalse() {
+    public void hasModule_moduleNotInModManager_returnsFalse() {
         assertFalse(modelManager.hasModule(CS2103T));
     }
 
     @Test
-    public void hasModule_moduleInAddressBook_returnsTrue() {
+    public void hasModule_moduleInModManager_returnsTrue() {
         modelManager.addModule(CS2103T);
         assertTrue(modelManager.hasModule(CS2103T));
     }
@@ -143,12 +143,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasFacilitator_facilitatorNotInAddressBook_returnsFalse() {
+    public void hasFacilitator_facilitatorNotInModManager_returnsFalse() {
         assertFalse(modelManager.hasFacilitator(ALICE));
     }
 
     @Test
-    public void hasFacilitator_facilitatorInAddressBook_returnsTrue() {
+    public void hasFacilitator_facilitatorInModManager_returnsTrue() {
         modelManager.addFacilitator(ALICE);
         assertTrue(modelManager.hasFacilitator(ALICE));
     }

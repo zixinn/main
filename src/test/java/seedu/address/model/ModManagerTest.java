@@ -49,7 +49,7 @@ public class ModManagerTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyModManager_replacesData() {
         ModManager newData = getTypicalAddressBook();
         modManager.resetData(newData);
         assertEquals(newData, modManager);
@@ -84,12 +84,12 @@ public class ModManagerTest {
     }
 
     @Test
-    public void hasModuleCode_moduleCodeNotInAddressBook_returnsFalse() {
+    public void hasModuleCode_moduleCodeNotInModManager_returnsFalse() {
         assertFalse(modManager.hasModuleCode("CS2103T"));
     }
 
     @Test
-    public void hasModuleCode_moduleCodeInAddressBook_returnsTrue() {
+    public void hasModuleCode_moduleCodeInModManager_returnsTrue() {
         modManager.addModule(CS2103T);
         assertTrue(modManager.hasModuleCode("CS2103T"));
     }
@@ -100,18 +100,18 @@ public class ModManagerTest {
     }
 
     @Test
-    public void hasModule_moduleNotInAddressBook_returnsFalse() {
+    public void hasModule_moduleNotInModManager_returnsFalse() {
         assertFalse(modManager.hasModule(CS2103T));
     }
 
     @Test
-    public void hasModule_moduleInAddressBook_returnsTrue() {
+    public void hasModule_moduleInModManager_returnsTrue() {
         modManager.addModule(CS2103T);
         assertTrue(modManager.hasModule(CS2103T));
     }
 
     @Test
-    public void hasModule_moduleWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasModule_moduleWithSameIdentityFieldsInModManager_returnsTrue() {
         modManager.addModule(CS2103T);
         Module editedModule = new ModuleBuilder().withDescription(VALID_DESCRIPTION_CS2101).build();
         assertTrue(modManager.hasModule(editedModule));
@@ -123,12 +123,12 @@ public class ModManagerTest {
     }
 
     @Test
-    public void findModule_moduleNotInAddressBook_returnsOptionalEmpty() {
+    public void findModule_moduleNotInModManager_returnsOptionalEmpty() {
         assertEquals(Optional.empty(), modManager.findModule(new ModuleCode("CS2103T")));
     }
 
     @Test
-    public void findModule_moduleInAddressBook_returnsModule() {
+    public void findModule_moduleInModManager_returnsModule() {
         modManager.addModule(CS2103T);
         assertEquals(Optional.of(CS2103T), modManager.findModule(new ModuleCode("CS2103T")));
     }
@@ -153,18 +153,18 @@ public class ModManagerTest {
     }
 
     @Test
-    public void hasFacilitator_facilitatorNotInAddressBook_returnsFalse() {
+    public void hasFacilitator_facilitatorNotInModManager_returnsFalse() {
         assertFalse(modManager.hasFacilitator(ALICE));
     }
 
     @Test
-    public void hasFacilitator_facilitatorInAddressBook_returnsTrue() {
+    public void hasFacilitator_facilitatorInModManager_returnsTrue() {
         modManager.addFacilitator(ALICE);
         assertTrue(modManager.hasFacilitator(ALICE));
     }
 
     @Test
-    public void hasFacilitator_facilitatorWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasFacilitator_facilitatorWithSameIdentityFieldsInModManager_returnsTrue() {
         modManager.addFacilitator(ALICE);
         Facilitator editedAlice = new FacilitatorBuilder(ALICE).withOffice(VALID_OFFICE_BOB)
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
@@ -186,7 +186,7 @@ public class ModManagerTest {
     }
 
     @Test
-    public void getAddressBook_emptyAddressBook_success() {
+    public void getModManager_emptyModManager_success() {
         assertEquals(new ModManager(), modManager);
     }
 
