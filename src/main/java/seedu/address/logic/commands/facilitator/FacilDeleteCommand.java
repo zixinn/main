@@ -4,16 +4,17 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
-import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 
 /**
  * Deletes a facilitator identified using it's displayed index from Mod Manager.
@@ -62,7 +63,10 @@ public class FacilDeleteCommand extends FacilCommand {
 
             if (fetch.isEmpty()) {
                 // No facilitators with such name, so ask the user to confirm
-                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(fname.toString()));
+                final List<String> words = List.of(fname.fullName.split("\\s+"));
+                Predicate<Facilitator> predicate =
+                    f -> words.stream().anyMatch(x -> StringUtil.containsWordIgnoreCase(f.getName().fullName, x));
+
                 lastShownList.stream().filter(predicate).forEach(fetch::add);
 
                 if (fetch.isEmpty()) {

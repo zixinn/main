@@ -14,10 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,7 +27,6 @@ import seedu.address.model.Model;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
-import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
@@ -116,7 +117,10 @@ public class FacilEditCommand extends FacilCommand {
 
             if (fetch.isEmpty()) {
                 // No facilitators with such name, so ask the user to confirm
-                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(fname.toString()));
+                final List<String> words = List.of(fname.fullName.split("\\s+"));
+                Predicate<Facilitator> predicate =
+                    f -> words.stream().anyMatch(x -> StringUtil.containsWordIgnoreCase(f.getName().fullName, x));
+
                 lastShownList.stream().filter(predicate).forEach(fetch::add);
 
                 if (fetch.isEmpty()) {
