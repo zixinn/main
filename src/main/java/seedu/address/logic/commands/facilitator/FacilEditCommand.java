@@ -174,7 +174,15 @@ public class FacilEditCommand extends FacilCommand {
 
         // state check
         FacilEditCommand e = (FacilEditCommand) other;
-        return index.equals(e.index)
+        if ((index != null && e.index == null) || (index == null && e.index != null)) {
+            return false;
+        }
+        if ((fname != null && e.fname == null) || (fname == null && e.fname != null)) {
+            return false;
+        }
+
+        return (index == null || index.equals(e.index))
+                && (fname == null || fname.equals(e.fname))
                 && editFacilitatorDescriptor.equals(e.editFacilitatorDescriptor);
     }
 

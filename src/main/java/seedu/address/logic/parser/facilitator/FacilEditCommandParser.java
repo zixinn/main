@@ -42,7 +42,6 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         Name fname = null;
 
         int mode = 0;
-        ParseException pE = null;
 
         try {
             index = ParserUtil.parseIndex(preAmble);

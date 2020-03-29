@@ -2,6 +2,7 @@ package seedu.address.logic.commands.facilitator;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.Name;
 
 /**
  * Deletes a facilitator identified using it's displayed index from Mod Manager.
@@ -25,24 +27,44 @@ public class FacilDeleteCommand extends FacilCommand {
     public static final String MESSAGE_DELETE_FACILITATOR_SUCCESS = "Deleted Facilitator: %1$s";
 
     private final Index targetIndex;
+    private final Name fname;
 
     /**
      * Creates a FacilDeleteCommand to delete the facilitator the specified {@code index}.
      */
     public FacilDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.fname = null;
+    }
+
+    public FacilDeleteCommand(Name fname) {
+        this.targetIndex = null;
+        this.fname = fname;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Facilitator> lastShownList = model.getFilteredFacilitatorList();
+        Facilitator facilitatorToDelete = null;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+        if (targetIndex != null) {
+            assert fname == null;
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+            }
+            facilitatorToDelete = lastShownList.get(targetIndex.getZeroBased());
+        } else {
+            assert fname != null;
+            final List<Facilitator> fetch = new ArrayList<>();
+            lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
+            assert fetch.size() <= 1;
+            if (fetch.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+            }
+            facilitatorToDelete = fetch.get(0);
         }
 
-        Facilitator facilitatorToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFacilitator(facilitatorToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete),
                 CommandType.FACILITATOR);
@@ -50,8 +72,25 @@ public class FacilDeleteCommand extends FacilCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FacilDeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((FacilDeleteCommand) other).targetIndex)); // state check
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof FacilDeleteCommand)) {
+            return false;
+        }
+
+        FacilDeleteCommand fd = (FacilDeleteCommand) other;
+
+        if ((targetIndex == null && fd.targetIndex != null) || (targetIndex != null && fd.targetIndex == null)) {
+            return false;
+        }
+
+        if ((fname == null && fd.fname != null) || (fname != null && fd.fname == null)) {
+            return false;
+        }
+
+        return (targetIndex == null || targetIndex.equals(fd.targetIndex))
+                && (fname == null || fname.equals(fd.fname)); // state check
     }
 }
