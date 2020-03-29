@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 
 /**
  * Deletes a facilitator identified using it's displayed index from Mod Manager.
@@ -25,6 +26,10 @@ public class FacilDeleteCommand extends FacilCommand {
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_DELETE + " 1";
 
     public static final String MESSAGE_DELETE_FACILITATOR_SUCCESS = "Deleted Facilitator: %1$s";
+
+    private final String MESSAGE_PARTIAL_MATCHING_FOUND =
+            "Facilitator %s cannot be found, or isn't unique. But here are the ones that are close to your query:\n";
+    private final String MESSAGE_ASK_TO_CONFIRM = "\nPlease input the exact facilitator you want to delete.";
 
     private final Index targetIndex;
     private final Name fname;
@@ -46,7 +51,7 @@ public class FacilDeleteCommand extends FacilCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Facilitator> lastShownList = model.getFilteredFacilitatorList();
-        Facilitator facilitatorToDelete = null;
+        Facilitator facilitatorToDelete;
 
         if (targetIndex != null) {
             assert fname == null;
@@ -58,16 +63,33 @@ public class FacilDeleteCommand extends FacilCommand {
             assert fname != null;
             final List<Facilitator> fetch = new ArrayList<>();
             lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
-            assert fetch.size() <= 1;
+
             if (fetch.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+                // No facilitators with such name, so ask the user to confirm
+                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(fname.toString()));
+                lastShownList.stream().filter(predicate).forEach(fetch::add);
+
+                if (fetch.isEmpty()) {
+                     throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+                }
+
+                return promptUserToConfirm(fetch);
             }
+
+            assert fetch.size() == 1;
             facilitatorToDelete = fetch.get(0);
         }
 
         model.deleteFacilitator(facilitatorToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete),
                 CommandType.FACILITATOR);
+    }
+
+    private CommandResult promptUserToConfirm(List<Facilitator> fetch) {
+        StringBuilder builder = new StringBuilder(String.format(MESSAGE_PARTIAL_MATCHING_FOUND, fname));
+        fetch.forEach(x -> builder.append("   ").append(x.getName().toString()).append('\n'));
+        builder.append(MESSAGE_ASK_TO_CONFIRM);
+        return new CommandResult(builder.toString(), CommandType.PROMPTING);
     }
 
     @Override
