@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes class find command;
+if () then ([either day or /next is present])
+
+    if () then ([/day is present])
+        :Parser parses day;
+         else ([else])
+         endif
+    :Logic executes command;
+else ([else])
+endif
+
+
+stop
+@enduml

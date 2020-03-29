@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.List;
@@ -26,8 +25,8 @@ public class LessonDeleteCommand extends LessonCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE + " 1\n"
             + " or \n"
-            + "Parameters: " + PREFIX_INDEX + " INDEX (must be a positive number) " + PREFIX_MODULE_CODE + " MOD_CODE\n"
-            + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE + " " + PREFIX_INDEX
+            + "Parameters: INDEX (must be a positive number) " + PREFIX_MODULE_CODE + " MOD_CODE\n"
+            + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
             + " 1 " + PREFIX_MODULE_CODE + " CS2103T\n";
 
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
