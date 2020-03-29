@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX =
             "The facilitator index provided is invalid!";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
+    public static final String MESSAGE_FACILITATOR_NOT_FOUND = "Facilitator %s does not exist in Mod Manager.";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! "
             + "Type `task list` to return to the main task list.";

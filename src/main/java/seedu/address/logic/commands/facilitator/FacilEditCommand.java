@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -37,13 +38,13 @@ public class FacilEditCommand extends FacilCommand {
             + ": Edits the details of the facilitator identified "
             + "by the index number used in the displayed facilitator list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) or FACILITATOR_NAME"
             + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
             + "[" + PREFIX_MODULE_CODE + " MOD_CODES...]\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) or FACILITATOR_NAME"
             + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
@@ -51,7 +52,9 @@ public class FacilEditCommand extends FacilCommand {
             + "[" + PREFIX_MODULE_CODE + " MOD_CODES]...\n"
             + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " Akshay Narayan "
+            + PREFIX_PHONE + "84841235";
 
     public static final String MESSAGE_EDIT_FACILITATOR_SUCCESS = "Edited Facilitator: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -61,6 +64,7 @@ public class FacilEditCommand extends FacilCommand {
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
     private final Index index;
+    private final Name fname;
     private final EditFacilitatorDescriptor editFacilitatorDescriptor;
 
     /**
@@ -74,7 +78,17 @@ public class FacilEditCommand extends FacilCommand {
         requireNonNull(editFacilitatorDescriptor);
 
         this.index = index;
+        this.fname = null;
         this.editFacilitatorDescriptor = new EditFacilitatorDescriptor(editFacilitatorDescriptor);
+    }
+
+    public FacilEditCommand(Name fname, EditFacilitatorDescriptor editFacilitatorDescriptor) {
+        requireNonNull(fname);
+        requireNonNull(editFacilitatorDescriptor);
+
+        this.index = null;
+        this.fname = fname;
+        this.editFacilitatorDescriptor = editFacilitatorDescriptor;
     }
 
     @Override
@@ -82,11 +96,29 @@ public class FacilEditCommand extends FacilCommand {
         requireNonNull(model);
         List<Facilitator> lastShownList = model.getFilteredFacilitatorList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+        int mode = 0;
+        if (index == null) {
+            mode = 1;
+            assert fname != null;
         }
 
-        Facilitator facilitatorToEdit = lastShownList.get(index.getZeroBased());
+        Facilitator facilitatorToEdit = null;
+
+        if (mode == 0) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+            }
+            facilitatorToEdit = lastShownList.get(index.getZeroBased());
+        } else {
+            final List<Facilitator> fetch = new ArrayList<>();
+            lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
+            assert fetch.size() <= 1;
+            if (fetch.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+            }
+            facilitatorToEdit = fetch.get(0);
+        }
+
         Facilitator editedFacilitator = createEditedFacilitator(facilitatorToEdit, editFacilitatorDescriptor);
 
         if (!facilitatorToEdit.isSameFacilitator(editedFacilitator) && model.hasFacilitator(editedFacilitator)) {

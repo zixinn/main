@@ -19,6 +19,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facilitator.Name;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -36,12 +37,26 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        Index index;
+        String preAmble = argMultimap.getPreamble();
+        Index index = null;
+        Name fname = null;
+
+        int mode = 0;
+        ParseException pE = null;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(preAmble);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE), pe);
+//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE), pe);
+            mode = 1;
+        }
+
+        try {
+            if (mode == 1) {
+                fname = ParserUtil.parseName(preAmble);
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE));
         }
 
         FacilEditCommand.EditFacilitatorDescriptor editFacilitatorDescriptor =
@@ -68,7 +83,11 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
             throw new ParseException(FacilEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new FacilEditCommand(index, editFacilitatorDescriptor);
+        if (mode == 0) {
+            return new FacilEditCommand(index, editFacilitatorDescriptor);
+        } else {
+            return new FacilEditCommand(fname, editFacilitatorDescriptor);
+        }
     }
 
     /**
