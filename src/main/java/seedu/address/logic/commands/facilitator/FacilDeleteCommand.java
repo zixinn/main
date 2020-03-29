@@ -27,9 +27,9 @@ public class FacilDeleteCommand extends FacilCommand {
 
     public static final String MESSAGE_DELETE_FACILITATOR_SUCCESS = "Deleted Facilitator: %1$s";
 
-    private final String MESSAGE_PARTIAL_MATCHING_FOUND =
+    public static final String MESSAGE_PARTIAL_MATCHING_FOUND =
             "Facilitator %s cannot be found, or isn't unique. But here are the ones that are close to your query:\n";
-    private final String MESSAGE_ASK_TO_CONFIRM = "\nPlease input the exact facilitator you want to delete.";
+    public static final String MESSAGE_ASK_TO_CONFIRM = "\nPlease input the exact facilitator you want to delete.";
 
     private final Index targetIndex;
     private final Name fname;
@@ -70,7 +70,7 @@ public class FacilDeleteCommand extends FacilCommand {
                 lastShownList.stream().filter(predicate).forEach(fetch::add);
 
                 if (fetch.isEmpty()) {
-                     throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+                    throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
                 }
 
                 return promptUserToConfirm(fetch);
@@ -85,6 +85,9 @@ public class FacilDeleteCommand extends FacilCommand {
                 CommandType.FACILITATOR);
     }
 
+    /**
+     * Returns a CommandResult with type PROMPTING, asking the user to input the more precise information.
+     */
     private CommandResult promptUserToConfirm(List<Facilitator> fetch) {
         StringBuilder builder = new StringBuilder(String.format(MESSAGE_PARTIAL_MATCHING_FOUND, fname));
         fetch.forEach(x -> builder.append("   ").append(x.getName().toString()).append('\n'));
