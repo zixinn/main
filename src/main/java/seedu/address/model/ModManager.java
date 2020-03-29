@@ -365,6 +365,13 @@ public class ModManager implements ReadOnlyModManager {
     }
 
     /**
+     * Checks if the time slot is free.
+     */
+    public boolean isTimeSlotFree(Lesson lesson, Optional<Lesson> lessonToExclude) {
+        return lessons.isTimeSlotFree(lesson, lessonToExclude);
+    }
+
+    /**
      * Replaces the given module code {@code target} in the lesson list with {@code editedModuleCode}.
      * {@code target} must exist in Mod Manager.
      * The module code identity of {@code editedModuleCode} must not be the same as another existing module code

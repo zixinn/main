@@ -243,6 +243,8 @@ public interface Model {
 
     ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
 
+    boolean isTimeSlotFree(Lesson lesson, Optional<Lesson> lessonToExclude);
+
     /**
      * Replaces the given module code {@code target} with {@code editedModuleCode} in the lesson list.
      * The module code identity of {@code editedModuleCode} must not be the same as another existing module code

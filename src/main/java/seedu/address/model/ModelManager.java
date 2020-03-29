@@ -315,6 +315,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isTimeSlotFree(Lesson lesson, Optional<Lesson> lessonToExclude) {
+        return modManager.isTimeSlotFree(lesson, lessonToExclude);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

@@ -45,6 +45,7 @@ public class LessonEditCommand extends LessonCommand {
             "The lesson index provided is invalid";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
+    public static final String MESSAGE_INVALID_TIME_RANGE = "The lesson to be added clashes with another lesson";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -64,7 +65,7 @@ public class LessonEditCommand extends LessonCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (index.getZeroBased() >= model.getLessons().size() || index.getZeroBased() < 0) {
+        if (index.getZeroBased() >= model.getLessons().size()) {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
@@ -88,6 +89,10 @@ public class LessonEditCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
         }
 
+        if (!model.isTimeSlotFree(editedLesson, Optional.of(lessonToEdit))) {
+            throw new CommandException(MESSAGE_INVALID_TIME_RANGE);
+        }
+
         model.setLesson(lessonToEdit, editedLesson);
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson), CommandType.LESSON);
     }
@@ -104,7 +109,7 @@ public class LessonEditCommand extends LessonCommand {
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
         String updatedVenue = "";
-        if (editLessonDescriptor.getVenue().equals("")) {
+        if (editLessonDescriptor.getVenue().get().equals("")) {
             updatedVenue = null;
         } else {
             updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
