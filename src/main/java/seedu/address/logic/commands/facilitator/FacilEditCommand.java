@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
@@ -112,10 +113,20 @@ public class FacilEditCommand extends FacilCommand {
         } else {
             final List<Facilitator> fetch = new ArrayList<>();
             lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
-            assert fetch.size() <= 1;
+
             if (fetch.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+                // No facilitators with such name, so ask the user to confirm
+                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(fname.toString()));
+                lastShownList.stream().filter(predicate).forEach(fetch::add);
+
+                if (fetch.isEmpty()) {
+                    throw new CommandException(String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, fname));
+                }
+
+                return promptUserToConfirm(fetch);
             }
+
+            assert fetch.size() == 1;
             facilitatorToEdit = fetch.get(0);
         }
 
@@ -140,6 +151,17 @@ public class FacilEditCommand extends FacilCommand {
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator),
                 CommandType.FACILITATOR);
+    }
+
+    /**
+     * Returns a CommandResult with type PROMPTING, asking the user to input the more precise information.
+     */
+    private CommandResult promptUserToConfirm(List<Facilitator> fetch) {
+        StringBuilder builder = new StringBuilder(
+                String.format(Messages.MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND, fname));
+        fetch.forEach(x -> builder.append("   ").append(x.getName().toString()).append('\n'));
+        builder.append(Messages.MESSAGE_ASK_TO_CONFIRM_FACILITATOR);
+        return new CommandResult(builder.toString(), CommandType.PROMPTING);
     }
 
     /**
