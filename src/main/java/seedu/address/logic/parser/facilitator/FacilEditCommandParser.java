@@ -47,7 +47,6 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         try {
             index = ParserUtil.parseIndex(preAmble);
         } catch (ParseException pe) {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE), pe);
             mode = 1;
         }
 
