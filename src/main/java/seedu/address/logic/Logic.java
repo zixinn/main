@@ -18,11 +18,12 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -37,29 +38,32 @@ public interface Logic {
      */
     ReadOnlyModManager getModManager();
 
-    /** Returns an unmodifiable view of the filtered list of modules */
+    /** Returns an unmodifiable view of the filtered list of modules. */
     ObservableList<Module> getFilteredModuleList();
 
-    /** Returns an unmodifiable view of the filtered list of facilitators */
+    /** Returns an unmodifiable view of the filtered list of facilitators. */
     ObservableList<Facilitator> getFilteredFacilitatorList();
 
-    /** Returns an unmodifiable view of the filtered list of tasks */
+    /** Returns an unmodifiable view of the filtered list of tasks. */
     ObservableList<Task> getFilteredTaskList();
 
-    /** Returns an unmodifiable view of the filtered list of lessons */
+    /** Returns an unmodifiable view of the filtered list of lessons. */
     List<Lesson> getLessons();
 
-    /** Returns an unmodifiable view of the filtered list of lessons */
-    ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
-
-    /** Returns the module to be viewed */
+    /** Returns the module to be viewed. */
     Optional<Module> getModule();
 
-    /** Returns an unmodifiable view of the filtered list of facilitators */
+    /** Returns an unmodifiable view of the filtered list of facilitators. */
     ObservableList<Facilitator> getFacilitatorListForModule();
 
-    /** Returns an unmodifiable view of the filtered list of tasks */
+    /** Returns an unmodifiable view of the filtered list of tasks. */
     ObservableList<Task> getTaskListForModule();
+
+    /** Returns an unmodifiable view of the filtered list of lessons. */
+    ObservableList<Lesson> getLessonListForModule(ModuleCode moduleCode);
+
+    /** Returns the calendar to be viewed. */
+    Calendar getCalendar();
 
     /**
      * Returns the user prefs' address book file path.
@@ -76,6 +80,4 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /** Returns the calendar to be viewed */
-    Calendar getCalendar();
 }

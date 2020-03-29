@@ -79,7 +79,7 @@ public class FacilEditCommandParserTest {
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 /index string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -87,7 +87,6 @@ public class FacilEditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-
         assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
                 ModuleCode.MESSAGE_CONSTRAINTS); // invalid module code
 

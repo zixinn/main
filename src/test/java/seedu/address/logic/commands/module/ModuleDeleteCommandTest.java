@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -36,6 +38,7 @@ public class ModuleDeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
         expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        expectedModel.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }
@@ -59,6 +62,7 @@ public class ModuleDeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
         expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        expectedModel.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }
@@ -69,6 +73,44 @@ public class ModuleDeleteCommandTest {
         ModuleDeleteCommand deleteCommand = new ModuleDeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_moduleViewedDeletedWithIndex_success() {
+        Module moduleToDelete = model.getFilteredModuleList().get(INDEX_FIRST.getZeroBased());
+        model.updateModule(Optional.of(moduleToDelete));
+        ModuleDeleteCommand deleteCommand = new ModuleDeleteCommand(INDEX_FIRST);
+
+        String expectedMessage = String.format(ModuleDeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
+        expectedModel.deleteModule(moduleToDelete);
+        expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        expectedModel.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
+        expectedModel.updateModule(Optional.empty());
+        expectedModel.removeLessonFromModule(moduleToDelete.getModuleCode());
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
+    }
+
+    @Test
+    public void execute_moduleViewedDeletedWithModuleCode_success() {
+        ModuleCode moduleCode = new ModuleCode(VALID_MODULE_CODE_CS2103T);
+        ModuleDeleteCommand deleteCommand = new ModuleDeleteCommand(moduleCode);
+
+        Module moduleToDelete = model.findModule(moduleCode).get();
+        model.updateModule(Optional.of(moduleToDelete));
+
+        String expectedMessage = String.format(ModuleDeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
+        expectedModel.deleteModule(moduleToDelete);
+        expectedModel.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
+        expectedModel.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
+        expectedModel.updateModule(Optional.empty());
+        expectedModel.removeLessonFromModule(moduleToDelete.getModuleCode());
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
     }
 
     @Test

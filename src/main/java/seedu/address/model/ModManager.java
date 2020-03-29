@@ -48,7 +48,7 @@ public class ModManager implements ReadOnlyModManager {
     public ModManager() {}
 
     /**
-     * Creates an ModManager using the Modules and Facilitators in the {@code toBeCopied}
+     * Creates a ModManager using the Modules, Facilitators, Tasks and Lessons in the {@code toBeCopied}
      */
     public ModManager(ReadOnlyModManager toBeCopied) {
         this();
@@ -80,6 +80,7 @@ public class ModManager implements ReadOnlyModManager {
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
+
     /**
      * Replaces the contents of the lesson list with {@code lessons}.
 
@@ -96,8 +97,8 @@ public class ModManager implements ReadOnlyModManager {
     public void resetData(ReadOnlyModManager newData) {
         requireNonNull(newData);
 
-        setFacilitators(newData.getFacilitatorList());
         setModules(newData.getModuleList());
+        setFacilitators(newData.getFacilitatorList());
         setTasks(newData.getTaskList());
         setLessons(newData.getLessonList());
     }
@@ -379,7 +380,8 @@ public class ModManager implements ReadOnlyModManager {
     public String toString() {
         return modules.asUnmodifiableObservableList().size() + " modules \n"
                 + facilitators.asUnmodifiableObservableList().size() + " facilitators \n"
-                + tasks.asUnmodifiableObservableList().size() + " tasks";
+                + tasks.asUnmodifiableObservableList().size() + " tasks\n"
+                + lessons.getLessonList().size() + " lessons";
     }
 
     @Override
@@ -408,7 +410,8 @@ public class ModManager implements ReadOnlyModManager {
                 || (other instanceof ModManager // instanceof handles nulls
                 && modules.equals(((ModManager) other).modules)
                 && facilitators.equals(((ModManager) other).facilitators)
-                && tasks.equals(((ModManager) other).tasks));
+                && tasks.equals(((ModManager) other).tasks))
+                && lessons.equals(((ModManager) other).lessons);
     }
 
     @Override

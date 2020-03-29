@@ -26,11 +26,11 @@ public class JsonModManagerStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readModManager_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readModManager(null));
     }
 
-    private java.util.Optional<ReadOnlyModManager> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyModManager> readModManager(String filePath) throws Exception {
         return new JsonModManagerStorage(Paths.get(filePath)).readModManager(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,38 +42,38 @@ public class JsonModManagerStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readModManager("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatModManager.json"));
+        assertThrows(DataConversionException.class, () -> readModManager("notJsonFormatModManager.json"));
     }
 
     @Test
-    public void readAddressBook_invalidModuleAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidModuleModManager.json"));
+    public void readModManager_invalidModuleModManager_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModManager("invalidModuleModManager.json"));
     }
 
     @Test
-    public void readAddressBook_invalidFacilitatorAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidFacilitatorModManager.json"));
+    public void readModManager_invalidFacilitatorModManager_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModManager("invalidFacilitatorModManager.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidModuleAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook(
+    public void readModManager_invalidAndValidModuleModManager_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModManager(
                 "invalidAndValidModuleModManager.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidFacilitatorAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook(
+    public void readModManager_invalidAndValidFacilitatorModManager_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModManager(
                 "invalidAndValidFacilitatorModManager.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveModManager_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempModManager.json");
         ModManager original = getTypicalAddressBook();
         JsonModManagerStorage jsonModManagerStorage = new JsonModManagerStorage(filePath);
@@ -99,24 +99,24 @@ public class JsonModManagerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveModManager_nullModManager_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveModManager(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code modManager} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyModManager addressBook, String filePath) {
+    private void saveModManager(ReadOnlyModManager modManager, String filePath) {
         try {
             new JsonModManagerStorage(Paths.get(filePath))
-                    .saveModManager(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveModManager(modManager, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new ModManager(), null));
+    public void saveModManager_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveModManager(new ModManager(), null));
     }
 }

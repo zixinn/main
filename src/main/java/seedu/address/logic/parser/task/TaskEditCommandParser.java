@@ -1,90 +1,111 @@
 package seedu.address.logic.parser.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_AT_WITHOUT_ON_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
+import java.util.Scanner;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.facilitator.FacilEditCommand;
+import javafx.util.Pair;
+import seedu.address.logic.commands.task.TaskEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.task.util.TaskNumManager;
 
 /**
- * Parses input arguments and creates a new FacilEditCommand object
+ * Parses input arguments and creates a new TaskEditCommand object
  */
-public class TaskEditCommandParser implements Parser<FacilEditCommand> {
+public class TaskEditCommandParser implements Parser<TaskEditCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the FacilEditCommand
-     * and returns an FacilEditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the TaskEditCommand
+     * and returns an TaskEditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FacilEditCommand parse(String args) throws ParseException {
+    public TaskEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
+                args, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
+        String taskNumString = argMultimap.getPreamble();
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE), pe);
+        if (taskNumString.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskEditCommand.MESSAGE_USAGE));
         }
 
-        FacilEditCommand.EditFacilitatorDescriptor editFacilitatorDescriptor =
-                new FacilEditCommand.EditFacilitatorDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME) != null) {
-            editFacilitatorDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE) != null) {
-            editFacilitatorDescriptor.setPhone(ParserUtil.parsePhone(
-                    parseFieldForEdit(argMultimap.getValue(PREFIX_PHONE))));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL) != null) {
-            editFacilitatorDescriptor.setEmail(ParserUtil.parseEmail(
-                    parseFieldForEdit(argMultimap.getValue(PREFIX_EMAIL))));
-        }
-        if (argMultimap.getValue(PREFIX_OFFICE) != null) {
-            editFacilitatorDescriptor.setOffice(ParserUtil.parseOffice(
-                    parseFieldForEdit(argMultimap.getValue(PREFIX_OFFICE))));
-        }
-        parseModuleCodesForEdit(argMultimap.getAllValues(PREFIX_MODULE_CODE))
-                .ifPresent(editFacilitatorDescriptor::setModuleCodes);
+        int present = 0;
 
-        if (!editFacilitatorDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(FacilEditCommand.MESSAGE_NOT_EDITED);
+        Pair<ModuleCode, Integer> pair = parseTaskNumString(taskNumString);
+        ModuleCode moduleCode = pair.getKey();
+        int taskNum = pair.getValue();
+
+        TaskEditCommand.EditTaskDescriptor editTaskDescriptor =
+                new TaskEditCommand.EditTaskDescriptor();
+
+        if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
+            present++;
+            editTaskDescriptor.setDescription(
+                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)));
         }
 
-        return new FacilEditCommand(index, editFacilitatorDescriptor);
+        if (argMultimap.getValue(PREFIX_ON) != null) {
+            present++;
+            TaskDateTime taskDateTime;
+            if (argMultimap.getValue(PREFIX_ON).trim().equals(TaskEditCommand.SPECIAL_VALUE_NON)) {
+                taskDateTime = Task.TABOO_DATE_TIME;
+                if (argMultimap.getValue(PREFIX_AT) != null) {
+                    throw new ParseException(TaskEditCommand.MESSAGE_NON_HAS_NO_TAILS);
+                }
+            } else if (argMultimap.getValue(PREFIX_AT) != null) {
+                taskDateTime = new TaskDateTime(argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT));
+            } else {
+                taskDateTime = new TaskDateTime(argMultimap.getValue(PREFIX_ON));
+            }
+            editTaskDescriptor.setTaskDateTime(taskDateTime);
+            assert editTaskDescriptor.getTaskDateTime().equals(Optional.of(taskDateTime));
+        } else if (argMultimap.getValue(PREFIX_AT) != null) {
+            throw new ParseException(MESSAGE_AT_WITHOUT_ON_ERROR);
+        }
+
+        if (present == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskEditCommand.MESSAGE_USAGE));
+        }
+
+        return new TaskEditCommand(moduleCode, taskNum, editTaskDescriptor);
     }
 
     /**
-     * Parses {@code Collection<String> moduleCodes} into a {@code Set<ModuleCode>} if {@code moduleCodes} is non-empty.
-     * If {@code moduleCodes} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<ModuleCode>} containing zero module codes.
+     * Takes the String and parses the ModuleCode and TaskNum from it.
      */
-    private Optional<Set<ModuleCode>> parseModuleCodesForEdit(Collection<String> moduleCodes) throws ParseException {
-        assert moduleCodes != null;
+    private Pair<ModuleCode, Integer> parseTaskNumString(String inp) throws ParseException {
+        assert !inp.isEmpty();
 
-        if (moduleCodes.isEmpty()) {
-            return Optional.empty();
+        Scanner sc = new Scanner(inp);
+        String modCodeString = sc.next();
+        if (!ModuleCode.isValidModuleCode(modCodeString)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        Collection<String> moduleCodeSet = moduleCodes.size() == 1 && moduleCodes.contains("")
-                ? Collections.emptySet() : moduleCodes;
-        return Optional.of(ParserUtil.parseModuleCodes(moduleCodeSet));
+        ModuleCode moduleCode = new ModuleCode(modCodeString);
+
+        if (!sc.hasNextInt()) {
+            throw new ParseException(TaskNumManager.MESSAGE_USAGE_CONSTRAINTS);
+        }
+        int taskNum = sc.nextInt();
+
+        if (sc.hasNext()) {
+            throw new ParseException(TaskNumManager.MESSAGE_USAGE_CONSTRAINTS);
+        }
+        sc.close();
+
+        return new Pair<ModuleCode, Integer>(moduleCode, taskNum);
     }
 
     /**

@@ -8,7 +8,6 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("/code");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("/desc");
-    public static final Prefix PREFIX_TASK = new Prefix("/task");
 
     public static final Prefix PREFIX_TYPE = new Prefix("/type");
     public static final Prefix PREFIX_VENUE = new Prefix("/venue");
@@ -22,7 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_YEAR = new Prefix("/year");
     public static final Prefix PREFIX_WEEK = new Prefix("/week");
 
-    public static final Prefix PREFIX_FACIL = new Prefix("/facil");
     public static final Prefix PREFIX_NAME = new Prefix("/name");
     public static final Prefix PREFIX_PHONE = new Prefix("/phone");
     public static final Prefix PREFIX_EMAIL = new Prefix("/email");

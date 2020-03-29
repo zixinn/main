@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.calendar.CalCommand;
+import seedu.address.logic.commands.cmd.CmdCommand;
 import seedu.address.logic.commands.facilitator.FacilCommand;
+import seedu.address.logic.commands.lesson.LessonCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
+import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ModManagerParserTest {
@@ -51,6 +56,38 @@ public class ModManagerParserTest {
                 instanceof FacilCommand);
         assertTrue(parser.parseCommand(Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
+    }
+
+    @Test
+    public void parseCommand_class() throws Exception {
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST)
+                instanceof LessonCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST + " 3")
+                instanceof LessonCommand);
+    }
+
+    @Test
+    public void parseCommand_cal() throws Exception {
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CAL + " " + Command.COMMAND_WORD_VIEW + " "
+                + PREFIX_WEEK + " this") instanceof CalCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CAL + " " + Command.COMMAND_WORD_FIND + " empty")
+                instanceof CalCommand);
+    }
+
+    @Test
+    public void parseCommand_task() throws Exception {
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_TASK + " " + Command.COMMAND_WORD_LIST)
+                instanceof TaskCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_TASK + " " + Command.COMMAND_WORD_LIST + " 3")
+                instanceof TaskCommand);
+    }
+
+    @Test
+    public void parseCommand_cmd() throws Exception {
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CMD + " " + Command.COMMAND_WORD_ALL)
+                instanceof CmdCommand);
+        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CMD + " " + Command.COMMAND_WORD_GROUP + " "
+                + Command.COMMAND_GROUP_TASK) instanceof CmdCommand);
     }
 
     @Test
