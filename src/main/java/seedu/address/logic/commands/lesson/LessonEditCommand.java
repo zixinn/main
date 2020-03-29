@@ -45,7 +45,7 @@ public class LessonEditCommand extends LessonCommand {
             "The lesson index provided is invalid";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
-    public static final String MESSAGE_INVALID_TIME_RANGE = "The lesson to be added clashes with another lesson";
+    public static final String MESSAGE_INVALID_TIME_RANGE = "The edited lesson clashes with another lesson";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
