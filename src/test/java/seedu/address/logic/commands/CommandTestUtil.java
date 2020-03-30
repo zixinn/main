@@ -37,9 +37,10 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS2103T = "CS2103T";
     public static final String VALID_MODULE_CODE_CS2101 = "CS2101";
     public static final String VALID_MODULE_CODE_CS1101S = "CS1101S";
-    public static final String VALID_MODULE_CODE_CS4215 = "CS3230";
-    public static final String VALID_MODULE_CODE_CS3230 = "CS4215";
-    public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS4215 CS3230";
+    public static final String VALID_MODULE_CODE_CS3230 = "CS3230";
+    public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
+    public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
+    public static final String VALID_TASK_DATE_TIME = "CS2101 CS2103T CS3230 CS4215";
     public static final String VALID_DESCRIPTION_CS2103T = "Software Engineering";
     public static final String VALID_DESCRIPTION_CS2101 = "Effective Communication for Computing Professionals";
     public static final String VALID_DESCRIPTION_CS1101S = "Programming Methodology";

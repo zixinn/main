@@ -1,0 +1,77 @@
+package seedu.address.testutil;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.ScheduledTask;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.util.Description;
+
+/**
+ * A utility class to help with building scheduled task objects.
+ */
+public class ScheduledTaskBuilder {
+    public static final String DEFAULT_MODULE_CODE = "CS2103T";
+    public static final String DEFAULT_DESCRIPTION = "Programming Assignment";
+    public static final String DEFAULT_TASK_DATE_TIME = "01/04/2020 23:59";
+    public static final boolean DEFAULT_IS_DONE = false;
+    private static final int DEFAULT_TASK_ID = 999;
+
+    private ModuleCode moduleCode;
+    private Description description;
+    private TaskDateTime taskDateTime;
+    private boolean isDone;
+    private int taskID;
+
+    public ScheduledTaskBuilder() throws ParseException {
+        moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
+        description = new Description(DEFAULT_DESCRIPTION);
+        taskDateTime = new TaskDateTime(DEFAULT_TASK_DATE_TIME);
+        isDone = DEFAULT_IS_DONE;
+        taskID = DEFAULT_TASK_ID;
+    }
+
+    /**
+     * Sets the {@code ModuleCode} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withModuleCode(String moduleCode) {
+        this.moduleCode = new ModuleCode(moduleCode);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withDescription(String description) {
+        this.description = new Description(description);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withTaskDateTime(String taskDateTime) throws ParseException {
+        this.taskDateTime = new TaskDateTime(taskDateTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code isDone} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withIsDone(boolean isDone) {
+        this.isDone = isDone;
+        return this;
+    }
+
+    /**
+     * Sets the {@code taskID} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withTaskID(int taskID) {
+        this.taskID = taskID;
+        return this;
+    }
+
+    public ScheduledTask build() {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskID, isDone);
+    }
+}
