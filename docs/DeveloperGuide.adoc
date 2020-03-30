@@ -252,12 +252,104 @@ The following sequence diagram shows how the lesson add command works:
 .Sequence Diagram for `class add` Command
 image::LessonAddSequenceDiagram.png[]
 
-NOTE: The lifeline for LessonCommandParser, LessonAddCommandParser and LessonAddCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+NOTE: The lifeline for `LessonCommandParser`, `LessonAddCommandParser` and `LessonAddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The following activity diagram summarizes what happens when a user executes a lesson add command:
 
 .Activity Diagram for `class add` Command
 image::LessonAddActivityDiagram.png[]
+
+===== Listing a class
+The list class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser` and `LessonAddCommand`.
+
+Given below is an example usage scenario and how the lesson list mechanism behaves at each step.
+
+1. The user executes the lesson list command.
+2. `LessonListCommandParser` creates a new `LessonListCommand`.
+3. `LogicManager` executes the `LessonListCommand`.
+
+The following sequence diagram shows how the lesson list command works:
+
+.Sequence Diagram for `class list` Command
+image::LessonListSequenceDiagram.png[]
+
+NOTE: The lifeline for `LessonCommandParser` and `LessonListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a lesson list command:
+
+.Activity Diagram for `class list` Command
+image::LessonListActivityDiagram.png[]
+
+===== Finding a class
+The find class command allows user to find a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonFindCommandParser` and `LessonFindCommand`. The operation is exposed in the `Model` interface as `Model#findNextLesson()` and `Model#findLessonByDay`.
+
+Given below is an example usage scenario and how the lesson find mechanism behaves at each step.
+
+1. The user executes the lesson find command with the `next` prefix.
+2. `LessonFindCommandParser` creates a new `LessonFindCommand`.
+3. `LogicManager` executes the `LessonFindCommand`.
+
+The following sequence diagram shows how the lesson find command works:
+
+.Sequence Diagram for `class find` Command
+image::LessonFindSequenceDiagram.png[]
+
+NOTE: The lifeline for `LessonCommandParser`, `LessonFindCommandParser`, `LessonFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a lesson find command:
+
+.Activity Diagram for `class find` Command
+image::LessonFindActivityDiagram.png[]
+
+
+===== Editing a class
+The edit class command allows user to edit a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonEditCommandParser` and `LessonEditCommand`. The operation is exposed in the `Model` interface as `Model#setLesson()`.
+
+Given below is an example usage scenario and how the lesson edit mechanism behaves at each step.
+
+1. The user executes the lesson edit command and provides the index of the lesson to be edited, the module code of the lesson and the fields to be edited.
+2. `LessonEditCommandParser` creates a new `EditLessonDescriptor` with the fields to be edited.
+3. `LessonEditCommandParser` creates a new `LessonEditCommand` based on the index and module code, and `EditLessonDescriptor`.
+4. `LogicManager` executes the `LessonEditCommand`.
+5. `LessonEditCommand` retrieves the `lesson` to be edited.
+6. `LessonEditCommand` creates a new `Lesson`.
+7. `ModManager` sets the existing `lesson` to the new `lesson` in the `LessonList`.
+
+The following sequence diagram shows how the lesson edit command works:
+
+.Sequence Diagram for `class edit` Command
+image::LessonEditSequenceDiagram.png[]
+
+NOTE: The lifeline for `LessonCommandParser`, `LessonEditCommandParser`, `EditLessonDescriptor` and `LessonEditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a lesson edit command:
+
+.Activity Diagram for `class edit` Command
+image::LessonEditActivityDiagram.png[]
+
+
+===== Deleting a class
+The delete class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonDeleteCommandParser` and `LessonDeleteCommand`. The operation is exposed in the `Model` interface as `Model#removeLesson()`.
+
+Given below is an example usage scenario and how the lesson delete mechanism behaves at each step.
+
+1. The user executes the lesson delete command and provides the index of the lesson to be deleted.
+2. `LessonDeleteCommandParser` creates a new `LessonDeleteCommand`.
+3. `LogicManager` executes the `LessonDeleteCommand`.
+4. `LessonDeleteCommand` retrieves the `lesson` to be deleted.
+4. `ModManager` deletes the `Lesson` from `LessonList`.
+
+The following sequence diagram shows how the lesson delete command works:
+
+.Sequence Diagram for `class delete` Command
+image::LessonDeleteSequenceDiagram.png[]
+
+NOTE: The lifeline for `LessonCommandParser`, `LessonDeleteCommandParser` and `LessonDeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a lesson delete command:
+
+.Activity Diagram for `class delete` Command
+image::LessonDeleteActivityDiagram.png[]
 
 ==== Design Considerations
 

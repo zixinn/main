@@ -289,6 +289,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean isTimeSlotFree(Lesson lesson, Optional<Lesson> lessonToExclude) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateCalendar(Calendar calendar) {
         throw new AssertionError("This method should not be called.");
     }

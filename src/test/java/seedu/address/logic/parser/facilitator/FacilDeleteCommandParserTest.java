@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.facilitator.FacilDeleteCommand;
+import seedu.address.model.facilitator.Name;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,11 +23,14 @@ public class FacilDeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new FacilDeleteCommand(INDEX_FIRST));
+        assertParseSuccess(parser, "Akshay", new FacilDeleteCommand(new Name("Akshay")));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
+        assertParseFailure(parser, "1a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE));
     }
 }

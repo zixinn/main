@@ -27,7 +27,8 @@ public class LessonAddCommandTest {
 
     @Test
     public void execute_lessonAcceptedByModel_andSuccessful() throws Exception {
-        Lesson lessonToAdd = new LessonBuilder().withLessonType("SEC").build();
+        Lesson lessonToAdd = new LessonBuilder().withLessonType("SEC").withStartTime("19:00").withEndTime("20:00")
+                .build();
         String expectedString = String.format(LessonAddCommand.MESSAGE_SUCCESS, lessonToAdd);
         LessonAddCommand command = new LessonAddCommand(lessonToAdd);
         CommandResult commandResult = command.execute(model);

@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
+import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.module.ModuleCode;
 
@@ -36,7 +38,35 @@ public class LessonList {
         if (contains(lesson)) {
             throw new DuplicateLessonException();
         }
+
+        if (!isTimeSlotFree(lesson, Optional.empty())) {
+            throw new InvalidTimeRangeException();
+        }
+
         lessons.add(lesson);
+    }
+
+    /**
+     * Checks if time slot is free for the lesson.
+     * @param lessonToBeAdded The lesson to check with.
+     * @return True if time slot is free and false otherwise.
+     */
+    public boolean isTimeSlotFree(Lesson lessonToBeAdded, Optional<Lesson> lessonToExclude) {
+        LocalTime targetStartTime = lessonToBeAdded.getStartTime();
+        LocalTime targetEndTime = lessonToBeAdded.getEndTime();
+        System.out.println(lessons);
+        for (Lesson lesson : lessons) {
+            if (!lessonToExclude.isEmpty() && lesson.equals(lessonToExclude.get())) {
+                continue;
+            }
+            LocalTime lessonStartTime = lesson.getStartTime();
+            LocalTime lessonEndTime = lesson.getEndTime();
+            if ((lessonToBeAdded.getDay().equals(lesson.getDay()))
+                    && (targetStartTime.compareTo(lessonEndTime) < 0 && lessonStartTime.compareTo(targetEndTime) < 0)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -182,23 +212,6 @@ public class LessonList {
                     lesson.getEndTime(), lesson.getVenue());
             setLesson(lesson, editedLesson);
         }
-    }
-
-    /**
-     * Finds the index of a lesson in the list.
-     * @param lesson Lesson to be checked.
-     * @return The index found.
-     */
-    public int findIndex(Lesson lesson) {
-        requireNonNull(lesson);
-        int index = 0;
-        for (Lesson l : lessons) {
-            if (l.equals(lesson)) {
-                return index;
-            }
-            index++;
-        }
-        throw new LessonNotFoundException();
     }
 
     @Override

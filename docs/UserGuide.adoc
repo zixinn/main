@@ -175,6 +175,10 @@ Format: `class add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [
 
 Parameter constraints:
 ****
+* MOD_CODE must be an existing and valid module code in the list of modules.
+* CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
+* DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
+* START_TIME and END_TIME should be in 24 hour HH:MM format.
 * VENUE is optional
 ****
 Example: `class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
@@ -188,6 +192,11 @@ Format: `class list`
 
 Finds classes occurring on a particular day. +
 Format: `class find /at DAY` +
+
+Parameter constraints:
+****
+* DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
+****
 Example: `class find /at MONDAY`
 
 ==== Finding next class
@@ -199,21 +208,42 @@ Format: `class find /next`
 
 Edits the information of the class. Class is selected by its index in the class list of a module. +
 Format: `class edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
+
+Parameter constraints:
+****
+* The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
+* MOD_CODE must be an existing and valid module code in the list of modules.
+* CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
+* DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
+* START_TIME and END_TIME should be in 24 hour HH:MM format.
+* At least one of the optional fields must be provided.
+****
 Example: `class edit 1 /code CS9000 /venue Home`
 
 ==== Deleting a class
 
 Deletes the class from the module. There are 2 ways you can delete a class. +
 
-Selects a class by its index in the full class list. You can see the full class list by using `class list`. +
+Selects a class to be deleted by its index in the full class list. You can view the full class list by using `class list` as stated in section 3.3.2. +
 
 Format: `class delete INDEX` +
+
+Parameter constraints:
+****
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
 Example: `class delete 1` +
 
-Selects a class by its index in the module's class list. +
+Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `mod view MOD_CODE` as stated in section 3.2.3. +
 
-Format: `class delete /code MOD_CODE /num INDEX` +
-Example: `class delete /code CS2103T /num 1` +
+Format: `class delete INDEX /code MOD_CODE` +
+
+Parameter constraints:
+****
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+Example: `class delete 1 /code CS2103T` +
 
 === Managing tasks : `task`
 
@@ -458,7 +488,7 @@ Receive reminders for deadlines and events the next day.
 |  `*class* find /next`
 |  `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]`
 |  `*class* delete INDEX`
-|  `*class* delete /code MOD_CODE /num INDEX`
+|  `*class* delete INDEX /code MOD_CODE`
 
 .7+|Task
 | `*task* add /code MOD_CODE /task TASK_NAME [/on DATE] [/at TIME]`
