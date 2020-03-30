@@ -267,6 +267,24 @@ e.g. 24:00 is not allowed.
 these tasks cannot be in the same time period, for example, in the same day.
 ****
 
+==== Editing a task
+
+Edits the information of a task. +
+Format: `task edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]` +
+Example: `task edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59` or `task edit CS2103T 848 /on non`
+
+==== Deleting a task
+
+Deletes a task from the module. +
+Format: `task delete /code MOD_CODE /task TASK_NAME` +
+Example: `task delete /code CS2103T /task IP week 4`
+
+==== Marking a task as done
+
+Marks a task as done in the module.
+Format: `task done /code MOD_CODE /id ID_NUMBER` +
+Example: `task done /code CS2103T /task 979`
+
 ==== Viewing all tasks
 
 Shows a list of all tasks across all modules in the Mod Manager. +
@@ -287,7 +305,7 @@ Parameter constraints:
 * Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
 ****
 
-==== Search tasks by date
+==== Searching tasks by date
 
 Searches all tasks that occur on your specified date, month, or year.
 
@@ -314,17 +332,6 @@ match only tasks that are on 10 April in any year.
 Finds upcoming tasks. +
 Format: `task find /upcoming` +
 
-==== Editing a task
-
-Edits the information of a task. +
-Format: `task edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]` +
-Example: `task edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59` or `task edit CS2103T 848 /on non`
-
-==== Deleting a task
-
-Deletes a task from the module. +
-Format: `task delete /code MOD_CODE /task TASK_NAME` +
-Example: `task delete /code CS2103T /task IP week 4`
 
 === Managing facilitators : `facil`
 

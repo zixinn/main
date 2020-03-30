@@ -152,6 +152,7 @@ public class TaskEditCommand extends TaskCommand {
         private int taskNum;
         private Description description;
         private TaskDateTime taskDateTime;
+        private boolean isDone;
 
         public EditTaskDescriptor() {}
 
@@ -163,6 +164,7 @@ public class TaskEditCommand extends TaskCommand {
             this.taskNum = toCopy.taskNum;
             this.description = toCopy.description;
             this.taskDateTime = toCopy.taskDateTime;
+            this.isDone = toCopy.isDone;
         }
 
         public ModuleCode getModuleCode() {
@@ -204,7 +206,8 @@ public class TaskEditCommand extends TaskCommand {
             return this.moduleCode.equals(e.moduleCode)
                     && this.taskNum == e.taskNum
                     && this.description.equals(e.description)
-                    && this.taskDateTime.equals(e.taskDateTime);
+                    && this.taskDateTime.equals(e.taskDateTime)
+                    && this.isDone == (e.isDone);
         }
     }
 }

@@ -35,8 +35,9 @@ public abstract class TaskCommand extends Command {
             COMMAND_GROUP_TASK, COMMAND_WORD_SEARCH,
             PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_LIST);
+    public static final String MARK_AS_DONE_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_DONE);
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
-            ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, SEARCH_FORMAT);
+            ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT, SEARCH_FORMAT, MARK_AS_DONE_FORMAT);
     @Override
     public abstract CommandResult execute(Model model) throws CommandException, ParseException;
 }

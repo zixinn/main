@@ -21,6 +21,7 @@ public abstract class Task implements DailySchedulable {
     public abstract boolean markAsDone();
     public abstract boolean isSameTask(Task other);
     public abstract int getTaskNum();
+    public abstract Task getClone();
 
     public static ScheduledTask makeScheduledTask(Description description,
                                            TaskDateTime taskDateTime,

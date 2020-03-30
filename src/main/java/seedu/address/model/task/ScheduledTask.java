@@ -50,7 +50,7 @@ public class ScheduledTask extends Task {
      * Gets the status icon of our Task.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "1" : "0"); //return tick or x symbols
     }
 
     @Override
@@ -80,9 +80,12 @@ public class ScheduledTask extends Task {
 
     @Override
     public boolean markAsDone() {
-        boolean old = isDone;
-        isDone = true;
-        return !old;
+        if (isDone) {
+            return false;
+        }
+
+        isDone = true; // set as done
+        return true;
     }
 
     @Override
@@ -106,6 +109,11 @@ public class ScheduledTask extends Task {
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.of(taskDateTime.getLocalDateTime().toLocalTime());
+    }
+
+    @Override
+    public Task getClone() {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
     }
 
     @Override

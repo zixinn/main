@@ -9,11 +9,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.logic.commands.task.TaskListCommand;
+import seedu.address.logic.commands.task.TaskMarkAsDoneCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FacilCommand object
+ * Parses input arguments and creates a new TaskCommand object
  */
 public class TaskCommandParser implements Parser<TaskCommand> {
 
@@ -44,6 +45,8 @@ public class TaskCommandParser implements Parser<TaskCommand> {
         case Command.COMMAND_WORD_DELETE:
             return new TaskDeleteCommandParser().parse(arguments);
 
+        case Command.COMMAND_WORD_DONE:
+            return new TaskMarkAsDoneCommandParser().parse(arguments);
         case Command.COMMAND_WORD_SEARCH:
             return new TaskSearchCommandParser().parse(arguments);
 
