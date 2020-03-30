@@ -24,7 +24,7 @@ public class LessonDeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, " /code CS2103T /num 1",
+        assertParseSuccess(parser, " 1 /code CS2103T",
                 new LessonDeleteCommand(INDEX_FIRST, Optional.of(new ModuleCode("CS2103T"))));
         assertParseSuccess(parser, " 1 ", new LessonDeleteCommand(INDEX_FIRST, Optional.empty()));
     }
@@ -32,7 +32,7 @@ public class LessonDeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, " a ", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, " /code CS2103T /num a ", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, " /code CODE123 /num 1 ", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " a /code CS2103T ", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " 1 /code CODE123 ", ModuleCode.MESSAGE_CONSTRAINTS);
     }
 }

@@ -36,6 +36,7 @@ public class LessonAddCommand extends LessonCommand {
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
+    public static final String MESSAGE_INVALID_TIME_RANGE = "The lesson to be added clashes with another lesson";
     private final Lesson toAdd;
 
     public LessonAddCommand(Lesson lesson) {
@@ -53,6 +54,10 @@ public class LessonAddCommand extends LessonCommand {
         Optional<Module> module = model.findModule(toAdd.getModuleCode());
         if (module.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        }
+
+        if (!model.isTimeSlotFree(toAdd, Optional.empty())) {
+            throw new CommandException(MESSAGE_INVALID_TIME_RANGE);
         }
 
         model.updateModule(module);

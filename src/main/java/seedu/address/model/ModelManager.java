@@ -288,9 +288,11 @@ public class ModelManager implements Model {
     public Lesson findNextLesson() {
         LessonList lessons = modManager.getLessons();
         Lesson lesson = lessons.findNextLesson();
-        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
-        module = Optional.ofNullable(filteredModules.get(0));
-        filteredModules.setPredicate(x -> true);
+        if (lesson != null) {
+            filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
+            module = Optional.ofNullable(filteredModules.get(0));
+            filteredModules.setPredicate(x -> true);
+        }
         return lesson;
     }
 
@@ -312,6 +314,11 @@ public class ModelManager implements Model {
     @Override
     public void setModuleCodeInLessonList(ModuleCode target, ModuleCode editedModuleCode) {
         modManager.setModuleCodeInLessonList(target, editedModuleCode);
+    }
+
+    @Override
+    public boolean isTimeSlotFree(Lesson lesson, Optional<Lesson> lessonToExclude) {
+        return modManager.isTimeSlotFree(lesson, lessonToExclude);
     }
 
     @Override

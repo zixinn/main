@@ -1,0 +1,22 @@
+@startuml
+start
+:User executes class delete command;
+:Parser parses index;
+if () then ([index is valid])
+    :Logic executes command;
+    if () then ([index is not out of bound])
+        if () then ([module code is valid])
+            if () then ([module code is present])
+                :Model deletes lesson from LessonList\nbased on the index in the module's lesson list;
+            else ([else])
+                :Model deletes lesson from LessonList\nbased on the index in the full lesson list;
+            endif
+            :Logic saves ModManager to Storage;
+        else ([else])
+        endif
+    else ([else])
+    endif
+else ([else])
+endif
+stop
+@enduml
