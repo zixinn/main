@@ -131,4 +131,60 @@ class TaskTest {
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode, num).toString());
         TaskNumManager.removeNum(sampleModCode, num);
     }
+
+    @Test
+    void getDescription() {
+    }
+
+    @Test
+    void getModuleCode() {
+    }
+
+    @Test
+    void getTaskDateTime() {
+    }
+
+    @Test
+    void isTaskDone() {
+    }
+
+    @Test
+    void markAsDone() {
+    }
+
+    @Test
+    void isSameTask() {
+    }
+
+    @Test
+    void getTaskNum() {
+    }
+
+    @Test
+    void getClone() {
+    }
+
+    @Test
+    void makeScheduledTask() {
+    }
+
+    @Test
+    void testMakeScheduledTask() {
+    }
+
+    @Test
+    void makeNonScheduledTask() {
+    }
+
+    @Test
+    void testMakeNonScheduledTask() {
+    }
+
+    @Test
+    void getTimeString() {
+    }
+
+    @Test
+    void getComparableTime() {
+    }
 }

@@ -40,4 +40,20 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("^")); // only non-alphanumeric characters
         assertTrue(Description.isValidDescription("software engineering*")); // contains non-alphanumeric characters
     }
+
+    @Test
+    void testIsValidDescription() {
+    }
+
+    @Test
+    void testToString() {
+    }
+
+    @Test
+    void testEquals() {
+    }
+
+    @Test
+    void testHashCode() {
+    }
 }
