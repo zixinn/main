@@ -290,6 +290,10 @@ Example: `task done /code CS2103T /task 979`
 Shows a list of all tasks across all modules in the Mod Manager. +
 Format: `*task* list`
 
+==== Viewing all undone tasks
+Shows a list of all tasks across all modules in the Mod Manager. +
+Format: `*task* undone`
+
 ==== Finding a task by description
 
 With this command, you can find tasks that contain any of the given keywords in their description.

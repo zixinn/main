@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -11,14 +10,14 @@ import seedu.address.model.Model;
 /**
  * Lists all tasks in Mod Manager to the user.
  */
-public class TaskListCommand extends TaskCommand {
+public class TaskListUnDoneCommand extends TaskCommand {
 
-    public static final String MESSAGE_SUCCESS = "All tasks across all modules in the Mod Manager are listed.";
+    public static final String MESSAGE_SUCCESS = "All undone tasks in the Mod Manager are listed.";
 
     @Override
     public CommandResult execute(Model model) throws ParseException {
         requireNonNull(model);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredTaskList(task -> !task.isTaskDone());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.TASK);
     }
 }
