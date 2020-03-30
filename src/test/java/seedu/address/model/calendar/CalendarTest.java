@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
@@ -42,9 +41,9 @@ public class CalendarTest {
     public void isWithinDate() throws ParseException {
         LocalDate localDate = LocalDate.parse("2020-03-12");
         Calendar calendar = new Calendar(localDate);
-        Task task = new ScheduledTask(new Description("read"),
+        Task task = Task.makeScheduledTask(new Description("read"),
                 new TaskDateTime("12/03/2020"), new ModuleCode("CS2103T"));
-        Task otherTask = new ScheduledTask(new Description("read"),
+        Task otherTask = Task.makeScheduledTask(new Description("read"),
                 new TaskDateTime("12/04/2020"), new ModuleCode("CS2103T"));
 
         //same date -> returns true
