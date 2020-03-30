@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.task.TaskCommand;
+import seedu.address.logic.commands.task.TaskForOneModuleCommand;
 import seedu.address.logic.commands.task.TaskListCommand;
 import seedu.address.logic.commands.task.TaskListUnDoneCommand;
 import seedu.address.logic.parser.Parser;
@@ -59,6 +60,9 @@ public class TaskCommandParser implements Parser<TaskCommand> {
 
         case Command.COMMAND_WORD_LIST:
             return new TaskListCommand();
+
+        case Command.COMMAND_WORD_MODULE:
+            return new TaskForOneModuleCommandParser().parse(arguments);
 
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_TASK_COMMAND, HelpCommand.MESSAGE_USAGE));

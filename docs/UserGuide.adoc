@@ -285,10 +285,14 @@ Marks a task as done in the module.
 Format: `task done /code MOD_CODE /id ID_NUMBER` +
 Example: `task done /code CS2103T /task 979`
 
-==== Viewing all tasks
+==== Viewing all tasks, or tasks for a specific module in ModManger
 
 Shows a list of all tasks across all modules in the Mod Manager. +
-Format: `*task* list`
+Format: `*task* list`, `*task* list /code CS2103T`
+
+==== Viewing tasks for a specific module in ModManger
+Shows a list of tasks for a particular module in the Mod Manager. +
+Format: `*task* module /code CS2103T`
 
 ==== Viewing all undone tasks
 Shows a list of all tasks across all modules in the Mod Manager. +
@@ -331,11 +335,6 @@ and you will have to follow the input requirements using valid numbers for
 * Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
 match only tasks that are on 10 April in any year.
 ****
-==== Finding upcoming tasks
-
-Finds upcoming tasks. +
-Format: `task find /upcoming` +
-
 
 === Managing facilitators : `facil`
 
