@@ -31,8 +31,9 @@ public abstract class Task implements DailySchedulable {
     public static ScheduledTask makeScheduledTask(Description description,
                                                   TaskDateTime taskDateTime,
                                                   ModuleCode moduleCode,
-                                                  int taskNum) {
-        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum);
+                                                  int taskNum,
+                                                  boolean isDone) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
     }
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
@@ -42,8 +43,8 @@ public abstract class Task implements DailySchedulable {
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                         ModuleCode moduleCode,
-                                                        int taskNum) {
-        return new NonScheduledTask(description, moduleCode, taskNum);
+                                                        int taskNum, boolean isDone) {
+        return new NonScheduledTask(description, moduleCode, taskNum, isDone);
     }
 
     public String getTimeString() {

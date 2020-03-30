@@ -121,22 +121,22 @@ public class TaskEditCommand extends TaskCommand {
         final Optional<TaskDateTime> updatedTaskDateTime = editTaskDescriptor.getTaskDateTime();
         final ModuleCode modCode = toEdit.getModuleCode();
         final int taskId = toEdit.getTaskNum();
-
+        final boolean isDone = toEdit.isTaskDone();
         if (updatedTaskDateTime.isPresent()) {
             TaskDateTime value = updatedTaskDateTime.get();
 
             return value.equals(Task.TABOO_DATE_TIME)
-                    ? Task.makeNonScheduledTask(updatedDescription, modCode, taskId)
+                    ? Task.makeNonScheduledTask(updatedDescription, modCode, taskId, isDone)
                     : Task.makeScheduledTask(updatedDescription, value,
-                    toEdit.getModuleCode(), toEdit.getTaskNum());
+                    toEdit.getModuleCode(), toEdit.getTaskNum(), isDone);
         } else {
             final Task[] toReturn = new Task[1];
             toEdit.getTaskDateTime()
                     .ifPresentOrElse(taskDateTime
                         -> toReturn[0] = Task.makeScheduledTask(updatedDescription, taskDateTime,
-                            modCode, taskId), ()
+                            modCode, taskId, isDone), ()
                         -> toReturn[0] = Task.makeNonScheduledTask(updatedDescription,
-                                modCode, taskId)
+                                modCode, taskId, isDone)
                 );
 
             return toReturn[0];

@@ -24,10 +24,11 @@ public class NonScheduledTask extends Task {
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
-    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
+    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskNum = taskNum;
+        this.isDone = isDone;
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 

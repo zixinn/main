@@ -37,6 +37,15 @@ public class ScheduledTask extends Task {
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
+    protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskNum, boolean isDone) {
+        this.description = description;
+        this.moduleCode = moduleCode;
+        this.taskDateTime = taskDateTime;
+        this.isDone = isDone;
+        this.taskNum = taskNum;
+        TaskNumManager.addNum(moduleCode, taskNum);
+    }
+
     /**
      * Gets the status icon of our Task.
      */
