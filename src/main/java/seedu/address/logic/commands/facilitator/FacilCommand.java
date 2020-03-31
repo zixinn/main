@@ -27,13 +27,16 @@ public abstract class FacilCommand extends Command {
             "%s %s %s FACILITATOR_NAME [%s PHONE] [%s EMAIL] [%s OFFICE] %s MOD_CODE [%s MORE_MOD_CODES]...",
             COMMAND_GROUP_FACIL, COMMAND_WORD_ADD,
             PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE, PREFIX_MODULE_CODE);
-    public static final String DELETE_FORMAT = String.format("%s %s INDEX", COMMAND_GROUP_FACIL, COMMAND_WORD_DELETE);
-    public static final String EDIT_FORMAT = String.format(
-            "%s %s [%s FACILITATOR_NAME] [%s PHONE] [%s EMAIL] [%s OFFICE] [%s MOD_CODE...]",
+    public static final String DELETE_FORMAT_INDEX = String.format(
+            "%s %s INDEX", COMMAND_GROUP_FACIL, COMMAND_WORD_DELETE);
+    public static final String DELETE_FORMAT_NAME = String.format(
+            "%s %s FACILITATOR_NAME", COMMAND_GROUP_FACIL, COMMAND_WORD_DELETE);
+    public static final String EDIT_FORMAT_INDEX = String.format(
+            "%s %s INDEX [%s FACILITATOR_NAME] [%s PHONE] [%s EMAIL] [%s OFFICE] [%s MOD_CODES...]",
             COMMAND_GROUP_FACIL, COMMAND_WORD_EDIT,
             PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
-    public static final String EDIT_FORMAT_PREFIX = String.format(
-            "%s %s [%s FACILITATOR_NAME] [%s PHONE] [%s EMAIL] [%s OFFICE] [%s MOD_CODE]...",
+    public static final String EDIT_FORMAT_NAME = String.format(
+            "%s %s FACILITATOR_NAME [%s FACILITATOR_NAME] [%s PHONE] [%s EMAIL] [%s OFFICE] [%s MOD_CODES...]",
             COMMAND_GROUP_FACIL, COMMAND_WORD_EDIT,
             PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
     public static final String FIND_FORMAT =
@@ -43,7 +46,8 @@ public abstract class FacilCommand extends Command {
     public static final List<String> ALL_COMMAND_WORDS = List.of(
             COMMAND_WORD_ADD, COMMAND_WORD_DELETE, COMMAND_WORD_EDIT, COMMAND_WORD_FIND, COMMAND_WORD_LIST);
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
-            ADD_FORMAT, ADD_FORMAT_PREFIX, DELETE_FORMAT, EDIT_FORMAT, EDIT_FORMAT_PREFIX, FIND_FORMAT, LIST_FORMAT);
+            ADD_FORMAT, ADD_FORMAT_PREFIX, DELETE_FORMAT_INDEX, DELETE_FORMAT_NAME, EDIT_FORMAT_INDEX, EDIT_FORMAT_NAME,
+            FIND_FORMAT, LIST_FORMAT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

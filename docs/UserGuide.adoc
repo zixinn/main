@@ -365,7 +365,7 @@ Example: `facil find Akshay`
 ==== Editing a facilitator
 Edits the information of a facilitator. +
 Format: `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
-or `facil edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE]...`
+or `facil edit FACILITATOR_NAME [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 
 Parameter constraints:
 ****
@@ -376,19 +376,19 @@ Parameter constraints:
 * You can remove phone, email or office linked to the facilitator by typing `/phone`, `/email` or `/office` respectively without specifying any input after it.
 ****
 
-Example: `facil edit 1 /name Akshay Narayan /email hisnewemail@nus.edu.sg`
+Example: `facil edit 1 /name Akshay /email hisnewemail@nus.edu.sg` or `facil edit Akshay Narayan /name Akshay /email hisnewemail@nus.edu.sg`
 
 ==== Deleting a facilitator
 
 Deletes a facilitator from the module. +
-Format: `facil delete INDEX`
+Format: `facil delete INDEX` or `facil delete FACILITATOR_NAME`
 
 Parameter constraints:
 ****
 * Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the displayed facilitator list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: `facil delete 2`
+Example: `facil delete 2` or `facil delete Akshay Narayan`
 
 === Managing calendar : `cal`
 
@@ -505,8 +505,8 @@ or `*facil* add /name FACILITATOR_NAME [/email EMAIL] [/phone PHONE] [/office OF
 |  `*facil* list`
 |  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 |  `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE...]`
-or `*facil* edit INDEX [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE]...`
-|  `*facil* delete INDEX`
+or `*facil* edit FACILITATOR_NAME [/name FACILITATOR_NAME] [/email EMAIL] [/phone PHONE] [/office OFFICE] [/code MOD_CODE...]`
+|  `*facil* delete INDEX` or `*facil* delete FACILITATOR_NAME`
 
 .3+|Calendar
 |  `*cal* find empty`

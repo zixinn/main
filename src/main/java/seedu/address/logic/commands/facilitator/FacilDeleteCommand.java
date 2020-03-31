@@ -24,7 +24,9 @@ public class FacilDeleteCommand extends FacilCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_FACIL + " " + COMMAND_WORD_DELETE
             + ": Deletes the facilitator identified by the index number used in the displayed facilitator list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_DELETE + " 1";
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_DELETE + " 1\n"
+            + "Parameters: FACILITATOR_NAME\n"
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_DELETE + " Akshay Narayan";
 
     public static final String MESSAGE_DELETE_FACILITATOR_SUCCESS = "Deleted Facilitator: %1$s";
 
@@ -91,7 +93,7 @@ public class FacilDeleteCommand extends FacilCommand {
     private CommandResult promptUserToConfirm(List<Facilitator> fetch) {
         StringBuilder builder = new StringBuilder(
                 String.format(Messages.MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND, fname));
-        fetch.forEach(x -> builder.append("   ").append(x.getName().toString()).append('\n'));
+        fetch.forEach(x -> builder.append("  ").append(x.getName().toString()).append('\n'));
         builder.append(Messages.MESSAGE_ASK_TO_CONFIRM_FACILITATOR);
         return new CommandResult(builder.toString(), CommandType.PROMPTING);
     }

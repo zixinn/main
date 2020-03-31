@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -81,7 +82,7 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidValueWithIndex_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
@@ -110,7 +111,36 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() {
+    public void parse_invalidValueWithName_failure() {
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_MODULE_CODE_DESC,
+                ModuleCode.MESSAGE_CONSTRAINTS); // invalid module code
+
+        // invalid phone followed by valid email
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+
+        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
+        assertParseFailure(parser, VALID_NAME_AMY + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // while parsing {@code PREFIX_MODULE_CODE} alone will reset the module codes of the {@code Facilitator} being
+        // edited, parsing it together with a valid module code results in error
+        assertParseFailure(parser, VALID_NAME_AMY + MODULE_CODE_DESC_CS2101 + MODULE_CODE_DESC_CS2103T
+                + MODULE_CODE_EMPTY, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NAME_AMY + MODULE_CODE_DESC_CS2101 + MODULE_CODE_EMPTY
+                + MODULE_CODE_DESC_CS2103T, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NAME_AMY + MODULE_CODE_EMPTY + MODULE_CODE_DESC_CS2101
+                + MODULE_CODE_DESC_CS2103T, ModuleCode.MESSAGE_CONSTRAINTS);
+
+        // multiple invalid values, but only the first invalid value is captured
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_OFFICE_AMY
+                + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_allFieldsSpecifiedWithIndex_success() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + MODULE_CODE_DESC_CS2103T
                 + EMAIL_DESC_AMY + OFFICE_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_CS2101;
@@ -125,7 +155,22 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_someFieldsSpecified_success() {
+    public void parse_allFieldsSpecifiedWithName_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + PHONE_DESC_BOB + MODULE_CODE_DESC_CS2103T
+                + EMAIL_DESC_AMY + OFFICE_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_CS2101;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
+                .withOffice(VALID_OFFICE_AMY).withModuleCodes(VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS2101)
+                .build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_someFieldsSpecifiedWithIndex_success() {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
@@ -137,7 +182,19 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() {
+    public void parse_someFieldsSpecifiedWithName_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_oneFieldSpecifiedWithIndex_success() {
         // name
         Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
@@ -179,7 +236,49 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
+    public void parse_oneFieldSpecifiedWithName_success() {
+        // name
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + NAME_DESC_AMY;
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withName(VALID_NAME_AMY).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // phone
+        userInput = name + PHONE_DESC_AMY;
+        descriptor = new EditFacilitatorDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // email
+        userInput = name + EMAIL_DESC_AMY;
+        descriptor = new EditFacilitatorDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // office
+        userInput = name + OFFICE_DESC_AMY;
+        descriptor = new EditFacilitatorDescriptorBuilder().withOffice(VALID_OFFICE_AMY).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // single module code
+        userInput = name + MODULE_CODE_DESC_CS2101;
+        descriptor = new EditFacilitatorDescriptorBuilder().withModuleCodes(VALID_MODULE_CODE_CS2101).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple module codes
+        userInput = name + MODULE_CODE_DESC_CS2101 + " " + VALID_MODULE_CODE_CS2103T;
+        descriptor = new EditFacilitatorDescriptorBuilder()
+                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleRepeatedFieldsWithIndex_acceptsLast() {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY
                 + MODULE_CODE_DESC_CS2101 + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2101
@@ -195,7 +294,23 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
+    public void parse_multipleRepeatedFieldsWithName_acceptsLast() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY
+                + MODULE_CODE_DESC_CS2101 + PHONE_DESC_AMY + OFFICE_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2101
+                + PHONE_DESC_BOB + OFFICE_DESC_BOB + EMAIL_DESC_BOB + MODULE_CODE_DESC_CS2103T;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withOffice(VALID_OFFICE_BOB)
+                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidValueFollowedByValidValueWithIndex_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
@@ -214,7 +329,26 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_resetPhone_success() {
+    public void parse_invalidValueFollowedByValidValueWithName_success() {
+        // no other valid values specified
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // other valid values specified
+        userInput = name + EMAIL_DESC_BOB + INVALID_PHONE_DESC + OFFICE_DESC_BOB
+                + PHONE_DESC_BOB;
+        descriptor = new EditFacilitatorDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withOffice(VALID_OFFICE_BOB).build();
+        expectedCommand = new FacilEditCommand(name, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetPhoneWithIndex_success() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + PHONE_EMPTY;
 
@@ -226,7 +360,19 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_resetEmail_success() {
+    public void parse_resetPhoneWithName_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + PHONE_EMPTY;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withPhone(null).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetEmailWithIndex_success() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + EMAIL_EMPTY;
 
@@ -238,13 +384,37 @@ public class FacilEditCommandParserTest {
     }
 
     @Test
-    public void parse_resetOffice_success() {
+    public void parse_resetEmailWithName_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + EMAIL_EMPTY;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withEmail(null).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetOfficeWithIndex_success() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + OFFICE_EMPTY;
 
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
                 .withOffice(null).build();
         FacilEditCommand expectedCommand = new FacilEditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetOfficeWithName_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        String userInput = name + OFFICE_EMPTY;
+
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withOffice(null).build();
+        FacilEditCommand expectedCommand = new FacilEditCommand(name, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

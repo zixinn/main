@@ -108,6 +108,7 @@ public class LogicManager implements Logic {
         return model.getCalendar();
     }
 
+    @Override
     public Path getModManagerFilePath() {
         return model.getModManagerFilePath();
     }
