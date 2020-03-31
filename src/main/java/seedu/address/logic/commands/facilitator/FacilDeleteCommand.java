@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.facilitator;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITATORS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,8 @@ public class FacilDeleteCommand extends FacilCommand {
             facilitatorToDelete = lastShownList.get(targetIndex.getZeroBased());
         } else {
             assert fname != null;
+            model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+            lastShownList = model.getFilteredFacilitatorList();
             final List<Facilitator> fetch = new ArrayList<>();
             lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
 

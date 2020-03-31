@@ -104,7 +104,7 @@ public class FacilEditCommand extends FacilCommand {
             assert fname != null;
         }
 
-        Facilitator facilitatorToEdit = null;
+        Facilitator facilitatorToEdit;
 
         if (mode == 0) {
             if (index.getZeroBased() >= lastShownList.size()) {
@@ -112,6 +112,8 @@ public class FacilEditCommand extends FacilCommand {
             }
             facilitatorToEdit = lastShownList.get(index.getZeroBased());
         } else {
+            model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+            lastShownList = model.getFilteredFacilitatorList();
             final List<Facilitator> fetch = new ArrayList<>();
             lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
 
