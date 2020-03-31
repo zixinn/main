@@ -54,9 +54,9 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
             TaskDateTime taskDateTime;
             String date = argMultimap.getValue(PREFIX_ON);
             if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
-                taskDateTime = new TaskDateTime(date, argMultimap.getValue(PREFIX_AT));
+                taskDateTime = ParserUtil.parseDateTimeForTask(date, argMultimap.getValue(PREFIX_AT));
             } else {
-                taskDateTime = new TaskDateTime(date);
+                taskDateTime = ParserUtil.parseDateForTask(date);
             }
             return new TaskAddCommand(Task.makeScheduledTask(description, taskDateTime, moduleCode));
         }
