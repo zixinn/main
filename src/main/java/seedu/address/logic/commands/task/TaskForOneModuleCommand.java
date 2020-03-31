@@ -29,9 +29,9 @@ public class TaskForOneModuleCommand extends TaskCommand {
             + PREFIX_MODULE_CODE + " CS3230 ";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
 
-    private final ModuleCode moduleCode;
+    private final String moduleCode;
 
-    public TaskForOneModuleCommand(ModuleCode moduleCode) {
+    public TaskForOneModuleCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
@@ -39,12 +39,19 @@ public class TaskForOneModuleCommand extends TaskCommand {
     public CommandResult execute(Model model) throws ParseException, CommandException {
         requireNonNull(model);
 
-        if (!model.hasModuleCode(moduleCode.toString())) {
-            throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode.value));
+        if (!model.hasModuleCode(moduleCode)) {
+            throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode));
         }
 
         model.updateFilteredTaskList(task -> task.getModuleCode().equals(moduleCode));
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                moduleCode.value), CommandType.TASK);
+                moduleCode), CommandType.TASK);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskForOneModuleCommand // instanceof handles nulls
+                && this.moduleCode.equals(((TaskForOneModuleCommand) other).moduleCode)); // state check
     }
 }

@@ -2,12 +2,16 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -40,7 +44,11 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS3230 = "CS3230";
     public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
-    public static final String VALID_TASK_DATE_TIME = "CS2101 CS2103T CS3230 CS4215";
+    public static final String TASK_DAY_26 = "26";
+    public static final String TASK_MONTH_03 = "3";
+    public static final String TASK_YEAR_2020 = "2020";
+    public static final String VALID_TASK_ID = "619";
+
     public static final String VALID_DESCRIPTION_CS2103T = "Software Engineering";
     public static final String VALID_DESCRIPTION_CS2101 = "Effective Communication for Computing Professionals";
     public static final String VALID_DESCRIPTION_CS1101S = "Programming Methodology";
@@ -53,6 +61,15 @@ public class CommandTestUtil {
     public static final String VALID_OFFICE_AMY = "COM3-04-04";
     public static final String VALID_OFFICE_BOB = "COM3-03-03";
 
+    public static final String VALID_FIND_WORDS_PROGRAMMING = "Programming";
+    public static final String VALID_FIND_WORDS_ASSIGNMENT = "assignment";
+    public static final String VALID_FIND_WORDS_HOMEWORK = "homEWorK";
+    public static final String TASK_UNKNOWN_COMMAND = "task unknownCommand";
+
+    public static final String INVALID_TASK_DAY_32 = "32";
+    public static final String INVALID_TASK_MONTH_13 = "13";
+    public static final String INVALID_TASK_YEAR_NEGATIVE = "-1";
+
     public static final String MODULE_CODE_DESC_CS2103T = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS2103T;
     public static final String MODULE_CODE_DESC_CS2101 = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS2101;
     public static final String MODULE_CODE_DESC_CS1101S = " " + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS1101S;
@@ -60,6 +77,13 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_CS2103T = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2103T;
     public static final String DESCRIPTION_DESC_CS2101 = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2101;
     public static final String DESCRIPTION_DESC_CS1101S = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS1101S;
+
+    public static final String TASK_CMD_DAY_26 = " " + PREFIX_DAY + " " + TASK_DAY_26;
+    public static final String TASK_CMD_MONTH_03 = " " + PREFIX_MONTH + " " + TASK_MONTH_03;
+    public static final String TASK_CMD_YEAR_2020 = " " + PREFIX_YEAR + " " + TASK_YEAR_2020;
+    public static final String TASK_ID_DESC_VALID_ID = " " + PREFIX_TASK_ID + " " + VALID_TASK_ID;
+
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
@@ -78,8 +102,20 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_OFFICE_DESC = " " + PREFIX_OFFICE; // empty string not allowed for offices
 
+    public static final String INVALID_TASK_DAY_STRING = " " + PREFIX_DAY + " " + "monday"; // strings not allowed for day
+    public static final String INVALID_TASK_MONTH_STRING = " " + PREFIX_MONTH + " " + "facebook"; // strings not allowed for month
+    public static final String INVALID_TASK_YEAR_STRING = " " + PREFIX_YEAR + " " + "instagram"; // strings not allowed for year
+    public static final String INVALID_TASK_DAY_OUT_OF_BOUNDS = " " + PREFIX_DAY + " " + INVALID_TASK_DAY_32 ; // strings not allowed for day
+    public static final String INVALID_TASK_MONTH_OUT_OF_BOUNDS = " " + PREFIX_MONTH + " " + INVALID_TASK_MONTH_13; // strings not allowed for month
+    public static final String INVALID_TASK_YEAR_OUT_OF_BOUNDS = " " + PREFIX_YEAR + " " + INVALID_TASK_YEAR_NEGATIVE; // strings not allowed for year
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+
+    public static final String EMPTY_ARGUMENTS = "";
+    public static final String EMPTY_SPACES = "     ";
+    public static final int TASK_LIST_VALID_CONSTANT = 3;
 
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_AMY;
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_BOB;

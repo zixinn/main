@@ -75,4 +75,8 @@ public class TaskAddCommand extends TaskCommand {
                 || (other instanceof TaskAddCommand) // instanceof handles nulls
                 && toAdd.equals(((TaskAddCommand) other).toAdd);
     }
+
+    public String toString() {
+        return toAdd.toString();
+    }
 }

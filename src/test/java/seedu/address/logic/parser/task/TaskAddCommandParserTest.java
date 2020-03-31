@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DAY_26;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_YEAR_2020;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.HashMap;

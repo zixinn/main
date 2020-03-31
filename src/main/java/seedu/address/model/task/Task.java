@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.DailySchedulable;
@@ -52,6 +53,21 @@ public abstract class Task implements DailySchedulable {
         return "";
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(getDescription())
+                && otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getTaskDateTime().equals(getTaskDateTime());
+    }
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.empty();

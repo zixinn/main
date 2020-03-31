@@ -32,34 +32,35 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
             + PREFIX_TASK_ID + " 913 ";
 
     public static final String MESSAGE_SUCCESS = "Congratulations! Task has been marked as done: %1$s";
+    public static final String MESSAGE_MODULE_CODE_NOT_EXISTANT = "The module code is not found! Please try again.";
+
     public static final String MESSAGE_TASK_ID_INVALID = "The Task's ID_NUMBER is not valid. "
             + "It cannot contain letters or special characters.";
-    public static final String MESSAGE_TASK_ID_NOT_EXISTENT = "The Task's ID_NUMBER is not found! Please recheck.";
+    public static final String MESSAGE_TASK_ID_NOT_EXISTENT = "The Task's ID_NUMBER is not found! Please try again.";
     public static final String MESSAGE_TASK_ALREADY_DONE = "Task of module %s with ID %d is already done. "
         + "Please try again with another task!";
-    private final ModuleCode moduleCode;
+    private final String moduleCode;
     private final int taskNum;
     /**
      * Creates a TaskMarkAsDoneCommand to add the specified {@code Task}
      */
-    public TaskMarkAsDoneCommand(ModuleCode moduleCode, int taskNum) {
+    public TaskMarkAsDoneCommand(String moduleCode, String taskNum) {
         requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
-        this.taskNum = taskNum;
+        this.taskNum = Integer.parseInt(taskNum);
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException, ParseException {
         requireNonNull(model);
         List<Task> current = model.getFilteredTaskList();
 
-        if (!model.hasModuleCode(moduleCode.toString())) {
-            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode.toString()));
+        if (!model.hasModuleCode(moduleCode)) {
+            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode));
         }
 
-        if (!TaskNumManager.doesNumExist(moduleCode, taskNum)) {
-            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskNum));
+        if (!TaskNumManager.doesNumExist(new ModuleCode(moduleCode), taskNum)) {
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode, taskNum));
         }
 
         Task taskToEdit = current.stream().reduce(null, (x, y) -> {
@@ -81,5 +82,13 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedTask),
                 CommandType.TASK);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskMarkAsDoneCommand // instanceof handles nulls
+                && this.moduleCode.equals(((TaskMarkAsDoneCommand) other).moduleCode) // state check
+                && this.taskNum == (((TaskMarkAsDoneCommand) other).taskNum)); // state check
     }
 }

@@ -12,7 +12,7 @@ import seedu.address.model.util.Description;
 public class ScheduledTaskBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2103T";
     public static final String DEFAULT_DESCRIPTION = "Programming Assignment";
-    public static final String DEFAULT_TASK_DATE_TIME = "01/04/2020 23:59";
+    public static final String DEFAULT_TASK_DATE_TIME = "01/04/2020";
     public static final boolean DEFAULT_IS_DONE = false;
     private static final int DEFAULT_TASK_ID = 999;
 

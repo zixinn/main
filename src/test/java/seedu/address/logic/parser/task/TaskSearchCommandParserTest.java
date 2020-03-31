@@ -1,83 +1,133 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_32;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_OUT_OF_BOUNDS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_STRING;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_13;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_OUT_OF_BOUNDS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_STRING;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_YEAR_STRING;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_DAY_26;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_MONTH_03;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_YEAR_2020;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_03;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.module.ModuleAddCommand;
-import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.util.Description;
-import seedu.address.testutil.ModuleBuilder;
+import seedu.address.logic.commands.task.TaskSearchCommand;
+import seedu.address.model.task.TaskSearchPredicate;
 
 public class TaskSearchCommandParserTest {
     private TaskSearchCommandParser parser = new TaskSearchCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Module expectedModule = new ModuleBuilder(CS2101).build();
+    public void parse_WithPreamble_success() {
+        // whitespace only preamble, empty HashMap (no day/month/year supplied)
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE,
+                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2101,
-                new ModuleAddCommand(expectedModule));
+        // arbitrary preamble
+        assertParseSuccess(parser, PREAMBLE_NON_EMPTY,
+                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
 
-        // multiple module codes - last module code accepted
-        assertParseSuccess(parser, MODULE_CODE_DESC_CS2103T + MODULE_CODE_DESC_CS2101
-                + DESCRIPTION_DESC_CS2101, new ModuleAddCommand(expectedModule));
+        // arbitrary preamble with parameters supplied
+        assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020 ,
+                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>(){{
+                    put("day", Integer.parseInt(TASK_DAY_26));
+                    put("year", Integer.parseInt(TASK_YEAR_2020));
+                }})));
 
-        // multiple descriptions - last description accepted
-        assertParseSuccess(parser, MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2103T
-                + DESCRIPTION_DESC_CS2101, new ModuleAddCommand(expectedModule));
+        // the rest of the methods below will not test the presence of Preamble
+        // since we already tested it here.
     }
 
     @Test
-    public void parse_optionalFieldMissing_success() {
-        // missing description
-        Module expectedModule = new ModuleBuilder().withDescription(null).build();
-        assertParseSuccess(parser, MODULE_CODE_DESC_CS2103T, new ModuleAddCommand(expectedModule));
+    public void parse_allFieldsMissing_success() {
+        // no preamble, empty HashMap (no day/month/year supplied)
+        assertParseSuccess(parser, EMPTY_ARGUMENTS,
+                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleAddCommand.MESSAGE_USAGE);
+    public void parse_someFieldsPresentAndHaveValidValues_success() {
+        // apply heuristic 'each Valid Input at Least Once in a Positive Test Case'
 
-        // missing module code prefix
-        assertParseFailure(parser, VALID_MODULE_CODE_CS2101 + DESCRIPTION_DESC_CS2101, expectedMessage);
+        // one and only valid field, year only
+        HashMap<String, Integer> year = new HashMap<String, Integer>() {{
+            put("year", Integer.parseInt(TASK_YEAR_2020));
+        }};
 
-        // all prefixes missing
-        assertParseFailure(parser, VALID_MODULE_CODE_CS2101 + VALID_DESCRIPTION_CS2101,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TASK_CMD_YEAR_2020,
+                new TaskSearchCommand(new TaskSearchPredicate(year)));
+
+        assertParseSuccess(parser, TASK_CMD_YEAR_2020,
+                new TaskSearchCommand(new TaskSearchPredicate(year)));
+
+        // two and only two valid fields, day and month
+        HashMap<String, Integer> dayMonth = new HashMap<String, Integer>() {{
+            put("day", Integer.parseInt(TASK_DAY_26));
+            put("month", Integer.parseInt(TASK_MONTH_03));
+        }};
+
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TASK_CMD_DAY_26 + TASK_CMD_MONTH_03,
+                new TaskSearchCommand(new TaskSearchPredicate(dayMonth)));
+
+        assertParseSuccess(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03,
+                new TaskSearchCommand(new TaskSearchPredicate(dayMonth)));
+    }
+
+    @Test
+    public void parse_allFieldsPresentAndHaveValidValues_success() {
+        HashMap<String, Integer> fullHashMap = new HashMap<String, Integer>() {{
+            put("day", Integer.parseInt(TASK_DAY_26));
+            put("month", Integer.parseInt(TASK_MONTH_03));
+            put("year", Integer.parseInt(TASK_YEAR_2020));
+        }};
+
+        // no preamble, full HashMap (all of day/month/year supplied)
+        assertParseSuccess(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
+                new TaskSearchCommand(new TaskSearchPredicate(fullHashMap)));
+    }
+
+    @Test
+    public void parse_FieldsArePresentButValuesOutOfBound_success() {
+        // /day 32 and /month 13 are allowed, look at the UG for more details.
+        HashMap<String, Integer> outOfBoundsDayAndMonthHashMap = new HashMap<String, Integer>() {{
+            put("day", Integer.parseInt(INVALID_TASK_DAY_32));
+            put("month", Integer.parseInt(INVALID_TASK_MONTH_13));
+        }};
+
+        assertParseSuccess(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS
+                        + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
+                new TaskSearchCommand(new TaskSearchPredicate(outOfBoundsDayAndMonthHashMap)));
+    }
+
+    @Test
+    public void parse_FieldsArePresentButAtLeastOneFieldHaveStringInput_failure() {
+        // apply heuristic ‘no more than one invalid input in a test case’
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
+
+        // invalid field is day
+        assertParseFailure(parser,INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
                 expectedMessage);
-    }
 
-    @Test
-    public void parse_invalidValue_failure() {
-        // invalid module code
-        assertParseFailure(parser, INVALID_MODULE_CODE_DESC + DESCRIPTION_DESC_CS2101,
-                ModuleCode.MESSAGE_CONSTRAINTS);
+        // invalid field is month
+        assertParseFailure(parser,TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
+                expectedMessage);
 
-        // invalid description
-        assertParseFailure(parser, MODULE_CODE_DESC_CS2101 + INVALID_DESCRIPTION_DESC,
-                Description.MESSAGE_CONSTRAINTS);
-
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_MODULE_CODE_DESC + INVALID_DESCRIPTION_DESC,
-                ModuleCode.MESSAGE_CONSTRAINTS);
-
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2101,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleAddCommand.MESSAGE_USAGE));
+        // invalid field is year
+        assertParseFailure(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
+                expectedMessage);
     }
 }
