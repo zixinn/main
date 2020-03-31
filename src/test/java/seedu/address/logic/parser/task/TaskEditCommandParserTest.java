@@ -1,28 +1,8 @@
 package seedu.address.logic.parser.task;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DAY_26;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_YEAR_2020;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.HashMap;
-
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.task.TaskAddCommand;
-import seedu.address.logic.commands.task.TaskSearchCommand;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskSearchPredicate;
-import seedu.address.model.util.Description;
-
-class TaskAddCommandParserTest {
+class TaskEditCommandParserTest {
     private TaskAddCommandParser parser = new TaskAddCommandParser();
 
     @Test
