@@ -52,6 +52,10 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_CS2103T = "Software Engineering";
     public static final String VALID_DESCRIPTION_CS2101 = "Effective Communication for Computing Professionals";
     public static final String VALID_DESCRIPTION_CS1101S = "Programming Methodology";
+    public static final String VALID_TASK_DESCRIPTION_PROGRAMMING = "Programming Lab 2";
+    public static final String VALID_TASK_DESCRIPTION_ASSIGNMENT = "written assignment 1 ";
+    public static final String VALID_TASK_DESCRIPTION_HOMEWORK = "homework 3";
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -64,6 +68,12 @@ public class CommandTestUtil {
     public static final String VALID_FIND_WORDS_PROGRAMMING = "Programming";
     public static final String VALID_FIND_WORDS_ASSIGNMENT = "assignment";
     public static final String VALID_FIND_WORDS_HOMEWORK = "homEWorK";
+    public static final String VALID_BROKEN_FIND_WORDS_PROG = "pROg";
+    public static final String VALID_BROKEN_FIND_WORDS_AS = "aSSiGN";
+    public static final String VALID_BROKEN_FIND_WORDS_HOME = "hOMe";
+    public static final String VALID_BROKEN_FIND_WORDS_SLEEP = "slEe";
+    public static final String VALID_BROKEN_FIND_WORDS_ONLINE = "lIne";
+
     public static final String TASK_UNKNOWN_COMMAND = "task unknownCommand";
 
     public static final String INVALID_TASK_DAY_32 = "32";
@@ -116,6 +126,7 @@ public class CommandTestUtil {
     public static final String EMPTY_ARGUMENTS = "";
     public static final String EMPTY_SPACES = "     ";
     public static final int TASK_LIST_VALID_CONSTANT = 3;
+    public static final int AN_INT_VALUE = 10;
 
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_AMY;
     public static final FacilEditCommand.EditFacilitatorDescriptor DESC_BOB;

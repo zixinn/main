@@ -306,6 +306,7 @@ Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 Parameter constraints:
 ****
 * The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
+* If no descriptions are supplied, no tasks will be found.
 * Search for description is case insensitive. e.g `programming` will match `Programming`.
 * The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
 * Tasks are only searched in the description.

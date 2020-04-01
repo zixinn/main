@@ -89,6 +89,15 @@ public class ScheduledTask extends Task {
     }
 
     @Override
+    public boolean markAsUndone() {
+        if (!isDone) {
+            return false;
+        }
+        isDone = false; // set as undone
+        return true;
+    }
+
+    @Override
     public boolean isSameTask(Task other) {
         if (!(other instanceof ScheduledTask)) {
             return false;

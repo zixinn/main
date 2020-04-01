@@ -392,9 +392,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) throws ParseException {
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        System.out.println("current predicate");
         filteredTasks.setPredicate(predicate);
     }
 
@@ -424,5 +423,11 @@ public class ModelManager implements Model {
     @Override
     public Calendar getCalendar() {
         return calendar;
+    }
+
+    //=========== utility mode =================================================================================
+
+    public ModelManager getClone() {
+        return new ModelManager(modManager, userPrefs);
     }
 }

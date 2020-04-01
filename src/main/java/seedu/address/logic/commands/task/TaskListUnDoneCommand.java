@@ -2,6 +2,7 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.facilitator.FacilFindCommand;
@@ -19,6 +20,7 @@ public class TaskListUnDoneCommand extends TaskCommand {
     public CommandResult execute(Model model) throws ParseException {
         requireNonNull(model);
         model.updateFilteredTaskList(task -> !task.isTaskDone());
-        return new CommandResult(MESSAGE_SUCCESS, CommandType.TASK);
+        return new CommandResult(String.format(Messages.MESSAGE_TASKS_UNDONE_OVERVIEW,
+                model.getFilteredTaskList().size()), CommandType.TASK);
     }
 }

@@ -37,7 +37,7 @@ public class NonScheduledTask extends Task {
      * Gets the status icon of our Task.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "1" : "0"); //return tick or x symbols
     }
 
     @Override
@@ -67,6 +67,15 @@ public class NonScheduledTask extends Task {
         }
 
         isDone = true; // set as done
+        return true;
+    }
+
+    @Override
+    public boolean markAsUndone() {
+        if (!isDone) {
+            return false;
+        }
+        isDone = false; // set as undone
         return true;
     }
 
