@@ -40,23 +40,23 @@ public class FacilEditCommand extends FacilCommand {
             + ": Edits the details of the facilitator identified "
             + "by the index number used in the displayed facilitator list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) or FACILITATOR_NAME"
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
             + "[" + PREFIX_MODULE_CODE + " MOD_CODES...]\n"
-            + "Parameters: INDEX (must be a positive integer) or FACILITATOR_NAME"
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " 1 "
+            + PREFIX_PHONE + " 91234567 "
+            + PREFIX_EMAIL + " johndoe@example.com\n"
+            + "Parameters: FACILITATOR_NAME"
             + "[" + PREFIX_NAME + " FACILITATOR_NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_OFFICE + " OFFICE] "
-            + "[" + PREFIX_MODULE_CODE + " MOD_CODES]...\n"
-            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n"
-            + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " Akshay Narayan "
-            + PREFIX_PHONE + "84841235";
+            + "[" + PREFIX_MODULE_CODE + " MOD_CODES...]\n"
+            + "Example: " + COMMAND_GROUP_FACIL + " " + COMMAND_WORD_EDIT + " Akshay Narayan "
+            + PREFIX_PHONE + " 84841235";
 
     public static final String MESSAGE_EDIT_FACILITATOR_SUCCESS = "Edited Facilitator: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -104,7 +104,7 @@ public class FacilEditCommand extends FacilCommand {
             assert fname != null;
         }
 
-        Facilitator facilitatorToEdit = null;
+        Facilitator facilitatorToEdit;
 
         if (mode == 0) {
             if (index.getZeroBased() >= lastShownList.size()) {
@@ -112,6 +112,8 @@ public class FacilEditCommand extends FacilCommand {
             }
             facilitatorToEdit = lastShownList.get(index.getZeroBased());
         } else {
+            model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+            lastShownList = model.getFilteredFacilitatorList();
             final List<Facilitator> fetch = new ArrayList<>();
             lastShownList.stream().filter(x -> x.getName().equals(fname)).forEach(fetch::add);
 
@@ -163,7 +165,7 @@ public class FacilEditCommand extends FacilCommand {
     private CommandResult promptUserToConfirm(List<Facilitator> fetch) {
         StringBuilder builder = new StringBuilder(
                 String.format(Messages.MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND, fname));
-        fetch.forEach(x -> builder.append("   ").append(x.getName().toString()).append('\n'));
+        fetch.forEach(x -> builder.append("  ").append(x.getName().toString()).append('\n'));
         builder.append(Messages.MESSAGE_ASK_TO_CONFIRM_FACILITATOR);
         return new CommandResult(builder.toString(), CommandType.PROMPTING);
     }

@@ -39,7 +39,6 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
-    private Optional<ModuleCode> moduleCode;
 
     /**
      * Initializes a ModelManager with the given modManager and userPrefs.
@@ -229,6 +228,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
         requireNonNull(predicate);
+        filteredFacilitators.setPredicate(PREDICATE_SHOW_ALL_FACILITATORS);
         filteredFacilitators.setPredicate(predicate);
     }
 

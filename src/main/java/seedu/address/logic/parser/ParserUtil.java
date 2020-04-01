@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -275,50 +276,36 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String taskTime} into a {@code LocalDateTime}.
+     * Parses a {@code String taskDate} into a {@code TaskDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code taskTime} is invalid.
+     * @throws ParseException if the given {@code taskDate} is invalid.
      */
-    public static TaskDateTime parseDateForTask(String taskTime) throws ParseException {
-        String trimmedTime;
-        if (taskTime == null) {
-            trimmedTime = null;
-        } else {
-            trimmedTime = taskTime.trim();
-            if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
-                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
-            }
+    public static TaskDateTime parseDateForTask(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedDate = taskDate.trim();
+        if (!TaskDateTime.isValidTaskTime(trimmedDate)) {
+            throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new TaskDateTime(trimmedTime);
+        return new TaskDateTime(trimmedDate);
     }
 
     /**
-     * Parses a {@code String taskTime} into a {@code LocalDateTime}.
+     * Parses {@code String taskDate} and {@code String taskTime} into a {@code TaskDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code taskTime} is invalid.
+     * @throws ParseException if the given {@code taskDate} or {@code taskTime} is invalid.
      */
-    public static TaskDateTime parseDateTimeForTask(String taskTime, String taskTimeInDay) throws ParseException {
-        String trimmedTime;
-        if (taskTime == null) {
-            trimmedTime = null;
-        } else {
-            trimmedTime = taskTime.trim();
-            if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
-                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
-            }
+    public static TaskDateTime parseDateTimeForTask(String taskDate, String taskTime) throws ParseException {
+        requireAllNonNull(taskDate, taskTime);
+        String trimmedDate = taskDate.trim();
+        if (!TaskDateTime.isValidTaskTime(trimmedDate)) {
+            throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
         }
-
-        String trimmedTimeInDay;
-        if (taskTimeInDay == null) {
-            trimmedTimeInDay = null;
-        } else {
-            trimmedTimeInDay = taskTime.trim();
-            if (!TaskDateTime.isValidTaskTime(trimmedTimeInDay)) {
-                throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
-            }
+        String trimmedTime = taskTime.trim();
+        if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
+            throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new TaskDateTime(trimmedTime, trimmedTimeInDay);
+        return new TaskDateTime(trimmedDate, trimmedTime);
     }
 }

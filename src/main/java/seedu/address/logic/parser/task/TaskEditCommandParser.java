@@ -65,9 +65,10 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
                     throw new ParseException(TaskEditCommand.MESSAGE_NON_HAS_NO_TAILS);
                 }
             } else if (argMultimap.getValue(PREFIX_AT) != null) {
-                taskDateTime = new TaskDateTime(argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT));
+                taskDateTime = ParserUtil.parseDateTimeForTask(
+                        argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT));
             } else {
-                taskDateTime = new TaskDateTime(argMultimap.getValue(PREFIX_ON));
+                taskDateTime = ParserUtil.parseDateForTask(argMultimap.getValue(PREFIX_ON));
             }
             editTaskDescriptor.setTaskDateTime(taskDateTime);
             assert editTaskDescriptor.getTaskDateTime().equals(Optional.of(taskDateTime));

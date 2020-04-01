@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND =
             "Facilitator %s cannot be found, or isn't unique. But here are the ones that are close to your query:\n";
     public static final String MESSAGE_ASK_TO_CONFIRM_FACILITATOR =
-            "Please input the exact facilitator you want to delete.";
+            "Please input the exact facilitator you want to delete. Facilitator name is case-sensitive.";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
     public static final String MESSAGE_FACILITATOR_NOT_FOUND = "Facilitator %s does not exist in Mod Manager.";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";

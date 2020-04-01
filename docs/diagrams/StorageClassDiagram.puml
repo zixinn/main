@@ -17,7 +17,7 @@ StorageManager o-right-> UserPrefsStorage
 StorageManager o--> ModManagerStorage
 
 JsonUserPrefsStorage ..|> UserPrefsStorage
-JsonModManagerStorage .up.|> ModManagerStorage
+JsonModManagerStorage ..|> ModManagerStorage
 JsonModManagerStorage .down.> JsonSerializableModManager
 JsonSerializableModManager ..> JsonAdaptedModule
 JsonSerializableModManager ..> JsonAdaptedLesson

@@ -1,5 +1,5 @@
 {
-  "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalAddressBook#getTypicalAddressBook()",
+  "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalModManager#getTypicalModManager()",
   "modules" : [ {
     "moduleCode" : "CS2103T",
     "description" : "Software Engineering"

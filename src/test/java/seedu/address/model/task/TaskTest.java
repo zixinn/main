@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -66,6 +63,7 @@ class TaskTest {
 
     }
 
+    /*
     @Test
     void isTaskDone_markedAsDoneTask_true() throws ParseException {
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
@@ -85,6 +83,7 @@ class TaskTest {
             assertTrue(tasks.get(i).isTaskDone());
         }
     }
+    */
 
     @Test
     void isTimeStringEmpty() {

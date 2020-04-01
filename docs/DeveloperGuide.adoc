@@ -189,7 +189,7 @@ image::ModuleAddActivityDiagram.png[]
 
 ===== Listing all modules
 The list module feature allows users to list all modules in Mod Manager.
-This feature is facilitated by `ModuleCommandParser` and `ModuleListCommand`.
+This feature is facilitated by `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredModuleList()`.
 
 Given below is an example usage scenario and how the module list mechanism behaves at each step:
@@ -211,6 +211,31 @@ The following activity diagram summarizes what happens when a user executes a mo
 
 .Activity Diagram for `mod list` Command
 image::ModuleListActivityDiagram.png[]
+
+===== Viewing a module
+The view module feature allows users to view information of a module in Mod Manager.
+This feature is facilitated by `ModuleCommandParser` and `ModuleViewCommand`.
+The operation is exposed in the `Model` interface as `Model#updateModule()`.
+
+Given below is an example usage scenario and how the module view mechanism behaves at each step:
+
+1. The user executes the module view command and provides the module code of the module to be viewed.
+2. `ModuleViewCommandParser` creates a new `ModuleViewCommand` based on the module.
+3. `LogicManager` executes the `ModuleViewCommand`.
+4. `ModelManager` updates the `module` viewed and the respective lists in `ModelManager`.
+
+The following sequence diagram shows how the module view command works:
+
+.Sequence Diagram for `mod view` Command
+image::ModuleCiewSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a module view command:
+
+.Activity Diagram for `mod view` Command
+image::ModuleViewActivityDiagram.png[]
 
 ==== Design Considerations
 
@@ -691,9 +716,9 @@ The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
 
 Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step:
 
-1. The user executes the facilitator edit command and provides the index of the facilitator to be edited and the fields to be edited.
+1. The user executes the facilitator edit command and provides the index or name of the facilitator to be edited and the fields to be edited.
 2. `FacilEditCommandParser` creates a new `EditFacilitatorDescriptor` with the fields to be edited.
-3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index and `EditFacilitatorDescriptor`.
+3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index or name and `EditFacilitatorDescriptor`.
 4. `LogicManager` executes the `FacilEditCommand`.
 5. `FacilEditCommand` retrieves the facilitator to be edited.
 6. `FacilEditCommand` creates a new `Facilitator`.
@@ -710,7 +735,7 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes a facilitator edit command:
 
-.Activity Diagram for `facil edt` Command
+.Activity Diagram for `facil edit` Command
 image::FacilitatorEditActivityDiagram.png[]
 
 ===== Deleting a facilitator
@@ -720,8 +745,8 @@ The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`
 
 Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step:
 
-1. The user executes the facilitator delete command and provides the index of the facilitator to be deleted.
-2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index.
+1. The user executes the facilitator delete command and provides the index or name of the facilitator to be deleted.
+2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index or name.
 3. `LogicManager` executes the `FacilDeleteCommand`.
 4. `FacilDeleteCommand` retrieves the facilitator to be deleted.
 5. `ModManager` deletes the facilitator from the `UniqueFacilitatorList`.
@@ -1442,13 +1467,13 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the <<gui, GUI>> with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the <<gui, GUI>> with a set of sample modules, classes, tasks and facilitators. The window size may not be optimum.
 
-. Saving window preferences
-
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+//. Saving window preferences
+//
+//.. Resize the window to an optimum size. Move the window to a different location. Close the window.
+//.. Re-launch the app by double-clicking the jar file. +
+//   Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
 
@@ -1456,9 +1481,9 @@ _{ more test cases ... }_
 
 . Deleting a facilitator while all facilitators are listed
 
-.. Prerequisites: List all facilitators using the `list` command. Multiple facilitators in the list.
+.. Prerequisites: List all facilitators using the `facil list` command. Multiple facilitators in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First facilitator is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No facilitator is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +

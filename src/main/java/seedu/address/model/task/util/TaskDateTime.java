@@ -20,8 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskDateTime implements Comparable {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Task can take any values, and it should not be more than 64 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Date and time should not be empty.";
 
     /*
      * The first character of the taskTime must not be a whitespace,
@@ -48,7 +47,7 @@ public class TaskDateTime implements Comparable {
      * @param date A valid date.
      */
     public TaskDateTime(String date) throws ParseException {
-        checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTaskTime(date), MESSAGE_CONSTRAINTS);
         try {
             this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
         } catch (DateTimeParseException dateError) {
@@ -63,7 +62,7 @@ public class TaskDateTime implements Comparable {
      * @param timeInDay time period in day
      */
     public TaskDateTime(String date, String timeInDay) throws ParseException {
-        checkArgument(date == null || isValidTaskTime(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTaskTime(date), MESSAGE_CONSTRAINTS);
         LocalTime timeInTheDay = null;
         try {
             timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
@@ -87,7 +86,7 @@ public class TaskDateTime implements Comparable {
      */
     public static boolean isValidTaskTime(String test) {
         // to have further check on this!
-        return test.matches(VALIDATION_REGEX) && test.length() <= 64;
+        return test.matches(VALIDATION_REGEX);
     }
 
     public LocalTime toLocalTime() {
