@@ -50,7 +50,7 @@ public class ScheduledTask extends Task {
      * Gets the status icon of our Task.
      */
     private String getStatusIcon() {
-        return (isDone ? "1" : "0"); //return tick or x symbols
+        return (isDone ? "Done" : "x"); //return tick or x symbols
     }
 
     @Override

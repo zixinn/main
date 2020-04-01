@@ -2,6 +2,7 @@ package seedu.address.ui.taskui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -14,23 +15,37 @@ public class TaskListCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
 
     public final Task task;
-
+    public final int id;
     @FXML
     private HBox cardPane;
     @FXML
-    private Label id;
+    private Label moduleCode;
     @FXML
-    private Label description;
+    private Label taskID;
+    @FXML
+    private Label taskDescription;
     @FXML
     private Label taskTime;
 
     public TaskListCard(Task task, int displayedIndex) {
         super(FXML);
+        this.id = displayedIndex;
         this.task = task;
-        id.setText(displayedIndex + ". ");
+        if (task.isTaskDone()) {
+            cardPane.setStyle("-fx-background-color: #4BB543; "
+                    + "-fx-background-radius: 8px;");
+        } else {
+            cardPane.setStyle("-fx-background-color: #9d6365;"
+                    + "-fx-background-radius: 8px; ");
+        }
 
-        String describing = String.format("[%s %d] %s", task.getModuleCode(), task.getTaskNum(), task.getDescription());
-        description.setText(describing);
+        taskID.setStyle("-fx-text-fill: #ffee00");
+
+        moduleCode.setText(String.format("%s", task.getModuleCode()));
+        moduleCode.setStyle("-fx-text-fill: #add8e6");
+        taskID.setText(String.format("ID: %d", task.getTaskNum()));
+        taskDescription.setText(String.format("%s",
+                task.getDescription()));
 
         if (!task.getTimeString().isEmpty()) {
             taskTime.setText(task.getTimeString());
@@ -53,7 +68,7 @@ public class TaskListCard extends UiPart<Region> {
 
         // state check
         TaskListCard card = (TaskListCard) other;
-        return id.getText().equals(card.id.getText())
+        return id == card.id
                 && task.equals(card.task);
     }
 }
