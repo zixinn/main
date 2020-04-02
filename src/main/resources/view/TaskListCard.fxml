@@ -19,7 +19,7 @@
       </padding>
       <HBox spacing="5" alignment="CENTER_LEFT">
         <Label fx:id="moduleCode" />
-        <Label fx:id="taskID" styleClass="cell_big_label" />
+        <Label fx:id="taskNum" styleClass="cell_big_label" />
       </HBox>
       <HBox spacing="5" alignment="CENTER_LEFT">
         <Label fx:id="taskDescription" styleClass="cell_big_label" />

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Scanner;
 
@@ -28,6 +29,9 @@ public class TaskDeleteCommandParser implements Parser<TaskDeleteCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDeleteCommand.MESSAGE_USAGE));
+        }
         String toUse = argMultimap.getPreamble();
 
         Pair<ModuleCode, Integer> pair = parseTaskNumString(toUse);

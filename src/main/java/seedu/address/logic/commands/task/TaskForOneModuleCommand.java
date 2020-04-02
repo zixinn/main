@@ -17,9 +17,9 @@ public class TaskForOneModuleCommand extends TaskCommand {
     public static final String MESSAGE_SUCCESS = "All tasks for the module %s are listed. "
             + "Returns to the full task list using: task list.";
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_MODULE
-            + ": Lists all the tasks for the module in Mod Manager. "
+            + ": Lists all the tasks for the module in Mod Manager. \n"
             + "Parameters: "
-            + PREFIX_MODULE_CODE + " MOD_CODE "
+            + PREFIX_MODULE_CODE + " MOD_CODE \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_MODULE + " "
             + PREFIX_MODULE_CODE + " CS3230 ";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
@@ -38,7 +38,7 @@ public class TaskForOneModuleCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode));
         }
 
-        model.updateFilteredTaskList(task -> task.getModuleCode().equals(moduleCode));
+        model.updateFilteredTaskList(task -> task.getModuleCode().toString().equals(moduleCode));
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 moduleCode), CommandType.TASK);
     }

@@ -13,8 +13,6 @@ import seedu.address.model.Model;
  */
 public class TaskListUnDoneCommand extends TaskCommand {
 
-    public static final String MESSAGE_SUCCESS = "All undone tasks in the Mod Manager are listed.";
-
     @Override
     public CommandResult execute(Model model) throws ParseException {
         requireNonNull(model);
