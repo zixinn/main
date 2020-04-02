@@ -18,7 +18,7 @@ public class TaskDeleteCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_DELETE
             + ": Deletes the task identified "
             + "by the unique ID of the task found in both the general tasks list and module specific list.\n"
-            + "Parameters: MODULE_CODE ID_NUMBER\n"
+            + "Parameters: MOD_CODE TASK_ID_NUMBER\n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_DELETE + " CS2103T 848";
 
     public static final String MESSAGE_MODULE_NOT_FOUND = "Module %s does not exist in Mod Manager.";
