@@ -21,13 +21,15 @@ public class NonScheduledTask extends Task {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskNum = TaskNumManager.getNum(moduleCode);
+        this.isDone = false;
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
-    protected NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
+    public NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskNum = taskNum;
+        this.isDone = isDone;
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
@@ -35,7 +37,7 @@ public class NonScheduledTask extends Task {
      * Gets the status icon of our Task.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Done" : "x");
     }
 
     @Override
@@ -60,9 +62,21 @@ public class NonScheduledTask extends Task {
 
     @Override
     public boolean markAsDone() {
-        boolean old = isDone;
-        isDone = true;
-        return !old;
+        if (isDone) {
+            return false;
+        }
+
+        isDone = true; // set as done
+        return true;
+    }
+
+    @Override
+    public boolean markAsUndone() {
+        if (!isDone) {
+            return false;
+        }
+        isDone = false; // set as undone
+        return true;
     }
 
     @Override
@@ -78,6 +92,11 @@ public class NonScheduledTask extends Task {
     @Override
     public int getTaskNum() {
         return this.taskNum;
+    }
+
+    @Override
+    public Task getClone() {
+        return new NonScheduledTask(description, moduleCode, taskNum, isDone);
     }
 
     @Override

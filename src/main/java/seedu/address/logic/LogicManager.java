@@ -75,6 +75,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
+        System.out.println(model.getFilteredTaskList());
         return model.getFilteredTaskList();
     }
 

@@ -32,10 +32,6 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE));
-        }
-
         HashMap<String, Integer> keywords = new HashMap<String, Integer>();
 
         if (arePrefixesPresent(argMultimap, PREFIX_DAY)) {

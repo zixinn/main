@@ -9,11 +9,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.logic.commands.task.TaskListCommand;
+import seedu.address.logic.commands.task.TaskListUnDoneCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FacilCommand object
+ * Parses input arguments and creates a new TaskCommand object
  */
 public class TaskCommandParser implements Parser<TaskCommand> {
 
@@ -44,6 +45,12 @@ public class TaskCommandParser implements Parser<TaskCommand> {
         case Command.COMMAND_WORD_DELETE:
             return new TaskDeleteCommandParser().parse(arguments);
 
+        case Command.COMMAND_WORD_DONE:
+            return new TaskMarkAsDoneCommandParser().parse(arguments);
+
+        case Command.COMMAND_WORD_UNDONE:
+            return new TaskListUnDoneCommand();
+
         case Command.COMMAND_WORD_SEARCH:
             return new TaskSearchCommandParser().parse(arguments);
 
@@ -52,6 +59,9 @@ public class TaskCommandParser implements Parser<TaskCommand> {
 
         case Command.COMMAND_WORD_LIST:
             return new TaskListCommand();
+
+        case Command.COMMAND_WORD_MODULE:
+            return new TaskForOneModuleCommandParser().parse(arguments);
 
         default:
             throw new ParseException(String.format(MESSAGE_UNKNOWN_TASK_COMMAND, HelpCommand.MESSAGE_USAGE));
