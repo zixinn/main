@@ -22,6 +22,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.UserInputHistory;
 import seedu.address.storage.Storage;
 
 /**
@@ -44,6 +45,7 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        UserInputHistory.saveInput(commandText);
 
         CommandResult commandResult;
         Command command = modManagerParser.parseCommand(commandText);
@@ -75,6 +77,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
+        System.out.println(model.getFilteredTaskList());
         return model.getFilteredTaskList();
     }
 

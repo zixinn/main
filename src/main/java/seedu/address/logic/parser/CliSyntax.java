@@ -24,4 +24,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_PHONE = new Prefix("/phone");
     public static final Prefix PREFIX_EMAIL = new Prefix("/email");
     public static final Prefix PREFIX_OFFICE = new Prefix("/office");
+
+    public static final Prefix PREFIX_TASK_ID = new Prefix("/id");
 }
