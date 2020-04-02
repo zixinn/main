@@ -385,15 +385,32 @@ Format: `*task* find /upcoming`
 
 ==== Editing a task
 
-Edits the information of a task.
+From here on, you will be introduced to Mod Manager's task ID system.
+****
+* A task can be uniquely identified in the system by two things: its associated module and a 3-digit number.
+* A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
+* Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
+* You can find out a task's ID by looking at the general task list - can be viewed with `task list`
+(section 4.4.3) , or the task list of a specific module - can be viewed with `mod view` (section 4.2.3).
+****
 
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
+You can edit a task's description, its date and time details, or both.
 
-Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59` or `*task* edit CS2103T 848 /on non`
+Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
+
+Mod Manager will find the task associated with the task ID number provided and update the information correspondingly.
+
+Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59`
+
+Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so.
+
+Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
+
+Example: `*task* edit CS2103T 848 /on non`
 
 ==== Deleting a task
 
-Deletes a task from the module.
+You can delete a task from Mod Manager's system.
 
 Format: `*task* delete MOD_CODE ID_NUMBER`
 
@@ -672,7 +689,8 @@ Receive reminders for deadlines and events the next day.
 .5+|Task
 |  `*task* add /code MOD_CODE /task TASK_NAME [/on DATE] [/at TIME]`
 |  `*task* delete MOD_CODE ID_NUMBER`
-|  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
+|  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
+   `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
 |  `*task* find [/date DATE] [/month MONTH] [/year YEAR]` +
    `*task* find /desc TASK_NAME` +
    `*task* find /upcoming`

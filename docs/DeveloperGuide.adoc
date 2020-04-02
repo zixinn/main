@@ -434,7 +434,7 @@ The following activity diagram summarizes what happens when a user executes a `*
 .Activity Diagram for `task add` Command
 image::TaskAddActivityDiagram.png[]
 
-===== Search tasks by date
+===== Searching tasks by date
 The search task feature allows users to search all tasks that occur on the specified date, month, or year.
 This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
 TaskSearchCommand`.
@@ -460,6 +460,36 @@ The following activity diagram summarizes what happens when a user executes a ta
 
 .Activity Diagram for `*task* search` Command
 image::TaskSearchActivityDiagram.png[]
+
+===== Editing a task
+The `task edit` command allows user to edit a task in `ModManager`.
+This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setTask()`.
+
+Given below is an example usage scenario and how the `task edit` mechanism behaves at each step.
+
+1. The user executes the `task edit` command and provides the `moduleCode` and the `taskNum` of the task to edit,
+and the fields to be edited.
+2. `TaskEditCommandParser` creates a new `EditTaskDescriptor` with the fields to be edited.
+3. `TaskEditCommandParser` creates a new `TaskEditCommand` based on the `moduleCode` and `taskNum`, and `EditTaskDescriptor`.
+4. `LogicManager` executes the `TaskEditCommand`.
+5. `TaskEditCommand` retrieves the `moduleCode` and `taskNum` of the `task` to be edited, and then retrieves the actual `task`
+from `ModManager`.
+6. `TaskEditCommand` creates a new `Task`.
+7. `ModManager` sets the existing `task` to the new `task` in the `UniqueTaskList`.
+
+===== Deleting a task
+The delete task feature allows users to delete a task from Mod Manager.
+This feature is facilitated by `TaskCommandParser`, `TaskDeleteCommandParser` and `TaskDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteTask()`.
+
+Given below is an example usage scenario and how the task delete mechanism behaves at each step:
+
+1. The user executes the task delete command and provides the `moduleCode` and `taskNum` of the task to be deleted.
+2. `TaskDeleteCommandParser` creates a new `TaskDeleteCommand` based on the `moduleCode` and `taskNum`.
+3. `LogicManager` executes the `TaskDeleteCommand`.
+4. `TaskDeleteCommand` retrieves the task to be deleted.
+5. `ModManager` deletes the task from the `UniqueTaskList`.
 ////
 ===== Listing all facilitators
 The list facilitator feature allows users to list all facilitators in Mod Manager.
