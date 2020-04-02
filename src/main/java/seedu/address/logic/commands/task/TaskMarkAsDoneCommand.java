@@ -32,7 +32,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
             + PREFIX_TASK_ID + " 913 ";
 
     public static final String MESSAGE_SUCCESS = "Congratulations! Task has been marked as done: %1$s";
-    public static final String MESSAGE_MODULE_CODE_NOT_EXISTANT = "The module code is not found! Please try again.";
+    public static final String MESSAGE_MODULE_CODE_NOT_EXISTENT = "The module code is not found! Please try again.";
 
     public static final String MESSAGE_TASK_ID_INVALID = "The Task's ID_NUMBER is not valid. "
             + "It cannot contain letters or special characters.";

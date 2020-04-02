@@ -387,7 +387,7 @@ Format: `*task* find /upcoming`
 
 Edits the information of a task.
 
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
+Format: `*task* edit MOD_CODE TASK_ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
 
 Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59` or `task edit CS2103T 848 /on non`
 

@@ -37,10 +37,19 @@ public class TaskPanel extends UiPart<Region> {
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-                setStyle("-fx-background-insets: 0px, 0px; "
-                        + "-fx-padding: 0px");
+//                setStyle("-fx-background-insets: 0px, 0px; "
+//                        + "-fx-padding: 0px");
+                if (task.isTaskDone()) {
+                    setStyle("-fx-background-color: #4BB543; -fx-background-radius: 15px; "
+                            + "-fx-background-insets: 3px, 0px; -fx-padding: 10px");
+                } else {
+                    setStyle("-fx-background-color: #9d6365; -fx-background-radius: 15px; "
+                            + "-fx-background-insets: 3px, 0px; -fx-padding: 10px");
+                }
+
             }
         }
     }

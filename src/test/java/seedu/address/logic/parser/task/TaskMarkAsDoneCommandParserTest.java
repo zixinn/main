@@ -47,7 +47,7 @@ class TaskMarkAsDoneCommandParserTest {
 
         // first invalid field is ModuleCode
         String expectedMessageMissingModCode = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTANT);
+                TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTENT);
 
         assertParseFailure(parser, TASK_ID_DESC_VALID_ID, expectedMessageMissingModCode);
 
