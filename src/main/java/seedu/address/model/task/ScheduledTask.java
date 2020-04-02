@@ -37,7 +37,8 @@ public class ScheduledTask extends Task {
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
-    public ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskNum, boolean isDone) {
+    public ScheduledTask(Description description, TaskDateTime taskDateTime,
+                         ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
         this.moduleCode = moduleCode;
         this.taskDateTime = taskDateTime;

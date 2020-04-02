@@ -2,7 +2,6 @@ package seedu.address.ui.taskui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -21,7 +20,7 @@ public class TaskListCard extends UiPart<Region> {
     @FXML
     private Label moduleCode;
     @FXML
-    private Label taskID;
+    private Label taskId;
     @FXML
     private Label taskDescription;
     @FXML
@@ -39,11 +38,11 @@ public class TaskListCard extends UiPart<Region> {
                     + "-fx-background-radius: 8px; ");
         }
 
-        taskID.setStyle("-fx-text-fill: #ffee00");
+        taskId.setStyle("-fx-text-fill: #ffee00");
 
         moduleCode.setText(String.format("%s", task.getModuleCode()));
         moduleCode.setStyle("-fx-text-fill: #add8e6");
-        taskID.setText(String.format("ID: %d", task.getTaskNum()));
+        taskId.setText(String.format("ID: %d", task.getTaskNum()));
         taskDescription.setText(String.format("%s",
                 task.getDescription()));
 

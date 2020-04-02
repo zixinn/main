@@ -2,7 +2,6 @@ package seedu.address.logic.parser.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_MODULE_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_TASK_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2103T;
@@ -11,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_MONTH_03;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_YEAR_2020;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_VALID_ID;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_LIST_VALID_CONSTANT;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_03;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
@@ -21,7 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROG
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,13 +29,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.facilitator.FacilFindCommand;
-import seedu.address.logic.commands.facilitator.FacilListCommand;
-import seedu.address.logic.commands.module.ModuleAddCommand;
-import seedu.address.logic.commands.module.ModuleDeleteCommand;
-import seedu.address.logic.commands.module.ModuleEditCommand;
-import seedu.address.logic.commands.module.ModuleListCommand;
-import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.logic.commands.task.TaskFindCommand;
 import seedu.address.logic.commands.task.TaskForOneModuleCommand;
 import seedu.address.logic.commands.task.TaskListCommand;
@@ -46,15 +36,8 @@ import seedu.address.logic.commands.task.TaskListUnDoneCommand;
 import seedu.address.logic.commands.task.TaskMarkAsDoneCommand;
 import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.module.ModuleCommandParser;
-import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
-import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.TaskContainsKeywordsPredicate;
 import seedu.address.model.task.TaskSearchPredicate;
-import seedu.address.testutil.EditModuleDescriptorBuilder;
-import seedu.address.testutil.ModuleBuilder;
-import seedu.address.testutil.ModuleUtil;
 
 public class TaskCommandParserTest {
     private TaskCommandParser parser = new TaskCommandParser();
@@ -112,7 +95,7 @@ public class TaskCommandParserTest {
     }
 
     @Test
-    public void parse_list_task_for_mod() throws Exception {
+    public void parse_listTaskForMod() throws Exception {
         TaskForOneModuleCommand command = (TaskForOneModuleCommand) parser.parse(Command.COMMAND_WORD_MODULE
                 + MODULE_CODE_DESC_CS2103T);
         assertEquals(new TaskForOneModuleCommand(VALID_MODULE_CODE_CS2103T), command);
@@ -126,7 +109,7 @@ public class TaskCommandParserTest {
     }
 
     @Test
-    public void parse_see_undone_tasks() throws Exception {
+    public void parse_seeUndoneTasks() throws Exception {
         assertTrue(parser.parse(Command.COMMAND_WORD_UNDONE) instanceof TaskListUnDoneCommand);
     }
 
@@ -135,11 +118,13 @@ public class TaskCommandParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         TaskSearchCommand command = (TaskSearchCommand) parser.parse(Command.COMMAND_WORD_SEARCH
                 + TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020);
-        HashMap<String, Integer> filters = new HashMap<String, Integer>(){{
-            put("day", Integer.parseInt(TASK_DAY_26));
-            put("month", Integer.parseInt(TASK_MONTH_03));
-            put("year", Integer.parseInt(TASK_YEAR_2020));
-        }};
+        HashMap<String, Integer> filters = new HashMap<String, Integer>() {
+            {
+                put("day", Integer.parseInt(TASK_DAY_26));
+                put("month", Integer.parseInt(TASK_MONTH_03));
+                put("year", Integer.parseInt(TASK_YEAR_2020));
+            }
+        };
         assertEquals(new TaskSearchCommand(new TaskSearchPredicate(filters)), command);
     }
 

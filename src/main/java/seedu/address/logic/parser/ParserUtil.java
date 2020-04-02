@@ -329,17 +329,17 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code taskTime} is invalid.
      */
-    public static int parseTaskID(String taskID) throws ParseException {
-        String trimmedID;
-        if (taskID == null) {
-            trimmedID = null;
+    public static int parseTaskId(String taskId) throws ParseException {
+        String trimmedId;
+        if (taskId == null) {
+            trimmedId = null;
         } else {
-            trimmedID = taskID.trim();
+            trimmedId = taskId.trim();
         }
 
         int value;
         try {
-            value = Integer.parseInt(trimmedID);
+            value = Integer.parseInt(trimmedId);
         } catch (NumberFormatException error) {
             throw new ParseException(TaskMarkAsDoneCommand.MESSAGE_TASK_ID_INVALID);
         }

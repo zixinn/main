@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 
@@ -20,14 +20,14 @@ public class ScheduledTaskBuilder {
     private Description description;
     private TaskDateTime taskDateTime;
     private boolean isDone;
-    private int taskID;
+    private int taskId;
 
     public ScheduledTaskBuilder() throws ParseException {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         description = new Description(DEFAULT_DESCRIPTION);
         taskDateTime = new TaskDateTime(DEFAULT_TASK_DATE_TIME);
         isDone = DEFAULT_IS_DONE;
-        taskID = DEFAULT_TASK_ID;
+        taskId = DEFAULT_TASK_ID;
     }
 
     /**
@@ -64,14 +64,14 @@ public class ScheduledTaskBuilder {
     }
 
     /**
-     * Sets the {@code taskID} of the {@code ScheduledTask} that we are building.
+     * Sets the {@code taskId} of the {@code ScheduledTask} that we are building.
      */
-    public ScheduledTaskBuilder withTaskID(int taskID) {
-        this.taskID = taskID;
+    public ScheduledTaskBuilder withTaskId(int taskId) {
+        this.taskId = taskId;
         return this;
     }
 
     public ScheduledTask build() {
-        return new ScheduledTask(description, taskDateTime, moduleCode, taskID, isDone);
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskId, isDone);
     }
 }

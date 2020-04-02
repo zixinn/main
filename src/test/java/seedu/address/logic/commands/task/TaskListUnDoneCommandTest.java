@@ -1,30 +1,5 @@
 package seedu.address.logic.commands.task;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_TASKS_UNDONE_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.task.TaskListUnDoneCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTasks.NON_SCHEDULED_PROGRAMMING_ASSIGNMENT_TASK;
-import static seedu.address.testutil.TypicalTasks.NON_SCHEDULED_PROGRAMMING_TASK;
-import static seedu.address.testutil.TypicalTasks.SCHEDULED_ASSIGNMENT_TASK;
-import static seedu.address.testutil.TypicalTasks.SCHEDULED_HOMEWORK_TASK;
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.CommandType;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskContainsKeywordsPredicate;
-import seedu.address.testutil.TypicalTasks;
 /*
 class TaskListUnDoneCommandTest {
     private Model model;

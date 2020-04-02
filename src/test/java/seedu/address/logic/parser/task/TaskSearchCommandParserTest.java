@@ -17,8 +17,8 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_CMD_YEAR_2020;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_03;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.HashMap;
 
@@ -31,7 +31,7 @@ public class TaskSearchCommandParserTest {
     private TaskSearchCommandParser parser = new TaskSearchCommandParser();
 
     @Test
-    public void parse_WithPreamble_success() {
+    public void parse_withPreamble_success() {
         // whitespace only preamble, empty HashMap (no day/month/year supplied)
         assertParseSuccess(parser, PREAMBLE_WHITESPACE,
                 new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
@@ -41,11 +41,13 @@ public class TaskSearchCommandParserTest {
                 new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
 
         // arbitrary preamble with parameters supplied
-        assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020 ,
-                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>(){{
-                    put("day", Integer.parseInt(TASK_DAY_26));
-                    put("year", Integer.parseInt(TASK_YEAR_2020));
-                }})));
+        assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020,
+                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>() {
+                    {
+                        put("day", Integer.parseInt(TASK_DAY_26));
+                        put("year", Integer.parseInt(TASK_YEAR_2020));
+                    }
+                })));
 
         // the rest of the methods below will not test the presence of Preamble
         // since we already tested it here.
@@ -63,9 +65,11 @@ public class TaskSearchCommandParserTest {
         // apply heuristic 'each Valid Input at Least Once in a Positive Test Case'
 
         // one and only valid field, year only
-        HashMap<String, Integer> year = new HashMap<String, Integer>() {{
-            put("year", Integer.parseInt(TASK_YEAR_2020));
-        }};
+        HashMap<String, Integer> year = new HashMap<String, Integer>() {
+            {
+                put("year", Integer.parseInt(TASK_YEAR_2020));
+            }
+        };
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TASK_CMD_YEAR_2020,
                 new TaskSearchCommand(new TaskSearchPredicate(year)));
@@ -74,38 +78,44 @@ public class TaskSearchCommandParserTest {
                 new TaskSearchCommand(new TaskSearchPredicate(year)));
 
         // two and only two valid fields, day and month
-        HashMap<String, Integer> dayMonth = new HashMap<String, Integer>() {{
-            put("day", Integer.parseInt(TASK_DAY_26));
-            put("month", Integer.parseInt(TASK_MONTH_03));
-        }};
+        HashMap<String, Integer> dayMonth = new HashMap<String, Integer>() {
+            {
+                put("day", Integer.parseInt(TASK_DAY_26));
+                put("month", Integer.parseInt(TASK_MONTH_03));
+            }
+        };
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TASK_CMD_DAY_26 + TASK_CMD_MONTH_03,
                 new TaskSearchCommand(new TaskSearchPredicate(dayMonth)));
 
-        assertParseSuccess(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03,
+        assertParseSuccess(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03,
                 new TaskSearchCommand(new TaskSearchPredicate(dayMonth)));
     }
 
     @Test
     public void parse_allFieldsPresentAndHaveValidValues_success() {
-        HashMap<String, Integer> fullHashMap = new HashMap<String, Integer>() {{
-            put("day", Integer.parseInt(TASK_DAY_26));
-            put("month", Integer.parseInt(TASK_MONTH_03));
-            put("year", Integer.parseInt(TASK_YEAR_2020));
-        }};
+        HashMap<String, Integer> fullHashMap = new HashMap<String, Integer>() {
+            {
+                put("day", Integer.parseInt(TASK_DAY_26));
+                put("month", Integer.parseInt(TASK_MONTH_03));
+                put("year", Integer.parseInt(TASK_YEAR_2020));
+            }
+        };
 
         // no preamble, full HashMap (all of day/month/year supplied)
-        assertParseSuccess(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
+        assertParseSuccess(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
                 new TaskSearchCommand(new TaskSearchPredicate(fullHashMap)));
     }
 
     @Test
-    public void parse_FieldsArePresentButValuesOutOfBound_success() {
+    public void parse_fieldsArePresentButValuesOutOfBound_success() {
         // /day 32 and /month 13 are allowed, look at the UG for more details.
-        HashMap<String, Integer> outOfBoundsDayAndMonthHashMap = new HashMap<String, Integer>() {{
-            put("day", Integer.parseInt(INVALID_TASK_DAY_32));
-            put("month", Integer.parseInt(INVALID_TASK_MONTH_13));
-        }};
+        HashMap<String, Integer> outOfBoundsDayAndMonthHashMap = new HashMap<String, Integer>() {
+            {
+                put("day", Integer.parseInt(INVALID_TASK_DAY_32));
+                put("month", Integer.parseInt(INVALID_TASK_MONTH_13));
+            }
+        };
 
         assertParseSuccess(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS
                         + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
@@ -113,21 +123,22 @@ public class TaskSearchCommandParserTest {
     }
 
     @Test
-    public void parse_FieldsArePresentButAtLeastOneFieldHaveStringInput_failure() {
+    public void parse_fieldsArePresentButAtLeastOneFieldHaveStringInput_failure() {
         // apply heuristic ‘no more than one invalid input in a test case’
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
 
         // invalid field is day
-        assertParseFailure(parser,INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
+        assertParseFailure(parser, INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
                 expectedMessage);
 
         // invalid field is month
-        assertParseFailure(parser,TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
+        assertParseFailure(parser, TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
                 expectedMessage);
 
         // invalid field is year
-        assertParseFailure(parser,TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
+        assertParseFailure(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
                 expectedMessage);
     }
 }

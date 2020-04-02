@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import java.time.LocalTime;
 import java.util.Optional;
 
-import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.DailySchedulable;

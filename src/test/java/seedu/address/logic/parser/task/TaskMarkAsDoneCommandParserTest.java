@@ -21,7 +21,7 @@ class TaskMarkAsDoneCommandParserTest {
     private TaskMarkAsDoneCommandParser parser = new TaskMarkAsDoneCommandParser();
 
     @Test
-    public void parse_WithPreamble_success() {
+    public void parse_withPreamble_success() {
         // whitespace only preamble
         System.out.println(MODULE_CODE_DESC_CS1101S + TASK_ID_DESC_VALID_ID);
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_CS1101S + TASK_ID_DESC_VALID_ID,
@@ -52,13 +52,14 @@ class TaskMarkAsDoneCommandParserTest {
         assertParseFailure(parser, TASK_ID_DESC_VALID_ID, expectedMessageMissingModCode);
 
         // moduleCode is present, but Task ID is not
-        String expectedMessageMissingTaskID = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        String expectedMessageMissingTaskId = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TaskMarkAsDoneCommand.MESSAGE_TASK_ID_NOT_EXISTENT);
 
-        assertParseFailure(parser, MODULE_CODE_DESC_CS2103T, expectedMessageMissingTaskID);
+        assertParseFailure(parser, MODULE_CODE_DESC_CS2103T, expectedMessageMissingTaskId);
 
         // both fields are not present, prompt user for command usage guide
-        String emptyArgumentsMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskMarkAsDoneCommand.MESSAGE_USAGE);
+        String emptyArgumentsMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                TaskMarkAsDoneCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, EMPTY_ARGUMENTS, emptyArgumentsMessage);
 
