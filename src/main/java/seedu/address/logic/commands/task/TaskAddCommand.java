@@ -40,7 +40,7 @@ public class TaskAddCommand extends TaskCommand {
             + "Please choose another name, or another time slot. Thanks!";
     public static final String MESSAGE_NOT_ADDED = "Unable to add this task. "
             + "There is no information received. Please try again!";
-    public static final String MESSAGE_MODULE_NOT_EXISTENT = "%s is not an existing module!.";
+    public static final String MESSAGE_MODULE_NOT_EXISTENT = "%s is not an existing module!";
     private final Task toAdd;
 
     /**
@@ -74,5 +74,9 @@ public class TaskAddCommand extends TaskCommand {
         return other == this // short circuit if same object
                 || (other instanceof TaskAddCommand) // instanceof handles nulls
                 && toAdd.equals(((TaskAddCommand) other).toAdd);
+    }
+
+    public String toString() {
+        return toAdd.toString();
     }
 }

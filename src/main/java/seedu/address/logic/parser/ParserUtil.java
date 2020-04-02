@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.task.TaskMarkAsDoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Email;
@@ -320,5 +321,28 @@ public class ParserUtil {
             }
         }
         return new TaskDateTime(trimmedTime, trimmedTimeInDay);
+    }
+
+    /**
+     * Parses a {@code String taskTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskTime} is invalid.
+     */
+    public static int parseTaskId(String taskId) throws ParseException {
+        String trimmedId;
+        if (taskId == null) {
+            trimmedId = null;
+        } else {
+            trimmedId = taskId.trim();
+        }
+
+        int value;
+        try {
+            value = Integer.parseInt(trimmedId);
+        } catch (NumberFormatException error) {
+            throw new ParseException(TaskMarkAsDoneCommand.MESSAGE_TASK_ID_INVALID);
+        }
+        return value;
     }
 }

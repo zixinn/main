@@ -26,12 +26,15 @@ public abstract class Command {
     public static final String COMMAND_WORD_CLEAR = "clear";
     public static final String COMMAND_WORD_DELETE = "delete";
     public static final String COMMAND_WORD_EDIT = "edit";
+    public static final String COMMAND_WORD_DONE = "done";
+    public static final String COMMAND_WORD_UNDONE = "undone";
     public static final String COMMAND_WORD_FIND = "find";
     public static final String COMMAND_WORD_SEARCH = "search";
     public static final String COMMAND_WORD_GROUP = "group";
     public static final String COMMAND_WORD_HELP = "help";
     public static final String COMMAND_WORD_LIST = "list";
     public static final String COMMAND_WORD_VIEW = "view";
+    public static final String COMMAND_WORD_MODULE = "module";
 
     /**
      * Executes the command and returns the result message.

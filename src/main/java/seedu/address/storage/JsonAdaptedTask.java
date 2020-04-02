@@ -19,6 +19,7 @@ public class JsonAdaptedTask {
     private final String taskTime;
     private final String moduleCode;
     private final int taskNum;
+    private final boolean isDone;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -27,11 +28,13 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(@JsonProperty("description") String description,
                            @JsonProperty("taskTime") String taskTime,
                            @JsonProperty("moduleCode") String moduleCode,
-                           @JsonProperty("taskNum") int taskNum) {
+                           @JsonProperty("taskNum") int taskNum,
+                           @JsonProperty("isDone") boolean isDone) {
         this.description = description;
         this.taskTime = taskTime;
         this.moduleCode = moduleCode;
         this.taskNum = taskNum;
+        this.isDone = isDone;
     }
 
     /**
@@ -42,6 +45,7 @@ public class JsonAdaptedTask {
         this.taskTime = source.getTimeString();
         this.moduleCode = source.getModuleCode().toString();
         this.taskNum = source.getTaskNum();
+        this.isDone = source.isTaskDone();
     }
 
     /**
@@ -67,7 +71,7 @@ public class JsonAdaptedTask {
 
         final TaskDateTime modelTaskTime;
         if (taskTime.isEmpty()) {
-            return Task.makeNonScheduledTask(modelDescription, modelModuleCode, taskNum);
+            return Task.makeNonScheduledTask(modelDescription, modelModuleCode, taskNum, isDone);
         }
 
         if (!TaskDateTime.isValidTaskTime(taskTime)) {
@@ -79,8 +83,7 @@ public class JsonAdaptedTask {
         } else {
             modelTaskTime = new TaskDateTime(taskTime.split(" ")[0], taskTime.split(" ")[1]);
         }
-        System.out.println("time received " + modelTaskTime);
 
-        return Task.makeScheduledTask(modelDescription, modelTaskTime, modelModuleCode, taskNum);
+        return Task.makeScheduledTask(modelDescription, modelTaskTime, modelModuleCode, taskNum, isDone);
     }
 }

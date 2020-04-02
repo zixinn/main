@@ -19,8 +19,10 @@ public abstract class Task implements DailySchedulable {
     public abstract Optional<TaskDateTime> getTaskDateTime();
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();
+    public abstract boolean markAsUndone();
     public abstract boolean isSameTask(Task other);
     public abstract int getTaskNum();
+    public abstract Task getClone();
 
     public static ScheduledTask makeScheduledTask(Description description,
                                            TaskDateTime taskDateTime,
@@ -31,8 +33,9 @@ public abstract class Task implements DailySchedulable {
     public static ScheduledTask makeScheduledTask(Description description,
                                                   TaskDateTime taskDateTime,
                                                   ModuleCode moduleCode,
-                                                  int taskNum) {
-        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum);
+                                                  int taskNum,
+                                                  boolean isDone) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
     }
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
@@ -42,14 +45,29 @@ public abstract class Task implements DailySchedulable {
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                         ModuleCode moduleCode,
-                                                        int taskNum) {
-        return new NonScheduledTask(description, moduleCode, taskNum);
+                                                        int taskNum, boolean isDone) {
+        return new NonScheduledTask(description, moduleCode, taskNum, isDone);
     }
 
     public String getTimeString() {
         return "";
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(getDescription())
+                && otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getTaskDateTime().equals(getTaskDateTime());
+    }
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.empty();
