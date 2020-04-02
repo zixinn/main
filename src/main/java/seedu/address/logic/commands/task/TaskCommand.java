@@ -39,7 +39,8 @@ public abstract class TaskCommand extends Command {
     public static final String MARK_AS_DONE_FORMAT = String.format("%s %s %s MOD_CODE %s ID_NUMBER",
             COMMAND_GROUP_TASK, COMMAND_WORD_DONE, PREFIX_MODULE_CODE, PREFIX_TASK_ID);
     public static final String LIST_DONE_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_UNDONE);
-    public static final String TASK_FOR_MODULE_FORMAT = String.format("%s %s %s MOD_CODE", COMMAND_GROUP_TASK, COMMAND_WORD_MODULE, PREFIX_MODULE_CODE);
+    public static final String TASK_FOR_MODULE_FORMAT = String.format("%s %s %s MOD_CODE",
+            COMMAND_GROUP_TASK, COMMAND_WORD_MODULE, PREFIX_MODULE_CODE);
 
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
             ADD_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT,
