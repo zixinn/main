@@ -44,6 +44,7 @@ public abstract class TaskCommand extends Command {
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
             ADD_FORMAT, MARK_AS_DONE_FORMAT, LIST_FORMAT, EDIT_FORMAT, DELETE_FORMAT,
             SEARCH_FORMAT, LIST_DONE_FORMAT, TASK_FOR_MODULE_FORMAT);
+
     @Override
     public abstract CommandResult execute(Model model) throws CommandException, ParseException;
 }
