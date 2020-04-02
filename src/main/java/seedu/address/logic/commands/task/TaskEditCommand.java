@@ -29,7 +29,7 @@ public class TaskEditCommand extends TaskCommand {
             + "Existing values will be overwritten by the input values.\n"
             + "If you simply want to remove the DateTime field, input 'non' as parameter for " + PREFIX_ON
             + " without adding " + PREFIX_AT + " parameters.\n"
-            + "Parameters: MOD_CODE TASK_ID_NUMBER "
+            + "Parameters: MOD_CODE ID_NUMBER "
             + "[ " + PREFIX_DESCRIPTION + " DESCRIPTION] "
             + "[ " + PREFIX_ON + " DATE/non] "
             + "[ " + PREFIX_AT + " TIME]\n"
