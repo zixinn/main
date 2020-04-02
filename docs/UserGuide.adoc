@@ -689,12 +689,8 @@ Receive reminders for deadlines and events the next day.
 .5+|Task
 |  `*task* add /code MOD_CODE /task TASK_NAME [/on DATE] [/at TIME]`
 |  `*task* delete MOD_CODE ID_NUMBER`
-<<<<<<< HEAD
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-=======
-|  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE/non] [/at TIME]`
->>>>>>> 059b2c9a3fd37fad183d1e0ce7d943caa6e72483
 |  `*task* find [/date DATE] [/month MONTH] [/year YEAR]` +
    `*task* find /desc TASK_NAME` +
    `*task* find /upcoming`
