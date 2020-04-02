@@ -43,6 +43,7 @@ public class TaskDeleteCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode, taskNum));
         }
 
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         List<Task> lastShown = model.getFilteredTaskList();
 
         Task toDelete = lastShown.stream().reduce(null, (x, y) -> {
