@@ -112,6 +112,13 @@ class JsonSerializableModManager {
             if (modManager.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
+            /* to check later, 17 Mar 00:43
+            for (ModuleCode moduleCode : tasks.getModuleCodes()) {
+                if (!modManager.hasModuleCode(moduleCode.moduleCode)) {
+                    throw new IllegalValueException(MESSAGE_MODULE_DOES_NOT_EXIST);
+                }
+            }
+            */
             modManager.getTasks().add(task);
         }
 

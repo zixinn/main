@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_VALID_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -37,7 +38,7 @@ class TaskMarkAsDoneCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         assertParseSuccess(parser, MODULE_CODE_DESC_CS2103T + TASK_ID_DESC_VALID_ID,
-                new TaskMarkAsDoneCommand(MODULE_CODE_DESC_CS2103T, VALID_TASK_ID));
+                new TaskMarkAsDoneCommand(VALID_MODULE_CODE_CS2103T, VALID_TASK_ID));
     }
 
     @Test

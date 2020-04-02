@@ -18,6 +18,7 @@ public class TypicalAddressBook {
     /**
      * Returns an {@code ModManager} with all the typical facilitators.
      */
+
     public static ModManager getTypicalAddressBook() {
         ModManager ab = new ModManager();
         for (Module module : getTypicalModules()) {
@@ -31,9 +32,10 @@ public class TypicalAddressBook {
             ab.addLesson(lesson);
         }
 
-        for (Task task: getTypicalTasks()) {
-            ab.addTask(task);
-        }
+        //@Todo: dinhnhobao to fix the bug
+        //for (Task task: getTypicalTasks()) {
+            //ab.addTask(task);
+        //}
 
         return ab;
     }
