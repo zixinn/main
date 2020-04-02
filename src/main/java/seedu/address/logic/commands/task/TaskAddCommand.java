@@ -76,7 +76,4 @@ public class TaskAddCommand extends TaskCommand {
                 && toAdd.equals(((TaskAddCommand) other).toAdd);
     }
 
-    public String toString() {
-        return toAdd.toString();
-    }
 }

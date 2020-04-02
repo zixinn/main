@@ -44,7 +44,7 @@ public class TaskMarkAsDoneCommandParser implements Parser<TaskMarkAsDoneCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTANT));
+                    TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTENT));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK_ID)) {

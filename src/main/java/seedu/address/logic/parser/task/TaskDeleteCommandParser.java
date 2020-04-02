@@ -29,7 +29,7 @@ public class TaskDeleteCommandParser implements Parser<TaskDeleteCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDeleteCommand.MESSAGE_USAGE));
         }
         String toUse = argMultimap.getPreamble();

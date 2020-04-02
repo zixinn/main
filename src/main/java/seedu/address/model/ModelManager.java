@@ -425,9 +425,4 @@ public class ModelManager implements Model {
         return calendar;
     }
 
-    //=========== utility mode =================================================================================
-
-    public ModelManager getClone() {
-        return new ModelManager(modManager, userPrefs);
-    }
 }
