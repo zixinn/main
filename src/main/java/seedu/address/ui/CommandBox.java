@@ -31,12 +31,10 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.UP) {
-                System.out.println("UP");
                 String toSet = UserInputHistory.goUp();
                 commandTextField.setText(toSet);
                 commandTextField.positionCaret(toSet.length());
             } else if (keyEvent.getCode() == KeyCode.DOWN) {
-                System.out.println("DOWN");
                 String toSet = UserInputHistory.goDown();
                 commandTextField.setText(toSet);
                 commandTextField.positionCaret(toSet.length());
