@@ -37,6 +37,7 @@ It explains the features and commands supported by Mod Manager, with examples to
 == Quick Start
 
 === Installing Mod Manager
+Here are the steps to get you started with using Mod Manager:
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `modmanager.jar` link:{repoURL}/releases[here].
@@ -44,7 +45,7 @@ It explains the features and commands supported by Mod Manager, with examples to
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 .GUI for Mod Manager
-image::Ui.png[width="790"]
+image::Gui.png[width="800"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -53,7 +54,7 @@ Here are some example commands that you can try:
 
 * *`cmd all`* : lists all available commands in our Mod Manager.
 * *`mod add /code CS2103T /desc Software Engineering`* : adds the module CS2103T to the module list.
-* *`lass add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`* : adds a class to the module CS2103T.
+* *`class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`* : adds a class to the module CS2103T.
 * *`task add /code CS2103T /task Complete tP tasks`*: adds a task to the module CS2103T.
 * *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds a facilitator to the module CS2103T. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
 * *`cal view /week this`* : views your schedules for the current week.
@@ -66,13 +67,13 @@ This section offers an overview of Mod Manager's layout so that you can find wha
 
 There are two main areas in Mod Manager:
 
-. A __command box__ and __result display box__ at the bottom of the screen.
+. A __result display box__ and __command box__ at the bottom of the screen.
 . A __main viewing area__ that occupies most of the screen.
 
 The *_command box_* is the area for you to enter commands. The result of each command will be shown
 in the *_result display box_*, immediately above the command box.
 
-.The command box and result display box
+.The result display box and command box
 image::commandAndResultBox.png[]
 
 The *_main viewing area_* shows all the contents for one of the four tabs at any point in time.
@@ -118,7 +119,7 @@ image::Calendar.png[]
 
 === Viewing help : `help`
 
-Opens up the help window that displays a link to the user guide.
+Opens up the help window that displays you a link to the user guide.
 
 Format: `help`
 
@@ -146,13 +147,13 @@ Adds a module with the module code CS2101 to Mod Manager.
 
 ==== Viewing all modules
 
-Shows a list of modules.
+Shows you a list of modules.
 
 Format: `mod list`
 
 ==== Viewing information of a module
 
-Shows all classes, tasks and facilitators for a module.
+Shows you all classes, tasks and facilitators for a module.
 
 Format: `mod view INDEX` or `mod view MOD_CODE`
 
@@ -227,7 +228,7 @@ Example: `class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud
 
 ==== Viewing all classes
 
-Shows a list of classes.
+Shows you a list of classes.
 
 Format: `class list`
 
@@ -318,7 +319,7 @@ these tasks cannot be in the same time period, for example, in the same day.
 
 ==== Viewing all tasks
 
-Shows a list of all tasks across all modules in the Mod Manager.
+Shows you a list of all tasks across all modules in the Mod Manager.
 
 Format: `*task* list`
 
@@ -408,7 +409,7 @@ Adds a facilitator with the name Akshay Narayan, phone 98765432 and email dcsaks
 Adds a facilitator with the name Aaron Tan, email tantc@comp.nus.edu.sg and office COM1-0312 to the modules CS1231 and CS2100.
 
 ==== Viewing all facilitators
-Shows a list of all facilitators sorted in alphabetical order.
+Shows you a list of all facilitators sorted in alphabetical order.
 
 Format: `facil list`
 
@@ -483,21 +484,57 @@ Deletes the facilitator with the name Akshay Narayan.
 
 ==== Viewing calendar for current week
 
-Shows the calender for the current week.
+Shows you the calendar for the current week.
+
+It displays the tasks and classes you have in the current week.
+The command will bring you automatically to the Calendar tab if you are in another tab.
 
 Format: `cal view /week this`
 
 ==== Viewing calendar for next week
 
-Shows the calendar for next week.
+Shows you the calendar for next week.
+
+It displays the tasks and classes you have in next week.
+The command will bring you automatically to the Calendar tab if you are in another tab.
 
 Format: `cal view /week next`
 
 ==== Finding empty slots
 
-Finds and lists empty slots from current day to end of the week of the current day.
+Finds and lists to you the empty slots from current day to end of the week of the current day.
+
+The list of empty slots will be displayed to you in the result display box.
+The command will also bring you automatically to the Calendar tab if you are in another tab.
 
 Format: `cal find empty`
+
+Example: +
+Suppose you want to find the empty slots in the calendar, but you are not in the Calendar tab:
+
+1) You type the command.
+
+image::CalFind1.png[]
+
+2) Mod Manager brings you to the Calendar tab and lists to you the list of empty slots in the result display box.
+
+image::CalFind2.png[]
+
+The full message in the result display box in the above example is:
+
+****
+Here's the list of empty slots from today to Sunday: +
+WEDNESDAY: +
+00:00-12:00  12:00-14:00  16:00-23:59 +
+THURSDAY: +
+00:00-08:00  11:00-23:59 +
+FRIDAY: +
+00:00-10:00  11:00-14:00  16:00-23:59 +
+SATURDAY: +
+00:00-23:59 +
+SUNDAY: +
+00:00-23:59
+****
 
 === Listing commands : `cmd`
 
