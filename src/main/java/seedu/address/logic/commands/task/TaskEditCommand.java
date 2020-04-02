@@ -65,6 +65,7 @@ public class TaskEditCommand extends TaskCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException, ParseException {
         requireNonNull(model);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         List<Task> current = model.getFilteredTaskList();
 
         if (!model.hasModuleCode(moduleCode.toString())) {
