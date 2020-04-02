@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -19,12 +18,11 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="description" styleClass="cell_big_label" />
+        <Label fx:id="moduleCode" />
+        <Label fx:id="taskNum" styleClass="cell_big_label" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="taskDescription" styleClass="cell_big_label" />
       </HBox>
       <Label fx:id="taskTime" styleClass="cell_big_label" />
     </VBox>

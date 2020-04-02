@@ -27,4 +27,12 @@ class TaskSearchPredicateTest {
         System.out.println(predicate.test(task));
         System.out.println(task.getTaskDateTime());
     }
+
+    @Test
+    void test2() {
+    }
+
+    @Test
+    void testEquals() {
+    }
 }

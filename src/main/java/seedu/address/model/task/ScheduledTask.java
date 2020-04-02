@@ -37,11 +37,21 @@ public class ScheduledTask extends Task {
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
+    public ScheduledTask(Description description, TaskDateTime taskDateTime,
+                         ModuleCode moduleCode, int taskNum, boolean isDone) {
+        this.description = description;
+        this.moduleCode = moduleCode;
+        this.taskDateTime = taskDateTime;
+        this.isDone = isDone;
+        this.taskNum = taskNum;
+        TaskNumManager.addNum(moduleCode, taskNum);
+    }
+
     /**
      * Gets the status icon of our Task.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Done" : "x"); //return tick or x symbols
     }
 
     @Override
@@ -71,9 +81,21 @@ public class ScheduledTask extends Task {
 
     @Override
     public boolean markAsDone() {
-        boolean old = isDone;
-        isDone = true;
-        return !old;
+        if (isDone) {
+            return false;
+        }
+
+        isDone = true; // set as done
+        return true;
+    }
+
+    @Override
+    public boolean markAsUndone() {
+        if (!isDone) {
+            return false;
+        }
+        isDone = false; // set as undone
+        return true;
     }
 
     @Override
@@ -97,6 +119,11 @@ public class ScheduledTask extends Task {
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.of(taskDateTime.getLocalDateTime().toLocalTime());
+    }
+
+    @Override
+    public Task getClone() {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
     }
 
     @Override
