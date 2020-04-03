@@ -692,7 +692,7 @@ Receive reminders for deadlines and events the next day.
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-|  `*task* find /desc DESCRIPTION` +
+|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
    `*task* find /upcoming`
 |  `*task* list`
 |  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
