@@ -55,7 +55,7 @@ Here are some example commands that you can try:
 * *`cmd all`* : lists all available commands in our Mod Manager.
 * *`mod add /code CS2103T /desc Software Engineering`* : adds the module CS2103T to the module list.
 * *`class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`* : adds a class to the module CS2103T.
-* *`task add /code CS2103T /task Complete tP tasks`*: adds a task to the module CS2103T.
+* *`task add /code CS2103T /desc Complete tP tasks`*: adds a task to the module CS2103T.
 * *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds a facilitator to the module CS2103T. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
 * *`cal view /week this`* : views your schedules for the current week.
 * *`exit`* : exits the application.
@@ -588,13 +588,13 @@ Example: `*cmd* group task`
 Provides guidance for mistyped commands by showing a list of possible valid commands. +
 The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `*clear*`
 
 Clears all entries from Mod Manager.
 
 Format: `*clear*`
 
-=== Exiting the program : `exit`
+=== Exiting the program : `*exit*`
 
 Exits the program.
 
