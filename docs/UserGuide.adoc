@@ -695,4 +695,4 @@ Receive reminders for deadlines and events the next day.
 |  `*task* find /desc TASK_NAME` +
    `*task* find /upcoming`
 |  `*task* list`
-|  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
+|  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
