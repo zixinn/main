@@ -686,12 +686,13 @@ Receive reminders for deadlines and events the next day.
 |  `*mod* view INDEX` +
    `*mod* view MOD_CODE`
 
-.5+|Task
+.6+|Task
 |  `*task* add /code MOD_CODE /task TASK_NAME [/on DATE] [/at TIME]`
 |  `*task* delete MOD_CODE ID_NUMBER`
+|  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-|  `*task* find [/date DATE] [/month MONTH] [/year YEAR]` +
-   `*task* find /desc TASK_NAME` +
+|  `*task* find /desc TASK_NAME` +
    `*task* find /upcoming`
 |  `*task* list`
+|  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
