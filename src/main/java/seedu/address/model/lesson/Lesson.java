@@ -18,13 +18,10 @@ import seedu.address.model.util.DailySchedulable;
  */
 public class Lesson implements Comparable<Lesson>, DailySchedulable {
     public static final String MESSAGE_CONSTRAINTS_DAY =
-            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY";
 
     public static final String MESSAGE_CONSTRAINTS_TIME =
             "Time should be in HH:MM 24 hours format";
-
-    public static final String MESSAGE_CONSTRAINTS_DAY_AND_TIME =
-            "Day, start time and end time should be provided";
 
     public static final String MESSAGE_CONSTRAINTS_VENUE =
             "Venue cannot be an empty string";
