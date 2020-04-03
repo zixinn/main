@@ -42,8 +42,8 @@ public class LessonFindCommand extends LessonCommand {
                 result = "No more lessons this week";
             } else {
                 result = "Next lesson:\n" + lesson.toString();
+                new ModuleViewCommand(lesson.getModuleCode()).execute(model);
             }
-            new ModuleViewCommand(lesson.getModuleCode()).execute(model);
         } else {
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
             if (lessonsOfTheDay.size() == 0) {
