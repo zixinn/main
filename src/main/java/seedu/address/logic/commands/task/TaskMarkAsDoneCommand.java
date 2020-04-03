@@ -23,10 +23,10 @@ import seedu.address.model.task.util.TaskNumManager;
 public class TaskMarkAsDoneCommand extends TaskCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_DONE
-            + ": Marks a task as done in Mod Manager. "
+            + ": Marks a task as done in Mod Manager. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
-            + PREFIX_TASK_ID + " ID_NUMBER "
+            + PREFIX_TASK_ID + " ID_NUMBER \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_DONE + " "
             + PREFIX_MODULE_CODE + " CS3230 "
             + PREFIX_TASK_ID + " 913 ";
