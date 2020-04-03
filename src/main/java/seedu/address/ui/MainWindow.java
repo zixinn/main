@@ -291,7 +291,6 @@ public class MainWindow extends UiPart<Stage> {
      * @param module The module to be viewed.
      */
     public void refreshModuleTab(Optional<Module> module) {
-        moduleDetailsPanel.changeDisplayModule(module);
         if (module.isEmpty()) {
             lessonPanel = new LessonPanel();
             lessonPanelPlaceholder.getChildren().clear();

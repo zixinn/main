@@ -10,6 +10,7 @@ import java.time.DayOfWeek;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,7 +22,7 @@ public class LessonFindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validDayLessonList_success() {
+    public void execute_validDayLessonList_success() throws CommandException {
         DayOfWeek day = DayOfWeek.WEDNESDAY;
         LessonFindCommand command = new LessonFindCommand(day);
         CommandResult result = command.execute(model);
@@ -32,7 +33,7 @@ public class LessonFindCommandTest {
     }
 
     @Test
-    public void execute_dayWithNoLessonLessonList_noLessonsFound() {
+    public void execute_dayWithNoLessonLessonList_noLessonsFound() throws CommandException {
         String result = new LessonFindCommand(DayOfWeek.SATURDAY).execute(model).getFeedbackToUser();
         String expectedResult = "No lessons on SATURDAY";
         assertEquals(result, expectedResult);

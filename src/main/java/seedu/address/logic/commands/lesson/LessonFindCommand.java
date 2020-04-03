@@ -9,6 +9,8 @@ import java.util.List;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
@@ -30,7 +32,7 @@ public class LessonFindCommand extends LessonCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String result;
         if (day == null) {
@@ -41,6 +43,7 @@ public class LessonFindCommand extends LessonCommand {
             } else {
                 result = "Next lesson:\n" + lesson.toString();
             }
+            new ModuleViewCommand(lesson.getModuleCode()).execute(model);
         } else {
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
             if (lessonsOfTheDay.size() == 0) {
