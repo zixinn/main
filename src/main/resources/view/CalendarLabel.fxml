@@ -6,7 +6,7 @@
 
 <StackPane alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="calendarLabel" alignment="TOP_CENTER" text="day" style="-fx-text-fill: white; -fx-font-family: Titillium Web Bold;" wrapText="true">
+        <Label fx:id="calendarLabel" alignment="TOP_CENTER" text="day" style="-fx-text-fill: white; -fx-font-family: Arial;" wrapText="true">
             <padding>
                 <Insets bottom="5.0" />
             </padding>

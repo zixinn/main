@@ -8,5 +8,5 @@
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
     </columnConstraints>
-    <Label fx:id="moduleDetails" wrapText="true" style="-fx-text-fill: white; -fx-font-family: Titillium Web Bold; -fx-font-size: 14pt; -fx-font-weight: bold; -fx-padding: 3px;"/>
+    <Label fx:id="moduleDetails" wrapText="true" style="-fx-text-fill: white; -fx-font-family: Arial; -fx-font-size: 14pt; -fx-font-weight: bold; -fx-padding: 3px;"/>
 </GridPane>
