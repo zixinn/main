@@ -188,7 +188,7 @@ public class ParserUtil {
      */
     public static LessonType parseLessonType(String lessonType) throws ParseException {
         requireNonNull(lessonType);
-        String trimmedType = lessonType.trim();
+        String trimmedType = lessonType.trim().toUpperCase();
         if (!Lesson.isValidType(trimmedType)) {
             throw new ParseException(LessonType.MESSAGE_CONSTRAINTS);
         }
@@ -202,7 +202,7 @@ public class ParserUtil {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
         String[] splitted = trimmed.split(" ");
-        String day = splitted[0];
+        String day = splitted[0].toUpperCase();
         boolean isDayValid = false;
         DayOfWeek assignedDay;
         for (int i = 0; i < 7; i++) {
