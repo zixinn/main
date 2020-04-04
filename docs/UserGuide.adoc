@@ -803,7 +803,10 @@ SUNDAY: +
 
 ==== Listing all commands
 
-Lists all valid commands.
+Lists all valid command groups.
+
+The command groups available in `ModManager` are the words in bold you have seen throughout this document.
+These include: `*facil*, *mod*, *task*, ...`
 
 Format: `*cmd* all`
 

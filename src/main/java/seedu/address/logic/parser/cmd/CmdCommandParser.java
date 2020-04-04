@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.cmd.CmdCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +25,7 @@ public class CmdCommandParser implements Parser<CmdCommand> {
     public CmdCommand parse(String userInput) throws ParseException {
         final Matcher matcher = BASIC_CMD_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_UNKNOWN_CMD_COMMAND, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_CMD_COMMAND, CmdCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -38,7 +37,7 @@ public class CmdCommandParser implements Parser<CmdCommand> {
         case Command.COMMAND_WORD_ALL:
             return new CmdAllCommandParser().parse(arguments);
         default:
-            throw new ParseException(String.format(MESSAGE_UNKNOWN_CMD_COMMAND, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_CMD_COMMAND, CmdCommand.MESSAGE_USAGE));
         }
     }
 }
