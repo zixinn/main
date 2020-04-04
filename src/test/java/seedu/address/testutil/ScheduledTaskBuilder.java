@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.util.TaskDateTime;

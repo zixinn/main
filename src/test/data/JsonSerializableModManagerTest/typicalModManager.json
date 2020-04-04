@@ -18,6 +18,9 @@
   }, {
     "moduleCode" : "GEQ1000",
     "description" : "Asking Questions"
+  }, {
+    "moduleCode" : "CS4223",
+    "description" : "Multi-core Architectures"
   } ],
   "facilitators" : [ {
     "name" : "Alice Pauline",
@@ -62,7 +65,25 @@
     "office" : "TP-SR4",
     "moduleCode" : [ "GEQ1000" ]
   } ],
-  "tasks": [ ],
+  "tasks": [ {
+    "description" : "Programming Assignment 2",
+    "taskTime" : "18/03/2020",
+    "moduleCode" : "CS4223",
+    "taskNum" : 111,
+    "isDone" : false
+  }, {
+    "description" : "Programming Assignment 3",
+    "taskTime" : "21/03/2020 19:30",
+    "moduleCode" : "CS4223",
+    "taskNum" : 999,
+    "isDone" : false
+  }, {
+    "description" : "OP2 Presentation",
+    "taskTime" : "",
+    "moduleCode" : "CS2101",
+    "taskNum" : 314,
+    "isDone" : false
+  } ],
   "lessons": [ {
     "moduleCode" : "CS2103T",
     "type" : "LEC",

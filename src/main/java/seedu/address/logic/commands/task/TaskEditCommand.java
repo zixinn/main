@@ -208,6 +208,9 @@ public class TaskEditCommand extends TaskCommand {
             return Optional.ofNullable(this.taskDateTime);
         }
 
+        /**
+         * Makes the task.
+         */
         public Task build() {
             if (taskDateTime == null) {
                 return Task.makeNonScheduledTask(description, moduleCode, taskNum, isDone);

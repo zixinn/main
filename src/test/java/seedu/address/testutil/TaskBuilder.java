@@ -1,13 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import java.util.Optional;
+
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
 
-import java.util.Optional;
-
+/**
+ * A utility class to help with building Task objects.
+ */
 public class TaskBuilder {
 
     public static final String DEFAULT_DESC = "Do your work!";
@@ -28,6 +30,9 @@ public class TaskBuilder {
         taskNum = DEFAULT_TASK_NUM;
     }
 
+    /**
+     * Initializes the TaskBuilder with data from {@code taskToCopy}
+     */
     public TaskBuilder(Task taskToCopy) {
         this.description = taskToCopy.getDescription();
         this.moduleCode = taskToCopy.getModuleCode();
@@ -35,26 +40,40 @@ public class TaskBuilder {
         this.taskNum = taskToCopy.getTaskNum();
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Task} that we are building.
+     */
     public TaskBuilder withDescription(String desc) {
         description = new Description(desc);
         return this;
     }
-
+    /**
+     * Sets the {@code ModuleCode} of the {@code Task} that we are building.
+     */
     public TaskBuilder withModuleCode(String modCode) {
         moduleCode = new ModuleCode(modCode);
         return this;
     }
 
+    /**
+     * Sets the {@code TaskDateTime} of the {@code Task} that we are building.
+     */
     public TaskBuilder withTaskDateTime(TaskDateTime tdt) {
         taskDateTime = Optional.ofNullable(tdt);
         return this;
     }
 
+    /**
+     * Sets the {@code taskNum} of the {@code Task} that we are building.
+     */
     public TaskBuilder withTaskNum(int taskNum) {
         this.taskNum = taskNum;
         return this;
     }
 
+    /**
+     * Returns the {@code task} that has been built.
+     */
     public Task build() {
         if (taskDateTime.isEmpty()) {
             return Task.makeNonScheduledTask(description, moduleCode, taskNum);

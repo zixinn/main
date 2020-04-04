@@ -66,6 +66,11 @@ public abstract class Task implements DailySchedulable {
         return "";
     }
 
+    /**
+     * Checks if a task is 'similar'.
+     * Similarity here implies equal ModuleCode and Description.
+     * Tasks with only equal date & time are not considered similar.
+     */
     public boolean isSameTask(Task otherTask) {
         // Only checks for similar description and module
         if (otherTask == this) {

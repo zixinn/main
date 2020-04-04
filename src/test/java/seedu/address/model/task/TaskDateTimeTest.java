@@ -1,10 +1,12 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.task.util.TaskDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.task.util.TaskDateTime;
+
 
 public class TaskDateTimeTest {
     private String validTime1 = "18/03/2020";

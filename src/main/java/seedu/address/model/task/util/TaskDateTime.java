@@ -13,7 +13,6 @@ import java.time.temporal.ChronoField;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 
 
@@ -23,12 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class TaskDateTime implements Comparable {
     public static final String MESSAGE_CONSTRAINTS = "Date and time should not be empty.";
-
-    /*
-     * The first character of the taskTime must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*"; // to impose stricter requirements!!
 
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
