@@ -10,8 +10,8 @@ import java.util.List;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -42,7 +42,10 @@ public class LessonFindCommand extends LessonCommand {
                 result = "No more lessons this week";
             } else {
                 result = "Next lesson:\n" + lesson.toString();
-                new ModuleViewCommand(lesson.getModuleCode()).execute(model);
+                model.updateModule(model.findModule(lesson.getModuleCode()));
+                model.updateFacilitatorListForModule(
+                        new ModuleCodesContainKeywordPredicate(lesson.getModuleCode().value));
+                model.updateTaskListForModule(x -> x.getModuleCode().equals(lesson.getModuleCode()));
             }
         } else {
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
@@ -54,7 +57,6 @@ public class LessonFindCommand extends LessonCommand {
                     result = result + "\u2022 " + l.toString() + "\n";
                 }
             }
-
         }
         return new CommandResult(result, CommandType.LESSON);
     }

@@ -12,11 +12,13 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 
@@ -31,6 +33,10 @@ public class LessonDeleteCommandTest {
         String expectedMessage = String.format(LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete);
         expectedModel.removeLesson(lessonToDelete);
+        expectedModel.updateModule(model.findModule(lessonToDelete.getModuleCode()));
+        expectedModel.updateFacilitatorListForModule(
+                new ModuleCodesContainKeywordPredicate(lessonToDelete.getModuleCode().value));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(lessonToDelete.getModuleCode()));
         assertCommandSuccess(command, model, expectedMessage, CommandType.LESSON, expectedModel);
     }
 
@@ -38,9 +44,9 @@ public class LessonDeleteCommandTest {
     public void execute_invalidIndexLessonList_throwsCommandException() {
         Index outOfBound = Index.fromOneBased(model.getLessons().size() + 1);
         LessonDeleteCommand command = new LessonDeleteCommand(outOfBound, Optional.empty());
-        assertCommandFailure(command, model, LessonDeleteCommand.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         command = new LessonDeleteCommand(outOfBound, Optional.of(new ModuleCode("CS2103T")));
-        assertCommandFailure(command, model, LessonDeleteCommand.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -50,6 +56,10 @@ public class LessonDeleteCommandTest {
         String expectedMessage = String.format(LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete);
         expectedModel.removeLesson(lessonToDelete);
+        expectedModel.updateModule(model.findModule(lessonToDelete.getModuleCode()));
+        expectedModel.updateFacilitatorListForModule(
+                new ModuleCodesContainKeywordPredicate(lessonToDelete.getModuleCode().value));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(lessonToDelete.getModuleCode()));
         assertCommandSuccess(command, model, expectedMessage, CommandType.LESSON, expectedModel);
     }
 

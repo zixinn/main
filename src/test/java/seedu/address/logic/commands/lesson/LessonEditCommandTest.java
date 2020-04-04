@@ -10,11 +10,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
@@ -32,6 +34,10 @@ public class LessonEditCommandTest {
         LessonEditCommand command = new LessonEditCommand(new ModuleCode("CS2103T"), INDEX_FIRST, descriptor);
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
         expectedModel.setLesson(model.getLessons().get(0), editedLesson);
+        expectedModel.updateModule(expectedModel.findModule(new ModuleCode("GEQ1000")));
+        expectedModel.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
+                editedLesson.getModuleCode().value));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
         assertCommandSuccess(command, model, expectedMessage, CommandType.LESSON, expectedModel);
     }
 
@@ -43,6 +49,10 @@ public class LessonEditCommandTest {
         LessonEditCommand command = new LessonEditCommand(new ModuleCode("CS2103T"), INDEX_FIRST, descriptor);
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
         expectedModel.setLesson(model.getLessons().get(0), editedLesson);
+        expectedModel.updateModule(expectedModel.findModule(new ModuleCode("GEQ1000")));
+        expectedModel.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(
+                editedLesson.getModuleCode().value));
+        expectedModel.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
         assertCommandSuccess(command, model, expectedMessage, CommandType.LESSON, expectedModel);
     }
 
@@ -59,7 +69,7 @@ public class LessonEditCommandTest {
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withLessonType("REC")
                 .build();
         LessonEditCommand command = new LessonEditCommand(new ModuleCode("CS2103T"), outOfBound, descriptor);
-        assertCommandFailure(command, model, LessonEditCommand.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test

@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Office {
 
-    public static final String MESSAGE_CONSTRAINTS = "Offices can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Offices can take any values, and it should not be blank.";
 
     /*
      * The first character of the office must not be a whitespace,
