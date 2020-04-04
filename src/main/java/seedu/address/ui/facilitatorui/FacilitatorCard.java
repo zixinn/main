@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.ui.UiPart;
 
@@ -30,15 +31,17 @@ public class FacilitatorCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox cardbox;
+    @FXML
     private Label name;
     @FXML
     private Label id;
     @FXML
-    private FlowPane phone;
+    private Label phone;
     @FXML
-    private FlowPane email;
+    private Label email;
     @FXML
-    private FlowPane office;
+    private Label office;
     @FXML
     private FlowPane moduleCodes;
 
@@ -49,15 +52,21 @@ public class FacilitatorCard extends UiPart<Region> {
         name.setText(facilitator.getName().fullName);
 
         if (facilitator.getPhone().value != null) {
-            phone.getChildren().add(new Label(facilitator.getPhone().value));
+            phone.setText(facilitator.getPhone().value);
+        } else {
+            cardbox.getChildren().remove(phone);
         }
 
         if (facilitator.getEmail().value != null) {
-            email.getChildren().add(new Label(facilitator.getEmail().value));
+            email.setText(facilitator.getEmail().value);
+        } else {
+            cardbox.getChildren().remove(email);
         }
 
         if (facilitator.getOffice().value != null) {
-            office.getChildren().add(new Label(facilitator.getOffice().value));
+            office.setText(facilitator.getOffice().value);
+        } else {
+            cardbox.getChildren().remove(office);
         }
 
         facilitator.getModuleCodes().stream()

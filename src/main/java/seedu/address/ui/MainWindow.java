@@ -121,6 +121,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Set the minimum width that user can make it smaller to
+        primaryStage.setMinWidth(1132);
     }
 
     public Stage getPrimaryStage() {
