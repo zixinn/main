@@ -114,7 +114,7 @@ image::Calendar.png[]
 * Items in square brackets are optional. Items in curly brackets are mutually exclusive.
 * Items with `…`​ after them can be used multiple times including zero times.
 * Parameters can be in any order.
-* Module codes are case-insensitive.
+* Module code and facilitator name are case-insensitive.
 ====
 
 === Viewing help : `*help*`
@@ -272,7 +272,7 @@ image::ModEditBefore2.png[]
 .After `*mod* edit CS2101 /desc Effective Communication for Computing Professionals`
 image::ModEditAfter2.png[]
 
-You can also remove the description of a module without specifying any input after the prefix.
+You can also remove the description of a module without specifying any input after the prefix `/desc`.
 To remove the description of the third module in the module list,
 you can type the following command:
 
@@ -551,7 +551,7 @@ Parameter constraints:
 ****
 * At least one of the optional fields (phone, email, office) must be provided.
 * A facilitator can be linked to one or more modules. A module with the module code provided must exist in Mod Manager.
-* To add multiple module codes, you can include the prefix /code once before all module codes (e.g. /code CS2103T CS3243) or multiple times once before each module code (e.g. /code CS2103T /code CS3243).
+* To add multiple module codes, you can include the prefix `/code` once before all module codes (e.g. `/code CS2103T CS3243`) or multiple times once before each module code (e.g. `/code CS2103T /code CS3243`).
 ****
 
 Examples:
@@ -568,7 +568,7 @@ image::FacilAddBefore1.png[]
 .After `*facil* add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T CS3243`
 image::FacilAddAfter1.png[]
 
-You can also add a facilitator to multiple modules by typing the prefix /code multiple times.
+You can also add a facilitator to multiple modules by typing the prefix `/code` multiple times.
 To add a facilitator with the name `Aaron Tan`, email `tantc@comp.nus.edu.sg` and office `COM1-0312` to the modules `CS1231` and `CS2100`,
 you can type the following command:
 
@@ -687,7 +687,7 @@ image::FacilEditBefore2.png[]
 .After `*facil* edit Akshay Narayan /office COM2-0203`
 image::FacilEditAfter2.png[]
 
-You can also remove the information of a facilitator without specifying any input after the prefix.
+You can also remove the information of a facilitator without specifying any input after the prefix `/phone`, `/email` or `/office`.
 To remove the phone of the second facilitator in the last shown facilitator list in the facilitator tab,
 type the following command:
 
