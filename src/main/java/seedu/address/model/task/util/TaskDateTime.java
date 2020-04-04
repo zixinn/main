@@ -21,7 +21,9 @@ import seedu.address.commons.core.LogsCenter;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskDateTime implements Comparable {
-    public static final String MESSAGE_CONSTRAINTS = "Date and time should not be empty.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date and time must conform to the format dd/mm/yyyy and hh:mm.\n"
+            + "These data must also be valid!";
 
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
@@ -63,7 +65,7 @@ public class TaskDateTime implements Comparable {
      * @param timeInDay time period in day
      */
     public TaskDateTime(String date, String timeInDay) {
-        checkArgument(isValidTaskTime(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTaskTime(date + " " + timeInDay), MESSAGE_CONSTRAINTS);
         try {
             LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
             this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
@@ -84,6 +86,7 @@ public class TaskDateTime implements Comparable {
      */
     public static boolean isValidTaskTime(String test) {
         // to have further check on this!
+        logger.info(test);
         int testLen = test.length();
         if (testLen != 10 && testLen != 16) {
             return false;

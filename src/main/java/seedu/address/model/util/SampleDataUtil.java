@@ -64,7 +64,7 @@ public class SampleDataUtil {
                         new ModuleCode("CS3233"), 111),
                 Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
                         new ModuleCode("CS4223"), 999),
-                Task.makeNonScheduledTask(new Description("OP2 Presentation"), new ModuleCode("CS2103T"), 314)
+                Task.makeNonScheduledTask(new Description("OP2 Presentation"), new ModuleCode("CS2101"), 314)
         };
     }
 
