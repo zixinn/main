@@ -99,19 +99,6 @@ public class ScheduledTask extends Task {
     }
 
     @Override
-    public boolean isSameTask(Task other) {
-        if (!(other instanceof ScheduledTask)) {
-            return false;
-        }
-
-        assert other.getTaskDateTime().isPresent();
-
-        return this.description.equals(other.getDescription())
-                && this.taskDateTime.equals(other.getTaskDateTime().get())
-                && this.moduleCode.equals(other.getModuleCode());
-    }
-
-    @Override
     public int getTaskNum() {
         return this.taskNum;
     }

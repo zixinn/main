@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.task;
 
+import static seedu.address.commons.core.Messages.MESSAGE_AT_WITHOUT_ON_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -43,7 +44,7 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ON)) {
             if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
-                throw new ParseException("/at but no /on? Really? You're in trouble lah.");
+                throw new ParseException(MESSAGE_AT_WITHOUT_ON_ERROR);
             }
             return new TaskAddCommand(Task.makeNonScheduledTask(description, moduleCode));
         } else {

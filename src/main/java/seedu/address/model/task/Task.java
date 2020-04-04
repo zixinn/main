@@ -20,7 +20,6 @@ public abstract class Task implements DailySchedulable {
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();
     public abstract boolean markAsUndone();
-    public abstract boolean isSameTask(Task other);
     public abstract int getTaskNum();
     public abstract Task getClone();
 
@@ -53,6 +52,20 @@ public abstract class Task implements DailySchedulable {
         return "";
     }
 
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        if (otherTask == null) {
+            return false;
+        }
+
+        return otherTask.getModuleCode().equals(getModuleCode())
+                && (otherTask.getTaskNum() == getTaskNum()
+                || otherTask.getDescription().equals(getDescription()));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -64,10 +77,11 @@ public abstract class Task implements DailySchedulable {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
+        return otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getDescription().equals(getDescription())
                 && otherTask.getTaskDateTime().equals(getTaskDateTime());
     }
+
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.empty();
