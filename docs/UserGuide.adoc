@@ -119,14 +119,14 @@ image::Calendar.png[]
 
 === Viewing help : `*help*`
 
-Opens up the help window that displays you a link to the user guide.
+You can open up the help window that displays you a link to the user guide.
 
 Format: `*help*`
 
 === Managing modules : `*mod*`
 
 The commands in this section carry out operations on the module list in Mod Manager.
-Executing these commands will bring you to the module tab.
+Executing these commands will bring you to the Module tab.
 
 ==== Adding a module
 
@@ -536,7 +536,7 @@ Example: `*task* delete CS2103T 973`
 === Managing facilitators : `*facil*`
 
 The commands in this section carry out operations on the facilitator list in Mod Manager.
-Executing these commands will bring you to the facilitators tab.
+Executing these commands will bring you to the Facilitators tab.
 
 ==== Adding a facilitator
 
@@ -741,14 +741,17 @@ image::FacilDeleteAfter2.png[]
 
 === Managing calendar : `*cal*`
 
+The commands in this section carry out operations related to the calendar in Mod Manager.
+Executing these commands will bring you to the Calendar tab.
+
 ==== Viewing calendar for current week
 
-Shows you the calendar for the current week. It displays the tasks and classes you have in the current week.
+You can view the calendar for the current week. It displays the tasks and classes you have in the current week.
 
 Format: `*cal* view /week this`
 
-Expected outcome: +
-Mod Manager brings you to the Calendar tab and displays the calendar as shown below.
+Example: +
+You can view the calendar for the current week by typing the above command.
 The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in the current week.
 
 .Outcome of `*cal* view /week this`
@@ -756,12 +759,12 @@ image::CalView1.png[]
 
 ==== Viewing calendar for next week
 
-Shows you the calendar for next week. It displays the tasks and classes you have in next week.
+You can view the calendar for next week. It displays the tasks and classes you have in next week.
 
 Format: `*cal* view /week next`
 
-Expected outcome: +
-Mod Manager brings you to the Calendar tab as shown below.
+Example: +
+You can view the calendar for the next week by typing the above command.
 The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in next week.
 
 .Outcome of `*cal* view /week next`
@@ -769,12 +772,13 @@ image::CalView2.png[]
 
 ==== Finding empty slots
 
-Finds and lists to you the empty slots from current day to end of the week of the current day.
+You can find the empty slots from current day to end of the week of the current day.
+The empty slots are time periods where you do not have classes or tasks.
 
 Format: `*cal* find empty`
 
-Expected outcome: +
-Mod Manager brings you to the Calendar tab and lists to you the list of empty slots in the result display box as shown below.
+Example: +
+You can get the list of empty slots by typing the above command. The list will be displayed in the result display box.
 
 .Outcome of `*cal* find empty`
 image::CalFind1.png[]
@@ -818,19 +822,15 @@ The command(s) closest to your mistyped one will be shown: both the syntax forma
 
 === Clearing all entries : `*clear*`
 
-Clears all entries from Mod Manager.
+You can clear all entries from Mod Manager.
 
 Format: `*clear*`
 
 === Exiting the program : `*exit*`
 
-Exits the program.
+You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
 
 Format: `*exit*`
-
-Expected outcome: +
-The application will close automatically. At the same time, the Mod Manager data will be saved automatically in your hard disk.
-Hence, you do not need to save manually.
 
 === Upcoming `[coming in v2.0]`
 

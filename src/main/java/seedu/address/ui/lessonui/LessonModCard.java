@@ -2,7 +2,6 @@ package seedu.address.ui.lessonui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -26,11 +25,11 @@ public class LessonModCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private FlowPane day;
+    private Label day;
     @FXML
-    private FlowPane time;
+    private Label time;
     @FXML
-    private FlowPane venue;
+    private Label venue;
 
     public LessonModCard(Lesson lesson, int displayedIndex) {
         super(FXML);
@@ -38,15 +37,14 @@ public class LessonModCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         type.setText(lesson.getType().toString());
 
-        day.getChildren().add(new Label(lesson.getDay().toString()));
-        time.getChildren().add(new Label(lesson.getStartTime().toString() + "-"
-                + lesson.getEndTime().toString()));
+        day.setText(lesson.getDay().toString());
+        time.setText(lesson.getStartTime().toString() + "-"
+                + lesson.getEndTime().toString());
 
         if (lesson.getVenue() != null) {
-            Label label = new Label(lesson.getVenue());
-            label.setWrapText(true);
-            label.prefWidthProperty().bind(venue.widthProperty());
-            venue.getChildren().add(label);
+            venue.setText(lesson.getVenue());
+        } else {
+            cardbox.getChildren().remove(venue);
         }
 
         cardbox.setMinHeight(0);
