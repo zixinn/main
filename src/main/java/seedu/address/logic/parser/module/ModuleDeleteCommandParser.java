@@ -1,7 +1,9 @@
 package seedu.address.logic.parser.module;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.module.ModuleDeleteCommand;
 import seedu.address.logic.parser.Parser;
@@ -30,10 +32,9 @@ public class ModuleDeleteCommandParser implements Parser<ModuleDeleteCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new ModuleDeleteCommand(index);
         } catch (ParseException pe) {
-            /*
-             This part is left empty intentionally
-             Kinda hack-ish
-             */
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+            }
         }
 
         try {

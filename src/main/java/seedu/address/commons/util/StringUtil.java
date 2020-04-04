@@ -77,9 +77,9 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code s} represents a non-zero unsigned integer
+     * Returns true if {@code s} represents a non-zero unsigned integer.
      * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
-     * Will return false for any other non-null string input
+     * Will return false for any other non-null string input.
      * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
      * @throws NullPointerException if {@code s} is null.
      */
@@ -89,6 +89,23 @@ public class StringUtil {
         try {
             int value = Integer.parseInt(s);
             return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if {@code s} represents an integer and false otherwise.
+     *
+     * @param s the string to check.
+     * @return true if {@code s} represents an integer and false otherwise.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+        try {
+            Integer.parseInt(s);
+            return true;
         } catch (NumberFormatException nfe) {
             return false;
         }

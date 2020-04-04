@@ -7,11 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.facilitator.FacilEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -37,21 +39,24 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFICE, PREFIX_MODULE_CODE);
 
-        String preAmble = argMultimap.getPreamble();
+        String preamble = argMultimap.getPreamble();
         Index index = null;
         Name fname = null;
 
         int mode = 0;
 
         try {
-            index = ParserUtil.parseIndex(preAmble);
+            index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+            }
             mode = 1;
         }
 
         try {
             if (mode == 1) {
-                fname = ParserUtil.parseName(preAmble);
+                fname = ParserUtil.parseName(preamble);
             }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE));

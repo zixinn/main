@@ -22,7 +22,7 @@ public class CmdGroupCommand extends CmdCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CMD + " " + COMMAND_WORD_GROUP
             + ": Lists all the formats of the specified group of commands.\n"
             + "Parameters: COMMAND_GROUP\n"
-            + "Examples: " + COMMAND_GROUP_CMD + " " + COMMAND_GROUP_CLASS;
+            + "Examples: " + COMMAND_GROUP_CMD + " " + COMMAND_WORD_GROUP + " " + COMMAND_GROUP_CLASS;
 
     public static final String MESSAGE_CMD_GROUP_SUCCESS = "%s command group listed: \n%s";
 

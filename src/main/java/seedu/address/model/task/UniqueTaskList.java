@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -87,10 +86,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * Removes tasks with the target ModuleCode.
      */
     public void removeWithModuleCode(final ModuleCode target) {
-        Optional<ModuleCode> toCompare = Optional.of(target);
         List<Task> replacementList = new ArrayList<>();
         internalList.stream()
-                .filter(task -> !task.getModuleCode().equals(toCompare))
+                .filter(task -> !task.getModuleCode().equals(target))
                 .forEach(replacementList::add);
 
         setTasks(replacementList);

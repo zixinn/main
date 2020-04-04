@@ -15,9 +15,12 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_TASK_COMMAND = "Unknown task command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_CMD_COMMAND = "Unknown cmd command! \n%1$s";
 
-    public static final String MESSAGE_INVALID_MODULE_DISPLAYED_INDEX = "The module index provided is invalid!";
+    public static final String MESSAGE_INVALID_MODULE_DISPLAYED_INDEX =
+            "The module index provided is invalid! "
+            + "Index must be a positive integer smaller than or equal to the size of the displayed module list.";
     public static final String MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX =
-            "The facilitator index provided is invalid!";
+            "The facilitator index provided is invalid! "
+            + "Index must be a positive integer smaller than or equal to the size of the displayed facilitator list.";
     public static final String MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND =
             "Facilitator %s cannot be found, or isn't unique. But here are the ones that are close to your query:\n";
     public static final String MESSAGE_ASK_TO_CONFIRM_FACILITATOR =
@@ -30,4 +33,8 @@ public class Messages {
             + "Type `task list` to return to the main task list.";
     public static final String MESSAGE_INVALID_CMD_GROUP = "%s group does not exist.";
     public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
+    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
+            "The lesson index provided is invalid! "
+            + "Index must be a positive integer smaller than or equal to the size of the displayed lesson list "
+            + "and should not be blank.";
 }

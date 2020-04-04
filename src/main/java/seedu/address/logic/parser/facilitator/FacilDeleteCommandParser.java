@@ -2,7 +2,9 @@ package seedu.address.logic.parser.facilitator;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.facilitator.FacilDeleteCommand;
 import seedu.address.logic.parser.Parser;
@@ -26,13 +28,16 @@ public class FacilDeleteCommandParser implements Parser<FacilDeleteCommand> {
         try {
             Index index = ParserUtil.parseIndex(args);
             return new FacilDeleteCommand(index);
-        } catch (ParseException ignored) {
+        } catch (ParseException pe1) {
+            if (pe1.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+            }
             try {
                 Name fname = ParserUtil.parseName(args);
                 return new FacilDeleteCommand(fname);
-            } catch (ParseException pe) {
+            } catch (ParseException pe2) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE), pe);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE), pe2);
             }
         }
     }

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -9,7 +10,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.lesson.LessonDeleteCommand;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -31,8 +31,8 @@ public class LessonDeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " a ", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, " a /code CS2103T ", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " a ", MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, " a /code CS2103T ", MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         assertParseFailure(parser, " 1 /code CODE123 ", ModuleCode.MESSAGE_CONSTRAINTS);
     }
 }

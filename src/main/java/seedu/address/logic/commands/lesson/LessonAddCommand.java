@@ -21,7 +21,7 @@ import seedu.address.model.module.Module;
  */
 public class LessonAddCommand extends LessonCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CLASS + " " + COMMAND_WORD_ADD
-            + ": Adds a lesson to Mod Manager. "
+            + ": Adds a lesson to Mod Manager. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + PREFIX_TYPE + " CLASS_TYPE "

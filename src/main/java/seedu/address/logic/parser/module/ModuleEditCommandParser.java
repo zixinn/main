@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -36,6 +38,9 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         try {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+            }
             invalidFormatException = pe;
             mode = 1;
         }
