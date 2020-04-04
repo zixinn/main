@@ -227,7 +227,7 @@ Given below is an example usage scenario and how the module view mechanism behav
 The following sequence diagram shows how the module view command works:
 
 .Sequence Diagram for `mod view` Command
-image::ModuleCiewSequenceDiagram.png[]
+image::ModuleViewSequenceDiagram.png[]
 
 NOTE: The lifeline for `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -236,6 +236,64 @@ The following activity diagram summarizes what happens when a user executes a mo
 
 .Activity Diagram for `mod view` Command
 image::ModuleViewActivityDiagram.png[]
+
+===== Editing a module
+The edit module feature allows users to edit a module from Mod Manager.
+This feature is facilitated by `ModuleCommandParser`, `ModuleEditCommandParser` and `ModuleEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setModule()`.
+
+Given below is an example usage scenario and how the module edit mechanism behaves at each step:
+
+1. The user executes the module edit command and provides the index or module code of the module to be edited and the fields to be edited.
+2. `ModuleEditCommandParser` creates a new `EditModuleDescriptor` with the fields to be edited.
+3. `ModuleEditCommandParser` creates a new `ModuleEditCommand` based on the index or module code and `EditModuleDescriptor`.
+4. `LogicManager` executes the `ModuleEditCommand`.
+5. `ModuleEditCommand` retrieves the module to be edited.
+6. `ModuleEditCommand` creates a new `Module`.
+7. `ModManager` sets the existing module to the new module in the `UniqueModuleList`.
+8. `ModelManager` updates the `filteredModules` in `ModelManager`.
+
+The following sequence diagram shows how the module edit command works:
+
+.Sequence Diagram for `mod edit` Command
+image::ModuleEditSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleEditCommandParser`, `EditModuleDescriptor` and `ModuleEditCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a module edit command:
+
+.Activity Diagram for `mod edit` Command
+image::ModuleEditActivityDiagram.png[]
+
+===== Deleting a module
+The delete module feature allows users to delete a module from Mod Manager.
+This feature is facilitated by `ModuleCommandParser`, `ModuleDeleteCommandParser` and `ModuleDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteModule()`.
+
+Given below is an example usage scenario and how the module delete mechanism behaves at each step:
+
+1. The user executes the module delete command and provides the index or module code of the module to be deleted.
+2. `ModuleDeleteCommandParser` creates a new `ModuleDeleteCommand` based on the index or module code.
+3. `LogicManager` executes the `ModuleDeleteCommand`.
+4. `ModuleDeleteCommand` retrieves the module to be deleted.
+5. `ModManager` deletes the module from the `UniqueModuleList`.
+6. `ModManager` deletes facilitators of the module from the `UniqueFacilitatorList`.
+7. `ModManager` deletes tasks of the module from the `UniqueTaskList`.
+8. `ModManager` deletes lessons of the module from the `LessonList`.
+
+The following sequence diagram shows how the module delete command works:
+
+.Sequence Diagram for `mod delete` Command
+image::ModuleDeleteSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleDeleteCommandParser` and `ModuleDeleteCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a module delete command:
+
+.Activity Diagram for `mod delete` Command
+image::ModuleDeleteActivityDiagram.png[]
 
 ==== Design Considerations
 
@@ -532,7 +590,7 @@ Given below is an example usage scenario and how the facilitator edit mechanism 
 7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
 8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
 
-The following sequence diagram shows how the facilitator edits command works:
+The following sequence diagram shows how the facilitator edit command works:
 
 .Sequence Diagram for `facil edit` Command
 image::FacilitatorEditSequenceDiagram.png[]
@@ -755,7 +813,7 @@ Given below is an example usage scenario and how the facilitator edit mechanism 
 7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
 8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
 
-The following sequence diagram shows how the facilitator edits command works:
+The following sequence diagram shows how the facilitator edit command works:
 
 .Sequence Diagram for `facil edit` Command
 image::FacilitatorEditSequenceDiagram.png[]
