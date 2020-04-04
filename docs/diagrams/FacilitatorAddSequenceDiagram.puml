@@ -23,7 +23,7 @@ end box
 [-> LogicManager : execute("facil add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("facil add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
+LogicManager -> ModManagerParser : parseCommand(\n"facil add \n/name Akshay \n/phone 98765432 \n/code CS2103T")
 activate ModManagerParser
 
 create FacilCommandParser
@@ -47,7 +47,7 @@ FacilCommandParser -> FacilAddCommandParser : parse("/name Akshay \n/phone 98765
 activate FacilAddCommandParser
 
 create Facilitator
-FacilAddCommandParser -> Facilitator : Facilitator(Akshay, \n98765432,\n null,\n null, \n[CS2103T])
+FacilAddCommandParser -> Facilitator : Facilitator(Akshay, 98765432,\n null, null, [CS2103T])
 activate Facilitator
 
 Facilitator --> FacilAddCommandParser : f

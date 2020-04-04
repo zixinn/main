@@ -1,0 +1,43 @@
+@startuml
+start
+:User executes module delete command;
+if () then ([index or module code is provided])
+    if () then ([index is provided])
+        :Parser parses index;
+        if () then ([index is valid])
+            :Logic executes command;
+            if () then ([index is not out of bounds])
+                :Model deletes module from UniqueModuleList;
+                :Model deletes facilitators of the module
+                            from UniqueFacilitatorList;
+                :Model deletes tasks of the module
+                            from UniqueTaskList;
+                :Model delete lessons of the module
+                                from LessonList;
+                :Logic saves ModManager to Storage;
+            else ([else])
+            endif
+        else ([else])
+        endif
+    else ([module code is provided])
+        :Parser parses module code;
+        if () then ([module code is valid])
+            :Logic executes command;
+            if () then ([module exists in ModManager])
+                :Model deletes module from UniqueModuleList;
+                :Model deletes facilitators of the module
+                            from UniqueFacilitatorList;
+                :Model deletes tasks of the module
+                            from UniqueTaskList;
+                :Model delete lessons of the module
+                                from LessonList;
+                :Logic saves ModManager to Storage;
+            else ([else])
+            endif
+        else ([else])
+        endif
+    endif
+else ([else])
+endif
+stop
+@enduml

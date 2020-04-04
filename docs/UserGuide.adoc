@@ -338,7 +338,7 @@ Parameter constraints:
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
-* START_TIME and END_TIME should be in 24 hour HH:MM format.
+* START_TIME and END_TIME should be in 24 hour HH:mm format.
 * VENUE is optional
 ****
 Example: `*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
@@ -379,7 +379,7 @@ Parameter constraints:
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
-* START_TIME and END_TIME should be in 24 hour HH:MM format.
+* START_TIME and END_TIME should be in 24 hour HH:mm format.
 * At least one of the optional fields must be provided.
 ****
 Example: `*class* edit 1 /code CS9000 /venue Home`
@@ -428,7 +428,7 @@ Parameter constraints:
 if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is not allowed.
 * `DATE` follows `_dd/MM/yyyy_` format. It should be a valid date,
 e.g. Day 32 or Month 13 is not allowed.
-* `TIME` follows `_HHmm_` format. It should be a valid time period,
+* `TIME` follows `_HH:mm_` format. It should be a valid time period,
 e.g. 24:00 is not allowed.
 * Duplicate task descriptions in the same module or across modules are allowed, however,
 these tasks cannot be in the same time period, for example, in the same day.

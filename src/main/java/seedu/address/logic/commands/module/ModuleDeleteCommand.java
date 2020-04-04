@@ -75,9 +75,10 @@ public class ModuleDeleteCommand extends ModuleCommand {
         }
 
         model.deleteModule(moduleToDelete);
-        model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
-        model.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
-        model.removeLessonFromModule(moduleToDelete.getModuleCode());
+        ModuleCode moduleCode = moduleToDelete.getModuleCode();
+        model.deleteModuleCodeFromFacilitatorList(moduleCode);
+        model.deleteTasksWithModuleCode(moduleCode);
+        model.removeLessonFromModule(moduleCode);
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
