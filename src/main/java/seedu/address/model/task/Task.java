@@ -20,7 +20,6 @@ public abstract class Task implements DailySchedulable {
     public abstract boolean isTaskDone();
     public abstract boolean markAsDone();
     public abstract boolean markAsUndone();
-    public abstract boolean isSameTask(Task other);
     public abstract int getTaskNum();
     public abstract Task getClone();
 
@@ -28,6 +27,13 @@ public abstract class Task implements DailySchedulable {
                                            TaskDateTime taskDateTime,
                                            ModuleCode moduleCode) {
         return new ScheduledTask(description, taskDateTime, moduleCode);
+    }
+
+    public static ScheduledTask makeScheduledTask(Description description,
+                                                  TaskDateTime taskDateTime,
+                                                  ModuleCode moduleCode,
+                                                  int taskNum) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum);
     }
 
     public static ScheduledTask makeScheduledTask(Description description,
@@ -45,6 +51,13 @@ public abstract class Task implements DailySchedulable {
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                         ModuleCode moduleCode,
+                                                        int taskNum) {
+        return new NonScheduledTask(description, moduleCode, taskNum);
+    }
+
+
+    public static NonScheduledTask makeNonScheduledTask(Description description,
+                                                        ModuleCode moduleCode,
                                                         int taskNum, boolean isDone) {
         return new NonScheduledTask(description, moduleCode, taskNum, isDone);
     }
@@ -53,8 +66,28 @@ public abstract class Task implements DailySchedulable {
         return "";
     }
 
+    /**
+     * Checks if a task is 'similar'.
+     * Similarity here implies equal ModuleCode and Description.
+     * Tasks with only equal date & time are not considered similar.
+     */
+    public boolean isSameTask(Task otherTask) {
+        // Only checks for similar description and module
+        if (otherTask == this) {
+            return true;
+        }
+
+        if (otherTask == null) {
+            return false;
+        }
+
+        return otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getDescription().equals(getDescription());
+    }
+
     @Override
     public boolean equals(Object other) {
+        // Checks for everything
         if (other == this) {
             return true;
         }
@@ -64,10 +97,11 @@ public abstract class Task implements DailySchedulable {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
+        return otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getDescription().equals(getDescription())
                 && otherTask.getTaskDateTime().equals(getTaskDateTime());
     }
+
     @Override
     public Optional<LocalTime> getComparableTime() {
         return Optional.empty();

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
@@ -38,7 +37,7 @@ public class CalendarTest {
     }
 
     @Test
-    public void isWithinDate() throws ParseException {
+    public void isWithinDate() {
         LocalDate localDate = LocalDate.parse("2020-03-12");
         Calendar calendar = new Calendar(localDate);
         Task task = Task.makeScheduledTask(new Description("read"),

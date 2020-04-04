@@ -17,6 +17,9 @@ public abstract class CmdCommand extends Command {
             String.format("%s %s COMMAND_GROUP", COMMAND_GROUP_CMD, COMMAND_WORD_GROUP);
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
             ALL_FORMAT, GROUP_FORMAT);
+    public static final String MESSAGE_USAGE = "There are 2 cmd commands:\n"
+            + "cmd all\n"
+            + "cmd group COMMAND_GROUP";
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
