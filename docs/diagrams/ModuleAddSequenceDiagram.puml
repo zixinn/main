@@ -19,10 +19,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueModuleList" as UniqueModuleList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("mod add\n /code CS2103T")
+[-> LogicManager : execute(\n"mod add\n /code CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("mod add\n /code CS2103T")
+LogicManager -> ModManagerParser : parseCommand(\n"mod add\n /code CS2103T")
 activate ModManagerParser
 
 create ModuleCommandParser
