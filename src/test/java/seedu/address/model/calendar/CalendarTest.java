@@ -38,7 +38,7 @@ public class CalendarTest {
     }
 
     @Test
-    public void isWithinDate() throws ParseException {
+    public void isWithinDate() {
         LocalDate localDate = LocalDate.parse("2020-03-12");
         Calendar calendar = new Calendar(localDate);
         Task task = Task.makeScheduledTask(new Description("read"),

@@ -1,4 +1,3 @@
-/*
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
@@ -15,9 +14,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.NonScheduledTask;
 import seedu.address.model.task.ScheduledTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.util.TaskDateTime;
 
 public class TypicalTasks {
-
+    /*
     private static ScheduledTask SCHEDULED_ASSIGNMENT_TASK;
     private static ScheduledTask SCHEDULED_HOMEWORK_TASK;
     private static NonScheduledTask NON_SCHEDULED_PROGRAMMING_TASK;
@@ -57,15 +57,24 @@ public class TypicalTasks {
             e.printStackTrace();
         }
     }
+     */
 
+//    Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020")
+//                        new ModuleCode("CS3233"), 111);
+//    Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
+//                        new ModuleCode("CS4223"), 999);
+//    Task.makeNonScheduledTask(new Description("OP2 Presentation"), new ModuleCode("CS2103T"), 314);
 
+    public static final Task SCHEDULED_TASK_1 = new TaskBuilder().withDescription("Programming Assignment 2")
+            .withModuleCode("CS3233").withTaskDateTime(new TaskDateTime("18/03/2020")).withTaskNum(111).build();
+    public static final Task SCHEDULED_TASK_2 = new TaskBuilder().withDescription("Programming Assignment 3")
+            .withModuleCode("CS4223").withTaskDateTime(new TaskDateTime("21/03/2020", "19:30")).withTaskNum(999).build();
+    public static final Task NON_SCHEDULED_TASK_1 = new TaskBuilder().withDescription("OP2 Presentation")
+            .withModuleCode("CS2101").withTaskDateTime(null).withTaskNum(314).build();
     private TypicalTasks() {} // prevents instantiation
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<Task>(Arrays.asList(SCHEDULED_ASSIGNMENT_TASK,
-                SCHEDULED_HOMEWORK_TASK,
-                NON_SCHEDULED_PROGRAMMING_TASK,
-                NON_SCHEDULED_PROGRAMMING_ASSIGNMENT_TASK));
+        return new ArrayList<Task>(Arrays.asList(SCHEDULED_TASK_1, SCHEDULED_TASK_2, NON_SCHEDULED_TASK_1));
     }
 }
-*/
+

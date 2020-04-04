@@ -29,7 +29,9 @@ public class SampleDataUtil {
             new Description("Effective Communication for Computing Professionals")),
             new Module(new ModuleCode("ES2660"), new Description("Communicating in Information Age")),
             new Module(new ModuleCode("MA1521"), new Description("Calculus for Computing")),
-            new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics"))
+            new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics")),
+            new Module(new ModuleCode("CS3233"), new Description("Competitive Programming")),
+            new Module(new ModuleCode("CS4223"), new Description("Multi-core Architectures"))
         };
         return modules;
     }
@@ -57,12 +59,13 @@ public class SampleDataUtil {
         };
     }
 
-    public static Task[] getSampleTasks() throws ParseException {
+    public static Task[] getSampleTasks() {
         return new Task[]{
                 Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020"),
-                        new ModuleCode("CS3233")),
+                        new ModuleCode("CS3233"), 111),
                 Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
-                        new ModuleCode("CS5330"))
+                        new ModuleCode("CS4223"), 999),
+                Task.makeNonScheduledTask(new Description("OP2 Presentation"), new ModuleCode("CS2103T"), 314)
         };
     }
 
@@ -73,6 +76,9 @@ public class SampleDataUtil {
         }
         for (Module sampleModule : getSampleModules()) {
             sampleAb.addModule(sampleModule);
+        }
+        for (Task sampleTask : getSampleTasks()) {
+            sampleAb.addTask(sampleTask);
         }
         return sampleAb;
     }

@@ -21,8 +21,9 @@ class TaskSearchPredicateTest {
     }
 
     @Test
-    void test1() throws ParseException {
+    void test1() {
         TaskSearchPredicate predicate = new TaskSearchPredicate(keywords);
+        assert TaskDateTime.isValidTaskTime("01/04/2020");
         Task task = new ScheduledTask(new Description("1"), new TaskDateTime("01/04/2020"), new ModuleCode("CS2103T"));
         System.out.println(predicate.test(task));
         System.out.println(task.getTaskDateTime());

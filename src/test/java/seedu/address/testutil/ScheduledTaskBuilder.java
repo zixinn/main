@@ -22,7 +22,7 @@ public class ScheduledTaskBuilder {
     private boolean isDone;
     private int taskId;
 
-    public ScheduledTaskBuilder() throws ParseException {
+    public ScheduledTaskBuilder() {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         description = new Description(DEFAULT_DESCRIPTION);
         taskDateTime = new TaskDateTime(DEFAULT_TASK_DATE_TIME);
@@ -50,7 +50,7 @@ public class ScheduledTaskBuilder {
     /**
      * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
      */
-    public ScheduledTaskBuilder withTaskDateTime(String taskDateTime) throws ParseException {
+    public ScheduledTaskBuilder withTaskDateTime(String taskDateTime) {
         this.taskDateTime = new TaskDateTime(taskDateTime);
         return this;
     }

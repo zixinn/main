@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.task.util.TaskNumManager;
@@ -22,7 +21,7 @@ class TaskTest {
     private TaskDateTime sampleTaskDateTime;
 
     @Test
-    void testGetDescription_success() throws ParseException {
+    void testGetDescription_success() {
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("Project pain",
@@ -36,7 +35,7 @@ class TaskTest {
     }
 
     @Test
-    void markAsDone_initiallyNotDoneTask_success() throws ParseException {
+    void markAsDone_initiallyNotDoneTask_success() {
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         Task task = Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode);
         assertFalse(task.isTaskDone());
@@ -45,7 +44,7 @@ class TaskTest {
     }
 
     @Test
-    void markAsDone_alreadyDoneTask_notifyTaskMarkedAsDone() throws ParseException {
+    void markAsDone_alreadyDoneTask_notifyTaskMarkedAsDone() {
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         Task task = Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode);
         assertFalse(task.isTaskDone());
@@ -54,7 +53,7 @@ class TaskTest {
     }
 
     @Test
-    void isTaskDone_newlyCreatedTask_false() throws ParseException {
+    void isTaskDone_newlyCreatedTask_false() {
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertFalse(
@@ -67,7 +66,7 @@ class TaskTest {
     }
 
     @Test
-    void isTaskDone_markedAsDoneTask_true() throws ParseException {
+    void isTaskDone_markedAsDoneTask_true() {
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         List<Task> tasks = new ArrayList<>();
@@ -93,14 +92,14 @@ class TaskTest {
     }
 
     @Test
-    void isTimeStringOnlyDate() throws ParseException {
+    void isTimeStringOnlyDate() {
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         assertEquals("18/03/2020",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateOnly, sampleModCode).getTimeString());
     }
 
     @Test
-    void isTimeStringDateTime() throws ParseException {
+    void isTimeStringDateTime() {
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("18/03/2020 18:30",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode).getTimeString());
@@ -115,7 +114,7 @@ class TaskTest {
     }
 
     @Test
-    void testToString_onlyTaskDateAvailable_success() throws ParseException {
+    void testToString_onlyTaskDateAvailable_success() {
         int num = TaskNumManager.getNum(sampleModCode);
         sampleTaskDateOnly = new TaskDateTime("18/03/2020");
         assertEquals("[x] [CS4246 " + num + "] Project pain 18/03/2020",
@@ -124,11 +123,25 @@ class TaskTest {
     }
 
     @Test
-    void testToString_bothTaskDateAndTimeAvailable_success() throws ParseException {
+    void testToString_bothTaskDateAndTimeAvailable_success() {
         int num = TaskNumManager.getNum(sampleModCode);
         sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
         assertEquals("[x] [CS4246 " + num + "] Project pain 18/03/2020 18:30",
                 Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode, num, false).toString());
+        TaskNumManager.removeNum(sampleModCode, num);
+    }
+
+    @Test
+    void sameTask_test() {
+        int num = TaskNumManager.getNum(sampleModCode);
+        sampleTaskDateTime = new TaskDateTime("18/03/2020", "18:30");
+        Task t1 = Task.makeScheduledTask(sampleDescription, sampleTaskDateTime, sampleModCode, num);
+        Task t2 = Task.makeNonScheduledTask(sampleDescription, sampleModCode, num);
+        Task t3 = Task.makeNonScheduledTask(new Description("bruh"), sampleModCode, num);
+        assertTrue(t1.isSameTask(t2));
+        assertFalse(t2.isSameTask(t3));
+        assertFalse(t1.isSameTask(t3));
+        assertFalse(t3.isSameTask(t2));
         TaskNumManager.removeNum(sampleModCode, num);
     }
 }

@@ -32,6 +32,13 @@ public abstract class Task implements DailySchedulable {
     public static ScheduledTask makeScheduledTask(Description description,
                                                   TaskDateTime taskDateTime,
                                                   ModuleCode moduleCode,
+                                                  int taskNum) {
+        return new ScheduledTask(description, taskDateTime, moduleCode, taskNum);
+    }
+
+    public static ScheduledTask makeScheduledTask(Description description,
+                                                  TaskDateTime taskDateTime,
+                                                  ModuleCode moduleCode,
                                                   int taskNum,
                                                   boolean isDone) {
         return new ScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
@@ -44,6 +51,13 @@ public abstract class Task implements DailySchedulable {
 
     public static NonScheduledTask makeNonScheduledTask(Description description,
                                                         ModuleCode moduleCode,
+                                                        int taskNum) {
+        return new NonScheduledTask(description, moduleCode, taskNum);
+    }
+
+
+    public static NonScheduledTask makeNonScheduledTask(Description description,
+                                                        ModuleCode moduleCode,
                                                         int taskNum, boolean isDone) {
         return new NonScheduledTask(description, moduleCode, taskNum, isDone);
     }
@@ -53,6 +67,7 @@ public abstract class Task implements DailySchedulable {
     }
 
     public boolean isSameTask(Task otherTask) {
+        // Only checks for similar description and module
         if (otherTask == this) {
             return true;
         }
@@ -62,12 +77,12 @@ public abstract class Task implements DailySchedulable {
         }
 
         return otherTask.getModuleCode().equals(getModuleCode())
-                && (otherTask.getTaskNum() == getTaskNum()
-                || otherTask.getDescription().equals(getDescription()));
+                && otherTask.getDescription().equals(getDescription());
     }
 
     @Override
     public boolean equals(Object other) {
+        // Checks for everything
         if (other == this) {
             return true;
         }

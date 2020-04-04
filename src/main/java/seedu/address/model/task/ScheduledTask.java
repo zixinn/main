@@ -124,20 +124,4 @@ public class ScheduledTask extends Task {
         return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString()
                 + " " + taskDateTime.toString();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof ScheduledTask)) {
-            return false;
-        }
-
-        ScheduledTask e = (ScheduledTask) o;
-
-        return this.moduleCode.equals(e.moduleCode)
-                && this.taskNum == e.taskNum;
-    }
 }

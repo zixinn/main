@@ -25,6 +25,14 @@ public class NonScheduledTask extends Task {
         TaskNumManager.addNum(moduleCode, taskNum);
     }
 
+    public NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
+        this.description = description;
+        this.moduleCode = moduleCode;
+        this.taskNum = taskNum;
+        this.isDone = false;
+        TaskNumManager.addNum(moduleCode, taskNum);
+    }
+
     public NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
         this.moduleCode = moduleCode;
@@ -98,21 +106,5 @@ public class NonScheduledTask extends Task {
     public String toString() {
         String modShow = String.format("[%s %d]", moduleCode.toString(), taskNum);
         return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof NonScheduledTask)) {
-            return false;
-        }
-
-        NonScheduledTask e = (NonScheduledTask) o;
-
-        return this.moduleCode.equals(e.moduleCode)
-                && this.taskNum == e.taskNum;
     }
 }
