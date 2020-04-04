@@ -43,7 +43,10 @@ public class LessonModCard extends UiPart<Region> {
                 + lesson.getEndTime().toString()));
 
         if (lesson.getVenue() != null) {
-            venue.getChildren().add(new Label(lesson.getVenue()));
+            Label label = new Label(lesson.getVenue());
+            label.setWrapText(true);
+            label.prefWidthProperty().bind(venue.widthProperty());
+            venue.getChildren().add(label);
         }
 
         cardbox.setMinHeight(0);
