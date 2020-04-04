@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.model.module.ModuleCode;
@@ -51,10 +52,12 @@ public class ModuleEditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + DESCRIPTION_DESC_CS2103T, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + DESCRIPTION_DESC_CS2103T,
+                Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + DESCRIPTION_DESC_CS2103T, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + DESCRIPTION_DESC_CS2103T,
+                Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
 
         // invalid module code
         assertParseFailure(parser, "AB12345C" + DESCRIPTION_DESC_CS2103T, MESSAGE_INVALID_FORMAT);

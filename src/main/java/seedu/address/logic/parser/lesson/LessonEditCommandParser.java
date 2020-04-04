@@ -2,6 +2,7 @@ package seedu.address.logic.parser.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
@@ -37,7 +38,13 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (argMultimap.getPreamble().trim().equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+
         ModuleCode target = null;
 
         LessonEditCommand.EditLessonDescriptor editLessonDescriptor = new LessonEditCommand.EditLessonDescriptor();

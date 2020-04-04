@@ -1,13 +1,13 @@
 package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ public class LessonEditCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_throwsException() {
-        String expectedMessage = MESSAGE_INVALID_INDEX;
+        String expectedMessage = MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
         String userInput = " 0 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";

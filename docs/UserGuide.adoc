@@ -388,7 +388,7 @@ Example: `*class* edit 1 /code CS9000 /venue Home`
 
 Deletes the class from the module. There are 2 ways you can delete a class.
 
-Selects a class to be deleted by its index in the full class list. You can view the full class list by using `class list` as stated in section 3.3.2.
+Selects a class to be deleted by its index in the full class list. You can view the full class list by using `*class* list` as stated in section 3.3.2.
 
 Format: `*class* delete INDEX`
 
@@ -399,7 +399,7 @@ Parameter constraints:
 
 Example: `*class* delete 1`
 
-Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `mod view MOD_CODE` as stated in section 3.2.3.
+Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
 Format: `*class* delete INDEX /code MOD_CODE`
 
@@ -438,7 +438,7 @@ these tasks cannot be in the same time period, for example, in the same day.
 
 Marks a task as done in the module.
 Format: `*task* done /code MOD_CODE /id ID_NUMBER` +
-Example: `*task* done /code CS2103T /task 979`
+Example: `*task* done /code CS2103T /id 979`
 
 ==== Viewing all tasks across modules in ModManger
 
@@ -507,8 +507,8 @@ From here on, you will be introduced to Mod Manager's task ID system.
 * A task can be uniquely identified in the system by two things: its associated module and a 3-digit number.
 * A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
 * Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
-* You can find out a task's ID by looking at the general task list - can be viewed with `task list`
-(section 4.4.3) , or the task list of a specific module - can be viewed with `mod view` (section 4.2.3).
+* You can find out a task's ID by looking at the general task list - can be viewed with `*task* list`
+(section 4.4.3) , or the task list of a specific module - can be viewed with `*mod* view` (section 4.2.3).
 ****
 
 You can edit a task's description, its date and time details, or both.
