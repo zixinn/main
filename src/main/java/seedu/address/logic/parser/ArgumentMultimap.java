@@ -51,6 +51,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns number of values for {@code prefix}
+     */
+    public int numOfValuesPresent(Prefix prefix) {
+        return getAllValues(prefix).size();
+    }
+
+    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {

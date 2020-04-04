@@ -37,4 +37,5 @@ public class Messages {
             "The lesson index provided is invalid! "
             + "Index must be a positive integer smaller than or equal to the size of the displayed lesson list "
             + "and should not be blank.";
+    public static final String MESSAGE_TOO_MANY_ARGUMENTS = "Too many arguments provided.";
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
@@ -44,6 +45,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1 || argMultimap.numOfValuesPresent(PREFIX_TYPE) > 1
+                || argMultimap.numOfValuesPresent(PREFIX_AT) > 1 || argMultimap.numOfValuesPresent(PREFIX_VENUE) > 1) {
+            throw new ParseException(MESSAGE_TOO_MANY_ARGUMENTS);
+        }
+
         String venue = null;
         if (arePrefixesPresent(argMultimap, PREFIX_VENUE)) {
             venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE));
@@ -52,13 +58,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
         LessonType lessonType = ParserUtil.parseLessonType(argMultimap.getValue(PREFIX_TYPE));
 
-        String trimmed = argMultimap.getValue(PREFIX_AT).trim();
-        String[] splitted = trimmed.split(" ");
-        if (splitted.length != 3) {
+        int argLen = (argMultimap.getValue(PREFIX_AT).trim()).split(" ").length;
+        if (argLen != 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
         DayOfWeek day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_AT));
-
         LocalTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_AT));
         LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_AT));
 
