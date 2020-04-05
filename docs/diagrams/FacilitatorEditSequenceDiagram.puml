@@ -21,10 +21,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
 end box
 
-[-> LogicManager : execute\n("facil edit 1 \n/phone\n 87654321")
+[-> LogicManager : execute(\n"facil edit 1 \n/phone\n 87654321")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand\n("facil edit 1 \n/phone 87654321")
+LogicManager -> ModManagerParser : parseCommand(\n"facil edit 1 \n/phone 87654321")
 activate ModManagerParser
 
 create FacilCommandParser
@@ -34,7 +34,7 @@ activate FacilCommandParser
 FacilCommandParser --> ModManagerParser
 deactivate FacilCommandParser
 
-ModManagerParser -> FacilCommandParser : parse\n("edit 1 \n/phone 87654321")
+ModManagerParser -> FacilCommandParser : parse("edit 1 \n/phone 87654321")
 activate FacilCommandParser
 
 create FacilEditCommandParser
@@ -44,17 +44,17 @@ activate FacilEditCommandParser
 FacilEditCommandParser --> FacilCommandParser
 deactivate FacilEditCommandParser
 
-FacilCommandParser -> FacilEditCommandParser : parse\n("1 \n/phone 87654321")
+FacilCommandParser -> FacilEditCommandParser : parse("1 \n/phone 87654321")
 activate FacilEditCommandParser
 
 create EditFacilitatorDescriptor
 FacilEditCommandParser -> EditFacilitatorDescriptor
 activate EditFacilitatorDescriptor
 
-EditFacilitatorDescriptor --> FacilEditCommandParser
+EditFacilitatorDescriptor --> FacilEditCommandParser : d
 deactivate EditFacilitatorDescriptor
 
-FacilEditCommandParser -> EditFacilitatorDescriptor : setPhone\n(87654321)
+FacilEditCommandParser -> EditFacilitatorDescriptor : setPhone(\n87654321)
 activate EditFacilitatorDescriptor
 
 EditFacilitatorDescriptor --> FacilEditCommandParser
@@ -87,6 +87,7 @@ FacilEditCommand -> ModelManager : getFilteredFacilitatorList()
 activate ModelManager
 
 ModelManager --> FacilEditCommand : l
+deactivate ModelManager
 
 FacilEditCommand -> ObservableList : get(0)
 activate ObservableList
@@ -106,13 +107,13 @@ deactivate Facilitator
 
 FacilEditCommand --> FacilEditCommand --: n
 
-
 FacilEditCommand -> ModelManager : setFacilitator(f, n)
+activate ModelManager
 
 ModelManager -> ModManager : setFacilitator(f, n)
 activate ModManager
 
-ModManager -> UniqueFacilitatorList : setFacilitator\n(f, n)
+ModManager -> UniqueFacilitatorList : setFacilitator(\nf, n)
 activate UniqueFacilitatorList
 
 UniqueFacilitatorList --> ModManager

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -32,5 +33,7 @@ public class FacilDeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilDeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+
     }
 }

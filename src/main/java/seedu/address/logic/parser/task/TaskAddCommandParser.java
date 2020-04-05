@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.task;
 
+import static seedu.address.commons.core.Messages.MESSAGE_AT_WITHOUT_ON_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -19,6 +21,7 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
+
 /**
  * Parses input arguments and creates a new TaskAddCommand object
  */
@@ -38,12 +41,25 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_ON) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_ON));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
+
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ON)) {
             if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
-                throw new ParseException("/at but no /on? Really? You're in trouble lah.");
+                throw new ParseException(MESSAGE_AT_WITHOUT_ON_ERROR);
             }
             return new TaskAddCommand(Task.makeNonScheduledTask(description, moduleCode));
         } else {

@@ -289,7 +289,7 @@ public class ParserUtil {
     public static TaskDateTime parseDateForTask(String taskDate) throws ParseException {
         requireNonNull(taskDate);
         String trimmedDate = taskDate.trim();
-        if (!TaskDateTime.isValidTaskTime(trimmedDate)) {
+        if (taskDate.length() != 10 || !TaskDateTime.isValidTaskTime(trimmedDate)) {
             throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
         }
         return new TaskDateTime(trimmedDate);
@@ -304,11 +304,9 @@ public class ParserUtil {
     public static TaskDateTime parseDateTimeForTask(String taskDate, String taskTime) throws ParseException {
         requireAllNonNull(taskDate, taskTime);
         String trimmedDate = taskDate.trim();
-        if (!TaskDateTime.isValidTaskTime(trimmedDate)) {
-            throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
-        }
         String trimmedTime = taskTime.trim();
-        if (!TaskDateTime.isValidTaskTime(trimmedTime)) {
+        String toTest = trimmedDate + " " + trimmedTime;
+        if (!TaskDateTime.isValidTaskTime(toTest)) {
             throw new ParseException(TaskDateTime.MESSAGE_CONSTRAINTS);
         }
         return new TaskDateTime(trimmedDate, trimmedTime);

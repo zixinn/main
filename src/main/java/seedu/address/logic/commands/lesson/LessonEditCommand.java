@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
@@ -41,8 +43,6 @@ public class LessonEditCommand extends LessonCommand {
             + PREFIX_AT + " TUESDAY 01:00 02:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
-            "The lesson index provided is invalid";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
     public static final String MESSAGE_INVALID_TIME_RANGE = "The edited lesson clashes with another lesson";
@@ -94,6 +94,12 @@ public class LessonEditCommand extends LessonCommand {
         }
 
         model.setLesson(lessonToEdit, editedLesson);
+
+        model.updateModule(module);
+        model.updateFacilitatorListForModule(
+                new ModuleCodesContainKeywordPredicate(editedLesson.getModuleCode().value));
+        model.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
+
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson), CommandType.LESSON);
     }
 

@@ -10,8 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
+import java.util.logging.Logger;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.core.LogsCenter;
 
 
 
@@ -20,13 +21,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskDateTime implements Comparable {
-    public static final String MESSAGE_CONSTRAINTS = "Date and time should not be empty.";
-
-    /*
-     * The first character of the taskTime must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*"; // to impose stricter requirements!!
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date and time must conform to the format dd/mm/yyyy and hh:mm.\n"
+            + "These data must also be valid!";
 
     private static DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("dd/MM/yyyy[ HH:mm]")
@@ -38,7 +35,11 @@ public class TaskDateTime implements Comparable {
     public static final LocalDateTime SPECIAL_DATE_TIME =
             LocalDate.parse("01/01/1970", dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
 
-    public final LocalDateTime taskTime;
+    private static Logger logger = LogsCenter.getLogger(TaskDateTime.class);
+
+    private LocalDateTime taskTime;
+
+
 
 
     /**
@@ -46,12 +47,14 @@ public class TaskDateTime implements Comparable {
      *
      * @param date A valid date.
      */
-    public TaskDateTime(String date) throws ParseException {
+    public TaskDateTime(String date) {
         checkArgument(isValidTaskTime(date), MESSAGE_CONSTRAINTS);
         try {
             this.taskTime = LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
         } catch (DateTimeParseException dateError) {
-            throw new ParseException(String.format("Invalid date: %s.", date));
+            logger.warning(
+                    String.format(
+                            "%s error: Please include code to check for valid date time first", date));
         }
     }
 
@@ -61,19 +64,16 @@ public class TaskDateTime implements Comparable {
      * @param date A valid date.
      * @param timeInDay time period in day
      */
-    public TaskDateTime(String date, String timeInDay) throws ParseException {
-        checkArgument(isValidTaskTime(date), MESSAGE_CONSTRAINTS);
-        LocalTime timeInTheDay = null;
+    public TaskDateTime(String date, String timeInDay) {
+        checkArgument(isValidTaskTime(date + " " + timeInDay), MESSAGE_CONSTRAINTS);
         try {
-            timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
-        } catch (DateTimeParseException timeError) {
-            throw new ParseException(String.format("Invalid task time: %s.", timeInDay));
-        }
-        try {
+            LocalTime timeInTheDay = LocalTime.parse(timeInDay, dateTimeFormatter.ofPattern("HH:mm"));
             this.taskTime = LocalDateTime.of(LocalDate.parse(date, dateTimeFormatter.ofPattern("dd/MM/yyyy")),
                     timeInTheDay);
-        } catch (DateTimeParseException dateError) {
-            throw new ParseException(String.format("Invalid date: %s.", date));
+        } catch (DateTimeParseException timeError) {
+            logger.warning(
+                    String.format(
+                            "%s %s error: Please include code to check for valid date time first", date, timeInDay));
         }
     }
 
@@ -86,7 +86,37 @@ public class TaskDateTime implements Comparable {
      */
     public static boolean isValidTaskTime(String test) {
         // to have further check on this!
-        return test.matches(VALIDATION_REGEX);
+        logger.info(test);
+        int testLen = test.length();
+        if (testLen != 10 && testLen != 16) {
+            return false;
+        } else if (testLen == 10) {
+            try {
+                LocalDate.parse(test, dateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay();
+            } catch (DateTimeParseException dateStringError) {
+                logger.info("Failed date " + test);
+                return false;
+            }
+            return true;
+        } else {
+            String[] splitted = test.split("\\s");
+            if (splitted.length != 2) {
+                return false;
+            }
+            try {
+                LocalTime.parse(splitted[1], dateTimeFormatter.ofPattern("HH:mm"));
+            } catch (DateTimeParseException timeError) {
+                logger.info("Failed time " + test);
+                return false;
+            }
+            try {
+                LocalDate.parse(splitted[0], dateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException dateError) {
+                logger.info("Failed date " + test);
+                return false;
+            }
+            return true;
+        }
     }
 
     public LocalTime toLocalTime() {
@@ -154,5 +184,18 @@ public class TaskDateTime implements Comparable {
     @Override
     public int hashCode() {
         return taskTime != null ? taskTime.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof TaskDateTime)) {
+            return false;
+        }
+
+        return this.taskTime.equals(((TaskDateTime) obj).taskTime);
     }
 }

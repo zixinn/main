@@ -81,7 +81,7 @@ public class JsonAdaptedTask {
         if (taskTime.length() <= 10) {
             modelTaskTime = new TaskDateTime(taskTime);
         } else {
-            modelTaskTime = new TaskDateTime(taskTime.split(" ")[0], taskTime.split(" ")[1]);
+            modelTaskTime = new TaskDateTime(taskTime.split("\\s")[0], taskTime.split("\\s")[1]);
         }
 
         return Task.makeScheduledTask(modelDescription, modelTaskTime, modelModuleCode, taskNum, isDone);
