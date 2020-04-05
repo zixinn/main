@@ -44,6 +44,7 @@ public class LessonList {
         }
 
         lessons.add(lesson);
+        sortLessonsByDayAndTime();
     }
 
     /**
@@ -83,6 +84,7 @@ public class LessonList {
         } else {
             int index = lessons.indexOf(target);
             lessons.set(index, edited);
+            sortLessonsByDayAndTime();
         }
     }
 
@@ -95,6 +97,7 @@ public class LessonList {
             }
         }
         lessons = replacement;
+        sortLessonsByDayAndTime();
     }
 
     public List<Lesson> getLessonList() {
@@ -148,7 +151,7 @@ public class LessonList {
      * @return The next lesson happening.
      */
     public Lesson findNextLesson() {
-        Collections.sort(lessons);
+        sortLessonsByDayAndTime();
         LocalDate curDate = LocalDate.now();
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
@@ -233,5 +236,9 @@ public class LessonList {
         } else {
             return false;
         }
+    }
+
+    public void sortLessonsByDayAndTime() {
+        Collections.sort(lessons);
     }
 }

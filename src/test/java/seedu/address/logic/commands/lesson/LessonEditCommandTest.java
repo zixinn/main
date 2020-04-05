@@ -31,7 +31,8 @@ public class LessonEditCommandTest {
         Lesson editedLesson = new LessonBuilder().withModuleCode("GEQ1000").withLessonType("TUT").withDay("SUNDAY")
                 .withStartTime("01:00").withEndTime("02:00").withVenue("Home").build();
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode("CS2103T"), INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(model.getLessons().get(0).getModuleCode(),
+                INDEX_FIRST, descriptor);
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
         expectedModel.setLesson(model.getLessons().get(0), editedLesson);
         expectedModel.updateModule(expectedModel.findModule(new ModuleCode("GEQ1000")));
@@ -46,7 +47,8 @@ public class LessonEditCommandTest {
         Lesson editedLesson = new LessonBuilder().withModuleCode("GEQ1000").withDay("SUNDAY")
                 .withStartTime("01:00").withEndTime("02:00").build();
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode("CS2103T"), INDEX_FIRST, descriptor);
+        LessonEditCommand command = new LessonEditCommand(model.getLessons().get(0).getModuleCode(),
+                INDEX_FIRST, descriptor);
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
         expectedModel.setLesson(model.getLessons().get(0), editedLesson);
         expectedModel.updateModule(expectedModel.findModule(new ModuleCode("GEQ1000")));
@@ -73,11 +75,12 @@ public class LessonEditCommandTest {
     }
 
     @Test
-    public void execute_duplicateLessonLessonList_throwsException() {
+    public void execute_unchangedLessonLessonList_throwsException() {
         Lesson lesson = model.getLessons().get(INDEX_FIRST.getZeroBased());
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode("GEQ1000"), INDEX_FIRST, descriptor);
-        assertCommandFailure(command, model, LessonEditCommand.MESSAGE_DUPLICATE_LESSON);
+        LessonEditCommand command = new LessonEditCommand(model.getLessons().get(INDEX_FIRST.getZeroBased())
+                .getModuleCode(), INDEX_FIRST, descriptor);
+        assertCommandFailure(command, model, LessonEditCommand.MESSAGE_USAGE);
     }
 
     @Test

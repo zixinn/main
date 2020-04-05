@@ -52,7 +52,7 @@ public class LessonDeleteCommandTest {
     @Test
     public void execute_validModuleCodeLessonList_success() {
         Lesson lessonToDelete = model.getLessons().get(INDEX_FIRST.getZeroBased());
-        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, Optional.of(new ModuleCode("CS2103T")));
+        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, Optional.of(lessonToDelete.getModuleCode()));
         String expectedMessage = String.format(LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete);
         expectedModel.removeLesson(lessonToDelete);

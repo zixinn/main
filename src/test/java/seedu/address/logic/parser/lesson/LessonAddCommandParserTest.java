@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -29,31 +30,36 @@ public class LessonAddCommandParserTest {
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + userInput, new LessonAddCommand(expectedLesson));
         assertParseSuccess(parser, userInput, new LessonAddCommand(expectedLesson));
+    }
 
-        // multiple module codes -> accept last module code
-        userInput = " " + PREFIX_MODULE_CODE + " " + "GEQ1000" + " " + PREFIX_MODULE_CODE + " "
+    @Test
+    public void parse_multipleArguments_throwsException() {
+        Lesson expectedLesson = new LessonBuilder().build();
+        String expectedMessage = MESSAGE_TOO_MANY_ARGUMENTS;
+        // multiple module codes
+        String userInput = " " + PREFIX_MODULE_CODE + " " + "GEQ1000" + " " + PREFIX_MODULE_CODE + " "
                 + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " " + PREFIX_AT
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
-        assertParseSuccess(parser, userInput, new LessonAddCommand(expectedLesson));
+        assertParseFailure(parser, userInput, expectedMessage);
 
-        // multiple day and time -> accept last
+        // multiple day and time
         userInput = " " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " " + PREFIX_AT
                 + " " + "WEDNESDAY" + " " + "02:00 03:00" + " " + PREFIX_AT
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
 
-        assertParseSuccess(parser, userInput, new LessonAddCommand(expectedLesson));
+        assertParseFailure(parser, userInput, expectedMessage);
 
-        // multiple venues -> accept last venue
+        // multiple venues
         userInput = " " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " " + PREFIX_AT
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + "Home" + " "
                 + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
-        assertParseSuccess(parser, userInput, new LessonAddCommand(expectedLesson));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test

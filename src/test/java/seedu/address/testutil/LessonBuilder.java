@@ -13,7 +13,7 @@ import seedu.address.model.module.ModuleCode;
 public class LessonBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2103T";
     public static final String DEFAULT_LESSON_TYPE = "LEC";
-    public static final String DEFAULT_DAY = "FRIDAY";
+    public static final String DEFAULT_DAY = "MONDAY";
     public static final String DEFAULT_START_TIME = "14:00";
     public static final String DEFAULT_END_TIME = "16:00";
     public static final String DEFAULT_VENUE = "i3-Aud";

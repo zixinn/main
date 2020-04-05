@@ -28,7 +28,7 @@ public class LessonFindCommandTest {
         CommandResult result = command.execute(model);
         String resultString = result.getFeedbackToUser();
         String expectedResult = "Lessons on " + day.toString() + "\n" + "\u2022 "
-                + model.getLessons().get(1).toString() + "\n";
+                + model.findLessonByDay(DayOfWeek.WEDNESDAY).get(0).toString() + "\n";
         assertEquals(resultString, expectedResult);
     }
 
