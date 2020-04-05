@@ -2,6 +2,7 @@ package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -174,7 +175,7 @@ public class LessonEditCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFieldsExcludingModuleCode_acceptsLast() {
+    public void parse_multipletype_acceptsLast() {
         String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_TYPE + " REC "
                 + PREFIX_TYPE + " SEC ";
@@ -184,21 +185,7 @@ public class LessonEditCommandParserTest {
 
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
-        assertParseSuccess(parser, userInput, command);
-    }
-
-    @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
-        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_TYPE + " FREE "
-                + PREFIX_TYPE + " SEC ";
-
-        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withLessonType("SEC").build();
-
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
-                INDEX_FIRST, descriptor);
-        assertParseSuccess(parser, userInput, command);
+        assertParseFailure(parser, userInput, MESSAGE_TOO_MANY_ARGUMENTS);
     }
 
     @Test
