@@ -13,13 +13,18 @@ if () then ([index or name is provided])
                     if () then ([ModManager does not contain edited facilitator])
                         :Model edits facilitator in UniqueFacilitatorList;
                         :Logic saves ModManager to Storage;
+                        :Ui shows the updated facilitator list;
                     else ([else])
+                        :Ui shows error message;
                     endif
                 else ([else])
+                    :Ui shows error message;
                 endif
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     else ([name is provided])
         :Parser parses name;
@@ -32,16 +37,22 @@ if () then ([index or name is provided])
                     if () then ([ModManager does not contain edited facilitator])
                         :Model edits facilitator in UniqueFacilitatorList;
                         :Logic saves ModManager to Storage;
+                        :Ui shows the updated facilitator list;
                     else ([else])
+                        :Ui shows error message;
                     endif
                 else ([else])
+                    :Ui shows error message;
                 endif
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     endif
 else ([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

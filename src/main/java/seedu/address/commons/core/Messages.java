@@ -26,16 +26,17 @@ public class Messages {
     public static final String MESSAGE_ASK_TO_CONFIRM_FACILITATOR =
             "Please input the exact facilitator you want to delete. Facilitator name is case-sensitive.";
     public static final String MESSAGE_FACILITATORS_LISTED_OVERVIEW = "%1$d facilitators listed!";
-    public static final String MESSAGE_FACILITATOR_NOT_FOUND = "Facilitator %s does not exist in Mod Manager.";
+    public static final String MESSAGE_FACILITATOR_NOT_FOUND = "Facilitator %1$s does not exist in Mod Manager.";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_TASKS_UNDONE_OVERVIEW = "%1$d undone tasks are listed!";
     public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! "
             + "Type `task list` to return to the main task list.";
-    public static final String MESSAGE_INVALID_CMD_GROUP = "%s group does not exist.";
+    public static final String MESSAGE_INVALID_CMD_GROUP = "%1$s group does not exist.";
     public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
             "The lesson index provided is invalid! "
             + "Index must be a positive integer smaller than or equal to the size of the displayed lesson list "
             + "and should not be blank.";
-    public static final String MESSAGE_TOO_MANY_ARGUMENTS = "Too many arguments provided.";
+
+    public static final String MESSAGE_TOO_MANY_ARGUMENTS = "There should not be more than %1$s %2$s prefix provided.";
 }

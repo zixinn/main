@@ -13,13 +13,18 @@ if () then ([index or module code is provided])
                     if () then ([ModManager does not contain edited module])
                         :Model edits module in UniqueModuleList;
                         :Logic saves ModManager to Storage;
+                        :Ui shows the updated module list;
                     else ([else])
+                        :Ui shows error message;
                     endif
                 else ([else])
+                    :Ui shows error message;
                 endif
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     else ([module code is provided])
         :Parser parses module code;
@@ -32,16 +37,22 @@ if () then ([index or module code is provided])
                     if () then ([ModManager does not contain edited module])
                         :Model edits module in UniqueModuleList;
                         :Logic saves ModManager to Storage;
+                        :Ui shows the updated module list;
                     else ([else])
+                        :Ui shows error message;
                     endif
                 else ([else])
+                    :Ui shows error message;
                 endif
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     endif
 else ([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

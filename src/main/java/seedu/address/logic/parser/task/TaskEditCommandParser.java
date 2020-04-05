@@ -3,6 +3,7 @@ package seedu.address.logic.parser.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_AT_WITHOUT_ON_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
@@ -49,6 +50,16 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
 
         TaskEditCommand.EditTaskDescriptor editTaskDescriptor =
                 new TaskEditCommand.EditTaskDescriptor();
+
+        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_ON) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_ON));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
             present++;

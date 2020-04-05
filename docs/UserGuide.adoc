@@ -19,6 +19,7 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
+// tag::introduction[]
 Welcome to *Mod Manager*!
 
 *Mod Manager* is a desktop application that assists students in *managing schedules and contacts for their modules* in a semester.
@@ -28,11 +29,14 @@ More importantly, *Mod Manager* is *optimized for those who prefer to work with 
 If you can type fast, Mod Manager can get your management of schedules and contacts done faster than traditional GUI apps.
 
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+// end::introduction[]
 
 == About
 
+// tag::about[]
 This user guide helps you to master how to use Mod Manager.
 It explains the features and commands supported by Mod Manager, with examples to illustrate how the application works.
+// end::about[]
 
 == Quick Start
 
@@ -125,8 +129,11 @@ Format: `*help*`
 
 === Managing modules : `*mod*`
 
+// tag::module[]
+// tag::mod[]
 The commands in this section carry out operations on the module list in Mod Manager.
 Executing these commands will bring you to the Module tab.
+// end::mod[]
 
 ==== Adding a module
 
@@ -187,6 +194,7 @@ you can type the following command:
 .After `*mod* list`
 image::ModListAfter1.png[]
 
+// tag::mod-view[]
 ==== Viewing information of a module
 
 You can view all classes, tasks and facilitators for a module.
@@ -226,6 +234,7 @@ image::ModViewBefore2.png[]
 
 .After `*mod* view CS2103T`
 image::ModViewAfter2.png[]
+// end::mod-view[]
 
 ==== Editing a module
 
@@ -324,6 +333,7 @@ image::ModDeleteBefore2.png[]
 
 .After `*mod* delete CS2103T`
 image::ModDeleteAfter2.png[]
+// end::module[]
 
 === Managing classes : `*class*`
 
@@ -535,6 +545,7 @@ Example: `*task* delete CS2103T 973`
 
 === Managing facilitators : `*facil*`
 
+// tag::facilitator[]
 The commands in this section carry out operations on the facilitator list in Mod Manager.
 Executing these commands will bring you to the Facilitators tab.
 
@@ -738,6 +749,7 @@ image::FacilDeleteBefore2.png[]
 
 .After `*facil* delete Akshay Narayan`
 image::FacilDeleteAfter2.png[]
+// end::facilitator[]
 
 === Managing calendar : `*cal*`
 
@@ -837,16 +849,13 @@ Format: `*exit*`
 
 === Upcoming `[coming in v2.0]`
 
+// tag::upcoming[]
 These features will be available in the next version of Mod Manager.
-
-==== Using indexing command system `[coming in v2.0]`
-
-Accesses modules, classes, tasks and facilitators using an indexing system.
 
 ==== Undoing previous command `[coming in v2.0]`
 Restores the Mod Manager to the state before the previous undoable command was executed.
 
-==== Categorising a tasks `[coming in v2.0]`
+==== Categorising tasks `[coming in v2.0]`
 
 Add tags to a task.
 
@@ -857,6 +866,7 @@ Adds a priority level to a task.
 ==== Receiving reminders `[coming in v2.0]`
 
 Receive reminders for deadlines and events the next day.
+// end::upcoming[]
 
 == FAQ
 
