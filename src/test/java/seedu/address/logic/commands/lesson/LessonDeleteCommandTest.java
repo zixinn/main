@@ -25,7 +25,7 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void execute_invalidModuleCode_throwsException() {
-        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS2101"));
+        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS8000"));
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_CODE);
     }
 

@@ -59,14 +59,6 @@ public class ModManagerParserTest {
     }
 
     @Test
-    public void parseCommand_class() throws Exception {
-        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST)
-                instanceof LessonCommand);
-        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST + " 3")
-                instanceof LessonCommand);
-    }
-
-    @Test
     public void parseCommand_cal() throws Exception {
         assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CAL + " " + Command.COMMAND_WORD_VIEW + " "
                 + PREFIX_WEEK + " this") instanceof CalCommand);

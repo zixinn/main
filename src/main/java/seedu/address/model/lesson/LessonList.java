@@ -228,7 +228,7 @@ public class LessonList {
             } else {
                 sortLessonsByDayAndTime();
                 otherList.sortLessonsByDayAndTime();
-                return lessons == otherList.getLessonList();
+                return lessons.equals(otherList.getLessonList());
             }
         } else {
             return false;
