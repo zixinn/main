@@ -15,7 +15,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.calendar.CalCommand;
 import seedu.address.logic.commands.cmd.CmdCommand;
 import seedu.address.logic.commands.facilitator.FacilCommand;
-import seedu.address.logic.commands.lesson.LessonCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
 import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -56,14 +55,6 @@ public class ModManagerParserTest {
                 instanceof FacilCommand);
         assertTrue(parser.parseCommand(Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_LIST + " 3")
                 instanceof FacilCommand);
-    }
-
-    @Test
-    public void parseCommand_class() throws Exception {
-        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST)
-                instanceof LessonCommand);
-        assertTrue(parser.parseCommand(Command.COMMAND_GROUP_CLASS + " " + Command.COMMAND_WORD_LIST + " 3")
-                instanceof LessonCommand);
     }
 
     @Test

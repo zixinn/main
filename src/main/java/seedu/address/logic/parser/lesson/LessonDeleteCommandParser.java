@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAY
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -16,7 +15,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new LessonDeleteCommand object
@@ -41,14 +39,14 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
             throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        Optional<ModuleCode> moduleCode = Optional.empty();
         if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
                 throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
             }
-            moduleCode = Optional.of(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
+            return new LessonDeleteCommand(index, ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
         }
-        return new LessonDeleteCommand(index, moduleCode);
     }
 
     /**

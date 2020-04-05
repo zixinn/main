@@ -353,12 +353,6 @@ Parameter constraints:
 ****
 Example: `*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
 
-==== Viewing all classes
-
-Shows you a list of classes.
-
-Format: `*class* list`
-
 ==== Finding classes by day
 
 Finds classes occurring on a particular day.
@@ -396,20 +390,7 @@ Example: `*class* edit 1 /code CS9000 /venue Home`
 
 ==== Deleting a class
 
-Deletes the class from the module. There are 2 ways you can delete a class.
-
-Selects a class to be deleted by its index in the full class list. You can view the full class list by using `*class* list` as stated in section 3.3.2.
-
-Format: `*class* delete INDEX`
-
-Parameter constraints:
-****
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Example: `*class* delete 1`
-
-Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
+Deletes the class from the module. Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
 Format: `*class* delete INDEX /code MOD_CODE`
 
@@ -885,14 +866,12 @@ Receive reminders for deadlines and events the next day.
 |  `*cal* view /week next`
 |  `*cal* view /week this`
 
-.5+|Class
+.4+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]`
-|  `*class* delete INDEX` +
-   `*class* delete INDEX /code MOD_CODE`
+|  `*class* delete INDEX /code MOD_CODE`
 |  `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]`
 |  `*class* find /at DAY` +
    `*class* find /next`
-|  `*class* list`
 
 .1+|Clear
 |  `*clear*`

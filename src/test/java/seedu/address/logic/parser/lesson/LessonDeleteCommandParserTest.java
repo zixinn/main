@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.lesson.LessonDeleteCommand;
@@ -25,8 +23,7 @@ public class LessonDeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, " 1 /code CS2103T",
-                new LessonDeleteCommand(INDEX_FIRST, Optional.of(new ModuleCode("CS2103T"))));
-        assertParseSuccess(parser, " 1 ", new LessonDeleteCommand(INDEX_FIRST, Optional.empty()));
+                new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS2103T")));
     }
 
     @Test
