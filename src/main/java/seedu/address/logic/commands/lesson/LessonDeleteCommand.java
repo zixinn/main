@@ -66,4 +66,5 @@ public class LessonDeleteCommand extends LessonCommand {
                 || (other instanceof LessonDeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((LessonDeleteCommand) other).targetIndex)); // state check
     }
+
 }
