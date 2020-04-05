@@ -3,5 +3,6 @@ start
 :User executes module list command;
 :Logic executes command;
 :Model updates filtered module list;
+:Ui shows the module list;
 stop
 @enduml

@@ -10,9 +10,12 @@ if () then ([index or module code provided])
                 :Model updates module viewed;
                 :Model updates facilitator list for module;
                 :Model updates task list for module;
+                :Ui shows classes, tasks and facilitators for module;
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     else ([module code is provided])
         :Parser parses module code;
@@ -22,12 +25,16 @@ if () then ([index or module code provided])
                 :Model updates module viewed;
                 :Model updates facilitator list for module;
                 :Model updates task list for module;
+                :Ui shows classes, tasks and facilitators for module;
             else ([else])
+                :Ui shows error message;
             endif
         else ([else])
+            :Ui shows error message;
         endif
     endif
 else ([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

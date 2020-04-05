@@ -9,11 +9,15 @@ if () then ([name and module code are present])
         and module exists in ModManager])
             :Model adds facilitator to UniqueFacilitatorList;
             :Logic saves ModManager to Storage;
+            :Ui shows the updated facilitator list;
         else ([else])
+            :Ui shows error message;
         endif
     else ([else])
+        :Ui shows error message;
     endif
 else([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

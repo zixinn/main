@@ -5,7 +5,9 @@ start
 if () then ([keyword is not empty])
     :Logic executes command;
     :Model updates filtered facilitator list;
+    :Ui shows the updated facilitator list;
 else ([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

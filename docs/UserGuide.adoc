@@ -839,14 +839,10 @@ Format: `*exit*`
 
 These features will be available in the next version of Mod Manager.
 
-==== Using indexing command system `[coming in v2.0]`
-
-Accesses modules, classes, tasks and facilitators using an indexing system.
-
 ==== Undoing previous command `[coming in v2.0]`
 Restores the Mod Manager to the state before the previous undoable command was executed.
 
-==== Categorising a tasks `[coming in v2.0]`
+==== Categorising tasks `[coming in v2.0]`
 
 Add tags to a task.
 
