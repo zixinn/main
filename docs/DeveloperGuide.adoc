@@ -123,10 +123,10 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Facilitator>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-
 [[Design-Storage]]
 === Storage Component
 
+// tag::storage[]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
@@ -136,6 +136,7 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Mod Manager data in json format and read it back.
+// end::storage[]
 
 [[Design-Commons]]
 === Common Classes
@@ -147,6 +148,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 === Module Management Feature
+
+// tag::module[]
+// tag::mod[]
 The module feature manages the modules in Mod Manager and is represented by the `Module` class.
 A module has a `ModuleCode` and an optional `Description`.
 
@@ -157,7 +161,9 @@ It supports the following operations:
 * view - View information of a module in Mod Manager.
 * edit - Edits a module in Mod Manager.
 * delete - Deletes a module in Mod Manager.
+// end::mod[]
 
+// tag::mod-add[]
 ==== Implementation Details
 
 ===== Adding a module
@@ -186,6 +192,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 
 .Activity Diagram for `mod add` Command
 image::ModuleAddActivityDiagram.png[]
+// end::mod-add[]
 
 ===== Listing all modules
 The list module feature allows users to list all modules in Mod Manager.
@@ -306,6 +313,7 @@ image::ModuleDeleteActivityDiagram.png[]
 ** Cons: More rigid for users.
 
 Alternative 1 is chosen as it gives users more flexibility and is more user-friendly.
+// end::module[]
 
 === Class Management Feature
 The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
@@ -420,7 +428,7 @@ Given below is an example usage scenario and how the lesson delete mechanism beh
 2. `LessonDeleteCommandParser` creates a new `LessonDeleteCommand`.
 3. `LogicManager` executes the `LessonDeleteCommand`.
 4. `LessonDeleteCommand` retrieves the `lesson` to be deleted.
-4. `ModManager` deletes the `Lesson` from `LessonList`.
+5. `ModManager` deletes the `Lesson` from `LessonList`.
 
 The following sequence diagram shows how the lesson delete command works:
 
@@ -706,6 +714,8 @@ and collaborating with the team member responsible for the `Module` component, a
 //ta
 
 === Facilitator Management Feature
+
+// tag::facilitator[]
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
 A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
@@ -852,6 +862,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil delete` Command
 image::FacilitatorDeleteActivityDiagram.png[]
 
+// tag::design-consideration-facilitator[]
 ==== Design Considerations
 
 ===== Aspect: Mutability of `Facilitator` object
@@ -883,6 +894,8 @@ Alternative 1 is chosen as the design is simpler without the need to maintain mu
 ** Cons: Have to iterate through the module list to find the module code for the facilitator.
 
 Alternative 1 is chosen because of ease of implementation due to time constraint.
+// end::design-consideration-facilitator[]
+// end::facilitator[]
 
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
@@ -1108,6 +1121,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is the `Mod Manager` and the *Actor* is the `user`, unless specified otherwise)
 
+// tag::use-case-module[]
 [discrete]
 === Use case: UC01 - Add module
 
@@ -1150,7 +1164,7 @@ Use case ends.
 
 *<<mss, MSS>>*
 
-1.  User requests to view a module and provides the module code.
+1.  User requests to view a module and provides the index or module code.
 2.  Mod Manager shows all information related to the module.
 +
 Use case ends.
@@ -1158,13 +1172,14 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 1a. The given module code is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
 
+// tag::use-case-mod-edit-delete[]
 [discrete]
 === Use case: UC04 - Edit module
 
@@ -1211,6 +1226,8 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
+// end::use-case-mod-edit-delete[]
+// end::use-case-module[]
 
 [discrete]
 === Use case: UC06 - Add class
@@ -1312,6 +1329,7 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+// tag::use-case-facilitator[]
 [discrete]
 === Use case: UC18 - Add facilitator
 
@@ -1414,6 +1432,7 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
+// end::use-case-facilitator[]
 
 [discrete]
 === Use case: UC23 - View calendar
@@ -1477,6 +1496,7 @@ Use case resumes at step 1.
 [appendix]
 == Non Functional Requirements
 
+// tag::nfr[]
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
 .  Should work on different screen sizes.
 .  Should be able to hold up to 250 classes, 250 tasks and 250 facilitators.
@@ -1489,6 +1509,7 @@ Use case resumes at step 1.
 .  Should be intuitive and easy to use, and users should become proficient within an hour.
 .  Should not conflict with other applications or processes.
 .  A developer with one year of experience should be able to add a new feature, including source code modifications and testing, with no more than one week of labour.
+// end::nfr[]
 
 [appendix]
 == Glossary
@@ -1535,6 +1556,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Testing of General Features
 
+// tag::testing-general[]
 . Launching the application.
 
 .. Download the jar file and copy into an empty folder. Double-click the jar file. +
@@ -1555,9 +1577,11 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Edit the data file to contain duplicate modules. Double-click the jar file. +
    Expected: Shows the <<gui, GUI>> with an empty set of modules, classes, tasks and facilitators.
+// end::testing-general[]
 
 === Testing of Module Feature
 
+// tag::testing-module[]
 . Adding a module.
 
 .. Prerequisites: List all modules using the `mod list` command. Module `CS1101S` does not exist in Mod Manager.
@@ -1578,6 +1602,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect mod view commands to try: `mod view`, `mod view x` (where x is negative, 0 or larger than the list size), `mod view x` (where no module with module code x exists) +
    Expected: Similar to previous.
 
+// tag::testing-mod-edit[]
 . Editing a module.
 
 .. Prerequisites: List all modules using the `mod list` command. Multiple modules in the list.
@@ -1587,6 +1612,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect mod edit commands to try: `mod edit`, `mod edit x` (where x is any value), `mod edit x /desc SE` (where x is negative, 0 or larger than the list size), `mod edit 1 /code x` (where a module with module code x exists) +
    Expected: Similar to previous.
+// end::testing-mod-edit[]
 
 . Deleting a module.
 
@@ -1597,9 +1623,11 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect mod delete commands to try: `mod delete`, `mod delete x` (where x is negative, 0 or larger than the list size), `mod delete x` (where no module with module code x exists) +
    Expected: Similar to previous.
+// end::testing-module[]
 
 === Testing of Facilitator Feature
 
+// tag::testing-facilitator[]
 . Adding a facilitator while all facilitators are listed.
 
 .. Prerequisites: List all facilitators using the `facil list` command. A facilitator with the name `Akshay Narayan` does not exist in Mod Manager. Module `CS2103T` exists in Mod Manager. Module `CS1101S` does not exist in Mod Manager.
@@ -1639,3 +1667,4 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No facilitator is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect facil delete commands to try: `facil delete`, `facil delete x` (where x is negative, 0 or larger than the list size), `facil delete x` (where no facilitator with name x exists) +
    Expected: Similar to previous.
+// end::testing-facilitator[]
