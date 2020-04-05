@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
 
@@ -31,6 +32,13 @@ public class LessonFindCommandParser implements Parser<LessonFindCommand> {
         } else if (arePrefixesPresent(argumentMultimap, PREFIX_AT)
                 && arePrefixesPresent(argumentMultimap, PREFIX_NEXT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonFindCommand.MESSAGE_USAGE));
+        }
+
+        if (argumentMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
+        if (argumentMultimap.numOfValuesPresent(PREFIX_NEXT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NEXT));
         }
 
         DayOfWeek day = null;

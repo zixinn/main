@@ -34,15 +34,13 @@ public class LessonAddCommandParserTest {
 
     @Test
     public void parse_multipleArguments_throwsException() {
-        Lesson expectedLesson = new LessonBuilder().build();
-        String expectedMessage = MESSAGE_TOO_MANY_ARGUMENTS;
         // multiple module codes
         String userInput = " " + PREFIX_MODULE_CODE + " " + "GEQ1000" + " " + PREFIX_MODULE_CODE + " "
                 + LessonBuilder.DEFAULT_MODULE_CODE + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " " + PREFIX_AT
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
 
         // multiple day and time
         userInput = " " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
@@ -51,7 +49,7 @@ public class LessonAddCommandParserTest {
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
 
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
 
         // multiple venues
         userInput = " " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
@@ -59,7 +57,7 @@ public class LessonAddCommandParserTest {
                 + " " + LessonBuilder.DEFAULT_DAY + " " + LessonBuilder.DEFAULT_START_TIME + " "
                 + LessonBuilder.DEFAULT_END_TIME + " " + PREFIX_VENUE + " " + "Home" + " "
                 + PREFIX_VENUE + " " + LessonBuilder.DEFAULT_VENUE + " ";
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_VENUE));
     }
 
     @Test

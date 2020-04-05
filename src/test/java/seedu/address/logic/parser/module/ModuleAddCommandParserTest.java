@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.module;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
@@ -11,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalModules.CS2101;
@@ -33,14 +36,6 @@ public class ModuleAddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2101,
                 new ModuleAddCommand(expectedModule));
-
-        // multiple module codes - last module code accepted
-        assertParseSuccess(parser, MODULE_CODE_DESC_CS2103T + MODULE_CODE_DESC_CS2101
-                + DESCRIPTION_DESC_CS2101, new ModuleAddCommand(expectedModule));
-
-        // multiple descriptions - last description accepted
-        assertParseSuccess(parser, MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2103T
-                + DESCRIPTION_DESC_CS2101, new ModuleAddCommand(expectedModule));
     }
 
     @Test
@@ -48,6 +43,17 @@ public class ModuleAddCommandParserTest {
         // missing description
         Module expectedModule = new ModuleBuilder().withDescription(null).build();
         assertParseSuccess(parser, MODULE_CODE_DESC_CS2103T, new ModuleAddCommand(expectedModule));
+    }
+
+    @Test
+    public void parse_tooManyArguments_failure() {
+        // multiple module codes
+        assertParseFailure(parser, MODULE_CODE_DESC_CS2103T + MODULE_CODE_DESC_CS2101
+                + DESCRIPTION_DESC_CS2101, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+
+        // multiple descriptions
+        assertParseFailure(parser, MODULE_CODE_DESC_CS2101 + DESCRIPTION_DESC_CS2103T
+                + DESCRIPTION_DESC_CS2101, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
     }
 
     @Test

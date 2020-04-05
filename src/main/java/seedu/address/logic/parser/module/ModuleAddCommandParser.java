@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.module;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -33,6 +34,13 @@ public class ModuleAddCommandParser implements Parser<ModuleAddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleAddCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));

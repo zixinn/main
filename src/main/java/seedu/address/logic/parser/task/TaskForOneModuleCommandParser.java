@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
@@ -13,7 +14,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
-
 
 /**
  * Parses input arguments and creates a new TaskFindCommand objecNt
@@ -31,6 +31,10 @@ public class TaskForOneModuleCommandParser implements Parser<TaskForOneModuleCom
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TaskForOneModuleCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
