@@ -221,17 +221,14 @@ public class LessonList {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else if (other instanceof LessonList) {
+        } else if (other instanceof LessonList && lessons.size() == ((LessonList) other).getLessonList().size()) {
             LessonList otherList = (LessonList) other;
             if (lessons.size() != otherList.getLessonList().size()) {
                 return false;
             } else {
-                for (int i = 0; i < lessons.size(); i++) {
-                    if (!lessons.get(i).equals(otherList.getLessonList().get(i))) {
-                        return false;
-                    }
-                }
-                return true;
+                sortLessonsByDayAndTime();
+                otherList.sortLessonsByDayAndTime();
+                return lessons == otherList.getLessonList();
             }
         } else {
             return false;

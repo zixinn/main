@@ -15,15 +15,16 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
-participant "l:ArrayList" as ArrayList MODEL_COLOR
+participant "l:ObservableList" as ObservableList MODEL_COLOR
 participant ":ModManager" as ModManager MODEL_COLOR
-participant ":LessonList" as ArrayList MODEL_COLOR
+participant ":LessonList" as ObservableList MODEL_COLOR
+participant ":ArrayList" as ArrayList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("class delete 1")
+[-> LogicManager : execute("class delete 1\n/code CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("class delete 1")
+LogicManager -> ModManagerParser : parseCommand("class delete 1\n/code CS2103T")
 activate ModManagerParser
 
 create LessonCommandParser
@@ -33,7 +34,7 @@ activate LessonCommandParser
 LessonCommandParser --> ModManagerParser
 deactivate LessonCommandParser
 
-ModManagerParser -> LessonCommandParser : parse("delete 1")
+ModManagerParser -> LessonCommandParser : parse("delete 1\n/code CS2103T")
 activate LessonCommandParser
 
 create LessonDeleteCommandParser
@@ -43,11 +44,11 @@ activate LessonDeleteCommandParser
 LessonDeleteCommandParser --> LessonCommandParser
 deactivate LessonDeleteCommandParser
 
-LessonCommandParser -> LessonDeleteCommandParser : parse("1")
+LessonCommandParser -> LessonDeleteCommandParser : parse("1\n/code CS2103T")
 activate LessonDeleteCommandParser
 
 create LessonDeleteCommand
-LessonDeleteCommandParser -> LessonDeleteCommand : LessonDeleteCommand(1, Optional.empty())
+LessonDeleteCommandParser -> LessonDeleteCommand : LessonDeleteCommand(1,\nCS2103T)
 activate LessonDeleteCommand
 
 LessonDeleteCommand --> LessonDeleteCommandParser : d
@@ -69,27 +70,27 @@ deactivate ModManagerParser
 LogicManager -> LessonDeleteCommand : execute()
 activate LessonDeleteCommand
 
-LessonDeleteCommand -> ModelManager : getLessonList()
+LessonDeleteCommand -> ModelManager : getLessonListForModule(CS2103T)
 activate ModelManager
 
 ModelManager --> LessonDeleteCommand : l
 
-LessonDeleteCommand -> ArrayList : get(0)
-activate ArrayList
+LessonDeleteCommand -> ObservableList : get(0)
+activate ObservableList
 
-ArrayList --> LessonDeleteCommand : f
-deactivate ArrayList
+ObservableList --> LessonDeleteCommand : f
+deactivate ObservableList
 
 LessonDeleteCommand -> ModelManager : removeLesson(f)
 
 ModelManager -> ModManager : removeLesson(f)
 activate ModManager
 
-ModManager -> LessonList : deleteLesson(f)
-activate LessonList
+ModManager -> ArrayList : deleteLesson(f)
+activate ArrayList
 
-LessonList --> ModManager
-deactivate LessonList
+ArrayList --> ModManager
+deactivate ArrayList
 
 ModManager --> ModelManager
 deactivate ModManager

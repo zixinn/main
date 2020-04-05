@@ -284,27 +284,6 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity Diagram for `class add` Command
 image::LessonAddActivityDiagram.png[]
 
-===== Listing a class
-The list class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser` and `LessonAddCommand`.
-
-Given below is an example usage scenario and how the lesson list mechanism behaves at each step.
-
-1. The user executes the lesson list command.
-2. `LessonListCommandParser` creates a new `LessonListCommand`.
-3. `LogicManager` executes the `LessonListCommand`.
-
-The following sequence diagram shows how the lesson list command works:
-
-.Sequence Diagram for `class list` Command
-image::LessonListSequenceDiagram.png[]
-
-NOTE: The lifeline for `LessonCommandParser` and `LessonListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
-The following activity diagram summarizes what happens when a user executes a lesson list command:
-
-.Activity Diagram for `class list` Command
-image::LessonListActivityDiagram.png[]
-
 ===== Finding a class
 The find class command allows user to find a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonFindCommandParser` and `LessonFindCommand`. The operation is exposed in the `Model` interface as `Model#findNextLesson()` and `Model#findLessonByDay`.
 
