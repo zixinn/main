@@ -15,7 +15,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.calendar.CalCommand;
 import seedu.address.logic.commands.cmd.CmdCommand;
 import seedu.address.logic.commands.facilitator.FacilCommand;
-import seedu.address.logic.commands.lesson.LessonCommand;
 import seedu.address.logic.commands.module.ModuleCommand;
 import seedu.address.logic.commands.task.TaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
