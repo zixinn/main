@@ -41,7 +41,7 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
 
         if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
-                throw new ParseException(MESSAGE_TOO_MANY_ARGUMENTS);
+                throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
             }
             return new LessonDeleteCommand(index, ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
         } else {

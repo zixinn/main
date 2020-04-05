@@ -3,6 +3,7 @@ package seedu.address.logic.parser.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_AT_WITHOUT_ON_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
@@ -50,6 +51,16 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         TaskEditCommand.EditTaskDescriptor editTaskDescriptor =
                 new TaskEditCommand.EditTaskDescriptor();
 
+        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_ON) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_ON));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
+
         if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
             present++;
             editTaskDescriptor.setDescription(
@@ -57,6 +68,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_ON) != null) {
+            System.out.println(argMultimap.getValue(PREFIX_ON));
             present++;
             TaskDateTime taskDateTime;
             if (argMultimap.getValue(PREFIX_ON).trim().equals(TaskEditCommand.SPECIAL_VALUE_NON)) {
@@ -65,6 +77,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
                     throw new ParseException(TaskEditCommand.MESSAGE_NON_HAS_NO_TAILS);
                 }
             } else if (argMultimap.getValue(PREFIX_AT) != null) {
+                System.out.println(argMultimap.getValue(PREFIX_AT));
                 taskDateTime = ParserUtil.parseDateTimeForTask(
                         argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT));
             } else {

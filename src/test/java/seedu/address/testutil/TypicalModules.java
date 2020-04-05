@@ -27,14 +27,14 @@ public class TypicalModules {
             .withDescription("Calculus for Computing").build();
     public static final Module GEQ1000 = new ModuleBuilder().withModuleCode("GEQ1000")
             .withDescription("Asking Questions").build();
-
-    // Manually added - Module's details found in {@code CommandTestUtil}
-    public static final Module CS1101S = new ModuleBuilder().withModuleCode("CS1101S")
-            .withDescription("Programming Methodology").build();
+    public static final Module CS3233 = new ModuleBuilder().withModuleCode("CS3233")
+            .withDescription("Competitive Programming").build();
+    public static final Module CS4223 = new ModuleBuilder().withModuleCode("CS4223")
+            .withDescription("Multi-core Architectures").build();
 
     private TypicalModules() {} // prevents instantiation
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, ES2660, ST2334, MA1521, GEQ1000));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, ES2660, ST2334, MA1521, GEQ1000, CS4223));
     }
 }

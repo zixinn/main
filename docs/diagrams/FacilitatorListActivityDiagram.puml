@@ -3,5 +3,6 @@ start
 :User executes facilitator list command;
 :Logic executes command;
 :Model updates filtered facilitator list;
+:Ui shows the facilitator list;
 stop
 @enduml

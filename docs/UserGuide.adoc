@@ -19,6 +19,7 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
+// tag::introduction[]
 Welcome to *Mod Manager*!
 
 *Mod Manager* is a desktop application that assists students in *managing schedules and contacts for their modules* in a semester.
@@ -28,11 +29,14 @@ More importantly, *Mod Manager* is *optimized for those who prefer to work with 
 If you can type fast, Mod Manager can get your management of schedules and contacts done faster than traditional GUI apps.
 
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+// end::introduction[]
 
 == About
 
+// tag::about[]
 This user guide helps you to master how to use Mod Manager.
 It explains the features and commands supported by Mod Manager, with examples to illustrate how the application works.
+// end::about[]
 
 == Quick Start
 
@@ -125,8 +129,11 @@ Format: `*help*`
 
 === Managing modules : `*mod*`
 
+// tag::module[]
+// tag::mod[]
 The commands in this section carry out operations on the module list in Mod Manager.
 Executing these commands will bring you to the Module tab.
+// end::mod[]
 
 ==== Adding a module
 
@@ -187,6 +194,7 @@ you can type the following command:
 .After `*mod* list`
 image::ModListAfter1.png[]
 
+// tag::mod-view[]
 ==== Viewing information of a module
 
 You can view all classes, tasks and facilitators for a module.
@@ -226,6 +234,7 @@ image::ModViewBefore2.png[]
 
 .After `*mod* view CS2103T`
 image::ModViewAfter2.png[]
+// end::mod-view[]
 
 ==== Editing a module
 
@@ -324,6 +333,7 @@ image::ModDeleteBefore2.png[]
 
 .After `*mod* delete CS2103T`
 image::ModDeleteAfter2.png[]
+// end::module[]
 
 === Managing classes : `*class*`
 
@@ -338,7 +348,7 @@ Parameter constraints:
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
-* START_TIME and END_TIME should be in 24 hour HH:MM format.
+* START_TIME and END_TIME should be in 24 hour HH:mm format.
 * VENUE is optional
 ****
 Example: `*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
@@ -373,7 +383,7 @@ Parameter constraints:
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
-* START_TIME and END_TIME should be in 24 hour HH:MM format.
+* START_TIME and END_TIME should be in 24 hour HH:mm format.
 * At least one of the optional fields must be provided.
 ****
 Example: `*class* edit 1 /code CS9000 /venue Home`
@@ -409,10 +419,10 @@ Parameter constraints:
 if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is not allowed.
 * `DATE` follows `_dd/MM/yyyy_` format. It should be a valid date,
 e.g. Day 32 or Month 13 is not allowed.
-* `TIME` follows `_HHmm_` format. It should be a valid time period,
+* `TIME` follows `_HH:mm_` format. It should be a valid time period,
 e.g. 24:00 is not allowed.
-* Duplicate task descriptions in the same module or across modules are allowed, however,
-these tasks cannot be in the same time period, for example, in the same day.
+* Duplicate tasks across modules are allowed. However,
+tasks within a same module must have different descriptions. They can occupy the same time period.
 ****
 
 ==== Marking a task as done
@@ -516,6 +526,7 @@ Example: `*task* delete CS2103T 973`
 
 === Managing facilitators : `*facil*`
 
+// tag::facilitator[]
 The commands in this section carry out operations on the facilitator list in Mod Manager.
 Executing these commands will bring you to the Facilitators tab.
 
@@ -719,6 +730,7 @@ image::FacilDeleteBefore2.png[]
 
 .After `*facil* delete Akshay Narayan`
 image::FacilDeleteAfter2.png[]
+// end::facilitator[]
 
 === Managing calendar : `*cal*`
 
@@ -784,7 +796,10 @@ SUNDAY: +
 
 ==== Listing all commands
 
-Lists all valid commands.
+Lists all valid command groups.
+
+The command groups available in `ModManager` are the words in bold you have seen throughout this document.
+These include: `*facil*, *mod*, *task*, ...`
 
 Format: `*cmd* all`
 
@@ -815,16 +830,13 @@ Format: `*exit*`
 
 === Upcoming `[coming in v2.0]`
 
+// tag::upcoming[]
 These features will be available in the next version of Mod Manager.
-
-==== Using indexing command system `[coming in v2.0]`
-
-Accesses modules, classes, tasks and facilitators using an indexing system.
 
 ==== Undoing previous command `[coming in v2.0]`
 Restores the Mod Manager to the state before the previous undoable command was executed.
 
-==== Categorising a tasks `[coming in v2.0]`
+==== Categorising tasks `[coming in v2.0]`
 
 Add tags to a task.
 
@@ -835,6 +847,7 @@ Adds a priority level to a task.
 ==== Receiving reminders `[coming in v2.0]`
 
 Receive reminders for deadlines and events the next day.
+// end::upcoming[]
 
 == FAQ
 

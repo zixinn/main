@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -27,6 +28,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS4
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
@@ -54,27 +59,9 @@ public class FacilAddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
 
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
-
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
-
-        // multiple offices - last office accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
-                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101, new FacilAddCommand(expectedFacilitator));
-
         // chain of multiple module codes - all accepted
-        Facilitator expectedWithChain = new FacilitatorBuilder(BOB)
-                .withModuleCodes(VALID_MODULE_CODE_CS2101, VALID_MODULE_CODE_CS2103T,
-                        VALID_MODULE_CODE_CS4215, VALID_MODULE_CODE_CS3230)
-                .build();
+        Facilitator expectedWithChain = new FacilitatorBuilder(BOB).withModuleCodes(VALID_MODULE_CODE_CS2101,
+                VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS4215, VALID_MODULE_CODE_CS3230).build();
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + OFFICE_DESC_BOB + MODULE_CODE_CHAIN, new FacilAddCommand(expectedWithChain));
     }
@@ -100,6 +87,30 @@ public class FacilAddCommandParserTest {
         expectedFacilitator = new FacilitatorBuilder(AMY).withPhone(null).withOffice(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2101,
                 new FacilAddCommand(expectedFacilitator));
+    }
+
+    @Test
+    public void parse_tooManyArguments_failure() {
+        // multiple names
+        assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101,
+                String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NAME));
+
+        // multiple phones
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101,
+                String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_PHONE));
+
+        // multiple emails
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101,
+                String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_EMAIL));
+
+        // multiple offices
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + OFFICE_DESC_AMY
+                + OFFICE_DESC_BOB + MODULE_CODE_DESC_CS2101,
+                String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_OFFICE));
+
     }
 
     @Test

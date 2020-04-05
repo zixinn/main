@@ -2,6 +2,7 @@ package seedu.address.logic.parser.facilitator;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -60,6 +61,19 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
             }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_NAME) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NAME));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_PHONE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_PHONE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_EMAIL) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_EMAIL));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_OFFICE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_OFFICE));
         }
 
         FacilEditCommand.EditFacilitatorDescriptor editFacilitatorDescriptor =

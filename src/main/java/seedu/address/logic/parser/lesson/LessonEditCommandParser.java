@@ -60,11 +60,17 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 2
-                || argMultimap.numOfValuesPresent(PREFIX_TYPE) > 1
-                || argMultimap.numOfValuesPresent(PREFIX_AT) > 1
-                || argMultimap.numOfValuesPresent(PREFIX_VENUE) > 1) {
-            throw new ParseException(MESSAGE_TOO_MANY_ARGUMENTS);
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 2) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "two", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_TYPE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TYPE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_VENUE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_VENUE));
         }
 
         List<String> mods = argMultimap.getAllValues(PREFIX_MODULE_CODE);

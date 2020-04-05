@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 
@@ -25,9 +27,6 @@ public class LessonDeleteCommand extends LessonCommand {
             + "Parameters: INDEX (must be a positive number) " + PREFIX_MODULE_CODE + " MOD_CODE\n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
             + " 1 " + PREFIX_MODULE_CODE + " CS2103T\n";
-
-    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
-            "The lesson index provided is invalid";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 

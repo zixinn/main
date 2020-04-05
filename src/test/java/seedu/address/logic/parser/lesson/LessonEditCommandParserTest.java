@@ -185,7 +185,7 @@ public class LessonEditCommandParserTest {
 
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
-        assertParseFailure(parser, userInput, MESSAGE_TOO_MANY_ARGUMENTS);
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TYPE));
     }
 
     @Test
