@@ -335,6 +335,8 @@ image::ModDeleteBefore2.png[]
 image::ModDeleteAfter2.png[]
 // end::module[]
 
+// tag::class[]
+
 === Managing classes : `*class*`
 
 ==== Adding a class
@@ -400,6 +402,8 @@ Parameter constraints:
 ****
 
 Example: `*class* delete 1 /code CS2103T`
+
+// end::class[]
 
 === Managing tasks : `*task*`
 

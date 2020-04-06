@@ -315,6 +315,8 @@ image::ModuleDeleteActivityDiagram.png[]
 Alternative 1 is chosen as it gives users more flexibility and is more user-friendly.
 // end::module[]
 
+//tag::class[]
+
 === Class Management Feature
 The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
 A class has a `ModuleCode`, `LessonType`, `day` which is a `DayOfWeek` object, `startTime`, `endTime` which are `LocalTime` objects and `venue` which is a `String`.
@@ -325,6 +327,7 @@ It supports the following operations:
 * list - Lists all classes in Mod Manager.
 * edit - Edits a class in Mod Manager.
 * delete - Deletes a class in Mod Manager.
+
 
 ==== Implementation Details
 
@@ -430,6 +433,8 @@ image::LessonDeleteActivityDiagram.png[]
 * **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
 ** Pros: Easier to parse and less invalid inputs to take note of. User can also edit any field.
 ** Cons: More prefixes to remember and command will be very lengthy.
+
+//end::class[]
 
 === Task Management Feature
 The task feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
@@ -1018,6 +1023,7 @@ Refer to the guide <<DevOps#, here>>.
 * view schedule and tasks for the current and upcoming week easily
 * navigate easily with the command assistant for quicker management
 
+//tag::user-stories[]
 [appendix]
 == User Stories
 
@@ -1094,6 +1100,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |visual user |see a clear <<gui, GUI>> |navigate the App more easily
 |=======================================================================
+
+//end::user-stories[]
 
 [appendix]
 == Use Cases
@@ -1208,6 +1216,8 @@ Use case resumes at step 1.
 // end::use-case-mod-edit-delete[]
 // end::use-case-module[]
 
+// tag::use-case-class[]
+
 [discrete]
 === Use case: UC06 - Add class
 *<<mss, MSS>>*
@@ -1307,6 +1317,8 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
+
+// end::use-case-class[]
 
 [discrete]
 === Use case: UC12 - Add task
