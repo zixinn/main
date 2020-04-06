@@ -1237,16 +1237,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC07 - List classes
-*<<mss, MSS>>*
-
-1. User request to list all the classes.
-2. Mod Manager replies with the list of all classes.
-+
-Use case ends.
-
-[discrete]
-=== Use case: UC08 - Find class by day
+=== Use case: UC07 - Find class by day
 *<<mss, MSS>>*
 
 1. User request to list all the classes by day and provides the day.
@@ -1268,7 +1259,7 @@ Use case resumes at step 1.
 Use case ends.
 
 [discrete]
-=== Use case: UC09 - Find next class
+=== Use case: UC08 - Find next class
 *<<mss, MSS>>*
 
 1. User request to find the next class.
@@ -1283,7 +1274,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC10 - Edit class
+=== Use case: UC09 - Edit class
 *<<mss, MSS>>*
 
 1. User request to edit a class and provides the index and necessary details to be edited.
@@ -1301,7 +1292,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC11 - Delete class
+=== Use case: UC10 - Delete class
 *<<mss, MSS>>*
 
 1. User requests to delete a class and provides the index.
@@ -1321,35 +1312,35 @@ Use case resumes at step 1.
 // end::use-case-class[]
 
 [discrete]
-=== Use case: UC12 - Add task
+=== Use case: UC11 - Add task
 
 [discrete]
-=== Use case: UC13 - Mark task as done
+=== Use case: UC12 - Mark task as done
 
 [discrete]
-=== Use case: UC14 - List tasks
+=== Use case: UC13 - List tasks
 
 [discrete]
-=== Use case: UC15 - List tasks for a specific module
+=== Use case: UC14 - List tasks for a specific module
 
 [discrete]
-=== Use case: UC16 - List undone tasks
+=== Use case: UC15 - List undone tasks
 
 [discrete]
-=== Use case: UC17 - Find task by description
+=== Use case: UC16 - Find task by description
 
 [discrete]
-=== Use cse: UC18 - Search task by date
+=== Use cse: UC17 - Search task by date
 
 [discrete]
-=== Use case: UC19 - Edit task
+=== Use case: UC18 - Edit task
 
 [discrete]
-=== Use case: UC20 - Delete task
+=== Use case: UC19 - Delete task
 
 // tag::use-case-facilitator[]
 [discrete]
-=== Use case: UC21 - Add facilitator
+=== Use case: UC20 - Add facilitator
 
 *<<mss, MSS>>*
 
@@ -1377,7 +1368,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC22 - List facilitators
+=== Use case: UC21 - List facilitators
 
 *<<mss, MSS>>*
 
@@ -1387,7 +1378,7 @@ Use case resumes at step 1.
 Use case ends.
 
 [discrete]
-=== Use case: UC23 - Find facilitator
+=== Use case: UC22 - Find facilitator
 
 *<<mss, MSS>>*
 
@@ -1404,7 +1395,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC24 - Edit facilitator
+=== Use case: UC23 - Edit facilitator
 
 *<<mss, MSS>>*
 
@@ -1432,7 +1423,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC25 - Delete facilitator
+=== Use case: UC24 - Delete facilitator
 
 *<<mss, MSS>>*
 
@@ -1454,7 +1445,7 @@ Use case resumes at step 1.
 
 //tag::use-case-calendar[]
 [discrete]
-=== Use case: UC26 - View calendar
+=== Use case: UC25 - View calendar
 *<<mss, MSS>>*
 
 1. User requests to view the calendar for a specified week.
@@ -1472,7 +1463,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC27 - Find empty slots in calendar
+=== Use case: UC26 - Find empty slots in calendar
 *<<mss, MSS>>*
 
 1. User requests to find empty slots in the calendar.
@@ -1496,7 +1487,7 @@ Use case ends.
 //end::use-case-calendar[]
 
 [discrete]
-=== Use case: UC28 - Clear all entries in Mod Manager
+=== Use case: UC27 - Clear all entries in Mod Manager
 *<<mss, MSS>>*
 
 1. User requests to clear all entries.
