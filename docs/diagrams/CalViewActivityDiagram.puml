@@ -15,6 +15,7 @@ if () then ([else])
         :Ui shows calendar for next week;
     endif;
 else ([argument for week is not specified or invalid])
+    :Ui shows error message;
 endif
 stop
 @enduml

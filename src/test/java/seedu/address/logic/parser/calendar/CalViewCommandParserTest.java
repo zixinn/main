@@ -1,6 +1,9 @@
 package seedu.address.logic.parser.calendar;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_SPACES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,7 +19,7 @@ public class CalViewCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalViewCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "       ",
+        assertParseFailure(parser, EMPTY_SPACES,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalViewCommand.MESSAGE_USAGE));
     }
 
@@ -29,13 +32,19 @@ public class CalViewCommandParserTest {
     @Test
     public void parse_invalidField_throwsParseException() {
         //empty input
-        assertParseFailure(parser, " /week",
+        assertParseFailure(parser, " " + PREFIX_WEEK,
                 Calendar.MESSAGE_CONSTRAINTS);
 
         //invalid word
-        assertParseFailure(parser, " /week those",
+        assertParseFailure(parser, " " + PREFIX_WEEK + "those",
                 Calendar.MESSAGE_CONSTRAINTS);
 
+    }
+
+    @Test
+    public void parse_tooManyArguments_failure() {
+        assertParseFailure(parser, " " + PREFIX_WEEK + "this " + PREFIX_WEEK + "next",
+                String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_WEEK));
     }
 
 }
