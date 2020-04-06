@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.calendar;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.stream.Stream;
@@ -31,6 +32,10 @@ public class CalViewCommandParser implements Parser<CalViewCommand> {
                 args, PREFIX_WEEK);
         if (!arePrefixesPresent(argMultimap, PREFIX_WEEK) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalViewCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_WEEK) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_WEEK));
         }
 
         Calendar calendar = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK));

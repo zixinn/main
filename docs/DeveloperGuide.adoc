@@ -875,7 +875,7 @@ Alternative 1 is chosen as the design is simpler without the need to maintain mu
 Alternative 1 is chosen because of ease of implementation due to time constraint.
 // end::design-consideration-facilitator[]
 // end::facilitator[]
-
+//tag::calendar[]
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
 
@@ -965,7 +965,7 @@ This is because without the `/type`, it is possible that users thought that the 
 
 Alternative 1 is chosen because it is shorter than alternative 2 and hence it can be easier for users to type.
 It is easier to implement too. The word `empty` is kept to allow users to know what the find command is for.
-
+//end::calendar[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -1308,9 +1308,36 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+[discrete]
+=== Use case: UC12 - Add task
+
+[discrete]
+=== Use case: UC13 - Mark task as done
+
+[discrete]
+=== Use case: UC14 - List tasks
+
+[discrete]
+=== Use case: UC15 - List tasks for a specific module
+
+[discrete]
+=== Use case: UC16 - List undone tasks
+
+[discrete]
+=== Use case: UC17 - Find task by description
+
+[discrete]
+=== Use cse: UC18 - Search task by date
+
+[discrete]
+=== Use case: UC19 - Edit task
+
+[discrete]
+=== Use case: UC20 - Delete task
+
 // tag::use-case-facilitator[]
 [discrete]
-=== Use case: UC18 - Add facilitator
+=== Use case: UC21 - Add facilitator
 
 *<<mss, MSS>>*
 
@@ -1338,7 +1365,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC19 - List facilitators
+=== Use case: UC22 - List facilitators
 
 *<<mss, MSS>>*
 
@@ -1348,7 +1375,7 @@ Use case resumes at step 1.
 Use case ends.
 
 [discrete]
-=== Use case: UC20 - Find facilitator
+=== Use case: UC23 - Find facilitator
 
 *<<mss, MSS>>*
 
@@ -1365,7 +1392,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC21 - Edit facilitator
+=== Use case: UC24 - Edit facilitator
 
 *<<mss, MSS>>*
 
@@ -1393,7 +1420,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC22 - Delete facilitator
+=== Use case: UC25 - Delete facilitator
 
 *<<mss, MSS>>*
 
@@ -1413,8 +1440,9 @@ Use case ends.
 Use case resumes at step 1.
 // end::use-case-facilitator[]
 
+//tag::use-case-calendar[]
 [discrete]
-=== Use case: UC23 - View calendar
+=== Use case: UC26 - View calendar
 *<<mss, MSS>>*
 
 1. User requests to view the calendar for a specified week.
@@ -1432,7 +1460,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC24 - Find empty slots in calendar
+=== Use case: UC27 - Find empty slots in calendar
 *<<mss, MSS>>*
 
 1. User requests to find empty slots in the calendar.
@@ -1453,9 +1481,10 @@ Use case resumes at step 1.
 * 2a. The list of empty slots is empty.
 +
 Use case ends.
+//end::use-case-calendar[]
 
 [discrete]
-=== Use case: UC25 - Clear all entries in Mod Manager
+=== Use case: UC28 - Clear all entries in Mod Manager
 *<<mss, MSS>>*
 
 1. User requests to clear all entries.
@@ -1492,7 +1521,7 @@ Use case resumes at step 1.
 
 [appendix]
 == Glossary
-
+//tag::glossary[]
 [[cli]] CLI::
 Command-line interface: processes commands to a computer program in the form of lines of text
 
@@ -1507,7 +1536,7 @@ Windows, Linux, Unix, OS-X
 
 [[mss]] MSS::
 Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
-
+//end::glossary[]
 [appendix]
 == Product Survey
 
@@ -1647,3 +1676,16 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect facil delete commands to try: `facil delete`, `facil delete x` (where x is negative, 0 or larger than the list size), `facil delete x` (where no facilitator with name x exists) +
    Expected: Similar to previous.
 // end::testing-facilitator[]
+
+//tag::testing-cal[]
+=== Testing of Calendar Feature
+
+. Viewing the calendar.
+.. Prerequisites: The classes and tasks with date within the current week exist.
+.. Test case: `cal view /week this` +
+   Expected: Classes and tasks appear in the correct day in the calendar and sorted according to time.
+.. Test case: `cal view /week that` +
+   Expected: Error message shown in the result display.
+.. Other incorrect cal view commands to try: `cal view`, `cal view /week ` +
+   Expected: Similar to previous.
+//end::testing-cal[]

@@ -485,12 +485,6 @@ and you will have to follow the input requirements using valid numbers for
 match only tasks that are on 10 April in any year.
 ****
 
-==== Finding upcoming tasks
-
-Finds upcoming tasks.
-
-Format: `*task* find /upcoming`
-
 ==== Editing a task
 
 From here on, you will be introduced to Mod Manager's task ID system.
@@ -732,6 +726,7 @@ image::FacilDeleteBefore2.png[]
 image::FacilDeleteAfter2.png[]
 // end::facilitator[]
 
+//tag::calendar[]
 === Managing calendar : `*cal*`
 
 The commands in this section carry out operations related to the calendar in Mod Manager.
@@ -791,6 +786,7 @@ SATURDAY: +
 SUNDAY: +
 00:00-23:59
 ****
+//end::calendar[]
 
 === Listing commands : `*cmd*`
 
@@ -816,17 +812,21 @@ Example: `*cmd* group task`
 Provides guidance for mistyped commands by showing a list of possible valid commands. +
 The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
 
+//tag::clear[]
 === Clearing all entries : `*clear*`
 
-You can clear all entries from Mod Manager.
+You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
 
 Format: `*clear*`
+//end::clear[]
 
+//tag::exit[]
 === Exiting the program : `*exit*`
 
 You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
 
 Format: `*exit*`
+//end::exit[]
 
 === Upcoming `[coming in v2.0]`
 
@@ -834,20 +834,27 @@ Format: `*exit*`
 These features will be available in the next version of Mod Manager.
 
 ==== Undoing previous command `[coming in v2.0]`
-Restores the Mod Manager to the state before the previous undoable command was executed.
+
+You can restore the Mod Manager to the state before the previous undoable command was executed.
 
 ==== Categorising tasks `[coming in v2.0]`
 
-Add tags to a task.
+You can add tags to a task.
 
 ==== Adding a priority level to a task `[coming in v2.0]`
 
-Adds a priority level to a task.
+You can add a priority level to a task.
 
 ==== Receiving reminders `[coming in v2.0]`
 
-Receive reminders for deadlines and events the next day.
+You can receive reminders for deadlines and events the next day.
 // end::upcoming[]
+
+==== Finding upcoming tasks `[coming in v2.0]`
+
+You can find upcoming tasks.
+
+==== Finding
 
 == FAQ
 
@@ -906,13 +913,14 @@ Receive reminders for deadlines and events the next day.
 |  `*mod* view INDEX` +
    `*mod* view MOD_CODE`
 
-.6+|Task
+.9+|Task
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
 |  `*task* delete MOD_CODE ID_NUMBER`
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
 |  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
-   `*task* find /upcoming`
 |  `*task* list`
+|  `*task* module /code MOD_CODE`
 |  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
+|  `*task* undone`
