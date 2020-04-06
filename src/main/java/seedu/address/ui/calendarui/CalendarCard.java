@@ -42,6 +42,8 @@ public class CalendarCard extends UiPart<Region> {
         if (item instanceof Lesson) {
             initLessonCard((Lesson) item);
         }
+        description.setStyle("-fx-font-weight: bold;");
+        time.setStyle("-fx-font-weight: bold;");
     }
 
     /**
@@ -54,10 +56,14 @@ public class CalendarCard extends UiPart<Region> {
         if (!task.getTimeString().equals("")) {
             time.setText(task.getTimeString());
         }
-        description.setStyle("-fx-text-fill: #010504;");
-        time.setStyle("-fx-text-fill: #010504;");
-        card.setStyle("-fx-background-color: #ffffd1;-fx-background-radius: 15; -fx-background-insets: 3px, 0px; "
-                + "-fx-padding: 10px;");
+
+        if (task.isTaskDone()) {
+            card.setStyle("-fx-background-color: #4BB543; -fx-background-radius: 15px; "
+                    + "-fx-background-insets: 3px, 0px; -fx-padding: 10px");
+        } else {
+            card.setStyle("-fx-background-color: #9d6365; -fx-background-radius: 15px; "
+                    + "-fx-background-insets: 3px, 0px; -fx-padding: 10px");
+        }
     }
 
     /**
