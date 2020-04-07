@@ -11,7 +11,7 @@ Mod Manager is a desktop application that assists students in managing schedules
 
 Mod Manager is morphed from existing desktop Java application https://github.com/nus-cs2103-AY1920S2/addressbook-level3[Address Book (Level 3)] over a period of 8 weeks by my team of 5 software engineering students.
 
-== Summary of contributions
+== Summary of Contributions
 
 Given below is a summary of my contributions to Mod Manager.
 
@@ -34,10 +34,10 @@ Given below is a summary of my contributions to Mod Manager.
 *Other contributions*:
 
 * Project management:
-** Managed issue tracker and milestones for team repo
-** Merged pull requests
+** Managed issue tracker and milestones for team repo and merged pull requests
 * Enhancements to existing features:
 ** Wrote additional tests to increase coverage from 60% to 66%: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/121[#121]
+** Updated sample data: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/183[#183]
 * Documentation:
 ** Updated introduction, about and upcoming section of User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/24[#24], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/126[#126]
 ** Added module and facilitator feature of User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/10[#10], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/174[#174]
@@ -60,7 +60,7 @@ Given below are sections I contributed to the User Guide. They showcase my abili
 
 include::../UserGuide.adoc[tag=about]
 
-=== Managing modules : `*mod*`
+=== Managing Modules : `*mod*`
 
 //include::../UserGuide.adoc[tag=module]
 

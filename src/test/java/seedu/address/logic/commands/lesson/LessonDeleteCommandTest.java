@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.lesson.LessonDeleteCommand.MESSAGE_INVALID_MODULE_CODE;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 
 public class LessonDeleteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_invalidModuleCode_throwsException() {

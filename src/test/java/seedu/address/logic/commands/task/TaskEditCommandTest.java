@@ -2,7 +2,7 @@ package seedu.address.logic.commands.task;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class TaskEditCommandTest {
 
     @Test
     void execute_allFieldsSuccess() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
         System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder().withDescription("Megaman")
                 .withTaskDateTime(new TaskDateTime("18/01/2021", "23:50")).build();
@@ -43,7 +43,7 @@ public class TaskEditCommandTest {
 
     @Test
     void execute_allFieldNonDateSuccess() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
         System.out.println(model.getFilteredTaskList());
         TaskBuilder editedTask = new TaskBuilder().withDescription("Megaman")
                 .withTaskDateTime(Task.TABOO_DATE_TIME);
@@ -63,7 +63,7 @@ public class TaskEditCommandTest {
 
     @Test
     void execute_noDescriptionNonDateSuccess() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
         System.out.println(model.getFilteredTaskList());
         TaskBuilder editedTask = new TaskBuilder(model.getFilteredTaskList().get(1))
                 .withTaskDateTime(Task.TABOO_DATE_TIME);
@@ -83,7 +83,7 @@ public class TaskEditCommandTest {
 
     @Test
     void execute_descriptionNoDateSuccess() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
         System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder().withDescription("Megaman").build();
 
@@ -101,7 +101,7 @@ public class TaskEditCommandTest {
 
     @Test
     void execute_duplicateTaskUnsuccessful() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
         System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder(model.getFilteredTaskList().get(1)).build();
 

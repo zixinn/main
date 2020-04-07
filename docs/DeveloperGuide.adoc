@@ -1737,6 +1737,6 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Classes and tasks appear in the correct day in the calendar and sorted according to time.
 .. Test case: `cal view /week that` +
    Expected: Error message shown in the result display.
-.. Other incorrect cal view commands to try: `cal view`, `cal view /week ` +
+.. Other incorrect cal view commands to try: `cal view`, `cal view /week` +
    Expected: Similar to previous.
 //end::testing-cal[]
