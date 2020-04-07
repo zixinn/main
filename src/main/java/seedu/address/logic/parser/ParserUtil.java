@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +20,7 @@ import seedu.address.model.facilitator.Phone;
 import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
+import seedu.address.model.lesson.exceptions.InvalidDayAndTimeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
@@ -289,17 +289,10 @@ public class ParserUtil {
     public static DayAndTime parseDayAndTime(String dayAndTime) throws ParseException {
         requireNonNull(dayAndTime);
         String trimmed = dayAndTime.trim();
-        String[] splitted = trimmed.split(" ");
-        if (!DayAndTime.isValidDayAndTime(trimmed)) {
-            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
-        }
-
-        DayOfWeek day = DayOfWeek.valueOf(splitted[0].toUpperCase());
-        LocalTime startTime = LocalTime.parse(splitted[1]);
-        LocalTime endTime = LocalTime.parse(splitted[2]);
-
         try {
-            return new DayAndTime(day, startTime, endTime);
+            return new DayAndTime(trimmed);
+        } catch (InvalidDayAndTimeException e) {
+            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
         } catch (InvalidTimeRangeException e) {
             throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_TIME);
         }
@@ -312,7 +305,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dayString} is invalid.
      */
     public static DayOfWeek parseDay(String dayString) throws ParseException {
-        dayString =  dayString.trim().toUpperCase();
+        dayString = dayString.trim().toUpperCase();
         if (!DayAndTime.isValidDay(dayString)) {
             throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY);
         }

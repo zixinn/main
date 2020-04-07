@@ -1,9 +1,7 @@
 package seedu.address.testutil;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import seedu.address.logic.commands.lesson.LessonEditCommand;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
@@ -30,9 +28,7 @@ public class EditLessonDescriptorBuilder {
         descriptor = new LessonEditCommand.EditLessonDescriptor();
         descriptor.setModuleCode(lesson.getModuleCode());
         descriptor.setLessonType(lesson.getType());
-        descriptor.setDay(lesson.getDay());
-        descriptor.setStartTime(lesson.getStartTime());
-        descriptor.setEndTime(lesson.getEndTime());
+        descriptor.setDayAndTime(lesson.getDayAndTime());
         descriptor.setVenue(lesson.getVenue());
     }
 
@@ -53,26 +49,10 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code day} of the {@code EditLessonDescriptor} that we are building.
+     * Sets the {@code dayAndTime} of the {@code EditLessonDescriptor} that we are building.
      */
-    public EditLessonDescriptorBuilder withDay(String day) {
-        descriptor.setDay(DayOfWeek.valueOf(day));
-        return this;
-    }
-
-    /**
-     * Sets the {@code startTime} of the {@code EditLessonDescriptor} that we are building.
-     */
-    public EditLessonDescriptorBuilder withStartTime(String time) {
-        descriptor.setStartTime(LocalTime.parse(time));
-        return this;
-    }
-
-    /**
-     * Sets the {@code endTime} of the {@code EditLessonDescriptor} that we are building.
-     */
-    public EditLessonDescriptorBuilder withEndTime(String time) {
-        descriptor.setEndTime(LocalTime.parse(time));
+    public EditLessonDescriptorBuilder withDayAndTime(String dayAndTime) {
+        descriptor.setDayAndTime(new DayAndTime(dayAndTime));
         return this;
     }
 

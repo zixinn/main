@@ -45,6 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS1101S = "CS1101S";
     public static final String VALID_MODULE_CODE_CS3230 = "CS3230";
     public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
+    public static final String VALID_MODULE_CODE_GEQ1000 = "GEQ1000";
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
     public static final String TASK_DAY_26 = "26";
     public static final String TASK_MONTH_03 = "3";
@@ -126,6 +127,29 @@ public class CommandTestUtil {
             " " + PREFIX_MONTH + " " + INVALID_TASK_MONTH_13; // strings not allowed for month
     public static final String INVALID_TASK_YEAR_OUT_OF_BOUNDS =
             " " + PREFIX_YEAR + " " + INVALID_TASK_YEAR_NEGATIVE; // strings not allowed for year
+
+    public static final String INVALID_INDEX_WITH_STRING = " 1 some random string ";
+    public static final String INVALID_INDEX_WITH_PREFIX = " 1 /some random string ";
+
+    public static final String INVALID_MODULE_CODE_CS9000 = "CS9000";
+    public static final String INVALID_MODULE_CODE_CODE123 = "code123";
+
+    public static final String VALID_LESSON_TYPE_LEC = "LEC";
+    public static final String VALID_LESSON_TYPE_TUT = "TUT";
+    public static final String VALID_LESSON_TYPE_REC = "REC";
+    public static final String VALID_LESSON_TYPE_SEC = "SEC";
+    public static final String INVALID_LESSON_TYPE_FREE = "FREE";
+
+    public static final String VALID_DAY_AND_TIME_SUNDAY = "SUNDAY 01:00 02:00";
+    public static final String VALID_DAY_AND_TIME_MONDAY = "MONDAY 19:00 20:00";
+    public static final String VALID_DAY_FRIDAY = "FRIDAY";
+    public static final String INVALID_DAY_SUNNYDAY = "SUNNYDAY 19:00 20:00";
+    public static final String INVALID_TIME = "SUNDAY 19:00 2:00";
+
+    public static final String VALID_VENUE_HOME = "Home";
+    public static final String VALID_VENUE_PARK = "Park";
+
+    public static final String INVALID_INDEX_A = "a";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

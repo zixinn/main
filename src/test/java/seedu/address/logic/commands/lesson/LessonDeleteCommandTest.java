@@ -2,6 +2,8 @@ package seedu.address.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_CS9000;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.lesson.LessonDeleteCommand.MESSAGE_INVALID_MODULE_CODE;
@@ -25,14 +27,14 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void execute_invalidModuleCode_throwsException() {
-        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS8000"));
+        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode(INVALID_MODULE_CODE_CS9000));
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_CODE);
     }
 
     @Test
     public void execute_invalidIndexLessonList_throwsCommandException() {
         Index outOfBound = Index.fromOneBased(model.getLessons().size() + 1);
-        LessonDeleteCommand command = new LessonDeleteCommand(outOfBound, new ModuleCode("CS2103T"));
+        LessonDeleteCommand command = new LessonDeleteCommand(outOfBound, new ModuleCode(VALID_MODULE_CODE_CS2103T));
         assertCommandFailure(command, model, LessonDeleteCommand.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
@@ -48,20 +50,23 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void execute_invalidModuleCodeLessonList_throwsCommandException() {
-        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS9000"));
+        LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode(INVALID_MODULE_CODE_CS9000));
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_CODE);
     }
 
     @Test
     public void equals() {
-        LessonDeleteCommand deleteFirstCommand = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS2103T"));
-        LessonDeleteCommand deleteSecondCommand = new LessonDeleteCommand(INDEX_SECOND, new ModuleCode("CS2103T"));
+        LessonDeleteCommand deleteFirstCommand = new LessonDeleteCommand(INDEX_FIRST,
+                new ModuleCode(VALID_MODULE_CODE_CS2103T));
+        LessonDeleteCommand deleteSecondCommand = new LessonDeleteCommand(INDEX_SECOND,
+                new ModuleCode(VALID_MODULE_CODE_CS2103T));
 
         // same object should return true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values should return true
-        LessonDeleteCommand deleteFirstCommandCopy = new LessonDeleteCommand(INDEX_FIRST, new ModuleCode("CS2103T"));
+        LessonDeleteCommand deleteFirstCommandCopy = new LessonDeleteCommand(INDEX_FIRST,
+                new ModuleCode(VALID_MODULE_CODE_CS2103T));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different type should return false

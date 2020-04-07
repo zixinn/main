@@ -150,7 +150,8 @@ public class LessonList {
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDayAndTime().getDay().compareTo(curDay) == 0 && lesson.getDayAndTime().getStartTime().compareTo(curTime) >= 0) {
+            if (lesson.getDayAndTime().getDay().compareTo(curDay) == 0
+                    && lesson.getDayAndTime().getStartTime().compareTo(curTime) >= 0) {
                 return lesson;
             } else if (lesson.getDayAndTime().getDay().compareTo(curDay) > 0) {
                 return lesson;

@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
@@ -42,9 +42,9 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         moduleCode = source.getModuleCode().toString();
         type = source.getType().toString();
-        dayAndTime = source.getDayAndTime().getDay().toString() + " " +
-                source.getDayAndTime().getStartTime().toString() + " " +
-                source.getDayAndTime().getEndTime().toString();
+        dayAndTime = source.getDayAndTime().getDay().toString() + " "
+                + source.getDayAndTime().getStartTime().toString() + " "
+                + source.getDayAndTime().getEndTime().toString();
         venue = source.getVenue();
     }
 

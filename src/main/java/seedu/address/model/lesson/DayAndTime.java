@@ -1,11 +1,13 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+import seedu.address.model.lesson.exceptions.InvalidDayAndTimeException;
 import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 
 /**
@@ -14,8 +16,8 @@ import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 public class DayAndTime implements Comparable<DayAndTime> {
 
     public static final String MESSAGE_CONSTRAINTS_DAY_AND_TIME =
-            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY\n " +
-                    "and time should be in HH:MM 24 hours format. Day, start time and end time must be all present.";
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY\n "
+                    + "and time should be in HH:MM 24 hours format. Day, start time and end time must be all present.";
 
     public static final String MESSAGE_CONSTRAINTS_DAY =
             "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY";
@@ -29,6 +31,27 @@ public class DayAndTime implements Comparable<DayAndTime> {
 
     public DayAndTime(DayOfWeek day, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(day, startTime, endTime);
+        if (startTime.compareTo(endTime) >= 0) {
+            throw new InvalidTimeRangeException();
+        }
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    /**
+     *
+     * @param dayAndTime
+     */
+    public DayAndTime(String dayAndTime) {
+        requireNonNull(dayAndTime);
+        if (!isValidDayAndTime(dayAndTime)) {
+            throw new InvalidDayAndTimeException();
+        }
+        String[] splitted = dayAndTime.split(" ");
+        DayOfWeek day = DayOfWeek.valueOf(splitted[0]);
+        LocalTime startTime = LocalTime.parse(splitted[1]);
+        LocalTime endTime = LocalTime.parse(splitted[2]);
         if (startTime.compareTo(endTime) >= 0) {
             throw new InvalidTimeRangeException();
         }

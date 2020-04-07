@@ -12,7 +12,7 @@ import seedu.address.model.lesson.Lesson;
 public class TypicalLessons {
     public static final Lesson CS2103T = new LessonBuilder().build();
     public static final Lesson GEQ1000 = new LessonBuilder().withModuleCode("GEQ1000").withLessonType("LAB")
-            .withDay("WEDNESDAY").build();
+            .withDayAndTime("WEDNESDAY 09:00 10:00").build();
 
     private TypicalLessons() {}
 

@@ -2,7 +2,7 @@ package seedu.address.model.lesson.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Lessons
- * (Facilitators are considered duplicates if they have the same identity).
+ * (lessons are considered duplicates if they have the same identity).
  */
 public class DuplicateLessonException extends RuntimeException {
     public DuplicateLessonException() {

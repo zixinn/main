@@ -20,7 +20,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
-import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -67,11 +66,7 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         DayAndTime dayAndTime;
 
         Lesson lesson;
-        try {
-            dayAndTime = ParserUtil.parseDayAndTime(argMultimap.getValue(PREFIX_AT));
-        } catch (InvalidTimeRangeException e) {
-            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_TIME);
-        }
+        dayAndTime = ParserUtil.parseDayAndTime(argMultimap.getValue(PREFIX_AT));
 
         lesson = new Lesson(moduleCode, lessonType, dayAndTime, venue);
         return new LessonAddCommand(lesson);
