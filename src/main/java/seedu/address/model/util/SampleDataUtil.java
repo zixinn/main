@@ -1,7 +1,5 @@
 package seedu.address.model.util;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +11,7 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
@@ -95,32 +94,32 @@ public class SampleDataUtil {
 
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.MONDAY,
-                    LocalTime.parse("08:00"), LocalTime.parse("10:00"), "AS6-0208"),
-            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.THURSDAY,
-                    LocalTime.parse("08:00"), LocalTime.parse("10:00"), "AS6-0208"),
-            new Lesson(new ModuleCode("CS2103T"), LessonType.LEC, DayOfWeek.FRIDAY,
-                    LocalTime.parse("14:00"), LocalTime.parse("16:00"), "i3-Aud"),
-            new Lesson(new ModuleCode("CS2103T"), LessonType.TUT, DayOfWeek.FRIDAY,
-                    LocalTime.parse("10:00"), LocalTime.parse("11:00"), "COM1-B103"),
-            new Lesson(new ModuleCode("CS2105"), LessonType.LEC, DayOfWeek.MONDAY,
-                    LocalTime.parse("14:00"), LocalTime.parse("16:00"), "i3-Aud"),
-            new Lesson(new ModuleCode("CS2105"), LessonType.TUT, DayOfWeek.MONDAY,
-                    LocalTime.parse("16:00"), LocalTime.parse("17:00"), "COM1-0203"),
-            new Lesson(new ModuleCode("CS3230"), LessonType.LEC, DayOfWeek.THURSDAY,
-                    LocalTime.parse("16:00"), LocalTime.parse("18:00"), "i3-Aud"),
-            new Lesson(new ModuleCode("CS3230"), LessonType.TUT, DayOfWeek.FRIDAY,
-                    LocalTime.parse("11:00"), LocalTime.parse("12:00"), "COM1-0103"),
-            new Lesson(new ModuleCode("ES2660"), LessonType.SEC, DayOfWeek.MONDAY,
-                    LocalTime.parse("10:00"), LocalTime.parse("12:00"), "AS6-0620"),
-            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.THURSDAY,
-                    LocalTime.parse("10:00"), LocalTime.parse("12:00"), "AS6-0620"),
-            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, DayOfWeek.MONDAY,
-                    LocalTime.parse("12:00"), LocalTime.parse("14:00"), "LT32"),
-            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, DayOfWeek.WEDNESDAY,
-                    LocalTime.parse("12:00"), LocalTime.parse("14:00"), "LT32"),
-            new Lesson(new ModuleCode("ST2334"), LessonType.TUT, DayOfWeek.FRIDAY,
-                    LocalTime.parse("12:00"), LocalTime.parse("13:00"), "S16-06118")
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, new DayAndTime("MONDAY 08:00 10:00"),
+                    "AS6-0208"),
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, new DayAndTime("THURSDAY 08:00 10:00"),
+                    "AS6-0208"),
+            new Lesson(new ModuleCode("CS2103T"), LessonType.LEC, new DayAndTime("FRIDAY 14:00 16:00"),
+                    "i3-Aud"),
+            new Lesson(new ModuleCode("CS2103T"), LessonType.TUT, new DayAndTime("FRIDAY 10:00 11:00"),
+                    "COM1-B103"),
+            new Lesson(new ModuleCode("CS2105"), LessonType.LEC, new DayAndTime("MONDAY 14:00 16:00"),
+                    "i3-Aud"),
+            new Lesson(new ModuleCode("CS2105"), LessonType.TUT, new DayAndTime("MONDAY 16:00 17:00"),
+                    "COM1-0203"),
+            new Lesson(new ModuleCode("CS3230"), LessonType.LEC, new DayAndTime("THURSDAY 16:00 18:00"),
+                    "i3-Aud"),
+            new Lesson(new ModuleCode("CS3230"), LessonType.TUT, new DayAndTime("FRIDAY 11:00 12:00"),
+                    "COM1-0103"),
+            new Lesson(new ModuleCode("ES2660"), LessonType.SEC, new DayAndTime("MONDAY 10:00 12:00"),
+                    "AS6-0620"),
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, new DayAndTime("THURSDAY 10:00 12:00"),
+                    "AS6-0620"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, new DayAndTime("MONDAY 12:00 14:00"),
+                    "LT32"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, new DayAndTime("WEDNESDAY 12:00 14:00"),
+                    "LT32"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.TUT, new DayAndTime("FRIDAY 12:00 13:00"),
+                    "S16-06118")
         };
     }
 

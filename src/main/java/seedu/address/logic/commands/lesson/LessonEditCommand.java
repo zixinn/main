@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +17,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
@@ -95,7 +94,7 @@ public class LessonEditCommand extends LessonCommand {
 
         model.setLesson(lessonToEdit, editedLesson);
 
-        model.updateModule(module);
+        model.updateModule(model.findModule(editedLesson.getModuleCode()));
         model.updateFacilitatorListForModule(
                 new ModuleCodesContainKeywordPredicate(editedLesson.getModuleCode().value));
         model.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
@@ -111,9 +110,7 @@ public class LessonEditCommand extends LessonCommand {
         assert lessonToEdit != null;
         ModuleCode updatedModuleCode = editLessonDescriptor.getModuleCode().orElse(lessonToEdit.getModuleCode());
         LessonType updatedLessonType = editLessonDescriptor.getLessonType().orElse(lessonToEdit.getType());
-        DayOfWeek updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
-        LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
-        LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
+        DayAndTime updatedDayAndTime = editLessonDescriptor.getDayAndTime().orElse(lessonToEdit.getDayAndTime());
         String updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
 
         if (editLessonDescriptor.getVenue().isPresent() && editLessonDescriptor.getVenue().get().equals("")) {
@@ -122,7 +119,7 @@ public class LessonEditCommand extends LessonCommand {
             updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
         }
 
-        return new Lesson(updatedModuleCode, updatedLessonType, updatedDay, updatedStartTime, updatedEndTime,
+        return new Lesson(updatedModuleCode, updatedLessonType, updatedDayAndTime,
                 updatedVenue);
     }
 
@@ -152,9 +149,7 @@ public class LessonEditCommand extends LessonCommand {
     public static class EditLessonDescriptor {
         private ModuleCode moduleCode;
         private LessonType type;
-        private DayOfWeek day;
-        private LocalTime startTime;
-        private LocalTime endTime;
+        private DayAndTime dayAndTime;
         private String venue; // optional
 
         public EditLessonDescriptor() {}
@@ -162,14 +157,12 @@ public class LessonEditCommand extends LessonCommand {
         public EditLessonDescriptor(EditLessonDescriptor copy) {
             setModuleCode(copy.moduleCode);
             setLessonType(copy.type);
-            setDay(copy.day);
-            setStartTime(copy.startTime);
-            setEndTime(copy.endTime);
+            setDayAndTime(copy.dayAndTime);
             setVenue(copy.venue);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(moduleCode, type, day, startTime, endTime, venue);
+            return CollectionUtil.isAnyNonNull(moduleCode, type, dayAndTime, venue);
         }
 
         public void setModuleCode(ModuleCode moduleCode) {
@@ -188,28 +181,12 @@ public class LessonEditCommand extends LessonCommand {
             return Optional.ofNullable(type);
         }
 
-        public void setDay(DayOfWeek day) {
-            this.day = day;
+        public void setDayAndTime(DayAndTime dayAndTime) {
+            this.dayAndTime = dayAndTime;
         }
 
-        public Optional<DayOfWeek> getDay() {
-            return Optional.ofNullable(day);
-        }
-
-        public void setStartTime(LocalTime startTime) {
-            this.startTime = startTime;
-        }
-
-        public Optional<LocalTime> getStartTime() {
-            return Optional.ofNullable(startTime);
-        }
-
-        public void setEndTime(LocalTime endTime) {
-            this.endTime = endTime;
-        }
-
-        public Optional<LocalTime> getEndTime() {
-            return Optional.ofNullable(endTime);
+        public Optional<DayAndTime> getDayAndTime() {
+            return Optional.ofNullable(dayAndTime);
         }
 
         public void setVenue(String venue) {
@@ -234,9 +211,7 @@ public class LessonEditCommand extends LessonCommand {
 
             return getModuleCode().equals(e.getModuleCode())
                     && getLessonType().equals(e.getLessonType())
-                    && getDay().equals(e.getDay())
-                    && getStartTime().equals(e.getStartTime())
-                    && getEndTime().equals(e.getEndTime())
+                    && getDayAndTime().equals(e.getDayAndTime())
                     && getVenue().equals(e.getVenue());
         }
     }

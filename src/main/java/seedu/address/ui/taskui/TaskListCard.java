@@ -30,13 +30,6 @@ public class TaskListCard extends UiPart<Region> {
         super(FXML);
         this.id = displayedIndex;
         this.task = task;
-        if (task.isTaskDone()) {
-            cardPane.setStyle("-fx-background-color: #4BB543; "
-                    + "-fx-background-radius: 8px;");
-        } else {
-            cardPane.setStyle("-fx-background-color: #9d6365;"
-                    + "-fx-background-radius: 8px; ");
-        }
 
         taskNum.setStyle("-fx-text-fill: #ffee00");
 

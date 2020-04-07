@@ -3,6 +3,19 @@ package seedu.address.logic.parser.lesson;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_SUNNYDAY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_WITH_PREFIX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_WITH_STRING;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_TYPE_FREE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_CODE123;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_AND_TIME_MONDAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_AND_TIME_SUNDAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TYPE_REC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TYPE_SEC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_GEQ1000;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_HOME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_PARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -14,7 +27,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.lesson.LessonEditCommand;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
@@ -29,16 +42,17 @@ public class LessonEditCommandParserTest {
 
         // missing index
         String userInput = " " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
 
         //missing module code
-        userInput = " 1 " + PREFIX_TYPE + " " + "SEC" + " ";
+        userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_TYPE + " " + VALID_LESSON_TYPE_SEC + " ";
         assertParseFailure(parser, userInput, expectedMessage);
 
         // missing all optional parts
-        userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " ";
+        userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
@@ -46,25 +60,25 @@ public class LessonEditCommandParserTest {
     public void parse_invalidPreamble_throwsException() {
         String expectedMessage = MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
         String userInput = " 0 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
 
         // negative index
         userInput = " -5 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
 
         // additional invalid arguments in index
-        userInput = " 1 some random string " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+        userInput = INVALID_INDEX_WITH_STRING + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
 
         // invalid prefix
-        userInput = " 1 /weird some random string " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+        userInput = INVALID_INDEX_WITH_PREFIX + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, expectedMessage);
     }
@@ -72,43 +86,41 @@ public class LessonEditCommandParserTest {
     @Test
     public void parse_invalidValue_throwsException() {
         // invalid module code
-        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + "CODE123" + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
+        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + INVALID_MODULE_CODE_CODE123 + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
                 + PREFIX_TYPE + " " + LessonBuilder.DEFAULT_LESSON_TYPE + " ";
         assertParseFailure(parser, userInput, ModuleCode.MESSAGE_CONSTRAINTS);
 
         // invalid type
         userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
-                + PREFIX_TYPE + " " + "FREE" + " ";
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
+                + PREFIX_TYPE + " " + INVALID_LESSON_TYPE_FREE + " ";
         assertParseFailure(parser, userInput, LessonType.MESSAGE_CONSTRAINTS);
 
         // invalid day and time
         userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
-                + PREFIX_AT + " " + LessonBuilder.DEFAULT_DAY + " " + "2:00"
-                + " " + "3:00" + " ";
-        assertParseFailure(parser, userInput, Lesson.MESSAGE_CONSTRAINTS_TIME);
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
+                + PREFIX_AT + " " + INVALID_TIME;
+        assertParseFailure(parser, userInput, DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
         userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
-                + PREFIX_AT + " " + "FREEDAY" + " " + LessonBuilder.DEFAULT_START_TIME
-                + " " + LessonBuilder.DEFAULT_END_TIME + " ";
-        assertParseFailure(parser, userInput, Lesson.MESSAGE_CONSTRAINTS_DAY);
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
+                + PREFIX_AT + " " + INVALID_DAY_SUNNYDAY;
+        assertParseFailure(parser, userInput, DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " "
-                + PREFIX_TYPE + " " + "REC" + " "
-                + PREFIX_AT + " SUNDAY 04:00 05:00 "
-                + PREFIX_VENUE + " Home ";
-        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withModuleCode("GEQ1000")
-                .withLessonType("REC")
-                .withDay("SUNDAY")
-                .withStartTime("04:00")
-                .withEndTime("05:00")
-                .withVenue("Home").build();
+        String userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
+                + PREFIX_TYPE + " " + VALID_LESSON_TYPE_REC + " "
+                + PREFIX_AT + " " + VALID_DAY_AND_TIME_SUNDAY + " "
+                + PREFIX_VENUE + " " + VALID_VENUE_HOME;
+        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withModuleCode(VALID_MODULE_CODE_GEQ1000)
+                .withLessonType(VALID_LESSON_TYPE_REC)
+                .withDayAndTime(VALID_DAY_AND_TIME_SUNDAY)
+                .withVenue(VALID_VENUE_HOME).build();
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
@@ -118,9 +130,10 @@ public class LessonEditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // module only
         String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " ";
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " ";
 
-        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withModuleCode("GEQ1000")
+        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withModuleCode(VALID_MODULE_CODE_GEQ1000)
                 .build();
 
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
@@ -128,33 +141,36 @@ public class LessonEditCommandParserTest {
         assertParseSuccess(parser, userInput, command);
 
         // lesson type only
-        userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_TYPE + " " + "REC" + " ";
+        userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_TYPE + " " + VALID_LESSON_TYPE_REC + " ";
 
         descriptor = new EditLessonDescriptorBuilder()
-                .withLessonType("REC").build();
+                .withLessonType(VALID_LESSON_TYPE_REC).build();
 
         command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
 
         // day and time only
-        userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_AT + " SATURDAY 06:00 07:00 ";
+        userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_AT + VALID_DAY_AND_TIME_SUNDAY;
 
         descriptor = new EditLessonDescriptorBuilder()
-                .withDay("SATURDAY").withStartTime("06:00").withEndTime("07:00").build();
+                .withDayAndTime(VALID_DAY_AND_TIME_SUNDAY).build();
 
         command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
         assertParseSuccess(parser, userInput, command);
 
         // venue only
-        userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_VENUE + " somewhere ";
+        userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_VENUE + " " + VALID_VENUE_HOME;
 
         descriptor = new EditLessonDescriptorBuilder()
-                .withVenue("somewhere").build();
+                .withVenue(VALID_VENUE_HOME).build();
 
         command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
@@ -163,11 +179,14 @@ public class LessonEditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_MODULE_CODE + " " + "GEQ1000" + " " + PREFIX_TYPE + " SEC ";
+        String userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " " + PREFIX_TYPE
+                + " " + VALID_LESSON_TYPE_SEC;
 
-        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withModuleCode("GEQ1000")
-                .withLessonType("SEC").build();
+        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withModuleCode(VALID_MODULE_CODE_GEQ1000)
+                .withLessonType(VALID_LESSON_TYPE_SEC).build();
 
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
                 INDEX_FIRST, descriptor);
@@ -175,22 +194,42 @@ public class LessonEditCommandParserTest {
     }
 
     @Test
-    public void parse_multipletype_acceptsLast() {
+    public void parse_multipleType_throwsException() {
         String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
-                + PREFIX_TYPE + " REC "
-                + PREFIX_TYPE + " SEC ";
-
-        LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withLessonType("SEC").build();
-
-        LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),
-                INDEX_FIRST, descriptor);
+                + PREFIX_TYPE + " " + VALID_LESSON_TYPE_REC + " "
+                + PREFIX_TYPE + " " + VALID_LESSON_TYPE_SEC;
         assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TYPE));
     }
 
     @Test
+    public void parse_multipleModuleCode_throwsException() {
+        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_GEQ1000 + " "
+                + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_TYPE + " " + VALID_LESSON_TYPE_REC;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "two", PREFIX_MODULE_CODE));
+    }
+
+    @Test
+    public void parse_multipleDayAndTime_throwsException() {
+        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_AT + " " + VALID_DAY_AND_TIME_SUNDAY + " "
+                + PREFIX_AT + " " + VALID_DAY_AND_TIME_MONDAY;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+    }
+
+    @Test
+    public void parse_multipleVenue_throwsException() {
+        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_VENUE + " " + VALID_VENUE_HOME + " "
+                + PREFIX_VENUE + " " + VALID_VENUE_PARK;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_VENUE));
+    }
+
+    @Test
     public void parse_resetVenue_success() {
-        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " " + PREFIX_VENUE
+        String userInput = " " + INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + LessonBuilder.DEFAULT_MODULE_CODE + " " + PREFIX_VENUE
                 + " ";
         LessonEditCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withVenue("").build();
         LessonEditCommand command = new LessonEditCommand(new ModuleCode(LessonBuilder.DEFAULT_MODULE_CODE),

@@ -71,7 +71,7 @@ public class CalendarView extends UiPart<Region> {
         List<DailySchedulable> items = new ArrayList<>();
 
         lessons.forEach(x -> {
-            if (x.getDay().getValue() == (day + 1)) {
+            if (x.getDayAndTime().getDay().getValue() == (day + 1)) {
                 items.add(x);
             }
         });

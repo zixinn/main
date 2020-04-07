@@ -87,16 +87,12 @@
   "lessons": [ {
     "moduleCode" : "CS2103T",
     "type" : "LEC",
-    "day" : "MONDAY",
-    "startTime" : "14:00",
-    "endTime" : "16:00",
+    "dayAndTime" : "MONDAY 14:00 16:00",
     "venue" : "i3-Aud"
   } , {
     "moduleCode" : "GEQ1000",
     "type" : "LAB",
-    "day" : "WEDNESDAY",
-    "startTime" : "14:00",
-    "endTime" : "16:00",
+    "dayAndTime" : "WEDNESDAY 09:00 10:00",
     "venue" : "i3-Aud"
   } ]
 }

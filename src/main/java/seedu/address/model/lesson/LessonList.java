@@ -53,17 +53,12 @@ public class LessonList {
      * @return True if time slot is free and false otherwise.
      */
     public boolean isTimeSlotFree(Lesson lessonToBeAdded, Optional<Lesson> lessonToExclude) {
-        LocalTime targetStartTime = lessonToBeAdded.getStartTime();
-        LocalTime targetEndTime = lessonToBeAdded.getEndTime();
         System.out.println(lessons);
         for (Lesson lesson : lessons) {
             if (!lessonToExclude.isEmpty() && lesson.equals(lessonToExclude.get())) {
                 continue;
             }
-            LocalTime lessonStartTime = lesson.getStartTime();
-            LocalTime lessonEndTime = lesson.getEndTime();
-            if ((lessonToBeAdded.getDay().equals(lesson.getDay()))
-                    && (targetStartTime.compareTo(lessonEndTime) < 0 && lessonStartTime.compareTo(targetEndTime) < 0)) {
+            if (lessonToBeAdded.getDayAndTime().isSameTimeSlot(lesson.getDayAndTime())) {
                 return false;
             }
         }
@@ -115,7 +110,6 @@ public class LessonList {
         } else {
             throw new LessonNotFoundException();
         }
-
     }
 
     /**
@@ -139,7 +133,7 @@ public class LessonList {
         requireNonNull(day);
         List<Lesson> lessonsOnDate = new ArrayList<>();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().equals(day)) {
+            if (lesson.getDayAndTime().getDay().equals(day)) {
                 lessonsOnDate.add(lesson);
             }
         }
@@ -156,9 +150,10 @@ public class LessonList {
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().compareTo(curDay) == 0 && lesson.getStartTime().compareTo(curTime) >= 0) {
+            if (lesson.getDayAndTime().getDay().compareTo(curDay) == 0
+                    && lesson.getDayAndTime().getStartTime().compareTo(curTime) >= 0) {
                 return lesson;
-            } else if (lesson.getDay().compareTo(curDay) > 0) {
+            } else if (lesson.getDayAndTime().getDay().compareTo(curDay) > 0) {
                 return lesson;
             }
         }
@@ -211,8 +206,8 @@ public class LessonList {
             }
         }
         for (Lesson lesson : lessonsToEdit) {
-            Lesson editedLesson = new Lesson(editedModuleCode, lesson.getType(), lesson.getDay(), lesson.getStartTime(),
-                    lesson.getEndTime(), lesson.getVenue());
+            Lesson editedLesson = new Lesson(editedModuleCode, lesson.getType(), lesson.getDayAndTime(),
+                    lesson.getVenue());
             setLesson(lesson, editedLesson);
         }
     }
