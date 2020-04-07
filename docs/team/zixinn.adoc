@@ -11,7 +11,7 @@ Mod Manager is a desktop application that assists students in managing schedules
 
 Mod Manager is morphed from existing desktop Java application https://github.com/nus-cs2103-AY1920S2/addressbook-level3[Address Book (Level 3)] over a period of 8 weeks by my team of 5 software engineering students.
 
-== Summary of contributions
+== Summary of Contributions
 
 Given below is a summary of my contributions to Mod Manager.
 

@@ -10,7 +10,7 @@ This portfolio documents my contribution to Mod Manager, a software engineering 
 
 Below are some relevant contributions I have made to the development of Mod Manager.
 
-== Summary of contributions
+== Summary of Contributions
 This section shows a summary of my contributions to Mod Manager.
 
 *Major enhancement*:
@@ -28,9 +28,10 @@ This section shows a summary of my contributions to Mod Manager.
 * Design and implement the Ui for module tab.
 
 *Code contributed*:
-[https://github.com/AY1920S2-CS2103T-F10-4/main/pulls?q=is%3Apr+author%3Aalushingg+is%3Aclosed[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=alushingg&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=undefined&zR=undefined&zACS=undefined&zS=undefined&zU=undefined&zMG=false&zFTF=undefined&zFGS=undefined&zSO=undefined&zSWO=undefined&zSD=false&zSWD=false[Reposense]]
 
-* *Other contributions*:
+* [https://github.com/AY1920S2-CS2103T-F10-4/main/pulls?q=is%3Apr+author%3Aalushingg+is%3Aclosed[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=alushingg&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=undefined&zR=undefined&zACS=undefined&zS=undefined&zU=undefined&zMG=false&zFTF=undefined&zFGS=undefined&zSO=undefined&zSWO=undefined&zSD=false&zSWD=false[Reposense]]
+
+*Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` on GitHub
