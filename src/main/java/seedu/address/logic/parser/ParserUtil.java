@@ -309,6 +309,7 @@ public class ParserUtil {
         if (!DayAndTime.isValidDay(dayString)) {
             throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY);
         }
+
         return DayOfWeek.valueOf(dayString);
     }
 }
