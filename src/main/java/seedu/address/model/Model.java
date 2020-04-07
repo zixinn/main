@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
@@ -184,7 +183,7 @@ public interface Model {
      * Adds the given task.
      * {@code module} must not already exist in Mod Manager.
      */
-    void addTask(Task task) throws ParseException;
+    void addTask(Task task);
 
     /**
      * Removes all tasks with the specified ModuleCode.

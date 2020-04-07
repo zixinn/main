@@ -1,17 +1,17 @@
 package seedu.address.model.util.action;
 
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.task.Task;
 
 /**
- * Represents a DoableAction involving a {@code Facilitator}.
+ * Represents a DoableAction involving a {@code Task}.
  */
-public class FacilAction implements DoableAction<Facilitator> {
-    private final Facilitator target;
-    private final Facilitator replacement;
+public class TaskAction implements DoableAction<Task> {
+    private final Task target;
+    private final Task replacement;
     private final DoableActionType type;
 
-    public FacilAction(Facilitator target, DoableActionType type) {
+    public TaskAction(Task target, DoableActionType type) {
         assert type != DoableActionType.EDIT;
 
         this.target = target;
@@ -19,7 +19,7 @@ public class FacilAction implements DoableAction<Facilitator> {
         this.type = type;
     }
 
-    public FacilAction(Facilitator target, Facilitator replacement, DoableActionType type) {
+    public TaskAction(Task target, Task replacement, DoableActionType type) {
         assert type == DoableActionType.EDIT;
 
         this.target = target;
@@ -31,14 +31,14 @@ public class FacilAction implements DoableAction<Facilitator> {
     public void undo(Model model) {
         switch (type) {
         case ADD:
-            model.deleteFacilitator(target);
+            model.deleteTask(target);
             break;
         case EDIT:
             assert replacement != null;
-            model.setFacilitator(replacement, target);
+            model.setTask(replacement, target);
             break;
         case DELETE:
-            model.addFacilitator(target);
+            model.addTask(target);
             break;
         default:
             break;
@@ -49,14 +49,14 @@ public class FacilAction implements DoableAction<Facilitator> {
     public void redo(Model model) {
         switch (type) {
         case ADD:
-            model.addFacilitator(target);
+            model.addTask(target);
             break;
         case EDIT:
             assert replacement != null;
-            model.setFacilitator(target, replacement);
+            model.setTask(target, replacement);
             break;
         case DELETE:
-            model.deleteFacilitator(target);
+            model.deleteTask(target);
             break;
         default:
             break;
@@ -64,12 +64,12 @@ public class FacilAction implements DoableAction<Facilitator> {
     }
 
     @Override
-    public Facilitator getTarget() {
-        return this.target;
+    public Task getTarget() {
+        return null;
     }
 
     @Override
     public DoableActionType getType() {
-        return this.type;
+        return null;
     }
 }
