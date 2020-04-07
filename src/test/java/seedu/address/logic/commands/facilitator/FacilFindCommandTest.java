@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_FACILITATORS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.BENSON;
 import static seedu.address.testutil.TypicalFacilitators.CARL;
 import static seedu.address.testutil.TypicalFacilitators.ELLE;
 import static seedu.address.testutil.TypicalFacilitators.FIONA;
 import static seedu.address.testutil.TypicalFacilitators.GEORGE;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,8 +27,8 @@ import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FacilFindCommand}.
  */
 public class FacilFindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void equals() {

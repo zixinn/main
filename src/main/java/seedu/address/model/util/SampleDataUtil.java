@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,6 +13,8 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
@@ -22,53 +26,106 @@ import seedu.address.model.task.util.TaskDateTime;
  */
 public class SampleDataUtil {
     public static Module[] getSampleModules() {
-        Module[] modules = new Module[] {
-            new Module(new ModuleCode("CS2103T"), new Description("Software Engineering")),
+        return new Module[] {
             new Module(new ModuleCode("CS2101"),
-            new Description("Effective Communication for Computing Professionals")),
+                    new Description("Effective Communication for Computing Professionals")),
+            new Module(new ModuleCode("CS2103T"), new Description("Software Engineering")),
+            new Module(new ModuleCode("CS2105"), new Description("Introduction to Computer Networks")),
+            new Module(new ModuleCode("CS3230"), new Description("Design and Analysis of Algorithms")),
             new Module(new ModuleCode("ES2660"), new Description("Communicating in Information Age")),
-            new Module(new ModuleCode("MA1521"), new Description("Calculus for Computing")),
-            new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics")),
-            new Module(new ModuleCode("CS3233"), new Description("Competitive Programming")),
-            new Module(new ModuleCode("CS4223"), new Description("Multi-core Architectures"))
+            new Module(new ModuleCode("ST2334"), new Description("Calculus for Computing"))
         };
-        return modules;
     }
 
     public static Facilitator[] getSampleFacilitators() {
         return new Facilitator[] {
+            new Facilitator(new Name("Diana Chung"), new Phone("98765432"), new Email("diana@example.com"),
+                    new Office("AS6-03-03"), getModuleCodeSet("CS2101")),
+            new Facilitator(new Name("Akshay Narayan"), new Phone(null), new Email("akshay@example.com"),
+                    new Office("COM2-02-02"), getModuleCodeSet("CS2103T")),
             new Facilitator(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Office("COM2-03-04"),
-                getModuleCodeSet("CS2103T")),
+                    new Office(null), getModuleCodeSet("CS2103T")),
+            new Facilitator(new Name("Zhou Lifeng"), new Phone(null), new Email("lifeng@example.com"),
+                    new Office("COM2-03-03"), getModuleCodeSet("CS2105")),
             new Facilitator(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                        new Office("COM1-02-18"),
-                        getModuleCodeSet("CS2103T", "CS2101")), new Facilitator(new Name("Charlotte Oliveiro"),
-                new Phone("93210283"), new Email("charlotte@example.com"),
-                        new Office("AS6-04-11"),
-                        getModuleCodeSet("ES2660")),
-            new Facilitator(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                        new Office("S16-04-03"),
-                        getModuleCodeSet("MA1521")),
+                    new Office(null), getModuleCodeSet("CS2105")),
+            new Facilitator(new Name("Ken Sung"), new Phone(null), new Email("diptarka@example.com"),
+                    new Office("COM2-02-12"), getModuleCodeSet("CS3230")),
+            new Facilitator(new Name("Diptarka Chakraborty"), new Phone(null), new Email("ken@example.com"),
+                    new Office("COM2-03-13"), getModuleCodeSet("CS3230")),
             new Facilitator(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                        new Office("S17-03-15"),
-                        getModuleCodeSet("ST2334")),
+                    new Office(null), getModuleCodeSet("CS3230")),
+            new Facilitator(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                    new Office("COM1-01-01"), getModuleCodeSet("CS2105", "CS3230")),
+            new Facilitator(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                    new Office("AS6-04-04"), getModuleCodeSet("ES2660")),
+            new Facilitator(new Name("Chan Yiu Man"), new Phone(null), new Email("yiuman@example.com"),
+                    new Office("S17-06-06"), getModuleCodeSet("ST2334")),
+            new Facilitator(new Name("Wong Yean Ling"), new Phone(null), new Email("yeanling@example.com"),
+                    new Office("S17-07-07"), getModuleCodeSet("ST2334")),
             new Facilitator(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                        new Office("AS4-01-13"),
-                        getModuleCodeSet("CS2101"))
+                    new Office("S17-05-05"), getModuleCodeSet("ST2334"))
         };
     }
 
     public static Task[] getSampleTasks() {
         return new Task[]{
-                Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("18/03/2020"),
-                        new ModuleCode("CS3233"), 111),
-                Task.makeScheduledTask(new Description("Programming Assignment 3"), new TaskDateTime("21/03/2020"),
-                        new ModuleCode("CS4223"), 999),
-                Task.makeNonScheduledTask(new Description("OP2 Presentation"), new ModuleCode("CS2101"), 314)
+            Task.makeScheduledTask(new Description("Oral Presentation 2"), new TaskDateTime("06/04/2020", "08:00"),
+                    new ModuleCode("CS2101"), 344, true),
+            Task.makeNonScheduledTask(new Description("Critical Reflection"), new ModuleCode("CS2101"), 295),
+            Task.makeScheduledTask(new Description("Team Project"), new TaskDateTime("13/04/2020"),
+                    new ModuleCode("CS2103T"), 970, true),
+            Task.makeScheduledTask(new Description("Project Portfolio"), new TaskDateTime("13/04/2020"),
+                    new ModuleCode("CS2103T"), 547),
+            Task.makeScheduledTask(new Description("Demo"), new TaskDateTime("13/04/2020"),
+                    new ModuleCode("CS2103T"), 241),
+            Task.makeNonScheduledTask(new Description("Tutorial"), new ModuleCode("CS2105"), 395, true),
+            Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("12/04/2020", "23:59"),
+                    new ModuleCode("CS2105"), 224),
+            Task.makeNonScheduledTask(new Description("Tutorial"), new ModuleCode("CS3230"), 250, true),
+            Task.makeScheduledTask(new Description("Programming Assignment 2"), new TaskDateTime("10/04/2020"),
+                    new ModuleCode("CS3230"), 175, true),
+            Task.makeScheduledTask(new Description("Assignment 3"), new TaskDateTime("24/04/2020", "23:59"),
+                    new ModuleCode("CS3230"), 442),
+            Task.makeScheduledTask(new Description("Challenge 3"), new TaskDateTime("13/04/2020"),
+                    new ModuleCode("CS3230"), 649),
+            Task.makeNonScheduledTask(new Description("Wildcard"), new ModuleCode("ES2660"), 291),
+            Task.makeNonScheduledTask(new Description("Tutorial"), new ModuleCode("ST2334"), 401, true)
         };
     }
 
-    public static ReadOnlyModManager getSampleAddressBook() {
+    public static Lesson[] getSampleLessons() {
+        return new Lesson[] {
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.MONDAY,
+                    LocalTime.parse("08:00"), LocalTime.parse("10:00"), "AS6-0208"),
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.THURSDAY,
+                    LocalTime.parse("08:00"), LocalTime.parse("10:00"), "AS6-0208"),
+            new Lesson(new ModuleCode("CS2103T"), LessonType.LEC, DayOfWeek.FRIDAY,
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"), "i3-Aud"),
+            new Lesson(new ModuleCode("CS2103T"), LessonType.TUT, DayOfWeek.FRIDAY,
+                    LocalTime.parse("10:00"), LocalTime.parse("11:00"), "COM1-B103"),
+            new Lesson(new ModuleCode("CS2105"), LessonType.LEC, DayOfWeek.MONDAY,
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"), "i3-Aud"),
+            new Lesson(new ModuleCode("CS2105"), LessonType.TUT, DayOfWeek.MONDAY,
+                    LocalTime.parse("16:00"), LocalTime.parse("17:00"), "COM1-0203"),
+            new Lesson(new ModuleCode("CS3230"), LessonType.LEC, DayOfWeek.THURSDAY,
+                    LocalTime.parse("16:00"), LocalTime.parse("18:00"), "i3-Aud"),
+            new Lesson(new ModuleCode("CS3230"), LessonType.TUT, DayOfWeek.FRIDAY,
+                    LocalTime.parse("11:00"), LocalTime.parse("12:00"), "COM1-0103"),
+            new Lesson(new ModuleCode("ES2660"), LessonType.SEC, DayOfWeek.MONDAY,
+                    LocalTime.parse("10:00"), LocalTime.parse("12:00"), "AS6-0620"),
+            new Lesson(new ModuleCode("CS2101"), LessonType.SEC, DayOfWeek.THURSDAY,
+                    LocalTime.parse("10:00"), LocalTime.parse("12:00"), "AS6-0620"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, DayOfWeek.MONDAY,
+                    LocalTime.parse("12:00"), LocalTime.parse("14:00"), "LT32"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.LEC, DayOfWeek.WEDNESDAY,
+                    LocalTime.parse("12:00"), LocalTime.parse("14:00"), "LT32"),
+            new Lesson(new ModuleCode("ST2334"), LessonType.TUT, DayOfWeek.FRIDAY,
+                    LocalTime.parse("12:00"), LocalTime.parse("13:00"), "S16-06118")
+        };
+    }
+
+    public static ReadOnlyModManager getSampleModManager() {
         ModManager sampleAb = new ModManager();
         for (Facilitator sampleFacilitator : getSampleFacilitators()) {
             sampleAb.addFacilitator(sampleFacilitator);
@@ -78,6 +135,9 @@ public class SampleDataUtil {
         }
         for (Task sampleTask : getSampleTasks()) {
             sampleAb.addTask(sampleTask);
+        }
+        for (Lesson sampleLesson : getSampleLessons()) {
+            sampleAb.addLesson(sampleLesson);
         }
         return sampleAb;
     }

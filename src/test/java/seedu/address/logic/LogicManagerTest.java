@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.OFFICE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.AMY;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.io.IOException;
@@ -42,13 +42,13 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
         JsonModManagerStorage modManagerStorage =
-                new JsonModManagerStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonModManagerStorage(temporaryFolder.resolve("modmanager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(modManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -76,7 +76,7 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonModManagerIoExceptionThrowingStub
         JsonModManagerStorage modManagerStorage =
-                new JsonModManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonModManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionModManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(modManagerStorage, userPrefsStorage);
@@ -86,7 +86,7 @@ public class LogicManagerTest {
         String facilAddCommand = Command.COMMAND_GROUP_FACIL + " " + Command.COMMAND_WORD_ADD + NAME_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + OFFICE_DESC_AMY + MODULE_CODE_DESC_CS2101;
         Facilitator expectedFacilitator = new FacilitatorBuilder(AMY).build();
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
         expectedModel.addFacilitator(expectedFacilitator);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(facilAddCommand, CommandException.class, expectedMessage, expectedModel);

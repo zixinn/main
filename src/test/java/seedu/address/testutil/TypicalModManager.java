@@ -14,16 +14,16 @@ import seedu.address.model.task.Task;
 /**
  * A utility class containing an {@code ModManager} object to be used in tests.
  */
-public class TypicalAddressBook {
+public class TypicalModManager {
     /**
-     * Returns an {@code ModManager} with all the typical facilitators.
+     * Returns a {@code ModManager} with all the typical facilitators.
      */
-
-    public static ModManager getTypicalAddressBook() {
+    public static ModManager getTypicalModManager() {
         ModManager ab = new ModManager();
         for (Module module : getTypicalModules()) {
             ab.addModule(module);
         }
+
         for (Facilitator facilitator : getTypicalFacilitators()) {
             ab.addFacilitator(facilitator);
         }

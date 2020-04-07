@@ -5,26 +5,24 @@ import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
 
 /**
- * A utility class to help with building Addressbook objects.
- * Example usage: <br>
- *     {@code ModManager ab = new AddressBookBuilder().withFacilitator("John", "Doe").build();}
+ * A utility class to help with building ModManager objects.
  */
-public class AddressBookBuilder {
+public class ModManagerBuilder {
 
     private ModManager modManager;
 
-    public AddressBookBuilder() {
+    public ModManagerBuilder() {
         modManager = new ModManager();
     }
 
-    public AddressBookBuilder(ModManager modManager) {
+    public ModManagerBuilder(ModManager modManager) {
         this.modManager = modManager;
     }
 
     /**
      * Adds a new {@code Module} to the {@code ModManager} that we are building.
      */
-    public AddressBookBuilder withModule(Module module) {
+    public ModManagerBuilder withModule(Module module) {
         modManager.addModule(module);
         return this;
     }
@@ -32,7 +30,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Facilitator} to the {@code ModManager} that we are building.
      */
-    public AddressBookBuilder withFacilitator(Facilitator facilitator) {
+    public ModManagerBuilder withFacilitator(Facilitator facilitator) {
         modManager.addFacilitator(facilitator);
         return this;
     }
