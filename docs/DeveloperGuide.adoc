@@ -1636,6 +1636,54 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Similar to previous.
 // end::testing-module[]
 
+// tag::testing-class[]
+
+=== Testing of Class Feature
+. Adding a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager.
+.. Test case: `class add /code CS2103T /type lec /at friday 10:00 12:00 /venue i3-aud` +
+   Expected: A CS2103T class of type lecture on friday from 10:00 to 12:00 at i3-Aud is added to the class list. Details of the added class is shown in the status message.
+.. Test case: `class add /code CS1101S /type lec /at friday 12:00 14:00` +
+   Expected: No class is added. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class add`, `class add /code cs2103t`, `class add /code cs2103t /type lec`, `class add /code cs2103t /type bla /at friday 10:00 12:00` +
+   Expected: No class is added. Error details shown in the status message.
+
+. Find classes on a certain day
+.. Prerequisites: -
+.. Test case: `class find /at monday` +
+   Expected: Classes listed in the result display.
+.. Test case: `class find` +
+   Expected: No class is found. Error details shown in the status message.
+
+. Finding next class
+.. Prerequisites: -
+.. Test case: `class find /next` +
+   Expected: Classes listed in the result display and module display changed to the module of the next class if there is class left for this week.
+.. Test case: `class find` +
+   Expected: No class is found. Error details shown in the status message.
+
+. Editing a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager. Classes for CS2103T exists.
+.. Test case: `class edit 1 /code cs2103t /venue Home` +
+   Expected: Venue of the first class in the list updated to `Home`.
+.. Test case: `class edit 1 /code cs2103t /venue` +
+   Expected: Venue of the first class in the list is removed`.
+.. Test case: `class edit 1 /code cs1101s` +
+   Expected: No class is edited. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class edit`, `class edit 0`, `class edit -1`, `class edit 1 /code cs2103t` +
+   Expected: No class is edited. Error details shown in the status message.
+
+. Deleting a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager. Classes for CS2103T exists.
+.. Test case: `class delete 1 /code cs2103t` +
+   Expected: First class of the list deleted.
+.. Test case: `class delete 1 /code cs1101s` +
+   Expected: No class is deleted. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class delete`, `class delete 1`, `class delete 0`, `class delete -1` +
+   Expected: No class is deleted. Error details shown in the status message.
+
+// end::testing-class[]
+
 === Testing of Facilitator Feature
 
 // tag::testing-facilitator[]
@@ -1655,7 +1703,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `facil find Akshay` +
    Expected: Only the facilitator with the name `Akshay Narayan` is shown. Number of facilitators listed shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `facil find` +
-   Expected: No facilitator is added. Error details shown in the status message. Status bar remains the same.
+   Expected: No facilitator is found. Error details shown in the status message. Status bar remains the same.
 
 . Editing a facilitator while all facilitators are listed.
 
