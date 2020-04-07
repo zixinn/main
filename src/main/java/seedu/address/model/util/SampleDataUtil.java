@@ -20,7 +20,6 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 
-
 /**
  * Contains utility methods for populating {@code ModManager} with sample data.
  */
@@ -33,7 +32,7 @@ public class SampleDataUtil {
             new Module(new ModuleCode("CS2105"), new Description("Introduction to Computer Networks")),
             new Module(new ModuleCode("CS3230"), new Description("Design and Analysis of Algorithms")),
             new Module(new ModuleCode("ES2660"), new Description("Communicating in Information Age")),
-            new Module(new ModuleCode("ST2334"), new Description("Calculus for Computing"))
+            new Module(new ModuleCode("ST2334"), new Description("Probability and Statistics"))
         };
     }
 
