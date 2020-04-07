@@ -18,7 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_ASSI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_HOMEWORK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROGRAMMING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 import static seedu.address.testutil.TypicalTasks.NON_SCHEDULED_PROGRAMMING_ASSIGNMENT_TASK;
 import static seedu.address.testutil.TypicalTasks.NON_SCHEDULED_PROGRAMMING_TASK;
 import static seedu.address.testutil.TypicalTasks.SCHEDULED_ASSIGNMENT_TASK;
@@ -42,8 +42,8 @@ import seedu.address.model.task.TaskContainsKeywordsPredicate;
  */
 /*
 public class TaskFindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void equals() {

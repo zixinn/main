@@ -196,6 +196,7 @@ public class ParserUtil {
         return Lesson.convertStringToLessonType(trimmedType);
     }
 
+
     /**
      * Parses {@code String venue} into {@code String}.
      */

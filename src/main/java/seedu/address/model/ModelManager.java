@@ -165,7 +165,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Module> getFilteredModuleList() {
@@ -218,7 +218,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Facilitator> getFilteredFacilitatorList() {
@@ -234,7 +234,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Facilitator> getFacilitatorListForModule() {
@@ -384,7 +384,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
@@ -399,7 +399,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Task> getTaskListForModule() {

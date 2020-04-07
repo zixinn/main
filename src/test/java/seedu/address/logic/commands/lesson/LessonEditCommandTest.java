@@ -12,9 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_GEQ
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_HOME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +31,8 @@ import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
 
 public class LessonEditCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedLessonList_success() {

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyModManager_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
         expectedModel.setModManager(new ModManager());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, CommandType.CLEAR, expectedModel);

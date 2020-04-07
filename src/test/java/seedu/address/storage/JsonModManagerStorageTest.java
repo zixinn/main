@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalFacilitators.HOON;
 import static seedu.address.testutil.TypicalFacilitators.IDA;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -75,7 +75,7 @@ public class JsonModManagerStorageTest {
     @Test
     public void readAndSaveModManager_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempModManager.json");
-        ModManager original = getTypicalAddressBook();
+        ModManager original = getTypicalModManager();
         JsonModManagerStorage jsonModManagerStorage = new JsonModManagerStorage(filePath);
 
         // Save in new file and read back
