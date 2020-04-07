@@ -37,9 +37,9 @@ public class LessonModCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         type.setText(lesson.getType().toString());
 
-        day.setText(lesson.getDay().toString());
-        time.setText(lesson.getStartTime().toString() + "-"
-                + lesson.getEndTime().toString());
+        day.setText(lesson.getDayAndTime().getDay().toString());
+        time.setText(lesson.getDayAndTime().getStartTime().toString() + "-"
+                + lesson.getDayAndTime().getEndTime().toString());
 
         if (lesson.getVenue() != null) {
             venue.setText(lesson.getVenue());

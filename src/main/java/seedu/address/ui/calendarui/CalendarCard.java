@@ -90,6 +90,7 @@ public class CalendarCard extends UiPart<Region> {
         default:
             break;
         }
-        time.setText(lesson.getStartTime().toString() + " - " + lesson.getEndTime().toString());
+        time.setText(lesson.getDayAndTime().getStartTime().toString() + " - "
+                + lesson.getDayAndTime().getEndTime().toString());
     }
 }

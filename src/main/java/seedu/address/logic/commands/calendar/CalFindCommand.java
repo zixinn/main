@@ -35,7 +35,7 @@ public class CalFindCommand extends CalCommand {
             Calendar date, int day, List<Task> tasks, List<Lesson> lessons) {
         List<DailySchedulable> schedulables = new ArrayList<>();
         lessons.forEach(x -> {
-            if (x.getDay().getValue() == (day + 1)) {
+            if (x.getDayAndTime().getDay().getValue() == (day + 1)) {
                 schedulables.add(x);
             }
         });
@@ -97,7 +97,7 @@ public class CalFindCommand extends CalCommand {
                 }
 
                 if (schedulable instanceof Lesson) {
-                    startTime = ((Lesson) schedulable).getEndTime();
+                    startTime = ((Lesson) schedulable).getDayAndTime().getEndTime();
                 } else {
                     startTime = time;
                 }
