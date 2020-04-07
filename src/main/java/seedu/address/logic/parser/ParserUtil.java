@@ -204,7 +204,6 @@ public class ParserUtil {
         String[] splitted = trimmed.split(" ");
         String day = splitted[0].toUpperCase();
         boolean isDayValid = false;
-        DayOfWeek assignedDay;
         for (int i = 0; i < 7; i++) {
             if (DayOfWeek.values()[i].toString().equals(day)) {
                 isDayValid = true;

@@ -8,10 +8,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.ALICE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ import seedu.address.model.util.Description;
 import seedu.address.testutil.ModelStub;
 
 public class ModuleViewCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_moduleCodeExist_success() throws Exception {

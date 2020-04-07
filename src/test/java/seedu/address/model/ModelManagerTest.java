@@ -22,7 +22,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.facilitator.NameContainsKeywordsPredicate;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ModManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -180,7 +180,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ModManager modManager = new AddressBookBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
+        ModManager modManager = new ModManagerBuilder().withFacilitator(ALICE).withFacilitator(BENSON)
                 .withModule(CS2103T).withModule(CS2101).build();
         ModManager differentModManager = new ModManager();
         UserPrefs userPrefs = new UserPrefs();

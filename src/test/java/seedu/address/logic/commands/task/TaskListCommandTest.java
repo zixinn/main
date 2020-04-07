@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import seedu.address.model.UserPrefs;
  */
 public class TaskListCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
     private Model expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
 
     @Test

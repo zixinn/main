@@ -8,9 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_FACILITATORS;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import seedu.address.model.facilitator.Name;
  */
 public class FacilDeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

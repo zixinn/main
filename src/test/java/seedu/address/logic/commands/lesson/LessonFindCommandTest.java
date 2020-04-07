@@ -3,7 +3,7 @@ package seedu.address.logic.commands.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.time.DayOfWeek;
 
@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code LessonFindCommand}.
  */
 public class LessonFindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_validDayLessonList_success() throws CommandException {

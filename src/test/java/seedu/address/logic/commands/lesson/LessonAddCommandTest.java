@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ import seedu.address.testutil.LessonBuilder;
 
 
 public class LessonAddCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
