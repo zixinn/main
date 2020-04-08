@@ -69,6 +69,11 @@ public class TaskAction implements DoableAction<Task> {
     }
 
     @Override
+    public Task getReplacement() {
+        return replacement;
+    }
+
+    @Override
     public DoableActionType getType() {
         return type;
     }

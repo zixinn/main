@@ -125,6 +125,11 @@ public class ModuleAction implements DoableAction<Module> {
     }
 
     @Override
+    public Module getReplacement() {
+        return replacement;
+    }
+
+    @Override
     public DoableActionType getType() {
         return this.type;
     }

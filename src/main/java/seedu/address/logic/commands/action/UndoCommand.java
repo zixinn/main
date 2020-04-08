@@ -19,9 +19,9 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Undone action: %s";
     public static final String MESSAGE_CANNOT_UNDO = "There are no valid actions to undo.";
 
-    private final String addAction = "Add:\n";
-    private final String editAction = "Edit:\n";
-    private final String deleteAction = "Delete:\n";
+    private final String addAction = "Add\n";
+    private final String editAction = "Edit\nFROM:   %s\nTO:   %s";
+    private final String deleteAction = "Delete\n";
 
     /**
      * Empty constructor for nothing.
@@ -48,7 +48,7 @@ public class UndoCommand extends Command {
         case ADD:
             return addAction + action.getTarget();
         case EDIT:
-            return editAction + action.getTarget();
+            return String.format(editAction, action.getTarget(), action.getReplacement());
         case DELETE:
             return deleteAction + action.getTarget();
         default:

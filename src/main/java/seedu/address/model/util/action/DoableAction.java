@@ -23,6 +23,11 @@ public interface DoableAction<T> {
     T getTarget();
 
     /**
+     * Get the possible replacement entity.
+     */
+    T getReplacement();
+
+    /**
      * Get the type of this action.
      */
     DoableActionType getType();

@@ -69,6 +69,11 @@ public class FacilAction implements DoableAction<Facilitator> {
     }
 
     @Override
+    public Facilitator getReplacement() {
+        return replacement;
+    }
+
+    @Override
     public DoableActionType getType() {
         return this.type;
     }

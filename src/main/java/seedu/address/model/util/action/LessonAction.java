@@ -69,6 +69,11 @@ public class LessonAction implements DoableAction<Lesson> {
     }
 
     @Override
+    public Lesson getReplacement() {
+        return replacement;
+    }
+
+    @Override
     public DoableActionType getType() {
         return type;
     }
