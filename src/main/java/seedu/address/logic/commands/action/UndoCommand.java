@@ -34,9 +34,10 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_CANNOT_UNDO);
         }
         DoableAction<?> undone = model.undo();
+        System.out.println(undone);
         String msg = makeMessage(undone);
 
-        return new CommandResult(msg, CommandType.UNDO);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, msg), CommandType.UNDO);
     }
 
     /**

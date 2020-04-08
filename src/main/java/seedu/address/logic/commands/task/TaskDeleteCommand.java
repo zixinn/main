@@ -9,6 +9,8 @@ import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskNumManager;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.TaskAction;
 
 /**
  * Deletes a task in Mod Manager using its unique ID.
@@ -56,6 +58,8 @@ public class TaskDeleteCommand extends TaskCommand {
 
         TaskNumManager.removeNum(toDelete.getModuleCode(), toDelete.getTaskNum());
         model.deleteTask(toDelete);
+        TaskAction deleteTaskAction = new TaskAction(toDelete, DoableActionType.DELETE);
+        model.addAction(deleteTaskAction);
 
         return new CommandResult(String.format(MESSAGE_TASK_DELETE_SUCCESS, toDelete), CommandType.TASK);
     }

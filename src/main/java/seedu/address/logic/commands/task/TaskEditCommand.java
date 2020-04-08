@@ -19,6 +19,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.TaskAction;
 
 /**
  * Represents a command that edits an existing task in Mod Manager.
@@ -105,6 +107,8 @@ public class TaskEditCommand extends TaskCommand {
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        TaskAction editTaskAction = new TaskAction(taskToEdit, editedTask, DoableActionType.EDIT);
+        model.addAction(editTaskAction);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask),
                 CommandType.TASK);

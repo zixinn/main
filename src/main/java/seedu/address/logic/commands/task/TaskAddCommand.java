@@ -15,6 +15,8 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.TaskAction;
 
 /**
  * Adds a module to Mod Manager.
@@ -65,6 +67,9 @@ public class TaskAddCommand extends TaskCommand {
         }
 
         model.addTask(toAdd);
+        TaskAction addTaskAction = new TaskAction(toAdd, DoableActionType.ADD);
+        model.addAction(addTaskAction);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.TASK);
     }
 

@@ -65,11 +65,11 @@ public class TaskAction implements DoableAction<Task> {
 
     @Override
     public Task getTarget() {
-        return null;
+        return target;
     }
 
     @Override
     public DoableActionType getType() {
-        return null;
+        return type;
     }
 }

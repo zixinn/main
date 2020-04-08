@@ -65,11 +65,11 @@ public class LessonAction implements DoableAction<Lesson> {
 
     @Override
     public Lesson getTarget() {
-        return null;
+        return target;
     }
 
     @Override
     public DoableActionType getType() {
-        return null;
+        return type;
     }
 }

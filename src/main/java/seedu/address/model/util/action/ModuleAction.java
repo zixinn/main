@@ -1,11 +1,13 @@
 package seedu.address.model.util.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskNumManager;
 
@@ -60,14 +62,23 @@ public class ModuleAction implements DoableAction<Module> {
             break;
         case DELETE:
             model.addModule(target);
+            ModuleCode moduleCode = target.getModuleCode();
             relatedLessons.forEach(model::addLesson);
             relatedTask.forEach(t -> {
-                TaskNumManager.addNum(target.getModuleCode(), t.getTaskNum());
+                TaskNumManager.addNum(moduleCode, t.getTaskNum());
                 model.addTask(t);
             });
             relatedFacil.forEach(f -> {
-                f.getModuleCodes().add(target.getModuleCode());
-                if (!model.hasFacilitator(f)) {
+                List<Facilitator> query = new ArrayList<>();
+                model.getFilteredFacilitatorList()
+                                .stream()
+                                .filter(facil -> facil.isSameFacilitator(f))
+                                .forEach(query::add);
+                assert query.size() <= 1;
+
+                if (query.size() == 1) {
+                    model.setFacilitator(query.get(0), f);
+                } else {
                     model.addFacilitator(f);
                 }
             });
