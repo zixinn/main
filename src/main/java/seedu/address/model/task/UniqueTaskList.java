@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.util.TaskNumManager;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -87,6 +88,10 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void removeWithModuleCode(final ModuleCode target) {
         List<Task> replacementList = new ArrayList<>();
+        internalList.stream()
+                .filter(task -> !task.getModuleCode().equals(target))
+                .forEach(x -> TaskNumManager.removeNum(target, x.getTaskNum()));
+
         internalList.stream()
                 .filter(task -> !task.getModuleCode().equals(target))
                 .forEach(replacementList::add);

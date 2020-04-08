@@ -23,6 +23,8 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.LessonAction;
 
 /**
  * Edits the details of an existing lesson in Mod Manager.
@@ -94,6 +96,8 @@ public class LessonEditCommand extends LessonCommand {
         }
 
         model.setLesson(lessonToEdit, editedLesson);
+        LessonAction editLessonAction = new LessonAction(lessonToEdit, editedLesson, DoableActionType.EDIT);
+        model.addAction(editLessonAction);
 
         model.updateModule(module);
         model.updateFacilitatorListForModule(
