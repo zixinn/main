@@ -14,7 +14,6 @@ import java.util.List;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 
@@ -46,5 +45,5 @@ public abstract class TaskCommand extends Command {
             SEARCH_FORMAT, LIST_DONE_FORMAT, TASK_FOR_MODULE_FORMAT);
 
     @Override
-    public abstract CommandResult execute(Model model) throws CommandException, ParseException;
+    public abstract CommandResult execute(Model model) throws CommandException;
 }

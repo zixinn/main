@@ -14,6 +14,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableAction;
 
 /**
  * The API of the Model component.
@@ -255,4 +256,14 @@ public interface Model {
     void updateCalendar(Calendar calendar);
 
     Calendar getCalendar();
+
+    void addAction(DoableAction<?> action);
+
+    boolean canUndo();
+
+    boolean canRedo();
+
+    DoableAction<?> undo();
+
+    DoableAction<?> redo();
 }

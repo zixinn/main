@@ -10,6 +10,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.parser.action.UndoCommandParser;
 import seedu.address.logic.parser.calendar.CalCommandParser;
 import seedu.address.logic.parser.cmd.CmdCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -71,6 +72,9 @@ public class ModManagerParser {
 
         case Command.COMMAND_GROUP_CMD:
             return new CmdCommandParser().parse(arguments);
+
+        case Command.COMMAND_GROUP_UNDO:
+            return new UndoCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

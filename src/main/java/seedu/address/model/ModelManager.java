@@ -21,6 +21,8 @@ import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableAction;
+import seedu.address.model.util.action.DoableActionList;
 
 /**
  * Represents the in-memory model of Mod Manager data.
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
+    private DoableActionList actionList;
 
     /**
      * Initializes a ModelManager with the given modManager and userPrefs.
@@ -60,6 +63,7 @@ public class ModelManager implements Model {
         tasksForModule = new FilteredList<>(this.modManager.getTaskList());
         tasksForModule.setPredicate(PREDICATE_SHOW_NO_TASKS);
         calendar = Calendar.getNowCalendar();
+        actionList = new DoableActionList();
     }
 
     public ModelManager() {
@@ -424,4 +428,30 @@ public class ModelManager implements Model {
         return calendar;
     }
 
+    //=========== DoableactionList ==========================================================================
+
+    @Override
+    public void addAction(DoableAction<?> action) {
+        actionList.addAction(action);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return actionList.canUndo();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return actionList.canRedo();
+    }
+
+    @Override
+    public DoableAction<?> undo() {
+        return actionList.undo(this);
+    }
+
+    @Override
+    public DoableAction<?> redo() {
+        return actionList.redo(this);
+    }
 }

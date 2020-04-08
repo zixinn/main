@@ -13,6 +13,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.FacilAction;
 
 /**
  * Adds a facilitator to Mod Manager.
@@ -80,6 +82,8 @@ public class FacilAddCommand extends FacilCommand {
         }
 
         model.addFacilitator(toAdd);
+        FacilAction addFacilAction = new FacilAction(toAdd, DoableActionType.ADD);
+        model.addAction(addFacilAction);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.FACILITATOR);
     }
 
