@@ -55,6 +55,8 @@ public class UniqueModuleList implements Iterable<Module> {
             throw new DuplicateModuleException();
         }
         internalList.add(toAdd);
+
+        internalList.sort(new ModuleComparator());
     }
 
     /**
@@ -76,6 +78,8 @@ public class UniqueModuleList implements Iterable<Module> {
         }
 
         internalList.set(index, editedModule);
+
+        internalList.sort(new ModuleComparator());
     }
 
     /**
@@ -105,6 +109,8 @@ public class UniqueModuleList implements Iterable<Module> {
     public void setModules(UniqueModuleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+
+        internalList.sort(new ModuleComparator());
     }
 
     /**
@@ -118,6 +124,8 @@ public class UniqueModuleList implements Iterable<Module> {
         }
 
         internalList.setAll(modules);
+
+        internalList.sort(new ModuleComparator());
     }
 
     /**

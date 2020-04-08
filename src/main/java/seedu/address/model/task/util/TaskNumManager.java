@@ -72,6 +72,5 @@ public class TaskNumManager {
             usedValues.put(moduleCode, new HashSet<>());
         }
         usedValues.get(moduleCode).add(id);
-        System.out.println(usedValues);
     }
 }
