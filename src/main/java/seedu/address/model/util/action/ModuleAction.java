@@ -59,6 +59,11 @@ public class ModuleAction implements DoableAction<Module> {
         case EDIT:
             assert replacement != null;
             model.setModule(replacement, target);
+            if (!replacement.getModuleCode().equals(target.getModuleCode())) {
+                model.setModuleCodeInFacilitatorList(replacement.getModuleCode(), target.getModuleCode());
+                model.setModuleCodeInTaskList(replacement.getModuleCode(), target.getModuleCode());
+                model.setModuleCodeInLessonList(replacement.getModuleCode(), target.getModuleCode());
+            }
             break;
         case DELETE:
             model.addModule(target);
@@ -97,6 +102,11 @@ public class ModuleAction implements DoableAction<Module> {
         case EDIT:
             assert replacement != null;
             model.setModule(target, replacement);
+            if (!replacement.getModuleCode().equals(target.getModuleCode())) {
+                model.setModuleCodeInFacilitatorList(target.getModuleCode(), replacement.getModuleCode());
+                model.setModuleCodeInTaskList(target.getModuleCode(), replacement.getModuleCode());
+                model.setModuleCodeInLessonList(target.getModuleCode(), replacement.getModuleCode());
+            }
             break;
         case DELETE:
             model.deleteModule(target);

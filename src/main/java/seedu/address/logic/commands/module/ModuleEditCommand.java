@@ -101,7 +101,7 @@ public class ModuleEditCommand extends ModuleCommand {
         }
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
 
-        if (moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
+        if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 

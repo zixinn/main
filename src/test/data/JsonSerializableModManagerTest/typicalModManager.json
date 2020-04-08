@@ -1,26 +1,26 @@
 {
   "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalModManager#getTypicalModManager()",
   "modules" : [ {
-    "moduleCode" : "CS2103T",
-    "description" : "Software Engineering"
-  }, {
     "moduleCode" : "CS2101",
     "description" : "Effective Communication for Computing Professionals"
   }, {
+    "moduleCode" : "CS2103T",
+    "description" : "Software Engineering"
+  }, {
+    "moduleCode" : "CS4223",
+    "description" : "Multi-core Architectures"
+  },  {
     "moduleCode" : "ES2660",
     "description" : "Communicating in the Information Age"
-  }, {
-    "moduleCode" : "ST2334",
-    "description" : "Probability and Statistics"
-  }, {
-    "moduleCode" : "MA1521",
-    "description" : "Calculus for Computing"
   }, {
     "moduleCode" : "GEQ1000",
     "description" : "Asking Questions"
   }, {
-    "moduleCode" : "CS4223",
-    "description" : "Multi-core Architectures"
+    "moduleCode" : "MA1521",
+    "description" : "Calculus for Computing"
+  }, {
+    "moduleCode" : "ST2334",
+    "description" : "Probability and Statistics"
   } ],
   "facilitators" : [ {
     "name" : "Alice Pauline",
