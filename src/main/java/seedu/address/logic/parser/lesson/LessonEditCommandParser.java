@@ -19,6 +19,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -85,17 +86,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_AT) != null) {
-            // need to change
-            String trimmed = argMultimap.getValue(PREFIX_AT).trim();
-            String[] splitted = trimmed.split(" ");
-            if (splitted.length != 3) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        LessonEditCommand.MESSAGE_USAGE));
-            }
-
-            editLessonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_AT)));
-            editLessonDescriptor.setStartTime(ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_AT)));
-            editLessonDescriptor.setEndTime(ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_AT)));
+            DayAndTime dayAndTime = ParserUtil.parseDayAndTime(argMultimap.getValue(PREFIX_AT));
+            editLessonDescriptor.setDayAndTime(dayAndTime);
         }
 
         if (argMultimap.getValue(PREFIX_VENUE) != null) {

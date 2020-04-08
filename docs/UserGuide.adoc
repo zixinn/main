@@ -335,15 +335,22 @@ image::ModDeleteBefore2.png[]
 image::ModDeleteAfter2.png[]
 // end::module[]
 
+// tag::class[]
+
 === Managing classes : `*class*`
+
+You can add, find, edit or delete classes within ModManager. +
+When managing your classes, you should take note of the following areas in the main viewing area as stated in section 3.1:
+
+image::ClassExplain.png[]
 
 ==== Adding a class
 
-Adds a class to a module.
+You can add a class to a module.
 
 Format: `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]` +
 
-Parameter constraints:
+Command properties:
 ****
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
@@ -351,33 +358,49 @@ Parameter constraints:
 * START_TIME and END_TIME should be in 24 hour HH:mm format.
 * VENUE is optional
 ****
-Example: `*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`
+Example: +
+You have a CS2103T lecture on Friday from 14:00 to 16:00 at i3-Aud. Before adding that class, ModManager looks like what you see in the figure below. +
+
+image::ClassAddBefore.png[]
+
+To add that class, you can type: +
+`*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`. +
+You will see a new class added to the module CS2103T as shown in the figure below.
+
+image::ClassAddAfter.png[]
 
 ==== Finding classes by day
 
-Finds classes occurring on a particular day.
+You can find classes occurring on a particular day.
 
 Format: `*class* find /at DAY`
 
-Parameter constraints:
+Command properties:
 ****
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
 ****
-Example: `*class* find /at MONDAY`
+Example: +
+To know what classes you have on Friday, you can type `*class* find /at friday` and you will be able to see the classes in the result display box as shown in the figure below.
+
+image::ClassFindDay.png[]
 
 ==== Finding next class
 
-Finds the next class that will start soon.
+You can find the next class that will start soon.
 
-Format: `*class* find /next`
+Format: `*class* find /next` +
+Example: +
+After typing `*class* find /next`, you will be directed to the module's page and you will see the class as shown in the figure below.
+
+image::ClassFindNext.png[]
 
 ==== Editing a class
 
-Edits the information of the class. Class is selected by its index in the class list of a module.
+You can edit the information of the class. The class to be edited is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
 Format: `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
 
-Parameter constraints:
+Command properties:
 ****
 * The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * MOD_CODE must be an existing and valid module code in the list of modules.
@@ -386,20 +409,28 @@ Parameter constraints:
 * START_TIME and END_TIME should be in 24 hour HH:mm format.
 * At least one of the optional fields must be provided.
 ****
-Example: `*class* edit 1 /code CS9000 /venue Home`
+Example: +
+Let's say that the venue of the CS2103T lecture you just added changed to Home. You can edit the class by typing `*class* edit 1 /code CS2103T /venue Home`. ModManager will direct you to the module's page and it will reflect the updated venue as seen below.
+
+image::ClassEdit.png[]
 
 ==== Deleting a class
 
-Deletes the class from the module. Selects a class to be deleted by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
+You can delete the class from the module. The class to be deleted is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
 Format: `*class* delete INDEX /code MOD_CODE`
 
-Parameter constraints:
+Command properties:
 ****
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: `*class* delete 1 /code CS2103T`
+Example: +
+You can delete the CS2103T lecture by typing `*class* delete 1 /code CS2103T`. The class will not appear in the class list as seen below.
+
+image::ClassDelete.png[]
+
+// end::class[]
 
 === Managing tasks : `*task*`
 

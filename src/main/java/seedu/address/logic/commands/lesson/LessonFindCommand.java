@@ -48,14 +48,16 @@ public class LessonFindCommand extends LessonCommand {
                 model.updateTaskListForModule(x -> x.getModuleCode().equals(lesson.getModuleCode()));
             }
         } else {
+            StringBuilder sb = new StringBuilder();
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
             if (lessonsOfTheDay.size() == 0) {
                 result = "No lessons on " + day.toString();
             } else {
-                result = "Lessons on " + day.toString() + "\n";
+                sb.append("Lessons on ").append(day.toString()).append("\n");
                 for (Lesson l : lessonsOfTheDay) {
-                    result = result + "\u2022 " + l.toString() + "\n";
+                    sb.append("\u2022 ").append(l.toString()).append("\n");
                 }
+                result = sb.toString();
             }
         }
         return new CommandResult(result, CommandType.LESSON);

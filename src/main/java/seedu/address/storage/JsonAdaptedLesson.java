@@ -2,14 +2,15 @@ package seedu.address.storage;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
+import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -20,23 +21,18 @@ public class JsonAdaptedLesson {
 
     private final String moduleCode;
     private final String type;
-    private final String day;
-    private final String startTime;
-    private final String endTime;
     private final String venue;
+    private final String dayAndTime;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("moduleCode") String moduleCode, @JsonProperty("type") String type,
-                             @JsonProperty("day") String day, @JsonProperty("startTime") String startTime,
-                             @JsonProperty("endTime") String endTime, @JsonProperty("venue") String venue) {
+                             @JsonProperty("dayAndTime") String dayAndTime, @JsonProperty("venue") String venue) {
         this.moduleCode = moduleCode;
         this.type = type;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.dayAndTime = dayAndTime;
         this.venue = venue;
     }
 
@@ -46,9 +42,9 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         moduleCode = source.getModuleCode().toString();
         type = source.getType().toString();
-        day = source.getDay().toString();
-        startTime = source.getStartTime().toString();
-        endTime = source.getEndTime().toString();
+        dayAndTime = source.getDayAndTime().getDay().toString() + " "
+                + source.getDayAndTime().getStartTime().toString() + " "
+                + source.getDayAndTime().getEndTime().toString();
         venue = source.getVenue();
     }
 
@@ -80,39 +76,25 @@ public class JsonAdaptedLesson {
 
         final LessonType modelType = Lesson.convertStringToLessonType(type);
 
-        if (day == null) {
+        if (dayAndTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    DayOfWeek.class.getSimpleName()));
+                    DayAndTime.class.getSimpleName()));
         }
 
-        if (Arrays.stream(DayOfWeek.values()).noneMatch(x -> x.toString().equals(day))) {
-            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS_DAY);
+        if (!DayAndTime.isValidDayAndTime(dayAndTime)) {
+            throw new IllegalValueException(DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
         }
 
-        final DayOfWeek modelDay = DayOfWeek.valueOf(day);
+        final DayAndTime modelDayAndTime;
 
-        if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalTime.class.getSimpleName()));
+        try {
+            String[] splitted = dayAndTime.trim().split(" ");
+            modelDayAndTime = new DayAndTime(DayOfWeek.valueOf(splitted[0]), LocalTime.parse(splitted[1]),
+                    LocalTime.parse(splitted[2]));
+        } catch (InvalidTimeRangeException e) {
+            throw new IllegalValueException(DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
         }
 
-        if (!Lesson.isValidTimeFormat(startTime)) {
-            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS_TIME);
-        }
-
-        final LocalTime modelStartTime = LocalTime.parse(startTime);
-
-        if (endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalTime.class.getSimpleName()));
-        }
-
-        if (!Lesson.isValidTimeFormat(endTime)) {
-            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS_TIME);
-        }
-
-        final LocalTime modelEndTime = LocalTime.parse(endTime);
-
-        return new Lesson(modelModuleCode, modelType, modelDay, modelStartTime, modelEndTime, venue);
+        return new Lesson(modelModuleCode, modelType, modelDayAndTime, venue);
     }
 }

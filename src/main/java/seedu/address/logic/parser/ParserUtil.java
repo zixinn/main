@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,8 +17,11 @@ import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
+import seedu.address.model.lesson.exceptions.InvalidDayAndTimeException;
+import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.util.Description;
@@ -196,61 +197,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String dayAndTime} into a {@code DayOfWeek}.
-     */
-    public static DayOfWeek parseDay(String dayAndTime) throws ParseException {
-        requireNonNull(dayAndTime);
-        String trimmed = dayAndTime.trim();
-        String[] splitted = trimmed.split(" ");
-        String day = splitted[0].toUpperCase();
-        boolean isDayValid = false;
-        for (int i = 0; i < 7; i++) {
-            if (DayOfWeek.values()[i].toString().equals(day)) {
-                isDayValid = true;
-                break;
-            }
-        }
-        if (!isDayValid) {
-            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_DAY);
-        }
-        return DayOfWeek.valueOf(day);
-    }
-
-    /**
-     * Parses {@code String dayAndTime} into {@code LocalTime}.
-     */
-    public static LocalTime parseStartTime(String dayAndTime) throws ParseException, DateTimeParseException {
-        requireNonNull(dayAndTime);
-        String trimmed = dayAndTime.trim();
-        String[] splitted = trimmed.split(" ", 2);
-        trimmed = splitted[1].trim();
-        String timeString = trimmed.split(" ")[0];
-        try {
-            return LocalTime.parse(timeString);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_TIME);
-        }
-    }
-
-    /**
-     * Parses {@code String dayAndTime} into {@code LocalTime}.
-     */
-    public static LocalTime parseEndTime(String dayAndTime) throws ParseException {
-        requireNonNull(dayAndTime);
-        String trimmed = dayAndTime.trim();
-        String[] splitted = trimmed.split(" ", 2);
-        trimmed = splitted[1].trim();
-        splitted = trimmed.split(" ", 2);
-        trimmed = splitted[1].trim();
-        String timeString = trimmed.split(" ")[0];
-        try {
-            return LocalTime.parse(timeString);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_TIME);
-        }
-    }
-
-    /**
      * Parses {@code String venue} into {@code String}.
      */
     public static String parseVenue(String venue) throws ParseException {
@@ -332,5 +278,38 @@ public class ParserUtil {
             throw new ParseException(TaskMarkAsDoneCommand.MESSAGE_TASK_ID_INVALID);
         }
         return value;
+    }
+
+    /**
+     * Parses a {@code String dayAndTime} into a {@code DayAndTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dayAndTimeString} is invalid.
+     */
+    public static DayAndTime parseDayAndTime(String dayAndTime) throws ParseException {
+        requireNonNull(dayAndTime);
+        String trimmed = dayAndTime.trim();
+        try {
+            return new DayAndTime(trimmed);
+        } catch (InvalidDayAndTimeException e) {
+            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY_AND_TIME);
+        } catch (InvalidTimeRangeException e) {
+            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_TIME);
+        }
+    }
+
+    /**
+     * Parses a {@code String dayString} into a {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dayString} is invalid.
+     */
+    public static DayOfWeek parseDay(String dayString) throws ParseException {
+        dayString = dayString.trim().toUpperCase();
+        if (!DayAndTime.isValidDay(dayString)) {
+            throw new ParseException(DayAndTime.MESSAGE_CONSTRAINTS_DAY);
+        }
+
+        return DayOfWeek.valueOf(dayString);
     }
 }
