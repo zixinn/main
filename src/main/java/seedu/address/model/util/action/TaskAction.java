@@ -65,16 +65,16 @@ public class TaskAction implements DoableAction<Task> {
 
     @Override
     public Task getTarget() {
-        return target;
+        return this.target;
     }
 
     @Override
     public Task getReplacement() {
-        return replacement;
+        return this.replacement;
     }
 
     @Override
     public DoableActionType getType() {
-        return type;
+        return this.type;
     }
 }
