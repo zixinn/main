@@ -9,6 +9,10 @@ public class TaskComparator implements Comparator<Task> {
 
     @Override
     public int compare(Task o1, Task o2) {
+        if (o1 instanceof NonScheduledTask && o2 instanceof NonScheduledTask) {
+            return 0;
+        }
+
         if (o1 instanceof NonScheduledTask) {
             return 1;
         }
