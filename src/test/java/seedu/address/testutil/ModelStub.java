@@ -306,27 +306,27 @@ public class ModelStub implements Model {
 
     @Override
     public void addAction(DoableAction<?> action) {
-
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public boolean canUndo() {
-        return false;
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public boolean canRedo() {
-        return false;
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public DoableAction<?> undo() {
-        return null;
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public DoableAction<?> redo() {
-        return null;
+        throw new AssertionError("This method should not be called.");
     }
 
 

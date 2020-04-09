@@ -2,12 +2,11 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,8 @@ import seedu.address.model.ModManager;
 import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
+import seedu.address.model.util.action.DoableAction;
+import seedu.address.model.util.action.DoableActionList;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
 
@@ -37,7 +38,7 @@ public class ModuleAddCommandTest {
 
         assertEquals(String.format(ModuleAddCommand.MESSAGE_SUCCESS, validModule),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
+        assertEquals(Collections.singletonList(validModule), modelStub.modulesAdded);
     }
 
     @Test
@@ -58,20 +59,20 @@ public class ModuleAddCommandTest {
         ModuleAddCommand addCs2101Command = new ModuleAddCommand(cs2101);
 
         // same object -> returns true
-        assertTrue(addCs2103tCommand.equals(addCs2103tCommand));
+        assertEquals(addCs2103tCommand, addCs2103tCommand);
 
         // same values -> returns true
         ModuleAddCommand addCs2103tCommandCopy = new ModuleAddCommand(cs2103t);
-        assertTrue(addCs2103tCommand.equals(addCs2103tCommandCopy));
+        assertEquals(addCs2103tCommand, addCs2103tCommandCopy);
 
         // different types -> returns false
-        assertFalse(addCs2103tCommand.equals(1));
+        assertNotEquals(1, addCs2103tCommand);
 
         // null -> returns false
-        assertFalse(addCs2103tCommand.equals(null));
+        assertNotEquals(null, addCs2103tCommand);
 
         // different module code -> returns false
-        assertFalse(addCs2103tCommand.equals(addCs2101Command));
+        assertNotEquals(addCs2103tCommand, addCs2101Command);
     }
 
     /**
@@ -97,6 +98,7 @@ public class ModuleAddCommandTest {
      */
     private class ModelStubAcceptingModuleAdded extends ModelStub {
         final ArrayList<Module> modulesAdded = new ArrayList<>();
+        final DoableActionList actionList = new DoableActionList();
 
         @Override
         public boolean hasModule(Module module) {
@@ -113,6 +115,11 @@ public class ModuleAddCommandTest {
         @Override
         public void updateFacilitatorListForModule(Predicate<Facilitator> predicate) {
             //empty method body
+        }
+
+        @Override
+        public void addAction(DoableAction<?> action) {
+            actionList.addAction(action);
         }
 
         @Override

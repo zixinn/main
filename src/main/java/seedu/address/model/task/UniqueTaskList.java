@@ -93,7 +93,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void removeWithModuleCode(final ModuleCode target) {
         List<Task> replacementList = new ArrayList<>();
         internalList.stream()
-                .filter(task -> !task.getModuleCode().equals(target))
+                .filter(task -> task.getModuleCode().equals(target))
                 .forEach(x -> TaskNumManager.removeNum(target, x.getTaskNum()));
 
         internalList.stream()
