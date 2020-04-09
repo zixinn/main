@@ -22,11 +22,11 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 // tag::introduction[]
 Welcome to *Mod Manager*!
 
-*Mod Manager* is a desktop application that assists students in *managing schedules and contacts for their modules* in a semester.
+*Mod Manager* is a desktop application that assists students in *managing tasks, schedules, and contacts for their modules* in a semester.
 
 More importantly, *Mod Manager* is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-If you can type fast, Mod Manager can get your management of schedules and contacts done faster than traditional GUI apps.
+If you can type fast, Mod Manager can get your management of tasks, schedules and contacts done faster than traditional GUI apps.
 
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 // end::introduction[]
@@ -44,9 +44,9 @@ It explains the features and commands supported by Mod Manager, with examples to
 Here are the steps to get you started with using Mod Manager:
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `modmanager.jar` link:{repoURL}/releases[here].
+.  Download the latest `ModManager.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Mod Manager.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Double-click the file to start the application. The GUI should appear in a few seconds.
 +
 .GUI for Mod Manager
 image::Gui.png[width="800"]
@@ -56,13 +56,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
-* *`cmd all`* : lists all available commands in our Mod Manager.
-* *`mod add /code CS2103T /desc Software Engineering`* : adds the module CS2103T to the module list.
-* *`class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`* : adds a class to the module CS2103T.
-* *`task add /code CS2103T /desc Complete tP tasks`*: adds a task to the module CS2103T.
-* *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds a facilitator to the module CS2103T. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
-* *`cal view /week this`* : views your schedules for the current week.
-* *`exit`* : exits the application.
+* `*cmd* all` : lists all available commands in our Mod Manager.
+* `*mod* add /code CS3233 /desc Competitive Programming`* : adds the module CS3233 to the module list.
+* `*class* add /code CS3233 /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud` : adds a lecture class to the module CS3233.
+* `*task* add /code CS3233 /desc Complete Pset 10 /on 30/04/2020 /at 23:59`: adds a task to the module CS3233.
+* `*facil* add /name Steven Halim /email stevenha@comp.nus.edu.sg /code CS3233`: adds a facilitator to the module CS3233. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
+* `*cal* view /week this` : views your schedules for the current week. You should see the CS3233 lecture group
+that you added above.
+* `*exit*` : exits the application.
 
 .  Refer to <<Features>> for details of each command.
 
@@ -96,7 +97,8 @@ image::Ui.png[]
 .Facilitators tab
 image::Facil.png[]
 
-* **Tasks** tab contains information about all the tasks you currently have.
+* **Tasks** tab contains information about all the tasks you currently have. Completed tasks
+are shown in green, whereas the rest are uncompleted tasks.
 +
 
 .Tasks tab
@@ -111,21 +113,92 @@ image::Calendar.png[]
 [[Features]]
 == Features
 
+This section describes the main features of Mod Manager and how to use them.
+
+The features are grouped into six categories:
+
+. <<General, General>> features
+. <<Managing modules : `*mod*`, Module>> features
+. <<Managing classes : `*class*`, Class>> features
+. <<Managing facilitators : `*facil*`, Facilitator>> features
+. <<Managing tasks : `*task*`, Task>> features
+. <<Managing calendar : `*cal*`, Calendar>> features
+
+Additionally, the <<Upcoming `[coming in v2.0]`, upcoming>> features section offers a
+preview of what you can expect in **Mod Manager v2.0**.
+
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-* Items in square brackets are optional. Items in curly brackets are mutually exclusive.
-* Items with `…`​ after them can be used multiple times including zero times.
-* Parameters can be in any order.
-* Module code and facilitator name are case-insensitive.
+This document uses the following notation to describe command formats:
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. +
+e.g. In the command format `*mod* add /code MOD_CODE`, `MOD_CODE` is a parameter
+which can be used as `*mod* add /code CS2103T`.
+* Items in square brackets are optional. +
+e.g `/code MOD_CODE [/desc DESCRIPTION]` can be used as
+`/code CS2103T /desc Software Engineering` or as `/code CS2103T`.
+* Items with `...`​ after them can be used multiple times, including zero times. +
+e.g. `[MORE_DESCRIPTIONS]...` can be used as `{nbsp}` (i.e. 0 times),
+`Software` (once), `Software Engineering` (twice),
+`SWE AI Algorithms` etc.
+//@Todo: check if below works
+* Parameters can be used in any order unless otherwise specified.
+e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
+`/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-=== Viewing help : `*help*`
 
-You can open up the help window that displays you a link to the user guide.
+=== General
+The following commands carry out general operations in Mark.
+
+==== Viewing help : `*help*`
+
+You can open the help window that displays a link to our user guide.
 
 Format: `*help*`
+
+
+==== Listing commands : `*cmd*`
+
+*Listing all commands*:
+
+Lists all valid command groups.
+
+The command groups available in `ModManager` are the words in bold you have seen throughout this document.
+These include: `*facil*, *mod*, *task*, ...`
+
+Format: `*cmd* all`
+
+*Listing commands for a specific feature*:
+
+Lists commands for a specific group.
+
+Format: `*cmd* group COMMAND_WORD`
+
+Example: `*cmd* group task`
+
+==== Automatic command guidance
+
+Provides guidance for mistyped commands by showing a list of possible valid commands. +
+The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
+
+//tag::clear[]
+==== Clearing all entries : `*clear*`
+
+You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
+
+Format: `*clear*`
+//end::clear[]
+
+//tag::exit[]
+==== Exiting the program : `*exit*`
+
+You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
+
+Format: `*exit*`
+//end::exit[]
+
 
 === Managing modules : `*mod*`
 
@@ -167,7 +240,7 @@ You can also add a module without description.
 To add a module with the module code `CS2101`,
 you can type the following command:
 
-`mod add /code CS2101`
+`*mod* add /code CS2101`
 
 .Before `*mod* add /code CS2101`
 image::ModAddBefore2.png[]
@@ -818,46 +891,6 @@ SUNDAY: +
 ****
 //end::calendar[]
 
-=== Listing commands : `*cmd*`
-
-==== Listing all commands
-
-Lists all valid command groups.
-
-The command groups available in `ModManager` are the words in bold you have seen throughout this document.
-These include: `*facil*, *mod*, *task*, ...`
-
-Format: `*cmd* all`
-
-==== Listing commands for a specific feature
-
-Lists commands for a specific group.
-
-Format: `*cmd* group COMMAND_WORD`
-
-Example: `*cmd* group task`
-
-=== Automatic command guidance
-
-Provides guidance for mistyped commands by showing a list of possible valid commands. +
-The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
-
-//tag::clear[]
-=== Clearing all entries : `*clear*`
-
-You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
-
-Format: `*clear*`
-//end::clear[]
-
-//tag::exit[]
-=== Exiting the program : `*exit*`
-
-You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
-
-Format: `*exit*`
-//end::exit[]
-
 === Upcoming `[coming in v2.0]`
 
 // tag::upcoming[]
@@ -884,13 +917,50 @@ You can receive reminders for deadlines and events the next day.
 
 You can find upcoming tasks.
 
-==== Finding
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Mod Manager folder.
+=== How do I transfer my data to another Computer?
 
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous Mod Manager folder.
+
+== Glossary
+This glossary aims to provide a definition for the special vocabulary used in this user guide.
+
+[[dashboard]] Dashboard::
+The default tab in view when the application starts. The dashboard
+contains a help section (command summary), favorite tags, current
+reminders, and a view of the folder hierarchy for bookmarks.
+<picture>
+
+////
+[[annotation]] Annotation::
+A note or highlight that is made on an <<offline-copy, offline copy>> of a bookmark.
+
+[[autotag]] Autotag::
+A tag that is automatically applied to bookmarks based on certain conditions. These conditions
+are specified when the autotag is created. Refer to <<Autotag-Command>> for details about how to use autotags.
+
+[[bookmark]] Bookmark::
+A saved shortcut to a website. In Mark, a bookmark can contain other information besides the website URL,
+such as reminders, <<offline-copy, offline copies>> and <<annotation, annotations>>.
+
+
+[[folder-hierarchy]] Folder Hierarchy::
+The structure of folders in Mark. This is displayed in the dashboard tab when the application starts.
+
+[[reminder]] Reminder::
+The reminder in Mark reminds you to check a specific bookmark.
+This is displayed in the dashboard tab when the application starts.
+
+[[offline-copy]] Offline copy::
+An copy of a bookmarked website that is used for offline viewing. It is stored as a HTML file on the computer.
+
+[[stray-notes]] General notes::
+Annotation notes that are not attached to a paragraph from the corresponding web page are described to be general.
+General notes are found at the bottom of the rightmost column on the offline copy, known as the _General notes section_.
+////
 == Command Summary
 
 .Summary of command formats
@@ -954,3 +1024,25 @@ You can find upcoming tasks.
 |  `*task* module /code MOD_CODE`
 |  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
 |  `*task* undone`
+|=====
+
+..Summary of common command parameters
+////
+please fill up
+[%autowidth]
+|======
+|*Parameter* | *Constraints*
+|`FILENAME` |`FILENAME` should consist of only alphanumeric characters, hyphens, and/or underscores.
+|`FOLDER_NAME` |`FOLDER_NAME` must be alphanumeric
+|`URL` |`URL` should have the format: `scheme://authority[/path][?query][\#fragment][/]` and adhere to the following
+constraints: +
+1. The scheme should be either 'http', 'https', 'ftp', or 'file', followed by '://'. +
+2. The authority should only contain alphanumeric characters and any of the characters `(.-_~!$&'*+,;=:@)`. +
+3. This can be followed by zero or more path segments. Each path segment begins with a '/' followed by zero or more
+alphanumeric or special characters. +
+4. Next, a URL may contain a query string, which begins with a '?'. +
+5. It may also contain a fragment after the query string (if present), which begins with a '#'. +
+6. Finally, a URL can end with an optional slash '/'.
+////
+
+
