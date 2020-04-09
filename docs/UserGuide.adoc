@@ -567,18 +567,76 @@ Example: `*task* delete CS2103T 973`
 
 ==== Marking a task as done
 
-Marks a task as done in the module.
+You can mark the task as done in the module in Mod Manager.
+
+NOTE: A newly added task as above will be marked as not done by default.
+
+NOTE: Editing a task will not change the done/not done status of the task, unless
+the `undo` command is used.
+
+NOTE: Tasks that are already marked as done cannot be re-marked as done. It's also
+not possible to "undone" a completed task, unless the `undo` command is used.
+
 Format: `*task* done /code MOD_CODE /id ID_NUMBER` +
-Example: `*task* done /code CS2103T /id 979`
+
+Command properties:
+****
+* MOD_CODE should belong to a valid and existing module in Mod Manager.
+* ID_NUMBER should belong to a valid task for the module above.
+****
+
+Example:
+You can mark a task as done in the module. To mark the task with
+task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the following command:
+
+`*task* done /code CS2105 /id 224`
+and hit kbd:[Enter]
+
+.Before `*task* done /code CS2105 /id 224`, only the relevant task and some other sample tasks are shown.
+image::TaskDoneBeforeCloseUp.png[]
+
+.After `*task* done /code CS2105 /id 224`
+image::TaskDoneAfterCloseUp.png[]
+
+The task card has changed to green; which means our task has been marked as done.
+Hooray! We just completed a task.
 
 ==== Viewing all tasks across modules in ModManger
 
-Shows a list of all tasks across all modules in the Mod Manager. +
+You can view a list of all tasks across all modules in Mod Manager.
+This is great when you need an overview of all tasks that you need to complete
+at present.
+
 Format: `*task* list`
 
+By typing the command above, you should see the following:
+
+.`*task* list` shows a list of all tasks in Mod Manager
+image::Task.png[]
+
 ==== Viewing tasks for a specific module in ModManger
-Shows a list of tasks for a particular module in the Mod Manager. +
+If you want to find tasks for a specific module in Mod Manager, this is the command for you to use!
+
 Format: `*task* module /code CS2103T`
+
+Command properties:
+****
+* MOD_CODE should belong to a valid and existing module in Mod Manager.
+****
+
+NOTE: Alternatively, you can also view the tasks for a specific module in the `Module` tab (main dashboard).
+
+Example:
+If you want a list of current tasks for the module `CS3230`, you can type in the following command:
+
+`*task* module /code CS3230`
+and hit kbd:[Enter]
+
+It is not compulsory for you to be at the `Tasks` tab before typing in this command.
+Mod Manager will automatically redirect you to the `Tasks` tab if you are currently at another tab.
+
+.All tasks belonging to the module `CS3230` are listed`
+image::TaskListModule.png[]
 
 ==== Viewing all undone tasks
 Shows a list of all tasks that are not yet done across all modules in the Mod Manager. +
@@ -625,7 +683,7 @@ and you will have to follow the input requirements using valid numbers for
 match only tasks that are on 10 April in any year.
 ****
 
-=
+
 // end::task[]
 === Managing facilitators : `*facil*`
 
@@ -937,6 +995,18 @@ The default tab in view when the application starts. The dashboard
 contains a help section (command summary), favorite tags, current
 reminders, and a view of the folder hierarchy for bookmarks.
 <picture>
+[[taskcard]] Task card::
+A task card represents a task with details such as the module it belongs to,
+description, and time period (if provided upon creation).
+
+A dark red card represents a task that is not yet done.
+
+image::TaskCardNotDone.png[]
+
+A green card represents a done task.
+
+image::TaskCardDone.png[]
+
 
 ////
 [[annotation]] Annotation::
