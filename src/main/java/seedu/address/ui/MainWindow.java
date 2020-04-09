@@ -353,6 +353,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
             case UNDO:
+            case REDO:
+                moduleDetailsPanel.changeDisplayModule(logic.getModule());
                 refreshModuleTab(logic.getModule());
                 break;
             default:
