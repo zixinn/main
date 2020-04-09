@@ -20,7 +20,7 @@ public class TaskListCard extends UiPart<Region> {
     @FXML
     private Label moduleCode;
     @FXML
-    private Label taskId;
+    private Label taskNum;
     @FXML
     private Label taskDescription;
     @FXML
@@ -30,19 +30,12 @@ public class TaskListCard extends UiPart<Region> {
         super(FXML);
         this.id = displayedIndex;
         this.task = task;
-        if (task.isTaskDone()) {
-            cardPane.setStyle("-fx-background-color: #4BB543; "
-                    + "-fx-background-radius: 8px;");
-        } else {
-            cardPane.setStyle("-fx-background-color: #9d6365;"
-                    + "-fx-background-radius: 8px; ");
-        }
 
-        taskId.setStyle("-fx-text-fill: #ffee00");
+        taskNum.setStyle("-fx-text-fill: #ffee00");
 
         moduleCode.setText(String.format("%s", task.getModuleCode()));
         moduleCode.setStyle("-fx-text-fill: #add8e6");
-        taskId.setText(String.format("ID: %d", task.getTaskNum()));
+        taskNum.setText(String.format("ID: %d", task.getTaskNum()));
         taskDescription.setText(String.format("%s",
                 task.getDescription()));
 

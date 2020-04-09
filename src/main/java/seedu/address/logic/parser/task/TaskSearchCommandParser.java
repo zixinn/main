@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
@@ -15,7 +16,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.TaskSearchPredicate;
-
 
 /**
  * Parses input arguments and creates a new TaskSearchCommand object
@@ -33,6 +33,16 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
                 args, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
 
         HashMap<String, Integer> keywords = new HashMap<String, Integer>();
+
+        if (argMultimap.numOfValuesPresent(PREFIX_DAY) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DAY));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_MONTH) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MONTH));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_YEAR) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_YEAR));
+        }
 
         if (arePrefixesPresent(argMultimap, PREFIX_DAY)) {
             int day;

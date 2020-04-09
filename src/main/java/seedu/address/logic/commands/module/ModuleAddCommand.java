@@ -9,6 +9,8 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.ModuleAction;
 
 /**
  * Adds a module to Mod Manager.
@@ -16,7 +18,7 @@ import seedu.address.model.module.Module;
 public class ModuleAddCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_ADD
-            + ": Adds a module to Mod Manager. "
+            + ": Adds a module to Mod Manager. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] \n"
@@ -46,6 +48,8 @@ public class ModuleAddCommand extends ModuleCommand {
         }
 
         model.addModule(toAdd);
+        ModuleAction addModAction = new ModuleAction(toAdd, DoableActionType.ADD);
+        model.addAction(addModAction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.MODULE);
     }

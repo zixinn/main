@@ -1,16 +1,21 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_A;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_CODE123;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.lesson.LessonDeleteCommand;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.testutil.LessonBuilder;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -24,15 +29,25 @@ public class LessonDeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, " 1 /code CS2103T",
-                new LessonDeleteCommand(INDEX_FIRST, Optional.of(new ModuleCode("CS2103T"))));
-        assertParseSuccess(parser, " 1 ", new LessonDeleteCommand(INDEX_FIRST, Optional.empty()));
+        assertParseSuccess(parser, (INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE
+                        + " " + VALID_MODULE_CODE_CS2103T),
+                new LessonDeleteCommand(INDEX_FIRST, new ModuleCode(VALID_MODULE_CODE_CS2103T)));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " a ", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, " a /code CS2103T ", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, " 1 /code CODE123 ", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_INDEX_A, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, (INVALID_INDEX_A + " " + PREFIX_MODULE_CODE + " "
+                + VALID_MODULE_CODE_CS2103T), MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, (INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "
+                + INVALID_MODULE_CODE_CODE123), ModuleCode.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_multipleModuleCode_throwsException() {
+        String userInput = " 1 " + PREFIX_MODULE_CODE + " " + LessonBuilder.DEFAULT_MODULE_CODE + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS2103T + " "
+                + PREFIX_MODULE_CODE + " " + VALID_MODULE_CODE_CS1101S;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
     }
 }

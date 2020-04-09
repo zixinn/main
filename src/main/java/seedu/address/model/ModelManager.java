@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
@@ -22,6 +21,8 @@ import seedu.address.model.lesson.LessonList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableAction;
+import seedu.address.model.util.action.DoableActionList;
 
 /**
  * Represents the in-memory model of Mod Manager data.
@@ -39,7 +40,7 @@ public class ModelManager implements Model {
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
-    private Optional<ModuleCode> moduleCode;
+    private DoableActionList actionList;
 
     /**
      * Initializes a ModelManager with the given modManager and userPrefs.
@@ -62,6 +63,7 @@ public class ModelManager implements Model {
         tasksForModule = new FilteredList<>(this.modManager.getTaskList());
         tasksForModule.setPredicate(PREDICATE_SHOW_NO_TASKS);
         calendar = Calendar.getNowCalendar();
+        actionList = new DoableActionList();
     }
 
     public ModelManager() {
@@ -166,7 +168,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Module> getFilteredModuleList() {
@@ -219,7 +221,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Facilitator> getFilteredFacilitatorList() {
@@ -229,12 +231,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredFacilitatorList(Predicate<Facilitator> predicate) {
         requireNonNull(predicate);
+        filteredFacilitators.setPredicate(PREDICATE_SHOW_ALL_FACILITATORS);
         filteredFacilitators.setPredicate(predicate);
     }
 
     /**
      * Returns an unmodifiable view of the list of {@code Facilitator} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Facilitator> getFacilitatorListForModule() {
@@ -356,7 +359,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTask(Task task) throws ParseException {
+    public void addTask(Task task) {
         modManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
@@ -384,7 +387,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
@@ -399,7 +402,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedModManager}
      */
     @Override
     public ObservableList<Task> getTaskListForModule() {
@@ -425,9 +428,30 @@ public class ModelManager implements Model {
         return calendar;
     }
 
-    //=========== utility mode =================================================================================
+    //=========== DoableactionList ==========================================================================
 
-    public ModelManager getClone() {
-        return new ModelManager(modManager, userPrefs);
+    @Override
+    public void addAction(DoableAction<?> action) {
+        actionList.addAction(action);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return actionList.canUndo();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return actionList.canRedo();
+    }
+
+    @Override
+    public DoableAction<?> undo() {
+        return actionList.undo(this);
+    }
+
+    @Override
+    public DoableAction<?> redo() {
+        return actionList.redo(this);
     }
 }

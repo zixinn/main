@@ -2,6 +2,7 @@ package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +12,13 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.ModuleAction;
 
 /**
  * Deletes a module identified using it's displayed index from Mod Manager.
@@ -75,12 +81,27 @@ public class ModuleDeleteCommand extends ModuleCommand {
         }
 
         model.deleteModule(moduleToDelete);
-        model.deleteModuleCodeFromFacilitatorList(moduleToDelete.getModuleCode());
-        model.deleteTasksWithModuleCode(moduleToDelete.getModuleCode());
+        ModuleCode moduleCode = moduleToDelete.getModuleCode();
+
+        List<Facilitator> relatedFacil =
+                new ArrayList<>(model.getFilteredFacilitatorList()
+                        .filtered(x -> x.getModuleCodes().contains(moduleCode)));
+
+        List<Lesson> relatedLessons = new ArrayList<>(model.getLessonListForModule(moduleCode));
+
+        List<Task> relatedTasks = new ArrayList<>(model.getFilteredTaskList()
+                .filtered(x -> x.getModuleCode().equals(moduleCode)));
+
+        model.deleteModuleCodeFromFacilitatorList(moduleCode);
+        model.deleteTasksWithModuleCode(moduleCode);
+        model.removeLessonFromModule(moduleCode);
+
+        ModuleAction deleteModAction =
+                new ModuleAction(moduleToDelete, relatedLessons, relatedTasks, relatedFacil, DoableActionType.DELETE);
+        model.addAction(deleteModAction);
 
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
-            model.removeLessonFromModule(moduleToDelete.getModuleCode());
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete),

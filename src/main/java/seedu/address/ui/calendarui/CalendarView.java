@@ -64,28 +64,36 @@ public class CalendarView extends UiPart<Region> {
     }
 
     /**
+     * Returns a list of schedulable tasks and lessons in a day.
+     */
+    public List<DailySchedulable> generateSchedulables(
+            Calendar calendar, int day, List<Task> tasks, List<Lesson> lessons) {
+        List<DailySchedulable> items = new ArrayList<>();
+
+        lessons.forEach(x -> {
+            if (x.getDayAndTime().getDay().getValue() == (day + 1)) {
+                items.add(x);
+            }
+        });
+
+        tasks.forEach(task -> {
+            if (task instanceof ScheduledTask && calendar.isWithinDate(task)) {
+                items.add(task);
+            }
+        });
+
+        items.sort(new DailySchedulableComparator());
+        return items;
+    }
+
+    /**
      * Adds cards to the calendar.
      */
     public void addCards(Calendar[] calendars, List<Task> tasks, List<Lesson> lessons) {
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
-            final int cnt = i;
             CalendarCardPanel panel = cardPanels.get(i);
             Calendar c = calendars[i];
-            List<DailySchedulable> items = new ArrayList<>();
-
-            lessons.forEach(x -> {
-                if (x.getDay().getValue() == (cnt + 1)) {
-                    items.add(x);
-                }
-            });
-
-            tasks.forEach(task -> {
-                if (task instanceof ScheduledTask && c.isWithinDate(task)) {
-                    items.add(task);
-                }
-            });
-
-            items.sort(new DailySchedulableComparator());
+            List<DailySchedulable> items = generateSchedulables(c, i, tasks, lessons);
 
             for (DailySchedulable item : items) {
                 panel.addCard(new CalendarCard(item));

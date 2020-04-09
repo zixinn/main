@@ -17,12 +17,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.facilitator.FacilEditCommand;
 import seedu.address.logic.commands.module.ModuleEditCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
@@ -43,6 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS1101S = "CS1101S";
     public static final String VALID_MODULE_CODE_CS3230 = "CS3230";
     public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
+    public static final String VALID_MODULE_CODE_GEQ1000 = "GEQ1000";
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
     public static final String TASK_DAY_26 = "26";
     public static final String TASK_MONTH_03 = "3";
@@ -125,6 +127,29 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_YEAR_OUT_OF_BOUNDS =
             " " + PREFIX_YEAR + " " + INVALID_TASK_YEAR_NEGATIVE; // strings not allowed for year
 
+    public static final String INVALID_INDEX_WITH_STRING = " 1 some random string ";
+    public static final String INVALID_INDEX_WITH_PREFIX = " 1 /some random string ";
+
+    public static final String INVALID_MODULE_CODE_CS9000 = "CS9000";
+    public static final String INVALID_MODULE_CODE_CODE123 = "code123";
+
+    public static final String VALID_LESSON_TYPE_LEC = "LEC";
+    public static final String VALID_LESSON_TYPE_TUT = "TUT";
+    public static final String VALID_LESSON_TYPE_REC = "REC";
+    public static final String VALID_LESSON_TYPE_SEC = "SEC";
+    public static final String INVALID_LESSON_TYPE_FREE = "FREE";
+
+    public static final String VALID_DAY_AND_TIME_SUNDAY = "SUNDAY 01:00 02:00";
+    public static final String VALID_DAY_AND_TIME_MONDAY = "MONDAY 19:00 20:00";
+    public static final String VALID_DAY_FRIDAY = "FRIDAY";
+    public static final String INVALID_DAY_SUNNYDAY = "SUNNYDAY 19:00 20:00";
+    public static final String INVALID_TIME = "SUNDAY 19:00 2:00";
+
+    public static final String VALID_VENUE_HOME = "Home";
+    public static final String VALID_VENUE_PARK = "Park";
+
+    public static final String INVALID_INDEX_A = "a";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -152,6 +177,8 @@ public class CommandTestUtil {
                 .withModuleCodes(VALID_MODULE_CODE_CS2103T, VALID_MODULE_CODE_CS2101).build();
     }
 
+    private static final Logger logger = LogsCenter.getLogger(CommandTestUtil.class);
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -163,7 +190,8 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
-        } catch (CommandException | ParseException ce) {
+        } catch (CommandException ce) {
+            logger.severe(ce.getMessage());
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }

@@ -1,11 +1,17 @@
 package seedu.address.model.calendar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.util.TaskDateTime;
+import seedu.address.model.util.Description;
 
 public class CalendarTest {
 
@@ -20,14 +26,30 @@ public class CalendarTest {
         Calendar calendar5 = new Calendar(LocalDate.parse("2020-03-14"));
         Calendar calendar6 = new Calendar(LocalDate.parse("2020-03-15"));
         Calendar[] calendars = calendar.getWeek();
-        assertTrue(calendars[0].equals(calendar0));
-        assertTrue(calendars[1].equals(calendar1));
-        assertTrue(calendars[2].equals(calendar2));
-        assertTrue(calendars[3].equals(calendar));
-        assertTrue(calendars[4].equals(calendar4));
-        assertTrue(calendars[5].equals(calendar5));
-        assertTrue(calendars[6].equals(calendar6));
+        assertEquals(calendars[0], calendar0);
+        assertEquals(calendars[1], calendar1);
+        assertEquals(calendars[2], calendar2);
+        assertEquals(calendars[3], calendar);
+        assertEquals(calendars[4], calendar4);
+        assertEquals(calendars[5], calendar5);
+        assertEquals(calendars[6], calendar6);
 
+    }
+
+    @Test
+    public void isWithinDate() {
+        LocalDate localDate = LocalDate.parse("2020-03-12");
+        Calendar calendar = new Calendar(localDate);
+        Task task = Task.makeScheduledTask(new Description("read"),
+                new TaskDateTime("12/03/2020"), new ModuleCode("CS2103T"));
+        Task otherTask = Task.makeScheduledTask(new Description("read"),
+                new TaskDateTime("12/04/2020"), new ModuleCode("CS2103T"));
+
+        //same date -> returns true
+        assertTrue(calendar.isWithinDate(task));
+
+        //different date -> returns false
+        assertFalse(calendar.isWithinDate(otherTask));
     }
 
     @Test
@@ -37,13 +59,16 @@ public class CalendarTest {
         Calendar otherCalendar = new Calendar(localDate);
 
         //same date -> returns true
-        assertTrue(calendar.equals(otherCalendar));
+        assertEquals(calendar, otherCalendar);
 
         //same object -> returns true
-        assertTrue(calendar.equals(calendar));
+        assertEquals(calendar, calendar);
 
         //null -> returns false
         assertFalse(calendar.equals(null));
+
+        //different type -> return false
+        assertFalse(calendar.equals(1));
 
         //different calendar -> return false
         Calendar diffCalendar = new Calendar(LocalDate.parse("2020-03-03"));

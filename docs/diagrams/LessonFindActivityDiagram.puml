@@ -5,10 +5,13 @@ if () then ([either day or /next is present])
 
     if () then ([/day is present])
         :Parser parses day;
+        :Ui shows the lesson;
          else ([else])
+            :Ui shows the lesson list;
          endif
-    :Logic executes command;
+
 else ([else])
+    :Ui shows error message;
 endif
 
 

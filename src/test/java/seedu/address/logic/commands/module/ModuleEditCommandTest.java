@@ -11,9 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.module.ModuleEditCommand.MESSAGE_NON_EXISTENT_MODULE;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.util.Optional;
 
@@ -38,7 +38,7 @@ import seedu.address.testutil.ModuleBuilder;
  */
 public class ModuleEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedIndex_success() {
@@ -226,7 +226,7 @@ public class ModuleEditCommandTest {
     public void execute_duplicateModuleModuleCode_failure() {
         Module firstModule = model.getFilteredModuleList().get(INDEX_FIRST.getZeroBased());
         ModuleEditCommand.EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
-        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2101), descriptor);
+        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2103T), descriptor);
 
         assertCommandFailure(editCommand, model, ModuleEditCommand.MESSAGE_DUPLICATE_MODULE);
     }

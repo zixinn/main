@@ -1,23 +1,26 @@
 {
-  "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalAddressBook#getTypicalAddressBook()",
+  "_comment": "ModManager save file which contains the same Module, Facilitator, Task and Lesson values as in TypicalModManager#getTypicalModManager()",
   "modules" : [ {
-    "moduleCode" : "CS2103T",
-    "description" : "Software Engineering"
-  }, {
     "moduleCode" : "CS2101",
     "description" : "Effective Communication for Computing Professionals"
   }, {
+    "moduleCode" : "CS2103T",
+    "description" : "Software Engineering"
+  }, {
+    "moduleCode" : "CS4223",
+    "description" : "Multi-core Architectures"
+  },  {
     "moduleCode" : "ES2660",
     "description" : "Communicating in the Information Age"
   }, {
-    "moduleCode" : "ST2334",
-    "description" : "Probability and Statistics"
+    "moduleCode" : "GEQ1000",
+    "description" : "Asking Questions"
   }, {
     "moduleCode" : "MA1521",
     "description" : "Calculus for Computing"
   }, {
-    "moduleCode" : "GEQ1000",
-    "description" : "Asking Questions"
+    "moduleCode" : "ST2334",
+    "description" : "Probability and Statistics"
   } ],
   "facilitators" : [ {
     "name" : "Alice Pauline",
@@ -62,20 +65,34 @@
     "office" : "TP-SR4",
     "moduleCode" : [ "GEQ1000" ]
   } ],
-  "tasks": [ ],
+  "tasks": [ {
+    "description" : "Programming Assignment 2",
+    "taskTime" : "18/03/2020",
+    "moduleCode" : "CS4223",
+    "taskNum" : 111,
+    "isDone" : false
+  }, {
+    "description" : "Programming Assignment 3",
+    "taskTime" : "21/03/2020 19:30",
+    "moduleCode" : "CS4223",
+    "taskNum" : 999,
+    "isDone" : false
+  }, {
+    "description" : "OP2 Presentation",
+    "taskTime" : "",
+    "moduleCode" : "CS2101",
+    "taskNum" : 314,
+    "isDone" : false
+  } ],
   "lessons": [ {
     "moduleCode" : "CS2103T",
     "type" : "LEC",
-    "day" : "FRIDAY",
-    "startTime" : "14:00",
-    "endTime" : "16:00",
+    "dayAndTime" : "MONDAY 14:00 16:00",
     "venue" : "i3-Aud"
   } , {
     "moduleCode" : "GEQ1000",
     "type" : "LAB",
-    "day" : "WEDNESDAY",
-    "startTime" : "14:00",
-    "endTime" : "16:00",
+    "dayAndTime" : "WEDNESDAY 09:00 10:00",
     "venue" : "i3-Aud"
   } ]
 }

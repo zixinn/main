@@ -44,6 +44,7 @@ public class LessonList {
         }
 
         lessons.add(lesson);
+        sortLessonsByDayAndTime();
     }
 
     /**
@@ -52,17 +53,12 @@ public class LessonList {
      * @return True if time slot is free and false otherwise.
      */
     public boolean isTimeSlotFree(Lesson lessonToBeAdded, Optional<Lesson> lessonToExclude) {
-        LocalTime targetStartTime = lessonToBeAdded.getStartTime();
-        LocalTime targetEndTime = lessonToBeAdded.getEndTime();
         System.out.println(lessons);
         for (Lesson lesson : lessons) {
             if (!lessonToExclude.isEmpty() && lesson.equals(lessonToExclude.get())) {
                 continue;
             }
-            LocalTime lessonStartTime = lesson.getStartTime();
-            LocalTime lessonEndTime = lesson.getEndTime();
-            if ((lessonToBeAdded.getDay().equals(lesson.getDay()))
-                    && (targetStartTime.compareTo(lessonEndTime) < 0 && lessonStartTime.compareTo(targetEndTime) < 0)) {
+            if (lessonToBeAdded.getDayAndTime().isSameTimeSlot(lesson.getDayAndTime())) {
                 return false;
             }
         }
@@ -83,6 +79,7 @@ public class LessonList {
         } else {
             int index = lessons.indexOf(target);
             lessons.set(index, edited);
+            sortLessonsByDayAndTime();
         }
     }
 
@@ -95,6 +92,7 @@ public class LessonList {
             }
         }
         lessons = replacement;
+        sortLessonsByDayAndTime();
     }
 
     public List<Lesson> getLessonList() {
@@ -112,7 +110,6 @@ public class LessonList {
         } else {
             throw new LessonNotFoundException();
         }
-
     }
 
     /**
@@ -136,7 +133,7 @@ public class LessonList {
         requireNonNull(day);
         List<Lesson> lessonsOnDate = new ArrayList<>();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().equals(day)) {
+            if (lesson.getDayAndTime().getDay().equals(day)) {
                 lessonsOnDate.add(lesson);
             }
         }
@@ -148,14 +145,15 @@ public class LessonList {
      * @return The next lesson happening.
      */
     public Lesson findNextLesson() {
-        Collections.sort(lessons);
+        sortLessonsByDayAndTime();
         LocalDate curDate = LocalDate.now();
         DayOfWeek curDay = curDate.getDayOfWeek();
         LocalTime curTime = LocalTime.now();
         for (Lesson lesson : lessons) {
-            if (lesson.getDay().compareTo(curDay) == 0 && lesson.getStartTime().compareTo(curTime) >= 0) {
+            if (lesson.getDayAndTime().getDay().compareTo(curDay) == 0
+                    && lesson.getDayAndTime().getStartTime().compareTo(curTime) >= 0) {
                 return lesson;
-            } else if (lesson.getDay().compareTo(curDay) > 0) {
+            } else if (lesson.getDayAndTime().getDay().compareTo(curDay) > 0) {
                 return lesson;
             }
         }
@@ -208,8 +206,8 @@ public class LessonList {
             }
         }
         for (Lesson lesson : lessonsToEdit) {
-            Lesson editedLesson = new Lesson(editedModuleCode, lesson.getType(), lesson.getDay(), lesson.getStartTime(),
-                    lesson.getEndTime(), lesson.getVenue());
+            Lesson editedLesson = new Lesson(editedModuleCode, lesson.getType(), lesson.getDayAndTime(),
+                    lesson.getVenue());
             setLesson(lesson, editedLesson);
         }
     }
@@ -218,20 +216,21 @@ public class LessonList {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else if (other instanceof LessonList) {
+        } else if (other instanceof LessonList && lessons.size() == ((LessonList) other).getLessonList().size()) {
             LessonList otherList = (LessonList) other;
             if (lessons.size() != otherList.getLessonList().size()) {
                 return false;
             } else {
-                for (int i = 0; i < lessons.size(); i++) {
-                    if (!lessons.get(i).equals(otherList.getLessonList().get(i))) {
-                        return false;
-                    }
-                }
-                return true;
+                sortLessonsByDayAndTime();
+                otherList.sortLessonsByDayAndTime();
+                return lessons.equals(otherList.getLessonList());
             }
         } else {
             return false;
         }
+    }
+
+    public void sortLessonsByDayAndTime() {
+        Collections.sort(lessons);
     }
 }

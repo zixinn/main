@@ -8,7 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +18,7 @@ import seedu.address.model.ModManager;
 import seedu.address.model.ReadOnlyModManager;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.module.Module;
+import seedu.address.model.util.action.DoableAction;
 import seedu.address.testutil.FacilitatorBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -37,7 +38,7 @@ public class FacilAddCommandTest {
 
         assertEquals(String.format(FacilAddCommand.MESSAGE_SUCCESS, validFacilitator),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFacilitator), modelStub.facilitatorsAdded);
+        assertEquals(Collections.singletonList(validFacilitator), modelStub.facilitatorsAdded);
     }
 
     @Test
@@ -121,6 +122,11 @@ public class FacilAddCommandTest {
         }
 
         @Override
+        public void addAction(DoableAction<?> action) {
+
+        }
+
+        @Override
         public ReadOnlyModManager getModManager() {
             return new ModManager();
         }
@@ -148,6 +154,11 @@ public class FacilAddCommandTest {
         public boolean hasFacilitator(Facilitator facilitator) {
             requireNonNull(facilitator);
             return facilitatorsAdded.stream().anyMatch(facilitator::isSameFacilitator);
+        }
+
+        @Override
+        public void addAction(DoableAction<?> action) {
+
         }
     }
 

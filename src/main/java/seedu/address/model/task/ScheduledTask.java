@@ -99,19 +99,6 @@ public class ScheduledTask extends Task {
     }
 
     @Override
-    public boolean isSameTask(Task other) {
-        if (!(other instanceof ScheduledTask)) {
-            return false;
-        }
-
-        assert other.getTaskDateTime().isPresent();
-
-        return this.description.equals(other.getDescription())
-                && this.taskDateTime.equals(other.getTaskDateTime().get())
-                && this.moduleCode.equals(other.getModuleCode());
-    }
-
-    @Override
     public int getTaskNum() {
         return this.taskNum;
     }
@@ -136,21 +123,5 @@ public class ScheduledTask extends Task {
         String modShow = String.format("[%s %d]", moduleCode.toString(), taskNum);
         return "[" + getStatusIcon() + "]" + " " + modShow + " " + description.toString()
                 + " " + taskDateTime.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof ScheduledTask)) {
-            return false;
-        }
-
-        ScheduledTask e = (ScheduledTask) o;
-
-        return this.moduleCode.equals(e.moduleCode)
-                && this.taskNum == e.taskNum;
     }
 }

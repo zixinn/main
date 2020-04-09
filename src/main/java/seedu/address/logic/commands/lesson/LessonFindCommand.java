@@ -9,7 +9,9 @@ import java.util.List;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -30,7 +32,7 @@ public class LessonFindCommand extends LessonCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String result;
         if (day == null) {
@@ -40,18 +42,23 @@ public class LessonFindCommand extends LessonCommand {
                 result = "No more lessons this week";
             } else {
                 result = "Next lesson:\n" + lesson.toString();
+                model.updateModule(model.findModule(lesson.getModuleCode()));
+                model.updateFacilitatorListForModule(
+                        new ModuleCodesContainKeywordPredicate(lesson.getModuleCode().value));
+                model.updateTaskListForModule(x -> x.getModuleCode().equals(lesson.getModuleCode()));
             }
         } else {
+            StringBuilder sb = new StringBuilder();
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
             if (lessonsOfTheDay.size() == 0) {
                 result = "No lessons on " + day.toString();
             } else {
-                result = "Lessons on " + day.toString() + "\n";
+                sb.append("Lessons on ").append(day.toString()).append("\n");
                 for (Lesson l : lessonsOfTheDay) {
-                    result = result + "\u2022 " + l.toString() + "\n";
+                    sb.append("\u2022 ").append(l.toString()).append("\n");
                 }
+                result = sb.toString();
             }
-
         }
         return new CommandResult(result, CommandType.LESSON);
     }

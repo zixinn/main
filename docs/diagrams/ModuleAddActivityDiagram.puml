@@ -8,11 +8,15 @@ if () then ([module code is present])
         if () then ([ModManager does not contain module])
             :Model adds module to UniqueModuleList;
             :Logic saves ModManager to Storage;
+            :Ui shows the updated module list;
         else ([else])
+            :Ui shows error message;
         endif
     else ([else])
+        :Ui shows error message;
     endif
 else([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

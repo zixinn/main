@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
@@ -13,24 +11,18 @@ import seedu.address.model.module.ModuleCode;
 public class LessonBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2103T";
     public static final String DEFAULT_LESSON_TYPE = "LEC";
-    public static final String DEFAULT_DAY = "FRIDAY";
-    public static final String DEFAULT_START_TIME = "14:00";
-    public static final String DEFAULT_END_TIME = "16:00";
+    public static final String DEFAULT_DAY_AND_TIME = "MONDAY 14:00 16:00";
     public static final String DEFAULT_VENUE = "i3-Aud";
 
     private ModuleCode moduleCode;
     private LessonType lessonType;
-    private DayOfWeek day;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private DayAndTime dayAndTime;
     private String venue;
 
     public LessonBuilder() {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         lessonType = LessonType.valueOf(DEFAULT_LESSON_TYPE);
-        day = DayOfWeek.valueOf(DEFAULT_DAY);
-        startTime = LocalTime.parse(DEFAULT_START_TIME);
-        endTime = LocalTime.parse(DEFAULT_END_TIME);
+        dayAndTime = new DayAndTime(DEFAULT_DAY_AND_TIME);
         venue = DEFAULT_VENUE;
     }
 
@@ -51,26 +43,10 @@ public class LessonBuilder {
     }
 
     /**
-     * Sets the {@code day} of the {@code Lesson} that we are building.
+     * Sets the {@code DayAndTime} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withDay(String day) {
-        this.day = DayOfWeek.valueOf(day);
-        return this;
-    }
-
-    /**
-     * Sets the {@code startTime} of the {@code Lesson} that we are building.
-     */
-    public LessonBuilder withStartTime(String startTime) {
-        this.startTime = LocalTime.parse(startTime);
-        return this;
-    }
-
-    /**
-     * Sets the {@code endTime} of the {@code Lesson} that we are building.
-     */
-    public LessonBuilder withEndTime(String endTime) {
-        this.endTime = LocalTime.parse(endTime);
+    public LessonBuilder withDayAndTime(String dayAndTime) {
+        this.dayAndTime = new DayAndTime(dayAndTime);
         return this;
     }
 
@@ -83,7 +59,7 @@ public class LessonBuilder {
     }
 
     public Lesson build() {
-        return new Lesson(moduleCode, lessonType, day, startTime, endTime, venue);
+        return new Lesson(moduleCode, lessonType, dayAndTime, venue);
     }
 
 

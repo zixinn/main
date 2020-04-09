@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -13,10 +13,8 @@ import seedu.address.model.Model;
  */
 public class TaskListUnDoneCommand extends TaskCommand {
 
-    public static final String MESSAGE_SUCCESS = "All undone tasks in the Mod Manager are listed.";
-
     @Override
-    public CommandResult execute(Model model) throws ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredTaskList(task -> !task.isTaskDone());
         return new CommandResult(String.format(Messages.MESSAGE_TASKS_UNDONE_OVERVIEW,

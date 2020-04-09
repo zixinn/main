@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
@@ -17,9 +16,9 @@ public class TaskForOneModuleCommand extends TaskCommand {
     public static final String MESSAGE_SUCCESS = "All tasks for the module %s are listed. "
             + "Returns to the full task list using: task list.";
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_MODULE
-            + ": Lists all the tasks for the module in Mod Manager. "
+            + ": Lists all the tasks for the module in Mod Manager. \n"
             + "Parameters: "
-            + PREFIX_MODULE_CODE + " MOD_CODE "
+            + PREFIX_MODULE_CODE + " MOD_CODE \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_MODULE + " "
             + PREFIX_MODULE_CODE + " CS3230 ";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
@@ -31,14 +30,14 @@ public class TaskForOneModuleCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws ParseException, CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasModuleCode(moduleCode)) {
             throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode));
         }
 
-        model.updateFilteredTaskList(task -> task.getModuleCode().equals(moduleCode));
+        model.updateFilteredTaskList(task -> task.getModuleCode().toString().equals(moduleCode));
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 moduleCode), CommandType.TASK);
     }

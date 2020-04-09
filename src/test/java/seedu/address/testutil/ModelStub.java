@@ -17,6 +17,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableAction;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -300,6 +301,31 @@ public class ModelStub implements Model {
 
     @Override
     public Calendar getCalendar() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addAction(DoableAction<?> action) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canUndo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canRedo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public DoableAction<?> undo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public DoableAction<?> redo() {
         throw new AssertionError("This method should not be called.");
     }
 

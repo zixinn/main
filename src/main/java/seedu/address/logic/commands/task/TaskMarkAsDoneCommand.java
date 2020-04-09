@@ -11,7 +11,6 @@ import java.util.List;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
@@ -23,16 +22,16 @@ import seedu.address.model.task.util.TaskNumManager;
 public class TaskMarkAsDoneCommand extends TaskCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_DONE
-            + ": Marks a task as done in Mod Manager. "
+            + ": Marks a task as done in Mod Manager. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
-            + PREFIX_TASK_ID + " ID_NUMBER "
+            + PREFIX_TASK_ID + " ID_NUMBER \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_DONE + " "
             + PREFIX_MODULE_CODE + " CS3230 "
             + PREFIX_TASK_ID + " 913 ";
 
     public static final String MESSAGE_SUCCESS = "Congratulations! Task has been marked as done: %1$s";
-    public static final String MESSAGE_MODULE_CODE_NOT_EXISTANT = "The module code is not found! Please try again.";
+    public static final String MESSAGE_MODULE_CODE_NOT_EXISTENT = "The module code is not found! Please try again.";
 
     public static final String MESSAGE_TASK_ID_INVALID = "The Task's ID_NUMBER is not valid. "
             + "It cannot contain letters or special characters.";
@@ -51,7 +50,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> current = model.getFilteredTaskList();
 

@@ -6,13 +6,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.util.TaskNumManager;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -49,6 +49,8 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+
+        internalList.sort(new TaskComparator());
     }
 
     /**
@@ -70,6 +72,8 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.set(index, editedTask);
+
+        internalList.sort(new TaskComparator());
     }
 
     /**
@@ -87,13 +91,18 @@ public class UniqueTaskList implements Iterable<Task> {
      * Removes tasks with the target ModuleCode.
      */
     public void removeWithModuleCode(final ModuleCode target) {
-        Optional<ModuleCode> toCompare = Optional.of(target);
         List<Task> replacementList = new ArrayList<>();
         internalList.stream()
-                .filter(task -> !task.getModuleCode().equals(toCompare))
+                .filter(task -> task.getModuleCode().equals(target))
+                .forEach(x -> TaskNumManager.removeNum(target, x.getTaskNum()));
+
+        internalList.stream()
+                .filter(task -> !task.getModuleCode().equals(target))
                 .forEach(replacementList::add);
 
         setTasks(replacementList);
+
+        internalList.sort(new TaskComparator());
     }
 
     /**
@@ -113,9 +122,11 @@ public class UniqueTaskList implements Iterable<Task> {
         for (Task task : tasksToEdit) {
             Task editedTask;
             if (task instanceof ScheduledTask) {
-                editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode);
+                editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode,
+                        task.getTaskNum(), task.isTaskDone());
             } else {
-                editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode);
+                editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode,
+                        task.getTaskNum(), task.isTaskDone());
             }
             setTask(task, editedTask);
         }
@@ -124,6 +135,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+
+        internalList.sort(new TaskComparator());
     }
 
     /**
@@ -137,6 +150,8 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.setAll(tasks);
+
+        internalList.sort(new TaskComparator());
     }
 
     /**

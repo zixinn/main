@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.TaskSearchPredicate;
 
@@ -44,7 +44,7 @@ public class TaskSearchCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredTaskList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_TASKS_FILTERED_OVERVIEW,

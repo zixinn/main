@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
@@ -44,12 +45,19 @@ public class TaskMarkAsDoneCommandParser implements Parser<TaskMarkAsDoneCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTANT));
+                    TaskMarkAsDoneCommand.MESSAGE_MODULE_CODE_NOT_EXISTENT));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TaskMarkAsDoneCommand.MESSAGE_TASK_ID_NOT_EXISTENT));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_TASK_ID) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TASK_ID));
         }
 
         String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)).toString();

@@ -3,9 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.model.lesson.exceptions.InvalidLessonTypeException;
@@ -17,36 +15,21 @@ import seedu.address.model.util.DailySchedulable;
  * Represents a Lesson in Mod Manager.
  */
 public class Lesson implements Comparable<Lesson>, DailySchedulable {
-    public static final String MESSAGE_CONSTRAINTS_DAY =
-            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, or FRIDAY";
-
-    public static final String MESSAGE_CONSTRAINTS_TIME =
-            "Time should be in HH:MM 24 hours format";
-
-    public static final String MESSAGE_CONSTRAINTS_DAY_AND_TIME =
-            "Day, start time and end time should be provided";
 
     public static final String MESSAGE_CONSTRAINTS_VENUE =
             "Venue cannot be an empty string";
 
     private ModuleCode moduleCode;
     private LessonType type;
-    private DayOfWeek day;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private DayAndTime dayAndTime;
     private String venue; // optional
 
-    public Lesson(ModuleCode moduleCode, LessonType type, DayOfWeek day, LocalTime startTime, LocalTime endTime,
+    public Lesson(ModuleCode moduleCode, LessonType type, DayAndTime dayAndTime,
                   String venue) throws InvalidTimeRangeException {
-        requireAllNonNull(moduleCode, type, day, startTime, endTime);
-        if (startTime.compareTo(endTime) >= 0) {
-            throw new InvalidTimeRangeException();
-        }
+        requireAllNonNull(moduleCode, type, dayAndTime);
         this.moduleCode = moduleCode;
         this.type = type;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.dayAndTime = dayAndTime;
         this.venue = venue;
     }
 
@@ -58,20 +41,12 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
         return type;
     }
 
-    public DayOfWeek getDay() {
-        return day;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
     public String getVenue() {
         return venue;
+    }
+
+    public DayAndTime getDayAndTime() {
+        return dayAndTime;
     }
 
     public boolean doesVenueExist() {
@@ -108,9 +83,7 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
 
         return otherLesson.getModuleCode().equals(getModuleCode())
                 && otherLesson.getType().equals(getType())
-                && otherLesson.getDay().equals(getDay())
-                && otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getEndTime())
+                && otherLesson.getDayAndTime().equals(getDayAndTime())
                 && isSameVenue(otherLesson);
     }
 
@@ -118,16 +91,7 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
      * Compares the instance of lesson to {@code lesson}.
      */
     public int compareTo(Lesson lesson) {
-        DayOfWeek day = lesson.getDay();
-        LocalTime time = lesson.getStartTime();
-        int val = this.getDay().compareTo(day);
-        if (val > 0) {
-            return 1;
-        } else if (val < 0) {
-            return -1;
-        } else {
-            return this.getStartTime().compareTo(time);
-        }
+        return this.dayAndTime.compareTo(lesson.dayAndTime);
     }
 
     /**
@@ -142,18 +106,6 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
             }
         }
         return false;
-    }
-
-    /**
-     * Checks if time is a valid time.
-     */
-    public static boolean isValidTimeFormat(String time) {
-        try {
-            LocalTime.parse(time);
-        } catch (DateTimeParseException | NullPointerException e) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -172,15 +124,15 @@ public class Lesson implements Comparable<Lesson>, DailySchedulable {
     @Override
     public String toString() {
         if (doesVenueExist()) {
-            return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime()
+            return getModuleCode() + " " + getType() + " " + getDayAndTime()
                     + " at " + venue;
         }
-        return getModuleCode() + " " + getType() + " " + getDay() + " " + getStartTime() + "-" + getEndTime();
+        return getModuleCode() + " " + getType() + " " + getDayAndTime();
     }
 
     @Override
     public Optional<LocalTime> getComparableTime() {
-        return Optional.of(getStartTime());
+        return Optional.of(getDayAndTime().getStartTime());
     }
 }
 

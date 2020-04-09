@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.TaskContainsKeywordsPredicate;
 
@@ -18,7 +18,7 @@ public class TaskFindCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_FIND
             + ": Finds all tasks for which the description contains any of the "
             + "specified task description (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: TASK_DESCRIPTION "
+            + "Parameters: TASK_DESCRIPTION \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_FIND + " assignment";
 
     private final TaskContainsKeywordsPredicate predicate;
@@ -28,7 +28,7 @@ public class TaskFindCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredTaskList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,

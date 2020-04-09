@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.lesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FRIDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,7 +24,7 @@ public class LessonFindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         LessonFindCommand command = new LessonFindCommand(DayOfWeek.FRIDAY);
-        assertParseSuccess(parser, " /at FRIDAY ", command);
+        assertParseSuccess(parser, (" " + PREFIX_AT + " " + VALID_DAY_FRIDAY + " "), command);
     }
 
 }

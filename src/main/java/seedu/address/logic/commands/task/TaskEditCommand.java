@@ -7,17 +7,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskDateTime;
 import seedu.address.model.task.util.TaskNumManager;
 import seedu.address.model.util.Description;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.TaskAction;
 
 /**
  * Represents a command that edits an existing task in Mod Manager.
@@ -51,6 +54,7 @@ public class TaskEditCommand extends TaskCommand {
     private final ModuleCode moduleCode;
     private final int taskNum;
     private final EditTaskDescriptor editTaskDescriptor;
+    private final Logger logger = LogsCenter.getLogger(TaskEditCommand.class);
 
     public TaskEditCommand(ModuleCode moduleCode, int taskNum, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(moduleCode);
@@ -63,8 +67,9 @@ public class TaskEditCommand extends TaskCommand {
 
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         List<Task> current = model.getFilteredTaskList();
 
         if (!model.hasModuleCode(moduleCode.toString())) {
@@ -86,7 +91,8 @@ public class TaskEditCommand extends TaskCommand {
 
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
+        if (taskToEdit.equals(editedTask) || current.contains(editedTask)) {
+            logger.severe("Dups: " + editedTask.toString() + " and " + taskToEdit.toString());
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
@@ -97,11 +103,12 @@ public class TaskEditCommand extends TaskCommand {
             ) {
                 throw new CommandException(MESSAGE_NOT_EDITED);
             }
-
         }
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        TaskAction editTaskAction = new TaskAction(taskToEdit, editedTask, DoableActionType.EDIT);
+        model.addAction(editTaskAction);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask),
                 CommandType.TASK);
@@ -167,6 +174,19 @@ public class TaskEditCommand extends TaskCommand {
             this.isDone = toCopy.isDone;
         }
 
+        public EditTaskDescriptor(Task task) {
+            this.moduleCode = task.getModuleCode();
+            this.taskNum = task.getTaskNum();
+            this.description = task.getDescription();
+            Optional<TaskDateTime> tdt = task.getTaskDateTime();
+            if (tdt.isEmpty()) {
+                this.taskDateTime = null;
+            } else {
+                this.taskDateTime = tdt.get();
+            }
+            this.isDone = task.isTaskDone();
+        }
+
         public ModuleCode getModuleCode() {
             return this.moduleCode;
         }
@@ -189,6 +209,17 @@ public class TaskEditCommand extends TaskCommand {
 
         public Optional<TaskDateTime> getTaskDateTime() {
             return Optional.ofNullable(this.taskDateTime);
+        }
+
+        /**
+         * Makes the task.
+         */
+        public Task build() {
+            if (taskDateTime == null) {
+                return Task.makeNonScheduledTask(description, moduleCode, taskNum, isDone);
+            } else {
+                return Task.makeScheduledTask(description, taskDateTime, moduleCode, taskNum, isDone);
+            }
         }
 
         @Override

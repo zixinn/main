@@ -6,16 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OFFICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilitatorAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilitators.IDA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +32,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.Name;
 import seedu.address.testutil.EditFacilitatorDescriptorBuilder;
 import seedu.address.testutil.FacilitatorBuilder;
 
@@ -37,10 +41,10 @@ import seedu.address.testutil.FacilitatorBuilder;
  */
 public class FacilEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredListWithIndex_success() {
         Facilitator editedFacilitator = new FacilitatorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withOffice(VALID_OFFICE_BOB).build();
         EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
@@ -55,7 +59,22 @@ public class FacilEditCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredListWithName_success() {
+        Facilitator editedFacilitator = new FacilitatorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withOffice(VALID_OFFICE_BOB).build();
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
+        FacilEditCommand editCommand = new FacilEditCommand(editedFacilitator.getName(), descriptor);
+
+        String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
+
+        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
+        expectedModel.setFacilitator(model.getFilteredFacilitatorList().get(0), editedFacilitator);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
+    }
+
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredListWithIndex_success() {
         Index indexLastFacilitator = Index.fromOneBased(model.getFilteredFacilitatorList().size());
         Facilitator lastFacilitator = model.getFilteredFacilitatorList().get(indexLastFacilitator.getZeroBased());
 
@@ -76,10 +95,44 @@ public class FacilEditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_someFieldsSpecifiedUnfilteredListWithName_success() {
+        Index indexLastFacilitator = Index.fromOneBased(model.getFilteredFacilitatorList().size());
+        Facilitator lastFacilitator = model.getFilteredFacilitatorList().get(indexLastFacilitator.getZeroBased());
+
+        FacilitatorBuilder facilitatorInList = new FacilitatorBuilder(lastFacilitator);
+        Facilitator editedFacilitator = facilitatorInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withModuleCodes(VALID_MODULE_CODE_CS2103T).build();
+        FacilEditCommand editCommand = new FacilEditCommand(lastFacilitator.getName(), descriptor);
+
+        String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
+
+        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
+        expectedModel.setFacilitator(lastFacilitator, editedFacilitator);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListWithIndex_success() {
         FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST,
                 new FacilEditCommand.EditFacilitatorDescriptor());
         Facilitator editedFacilitator = model.getFilteredFacilitatorList().get(INDEX_FIRST.getZeroBased());
+
+        String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
+
+        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListWithName_success() {
+        Facilitator editedFacilitator = model.getFilteredFacilitatorList().get(INDEX_FIRST.getZeroBased());
+        FacilEditCommand editCommand = new FacilEditCommand(editedFacilitator.getName(),
+                new FacilEditCommand.EditFacilitatorDescriptor());
 
         String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
 
@@ -108,6 +161,26 @@ public class FacilEditCommandTest {
     }
 
     @Test
+    public void execute_partialName_success() {
+        Name name = new Name("Alice");
+        Facilitator editedFacilitator = new FacilitatorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withOffice(VALID_OFFICE_BOB).build();
+        EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder(editedFacilitator).build();
+        FacilEditCommand editCommand = new FacilEditCommand(name, descriptor);
+
+        ArrayList<Facilitator> fetch = new ArrayList<>();
+        fetch.add(model.getFilteredFacilitatorList().get(0));
+        StringBuilder builder = new StringBuilder(
+                String.format(Messages.MESSAGE_PARTIAL_FACILITATOR_NAME_MATCHING_FOUND, name));
+        fetch.forEach(x -> builder.append("  ").append(x.getName().toString()).append('\n'));
+        builder.append(Messages.MESSAGE_ASK_TO_CONFIRM_FACILITATOR);
+
+        String expectedMessage = builder.toString();
+
+        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.PROMPTING, model);
+    }
+
+    @Test
     public void execute_invalidFacilitatorIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilitatorList().size() + 1);
         FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
@@ -132,6 +205,16 @@ public class FacilEditCommandTest {
                 new EditFacilitatorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FACILITATOR_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_facilitatorNameNotFound_failure() {
+        Name name = new Name(VALID_NAME_AMY);
+        FacilEditCommand.EditFacilitatorDescriptor descriptor = new EditFacilitatorDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build();
+        FacilEditCommand editCommand = new FacilEditCommand(name, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_FACILITATOR_NOT_FOUND, name));
     }
 
     @Test
@@ -210,27 +293,37 @@ public class FacilEditCommandTest {
 
     @Test
     public void equals() {
-        final FacilEditCommand standardCommand = new FacilEditCommand(INDEX_FIRST, DESC_AMY);
+        final FacilEditCommand standardIndexCommand = new FacilEditCommand(INDEX_FIRST, DESC_AMY);
+        final FacilEditCommand standardNameCommand = new FacilEditCommand(new Name(VALID_NAME_BOB), DESC_AMY);
 
         // same values -> returns true
         EditFacilitatorDescriptor copyDescriptor = new EditFacilitatorDescriptor(DESC_AMY);
-        FacilEditCommand commandWithSameValues = new FacilEditCommand(INDEX_FIRST, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        FacilEditCommand commandWithSameIndexValues = new FacilEditCommand(INDEX_FIRST, copyDescriptor);
+        assertTrue(standardIndexCommand.equals(commandWithSameIndexValues));
+        FacilEditCommand commandWithSameNameValues = new FacilEditCommand(new Name(VALID_NAME_BOB), copyDescriptor);
+        assertTrue(standardNameCommand.equals(commandWithSameNameValues));
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertTrue(standardIndexCommand.equals(standardIndexCommand));
+        assertTrue(standardNameCommand.equals(standardNameCommand));
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertFalse(standardIndexCommand.equals(null));
+        assertFalse(standardNameCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardIndexCommand.equals(new ClearCommand()));
+        assertFalse(standardNameCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new FacilEditCommand(INDEX_SECOND, DESC_AMY)));
+        assertFalse(standardIndexCommand.equals(new FacilEditCommand(INDEX_SECOND, DESC_AMY)));
+
+        // different name -> returns false
+        assertFalse(standardIndexCommand.equals(new FacilEditCommand(new Name(VALID_NAME_AMY), DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new FacilEditCommand(INDEX_FIRST, DESC_BOB)));
+        assertFalse(standardIndexCommand.equals(new FacilEditCommand(INDEX_FIRST, DESC_BOB)));
+        assertFalse(standardNameCommand.equals(new FacilEditCommand(new Name(VALID_NAME_BOB), DESC_BOB)));
     }
 
 }

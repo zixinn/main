@@ -1,15 +1,38 @@
 @startuml
 start
 :User executes facilitator delete command;
-:Parser parses index;
-if () then ([index is valid])
-    :Logic executes command;
-    if () then ([index is not out of bounds])
-        :Model deletes facilitator from UniqueFacilitatorList;
-        :Logic saves ModManager to Storage;
-    else ([else])
+if () then ([index or name is provided])
+    if () then ([index is provided])
+        :Parser parses index;
+        if () then ([index is valid])
+            :Logic executes command;
+            if () then ([index is not out of bounds])
+                :Model deletes facilitator from UniqueFacilitatorList;
+                :Logic saves ModManager to Storage;
+                :Ui shows the updated facilitator list;
+            else ([else])
+                :Ui shows error message;
+            endif
+        else ([else])
+            :Ui shows error message;
+        endif
+    else ([name is provided])
+        :Parser parses name;
+        if () then ([name is valid])
+            :Logic executes command;
+            if () then ([facilitator exists in ModManager])
+                :Model deletes facilitator from UniqueFacilitatorList;
+                :Logic saves ModManager to Storage;
+                :Ui shows the updated facilitator list;
+            else ([else])
+                :Ui shows error message;
+            endif
+        else ([else])
+            :Ui shows error message;
+        endif
     endif
 else ([else])
+    :Ui shows error message;
 endif
 stop
 @enduml

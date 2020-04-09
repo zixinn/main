@@ -5,11 +5,12 @@ import java.util.List;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskNumManager;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.TaskAction;
 
 /**
  * Deletes a task in Mod Manager using its unique ID.
@@ -18,7 +19,7 @@ public class TaskDeleteCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_DELETE
             + ": Deletes the task identified "
             + "by the unique ID of the task found in both the general tasks list and module specific list.\n"
-            + "Parameters: MODULE_CODE ID_NUMBER\n"
+            + "Parameters: MOD_CODE ID_NUMBER\n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_DELETE + " CS2103T 848";
 
     public static final String MESSAGE_MODULE_NOT_FOUND = "Module %s does not exist in Mod Manager.";
@@ -34,7 +35,7 @@ public class TaskDeleteCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         if (!model.hasModuleCode(moduleCode.toString())) {
             throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode));
         }
@@ -43,6 +44,7 @@ public class TaskDeleteCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode, taskNum));
         }
 
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         List<Task> lastShown = model.getFilteredTaskList();
 
         Task toDelete = lastShown.stream().reduce(null, (x, y) -> {
@@ -56,6 +58,8 @@ public class TaskDeleteCommand extends TaskCommand {
 
         TaskNumManager.removeNum(toDelete.getModuleCode(), toDelete.getTaskNum());
         model.deleteTask(toDelete);
+        TaskAction deleteTaskAction = new TaskAction(toDelete, DoableActionType.DELETE);
+        model.addAction(deleteTaskAction);
 
         return new CommandResult(String.format(MESSAGE_TASK_DELETE_SUCCESS, toDelete), CommandType.TASK);
     }

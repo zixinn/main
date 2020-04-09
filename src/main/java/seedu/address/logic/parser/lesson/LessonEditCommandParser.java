@@ -2,6 +2,8 @@ package seedu.address.logic.parser.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT;
@@ -17,6 +19,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.module.ModuleCode;
 
 /**
@@ -37,8 +40,14 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (argMultimap.getPreamble().trim().equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        ModuleCode target = null;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+
+        ModuleCode target;
 
         LessonEditCommand.EditLessonDescriptor editLessonDescriptor = new LessonEditCommand.EditLessonDescriptor();
 
@@ -52,16 +61,24 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getAllValues(PREFIX_MODULE_CODE).isEmpty()) {
-            List<String> mods = argMultimap.getAllValues(PREFIX_MODULE_CODE);
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 2) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "two", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_TYPE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TYPE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_AT) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_VENUE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_VENUE));
+        }
+
+        List<String> mods = argMultimap.getAllValues(PREFIX_MODULE_CODE);
+        target = ParserUtil.parseModuleCode(mods.get(0));
+        if (mods.size() == 2) {
+            editLessonDescriptor.setModuleCode(ParserUtil.parseModuleCode(mods.get(1)));
             target = ParserUtil.parseModuleCode(mods.get(0));
-            if (mods.size() == 2) {
-                editLessonDescriptor.setModuleCode(ParserUtil.parseModuleCode(mods.get(1)));
-                target = ParserUtil.parseModuleCode(mods.get(0));
-            } else if (mods.size() > 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        LessonEditCommand.MESSAGE_USAGE));
-            }
         }
 
         if (argMultimap.getValue(PREFIX_TYPE) != null) {
@@ -69,17 +86,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_AT) != null) {
-            // need to change
-            String trimmed = argMultimap.getValue(PREFIX_AT).trim();
-            String[] splitted = trimmed.split(" ");
-            if (splitted.length != 3) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        LessonEditCommand.MESSAGE_USAGE));
-            }
-
-            editLessonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_AT)));
-            editLessonDescriptor.setStartTime(ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_AT)));
-            editLessonDescriptor.setEndTime(ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_AT)));
+            DayAndTime dayAndTime = ParserUtil.parseDayAndTime(argMultimap.getValue(PREFIX_AT));
+            editLessonDescriptor.setDayAndTime(dayAndTime);
         }
 
         if (argMultimap.getValue(PREFIX_VENUE) != null) {

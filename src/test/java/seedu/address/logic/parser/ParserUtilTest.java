@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,12 +15,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Email;
 import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
+import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.Description;
@@ -266,52 +265,33 @@ public class ParserUtilTest {
 
     @Test
     public void parseDay_validValueWithoutWhitespace_returnsDay() throws Exception {
-        assertEquals(DayOfWeek.valueOf("MONDAY"), ParserUtil.parseDay("MONDAY 08:00 10:00"));
+        assertEquals(DayOfWeek.valueOf("MONDAY"), ParserUtil.parseDay("MONDAY"));
     }
 
     @Test
     public void parseDay_validValueWithWhitespace_returnsTrimmedDay() throws Exception {
-        assertEquals(DayOfWeek.valueOf("SUNDAY"), ParserUtil.parseDay("  SUNDAY  08:00  10:00  "));
+        assertEquals(DayOfWeek.valueOf("SUNDAY"), ParserUtil.parseDay("  SUNDAY  "));
     }
 
     @Test
-    public void parseStartTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseStartTime(null));
+    public void parseDayAndTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDayAndTime(null));
     }
 
     @Test
-    public void parseStartTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStartTime("MONDAY 08:60 10:00"));
+    public void parseDayAndTime_validValue_returnsDayAndTime() throws Exception {
+        assertEquals(new DayAndTime("MONDAY 08:00 10:00"), ParserUtil.parseDayAndTime("MONDAY 08:00 10:00"));
     }
 
     @Test
-    public void parseStartTime_validValueWithoutWhitespace_returnsStartTime() throws Exception {
-        assertEquals(LocalTime.parse("08:00"), ParserUtil.parseStartTime("MONDAY 08:00 10:00"));
+    public void parseDayAndTime_validValue_returnsTrimmedDayAndTime() throws Exception {
+        assertEquals(new DayAndTime("MONDAY 08:00 10:00"), ParserUtil.parseDayAndTime("   MONDAY 08:00 10:00   "));
     }
 
     @Test
-    public void parseStartTime_validValueWithWhitespace_returnsTrimmedStartTime() throws Exception {
-        assertEquals(LocalTime.parse("08:00"), ParserUtil.parseStartTime("  SUNDAY  08:00  10:00  "));
-    }
-
-    @Test
-    public void parseEndTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndTime(null));
-    }
-
-    @Test
-    public void parseEndTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEndTime("MONDAY 23:00 25:00"));
-    }
-
-    @Test
-    public void parseEndTime_validValueWithoutWhitespace_returnsEndTime() throws Exception {
-        assertEquals(LocalTime.parse("10:00"), ParserUtil.parseEndTime("MONDAY 08:00 10:00"));
-    }
-
-    @Test
-    public void parseEndTime_validValueWithWhitespace_returnsTrimmedEndTime() throws Exception {
-        assertEquals(LocalTime.parse("10:00"), ParserUtil.parseEndTime("  SUNDAY  08:00  10:00  "));
+    public void parseDayAndTime_invalidValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayAndTime("MONDAY 23:00 25:00"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayAndTime("FREEDAY 20:00 22:00"));
     }
 
     @Test

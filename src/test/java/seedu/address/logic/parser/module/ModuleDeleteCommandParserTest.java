@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.module.ModuleDeleteCommand;
 import seedu.address.model.module.ModuleCode;
 
@@ -28,8 +29,7 @@ public class ModuleDeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "-123",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-123", Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
         assertParseFailure(parser, "CS 324",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleDeleteCommand.MESSAGE_USAGE));
     }

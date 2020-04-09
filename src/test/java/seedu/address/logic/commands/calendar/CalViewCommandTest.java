@@ -1,7 +1,11 @@
 package seedu.address.logic.commands.calendar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +30,28 @@ public class CalViewCommandTest {
                 CalViewCommand.MESSAGE_SUCCESS, CommandType.CALENDAR);
         assertCommandSuccess(new CalViewCommand(
                 Calendar.getNowCalendar()), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        CalViewCommand calViewCommand = new CalViewCommand(new Calendar(LocalDate.parse("2020-02-02")));
+        CalViewCommand calViewCommandCopy = new CalViewCommand(new Calendar(LocalDate.parse("2020-02-02")));
+        CalViewCommand otherCalViewCommand = new CalViewCommand(Calendar.getNextWeekCalendar());
+
+        //same object -> return true
+        assertEquals(calViewCommand, calViewCommand);
+
+        //same date -> return true
+        assertEquals(calViewCommand, calViewCommandCopy);
+
+        //null -> return false
+        assertFalse(calViewCommand.equals(null));
+
+        //different type -> return false
+        assertFalse(calViewCommand.equals(1));
+
+        //different date -> return false
+        assertFalse(calViewCommand.equals(otherCalViewCommand));
+
     }
 }

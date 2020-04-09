@@ -22,9 +22,9 @@ public class CmdGroupCommand extends CmdCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CMD + " " + COMMAND_WORD_GROUP
             + ": Lists all the formats of the specified group of commands.\n"
             + "Parameters: COMMAND_GROUP\n"
-            + "Examples: " + COMMAND_GROUP_CMD + " " + COMMAND_GROUP_CLASS;
+            + "Examples: " + COMMAND_GROUP_CMD + " " + COMMAND_WORD_GROUP + " " + COMMAND_GROUP_CLASS;
 
-    public static final String MESSAGE_CMD_GROUP_SUCCESS = "%s command group listed: \n%s";
+    public static final String MESSAGE_CMD_GROUP_SUCCESS = "%s command(s) listed: \n%s";
 
     private final String commandGroup;
 
@@ -66,6 +66,14 @@ public class CmdGroupCommand extends CmdCommand {
         case COMMAND_GROUP_EXIT:
             return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
                     getCommands(List.of("exit"))), CommandType.CMD);
+
+        case COMMAND_GROUP_UNDO:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(List.of(COMMAND_GROUP_UNDO))), CommandType.CMD);
+
+        case COMMAND_GROUP_REDO:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(List.of(COMMAND_GROUP_REDO))), CommandType.CMD);
 
         default:
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_CMD_GROUP, commandGroup));

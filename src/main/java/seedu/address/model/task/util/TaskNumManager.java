@@ -55,7 +55,9 @@ public class TaskNumManager {
      * Removes the taskNum.
      */
     public static void removeNum(ModuleCode moduleCode, Integer id) {
-        assert usedValues.containsKey(moduleCode);
+        if (!usedValues.containsKey(moduleCode)) {
+            return;
+        }
 
         usedValues.get(moduleCode).remove(id);
 
@@ -68,11 +70,13 @@ public class TaskNumManager {
      * Adds the taskNum to database.
      */
     public static void addNum(ModuleCode moduleCode, Integer id) {
-        if (usedValues.containsKey(moduleCode)) {
-            assert !usedValues.get(moduleCode).contains(id);
-        } else {
+        if (!usedValues.containsKey(moduleCode)) {
             usedValues.put(moduleCode, new HashSet<>());
         }
         usedValues.get(moduleCode).add(id);
+    }
+
+    public static HashMap<ModuleCode, HashSet<Integer>> getMap() {
+        return usedValues;
     }
 }

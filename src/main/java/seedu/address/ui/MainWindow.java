@@ -121,6 +121,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Set the minimum width that user can make it smaller to
+        primaryStage.setMinWidth(1132);
     }
 
     public Stage getPrimaryStage() {
@@ -291,7 +294,6 @@ public class MainWindow extends UiPart<Stage> {
      * @param module The module to be viewed.
      */
     public void refreshModuleTab(Optional<Module> module) {
-        moduleDetailsPanel.changeDisplayModule(module);
         if (module.isEmpty()) {
             lessonPanel = new LessonPanel();
             lessonPanelPlaceholder.getChildren().clear();
@@ -349,6 +351,11 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case EXIT:
                 handleExit();
+                break;
+            case UNDO:
+            case REDO:
+                moduleDetailsPanel.changeDisplayModule(logic.getModule());
+                refreshModuleTab(logic.getModule());
                 break;
             default:
                 break;

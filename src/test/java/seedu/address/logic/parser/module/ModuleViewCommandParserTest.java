@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.module.ModuleViewCommand;
 import seedu.address.model.module.ModuleCode;
 
@@ -52,8 +53,7 @@ public class ModuleViewCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
 
         // invalid index
-        assertParseFailure(parser, "-123",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-123", Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
 
         // multiple index
         assertParseFailure(parser, "1 2",

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.facilitator;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,6 +48,19 @@ public class FacilAddCommandParser implements Parser<FacilAddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_PHONE) && !arePrefixesPresent(argMultimap, PREFIX_EMAIL)
                 && !arePrefixesPresent(argMultimap, PREFIX_OFFICE)) {
             throw new ParseException(FacilAddCommand.MESSAGE_NOT_ADDED);
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_NAME) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NAME));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_PHONE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_PHONE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_EMAIL) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_EMAIL));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_OFFICE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_OFFICE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME));

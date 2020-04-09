@@ -123,10 +123,10 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Facilitator>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-
 [[Design-Storage]]
 === Storage Component
 
+// tag::storage[]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
@@ -136,6 +136,7 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Mod Manager data in json format and read it back.
+// end::storage[]
 
 [[Design-Commons]]
 === Common Classes
@@ -147,6 +148,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 === Module Management Feature
+
+// tag::module[]
+// tag::mod[]
 The module feature manages the modules in Mod Manager and is represented by the `Module` class.
 A module has a `ModuleCode` and an optional `Description`.
 
@@ -157,7 +161,9 @@ It supports the following operations:
 * view - View information of a module in Mod Manager.
 * edit - Edits a module in Mod Manager.
 * delete - Deletes a module in Mod Manager.
+// end::mod[]
 
+// tag::mod-add[]
 ==== Implementation Details
 
 ===== Adding a module
@@ -186,10 +192,11 @@ The following activity diagram summarizes what happens when a user executes a mo
 
 .Activity Diagram for `mod add` Command
 image::ModuleAddActivityDiagram.png[]
+// end::mod-add[]
 
 ===== Listing all modules
 The list module feature allows users to list all modules in Mod Manager.
-This feature is facilitated by `ModuleCommandParser` and `ModuleListCommand`.
+This feature is facilitated by `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredModuleList()`.
 
 Given below is an example usage scenario and how the module list mechanism behaves at each step:
@@ -212,6 +219,89 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity Diagram for `mod list` Command
 image::ModuleListActivityDiagram.png[]
 
+===== Viewing a module
+The view module feature allows users to view information of a module in Mod Manager.
+This feature is facilitated by `ModuleCommandParser` and `ModuleViewCommand`.
+The operation is exposed in the `Model` interface as `Model#updateModule()`.
+
+Given below is an example usage scenario and how the module view mechanism behaves at each step:
+
+1. The user executes the module view command and provides the module code of the module to be viewed.
+2. `ModuleViewCommandParser` creates a new `ModuleViewCommand` based on the module.
+3. `LogicManager` executes the `ModuleViewCommand`.
+4. `ModelManager` updates the `module` viewed and the respective lists in `ModelManager`.
+
+The following sequence diagram shows how the module view command works:
+
+.Sequence Diagram for `mod view` Command
+image::ModuleViewSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes a module view command:
+
+.Activity Diagram for `mod view` Command
+image::ModuleViewActivityDiagram.png[]
+
+===== Editing a module
+The edit module feature allows users to edit a module from Mod Manager.
+This feature is facilitated by `ModuleCommandParser`, `ModuleEditCommandParser` and `ModuleEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setModule()`.
+
+Given below is an example usage scenario and how the module edit mechanism behaves at each step:
+
+1. The user executes the module edit command and provides the index or module code of the module to be edited and the fields to be edited.
+2. `ModuleEditCommandParser` creates a new `EditModuleDescriptor` with the fields to be edited.
+3. `ModuleEditCommandParser` creates a new `ModuleEditCommand` based on the index or module code and `EditModuleDescriptor`.
+4. `LogicManager` executes the `ModuleEditCommand`.
+5. `ModuleEditCommand` retrieves the module to be edited.
+6. `ModuleEditCommand` creates a new `Module`.
+7. `ModManager` sets the existing module to the new module in the `UniqueModuleList`.
+8. `ModelManager` updates the `filteredModules` in `ModelManager`.
+
+The following sequence diagram shows how the module edit command works:
+
+.Sequence Diagram for `mod edit` Command
+image::ModuleEditSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleEditCommandParser`, `EditModuleDescriptor` and `ModuleEditCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a module edit command:
+
+.Activity Diagram for `mod edit` Command
+image::ModuleEditActivityDiagram.png[]
+
+===== Deleting a module
+The delete module feature allows users to delete a module from Mod Manager.
+This feature is facilitated by `ModuleCommandParser`, `ModuleDeleteCommandParser` and `ModuleDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteModule()`.
+
+Given below is an example usage scenario and how the module delete mechanism behaves at each step:
+
+1. The user executes the module delete command and provides the index or module code of the module to be deleted.
+2. `ModuleDeleteCommandParser` creates a new `ModuleDeleteCommand` based on the index or module code.
+3. `LogicManager` executes the `ModuleDeleteCommand`.
+4. `ModuleDeleteCommand` retrieves the module to be deleted.
+5. `ModManager` deletes the module from the `UniqueModuleList`.
+6. `ModManager` deletes facilitators of the module from the `UniqueFacilitatorList`.
+7. `ModManager` deletes tasks of the module from the `UniqueTaskList`.
+8. `ModManager` deletes lessons of the module from the `LessonList`.
+
+The following sequence diagram shows how the module delete command works:
+
+.Sequence Diagram for `mod delete` Command
+image::ModuleDeleteSequenceDiagram.png[]
+
+NOTE: The lifeline for `ModuleCommandParser`, `ModuleDeleteCommandParser` and `ModuleDeleteCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a module delete command:
+
+.Activity Diagram for `mod delete` Command
+image::ModuleDeleteActivityDiagram.png[]
+
 ==== Design Considerations
 
 ===== Aspect: Support for editing module code
@@ -223,6 +313,9 @@ image::ModuleListActivityDiagram.png[]
 ** Cons: More rigid for users.
 
 Alternative 1 is chosen as it gives users more flexibility and is more user-friendly.
+// end::module[]
+
+//tag::class[]
 
 === Class Management Feature
 The class feature manages the classes in Mod Manager and is represented by the `Lesson` class.
@@ -234,6 +327,7 @@ It supports the following operations:
 * list - Lists all classes in Mod Manager.
 * edit - Edits a class in Mod Manager.
 * delete - Deletes a class in Mod Manager.
+
 
 ==== Implementation Details
 
@@ -258,27 +352,6 @@ The following activity diagram summarizes what happens when a user executes a le
 
 .Activity Diagram for `class add` Command
 image::LessonAddActivityDiagram.png[]
-
-===== Listing a class
-The list class command allows user to add a class to ModManager. This feature is facilitated by `LessonCommandParser` and `LessonAddCommand`.
-
-Given below is an example usage scenario and how the lesson list mechanism behaves at each step.
-
-1. The user executes the lesson list command.
-2. `LessonListCommandParser` creates a new `LessonListCommand`.
-3. `LogicManager` executes the `LessonListCommand`.
-
-The following sequence diagram shows how the lesson list command works:
-
-.Sequence Diagram for `class list` Command
-image::LessonListSequenceDiagram.png[]
-
-NOTE: The lifeline for `LessonCommandParser` and `LessonListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
-The following activity diagram summarizes what happens when a user executes a lesson list command:
-
-.Activity Diagram for `class list` Command
-image::LessonListActivityDiagram.png[]
 
 ===== Finding a class
 The find class command allows user to find a class to ModManager. This feature is facilitated by `LessonCommandParser`, `LessonFindCommandParser` and `LessonFindCommand`. The operation is exposed in the `Model` interface as `Model#findNextLesson()` and `Model#findLessonByDay`.
@@ -337,7 +410,7 @@ Given below is an example usage scenario and how the lesson delete mechanism beh
 2. `LessonDeleteCommandParser` creates a new `LessonDeleteCommand`.
 3. `LogicManager` executes the `LessonDeleteCommand`.
 4. `LessonDeleteCommand` retrieves the `lesson` to be deleted.
-4. `ModManager` deletes the `Lesson` from `LessonList`.
+5. `ModManager` deletes the `Lesson` from `LessonList`.
 
 The following sequence diagram shows how the lesson delete command works:
 
@@ -360,6 +433,8 @@ image::LessonDeleteActivityDiagram.png[]
 * **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
 ** Pros: Easier to parse and less invalid inputs to take note of. User can also edit any field.
 ** Cons: More prefixes to remember and command will be very lengthy.
+
+//end::class[]
 
 === Task Management Feature
 The task feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
@@ -409,7 +484,7 @@ The following activity diagram summarizes what happens when a user executes a `*
 .Activity Diagram for `task add` Command
 image::TaskAddActivityDiagram.png[]
 
-===== Search tasks by date
+===== Searching tasks by date
 The search task feature allows users to search all tasks that occur on the specified date, month, or year.
 This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
 TaskSearchCommand`.
@@ -435,6 +510,36 @@ The following activity diagram summarizes what happens when a user executes a ta
 
 .Activity Diagram for `*task* search` Command
 image::TaskSearchActivityDiagram.png[]
+
+===== Editing a task
+The `task edit` command allows user to edit a task in `ModManager`.
+This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
+The operation is exposed in the `Model` interface as `Model#setTask()`.
+
+Given below is an example usage scenario and how the `task edit` mechanism behaves at each step.
+
+1. The user executes the `task edit` command and provides the `moduleCode` and the `taskNum` of the task to edit,
+and the fields to be edited.
+2. `TaskEditCommandParser` creates a new `EditTaskDescriptor` with the fields to be edited.
+3. `TaskEditCommandParser` creates a new `TaskEditCommand` based on the `moduleCode` and `taskNum`, and `EditTaskDescriptor`.
+4. `LogicManager` executes the `TaskEditCommand`.
+5. `TaskEditCommand` retrieves the `moduleCode` and `taskNum` of the `task` to be edited, and then retrieves the actual `task`
+from `ModManager`.
+6. `TaskEditCommand` creates a new `Task`.
+7. `ModManager` sets the existing `task` to the new `task` in the `UniqueTaskList`.
+
+===== Deleting a task
+The delete task feature allows users to delete a task from Mod Manager.
+This feature is facilitated by `TaskCommandParser`, `TaskDeleteCommandParser` and `TaskDeleteCommand`.
+The operation is exposed in the `Model` interface as `Model#deleteTask()`.
+
+Given below is an example usage scenario and how the task delete mechanism behaves at each step:
+
+1. The user executes the task delete command and provides the `moduleCode` and `taskNum` of the task to be deleted.
+2. `TaskDeleteCommandParser` creates a new `TaskDeleteCommand` based on the `moduleCode` and `taskNum`.
+3. `LogicManager` executes the `TaskDeleteCommand`.
+4. `TaskDeleteCommand` retrieves the task to be deleted.
+5. `ModManager` deletes the task from the `UniqueTaskList`.
 ////
 ===== Listing all facilitators
 The list facilitator feature allows users to list all facilitators in Mod Manager.
@@ -477,7 +582,7 @@ Given below is an example usage scenario and how the facilitator edit mechanism 
 7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
 8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
 
-The following sequence diagram shows how the facilitator edits command works:
+The following sequence diagram shows how the facilitator edit command works:
 
 .Sequence Diagram for `facil edit` Command
 image::FacilitatorEditSequenceDiagram.png[]
@@ -593,6 +698,8 @@ and collaborating with the team member responsible for the `Module` component, a
 //ta
 
 === Facilitator Management Feature
+
+// tag::facilitator[]
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
 A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
@@ -691,16 +798,16 @@ The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
 
 Given below is an example usage scenario and how the facilitator edit mechanism behaves at each step:
 
-1. The user executes the facilitator edit command and provides the index of the facilitator to be edited and the fields to be edited.
+1. The user executes the facilitator edit command and provides the index or name of the facilitator to be edited and the fields to be edited.
 2. `FacilEditCommandParser` creates a new `EditFacilitatorDescriptor` with the fields to be edited.
-3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index and `EditFacilitatorDescriptor`.
+3. `FacilEditCommandParser` creates a new `FacilEditCommand` based on the index or name and `EditFacilitatorDescriptor`.
 4. `LogicManager` executes the `FacilEditCommand`.
 5. `FacilEditCommand` retrieves the facilitator to be edited.
 6. `FacilEditCommand` creates a new `Facilitator`.
 7. `ModManager` sets the existing facilitator to the new facilitator in the `UniqueFacilitatorList`.
 8. `ModelManager` updates the `filteredFacilitators` in `ModelManager`.
 
-The following sequence diagram shows how the facilitator edits command works:
+The following sequence diagram shows how the facilitator edit command works:
 
 .Sequence Diagram for `facil edit` Command
 image::FacilitatorEditSequenceDiagram.png[]
@@ -710,7 +817,7 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes a facilitator edit command:
 
-.Activity Diagram for `facil edt` Command
+.Activity Diagram for `facil edit` Command
 image::FacilitatorEditActivityDiagram.png[]
 
 ===== Deleting a facilitator
@@ -720,8 +827,8 @@ The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`
 
 Given below is an example usage scenario and how the facilitator delete mechanism behaves at each step:
 
-1. The user executes the facilitator delete command and provides the index of the facilitator to be deleted.
-2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index.
+1. The user executes the facilitator delete command and provides the index or name of the facilitator to be deleted.
+2. `FacilDeleteCommandParser` creates a new `FacilDeleteCommand` based on the index or name.
 3. `LogicManager` executes the `FacilDeleteCommand`.
 4. `FacilDeleteCommand` retrieves the facilitator to be deleted.
 5. `ModManager` deletes the facilitator from the `UniqueFacilitatorList`.
@@ -739,6 +846,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil delete` Command
 image::FacilitatorDeleteActivityDiagram.png[]
 
+// tag::design-consideration-facilitator[]
 ==== Design Considerations
 
 ===== Aspect: Mutability of `Facilitator` object
@@ -770,7 +878,9 @@ Alternative 1 is chosen as the design is simpler without the need to maintain mu
 ** Cons: Have to iterate through the module list to find the module code for the facilitator.
 
 Alternative 1 is chosen because of ease of implementation due to time constraint.
-
+// end::design-consideration-facilitator[]
+// end::facilitator[]
+//tag::calendar[]
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
 
@@ -860,7 +970,7 @@ This is because without the `/type`, it is possible that users thought that the 
 
 Alternative 1 is chosen because it is shorter than alternative 2 and hence it can be easier for users to type.
 It is easier to implement too. The word `empty` is kept to allow users to know what the find command is for.
-
+//end::calendar[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -913,6 +1023,7 @@ Refer to the guide <<DevOps#, here>>.
 * view schedule and tasks for the current and upcoming week easily
 * navigate easily with the command assistant for quicker management
 
+//tag::user-stories[]
 [appendix]
 == User Stories
 
@@ -923,11 +1034,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |student |add modules I am taking  |keep track of the information related to the module
+|`* * *` |student |add a module I am taking  |keep track of the information related to the module
 
-|`* * *` |student |add classes |keep track of the classes I have for a particular module
+|`* * *` |student |add a class |keep track of the classes I have for a particular module
 
-|`* * *` |student |add tasks |keep track of the tasks I have for a particular module
+|`* * *` |student |add a task |keep track of the tasks I have for a particular module
 
 |`* * *` |student |add facilitators' information |keep track of the information of the facilitators
 
@@ -937,9 +1048,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |student |view facilitators' information |contact them when I need help
 
-|`* * *` |student |edit a module’s description |modify the module’s description
+|`* * *` |student |edit a module |update the module
 
-|`* * *` |student |edit classes |keep my classes up to date
+|`* * *` |student |edit a class |keep my classes up to date
 
 |`* * *` |student |edit a task |keep my tasks up to date
 
@@ -960,8 +1071,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |new user |view all commands |learn how to use them
 
 |`* * *` |new user |view commands for a specific feature |learn how to use them
-
-|`* * *` |user |get reminded about how commands work |recall the commands
 
 |`* * *` |user |import and export data |easily migrate the data to another computer
 
@@ -992,11 +1101,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |visual user |see a clear <<gui, GUI>> |navigate the App more easily
 |=======================================================================
 
+//end::user-stories[]
+
 [appendix]
 == Use Cases
 
 (For all use cases below, the *System* is the `Mod Manager` and the *Actor* is the `user`, unless specified otherwise)
 
+// tag::use-case-module[]
 [discrete]
 === Use case: UC01 - Add module
 
@@ -1034,19 +1146,12 @@ Use case resumes at step 1.
 +
 Use case ends.
 
-*<<extensions, Extensions>>*
-
-[none]
-* 1a. The list of modules is empty.
-+
-Use case ends.
-
 [discrete]
 === Use case: UC03 - View module
 
 *<<mss, MSS>>*
 
-1.  User requests to view a module and provides the module code.
+1.  User requests to view a module and provides the index or module code.
 2.  Mod Manager shows all information related to the module.
 +
 Use case ends.
@@ -1054,13 +1159,14 @@ Use case ends.
 *<<extensions, Extensions>>*
 
 [none]
-* 1a. The given module code is invalid.
+* 1a. The given index or module code is invalid.
 +
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
 
+// tag::use-case-mod-edit-delete[]
 [discrete]
 === Use case: UC04 - Edit module
 
@@ -1107,6 +1213,10 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
+// end::use-case-mod-edit-delete[]
+// end::use-case-module[]
+
+// tag::use-case-class[]
 
 [discrete]
 === Use case: UC06 - Add class
@@ -1127,22 +1237,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC07 - List classes
-*<<mss, MSS>>*
-
-1. User request to list all the classes.
-2. Mod Manager replies with the list of all classes.
-+
-Use case ends.
-
-*<<extensions, Extensions>>*
-[none]
-* 1a. The list of classes is empty.
-+
-Use case ends.
-
-[discrete]
-=== Use case: UC08 - Find class by day
+=== Use case: UC07 - Find class by day
 *<<mss, MSS>>*
 
 1. User request to list all the classes by day and provides the day.
@@ -1164,7 +1259,7 @@ Use case resumes at step 1.
 Use case ends.
 
 [discrete]
-=== Use case: UC09 - Find next class
+=== Use case: UC08 - Find next class
 *<<mss, MSS>>*
 
 1. User request to find the next class.
@@ -1179,7 +1274,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC10 - Edit class
+=== Use case: UC09 - Edit class
 *<<mss, MSS>>*
 
 1. User request to edit a class and provides the index and necessary details to be edited.
@@ -1197,7 +1292,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC11 - Delete class
+=== Use case: UC10 - Delete class
 *<<mss, MSS>>*
 
 1. User requests to delete a class and provides the index.
@@ -1214,8 +1309,38 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+// end::use-case-class[]
+
 [discrete]
-=== Use case: UC18 - Add facilitator
+=== Use case: UC11 - Add task
+
+[discrete]
+=== Use case: UC12 - Mark task as done
+
+[discrete]
+=== Use case: UC13 - List tasks
+
+[discrete]
+=== Use case: UC14 - List tasks for a specific module
+
+[discrete]
+=== Use case: UC15 - List undone tasks
+
+[discrete]
+=== Use case: UC16 - Find task by description
+
+[discrete]
+=== Use cse: UC17 - Search task by date
+
+[discrete]
+=== Use case: UC18 - Edit task
+
+[discrete]
+=== Use case: UC19 - Delete task
+
+// tag::use-case-facilitator[]
+[discrete]
+=== Use case: UC20 - Add facilitator
 
 *<<mss, MSS>>*
 
@@ -1243,7 +1368,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC19 - List facilitators
+=== Use case: UC21 - List facilitators
 
 *<<mss, MSS>>*
 
@@ -1252,15 +1377,8 @@ Use case resumes at step 1.
 +
 Use case ends.
 
-*<<extensions, Extensions>>*
-
-[none]
-* 1a. The list of facilitators is empty.
-+
-Use case ends.
-
 [discrete]
-=== Use case: UC20 - Find facilitator
+=== Use case: UC22 - Find facilitator
 
 *<<mss, MSS>>*
 
@@ -1277,7 +1395,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: UC21 - Edit facilitator
+=== Use case: UC23 - Edit facilitator
 
 *<<mss, MSS>>*
 
@@ -1305,7 +1423,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC22 - Delete facilitator
+=== Use case: UC24 - Delete facilitator
 
 *<<mss, MSS>>*
 
@@ -1323,9 +1441,11 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes at step 1.
+// end::use-case-facilitator[]
 
+//tag::use-case-calendar[]
 [discrete]
-=== Use case: UC23 - View calendar
+=== Use case: UC25 - View calendar
 *<<mss, MSS>>*
 
 1. User requests to view the calendar for a specified week.
@@ -1343,7 +1463,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: UC24 - Find empty slots in calendar
+=== Use case: UC26 - Find empty slots in calendar
 *<<mss, MSS>>*
 
 1. User requests to find empty slots in the calendar.
@@ -1364,9 +1484,10 @@ Use case resumes at step 1.
 * 2a. The list of empty slots is empty.
 +
 Use case ends.
+//end::use-case-calendar[]
 
 [discrete]
-=== Use case: UC25 - Clear all entries in Mod Manager
+=== Use case: UC27 - Clear all entries in Mod Manager
 *<<mss, MSS>>*
 
 1. User requests to clear all entries.
@@ -1386,16 +1507,24 @@ Use case resumes at step 1.
 [appendix]
 == Non Functional Requirements
 
+// tag::nfr[]
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 250 classes, 250 tasks and 250 facilitators and without a noticeable sluggishness in performance for typical usage.
+.  Should work on different screen sizes.
+.  Should be able to hold up to 250 classes, 250 tasks and 250 facilitators.
+.  Response time for each command should be within 3 seconds.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  A user should be able to navigate from one tab to another by typing or clicking.
 .  Should work without any internet required.
-.  Should be for a single user.
-.  Data should be stored locally and should be in a human editable file.
+.  Rate of failure should not exceed 5%.
+.  User data should be protected and should not be accessible to other users.
+.  Should be intuitive and easy to use, and users should become proficient within an hour.
+.  Should not conflict with other applications or processes.
+.  A developer with one year of experience should be able to add a new feature, including source code modifications and testing, with no more than one week of labour.
+// end::nfr[]
 
 [appendix]
 == Glossary
-
+//tag::glossary[]
 [[cli]] CLI::
 Command-line interface: processes commands to a computer program in the form of lines of text
 
@@ -1410,7 +1539,7 @@ Windows, Linux, Unix, OS-X
 
 [[mss]] MSS::
 Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
-
+//end::glossary[]
 [appendix]
 == Product Survey
 
@@ -1436,40 +1565,178 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-=== Launch and Shutdown
+=== Testing of General Features
 
-. Initial launch
+// tag::testing-general[]
+. Launching the application.
 
-.. Download the jar file and copy into an empty folder
-.. Double-click the jar file +
-   Expected: Shows the <<gui, GUI>> with a set of sample contacts. The window size may not be optimum.
+.. Download the jar file and copy into an empty folder. Double-click the jar file. +
+   Expected: Shows the <<gui, GUI>> with a set of sample modules, classes, tasks and facilitators. The window size may not be optimum.
 
-. Saving window preferences
+. Exiting the application.
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+.. Type `exit` in the command box and press kbd:[Enter]. +
+   Expected: Closes the application window and saves data.
 
-_{ more test cases ... }_
-
-=== Deleting a Facilitator
-
-. Deleting a facilitator while all facilitators are listed
-
-.. Prerequisites: List all facilitators using the `list` command. Multiple facilitators in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No facilitator is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Click on the close button on the application window. +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+. Saving data.
 
-=== Saving Data
+.. Delete the data file if it exists. Double-click the jar file. +
+   Expected: Shows the <<gui, GUI>> with a set of sample modules, classes, tasks and facilitators.
 
-. Dealing with missing/corrupted data files
+.. Edit the data file to contain duplicate modules. Double-click the jar file. +
+   Expected: Shows the <<gui, GUI>> with an empty set of modules, classes, tasks and facilitators.
+// end::testing-general[]
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+=== Testing of Module Feature
 
-_{ more test cases ... }_
+// tag::testing-module[]
+. Adding a module.
+
+.. Prerequisites: List all modules using the `mod list` command. Module `CS1101S` does not exist in Mod Manager.
+.. Test case: `mod add /code CS1101S /desc Programming Methodology` +
+   Expected: A module with the module code `CS1101S` and description `Programming Methodology` is added to the list. Details of the added module shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `mod add /desc Programming Methodology` +
+   Expected: No module is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect mod add commands to try: `mod add`, `mod add /code`, `mod add /code x` (where module x already exists in Mod Manager), `mod add /code CS1101S /desc` +
+   Expected: Similar to previous.
+
+. Viewing a module.
+
+.. Prerequisites: List all modules using the `mod list` command. Module `CS2103T` exists in Mod Manager.
+.. Test case: `mod view CS2103T` +
+   Expected: Classes, tasks and facilitators of the module `CS2103T` shown. Details of the viewed module shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `mod view 0` +
+   Expected: No module is viewed. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect mod view commands to try: `mod view`, `mod view x` (where x is negative, 0 or larger than the list size), `mod view x` (where no module with module code x exists) +
+   Expected: Similar to previous.
+
+// tag::testing-mod-edit[]
+. Editing a module.
+
+.. Prerequisites: List all modules using the `mod list` command. Multiple modules in the list.
+.. Test case: `mod edit 1 /desc SE` +
+   Expected: Description of the first module in the list is updated to `SE`. Details of the edited module shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `mod edit 0` +
+   Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect mod edit commands to try: `mod edit`, `mod edit x` (where x is any value), `mod edit x /desc SE` (where x is negative, 0 or larger than the list size), `mod edit 1 /code x` (where a module with module code x exists) +
+   Expected: Similar to previous.
+// end::testing-mod-edit[]
+
+. Deleting a module.
+
+.. Prerequisites: List all modules using the `mod list` command. Multiple modules in the list.
+.. Test case: `mod delete 1` +
+   Expected: First module is deleted from the list. Details of the deleted module shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `mod delete 0` +
+   Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect mod delete commands to try: `mod delete`, `mod delete x` (where x is negative, 0 or larger than the list size), `mod delete x` (where no module with module code x exists) +
+   Expected: Similar to previous.
+// end::testing-module[]
+
+// tag::testing-class[]
+
+=== Testing of Class Feature
+. Adding a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager.
+.. Test case: `class add /code CS2103T /type lec /at friday 10:00 12:00 /venue i3-aud` +
+   Expected: A CS2103T class of type lecture on friday from 10:00 to 12:00 at i3-Aud is added to the class list. Details of the added class is shown in the status message.
+.. Test case: `class add /code CS1101S /type lec /at friday 12:00 14:00` +
+   Expected: No class is added. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class add`, `class add /code cs2103t`, `class add /code cs2103t /type lec`, `class add /code cs2103t /type bla /at friday 10:00 12:00` +
+   Expected: No class is added. Error details shown in the status message.
+
+. Find classes on a certain day
+.. Prerequisites: -
+.. Test case: `class find /at monday` +
+   Expected: Classes listed in the result display.
+.. Test case: `class find` +
+   Expected: No class is found. Error details shown in the status message.
+
+. Finding next class
+.. Prerequisites: -
+.. Test case: `class find /next` +
+   Expected: Classes listed in the result display and module display changed to the module of the next class if there is class left for this week.
+.. Test case: `class find` +
+   Expected: No class is found. Error details shown in the status message.
+
+. Editing a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager. Classes for CS2103T exists.
+.. Test case: `class edit 1 /code cs2103t /venue Home` +
+   Expected: Venue of the first class in the list updated to `Home`.
+.. Test case: `class edit 1 /code cs2103t /venue` +
+   Expected: Venue of the first class in the list is removed`.
+.. Test case: `class edit 1 /code cs1101s` +
+   Expected: No class is edited. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class edit`, `class edit 0`, `class edit -1`, `class edit 1 /code cs2103t` +
+   Expected: No class is edited. Error details shown in the status message.
+
+. Deleting a class
+.. Prerequisites: View the module using the `mod view CS2103T` command. Module CS2103T exists in ModManager and module CS1101S does not exist in ModManager. Classes for CS2103T exists.
+.. Test case: `class delete 1 /code cs2103t` +
+   Expected: First class of the list deleted.
+.. Test case: `class delete 1 /code cs1101s` +
+   Expected: No class is deleted. Error details shown in the status message.
+.. Other incorrect class add commands to try: `class delete`, `class delete 1`, `class delete 0`, `class delete -1` +
+   Expected: No class is deleted. Error details shown in the status message.
+
+// end::testing-class[]
+
+=== Testing of Facilitator Feature
+
+// tag::testing-facilitator[]
+. Adding a facilitator while all facilitators are listed.
+
+.. Prerequisites: List all facilitators using the `facil list` command. A facilitator with the name `Akshay Narayan` does not exist in Mod Manager. Module `CS2103T` exists in Mod Manager. Module `CS1101S` does not exist in Mod Manager.
+.. Test case: `facil add /name Akshay Narayan /phone 98765432 /email dcsaksh@nus.edu.sg /code CS2103T` +
+   Expected: A facilitator with the name `Akshay Narayan`, phone `98765432` and email `dcsaksh@nus.edu.sg` and module `CS2103T` is added to the list. Details of the added facilitator shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `facil add /name Akshay Narayan /phone 98765432 /code CS1101S` +
+   Expected: No facilitator is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect facil add commands to try: `facil add`, `facil add /name Akshay Narayan`, `facil add /name Akshay Narayan /office /code cs2103T`, `facil add /name Akshay Narayan /email abcde /code cs2103T` +
+   Expected: Similar to previous.
+
+. Finding a facilitator while all facilitators are listed.
+
+.. Prerequisites: List all facilitators using the `facil list` command. Multiple facilitators in the list. A facilitator with the name `Akshay Narayan` exists in Mod Manager. No other facilitator’s name contains `Akshay`.
+.. Test case: `facil find Akshay` +
+   Expected: Only the facilitator with the name `Akshay Narayan` is shown. Number of facilitators listed shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `facil find` +
+   Expected: No facilitator is found. Error details shown in the status message. Status bar remains the same.
+
+. Editing a facilitator while all facilitators are listed.
+
+.. Prerequisites: List all facilitators using the `facil list` command. Multiple facilitators in the list.
+.. Test case: `facil edit 1 /office COM2-0202` +
+   Expected: Office of the first facilitator in the list is updated to `COM2-0202`. Details of the edited facilitator shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `facil edit 2 /phone` +
+   Expected: Phone of the second facilitator in the list is removed. Details of the edited facilitator shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `facil edit 0` +
+   Expected: No facilitator is edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect facil edit commands to try: `facil edit`, `facil edit x` (where x is any value), `facil edit x /phone 87654321` (where x is negative, 0 or larger than the list size) +
+   Expected: Similar to previous.
+
+. Deleting a facilitator while all facilitators are listed.
+
+.. Prerequisites: List all facilitators using the `facil list` command. Multiple facilitators in the list.
+.. Test case: `facil delete 1` +
+   Expected: First facilitator is deleted from the list. Details of the deleted facilitator shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `facil delete 0` +
+   Expected: No facilitator is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect facil delete commands to try: `facil delete`, `facil delete x` (where x is negative, 0 or larger than the list size), `facil delete x` (where no facilitator with name x exists) +
+   Expected: Similar to previous.
+// end::testing-facilitator[]
+
+//tag::testing-cal[]
+=== Testing of Calendar Feature
+
+. Viewing the calendar.
+.. Prerequisites: The classes and tasks with date within the current week exist.
+.. Test case: `cal view /week this` +
+   Expected: Classes and tasks appear in the correct day in the calendar and sorted according to time.
+.. Test case: `cal view /week that` +
+   Expected: Error message shown in the result display.
+.. Other incorrect cal view commands to try: `cal view`, `cal view /week` +
+   Expected: Similar to previous.
+//end::testing-cal[]

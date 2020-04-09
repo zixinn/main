@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +40,7 @@ public class JsonSerializableModManagerTest {
         JsonSerializableModManager dataFromFile = JsonUtil.readJsonFile(TYPICAL_MOD_MANAGER_FILE,
                 JsonSerializableModManager.class).get();
         ModManager modManagerFromFile = dataFromFile.toModelType();
-        ModManager typicalModManager = getTypicalAddressBook();
+        ModManager typicalModManager = getTypicalModManager();
         assertEquals(modManagerFromFile, typicalModManager);
     }
 
