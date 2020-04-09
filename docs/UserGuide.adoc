@@ -143,7 +143,7 @@ Format:
 
 * `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 
-Parameter constraints:
+Command properties:
 ****
 * MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
 * DESCRIPTION should not exceed 64 characters.
@@ -204,7 +204,7 @@ Format:
 * `*mod* view INDEX`
 * `*mod* view MOD_CODE`
 
-Parameter constraints:
+Command properties:
 ****
 * Views the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -245,7 +245,7 @@ Format:
 * `*mod* edit INDEX [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 * `*mod* edit MOD_CODE [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 
-Parameter constraints:
+Command properties:
 ****
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -303,7 +303,7 @@ Format:
 * `*mod* delete INDEX`
 * `*mod* delete MOD_CODE`
 
-Parameter constraints:
+Command properties:
 ****
 * Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -388,7 +388,8 @@ image::ClassFindDay.png[]
 
 You can find the next class that will start soon.
 
-Format: `*class* find /next` +
+Format: `*class* find /next`
+
 Example: +
 After typing `*class* find /next`, you will be directed to the module's page and you will see the class as shown in the figure below.
 
@@ -442,7 +443,7 @@ Format: `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
 
 Example: `*task* add /code CS3230 /desc Programming Assignment 2 /on 20/02/2020 /at 23:59`
 
-Parameter constraints:
+Command properties:
 ****
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * A module can be linked to any number of tasks (including 0).
@@ -481,7 +482,7 @@ With this command, you can find tasks that contain any of the given keywords in 
 
 Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 
-Parameter constraints:
+Command properties:
 ****
 * The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
 * If no descriptions are supplied, no tasks will be found.
@@ -500,7 +501,7 @@ Format: `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
 
 Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
 
-Parameter constraints:
+Command properties:
 ****
 * The search works across modules, and no `/code` commands are required.
 * Tasks are only searched for its date. Tasks that do not have dates or times
@@ -564,7 +565,7 @@ Format:
 * `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
 * `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
-Parameter constraints:
+Command properties:
 ****
 * At least one of the optional fields (phone, email, office) must be provided.
 * A facilitator can be linked to one or more modules. A module with the module code provided must exist in Mod Manager.
@@ -624,7 +625,7 @@ Format:
 
 * `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 
-Parameter constraints:
+Command properties:
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
 * The order of the name does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -668,7 +669,7 @@ Format:
 * `*facil* edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 * `*facil* edit FACILITATOR_NAME [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 
-Parameter constraints:
+Command properties:
 ****
 * Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the facilitator tab. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -725,7 +726,7 @@ Format:
 * `*facil* delete INDEX`
 * `*facil* delete FACILITATOR_NAME`
 
-Parameter constraints:
+Command properties:
 ****
 * Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the facilitator tab. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -770,8 +771,8 @@ You can view the calendar for the current week. It displays the tasks and classe
 Format: `*cal* view /week this`
 
 Example: +
-You can view the calendar for the current week by typing the above command.
-The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in the current week.
+After typing `*cal* view /week this`, the calendar for the current week will be displayed to you as shown below.
+The red boxes represents the tasks you have not done, the green boxes represents the tasks you have already done and the blue boxes represents the lessons you have in the current week.
 
 .Outcome of `*cal* view /week this`
 image::CalView1.png[]
@@ -783,8 +784,8 @@ You can view the calendar for next week. It displays the tasks and classes you h
 Format: `*cal* view /week next`
 
 Example: +
-You can view the calendar for the next week by typing the above command.
-The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in next week.
+After typing `*cal* view /week next`, the calendar for the next week will be displayed to you as shown below.
+The red boxes represents the tasks you have not done, the green boxes represents the tasks you have already done and the blue boxes represents the lessons you have in next week.
 
 .Outcome of `*cal* view /week next`
 image::CalView2.png[]
@@ -797,7 +798,7 @@ The empty slots are time periods where you do not have classes or tasks.
 Format: `*cal* find empty`
 
 Example: +
-You can get the list of empty slots by typing the above command. The list will be displayed in the result display box.
+You can get the list of empty slots after typing `*cal* find empty`. The list will be displayed in the result display box as seen below.
 
 .Outcome of `*cal* find empty`
 image::CalFind1.png[]
@@ -806,12 +807,10 @@ The full message in the result display box in the above figure is:
 
 ****
 Here's the list of empty slots from today to Sunday: +
-WEDNESDAY: +
-00:00-12:00  12:00-14:00  16:00-23:59 +
 THURSDAY: +
-00:00-08:00  11:00-23:59 +
+00:00-08:00  12:00-16:00  18:00-23:59 +
 FRIDAY: +
-00:00-10:00  11:00-14:00  16:00-23:59 +
+00:00-10:00  13:00-14:00  16:00-23:59 +
 SATURDAY: +
 00:00-23:59 +
 SUNDAY: +
