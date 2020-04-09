@@ -7,17 +7,16 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.util.action.DoableAction;
 
-
 /**
- * Represents an Undo command.
+ * Represents a Redo command.
  */
-public class UndoCommand extends Command {
-    public static final String MESSAGE_USAGE = COMMAND_GROUP_UNDO
-            + ": Undo a previous action which changed the system's data. "
+public class RedoCommand extends Command {
+    public static final String MESSAGE_USAGE = COMMAND_GROUP_REDO
+            + ": Redo a previously undone action which changed the system's data. "
             + "Such actions come from your add, edit, or delete commands.\n"
-            + "Format: " + COMMAND_GROUP_UNDO;
-    public static final String MESSAGE_SUCCESS = "Undone action: %s";
-    public static final String MESSAGE_CANNOT_UNDO = "There are no valid actions to undo.";
+            + "Format: " + COMMAND_GROUP_REDO;
+    public static final String MESSAGE_SUCCESS = "Redone action: %s";
+    public static final String MESSAGE_CANNOT_REDO = "There are no valid actions to redo.";
 
     private final String addAction = "Add\n";
     private final String editAction = "Edit\nFROM:   %s\nTO:   %s";
@@ -26,17 +25,17 @@ public class UndoCommand extends Command {
     /**
      * Empty constructor for nothing.
      */
-    public UndoCommand() {}
+    public RedoCommand() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.canUndo()) {
-            throw new CommandException(MESSAGE_CANNOT_UNDO);
+        if (!model.canRedo()) {
+            throw new CommandException(MESSAGE_CANNOT_REDO);
         }
-        DoableAction<?> undone = model.undo();
-        String msg = makeMessage(undone);
+        DoableAction<?> redone = model.redo();
+        String msg = makeMessage(redone);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, msg), CommandType.UNDO);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, msg), CommandType.REDO);
     }
 
     /**

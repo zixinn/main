@@ -17,9 +17,10 @@ public abstract class Command {
     public static final String COMMAND_GROUP_MOD = "mod";
     public static final String COMMAND_GROUP_TASK = "task";
     public static final String COMMAND_GROUP_UNDO = "undo";
+    public static final String COMMAND_GROUP_REDO = "redo";
     public static final List<String> ALL_COMMAND_GROUPS = List.of(
             COMMAND_GROUP_CAL, COMMAND_GROUP_CLASS, COMMAND_GROUP_CMD, COMMAND_GROUP_EXIT, COMMAND_GROUP_FACIL,
-            COMMAND_GROUP_MOD, COMMAND_GROUP_TASK, COMMAND_GROUP_UNDO);
+            COMMAND_GROUP_MOD, COMMAND_GROUP_TASK, COMMAND_GROUP_UNDO, COMMAND_GROUP_REDO);
 
     public static final String COMMAND_WORD_ADD = "add";
     public static final String COMMAND_WORD_ALL = "all";

@@ -110,8 +110,8 @@ public class ModuleAction implements DoableAction<Module> {
             break;
         case DELETE:
             model.deleteModule(target);
-            relatedLessons.forEach(model::removeLesson);
-            relatedTask.forEach(model::deleteTask);
+            model.removeLessonFromModule(target.getModuleCode());
+            model.deleteTasksWithModuleCode(target.getModuleCode());
             model.deleteModuleCodeFromFacilitatorList(target.getModuleCode());
             break;
         default:
