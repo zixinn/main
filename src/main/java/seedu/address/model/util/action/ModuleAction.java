@@ -2,9 +2,11 @@ package seedu.address.model.util.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
@@ -55,6 +57,9 @@ public class ModuleAction implements DoableAction<Module> {
         switch (type) {
         case ADD:
             model.deleteModule(target);
+            if (model.getModule().isPresent() && model.getModule().get().equals(target)) {
+                model.updateModule(Optional.empty());
+            }
             break;
         case EDIT:
             assert replacement != null;
@@ -63,6 +68,12 @@ public class ModuleAction implements DoableAction<Module> {
                 model.setModuleCodeInFacilitatorList(replacement.getModuleCode(), target.getModuleCode());
                 model.setModuleCodeInTaskList(replacement.getModuleCode(), target.getModuleCode());
                 model.setModuleCodeInLessonList(replacement.getModuleCode(), target.getModuleCode());
+            }
+            if (model.getModule().isPresent() && model.getModule().get().equals(replacement)) {
+                model.updateModule(Optional.of(target));
+                model.updateFacilitatorListForModule(
+                        new ModuleCodesContainKeywordPredicate(target.getModuleCode().value));
+                model.updateTaskListForModule(x -> x.getModuleCode().equals(target.getModuleCode()));
             }
             break;
         case DELETE:
@@ -87,6 +98,8 @@ public class ModuleAction implements DoableAction<Module> {
                     model.addFacilitator(f);
                 }
             });
+            model.updateFacilitatorListForModule(Model.PREDICATE_SHOW_NO_FACILITATORS);
+            model.updateTaskListForModule(Model.PREDICATE_SHOW_NO_TASKS);
             break;
         default:
             break;
@@ -107,12 +120,21 @@ public class ModuleAction implements DoableAction<Module> {
                 model.setModuleCodeInTaskList(target.getModuleCode(), replacement.getModuleCode());
                 model.setModuleCodeInLessonList(target.getModuleCode(), replacement.getModuleCode());
             }
+            if (model.getModule().isPresent() && model.getModule().get().equals(target)) {
+                model.updateModule(Optional.of(replacement));
+                model.updateFacilitatorListForModule(
+                        new ModuleCodesContainKeywordPredicate(replacement.getModuleCode().value));
+                model.updateTaskListForModule(x -> x.getModuleCode().equals(replacement.getModuleCode()));
+            }
             break;
         case DELETE:
             model.deleteModule(target);
             model.removeLessonFromModule(target.getModuleCode());
             model.deleteTasksWithModuleCode(target.getModuleCode());
             model.deleteModuleCodeFromFacilitatorList(target.getModuleCode());
+            if (model.getModule().isPresent() && model.getModule().get().equals(target)) {
+                model.updateModule(Optional.empty());
+            }
             break;
         default:
             break;
