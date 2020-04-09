@@ -122,9 +122,11 @@ public class UniqueTaskList implements Iterable<Task> {
         for (Task task : tasksToEdit) {
             Task editedTask;
             if (task instanceof ScheduledTask) {
-                editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode);
+                editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode,
+                        task.getTaskNum(), task.isTaskDone());
             } else {
-                editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode);
+                editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode,
+                        task.getTaskNum(), task.isTaskDone());
             }
             setTask(task, editedTask);
         }
