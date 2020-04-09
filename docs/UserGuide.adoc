@@ -148,7 +148,6 @@ e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
 `/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-
 === General
 The following commands carry out general operations in Mark.
 
@@ -506,7 +505,10 @@ image::ClassDelete.png[]
 
 // end::class[]
 
+// start::task[]
 === Managing tasks : `*task*`
+The commands in this section carry out operations on the task list in Mod Manager.
+Executing these commands will bring you to the Task tab.
 
 ==== Adding a task
 
@@ -529,6 +531,39 @@ e.g. 24:00 is not allowed.
 * Duplicate tasks across modules are allowed. However,
 tasks within a same module must have different descriptions. They can occupy the same time period.
 ****
+
+==== Editing a task
+
+From here on, you will be introduced to Mod Manager's task ID system.
+****
+* A task can be uniquely identified in the system by two things: its associated module and a 3-digit number.
+* A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
+* Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
+* You can find out a task's ID by looking at the general task list - can be viewed with `*task* list`
+(section 4.4.3) , or the task list of a specific module - can be viewed with `*mod* view` (section 4.2.3).
+****
+
+You can edit a task's description, its date and time details, or both.
+
+Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
+
+Mod Manager will find the task associated with the task ID number provided and update the information correspondingly.
+
+Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59`
+
+Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so.
+
+Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
+
+Example: `*task* edit CS2103T 848 /on non`
+
+==== Deleting a task
+
+You can delete a task from Mod Manager's system.
+
+Format: `*task* delete MOD_CODE ID_NUMBER`
+
+Example: `*task* delete CS2103T 973`
 
 ==== Marking a task as done
 
@@ -590,39 +625,8 @@ and you will have to follow the input requirements using valid numbers for
 match only tasks that are on 10 April in any year.
 ****
 
-==== Editing a task
-
-From here on, you will be introduced to Mod Manager's task ID system.
-****
-* A task can be uniquely identified in the system by two things: its associated module and a 3-digit number.
-* A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
-* Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
-* You can find out a task's ID by looking at the general task list - can be viewed with `*task* list`
-(section 4.4.3) , or the task list of a specific module - can be viewed with `*mod* view` (section 4.2.3).
-****
-
-You can edit a task's description, its date and time details, or both.
-
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
-
-Mod Manager will find the task associated with the task ID number provided and update the information correspondingly.
-
-Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59`
-
-Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so.
-
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-
-Example: `*task* edit CS2103T 848 /on non`
-
-==== Deleting a task
-
-You can delete a task from Mod Manager's system.
-
-Format: `*task* delete MOD_CODE ID_NUMBER`
-
-Example: `*task* delete CS2103T 973`
-
+=
+// end::task[]
 === Managing facilitators : `*facil*`
 
 // tag::facilitator[]
