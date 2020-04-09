@@ -48,8 +48,8 @@ public class DayAndTime implements Comparable<DayAndTime> {
         if (!isValidDayAndTime(dayAndTime)) {
             throw new InvalidDayAndTimeException();
         }
-        String[] splitted = dayAndTime.split(" ");
-        DayOfWeek day = DayOfWeek.valueOf(splitted[0]);
+        String[] splitted = dayAndTime.split("\\s");
+        DayOfWeek day = DayOfWeek.valueOf(splitted[0].toUpperCase());
         LocalTime startTime = LocalTime.parse(splitted[1]);
         LocalTime endTime = LocalTime.parse(splitted[2]);
         if (startTime.compareTo(endTime) >= 0) {
