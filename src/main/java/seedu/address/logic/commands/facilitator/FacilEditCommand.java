@@ -30,6 +30,8 @@ import seedu.address.model.facilitator.Name;
 import seedu.address.model.facilitator.Office;
 import seedu.address.model.facilitator.Phone;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.FacilAction;
 
 /**
  * Edits the details of an existing facilitator in Mod Manager.
@@ -155,6 +157,8 @@ public class FacilEditCommand extends FacilCommand {
 
         model.setFacilitator(facilitatorToEdit, editedFacilitator);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+        FacilAction editFacilAction = new FacilAction(facilitatorToEdit, editedFacilitator, DoableActionType.EDIT);
+        model.addAction(editFacilAction);
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator),
                 CommandType.FACILITATOR);
     }

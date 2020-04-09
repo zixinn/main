@@ -226,7 +226,7 @@ public class ModuleEditCommandTest {
     public void execute_duplicateModuleModuleCode_failure() {
         Module firstModule = model.getFilteredModuleList().get(INDEX_FIRST.getZeroBased());
         ModuleEditCommand.EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
-        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2101), descriptor);
+        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2103T), descriptor);
 
         assertCommandFailure(editCommand, model, ModuleEditCommand.MESSAGE_DUPLICATE_MODULE);
     }

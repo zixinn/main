@@ -15,6 +15,8 @@ import seedu.address.model.Model;
 import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.LessonAction;
 
 /**
  * Adds a lesson to Mod Manager.
@@ -65,6 +67,8 @@ public class LessonAddCommand extends LessonCommand {
         model.updateTaskListForModule(x -> x.getModuleCode().equals(toAdd.getModuleCode()));
 
         model.addLesson(toAdd);
+        LessonAction addLessonAction = new LessonAction(toAdd, DoableActionType.ADD);
+        model.addAction(addLessonAction);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.LESSON);
     }
 

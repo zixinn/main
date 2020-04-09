@@ -8,13 +8,13 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.action.DoableAction;
 
 /**
  * The API of the Model component.
@@ -184,7 +184,7 @@ public interface Model {
      * Adds the given task.
      * {@code module} must not already exist in Mod Manager.
      */
-    void addTask(Task task) throws ParseException;
+    void addTask(Task task);
 
     /**
      * Removes all tasks with the specified ModuleCode.
@@ -256,4 +256,14 @@ public interface Model {
     void updateCalendar(Calendar calendar);
 
     Calendar getCalendar();
+
+    void addAction(DoableAction<?> action);
+
+    boolean canUndo();
+
+    boolean canRedo();
+
+    DoableAction<?> undo();
+
+    DoableAction<?> redo();
 }

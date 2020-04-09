@@ -19,6 +19,8 @@ import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.Description;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.ModuleAction;
 
 /**
  * Edits the details of an existing module in Mod Manager.
@@ -105,6 +107,8 @@ public class ModuleEditCommand extends ModuleCommand {
 
         model.setModule(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+        ModuleAction editModAction = new ModuleAction(moduleToEdit, editedModule, DoableActionType.EDIT);
+        model.addAction(editModAction);
 
         if (!moduleToEdit.getModuleCode().equals(editedModule.getModuleCode())) {
             model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());

@@ -11,6 +11,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.LessonAction;
 
 /**
  * Deletes a lesson identified using it's displayed index from Mod Manager.
@@ -55,6 +57,8 @@ public class LessonDeleteCommand extends LessonCommand {
 
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.removeLesson(lessonToDelete);
+        LessonAction deleteLessonAction = new LessonAction(lessonToDelete, DoableActionType.DELETE);
+        model.addAction(deleteLessonAction);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete),
                 CommandType.LESSON);
 

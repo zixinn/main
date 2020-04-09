@@ -16,6 +16,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facilitator.Facilitator;
 import seedu.address.model.facilitator.Name;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.FacilAction;
 
 /**
  * Deletes a facilitator identified using it's displayed index from Mod Manager.
@@ -86,6 +88,8 @@ public class FacilDeleteCommand extends FacilCommand {
         }
 
         model.deleteFacilitator(facilitatorToDelete);
+        FacilAction deleteFacilAction = new FacilAction(facilitatorToDelete, DoableActionType.DELETE);
+        model.addAction(deleteFacilAction);
         return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete),
                 CommandType.FACILITATOR);
     }

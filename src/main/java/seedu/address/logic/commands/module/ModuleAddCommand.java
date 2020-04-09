@@ -9,6 +9,8 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.ModuleAction;
 
 /**
  * Adds a module to Mod Manager.
@@ -46,6 +48,8 @@ public class ModuleAddCommand extends ModuleCommand {
         }
 
         model.addModule(toAdd);
+        ModuleAction addModAction = new ModuleAction(toAdd, DoableActionType.ADD);
+        model.addAction(addModAction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.MODULE);
     }
