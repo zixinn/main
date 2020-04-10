@@ -979,6 +979,13 @@ You can receive reminders for deadlines and events the next day.
 
 You can find upcoming tasks.
 
+==== Individual view of the recently edited element after an `add`, `edit` or `delete` command
+
+After an `add`, `edit`, or `delete` operation, the view will be scrolled to
+that particular recently created/modified element,
+so that the user can refer to the information easier. The newly `add`-ed
+or `edit`-ed details will be highlighted and focused so the user can know
+which one has just been `add`-ed, `edit`-ed, or `delete`-d.
 
 == FAQ
 
