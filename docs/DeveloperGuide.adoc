@@ -502,13 +502,13 @@ Generating task number is done through static calls to methods of `TaskNumManage
 
 It supports the following operations:
 
-* `*add*` - Adds a task to a `Module` in Mod Manager.
-* `*list*` - Shows a list of all tasks across all `Module` s in Mod Manager.
-* `*find*` - Finds a task in Mod Manager by its description.
-* `*upcoming*` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager.
-* `*search*`- Searches for tasks that occur on your specified date, month, or year in Mod Manager.
-* `*edit*` - Edits the information of a task in Mod Manager.
-* `*delete*` - Deletes a task from the `Module` and Mod Manager.
+* `add` - Adds a task to a `Module` in Mod Manager.
+* `list` - Shows a list of all tasks across all `Module` s in Mod Manager.
+* `find` - Finds a task in Mod Manager by its description.
+* `upcoming` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager.
+* `search`- Searches for tasks that occur on your specified date, month, or year in Mod Manager.
+* `edit` - Edits the information of a task in Mod Manager.
+* `delete` - Deletes a task from the `Module` and Mod Manager.
 
 //end::taskOverview[]
 ==== Implementation Details
@@ -696,7 +696,7 @@ and collaborating with the team member responsible for the `Module` component, a
 
 // tag::facilitator[]
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
-A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
+A facilitator has a `Name`, an optional `Phone`, an optional `Email`, an optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
 
 It supports the following operations:
@@ -914,20 +914,20 @@ The following activity diagram summarizes what happens when a user executes a ca
 image::CalViewActivityDiagram.png[]
 
 ===== Finding empty slots in calendar
-The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by CalCommandParser, CalFindCommandParser and CalFindCommand.
+The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand`.
 
 Given below is an example usage scenario and how the calendar find mechanism behaves at each step:
 
 1. The user executes the calendar find command.
-2. CalFindCommandParser creates a new CalFindCommand.
-3. LogicManager executes the CalFindCommand.
+2. `CalFindCommandParser` creates a new `CalFindCommand`.
+3. `LogicManager` executes the `CalFindCommand`.
 
 The following sequence diagram shows how the calendar find command works:
 
 .Sequence Diagram for `cal find` Command
 image::CalFindSequenceDiagram.png[]
 
-NOTE: The lifeline for CalCommandParser, CalFindCommandParser and CalFindCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+NOTE: The lifeline for `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 The following activity diagram summarizes what happens when a user executes a calendar find command:
 
