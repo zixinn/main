@@ -30,7 +30,7 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_TASKS_UNDONE_OVERVIEW = "%1$d undone tasks are listed!";
     public static final String MESSAGE_TASKS_FILTERED_OVERVIEW = "%1$d tasks matched your query! "
-            + "Type `task list` to return to the main task list.";
+            + "Type: task list to return to the main task list.";
     public static final String MESSAGE_INVALID_CMD_GROUP = "%1$s group does not exist.";
     public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =

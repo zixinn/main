@@ -663,9 +663,9 @@ Command properties:
 
 Searches all tasks that occur on your specified date, month, or year.
 
-Format: `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
+Format: `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
 
-Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
+Example: `*task* search /month 4`, `*task* search /date 10 /month 4`
 
 Command properties:
 ****
@@ -674,12 +674,12 @@ Command properties:
 will not be found in this list.
 * If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
 * An invalid day, month, or year number can be provided, e.g.
-`/day 32`, `/month 13`, `year -1`, however, no matching tasks
-will be returned by the search. On the other hand, Invalid inputs such as
-`/day monday`, `/month December`, `/year this year` are not allowed,
+`/date 32`, `/month 13`, `year -1`, however, no matching tasks
+will be returned by the search. On the other hand, invalid inputs such as
+`/date monday`, `/month December`, `/year this year` are not allowed,
 and you will have to follow the input requirements using valid numbers for
-`/day`, `/month`, and `/year` instead.
-* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
+`/date`, `/month`, and `/year` instead.
+* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/date 10 /month 4` will
 match only tasks that are on 10 April in any year.
 ****
 
@@ -1096,7 +1096,7 @@ General notes are found at the bottom of the rightmost column on the offline cop
 |  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
+|  `*task* search [/date DAY] [/month MONTH] [/year YEAR]`
 |  `*task* undone`
 |=====
 
