@@ -172,7 +172,7 @@ public interface Model {
     /**
      * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
      */
-    boolean hasTask(Task module);
+    boolean hasTask(Task task);
 
     /**
      * Deletes the given task.
