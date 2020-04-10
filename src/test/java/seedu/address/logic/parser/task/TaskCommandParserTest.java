@@ -120,7 +120,7 @@ public class TaskCommandParserTest {
                 + TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020);
         HashMap<String, Integer> filters = new HashMap<String, Integer>() {
             {
-                put("day", Integer.parseInt(TASK_DAY_26));
+                put("date", Integer.parseInt(TASK_DAY_26));
                 put("month", Integer.parseInt(TASK_MONTH_03));
                 put("year", Integer.parseInt(TASK_YEAR_2020));
             }

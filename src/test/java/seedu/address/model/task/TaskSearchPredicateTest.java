@@ -14,7 +14,7 @@ class TaskSearchPredicateTest {
 
     @BeforeEach
     void setUp() {
-        keywords.put("day", 1);
+        keywords.put("date", 1);
         keywords.put("month", 4);
         keywords.put("year", 2020);
     }
