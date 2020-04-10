@@ -2,6 +2,8 @@
 scale 0.6
 !include style.puml
 skinparam ArrowFontSize 60
+skinparam sequenceGroupFontSize 42
+skinparam sequenceGroupHeaderFontSize 40
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -67,6 +69,7 @@ deactivate ModManagerParser
 LogicManager -> LessonFindCommand : execute()
 activate LessonFindCommand
 
+alt day == null
 LessonFindCommand -> ModelManager : findNextLesson()
 activate ModelManager
 
@@ -84,6 +87,33 @@ deactivate ModManager
 
 ModelManager --> LessonFindCommand : l
 deactivate ModelManager
+
+opt l != null
+    LessonFindCommand -> LessonFindCommand : updateList()
+    activate LessonFindCommand
+    LessonFindCommand --> LessonFindCommand
+    deactivate LessonFindCommand
+end
+else day != null
+LessonFindCommand -> ModelManager : findLessonsByDay(day)
+activate ModelManager
+
+ModelManager -> ModManager : findLessonsByDay(day)
+activate ModManager
+
+ModManager -> LessonList : findLessonsByDay(day)
+activate LessonList
+
+LessonList --> ModManager : l
+deactivate LessonList
+
+ModManager --> ModelManager : l
+deactivate ModManager
+
+ModelManager --> LessonFindCommand : l
+deactivate ModelManager
+
+end
 
 create CommandResult
 LessonFindCommand -> CommandResult

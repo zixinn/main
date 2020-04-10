@@ -340,8 +340,9 @@ image::ModDeleteAfter2.png[]
 === Managing classes : `*class*`
 
 You can add, find, edit or delete classes within ModManager. +
-When managing your classes, you should take note of the following areas in the main viewing area as stated in section 3.1:
+When managing your classes, you should take note of the following areas in the main viewing area. To find the main viewing area, you can refer to section 3.1.
 
+.Explanation of how to look at classes
 image::ClassExplain.png[]
 
 ==== Adding a class
@@ -361,12 +362,14 @@ Command properties:
 Example: +
 You have a CS2103T lecture on Friday from 14:00 to 16:00 at i3-Aud. Before adding that class, ModManager looks like what you see in the figure below. +
 
+.Before adding a class
 image::ClassAddBefore.png[]
 
 To add that class, you can type: +
 `*class* add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`. +
 You will see a new class added to the module CS2103T as shown in the figure below.
 
+.After adding a class
 image::ClassAddAfter.png[]
 
 ==== Finding classes by day
@@ -382,6 +385,7 @@ Command properties:
 Example: +
 To know what classes you have on Friday, you can type `*class* find /at friday` and you will be able to see the classes in the result display box as shown in the figure below.
 
+.After finding class by day
 image::ClassFindDay.png[]
 
 ==== Finding next class
@@ -392,6 +396,7 @@ Format: `*class* find /next` +
 Example: +
 After typing `*class* find /next`, you will be directed to the module's page and you will see the class as shown in the figure below.
 
+.After finding next class
 image::ClassFindNext.png[]
 
 ==== Editing a class
@@ -412,6 +417,7 @@ Command properties:
 Example: +
 Let's say that the venue of the CS2103T lecture you just added changed to Home. You can edit the class by typing `*class* edit 1 /code CS2103T /venue Home`. ModManager will direct you to the module's page and it will reflect the updated venue as seen below.
 
+.After editing a class
 image::ClassEdit.png[]
 
 ==== Deleting a class
@@ -426,8 +432,9 @@ Command properties:
 ****
 
 Example: +
-You can delete the CS2103T lecture by typing `*class* delete 1 /code CS2103T`. The class will not appear in the class list as seen below.
+You can delete the CS2103T lecture by typing `*class* delete 1 /code CS2103T`. The class will not appear in the class list under the module CS2103T as seen below.
 
+.After deleting a class
 image::ClassDelete.png[]
 
 // end::class[]

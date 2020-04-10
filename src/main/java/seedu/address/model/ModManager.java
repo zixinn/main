@@ -344,7 +344,7 @@ public class ModManager implements ReadOnlyModManager {
     /**
      * Finds lessons that is happening on a particular day.
      */
-    public List<Lesson> findLessonByDay(DayOfWeek day) {
+    public List<Lesson> findLessonsByDay(DayOfWeek day) {
         return lessons.findLessonsByDay(day);
     }
 

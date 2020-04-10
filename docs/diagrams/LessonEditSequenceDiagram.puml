@@ -126,6 +126,18 @@ ModelManager --> LessonEditCommand
 
 deactivate ModelManager
 
+LessonEditCommand -> LessonEditCommand : updateList()
+activate LessonEditCommand
+
+LessonEditCommand --> LessonEditCommand
+deactivate LessonEditCommand
+
+LessonEditCommand -> LessonEditCommand : updateActions()
+activate LessonEditCommand
+
+LessonEditCommand --> LessonEditCommand
+deactivate LessonEditCommand
+
 create CommandResult
 LessonEditCommand -> CommandResult
 activate CommandResult

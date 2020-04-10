@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.action.DoableActionType;
@@ -55,10 +56,11 @@ public class LessonDeleteCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
+        updateList(model.findModule(moduleCode).get(), model);
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.removeLesson(lessonToDelete);
-        LessonAction deleteLessonAction = new LessonAction(lessonToDelete, DoableActionType.DELETE);
-        model.addAction(deleteLessonAction);
+        updateAction(lessonToDelete, null, DoableActionType.DELETE, model);
+
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete),
                 CommandType.LESSON);
 

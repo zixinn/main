@@ -95,13 +95,8 @@ public class LessonEditCommand extends LessonCommand {
         }
 
         model.setLesson(lessonToEdit, editedLesson);
-        LessonAction editLessonAction = new LessonAction(lessonToEdit, editedLesson, DoableActionType.EDIT);
-        model.addAction(editLessonAction);
-
-        model.updateModule(model.findModule(editedLesson.getModuleCode()));
-        model.updateFacilitatorListForModule(
-                new ModuleCodesContainKeywordPredicate(editedLesson.getModuleCode().value));
-        model.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
+        updateAction(lessonToEdit, editedLesson, DoableActionType.EDIT, model);
+        updateList(model.findModule(editedLesson.getModuleCode()).get(), model);
 
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson), CommandType.LESSON);
     }
