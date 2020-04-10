@@ -21,7 +21,6 @@ public class CmdAllCommand extends CmdCommand {
     public CommandResult execute(Model model) throws CommandException {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are all available command groups: \n");
-
         boolean first = true;
         for (String group : Command.ALL_COMMAND_GROUPS) {
             if (first) {

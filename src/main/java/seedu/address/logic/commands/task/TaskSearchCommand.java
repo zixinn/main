@@ -37,6 +37,11 @@ public class TaskSearchCommand extends TaskCommand {
             + "It cannot contain letters or words. Please try again. \n"
             + MESSAGE_COMMAND_EXAMPLE;
 
+    public static final String MESSAGE_OUT_OF_BOUNDS_VALUES = "The provided day, month, year, "
+            + "or any of their combination "
+            + "is out of bounds. "
+            + "Please try again. \n"
+            + MESSAGE_COMMAND_EXAMPLE;
     private final TaskSearchPredicate predicate;
 
     public TaskSearchCommand(TaskSearchPredicate predicate) {
