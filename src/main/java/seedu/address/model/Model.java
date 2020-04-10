@@ -170,7 +170,7 @@ public interface Model {
     void updateFacilitatorListForModule(Predicate<Facilitator> predicate);
 
     /**
-     * Returns true if a task with the same identity as {@code module} exists in Mod Manager.
+     * Returns true if a task with the same identity as {@code task} exists in Mod Manager.
      */
     boolean hasTask(Task task);
 
