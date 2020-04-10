@@ -701,14 +701,14 @@ and collaborating with the team member responsible for the `Module` component, a
 
 // tag::facilitator[]
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
-A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
+A facilitator has a `Name`, an optional `Phone`, an optional `Email`, an optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
 
 It supports the following operations:
 
 * add - Adds a facilitator to Mod Manager.
 * list - Lists all facilitators in Mod Manager.
-* view - Finds a facilitator in Mod Manager by name.
+* find - Finds a facilitator in Mod Manager by name.
 * edit - Edits a facilitator in Mod Manager.
 * delete - Deletes a facilitator in Mod Manager.
 
