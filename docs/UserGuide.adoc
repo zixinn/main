@@ -569,7 +569,7 @@ Example: `*task* delete CS2103T 973`
 
 You can mark the task as done in the module in Mod Manager.
 
-NOTE: A newly added task as above will be marked as not done by default.
+NOTE: A newly added task as above will be considered as not done by default.
 
 NOTE: Editing a task will not change the done/not done status of the task, unless
 the `undo` command is used.
@@ -592,7 +592,7 @@ task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the followi
 `*task* done /code CS2105 /id 224`
 and hit kbd:[Enter]
 
-.Before `*task* done /code CS2105 /id 224`, only the relevant task and some other sample tasks are shown.
+.Before `*task* done /code CS2105 /id 224`
 image::TaskDoneBeforeCloseUp.png[]
 
 .After `*task* done /code CS2105 /id 224`
@@ -612,7 +612,7 @@ Format: `*task* list`
 By typing the command above, you should see the following:
 
 .`*task* list` shows a list of all tasks in Mod Manager
-image::Task.png[]
+image::TaskList.png[]
 
 ==== Viewing tasks for a specific module in ModManger
 If you want to find tasks for a specific module in Mod Manager, this is the command for you to use!
@@ -638,55 +638,131 @@ Mod Manager will automatically redirect you to the `Tasks` tab if you are curren
 .All tasks belonging to the module `CS3230` are listed`
 image::TaskListModule.png[]
 
-==== Viewing all undone tasks
-Shows a list of all tasks that are not yet done across all modules in the Mod Manager. +
-Format: `*task* undone`
+==== Viewing all tasks not done
+Previously, we know that we can mark a task as done, so as to organise, manage,
+and plan our tasks better. Now, with this command, you can see all the
+tasks that have not yet been completed (not done).
+
+Format: `*task* not-done`
+
+.Before `*task* not-done`, all tasks are listed
+image::TaskListNotDoneBefore.png[]
+
+By typing the command above and hit kbd:[Enter] , you should only see uncompleted tasks,
+which are in dark red color:
+
+.Only uncompleted tasks are shown
+image::TaskListNotDoneAfter.png[]
 
 ==== Finding a task by description
 
-With this command, you can find tasks that contain any of the given keywords in their description.
+You are browsing through the task list. But there are too many tasks! You suddenly
+remember a specific task that you want to do, but you can only vaguely remember its description,
+e.g. something related to assignment.
+
+This command is exactly what you need. In your case, you can find all tasks that
+contain the word `assignment`, which may include `Programming Assignment`,
+`written assignment`, `Take-home Lab Assignment` (note that it can be case-insensitive).
+If you remember multiple words in your wanted tasks, you may also type in multiple words as you want.
+Tasks that meet at least one of the keywords you provided will be shown to you.
 
 Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 
 Command properties:
 ****
-* The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
-* If no descriptions are supplied, no tasks will be found.
-* Search for description is case insensitive. e.g `programming` will match `Programming`.
+* The `find` works across modules, so no `/code` command are required. For example, you may want to find all the `assignment` currently due.
+* Searching for description is case insensitive. e.g `programming` will match `Programming`.
 * The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
 * Tasks are only searched in the description.
-* Words can be partially matched e.g. `A` will match `Assignment`.
+* Words can be partially matched e.g. `assign` will match `assignment`.
 * Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
 ****
 
+Examples: To find tasks that contain the word `oral`, `assign`, or `tut` in their description,
+you can type in the following command:
+
+`*task* find oral assign tut` and press kbd:[Enter]
+
+.After `*task* find oral assign tut`, all matching tasks are displayed.
+image::TaskFindAfter.png[]
+
+Explanation: +
+- `Oral Presentation 2` contains `Oral` which matches `oral` (case-insensitive). +
+- `Programming Assignment 2` contains `Assignment` which matches `assign` (case-insensitive, and words can be partial match) +
+-  Similarly, `Assignment 3` will match `assign`, and `Tutorial` will match `tut` +
+- As long as a task's description matches *one* of the keywords provided, it will be shown. +
+
+You can try typing in `*task* find assign tut oral` and press kbd:[Enter]. This will return the same list
+of tasks, since the ordering of the keywords does not matter.
+
+Other examples:
+
+* `*task* find homework` +
+Finds all tasks that contain the word `homework` in their description
+
+* `*task* find math coding` +
+Finds all tasks that contain the word `math` *or* `coding` in their description
+
 ==== Searching tasks by date
 
-Searches all tasks that occur on your specified date, month, or year.
+With this command, you can search for all tasks that occur on your specified date, month, or year.
+
+NOTE: Tasks are only searched for its date. Tasks that do not have dates or times
+will not be found in this list.
 
 Format: `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
 
-Example: `*task* search /month 4`, `*task* search /date 10 /month 4`
-
 Command properties:
 ****
-* The search works across modules, and no `/code` commands are required.
-* Tasks are only searched for its date. Tasks that do not have dates or times
-will not be found in this list.
-* If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
-* An invalid day, month, or year number can be provided, e.g.
-`/date 32`, `/month 13`, `year -1`, however, no matching tasks
-will be returned by the search. On the other hand, invalid inputs such as
-`/date monday`, `/month December`, `/year this year` are not allowed,
-and you will have to follow the input requirements using valid numbers for
-`/date`, `/month`, and `/year` instead.
-* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/date 10 /month 4` will
-match only tasks that are on 10 April in any year.
+* The `search` works across modules, so no `/code` commands are required.
+* If no optional fields are provided, Mod Manager will output all tasks
+that have a specified time period.
+* Invalid inputs such as `/date monday`, `/month December`, `/year this year` are not allowed.
+Please use numbers for `/date`, `/month`, and `/year` instead.
+* Invalid date, month, or year is not allowed. For example: +
+- `/date 32`, `/date 0`: `date` can only range from `1` to `31`.
+- `/month 13`, `/month 0`: `month` can only range from `1` to `12`.
+- `/year 0`, `/year 99999`: the `search` only accept `year` ranging from `1` to `9999`
+- `/date 30 /month 2`: there is no 30/2 in any year
+- `/date 29 /month 2 /year 2019`: this is not possible since `2019` is not a leap year.
+However, `/date 29 /month 2` (year is not provided) is okay.
+* Tasks matching *all* conditions will be returned (i.e. `AND` search). e.g. `/month 5 /year 2020` will
+only match tasks that are in May 2020.
 ****
 
+Example: You can search for tasks that are due on the submission date of CS2103T for AY19/20 S2
+(13 April). To find tasks happening on 13 April,
+you can type `*task* search /date 13 /month 4` and press kbd:[Enter]. This will return all tasks
+that are happening on 13 April.
 
+.Before `*task* search /date 13 /month 4`, all tasks are listed
+image::TaskSearchBefore.png[]
+Note that the content above may be different from what is currently on your Mod Manager. You may `add`
+or `edit` the tasks to match we have above
+
+.After `*task* search /date 13 /month 4`, only matching tasks are listed
+image::TaskSearchAfter.png[]
+
+Explanation: the two tasks both have date as `13` and month as `4`.
+
+Other examples:
+
+* `*task* search /date 1` +
+Searches for all tasks happening on the first day of the month, in any year. Who wants
+to study on New Year's Day really?
+
+* `*task* search /month 4 /year 2020` +
+Searches for all tasks in the current month (at the time of writing, April 2020).
+
+* `*task* search /year 2020` +
+Searches for all tasks in this year (at the time of writing). This will be useful
+if Mod Manager is used over a long period of time.
+
+* `*task* search /date 14 /month 2 /year 2021` +
+Searches for all tasks happening on 14/02/2021.
 // end::task[]
-=== Managing facilitators : `*facil*`
 
+=== Managing facilitators : `*facil*`
 // tag::facilitator[]
 The commands in this section carry out operations on the facilitator list in Mod Manager.
 Executing these commands will bring you to the Facilitators tab.
@@ -979,7 +1055,7 @@ You can receive reminders for deadlines and events the next day.
 
 You can find upcoming tasks.
 
-==== Individual view of the recently edited element after an `add`, `edit` or `delete` command
+==== Individual view of the recently edited element after an `add`, `edit` or `delete` command `[coming in v2.0]`
 
 After an `add`, `edit`, or `delete` operation, the view will be scrolled to
 that particular recently created/modified element,
@@ -1096,34 +1172,22 @@ General notes are found at the bottom of the rightmost column on the offline cop
 
 .9+|Task
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
+|  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
 |  `*task* delete MOD_CODE ID_NUMBER`
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
-|  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
-   `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* search [/date DAY] [/month MONTH] [/year YEAR]`
-|  `*task* undone`
+|  `*task* not-done`
+|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
+|  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
 |=====
 
 ..Summary of common command parameters
-////
-please fill up
 [%autowidth]
 |======
 |*Parameter* | *Constraints*
-|`FILENAME` |`FILENAME` should consist of only alphanumeric characters, hyphens, and/or underscores.
-|`FOLDER_NAME` |`FOLDER_NAME` must be alphanumeric
-|`URL` |`URL` should have the format: `scheme://authority[/path][?query][\#fragment][/]` and adhere to the following
-constraints: +
-1. The scheme should be either 'http', 'https', 'ftp', or 'file', followed by '://'. +
-2. The authority should only contain alphanumeric characters and any of the characters `(.-_~!$&'*+,;=:@)`. +
-3. This can be followed by zero or more path segments. Each path segment begins with a '/' followed by zero or more
-alphanumeric or special characters. +
-4. Next, a URL may contain a query string, which begins with a '?'. +
-5. It may also contain a fragment after the query string (if present), which begins with a '#'. +
-6. Finally, a URL can end with an optional slash '/'.
-////
+|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+|`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
+                 This includes `Module` 's and `Task` 's description.
 
 
