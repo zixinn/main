@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.model.ModManager;
 import seedu.address.model.Model;
-
-import java.util.Optional;
 
 /**
  * Clears the Mod Manager.
