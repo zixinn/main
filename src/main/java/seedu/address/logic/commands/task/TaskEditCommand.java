@@ -80,13 +80,8 @@ public class TaskEditCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskNum));
         }
 
-        Task taskToEdit = current.stream().reduce(null, (x, y) -> {
-            if (y.getTaskNum() == this.taskNum) {
-                return y;
-            } else {
-                return x;
-            }
-        });
+        Task taskToEdit = current.stream().reduce(null, (x, y)
+            -> y.getModuleCode().equals(moduleCode) && y.getTaskNum() == taskNum ? y : x);
         assert taskToEdit != null;
 
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);

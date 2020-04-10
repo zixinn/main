@@ -2,7 +2,6 @@ package seedu.address.model.util;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.Stack;
 
 /**
  * To store user input strings.

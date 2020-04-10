@@ -58,6 +58,7 @@ simpler nature and being easy to upgrade in the future.
 *** Added the task edit/delete sections of the User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/135[#135]
 ** Community:
 *** PR reviews (with non-trivial comments): https://github.com/AY1920S2-CS2103T-F10-4/main/pull/189[#189]
+*** Reformatted .puml settings for the team: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/109[#109]
 
 == Contributions to the User Guide
 
@@ -66,17 +67,20 @@ simpler nature and being easy to upgrade in the future.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=delete]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+== General Features
+include::../DeveloperGuide.adoc[tag=general-features]
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+== Overview of `Task`
+include::../DeveloperGuide.adoc[tag=taskOverview]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+== `task edit`
+include::../DeveloperGuide.adoc[tag=task-edit]
+
+== `task delete`
+include::../DeveloperGuide.adoc[tag=task-delete]
 
