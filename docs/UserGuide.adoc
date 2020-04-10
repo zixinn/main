@@ -654,7 +654,7 @@ which are in dark red color:
 .Only uncompleted tasks are shown
 image::TaskListNotDoneAfter.png[]
 
-==== Finding a task by description
+==== Finding tasks by description
 
 You are browsing through the task list. But there are too many tasks! You suddenly
 remember a specific task that you want to do, but you can only vaguely remember its description,
