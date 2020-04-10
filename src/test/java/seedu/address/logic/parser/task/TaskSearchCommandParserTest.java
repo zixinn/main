@@ -2,10 +2,8 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ARGUMENTS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_32;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_OUT_OF_BOUNDS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_STRING;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_13;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_OUT_OF_BOUNDS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_STRING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_YEAR_STRING;

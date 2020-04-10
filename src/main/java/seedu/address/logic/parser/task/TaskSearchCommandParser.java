@@ -187,6 +187,9 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         return ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0));
     }
 
+    /**
+     * Returns true if the date {@code date}/{@code month}/{@code year} is valid
+     */
     private boolean isValidDate(int date, int month, int year) {
         if (isOutOfBoundsYear(year)) {
             return false;
