@@ -880,6 +880,7 @@ Alternative 1 is chosen as the design is simpler without the need to maintain mu
 Alternative 1 is chosen because of ease of implementation due to time constraint.
 // end::design-consideration-facilitator[]
 // end::facilitator[]
+
 //tag::calendar[]
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
