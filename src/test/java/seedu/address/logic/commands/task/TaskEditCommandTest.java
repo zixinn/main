@@ -108,7 +108,7 @@ public class TaskEditCommandTest {
         TaskEditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         TaskEditCommand command = new TaskEditCommand(defaultCode, defaultNum, descriptor);
 
-        String expectedMsg = TaskEditCommand.MESSAGE_DUPLICATE_TASK;
+        String expectedMsg = TaskEditCommand.MESSAGE_NOT_EDITED;
 
         assertCommandFailure(command, model, expectedMsg);
     }

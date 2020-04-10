@@ -38,7 +38,7 @@ public class TaskAddCommand extends TaskCommand {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager. "
-            + "Please choose another name, or another time slot. Thanks!";
+            + "Please choose another description, or another time period.";
     public static final String MESSAGE_NOT_ADDED = "Unable to add this task. "
             + "There is no information received. Please try again!";
     public static final String MESSAGE_MODULE_NOT_EXISTENT = "%s is not an existing module!";
