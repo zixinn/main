@@ -14,6 +14,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.task.TaskContainsInModulePredicate;
 
 /**
  * Parses input arguments and creates a new TaskFindCommand objecNt
@@ -38,7 +39,7 @@ public class TaskForOneModuleCommandParser implements Parser<TaskForOneModuleCom
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
-        return new TaskForOneModuleCommand(moduleCode.toString());
+        return new TaskForOneModuleCommand(new TaskContainsInModulePredicate(moduleCode.toString()));
     }
 
     /**

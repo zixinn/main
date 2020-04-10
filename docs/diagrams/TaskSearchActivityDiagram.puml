@@ -1,7 +1,7 @@
 @startuml
 scale 1.2
 start
-:User executes task find command;
+:User executes task search command;
 :Parser parses keywords;
 if () then ([else])
     :Logic executes command;

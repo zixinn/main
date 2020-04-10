@@ -638,14 +638,14 @@ Mod Manager will automatically redirect you to the `Tasks` tab if you are curren
 .All tasks belonging to the module `CS3230` are listed`
 image::TaskListModule.png[]
 
-==== Viewing all tasks not done
+==== Viewing all tasks not done/finished
 Previously, we know that we can mark a task as done, so as to organise, manage,
 and plan our tasks better. Now, with this command, you can see all the
-tasks that have not yet been completed (not done).
+tasks that have not yet been finished.
 
-Format: `*task* not-done`
+Format: `*task* undone`
 
-.Before `*task* not-done`, all tasks are listed
+.Before `*task* undone`, all tasks are listed
 image::TaskListNotDoneBefore.png[]
 
 By typing the command above and hit kbd:[Enter] , you should only see uncompleted tasks,
@@ -1177,7 +1177,7 @@ General notes are found at the bottom of the rightmost column on the offline cop
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* not-done`
+|  `*task* undone`
 |  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
 |=====
