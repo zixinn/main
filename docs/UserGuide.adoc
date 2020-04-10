@@ -772,7 +772,7 @@ Format: `*cal* view /week this`
 
 Example: +
 After typing `*cal* view /week this`, the calendar for the current week will be displayed to you as shown below.
-The red boxes represents the tasks you have not done, the green boxes represents the tasks you have already done and the blue boxes represents the lessons you have in the current week.
+The red cards represent the tasks you have not done, the green cards represent the tasks you have already done and the blue cards represent the classes you have in the current week.
 
 .Outcome of `*cal* view /week this`
 image::CalView1.png[]
@@ -785,7 +785,7 @@ Format: `*cal* view /week next`
 
 Example: +
 After typing `*cal* view /week next`, the calendar for the next week will be displayed to you as shown below.
-The red boxes represents the tasks you have not done, the green boxes represents the tasks you have already done and the blue boxes represents the lessons you have in next week.
+The red cards represent the tasks you have not done, the green cards represent the tasks you have already done and the blue cards represent the classes you have in next week.
 
 .Outcome of `*cal* view /week next`
 image::CalView2.png[]
@@ -799,6 +799,7 @@ Format: `*cal* find empty`
 
 Example: +
 You can get the list of empty slots after typing `*cal* find empty`. The list will be displayed in the result display box as seen below.
+The command will not change the week of the calendar you are viewing.
 
 .Outcome of `*cal* find empty`
 image::CalFind1.png[]

@@ -918,20 +918,20 @@ The following activity diagram summarizes what happens when a user executes a ca
 image::CalViewActivityDiagram.png[]
 
 ===== Finding empty slots in calendar
-The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by CalCommandParser, CalFindCommandParser and CalFindCommand.
+The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand`.
 
 Given below is an example usage scenario and how the calendar find mechanism behaves at each step:
 
 1. The user executes the calendar find command.
-2. CalFindCommandParser creates a new CalFindCommand.
-3. LogicManager executes the CalFindCommand.
+2. `CalFindCommandParser` creates a new `CalFindCommand`.
+3. `LogicManager` executes the `CalFindCommand`.
 
 The following sequence diagram shows how the calendar find command works:
 
 .Sequence Diagram for `cal find` Command
 image::CalFindSequenceDiagram.png[]
 
-NOTE: The lifeline for CalCommandParser, CalFindCommandParser and CalFindCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+NOTE: The lifeline for `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 The following activity diagram summarizes what happens when a user executes a calendar find command:
 
