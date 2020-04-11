@@ -43,8 +43,8 @@ public class ModuleEditCommandParserTest {
         assertParseFailure(parser, DESCRIPTION_DESC_CS2103T, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", ModuleEditCommand.MESSAGE_NOT_EDITED);
-        assertParseFailure(parser, "CS2103T", ModuleEditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "CS2103T", MESSAGE_INVALID_FORMAT);
 
         // no index or module code and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

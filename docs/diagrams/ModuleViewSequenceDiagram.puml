@@ -81,14 +81,23 @@ ModManager --> ModelManager : m
 deactivate ModManager
 
 ModelManager --> ModuleViewCommand : m
+deactivate ModelManager
 
 ModuleViewCommand -> ModelManager : updateModule(m)
+activate ModelManager
+
 ModelManager --> ModuleViewCommand
+deactivate ModelManager
 
 ModuleViewCommand -> ModelManager : updateFacilitatorListForModule(fp)
+activate ModelManager
+
 ModelManager --> ModuleViewCommand
+deactivate ModelManager
 
 ModuleViewCommand -> ModelManager : updateTaskListForModule(tp)
+activate ModelManager
+
 ModelManager --> ModuleViewCommand
 deactivate ModelManager
 

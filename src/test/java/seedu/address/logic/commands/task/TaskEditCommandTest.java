@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.model.ModManager;
 import seedu.address.model.Model;
@@ -108,7 +109,7 @@ public class TaskEditCommandTest {
         TaskEditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         TaskEditCommand command = new TaskEditCommand(defaultCode, defaultNum, descriptor);
 
-        String expectedMsg = TaskEditCommand.MESSAGE_NOT_EDITED;
+        String expectedMsg = Messages.MESSAGE_NOT_EDITED;
 
         assertCommandFailure(command, model, expectedMsg);
     }

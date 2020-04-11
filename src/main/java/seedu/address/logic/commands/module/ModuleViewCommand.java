@@ -21,7 +21,8 @@ import seedu.address.model.module.ModuleCode;
 public class ModuleViewCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW
-            + ": Views a module in Mod Manager. \n"
+            + ": Views a module identified by the index number or module code used in the displayed module list.\n"
+            + ModuleCode.MESSAGE_CONSTRAINTS + "\n"
             + "Parameters: MOD_CODE \n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_VIEW + " CS2103T \n"
             + "Parameters: INDEX \n"

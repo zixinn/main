@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.lesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_A;
@@ -36,7 +37,8 @@ public class LessonDeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, INVALID_INDEX_A, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, INVALID_INDEX_A,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
         assertParseFailure(parser, (INVALID_INDEX_A + " " + PREFIX_MODULE_CODE + " "
                 + VALID_MODULE_CODE_CS2103T), MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         assertParseFailure(parser, (INDEX_FIRST.getOneBased() + " " + PREFIX_MODULE_CODE + " "

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
@@ -32,7 +32,7 @@ public abstract class TaskCommand extends Command {
             COMMAND_GROUP_TASK, COMMAND_WORD_DELETE);
     public static final String SEARCH_FORMAT = String.format("%s %s %s DAY %s MONTH %s YEAR",
             COMMAND_GROUP_TASK, COMMAND_WORD_SEARCH,
-            PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
+            PREFIX_DATE, PREFIX_MONTH, PREFIX_YEAR);
     public static final String LIST_FORMAT = String.format("%s %s", COMMAND_GROUP_TASK, COMMAND_WORD_LIST);
     public static final String MARK_AS_DONE_FORMAT = String.format("%s %s %s MOD_CODE %s ID_NUMBER",
             COMMAND_GROUP_TASK, COMMAND_WORD_DONE, PREFIX_MODULE_CODE, PREFIX_TASK_ID);

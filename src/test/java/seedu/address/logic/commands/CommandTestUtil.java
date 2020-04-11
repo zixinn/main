@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -90,7 +90,7 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_CS2101 = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2101;
     public static final String DESCRIPTION_DESC_CS1101S = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS1101S;
 
-    public static final String TASK_CMD_DAY_26 = " " + PREFIX_DAY + " " + TASK_DAY_26;
+    public static final String TASK_CMD_DAY_26 = " " + PREFIX_DATE + " " + TASK_DAY_26;
     public static final String TASK_CMD_MONTH_03 = " " + PREFIX_MONTH + " " + TASK_MONTH_03;
     public static final String TASK_CMD_YEAR_2020 = " " + PREFIX_YEAR + " " + TASK_YEAR_2020;
     public static final String TASK_ID_DESC_VALID_ID = " " + PREFIX_TASK_ID + " " + VALID_TASK_ID;
@@ -116,13 +116,13 @@ public class CommandTestUtil {
     public static final String INVALID_OFFICE_DESC = " " + PREFIX_OFFICE; // empty string not allowed for offices
 
     public static final String INVALID_TASK_DAY_STRING =
-            " " + PREFIX_DAY + " " + "monday"; // strings not allowed for day
+            " " + PREFIX_DATE + " " + "monday"; // strings not allowed for day
     public static final String INVALID_TASK_MONTH_STRING =
             " " + PREFIX_MONTH + " " + "facebook"; // strings not allowed for month
     public static final String INVALID_TASK_YEAR_STRING =
             " " + PREFIX_YEAR + " " + "instagram"; // strings not allowed for year
     public static final String INVALID_TASK_DAY_OUT_OF_BOUNDS =
-            " " + PREFIX_DAY + " " + INVALID_TASK_DAY_32; // strings not allowed for day
+            " " + PREFIX_DATE + " " + INVALID_TASK_DAY_32; // strings not allowed for day
     public static final String INVALID_TASK_MONTH_OUT_OF_BOUNDS =
             " " + PREFIX_MONTH + " " + INVALID_TASK_MONTH_13; // strings not allowed for month
     public static final String INVALID_TASK_YEAR_OUT_OF_BOUNDS =

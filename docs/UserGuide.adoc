@@ -38,7 +38,7 @@ This user guide helps you to master how to use Mod Manager.
 It explains the features and commands supported by Mod Manager, with examples to illustrate how the application works.
 // end::about[]
 
-Note the following symbols and formatting used in this document:
+Note the following symbols used in this document:
 
 .Symbols used in this User Guide
 [%autowidth]
@@ -70,7 +70,7 @@ Here are some example commands that you can try:
 * `*mod* add /code CS3233 /desc Competitive Programming` : adds the module CS3233 to the module list.
 * `*class* add /code CS3233 /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud` : adds a lecture class to the module CS3233.
 * `*task* add /code CS3233 /desc Complete Pset 10 /on 30/04/2020 /at 23:59`: adds a task to the module CS3233.
-* `*facil* add /name Steven Halim /email stevenha@comp.nus.edu.sg /code CS3233`: adds a facilitator to the module CS3233. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
+* `*facil* add /name Steven Halim /email stevenha@comp.nus.edu.sg /code CS3233`: adds a facilitator to the module CS3233. If you are rushing to write an email to your lecturer, you can refer to this conveniently.
 * `*cal* view /week this` : views your schedules for the current week. You should see the CS3233 lecture group
 that you added above.
 * `*exit*` : exits the application.
@@ -152,13 +152,12 @@ e.g `/code MOD_CODE [/desc DESCRIPTION]` can be used as
 e.g. `[MORE_DESCRIPTIONS]...` can be used as `{nbsp}` (i.e. 0 times),
 `Software` (once), `Software Engineering` (twice),
 `SWE AI Algorithms` etc.
-//@Todo: check if below works
 * Parameters can be used in any order unless otherwise specified.
 e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
 `/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-=== General
+=== General Features
 The following commands carry out general operations in Mod Manager.
 
 ==== Viewing help : `*help*`
@@ -191,7 +190,7 @@ Format:
 
 Lists all valid command groups.
 
-The command groups available in `ModManager` are the words in bold you have seen throughout this document.
+The command groups available in Mod Manager are the words in bold you have seen throughout this document.
 These include: `*facil*, *mod*, *task*, ...`
 
 Format:
@@ -460,7 +459,7 @@ image::ModDeleteAfter2.png[]
 
 === Class feature : `*class*`
 
-You can add, find, edit or delete classes within ModManager. +
+You can add, find, edit or delete classes within Mod Manager. +
 When managing your classes, you should take note of the following areas in the main viewing area. To find the main viewing area, you can refer to section 3.1.
 
 .Explanation of how to look at classes
@@ -484,7 +483,7 @@ Command properties:
 ****
 Example:
 
-You have a CS2103T lecture on Friday from 14:00 to 16:00 at i3-Aud. Before adding that class, ModManager looks like what you see in the figure below. +
+You have a CS2103T lecture on Friday from 14:00 to 16:00 at i3-Aud. Before adding that class, Mod Manager looks like what you see in the figure below. +
 
 .Before adding a class
 image::ClassAddBefore.png[]
@@ -549,7 +548,7 @@ Command properties:
 ****
 Example:
 
-Let's say that the venue of the CS2103T lecture you just added changed to Home. You can edit the class by typing `*class* edit 1 /code CS2103T /venue Home`. ModManager will direct you to the module's page and it will reflect the updated venue as seen below.
+Let's say that the venue of the CS2103T lecture you just added changed to Home. You can edit the class by typing `*class* edit 1 /code CS2103T /venue Home`. Mod Manager will direct you to the module's page and it will reflect the updated venue as seen below.
 
 .After editing a class
 image::ClassEdit.png[]
@@ -682,7 +681,7 @@ image::TaskDoneAfterCloseUp.png[]
 The task card has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
 
-==== Viewing all tasks across all modules in ModManger
+==== Viewing all tasks across all modules
 
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
@@ -699,7 +698,7 @@ By typing the command above, you should see the following:
 .`*task* list` shows a list of all tasks in Mod Manager
 image::TaskList.png[]
 
-==== Viewing tasks for a specific module in ModManger
+==== Viewing tasks for a specific module
 If you want to find tasks for a specific module in Mod Manager, this is the command for you to use!
 
 Format:
@@ -1135,7 +1134,7 @@ SUNDAY: +
 ****
 //end::calendar[]
 
-=== Upcoming `[coming in v2.0]`
+=== Upcoming Features `[coming in v2.0]`
 
 // tag::upcoming[]
 These features will be available in the next version of Mod Manager.
@@ -1161,13 +1160,13 @@ You can find upcoming tasks, such as assignment submission and final exam in Mod
 
 ==== Viewing of the recently edited item after an `add`, `edit` or `delete` command `[coming in v2.0]`
 
-After an `add`, `edit`, or `delete` operation, the view will be scrolled to
+After an `add`, `edit` or `delete` operation, the view will be scrolled to
 that recently created or modified item, so that you can refer to the information easily.
 The newly created or modified details will be highlighted and focused so that you know what has been changed.
 
 == FAQ
 
-=== How do I transfer my data to another Computer?
+=== How do I transfer my data to another computer?
 
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous Mod Manager folder.
@@ -1202,22 +1201,12 @@ image::TaskCardDone.png[]
 |  `*cal* view /week next`
 |  `*cal* view /week this`
 
-.4+|Class
+.5+|Class
 |  `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]`
 |  `*class* delete INDEX /code MOD_CODE`
 |  `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]`
-|  `*class* find /at DAY` +
-   `*class* find /next`
-
-.1+|Clear
-|  `*clear*`
-
-.2+|Command
-|  `*cmd* all`
-|  `*cmd* group COMMAND_WORD`
-
-.1+|Exit
-|  `*exit*`
+|  `*class* find /at DAY`
+|  `*class* find /next`
 
 .5+|Facilitator
 |  `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...` +
@@ -1229,8 +1218,14 @@ image::TaskCardDone.png[]
 |  `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 |  `*facil* list`
 
-.1+|Help
+.7+|General
+|  `*clear*`
+|  `*cmd* all`
+|  `*cmd* group COMMAND_WORD`
+|  `*exit*`
 |  `*help*`
+|  `*redo*`
+|  `*undo*`
 
 .5+|Module
 |  `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
@@ -1241,9 +1236,6 @@ image::TaskCardDone.png[]
 |  `*mod* list`
 |  `*mod* view INDEX` +
    `*mod* view MOD_CODE`
-
-.1+|Redo
-|  `*redo*`
 
 .9+|Task
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
@@ -1257,17 +1249,14 @@ image::TaskCardDone.png[]
 |  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
 |  `*task* undone`
 
-.1+|Undo
-|  `*undo*`
-
 |=====
 
 .Summary of common command parameters
 [%autowidth]
-|======
+|=====
 |*Parameter* | *Constraints*
 |`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
                  This includes `Module` 's and `Task` 's description.
-
+|=====
 

@@ -15,7 +15,7 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_ON = new Prefix("/on");
     public static final Prefix PREFIX_AT = new Prefix("/at");
-    public static final Prefix PREFIX_DAY = new Prefix("/date");
+    public static final Prefix PREFIX_DATE = new Prefix("/date");
     public static final Prefix PREFIX_MONTH = new Prefix("/month");
     public static final Prefix PREFIX_YEAR = new Prefix("/year");
     public static final Prefix PREFIX_TASK_ID = new Prefix("/id");

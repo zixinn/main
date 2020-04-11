@@ -88,8 +88,10 @@ public class FacilDeleteCommand extends FacilCommand {
         }
 
         model.deleteFacilitator(facilitatorToDelete);
+
         FacilAction deleteFacilAction = new FacilAction(facilitatorToDelete, DoableActionType.DELETE);
         model.addAction(deleteFacilAction);
+
         return new CommandResult(String.format(MESSAGE_DELETE_FACILITATOR_SUCCESS, facilitatorToDelete),
                 CommandType.FACILITATOR);
     }

@@ -1,16 +1,15 @@
 package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,8 +28,9 @@ public class ModuleEditCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT
             + ": Edits the details of the module identified "
-            + "by the index number used in the displayed module list. "
+            + "by the index number or module code used in the displayed module list.\n"
             + "Existing values will be overwritten by the input values.\n"
+            + ModuleCode.MESSAGE_CONSTRAINTS + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_MODULE_CODE + " NEW_MOD_CODE] "
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
@@ -44,7 +44,6 @@ public class ModuleEditCommand extends ModuleCommand {
             + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
     public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
 
@@ -105,10 +104,11 @@ public class ModuleEditCommand extends ModuleCommand {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
+        if (moduleToEdit.equals(editedModule)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         model.setModule(moduleToEdit, editedModule);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-        ModuleAction editModAction = new ModuleAction(moduleToEdit, editedModule, DoableActionType.EDIT);
-        model.addAction(editModAction);
 
         if (!moduleToEdit.getModuleCode().equals(editedModule.getModuleCode())) {
             model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
@@ -122,6 +122,9 @@ public class ModuleEditCommand extends ModuleCommand {
                     new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
             model.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
         }
+
+        ModuleAction editModAction = new ModuleAction(moduleToEdit, editedModule, DoableActionType.EDIT);
+        model.addAction(editModAction);
 
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule), CommandType.MODULE);
     }
@@ -183,13 +186,6 @@ public class ModuleEditCommand extends ModuleCommand {
         public EditModuleDescriptor(ModuleEditCommand.EditModuleDescriptor toCopy) {
             setModuleCode(toCopy.moduleCode);
             setDescription(toCopy.description);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(moduleCode, description);
         }
 
         public void setModuleCode(ModuleCode moduleCode) {

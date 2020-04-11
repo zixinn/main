@@ -19,6 +19,8 @@ participant "l:ObservableList" as ObservableList MODEL_COLOR
 participant "n:Module" as Module MODEL_COLOR
 participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueModuleList" as UniqueModuleList MODEL_COLOR
+participant "ma:ModuleAction" as ModuleAction MODEL_COLOR
+participant ":DoableActionList" as DoableActionList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(\n"mod edit 1 \n/desc SE")
@@ -123,8 +125,24 @@ ModManager --> ModelManager
 deactivate ModManager
 
 ModelManager --> ModuleEditCommand
+deactivate ModelManager
 
-ModuleEditCommand -> ModelManager : updateFilteredModuleList(\nPREDICATE_SHOW_ALL_MODULES)
+create ModuleAction
+ModuleEditCommand -> ModuleAction : ModuleAction(m, n, EDIT)
+activate ModuleAction
+
+ModuleAction --> ModuleEditCommand : ma
+deactivate ModuleAction
+
+ModuleEditCommand -> ModelManager : addAction(ma)
+activate ModelManager
+
+ModelManager -> DoableActionList : addAction(ma)
+activate DoableActionList
+
+DoableActionList --> ModelManager
+deactivate DoableActionList
+
 ModelManager --> ModuleEditCommand
 deactivate ModelManager
 

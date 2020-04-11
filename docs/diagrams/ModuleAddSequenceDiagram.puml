@@ -17,6 +17,8 @@ participant "m:Module" as Module MODEL_COLOR
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueModuleList" as UniqueModuleList MODEL_COLOR
+participant "ma:ModuleAction" as ModuleAction MODEL_COLOR
+participant ":DoableActionList" as DoableActionList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(\n"mod add\n /code CS2103T")
@@ -90,8 +92,24 @@ deactivate UniqueModuleList
 ModManager --> ModelManager
 deactivate ModManager
 
-ModelManager -> ModelManager ++ : UpdateFilteredModuleList(\nPREDICATE_SHOW_ALL_MODULES)
-ModelManager --> ModelManager --
+ModelManager --> ModuleAddCommand
+deactivate ModelManager
+
+create ModuleAction
+ModuleAddCommand -> ModuleAction : ModuleAction(m, ADD)
+activate ModuleAction
+
+ModuleAction --> ModuleAddCommand : ma
+deactivate ModuleAction
+
+ModuleAddCommand -> ModelManager : addAction(ma)
+activate ModelManager
+
+ModelManager -> DoableActionList : addAction(ma)
+activate DoableActionList
+
+DoableActionList --> ModelManager
+deactivate DoableActionList
 
 ModelManager --> ModuleAddCommand
 deactivate ModelManager
