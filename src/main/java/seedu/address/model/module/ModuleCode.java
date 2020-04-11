@@ -53,4 +53,7 @@ public class ModuleCode {
         return value;
     }
 
+    public ModuleCode getClone() { // returns a defensive copy
+        return new ModuleCode(value);
+    }
 }

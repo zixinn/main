@@ -39,6 +39,10 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
     private static final int FEBRUARY = 2;
 
+    public static final String DATE_STRING = "date";
+    public static final String MONTH_STRING = "month";
+    public static final String YEAR_STRING = "year";
+
     private static final List<Integer> THIRTY_DAY_MONTHS = new ArrayList<Integer>(Arrays.asList(4, 6, 9, 11));
 
     private static final ParseException INVALID_PARAMETERS_EXCEPTION =
@@ -85,7 +89,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             } catch (NumberFormatException error) {
                 throw INVALID_PARAMETERS_EXCEPTION;
             }
-            keywords.put("date", day);
+            keywords.put(DATE_STRING, day);
         }
 
         assert (keywords.size() <= 1): "Only the date key has been inserted";
@@ -97,7 +101,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             } catch (NumberFormatException error) {
                 throw INVALID_PARAMETERS_EXCEPTION;
             }
-            keywords.put("month", month);
+            keywords.put(MONTH_STRING, month);
         }
 
         assert (keywords.size() <= 2): "Only the date and month key has been inserted";
@@ -109,7 +113,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             } catch (NumberFormatException error) {
                 throw INVALID_PARAMETERS_EXCEPTION;
             }
-            keywords.put("year", year);
+            keywords.put(YEAR_STRING, year);
         }
 
         assert (keywords.size() <= 3): "Only three keys date, month, and year can be inserted";
@@ -139,8 +143,8 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         assert (keywords.size() == 2): "There should be two out of three parameters provided at this point";
         String missingKeyword = findMissingKeyword(keywords);
 
-        if (missingKeyword.equals("year")) { // dd/MM, painful combination to check
-            if (!isCompatibleDateMonth(keywords.get("date"), keywords.get("month"))) {
+        if (missingKeyword.equals(YEAR_STRING)) { // dd/MM, painful combination to check
+            if (!isCompatibleDateMonth(keywords.get(DATE_STRING), keywords.get(MONTH_STRING))) {
                 throw OUT_OF_BOUNDS_PARAMETERS_EXCEPTION;
             } else {
                 return new TaskSearchCommand(new TaskSearchPredicate(keywords));
@@ -176,9 +180,9 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
      * Returns true if the date {@code date}/{@code month}/{@code year} is valid
      */
     private boolean isValidDate(HashMap<String, Integer> keywords) {
-        int date = keywords.get("date");
-        int month = keywords.get("month");
-        int year = keywords.get("year");
+        int date = keywords.get(DATE_STRING);
+        int month = keywords.get(MONTH_STRING);
+        int year = keywords.get(YEAR_STRING);
 
         if (isOutOfBoundsYear(year)) {
             return false;
@@ -223,9 +227,9 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
     private static boolean isAllDateMonthYearProvided(HashMap<String, Integer> keywords) {
         List<String> allKeywords = new ArrayList<String>();
-        allKeywords.add("day");
-        allKeywords.add("month");
-        allKeywords.add("year");
+        allKeywords.add(DATE_STRING);
+        allKeywords.add(MONTH_STRING);
+        allKeywords.add(YEAR_STRING);
 
         assert (allKeywords.size() == 3): "Maximum is three parameters for search";
         return (keywords.size() == allKeywords.size());
@@ -234,22 +238,22 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
     private boolean checkOnlyKeyNotOutOfBound(HashMap<String, Integer> keywords) {
         assert (keywords.size() == 1): "There should only be one parameter out of date, month, year";
 
-        if (keywords.containsKey("date")) {
-            int date = keywords.get("date");
+        if (keywords.containsKey(DATE_STRING)) {
+            int date = keywords.get(DATE_STRING);
             if (isOutOfBoundsDate(date)) {
                 return false;
             }
         }
 
-        if (keywords.containsKey("month")) {
-            int month = keywords.get("month");
+        if (keywords.containsKey(MONTH_STRING)) {
+            int month = keywords.get(MONTH_STRING);
             if (isOutOfBoundsMonth(month)) {
                 return false;
             }
         }
 
-        if (keywords.containsKey("year")) {
-            int year = keywords.get("year");
+        if (keywords.containsKey(YEAR_STRING)) {
+            int year = keywords.get(YEAR_STRING);
             if (isOutOfBoundsYear(year)) {
                 return false;
             }
@@ -260,15 +264,15 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
     private String findMissingKeyword(HashMap<String, Integer> keywords) {
         assert (keywords.size() == 2): "There should only be one keyword missing";
 
-        if (!keywords.containsKey("date")) {
-            return "date";
+        if (!keywords.containsKey(DATE_STRING)) {
+            return DATE_STRING;
         }
 
-        if (!keywords.containsKey("month")) {
-            return "month";
+        if (!keywords.containsKey(MONTH_STRING)) {
+            return MONTH_STRING;
         }
 
-        return "year";
+        return YEAR_STRING;
     }
     private boolean isOutOfBoundsDateInFebruaryNoLeapYear(int date) {
         return !(MINIMUM_DATE <= date && date <= TWENTY_EIGHT_MAXIMUM_DATE);
@@ -316,20 +320,20 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
     private boolean isCombinationValidForIndependentParameters(HashMap<String, Integer> keywords) {
         assert (keywords.size() == 2): "keywords should be dd/yy or MM/yy, which can be independently checked";
-        assert (keywords.containsKey("year")): "Year should be independently with date only or month only";
+        assert (keywords.containsKey(YEAR_STRING)): "Year should be independently with date only or month only";
 
-        if (isOutOfBoundsYear(keywords.get("year"))) {
+        if (isOutOfBoundsYear(keywords.get(YEAR_STRING))) {
             return false;
         }
 
-        if (keywords.containsKey("date")) {
-            if (isOutOfBoundsDate(keywords.get("date"))) {
+        if (keywords.containsKey(DATE_STRING)) {
+            if (isOutOfBoundsDate(keywords.get(DATE_STRING))) {
                 return false;
             }
         }
 
-        if (keywords.containsKey("month")) {
-            if (isOutOfBoundsDate(keywords.get("month"))) {
+        if (keywords.containsKey(MONTH_STRING)) {
+            if (isOutOfBoundsDate(keywords.get(MONTH_STRING))) {
                 return false;
             }
         }

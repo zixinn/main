@@ -72,10 +72,14 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
                 return x;
             }
         });
+
         assert (taskToEdit != null): "The matching task should have been found above";
 
-        Task editedTask = taskToEdit.getClone(); // defensive programming
+        Task editedTask = taskToEdit.getClone(); // returns a defensive copy
+
         boolean isChanged = editedTask.markAsDone();
+
+        assert (editedTask != taskToEdit): "deep copied the task";
 
         if (!isChanged) {
             throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
