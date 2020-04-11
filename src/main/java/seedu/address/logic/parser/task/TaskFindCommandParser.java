@@ -27,7 +27,7 @@ public class TaskFindCommandParser implements Parser<TaskFindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        assert (nameKeywords.length > 0): "Finding keywords should be provided";
+        assert (nameKeywords.length > 0) : "Finding keywords should be provided";
 
         return new TaskFindCommand(new TaskContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }

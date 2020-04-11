@@ -22,21 +22,20 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.task.TaskFindCommand;
 import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.model.task.TaskSearchPredicate;
 
 public class TaskSearchCommandParserTest {
-    private TaskSearchCommandParser parser = new TaskSearchCommandParser();
-
-    private static String WRONG_COMMAND_SYNTAX_MESSAGE =
+    private static String wrongSyntaxMessage =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE);
-    private static String INVALID_PARAMETERS_MESSAGE =
+    private static String invalidParametersMessage =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
-    private static String OUT_OF_BOUNDS_COMMAND_MESSAGE =
+    private static String outOfBoundsMessage =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
+
+    private TaskSearchCommandParser parser = new TaskSearchCommandParser();
 
     @Test
     public void parse_withPreamble_success() {
@@ -55,7 +54,7 @@ public class TaskSearchCommandParserTest {
     @Test
     public void parse_allFieldsMissing_failure() {
         // no preamble, empty HashMap (no day/month/year supplied)
-        assertParseFailure(parser, EMPTY_ARGUMENTS, WRONG_COMMAND_SYNTAX_MESSAGE);
+        assertParseFailure(parser, EMPTY_ARGUMENTS, wrongSyntaxMessage);
     }
 
     @Test
@@ -108,7 +107,7 @@ public class TaskSearchCommandParserTest {
     @Test
     public void parse_fieldsArePresentButValuesOutOfBound_failure() {
         assertParseFailure(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
-                OUT_OF_BOUNDS_COMMAND_MESSAGE);
+                outOfBoundsMessage);
     }
 
     @Test
@@ -117,14 +116,14 @@ public class TaskSearchCommandParserTest {
 
         // invalid field is day
         assertParseFailure(parser, INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
-                INVALID_PARAMETERS_MESSAGE);
+                invalidParametersMessage);
 
         // invalid field is month
         assertParseFailure(parser, TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
-                INVALID_PARAMETERS_MESSAGE);
+                invalidParametersMessage);
 
         // invalid field is year
         assertParseFailure(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
-                INVALID_PARAMETERS_MESSAGE);
+                invalidParametersMessage);
     }
 }

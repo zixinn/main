@@ -125,7 +125,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode,
                         task.getTaskNum(), task.isTaskDone());
             } else {
-                assert (task instanceof NonScheduledTask): "This task should not be schedule-able";
+                assert (task instanceof NonScheduledTask) : "This task should not be schedule-able";
                 editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode,
                         task.getTaskNum(), task.isTaskDone());
             }

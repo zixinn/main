@@ -22,7 +22,7 @@ public class ScheduledTask extends Task {
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
         this.description = description;
         this.moduleCode = moduleCode.getClone(); // returns a defensive copy
-        assert (taskDateTime != null): "A ScheduledTask must have a valid time frame";
+        assert (taskDateTime != null) : "A ScheduledTask must have a valid time frame";
         this.taskDateTime = taskDateTime;
         this.isDone = false;
         this.taskNum = TaskNumManager.getNum(moduleCode);
@@ -32,7 +32,7 @@ public class ScheduledTask extends Task {
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskNum) {
         this.description = description;
         this.moduleCode = moduleCode.getClone(); // returns a defensive copy
-        assert (taskDateTime != null): "A ScheduledTask must have a valid time frame";
+        assert (taskDateTime != null) : "A ScheduledTask must have a valid time frame";
         this.taskDateTime = taskDateTime;
         this.isDone = false;
         this.taskNum = taskNum;

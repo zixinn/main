@@ -12,7 +12,7 @@ public class TaskContainsInModulePredicate implements Predicate<Task> {
     private final String moduleCode;
 
     public TaskContainsInModulePredicate(String moduleCode) {
-        assert (ModuleCode.isValidModuleCode(moduleCode)): "Module code should be valid";
+        assert (ModuleCode.isValidModuleCode(moduleCode)) : "Module code should be valid";
         this.moduleCode = moduleCode;
     }
 

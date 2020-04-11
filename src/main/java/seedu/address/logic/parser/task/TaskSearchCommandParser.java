@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.task.TaskFindCommand;
 import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -26,6 +25,10 @@ import seedu.address.model.task.TaskSearchPredicate;
  */
 public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
+    public static final String DATE_STRING = "date";
+    public static final String MONTH_STRING = "month";
+    public static final String YEAR_STRING = "year";
+
     private static final int MINIMUM_YEAR = 1;
     private static final int MAXIMUM_YEAR = 9999;
     private static final int MINIMUM_MONTH = 1;
@@ -38,10 +41,6 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
     private static final int TWENTY_EIGHT_MAXIMUM_DATE = 28;
 
     private static final int FEBRUARY = 2;
-
-    public static final String DATE_STRING = "date";
-    public static final String MONTH_STRING = "month";
-    public static final String YEAR_STRING = "year";
 
     private static final List<Integer> THIRTY_DAY_MONTHS = new ArrayList<Integer>(Arrays.asList(4, 6, 9, 11));
 
@@ -92,7 +91,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             keywords.put(DATE_STRING, day);
         }
 
-        assert (keywords.size() <= 1): "Only the date key has been inserted";
+        assert (keywords.size() <= 1) : "Only the date key has been inserted";
 
         if (arePrefixesPresent(argMultimap, PREFIX_MONTH)) {
             int month;
@@ -104,7 +103,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             keywords.put(MONTH_STRING, month);
         }
 
-        assert (keywords.size() <= 2): "Only the date and month key has been inserted";
+        assert (keywords.size() <= 2) : "Only the date and month key has been inserted";
 
         if (arePrefixesPresent(argMultimap, PREFIX_YEAR)) {
             int year;
@@ -116,7 +115,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             keywords.put(YEAR_STRING, year);
         }
 
-        assert (keywords.size() <= 3): "Only three keys date, month, and year can be inserted";
+        assert (keywords.size() <= 3) : "Only three keys date, month, and year can be inserted";
 
         // check for out of bounds date, month, and/or year
 
@@ -128,7 +127,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             }
         }
 
-        assert (keywords.size() <= 2): "At least one of the three parameters should be missing";
+        assert (keywords.size() <= 2) : "At least one of the three parameters should be missing";
 
         boolean isOneParameterProvided = (keywords.size() == 1);
 
@@ -140,7 +139,7 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
             }
         }
 
-        assert (keywords.size() == 2): "There should be two out of three parameters provided at this point";
+        assert (keywords.size() == 2) : "There should be two out of three parameters provided at this point";
         String missingKeyword = findMissingKeyword(keywords);
 
         if (missingKeyword.equals(YEAR_STRING)) { // dd/MM, painful combination to check
@@ -167,6 +166,9 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix) != null);
     }
 
+    /**
+     * Returns true if {@code year} is a leap year
+     */
     private boolean isLeapYear(int year) {
         boolean isLeapYearMultipleOf400 = (year % 400 == 0);
         boolean isYearNotMultipleOf100 = !(year % 100 == 0);
@@ -225,18 +227,27 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         return !(MINIMUM_DATE <= date && date <= MAXIMUM_DATE);
     }
 
+    /**
+     * Checks if the {@code keywords}  make up a valid date, such as {@code 24/04/2020}.
+     * Precondition: {@code keywords} contains all of date, month, and year
+     */
     private static boolean isAllDateMonthYearProvided(HashMap<String, Integer> keywords) {
         List<String> allKeywords = new ArrayList<String>();
         allKeywords.add(DATE_STRING);
         allKeywords.add(MONTH_STRING);
         allKeywords.add(YEAR_STRING);
 
-        assert (allKeywords.size() == 3): "Maximum is three parameters for search";
+        assert (allKeywords.size() == 3) : "Maximum is three parameters for search";
         return (keywords.size() == allKeywords.size());
     }
 
+    /**
+     * Checks if the only value in {@code keywords} is valid.
+     * Precondition: {@code keywords} contains only ONE of date, month, and year,
+     * and we need to check if that corresponding value is valid.
+     */
     private boolean isTheOnlyKeyNotOutOfBound(HashMap<String, Integer> keywords) {
-        assert (keywords.size() == 1): "There should only be one parameter out of date, month, year";
+        assert (keywords.size() == 1) : "There should only be one parameter out of date, month, year";
 
         if (keywords.containsKey(DATE_STRING)) {
             int date = keywords.get(DATE_STRING);
@@ -261,8 +272,12 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         return true;
     }
 
+    /**
+     * Finds the ONE missing {@code keyword} in {@code keywords}.
+     * Precondition: {@code keywords} contains exactly TWO of date, month, and year.
+     */
     private String findMissingKeyword(HashMap<String, Integer> keywords) {
-        assert (keywords.size() == 2): "There should only be one keyword missing";
+        assert (keywords.size() == 2) : "There should only be one keyword missing";
 
         if (!keywords.containsKey(DATE_STRING)) {
             return DATE_STRING;
@@ -287,15 +302,19 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
     }
 
     private boolean isMonthFebruary(int month) {
-        assert !isOutOfBoundsMonth(month): "The month provided should be valid and in bounds";
+        assert !isOutOfBoundsMonth(month) : "The month provided should be valid and in bounds";
         return month == FEBRUARY;
     }
 
     private boolean isMonthThirtyDays(int month) {
-        assert !isOutOfBoundsMonth(month): "The month provided should be valid and in bounds";
+        assert !isOutOfBoundsMonth(month) : "The month provided should be valid and in bounds";
         return THIRTY_DAY_MONTHS.contains(month);
     }
 
+    /**
+     * Checks if the provided {@code date} and {@code month} makes up a valid date.
+     * @return
+     */
     private boolean isCompatibleDateMonth(int date, int month) {
         if (isOutOfBoundsMonth(month)) {
             return false;
@@ -318,9 +337,13 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         return true;
     }
 
+    /**
+     * Checks if the combination {@dd/YY} or {@mm/YY} is valid.
+     * Note that we can independently check date, month, and year in this case.
+     */
     private boolean isCombinationValidForIndependentParameters(HashMap<String, Integer> keywords) {
-        assert (keywords.size() == 2): "keywords should be dd/yy or MM/yy, which can be independently checked";
-        assert (keywords.containsKey(YEAR_STRING)): "Year should be independently with date only or month only";
+        assert (keywords.size() == 2) : "keywords should be dd/yy or MM/yy, which can be independently checked";
+        assert (keywords.containsKey(YEAR_STRING)) : "Year should be independently with date only or month only";
 
         if (isOutOfBoundsYear(keywords.get(YEAR_STRING))) {
             return false;

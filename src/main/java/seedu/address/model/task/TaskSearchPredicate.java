@@ -7,8 +7,6 @@ import static seedu.address.logic.parser.task.TaskSearchCommandParser.YEAR_STRIN
 import java.util.HashMap;
 import java.util.function.Predicate;
 
-import seedu.address.logic.parser.task.TaskSearchCommandParser;
-
 /**
  * Tests that a {@code Task}'s {@code Description} matches any of the keywords given.
  */
@@ -17,7 +15,7 @@ public class TaskSearchPredicate implements Predicate<Task> {
     private final HashMap<String, Integer> keywords;
 
     public TaskSearchPredicate(HashMap<String, Integer> keywords) {
-        assert (keywords.size() > 0): "There should be at least one parameter provided for searching";
+        assert (keywords.size() > 0) : "There should be at least one parameter provided for searching";
         this.keywords = keywords;
     }
 
