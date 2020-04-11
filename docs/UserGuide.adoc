@@ -159,7 +159,7 @@ e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
 ====
 
 === General features
-The following commands carry out some general operations in Mod Manager.
+This section is about some general operations in Mod Manager.
 
 ==== Viewing help : `*help*`
 
@@ -275,10 +275,26 @@ there, you might want to scroll down through the list.
 .After executing `*cmd* group class`
 image::cmdGroup2.png[]
 
+==== Navigating through past commands with up/down key
+
+During a Mod Manager usage session, you may want to repeat some commands but you feel quite lazy to type again. Therefore,
+we bring you the ability to use the `up/down` arrow key on your keyboard to find the past command that you need.
+
+Example:
+
+Let's say you want to use command "mod view CS2103T" again, but you have already executed 5 more commands ever since.
+Just simply press the `up` key on your keyboard a few times and you will see it in the command box.
+
+If you have been pressing `up` and accidentally bypassed the command you need, just press `down` until you see it again.
+
+For this feature, you can try out very quickly. Just open Mod Manager, type in a few commands and press `up/down` like you mean it.
+That's the best and only way to truly feel the convenience of Mod Manager.
+
 //tag::clear[]
 ==== Clearing all entries : `*clear*`
 
 You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
+Please use this command cautiously, you cannot `undo` after it!
 
 Format:
 

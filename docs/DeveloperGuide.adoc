@@ -103,10 +103,15 @@ image::LogicClassDiagram.png[]
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `ModManagerParser` class to parse the user command.
+.  `ModManagerParser` will then create the appropriate parser object to continue parsing the command. This parser object will then
+determine the specific kind of the user command and let a subtype parser of it do the rest of the parsing work.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a facilitator).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+
+This logic component design is chosen because we have many commands that can be grouped with the same keyword (e.g. `mod`, `task`, `lesson`, etc).
+The design provides good abstraction for the developers without cluttering a particular parser class.
 
 [[Design-Model]]
 === Model Component
@@ -119,8 +124,9 @@ image::ModelClassDiagram.png[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
+* stores a `DoableActionList` capturing effects of user commands that can add/edit/delete entities, i.e. what is added, edited, or deleted.
 * stores the Mod Manager data.
-* exposes an unmodifiable `ObservableList<Facilitator>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes many unmodifiable `ObservableList` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 //end::model[]
 
@@ -152,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 
 There are a few general features implemented to help users improve their workflow with Mod Manager.
 
-These are: `undo` and `redo` feature, and navigating through past commands with up/down keys.
+These are: `undo` and `redo` feature, navigating through past commands with up/down keys, `clear` command, and `help` command.
 
 
 ==== Implementation Details
@@ -181,6 +187,17 @@ This feature applies to each usage session. The mechanism is below.
 
 3. When a `down` key is pressed, the most previously input seen by pressing `up` will be shown at the `CommandBox`. When
 there are no inputs to show, the `CommandBox` will become empty.
+
+==== Clear command
+This command simply clears all the data from the system. The action is not undo-able. Its mechanism is simple.
+
+1. The user inputs a clear command.
+
+2. `ModelManager` will replace the current `ModManager` instance with a newly created one that doesn't contain any data.
+
+==== Help command
+This command will pop up a window showing a link to the User Guide. The user simply inputs a help command and the window
+will appear.
 
 ==== Design Considerations
 
