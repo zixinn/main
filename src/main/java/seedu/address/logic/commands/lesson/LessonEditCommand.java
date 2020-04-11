@@ -2,6 +2,7 @@ package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_LESSON_INVALID_TIME_RANGE;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -28,8 +29,8 @@ import seedu.address.model.util.action.DoableActionType;
  */
 public class LessonEditCommand extends LessonCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CLASS + " " + COMMAND_WORD_EDIT
-            + ": Edits the details of the lesson identified "
-            + "by the index number used in the displayed lesson list. "
+            + ": Edits the details of the class identified "
+            + "by the index number used in the displayed class list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_MODULE_CODE + " MOD_CODE "
@@ -41,10 +42,9 @@ public class LessonEditCommand extends LessonCommand {
             + PREFIX_MODULE_CODE + " CS9000 "
             + PREFIX_AT + " TUESDAY 01:00 02:00";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited class: %1$s";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This class already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
-    public static final String MESSAGE_INVALID_TIME_RANGE = "The edited lesson clashes with another lesson";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -90,7 +90,7 @@ public class LessonEditCommand extends LessonCommand {
         }
 
         if (!model.isTimeSlotFree(editedLesson, Optional.of(lessonToEdit))) {
-            throw new CommandException(MESSAGE_INVALID_TIME_RANGE);
+            throw new CommandException(String.format(MESSAGE_LESSON_INVALID_TIME_RANGE, "edited"));
         }
 
         model.setLesson(lessonToEdit, editedLesson);

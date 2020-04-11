@@ -20,12 +20,12 @@ import seedu.address.model.util.action.DoableActionType;
 public class LessonDeleteCommand extends LessonCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
+            + ": Deletes the class identified by the index number used in the displayed class list.\n"
             + "Parameters: INDEX (must be a positive number) " + PREFIX_MODULE_CODE + " MOD_CODE\n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
             + " 1 " + PREFIX_MODULE_CODE + " CS2103T\n";
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Class: %1$s";
 
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module code provided is invalid.";
 

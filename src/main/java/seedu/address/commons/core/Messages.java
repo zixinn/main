@@ -33,9 +33,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_CMD_GROUP = "%1$s group does not exist.";
     public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
-            "The lesson index provided is invalid! "
-            + "Index must be a positive integer smaller than or equal to the size of the displayed lesson list "
+            "The class index provided is invalid! "
+            + "Index must be a positive integer smaller than or equal to the size of the displayed class list "
             + "and should not be blank.";
+    public static final String MESSAGE_LESSON_INVALID_TIME_RANGE = "The %s class clashes with another class";
 
     public static final String MESSAGE_TOO_MANY_ARGUMENTS = "There should not be more than %1$s %2$s prefix provided.";
 }
