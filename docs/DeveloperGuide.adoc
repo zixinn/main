@@ -1084,7 +1084,11 @@ Low (unlikely to have) - `*`
 
 |`* * *` |student |view information related to a module |I can prepare for each module
 
-|`* * *` |student |view tasks |I can complete them
+|`* * *` |student |view all tasks across all modules |I can organise, plan, and manage my tasks better.
+
+|`* * *` |student |view tasks for a specific module |I can manage and keep track of homework, programming assignments, and other tasks specifically for the module.
+
+|`* * *` |student |view all tasks not done |I know what tasks are not yet completed and do them.
 
 |`* * *` |student |view facilitators' information |I can contact them when I need help
 
@@ -1093,6 +1097,8 @@ Low (unlikely to have) - `*`
 |`* * *` |student |edit a class |I can keep my classes up to date
 
 |`* * *` |student |edit a task |I can keep my tasks up to date
+
+|`* * *` |student |mark a task as done |I can keep track of what tasks I have completed and what I have not yet completed.
 
 |`* * *` |student |edit a facilitator’s information |I can keep their contact details up to date
 
@@ -1116,7 +1122,9 @@ Low (unlikely to have) - `*`
 
 |`* *` |student |find a facilitator by name |I can locate details of facilitators without having to go through the entire list
 
-|`* *` |student |find tasks by date |I can keep track of tasks on a particular date
+|`* *` |student |find tasks by description |I can find the exact tasks that I want to do, such as a particular programming assignment on multimedia streaming.
+
+|`* *` |student |search tasks by its date |I know what tasks are happening today, tomorrow, this month, next month, or any other time periods.
 
 |`* *` |student |find upcoming tasks |I can prioritise them
 
