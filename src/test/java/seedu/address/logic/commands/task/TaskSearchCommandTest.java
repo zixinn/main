@@ -39,14 +39,14 @@ public class TaskSearchCommandTest {
     public void equals() {
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>() {
             {
-                put("date", Integer.parseInt(TASK_DAY_26));
-                put("year", Integer.parseInt(TASK_YEAR_2020));
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
             }
         };
 
         HashMap<String, Integer> differentHashMap = new HashMap<String, Integer>() {
             {
-                put("date", Integer.parseInt(TASK_DAY_26));
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
             }
         };
         TaskSearchPredicate firstPredicate =
@@ -120,9 +120,9 @@ public class TaskSearchCommandTest {
     public void execute_allFieldsPresentAndHaveValidValues_success() {
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>() {
             {
-                put("date", Integer.parseInt(TASK_DAY_26));
-                put("month", Integer.parseInt(TASK_MONTH_03));
-                put("year", Integer.parseInt(TASK_YEAR_2020));
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                put(MONTH_STRING, Integer.parseInt(TASK_MONTH_03));
+                put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
             }
         };
         TaskSearchPredicate taskSearchPredicate = new TaskSearchPredicate(hashMap);
