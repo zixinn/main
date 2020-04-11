@@ -9,11 +9,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.action.DoableActionType;
-import seedu.address.model.util.action.LessonAction;
 
 /**
  * Deletes a lesson identified using it's displayed index from Mod Manager.
@@ -56,8 +54,8 @@ public class LessonDeleteCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        updateList(model.findModule(moduleCode).get(), model);
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
+        updateList(model.findModule(moduleCode).get(), model);
         model.removeLesson(lessonToDelete);
         updateAction(lessonToDelete, null, DoableActionType.DELETE, model);
 

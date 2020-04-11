@@ -1,11 +1,11 @@
 package seedu.address.logic.commands.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_CS9000;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.lesson.LessonDeleteCommand.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -14,7 +14,8 @@ import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -39,13 +40,15 @@ public class LessonDeleteCommandTest {
     }
 
     @Test
-    public void execute_validModuleCodeLessonList_success() {
+    public void execute_validModuleCodeLessonList_success() throws CommandException {
         Lesson lessonToDelete = model.getLessons().get(INDEX_FIRST.getZeroBased());
         LessonDeleteCommand command = new LessonDeleteCommand(INDEX_FIRST, lessonToDelete.getModuleCode());
         String expectedMessage = String.format(LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete);
         expectedModel.removeLesson(lessonToDelete);
-        assertCommandSuccess(command, model, expectedMessage, CommandType.LESSON, expectedModel);
+        CommandResult result = command.execute(model);
+        assertEquals(model.getLessons(), expectedModel.getLessons());
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
     }
 
     @Test

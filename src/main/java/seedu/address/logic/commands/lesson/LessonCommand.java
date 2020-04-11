@@ -17,7 +17,6 @@ import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.util.action.DoableAction;
 import seedu.address.model.util.action.DoableActionType;
 import seedu.address.model.util.action.LessonAction;
 
