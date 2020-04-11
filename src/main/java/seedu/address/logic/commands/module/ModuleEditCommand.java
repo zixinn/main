@@ -28,8 +28,9 @@ public class ModuleEditCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_EDIT
             + ": Edits the details of the module identified "
-            + "by the index number used in the displayed module list. "
+            + "by the index number or module code used in the displayed module list.\n"
             + "Existing values will be overwritten by the input values.\n"
+            + ModuleCode.MESSAGE_CONSTRAINTS + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_MODULE_CODE + " NEW_MOD_CODE] "
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"

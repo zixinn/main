@@ -64,13 +64,14 @@ public class LessonEditCommand extends LessonCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (index.getZeroBased() >= model.getLessons().size()) {
-            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
 
         Optional<Module> module = model.findModule(target);
         if (module.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
+        }
+
+        if (index.getZeroBased() >= model.getLessonListForModule(target).size()) {
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToEdit = model.getLessonListForModule(target).get(index.getZeroBased());

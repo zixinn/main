@@ -41,12 +41,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
         ModuleCode target;
 
         LessonEditCommand.EditLessonDescriptor editLessonDescriptor = new LessonEditCommand.EditLessonDescriptor();
@@ -72,6 +66,12 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
         if (argMultimap.numOfValuesPresent(PREFIX_VENUE) > 1) {
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_VENUE));
+        }
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         List<String> mods = argMultimap.getAllValues(PREFIX_MODULE_CODE);

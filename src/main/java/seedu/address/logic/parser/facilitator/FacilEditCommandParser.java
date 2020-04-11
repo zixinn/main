@@ -46,6 +46,13 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
 
         int mode = 0;
 
+        if (argMultimap.getValue(PREFIX_NAME) == null && argMultimap.getValue(PREFIX_PHONE) == null
+                && argMultimap.getValue(PREFIX_EMAIL) == null && argMultimap.getValue(PREFIX_OFFICE) == null
+                && argMultimap.getValue(PREFIX_MODULE_CODE) == null) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FacilEditCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {

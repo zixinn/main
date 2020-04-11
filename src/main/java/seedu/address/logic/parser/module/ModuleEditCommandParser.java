@@ -36,6 +36,11 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         ParseException invalidFormatException = null;
         String preamble = argMultimap.getPreamble();
 
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) == null && argMultimap.getValue(PREFIX_DESCRIPTION) == null) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ModuleEditCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {

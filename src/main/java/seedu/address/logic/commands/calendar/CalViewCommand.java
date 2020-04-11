@@ -14,9 +14,9 @@ import seedu.address.model.calendar.Calendar;
 public class CalViewCommand extends CalCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CAL + " " + COMMAND_WORD_VIEW
-            + ": Views the calendar for a week. "
+            + ": Views the calendar for a week.\n"
             + "Parameters: "
-            + PREFIX_WEEK + " this OR"
+            + PREFIX_WEEK + " this OR "
             + PREFIX_WEEK + " next";
 
     public static final String MESSAGE_SUCCESS = "Calendar can be viewed";

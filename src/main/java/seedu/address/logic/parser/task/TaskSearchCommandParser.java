@@ -2,7 +2,7 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
@@ -47,12 +47,12 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
      */
     public TaskSearchCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
+                args, PREFIX_DATE, PREFIX_MONTH, PREFIX_YEAR);
 
         HashMap<String, Integer> keywords = new HashMap<String, Integer>();
 
-        if (argMultimap.numOfValuesPresent(PREFIX_DAY) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DAY));
+        if (argMultimap.numOfValuesPresent(PREFIX_DATE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DATE));
         }
         if (argMultimap.numOfValuesPresent(PREFIX_MONTH) > 1) {
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MONTH));
@@ -63,10 +63,10 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
         // check for invalid date, month, and/or year, such as strings and characters
 
-        if (arePrefixesPresent(argMultimap, PREFIX_DAY)) {
+        if (arePrefixesPresent(argMultimap, PREFIX_DATE)) {
             int day;
             try {
-                day = Integer.parseInt(argMultimap.getValue(PREFIX_DAY));
+                day = Integer.parseInt(argMultimap.getValue(PREFIX_DATE));
             } catch (NumberFormatException error) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR));

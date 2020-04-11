@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
@@ -20,6 +20,7 @@ public class TaskSearchCommand extends TaskCommand {
 
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example: "
             + COMMAND_GROUP_TASK + " " + COMMAND_WORD_SEARCH + " "
+            + PREFIX_DATE + " 11 "
             + PREFIX_MONTH + " 5 "
             + PREFIX_YEAR + " 2020\n";
 
@@ -27,17 +28,17 @@ public class TaskSearchCommand extends TaskCommand {
             + ": Finds all tasks that occur on your specified date, month, or year "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_DAY + " dd] "
+            + "[" + PREFIX_DATE + " dd] "
             + "[" + PREFIX_MONTH + " MM] "
             + "[" + PREFIX_YEAR + " yy] \n"
             + MESSAGE_COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_INVALID_DAY_MONTH_YEAR = "The provided day, month, or year "
+    public static final String MESSAGE_INVALID_DAY_MONTH_YEAR = "The provided date, month, or year "
             + "must be a valid number. "
             + "It cannot contain letters or words. Please try again. \n"
             + MESSAGE_COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_OUT_OF_BOUNDS_VALUES = "The provided day, month, year, "
+    public static final String MESSAGE_OUT_OF_BOUNDS_VALUES = "The provided date, month, year, "
             + "or any of their combination "
             + "is out of bounds. "
             + "Please try again. \n"
