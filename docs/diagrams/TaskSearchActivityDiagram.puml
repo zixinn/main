@@ -6,7 +6,7 @@ start
 if () then ([the provided date, month, and year is valid])
     :Logic executes command;
     :Model updates filtered task list;
-    :Ui displays a list of tasks occuring on
+    :Ui displays a list of tasks occurring on
     the specified day, month, or year;
 else ([else])
     :Ui shows error message;

@@ -547,7 +547,7 @@ The following activity diagram summarizes what happens when a user executes the 
 .Activity Diagram for a general `*task* done` Command
 image::TaskMarkAsDoneActivityDiagram.png[]
 
-===== Viewing all tasks across modules in Mod Manger
+===== Viewing all tasks across modules in Mod Manager
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -1150,9 +1150,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 === Use case: UC01 - Add module
 
 *<<mss, MSS>>*
-
-1.  User requests to add a module and provides the module code and description of the module.
-2.  Mod Manager adds the module.
+[none]
+* 1.  User requests to add a module and provides the module code and description of the module.
+* 2.  Mod Manager adds the module.
 +
 Use case ends.
 
@@ -1164,22 +1164,22 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 * 1b. The module code or description is invalid.
 +
 [none]
 ** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC02 - List modules
 
 *<<mss, MSS>>*
-
-1.  User requests to list all modules.
-2.  Mod Manager shows the list of all the modules.
+[none]
+* 1.  User requests to list all modules.
+* 2.  Mod Manager shows the list of all the modules.
 +
 Use case ends.
 
@@ -1187,9 +1187,9 @@ Use case ends.
 === Use case: UC03 - View module
 
 *<<mss, MSS>>*
-
-1.  User requests to view a module and provides the index or module code.
-2.  Mod Manager shows all information related to the module.
+[none]
+* 1.  User requests to view a module and provides the index or module code.
+* 2.  Mod Manager shows all information related to the module.
 +
 Use case ends.
 
@@ -1201,16 +1201,16 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 // tag::use-case-mod-edit-delete[]
 [discrete]
 === Use case: UC04 - Edit module
 
 *<<mss, MSS>>*
-
-1.  User requests to edit a module and provides the index or module code and the new description.
-2.  Mod Manager edits the module.
+[none]
+* 1.  User requests to edit a module and provides the index or module code and the new description.
+* 2.  Mod Manager edits the module.
 +
 Use case ends.
 
@@ -1222,22 +1222,22 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 * 1b. The new description is invalid.
 +
 [none]
 ** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC05 - Delete module
 
 *<<mss, MSS>>*
-
-1.  User requests to delete a module and provides the index or module code.
-2.  Mod Manager deletes the module.
+[none]
+*  1.  User requests to delete a module and provides the index or module code.
+*  2.  Mod Manager deletes the module.
 +
 Use case ends.
 
@@ -1249,7 +1249,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 // end::use-case-mod-edit-delete[]
 // end::use-case-module[]
 
@@ -1258,9 +1258,9 @@ Use case resumes at step 1.
 [discrete]
 === Use case: UC06 - Add class
 *<<mss, MSS>>*
-
-1. User request to add a class and provides the details of the new class.
-2. Mod Manager adds a class.
+[none]
+* 1. User request to add a class and provides the details of the new class.
+* 2. Mod Manager adds a class.
 +
 Use case ends.
 
@@ -1271,14 +1271,14 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC07 - Find class by day
 *<<mss, MSS>>*
-
-1. User request to list all the classes by day and provides the day.
-2. Mod Manager replies with the list of classes.
+[none]
+* 1. User request to list all the classes by day and provides the day.
+* 2. Mod Manager replies with the list of classes.
 +
 Use case ends.
 
@@ -1289,7 +1289,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 +
 * 1b. No class on the day provided.
 +
@@ -1298,9 +1298,9 @@ Use case ends.
 [discrete]
 === Use case: UC08 - Find next class
 *<<mss, MSS>>*
-
-1. User request to find the next class.
-2. Mod Manager replies with the next class.
+[none]
+* 1. User request to find the next class.
+* 2. Mod Manager replies with the next class.
 +
 Use case ends.
 
@@ -1313,9 +1313,9 @@ Use case ends.
 [discrete]
 === Use case: UC09 - Edit class
 *<<mss, MSS>>*
-
-1. User request to edit a class and provides the index and necessary details to be edited.
-2. Mod Manager edits the class.
+[none]
+* 1. User request to edit a class and provides the index and necessary details to be edited.
+* 2. Mod Manager edits the class.
 +
 Use case ends.
 
@@ -1326,14 +1326,14 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC10 - Delete class
 *<<mss, MSS>>*
-
-1. User requests to delete a class and provides the index.
-2. Mod Manager deletes the class.
+[none]
+* 1. User requests to delete a class and provides the index.
+* 2. Mod Manager deletes the class.
 +
 Use case ends.
 
@@ -1344,7 +1344,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 // end::use-case-class[]
 
@@ -1358,33 +1358,162 @@ Use case resumes at step 1.
 === Use case: UC13 - Delete task
 
 //tag::use-case-tasks-second-part[]
-[discrete]
-=== Use case: UC14 - Mark task as done
 
 [discrete]
-=== Use case: UC15 - List tasks
+=== Use case: UC14 - Marking a task as done
+
+*<<mss, MSS>>*
+[none]
+* 1. User requests to mark a task as done and provides the module code and task ID of the task. +
+
+* 2. Mod Manager marks the task as done. The corresponding task card is changed to green.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. The module code and task ID provided is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1b. The task is already marked as done.
++
+[none]
+** 1b1. Mod Manager shows an error message, notifying the task is already done.
++
+Use case resumes from step 1.
 
 [discrete]
-=== Use case: UC16 - List tasks for a specific module
+
+=== Use case: UC15 - Viewing all tasks across modules in Mod Manager
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to list all tasks across modules in Mod Manager.
+* 2.  Mod Manager shows the list of all the tasks.
++
+Use case ends.
 
 [discrete]
-=== Use case: UC17 - List undone tasks
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. There are no tasks currently available in Mod Manager.
++
+Use case ends.
+
+=== Use case: UC16 - Viewing tasks for a specific module in Mod Manger
+
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to list tasks for a specific module and provides the module code.
+* 2.  Mod Manager shows the list of tasks belonging to the specified module.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. The module code is invalid (module not available in Mod Manager).
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1b. There are no tasks currently available for the specified module.
++
+Use case ends.
+[discrete]
+
+=== Use case: UC17 - Viewing undone tasks
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to list all undone tasks across modules in Mod Manager.
+* 2.  Mod Manager shows the list of all undone tasks.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. There are no undone tasks currently available in Mod Manager.
++
+Use case ends.
+[discrete]
+
+=== Use case: UC18 - Finding tasks by description
+
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to find a task by its description and provides a number of keywords.
+* 2.  Mod Manager shows the list of tasks whose descriptions contain at least one of the keywords.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. None of the task descriptions contain any of the keywords.
++
+Use case ends.
+
+[none]
+* 1b. No keywords are provided.
++
+[none]
+** 1b1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
 
 [discrete]
-=== Use case: UC18 - Find task by description
+=== Use case: UC19 - Searching tasks by date
+*<<mss, MSS>>*
+[none]
+* 1. User requests to searches for a task by its date and provides the date, month, and year, or any of which.
+* 2. Mod Manager shows the list of tasks occurring on the specified date, month, and year, or any of which.
++
+Use case ends.
 
-[discrete]
-=== Use cse: UC19 - Search task by date
+*<<extensions, Extensions>>*
+[none]
+* 1a. The date, month, or year provided is invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1b. No parameters are provided.
++
+[none]
+** 1b1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1c. There are no tasks matching the specified date, month, and year.
++
+Use case ends.
 //end::use-case-tasks-second-part[]
+
 
 // tag::use-case-facilitator[]
 [discrete]
 === Use case: UC20 - Add facilitator
 
 *<<mss, MSS>>*
-
-1.  User requests to add a facilitator and provides the details of the facilitator.
-2.  Mod Manager adds the facilitator.
+[none]
+* 1.  User requests to add a facilitator and provides the details of the facilitator.
+* 2.  Mod Manager adds the facilitator.
 +
 Use case ends.
 
@@ -1396,7 +1525,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [none]
 * 1b. Fields provided are invalid.
@@ -1404,15 +1533,15 @@ Use case resumes at step 1.
 [none]
 ** 1b1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC21 - List facilitators
 
 *<<mss, MSS>>*
-
-1.  User requests to list all facilitators.
-2.  Mod Manager shows the list of all the facilitators.
+[none]
+* 1.  User requests to list all facilitators.
+* 2.  Mod Manager shows the list of all the facilitators.
 +
 Use case ends.
 
@@ -1420,16 +1549,16 @@ Use case ends.
 === Use case: UC22 - Find facilitator
 
 *<<mss, MSS>>*
-
-1.  User requests to find a facilitator and provides a keyword.
-2.  Mod Manager shows the list of facilitators whose names contain the keyword.
+[none]
+* 1.  User requests to find a facilitator and provides a number of keywords.
+* 2.  Mod Manager shows the list of facilitators whose names contain at least one of the keywords.
 +
 Use case ends.
 
 *<<extensions, Extensions>>*
 
 [none]
-* 1a. None of the names of the facilitators contain the keyword.
+* 1a. None of the names of the facilitators contain any of the keywords.
 +
 Use case ends.
 
@@ -1437,9 +1566,9 @@ Use case ends.
 === Use case: UC23 - Edit facilitator
 
 *<<mss, MSS>>*
-
-1.  User requests to edit a facilitator and provides the index or module code and new details.
-2.  Mod Manager edits the facilitator.
+[none]
+* 1.  User requests to edit a facilitator and provides the index or module code and new details.
+* 2.  Mod Manager edits the facilitator.
 +
 Use case ends.
 
@@ -1451,7 +1580,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [none]
 * 1a. Fields provided are invalid.
@@ -1459,15 +1588,15 @@ Use case resumes at step 1.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC24 - Delete facilitator
 
 *<<mss, MSS>>*
-
-1.  User requests to delete a facilitator and provides the index or module code.
-2.  Mod Manager deletes the facilitator.
+[none]
+* 1.  User requests to delete a facilitator and provides the index or module code.
+* 2.  Mod Manager deletes the facilitator.
 +
 Use case ends.
 
@@ -1479,16 +1608,16 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 // end::use-case-facilitator[]
 
 //tag::use-case-calendar[]
 [discrete]
 === Use case: UC25 - View calendar
 *<<mss, MSS>>*
-
-1. User requests to view the calendar for a specified week.
-2. Mod Manager shows the calendar for the specified week.
+[none]
+* 1. User requests to view the calendar for a specified week.
+* 2. Mod Manager shows the calendar for the specified week.
 +
 Use case ends.
 
@@ -1499,14 +1628,14 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC26 - Find empty slots in calendar
 *<<mss, MSS>>*
-
-1. User requests to find empty slots in the calendar.
-2. Mod Manager shows the list of empty slots available.
+[none]
+* 1. User requests to find empty slots in the calendar.
+* 2. Mod Manager shows the list of empty slots available.
 +
 Use case ends.
 
@@ -1517,7 +1646,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [none]
 * 2a. The list of empty slots is empty.
@@ -1528,9 +1657,9 @@ Use case ends.
 [discrete]
 === Use case: UC27 - Clear all entries in Mod Manager
 *<<mss, MSS>>*
-
-1. User requests to clear all entries.
-2. Mod Manager clears all entries.
+[none]
+* 1. User requests to clear all entries.
+* 2. Mod Manager clears all entries.
 +
 Use case ends.
 
@@ -1541,7 +1670,7 @@ Use case ends.
 [none]
 ** 1a1. Mod Manager shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes from step 1.
 
 [appendix]
 == Non Functional Requirements
