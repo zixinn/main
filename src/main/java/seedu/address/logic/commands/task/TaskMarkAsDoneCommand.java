@@ -62,6 +62,9 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode, taskNum));
         }
 
+        assert model.hasModuleCode(moduleCode): "The module should be already available in Mod Manager";
+        assert TaskNumManager.doesNumExist(new ModuleCode(moduleCode), taskNum): "The Task ID is valid for the module";
+
         Task taskToEdit = current.stream().reduce(null, (x, y) -> {
             if (y.getTaskNum() == this.taskNum) {
                 return y;
@@ -69,14 +72,17 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
                 return x;
             }
         });
-        assert taskToEdit != null;
+        assert (taskToEdit != null): "The matching task should have been found above";
 
-        Task editedTask = taskToEdit.getClone();
+        Task editedTask = taskToEdit.getClone(); // defensive programming
         boolean isChanged = editedTask.markAsDone();
 
         if (!isChanged) {
             throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
         }
+
+        assert (isChanged): "Marking the task as done successfully";
+
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedTask),
