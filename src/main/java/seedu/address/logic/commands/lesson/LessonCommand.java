@@ -41,7 +41,7 @@ public abstract class LessonCommand extends Command {
             COMMAND_WORD_ADD, COMMAND_WORD_EDIT, COMMAND_WORD_DELETE, COMMAND_WORD_FIND, COMMAND_WORD_LIST);
 
     public static final List<String> ALL_COMMAND_FORMATS = List.of(
-            ADD_FORMAT, DELETE_FORMAT, EDIT_FORMAT, FIND_FORMAT, LIST_FORMAT);
+            ADD_FORMAT, DELETE_FORMAT, EDIT_FORMAT, FIND_FORMAT);
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

@@ -75,6 +75,14 @@ public class CmdGroupCommand extends CmdCommand {
             return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
                     getCommands(List.of(COMMAND_GROUP_REDO))), CommandType.CMD);
 
+        case COMMAND_GROUP_CLEAR:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(List.of(COMMAND_GROUP_CLEAR))), CommandType.CMD);
+
+        case COMMAND_GROUP_HELP:
+            return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
+                    getCommands(List.of(COMMAND_GROUP_HELP))), CommandType.CMD);
+
         default:
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_CMD_GROUP, commandGroup));
         }

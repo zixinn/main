@@ -67,6 +67,9 @@ simpler nature and being easy to upgrade in the future.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+== Undo/Redo features
+include::../UserGuide.adoc[tag=undo-redo]
+
 == Contributions to the Developer Guide
 
 |===

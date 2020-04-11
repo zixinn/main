@@ -127,7 +127,7 @@ This section describes the main features of Mod Manager and how to use them.
 
 The features are grouped into six categories:
 
-. <<General, General>> feature
+. <<General features, General>> features
 . <<Module feature : `*mod*`, Module>> feature
 . <<Class feature : `*class*`, Class>> feature
 . <<Facilitator feature : `*facil*`, Facilitator>> feature
@@ -158,8 +158,8 @@ e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
 `/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-=== General
-The following commands carry out general operations in Mod Manager.
+=== General features
+The following commands carry out some general operations in Mod Manager.
 
 ==== Viewing help : `*help*`
 
@@ -168,28 +168,69 @@ You can open the help window that displays a link to our user guide.
 Format:
 
 * `*help*`
-
+//tag::undo-redo[]
 ==== Undoing previous commands : `*undo*`
 
-You can restore the Mod Manager to the state before the previous undoable command was executed.
+During a usage session with Mod Manager, you may make mistakes while adding/editing/deleting an entry. It
+would be nice if you can reverse the effect in a neat way. The `*undo*` command is here to give you that
+convenience.
+
+All of your commands are recorded, so with `*undo*`, you can reverse the effect of previous add/edit/delete commands one by one,
+starting with the most previous command.
+
+As of the current version, you can only use `*undo*` to reverse the effects of add/edit/delete commands.
 
 Format:
 
 * `*undo*`
 
+Example:
+
+Let's say you are editing a task of module ST2334 with ID number 401. It is the task highlighted with the red box. Don't
+bother with the command if you haven't read the section on <<Task feature : `*task*`, Task feature>> yet. This is just a quick demonstration.
+
+.Editing a task as per usual
+image::undo-1.png[]
+
+After that, you realize you didn't mean to make this change, so you type `*undo*`.
+
+.Before undo
+image::undo-2.png[]
+
+After you press kbd:[Enter], the effect will be reverted and the change is undone. The task is back to before your
+editing.
+
+.After undo
+image::undo-3.png[]
+
 ==== Redoing previously undone commands : `*redo*`
 
-You can reverse your undone actions.
+We understand that you can change your mind right after undo-ing, so we give have the `*redo*` command to assist you.
+
+You can reverse the effect of the most previous `*undo*` command with `*redo*`.
 
 Format:
 
 * `*redo*`
 
+Example:
+
+Let's say you have just used `*undo*` to a task edit command.
+
+.Before redo
+image::redo-1.png[]
+
+After you press kbd:[Enter], the previously undone effect will come back.
+
+.After redo
+image::redo-2.png[]
+//end::undo-redo[]
 ==== Listing commands : `*cmd*`
 
 *Listing all commands*:
 
-Lists all valid command groups.
+Sometimes, you might forget what commands are available in Mod Manager. To give you a quick reminder of all the
+command groups provided, we have the `*cmd* all` command.
 
 The command groups available in `ModManager` are the words in bold you have seen throughout this document.
 These include: `*facil*, *mod*, *task*, ...`
@@ -198,20 +239,41 @@ Format:
 
 * `*cmd* all`
 
+Example:
+
+Type `*cmd* all` into the Command Box.
+
+.Before executing `*cmd* all`
+image::cmdAll1.png[]
+
+Press kbd:[Enter] and you will be able to see all the command groups listed.
+
+.After executing `*cmd* all`
+image::cmdAll2.png[]
+
 *Listing commands for a specific feature*:
 
-Lists commands for a specific group.
+Seeing all the command groups might not be sufficient to remind you of the specific command formats. That's why there is
+`*cmd* group`. It will list all valid command formats of a group for you, so you can get back to work.
+
+You can use `*cmd* all` first to get a glimpse of all the command groups we have.
 
 Format:
 
-* `*cmd* group COMMAND_WORD`
+* `*cmd* group COMMAND_GROUP`
 
-Example: `*cmd* group task`
+Example: `*cmd* group class`
 
-==== Automatic command guidance
+You want to know what commands there are in command group `class`. Type `*cmd* group class` into the Command Box.
 
-Provides guidance for mistyped commands by showing a list of possible valid commands. +
-The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
+.Before executing `*cmd* group class`
+image::cmdGroup1.png[]
+
+Hit kbd:[Enter] and you will see the commands associated in the command group `class`. Since there are quite a few commands
+there, you might want to scroll down through the list.
+
+.After executing `*cmd* group class`
+image::cmdGroup2.png[]
 
 //tag::clear[]
 ==== Clearing all entries : `*clear*`
@@ -1257,7 +1319,7 @@ image::TaskCardDone.png[]
 [%autowidth]
 |======
 |*Parameter* | *Constraints*
-|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 digits (and a possible trailing letter) with no spaces.
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
                  This includes `Module` 's and `Task` 's description.
 
