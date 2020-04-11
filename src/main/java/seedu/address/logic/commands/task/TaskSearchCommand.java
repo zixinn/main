@@ -25,7 +25,7 @@ public class TaskSearchCommand extends TaskCommand {
             + PREFIX_YEAR + " 2020\n";
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_SEARCH
-            + ": Finds all tasks that occur on your specified date, month, or year "
+            + ": Searches for all tasks that occur on your specified date, month, or year "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_DATE + " dd] "

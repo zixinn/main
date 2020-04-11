@@ -236,7 +236,7 @@ public class ModManager implements ReadOnlyModManager {
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return tasks.contains(task);
+        return tasks.hasThisTask(task);
     }
 
     /**

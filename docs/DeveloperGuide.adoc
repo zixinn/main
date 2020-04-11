@@ -551,7 +551,7 @@ image::TaskAddActivityDiagram.png[]
 //tag::task-edit[]
 ===== Editing a task
 The `task edit` command allows user to edit a task in Mod Manager.
-
+The fields that can be edited are: description and time.
 This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setTask()`.
 
@@ -616,7 +616,7 @@ The execution of a `TaskDeleteCommand` is described below.
 
 //end::task-delete[]
 
-// tag::task-second-part[]
+//tag::task-second-part[]
 
 ===== Marking a task as done
 The marking a task as done command allows users to mark a certain `Task` in a `Module` as done,
@@ -861,7 +861,7 @@ such as assignments, homework, term tests, and exams.
 ** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
 and collaborating with the team member responsible for the `Module` component, as mentioned above.
 
-// tag::task-second-part[]
+//end::task-second-part[]
 
 === Facilitator Management Feature
 
@@ -961,7 +961,6 @@ image::FacilitatorFindActivityDiagram.png[]
 
 ===== Editing a facilitator
 The edit facilitator feature allows users to edit a facilitator from Mod Manager.
-The fields that can be edited are: description and time.
 This feature is facilitated by `FacilCommandParser`, `FacilEditCommandParser` and `FacilEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
 

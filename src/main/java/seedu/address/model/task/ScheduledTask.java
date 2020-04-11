@@ -21,7 +21,8 @@ public class ScheduledTask extends Task {
 
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
+        assert (taskDateTime != null) : "A ScheduledTask must have a valid time frame";
         this.taskDateTime = taskDateTime;
         this.isDone = false;
         this.taskNum = TaskNumManager.getNum(moduleCode);
@@ -30,7 +31,8 @@ public class ScheduledTask extends Task {
 
     protected ScheduledTask(Description description, TaskDateTime taskDateTime, ModuleCode moduleCode, int taskNum) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
+        assert (taskDateTime != null) : "A ScheduledTask must have a valid time frame";
         this.taskDateTime = taskDateTime;
         this.isDone = false;
         this.taskNum = taskNum;
@@ -40,7 +42,7 @@ public class ScheduledTask extends Task {
     public ScheduledTask(Description description, TaskDateTime taskDateTime,
                          ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
         this.taskDateTime = taskDateTime;
         this.isDone = isDone;
         this.taskNum = taskNum;
@@ -66,7 +68,7 @@ public class ScheduledTask extends Task {
 
     @Override
     public ModuleCode getModuleCode() {
-        return moduleCode;
+        return moduleCode.getClone(); // returns a defensive copy
     }
 
     @Override
@@ -84,7 +86,6 @@ public class ScheduledTask extends Task {
         if (isDone) {
             return false;
         }
-
         isDone = true; // set as done
         return true;
     }
@@ -94,6 +95,7 @@ public class ScheduledTask extends Task {
         if (!isDone) {
             return false;
         }
+
         isDone = false; // set as undone
         return true;
     }
