@@ -602,7 +602,7 @@ image::TaskDoneAfterCloseUp.png[]
 The task card has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
 
-==== Viewing all tasks across modules in ModManger
+==== Viewing all tasks across all modules in ModManger
 
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete

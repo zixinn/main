@@ -3,15 +3,11 @@ package seedu.address.logic.commands.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
-import java.util.function.Predicate;
-
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskContainsInModulePredicate;
-import seedu.address.model.task.TaskSearchPredicate;
 
 /**
  * Lists all tasks in Mod Manager to the user.
