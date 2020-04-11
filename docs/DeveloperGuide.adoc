@@ -110,7 +110,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 [[Design-Model]]
 === Model Component
-
+//tag::model[]
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
@@ -122,6 +122,7 @@ The `Model`,
 * stores the Mod Manager data.
 * exposes an unmodifiable `ObservableList<Facilitator>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+//end::model[]
 
 [[Design-Storage]]
 === Storage Component
@@ -147,6 +148,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== General Features
+
+There are a few general features implemented to help users improve their workflow with Mod Manager.
+
+These are: `undo` and `redo` feature, and navigating through past commands with up/down keys.
+
+
+==== Implementation Details
+
+//tag::general-features[]
+===== Undo/Redo Feature
+Each add/edit/delete action is captured as a `DoableAction`. Every time a `DoableAction` is performed, it will be recorded
+to the `DoableActionList`. Thus, after each add/edit/delete command execution, a suitable `DoableAction` will be be
+created and recorded. Other sections might not mention this again.
+
+`DoableActionList` stores two `Stacks` of `DoableAction` called `primary` and `secondary`.
+
+The mechanism of `undo` is given below. For `redo`, it is exactly the same.
+
+1. The user executes the `undo` command. The `UndoCommandParser` creates an `UndoCommand`.
+2. `LogicManager` executes the `UndoCommand`.
+3. `ModelManager` calls `undo` method of `DoableActionList` to reverse the effect of the most previous `DoableAction`.
+
+===== Navigating Through Past Commands With Up/Down Keys
+This feature applies to each usage session. The mechanism is below.
+
+1. Each time the user types anything and presses Enter in the `CommandBox`, the input will be save the to `UserInputHistory`.
+
+2. When an `up` key is pressed, the latest previous input will be retrieved from `UserInputHistory` and display at the
+`CommandBox`. If there are no previous inputs to show, the `CommandBox` will either stay the same or become empty.
+
+3. When a `down` key is pressed, the most previously input seen by pressing `up` will be shown at the `CommandBox`. When
+there are no inputs to show, the `CommandBox` will become empty.
+
+==== Design Considerations
+
+===== Aspect: Undo/Redo Implementation
+* **Alternative 1:** Saves the entire database every time an add/edit/delete action occurs.
+** Pros: Easy to implement.
+** Cons: High memory consumption during a usage session, and potentially causing lag if the database is huge.
+* **Alternative 2 (current choice):** Each feature that involves adding/editing/deleting data to the database would have
+a corresponding class extending `DoableAction`. For example, Module Management feature would have a `ModuleAction` class
+that extends `DoableAction`. This special class will contain specific details on how to revert the effect of each
+add/edit/delete action.
+** Pros: Low memory consumption during a usage session, leading to potentially more consistent performance.
+** Cons: Difficult to implement.
+
+Alternative 2 was chosen as it could provide better performance with a huge database, and partly because our team enjoyed
+some extra challenge.
+
+//end::general-features[]
+
 === Module Management Feature
 
 // tag::module[]
@@ -156,11 +209,11 @@ A module has a `ModuleCode` and an optional `Description`.
 
 It supports the following operations:
 
-* add - Adds a module to Mod Manager.
-* list - Lists all modules in Mod Manager.
-* view - View information of a module in Mod Manager.
-* edit - Edits a module in Mod Manager.
-* delete - Deletes a module in Mod Manager.
+* `add` - Adds a module to Mod Manager.
+* `list` - Lists all modules in Mod Manager.
+* `view` - View information of a module in Mod Manager.
+* `edit` - Edits a module in Mod Manager.
+* `delete` - Deletes a module in Mod Manager.
 // end::mod[]
 
 // tag::mod-add[]
@@ -323,10 +376,10 @@ A class has a `ModuleCode`, `LessonType`, `day` which is a `DayOfWeek` object, `
 
 It supports the following operations:
 
-* add - Adds a class to Mod Manager.
-* list - Lists all classes in Mod Manager.
-* edit - Edits a class in Mod Manager.
-* delete - Deletes a class in Mod Manager.
+* `add` - Adds a class to Mod Manager.
+* `list` - Lists all classes in Mod Manager.
+* `edit` - Edits a class in Mod Manager.
+* `delete` - Deletes a class in Mod Manager.
 
 
 ==== Implementation Details
@@ -437,21 +490,30 @@ image::LessonDeleteActivityDiagram.png[]
 //end::class[]
 
 === Task Management Feature
-The task feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
+//tag::taskOverview[]
+The task management feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
 `ScheduledTask` for a `Task` with a time period and `NonScheduledTask` for a `Task` with no specified time period.
-A task has a `Description`, an optional `TaskDateTime`, and one and only one `ModuleCode`.
+A task has a `Description`, an optional `TaskDateTime`, and exactly one `ModuleCode`.
 A `Module` with that `ModuleCode` of the task should exist in Mod Manager.
+
+A `Task` object also has a unique ID number specified by its `ModuleCode` and a 3-digit number ranging from
+100 to 999. Since part of the ID is the `ModuleCode`, a `Task` object only needs to store an extra `taskNum`.
+Generating task number is done through static calls to methods of `TaskNumManager`.
 
 It supports the following operations:
 
 * `*add*` - Adds a task to a `Module` in Mod Manager.
 * `*edit*` - Edits the information of a task in Mod Manager.
 * `*delete*` - Deletes a task from the `Module` and Mod Manager.
+* `*done*` - Marks a task as done in Mod Manager
 * `*list*` - Shows a list of all tasks across all `Module` s in Mod Manager.
+* `*module*` - Shows a list of all tasks for a specified `Module` in Mod Manager.
+* `*undone*` - Shows a list of all undone tasks in Mod Manager.
 * `*find*` - Finds a task in Mod Manager by its description.
-* `*search*`- Searches for tasks that occur on your specified date, month, or year in Mod Manager.
+* `*search*`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
 * `*upcoming*` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
 
+//end::taskOverview[]
 ==== Implementation Details
 
 ===== Adding a task
@@ -484,8 +546,10 @@ The following activity diagram summarizes what happens when a user executes a `*
 .Activity Diagram for `task add` Command
 image::TaskAddActivityDiagram.png[]
 
+//tag::task-edit[]
 ===== Editing a task
 The `task edit` command allows user to edit a task in Mod Manager.
+
 This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setTask()`.
 
@@ -498,11 +562,31 @@ and the fields to be edited.
 4. `LogicManager` executes the `TaskEditCommand`.
 5. `TaskEditCommand` retrieves the `moduleCode` and `taskNum` of the `task` to be edited, and then retrieves the actual `task`
 from `ModManager`.
-6. `TaskEditCommand` creates a new `Task`.
+6. `TaskEditCommand` creates a new `Task`. Since the user can use `task edit` to remove a task's date/time, a special `TaskDateTime` has been set to `01/01/1970` to
+help with the `edit` command. Essentially, if the `EditTaskDescription` carries such date, the newly created `Task` will
+not have a `TaskDateTime` and be of type `NonScheduledTask`. An assumption about user inputs is made here: no one will
+actually input `01/01/1970` as a date.
 7. `ModManager` sets the existing `task` to the new `task` in the `UniqueTaskList`.
+8. The `edit` action is recorded in `ModelManager`.
 
+The following sequence diagram shows how a `TaskEditCommand` is created after the parsing steps:
+
+.Sequence Diagram for `TaskEditCommand` creation steps
+image::TaskEditCommandSequenceDiagram.png[]
+
+The execution of a `TaskEditCommand` is described below.
+
+1. `List<Task> current` is retrieved by calling `model.getFilteredTaskList`.
+2. Retrieve the correct `taskToEdit` from `current` by turning it into a `stream` and use the `reduce` method.
+3. The `editedTask` is created using method `createEditedTask`.
+4. `model` sets `taskToEdit` to `editedTask` in the `UniqueTaskList` via calls to `ModManager`.
+5. An `editTaskAction` is created and added to `model`.
+6. A `CommandResult` is returned.
+//end::task-edit[]
+
+//tag::task-delete[]
 ===== Deleting a task
-The delete task feature allows users to delete a task from Mod Manager.
+The delete task feature allows user to delete a task from Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskDeleteCommandParser` and `TaskDeleteCommand`.
 The operation is exposed in the `Model` interface as `Model#deleteTask()`.
 
@@ -513,6 +597,22 @@ Given below is an example usage scenario and how the task delete mechanism behav
 3. `LogicManager` executes the `TaskDeleteCommand`.
 4. `TaskDeleteCommand` retrieves the task to be deleted.
 5. `ModManager` deletes the task from the `UniqueTaskList`.
+
+The following sequence diagram shows how a `TaskDeleteCommand` is created after the parsing  steps:
+
+.Sequence Diagram for `TaskDeleteCommand` creation steps
+image::TaskDeleteCommandSequenceDiagram.png[]
+
+The execution of a `TaskDeleteCommand` is described below.
+
+1. `List<Task> current` is retrieved by calling `model.getFilteredTaskList`.
+2. Retrieve the correct `taskToDelete` from `current` by turning it into a `stream` and use the `reduce` method.
+3. The `taskNum` of `taskToDelete` is removed from the system via `TaskNumManager`.
+4. `model` deletes `taskToDelete` in the `UniqueTaskList` via calls to `ModManager`.
+5. A `deleteTaskAction` is created and added to `model`.
+6. A `CommandResult` is returned.
+
+//end::task-delete[]
 
 // tag::task-second-part[]
 
@@ -676,6 +776,33 @@ The following activity diagram summarizes what happens when a user executes a ta
 .Activity Diagram for a general `*task* search` Command
 image::TaskSearchActivityDiagram.png[]
 
+===== Searching tasks by date
+The search task feature allows users to search all tasks that occur on the specified date, month, or year.
+This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
+TaskSearchCommand`.
+The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario and how the `*task* search` mechanism behaves at each step:
+
+1. The user executes the `*task* search` command and provides the day, month, or year, or any combination of which
+that they want to search for search for.
+2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
+3. `LogicManager` executes the `TaskSearchCommand`.
+4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
+
+The following sequence diagram shows how the `*task* search` command works:
+
+.Sequence Diagram for `*task* search` Command
+image::TaskSearchSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser`, `TaskSearchCommandParser`, `TaskSearchCommand` and `TaskSearch` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes a task find command:
+
+.Activity Diagram for `*task* search` Command
+image::TaskSearchActivityDiagram.png[]
+
 ==== Design Considerations
 
 ===== Aspect: A task may have a specified time frame, or not. How do we implement this feature?
@@ -738,16 +865,16 @@ and collaborating with the team member responsible for the `Module` component, a
 
 // tag::facilitator[]
 The facilitator feature manages the facilitators in Mod Manager and is represented by the `Facilitator` class.
-A facilitator has a `Name`, an optional `Phone`, an optional `Email`, and optional `Office` and one or more `ModuleCode`.
+A facilitator has a `Name`, an optional `Phone`, an optional `Email`, an optional `Office` and one or more `ModuleCode`.
 A `Module` with the `ModuleCode` of the facilitator should exist in Mod Manager.
 
 It supports the following operations:
 
-* add - Adds a facilitator to Mod Manager.
-* list - Lists all facilitators in Mod Manager.
-* view - Finds a facilitator in Mod Manager by name.
-* edit - Edits a facilitator in Mod Manager.
-* delete - Deletes a facilitator in Mod Manager.
+* `add` - Adds a facilitator to Mod Manager.
+* `list` - Lists all facilitators in Mod Manager.
+* `view` - Finds a facilitator in Mod Manager by name.
+* `edit` - Edits a facilitator in Mod Manager.
+* `delete` - Deletes a facilitator in Mod Manager.
 
 ==== Implementation Details
 
@@ -917,14 +1044,15 @@ Alternative 1 is chosen as the design is simpler without the need to maintain mu
 Alternative 1 is chosen because of ease of implementation due to time constraint.
 // end::design-consideration-facilitator[]
 // end::facilitator[]
+
 //tag::calendar[]
 === Calendar Feature
 The calendar feature manages the calendar in Mod Manager and is represented by the Calendar class. A calendar has a LocalDate.
 
 It supports the following operations:
 
-* view - Views the schedules and tasks in a whole week in Mod Manager.
-* find - Finds empty slots in a week from current day to end of the week in Mod Manager.
+* `view` - Views the schedules and tasks in a whole week in Mod Manager.
+* `find` - Finds empty slots in a week from current day to end of the week in Mod Manager.
 
 ==== Implementation Details
 
@@ -955,20 +1083,20 @@ The following activity diagram summarizes what happens when a user executes a ca
 image::CalViewActivityDiagram.png[]
 
 ===== Finding empty slots in calendar
-The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by CalCommandParser, CalFindCommandParser and CalFindCommand.
+The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand`.
 
 Given below is an example usage scenario and how the calendar find mechanism behaves at each step:
 
 1. The user executes the calendar find command.
-2. CalFindCommandParser creates a new CalFindCommand.
-3. LogicManager executes the CalFindCommand.
+2. `CalFindCommandParser` creates a new `CalFindCommand`.
+3. `LogicManager` executes the `CalFindCommand`.
 
 The following sequence diagram shows how the calendar find command works:
 
 .Sequence Diagram for `cal find` Command
 image::CalFindSequenceDiagram.png[]
 
-NOTE: The lifeline for CalCommandParser, CalFindCommandParser and CalFindCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+NOTE: The lifeline for `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 The following activity diagram summarizes what happens when a user executes a calendar find command:
 

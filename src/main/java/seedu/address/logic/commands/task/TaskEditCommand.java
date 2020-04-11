@@ -27,7 +27,7 @@ import seedu.address.model.util.action.TaskAction;
  */
 public class TaskEditCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_EDIT
-            + ": Edits the details of the task identified "
+            + ": Edits the description and/or time of the task identified "
             + "by the unique ID of the task found in the both the general tasks list and module specific list. "
             + "Existing values will be overwritten by the input values.\n"
             + "If you simply want to remove the DateTime field, input 'non' as parameter for " + PREFIX_ON
@@ -44,7 +44,7 @@ public class TaskEditCommand extends TaskCommand {
             + PREFIX_ON + " non";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "No difference detected. At least one different field is required.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager.";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task of module %s with ID %d does not exist in Mod Manager.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "The module %s does not exist in Mod Manager.";
@@ -80,29 +80,20 @@ public class TaskEditCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode.toString(), taskNum));
         }
 
-        Task taskToEdit = current.stream().reduce(null, (x, y) -> {
-            if (y.getTaskNum() == this.taskNum) {
-                return y;
-            } else {
-                return x;
-            }
-        });
+        Task taskToEdit = current.stream().reduce(null, (x, y)
+            -> y.getModuleCode().equals(moduleCode) && y.getTaskNum() == taskNum ? y : x);
         assert taskToEdit != null;
 
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        System.out.println(current);
 
-        if (taskToEdit.equals(editedTask) || current.contains(editedTask)) {
+        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             logger.severe("Dups: " + editedTask.toString() + " and " + taskToEdit.toString());
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        if (editTaskDescriptor.getDescription().isEmpty()) {
-            if (editTaskDescriptor.getTaskDateTime().equals(taskToEdit.getTaskDateTime())
-                    || (taskToEdit.getTaskDateTime().isEmpty()
-                    && editTaskDescriptor.getTaskDateTime().equals(Optional.of(Task.TABOO_DATE_TIME)))
-            ) {
-                throw new CommandException(MESSAGE_NOT_EDITED);
-            }
+        if (taskToEdit.equals(editedTask)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         model.setTask(taskToEdit, editedTask);

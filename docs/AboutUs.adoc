@@ -28,8 +28,8 @@ In charge of[Component XYZ]: e.g. In charge of Model, UI, Storage, etc. If you a
 image::NNpanpan.png[width="150", align="left"]
 {empty}[https://github.com/NNpanpan[github]] [<<NNpanpan#, portfolio>>]
 
-Role: Developer, Team Lead +
-Responsibilities: Command Component
+Role: Developer, Project Lead +
+Responsibilities: Cmd Component, Undo/Redo Commands
 
 '''
 

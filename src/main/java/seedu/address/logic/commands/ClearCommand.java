@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 
@@ -17,6 +19,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setModManager(new ModManager());
+        model.updateModule(Optional.empty());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.CLEAR);
     }
 }
