@@ -9,7 +9,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_MODULE_COMMAND = "Unknown module command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_FACILITATOR_COMMAND = "Unknown facilitator command! \n%1$s";
-    public static final String MESSAGE_UNKNOWN_LESSON_COMMAND = "Unknown lesson command! \n%1$s";
+    public static final String MESSAGE_UNKNOWN_LESSON_COMMAND = "Unknown class command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_CALENDAR_COMMAND = "Unknown calendar command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_TASK_COMMAND = "Unknown task command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_CMD_COMMAND = "Unknown cmd command! \n%1$s";
@@ -33,9 +33,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_CMD_GROUP = "%1$s group does not exist.";
     public static final String MESSAGE_AT_WITHOUT_ON_ERROR = "/at parameter must not exist without /on parameter.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
-            "The lesson index provided is invalid! "
-            + "Index must be a positive integer smaller than or equal to the size of the displayed lesson list "
+            "The class index provided is invalid! "
+            + "Index must be a positive integer smaller than or equal to the size of the displayed class list "
             + "and should not be blank.";
+    public static final String MESSAGE_LESSON_INVALID_TIME_RANGE = "The %s class clashes with another class";
 
     public static final String MESSAGE_TOO_MANY_ARGUMENTS = "There should not be more than %1$s %2$s prefix provided.";
 }

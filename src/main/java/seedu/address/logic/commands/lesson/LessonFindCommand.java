@@ -38,18 +38,18 @@ public class LessonFindCommand extends LessonCommand {
             Lesson lesson;
             lesson = model.findNextLesson();
             if (lesson == null) {
-                result = "No more lessons this week";
+                result = "No more class this week";
             } else {
-                result = "Next lesson:\n" + lesson.toString();
+                result = "Next class:\n" + lesson.toString();
                 updateList(model.findModule(lesson.getModuleCode()).get(), model);
             }
         } else {
             StringBuilder sb = new StringBuilder();
             List<Lesson> lessonsOfTheDay = model.findLessonByDay(day);
             if (lessonsOfTheDay.size() == 0) {
-                result = "No lessons on " + day.toString();
+                result = "No class on " + day.toString();
             } else {
-                sb.append("Lessons on ").append(day.toString()).append("\n");
+                sb.append("Classes on ").append(day.toString()).append("\n");
                 for (Lesson l : lessonsOfTheDay) {
                     sb.append("\u2022 ").append(l.toString()).append("\n");
                 }

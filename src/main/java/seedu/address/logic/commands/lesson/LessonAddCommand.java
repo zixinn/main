@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_LESSON_INVALID_TIME_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -22,7 +23,7 @@ import seedu.address.model.util.action.DoableActionType;
  */
 public class LessonAddCommand extends LessonCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CLASS + " " + COMMAND_WORD_ADD
-            + ": Adds a lesson to Mod Manager. \n"
+            + ": Adds a class to Mod Manager. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + " MOD_CODE "
             + PREFIX_TYPE + " CLASS_TYPE "
@@ -34,10 +35,9 @@ public class LessonAddCommand extends LessonCommand {
             + PREFIX_AT + " FRIDAY 14:00 16:00 "
             + PREFIX_VENUE + " I3-AUD ";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in Mod Manager";
+    public static final String MESSAGE_SUCCESS = "New class added: %1$s";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This class already exists in Mod Manager";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Module does not exist";
-    public static final String MESSAGE_INVALID_TIME_RANGE = "The lesson to be added clashes with another lesson";
     private final Lesson toAdd;
 
     public LessonAddCommand(Lesson lesson) {
@@ -59,7 +59,7 @@ public class LessonAddCommand extends LessonCommand {
         }
 
         if (!model.isTimeSlotFree(toAdd, Optional.empty())) {
-            throw new CommandException(MESSAGE_INVALID_TIME_RANGE);
+            throw new CommandException(String.format(MESSAGE_LESSON_INVALID_TIME_RANGE, "added"));
         }
 
         updateList(module.get(), model);
