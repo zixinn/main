@@ -324,7 +324,7 @@ A class has a `ModuleCode`, `LessonType`, `DayAndTime` and `venue` which is a `S
 It supports the following operations:
 
 * add - Adds a class to Mod Manager.
-* list - Lists all classes in Mod Manager.
+* find - Finds specific classes in Mod Manager.
 * edit - Edits a class in Mod Manager.
 * delete - Deletes a class in Mod Manager.
 
