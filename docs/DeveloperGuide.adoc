@@ -548,7 +548,8 @@ image::TaskAddActivityDiagram.png[]
 
 //tag::task-edit[]
 ===== Editing a task
-The `task edit` command allows user to edit a task in Mod Manager.
+The `task edit` command allows user to edit a task in Mod Manager. The fields that can be edited are: description and
+task time.
 
 This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setTask()`.

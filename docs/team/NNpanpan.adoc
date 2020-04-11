@@ -55,7 +55,8 @@ simpler nature and being easy to upgrade in the future.
 ** Project management:
 *** Reviewed and merged pull requests on Github.
 ** Documentation:
-*** Added the task edit/delete sections of the User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/135[#135]
+*** Wrote the task edit/delete and undo/redo sections of the User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/135[#135]
+*** Wrote the general features and task edit/delete sections of the Developer Guide:
 ** Community:
 *** PR reviews (with non-trivial comments): https://github.com/AY1920S2-CS2103T-F10-4/main/pull/189[#189]
 *** Reformatted .puml settings for the team: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/109[#109]
@@ -70,6 +71,9 @@ simpler nature and being easy to upgrade in the future.
 == Undo/Redo features
 include::../UserGuide.adoc[tag=undo-redo]
 
+== `task edit` and `task delete` commands
+include::../UserGuide.adoc[tag=task-edit-delete]
+
 == Contributions to the Developer Guide
 
 |===
@@ -77,9 +81,6 @@ include::../UserGuide.adoc[tag=undo-redo]
 |===
 == General Features
 include::../DeveloperGuide.adoc[tag=general-features]
-
-== Overview of `Task`
-include::../DeveloperGuide.adoc[tag=taskOverview]
 
 == `task edit`
 include::../DeveloperGuide.adoc[tag=task-edit]
