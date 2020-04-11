@@ -81,6 +81,12 @@ activate ObservableList
 ObservableList --> LessonDeleteCommand : f
 deactivate ObservableList
 
+LessonDeleteCommand -> LessonDeleteCommand : updateList()
+activate LessonDeleteCommand
+
+LessonDeleteCommand --> LessonDeleteCommand
+deactivate LessonDeleteCommand
+
 LessonDeleteCommand -> ModelManager : removeLesson(f)
 
 ModelManager -> ModManager : removeLesson(f)
@@ -97,6 +103,12 @@ deactivate ModManager
 
 ModelManager --> LessonDeleteCommand
 deactivate ModelManager
+
+LessonDeleteCommand -> LessonDeleteCommand : updateActions()
+activate LessonDeleteCommand
+
+LessonDeleteCommand --> LessonDeleteCommand
+deactivate LessonDeleteCommand
 
 create CommandResult
 LessonDeleteCommand -> CommandResult

@@ -11,7 +11,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -42,10 +41,7 @@ public class LessonFindCommand extends LessonCommand {
                 result = "No more lessons this week";
             } else {
                 result = "Next lesson:\n" + lesson.toString();
-                model.updateModule(model.findModule(lesson.getModuleCode()));
-                model.updateFacilitatorListForModule(
-                        new ModuleCodesContainKeywordPredicate(lesson.getModuleCode().value));
-                model.updateTaskListForModule(x -> x.getModuleCode().equals(lesson.getModuleCode()));
+                updateList(model.findModule(lesson.getModuleCode()).get(), model);
             }
         } else {
             StringBuilder sb = new StringBuilder();

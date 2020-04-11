@@ -16,14 +16,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.DayAndTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonType;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.action.DoableActionType;
-import seedu.address.model.util.action.LessonAction;
 
 /**
  * Edits the details of an existing lesson in Mod Manager.
@@ -95,13 +93,8 @@ public class LessonEditCommand extends LessonCommand {
         }
 
         model.setLesson(lessonToEdit, editedLesson);
-        LessonAction editLessonAction = new LessonAction(lessonToEdit, editedLesson, DoableActionType.EDIT);
-        model.addAction(editLessonAction);
-
-        model.updateModule(model.findModule(editedLesson.getModuleCode()));
-        model.updateFacilitatorListForModule(
-                new ModuleCodesContainKeywordPredicate(editedLesson.getModuleCode().value));
-        model.updateTaskListForModule(x -> x.getModuleCode().equals(editedLesson.getModuleCode()));
+        updateAction(lessonToEdit, editedLesson, DoableActionType.EDIT, model);
+        updateList(model.findModule(editedLesson.getModuleCode()).get(), model);
 
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson), CommandType.LESSON);
     }
