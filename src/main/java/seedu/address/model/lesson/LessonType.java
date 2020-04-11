@@ -7,6 +7,6 @@ public enum LessonType {
     LEC, TUT, SEC, REC, LAB;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lesson type can only be either LEC, TUT, SEC, REC or LAB and should not be blank";
+            "Class type can only be either LEC, TUT, SEC, REC or LAB and should not be blank";
 }
 

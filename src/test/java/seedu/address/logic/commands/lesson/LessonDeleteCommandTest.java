@@ -3,6 +3,7 @@ package seedu.address.logic.commands.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_CS9000;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -36,7 +37,7 @@ public class LessonDeleteCommandTest {
     public void execute_invalidIndexLessonList_throwsCommandException() {
         Index outOfBound = Index.fromOneBased(model.getLessons().size() + 1);
         LessonDeleteCommand command = new LessonDeleteCommand(outOfBound, new ModuleCode(VALID_MODULE_CODE_CS2103T));
-        assertCommandFailure(command, model, LessonDeleteCommand.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
