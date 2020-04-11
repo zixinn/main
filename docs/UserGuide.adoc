@@ -565,6 +565,7 @@ Format: `*task* delete MOD_CODE ID_NUMBER`
 
 Example: `*task* delete CS2103T 973`
 
+// tag::task-second-part[]
 ==== Marking a task as done
 
 You can mark the task as done in the module in Mod Manager.
@@ -760,7 +761,7 @@ if Mod Manager is used over a long period of time.
 
 * `*task* search /date 14 /month 2 /year 2021` +
 Searches for all tasks happening on 14/02/2021.
-// end::task[]
+// end::task-second-part[]
 
 === Managing facilitators : `*facil*`
 // tag::facilitator[]
@@ -1051,9 +1052,11 @@ You can add a priority level to a task.
 You can receive reminders for deadlines and events the next day.
 // end::upcoming[]
 
+// tag::upcoming-tasks[]
 ==== Finding upcoming tasks `[coming in v2.0]`
 
-You can find upcoming tasks.
+You can find upcoming tasks, such as assignment submission and final exam in Mod Manager.
+// end::upcoming-tasks[]
 
 ==== Individual view of the recently edited element after an `add`, `edit` or `delete` command `[coming in v2.0]`
 
@@ -1174,12 +1177,16 @@ General notes are found at the bottom of the rightmost column on the offline cop
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
 |  `*task* delete MOD_CODE ID_NUMBER`
+//tag::task-summary-second[]
+
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
 |  `*task* undone`
 |  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
+//end::task-summary-second[]
+
 |=====
 
 ..Summary of common command parameters

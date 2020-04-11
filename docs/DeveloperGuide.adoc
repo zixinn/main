@@ -485,13 +485,13 @@ The following activity diagram summarizes what happens when a user executes a `*
 image::TaskAddActivityDiagram.png[]
 
 ===== Editing a task
-The `task edit` command allows user to edit a task in `ModManager`.
+The `task edit` command allows user to edit a task in Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setTask()`.
 
 Given below is an example usage scenario and how the `task edit` mechanism behaves at each step.
 
-1. The user executes the `task edit` command and provides the `moduleCode` and the `taskNum` of the task to edit,
+1. The user executes the task edit command and provides the `moduleCode` and the `taskNum` of the task to edit,
 and the fields to be edited.
 2. `TaskEditCommandParser` creates a new `EditTaskDescriptor` with the fields to be edited.
 3. `TaskEditCommandParser` creates a new `TaskEditCommand` based on the `moduleCode` and `taskNum`, and `EditTaskDescriptor`.
@@ -514,7 +514,38 @@ Given below is an example usage scenario and how the task delete mechanism behav
 4. `TaskDeleteCommand` retrieves the task to be deleted.
 5. `ModManager` deletes the task from the `UniqueTaskList`.
 
+// tag::task-second-part[]
+
 ===== Marking a task as done
+The marking a task as done command allows users to mark a certain `Task` in a `Module` as done,
+based on its task ID called `taskNum`.
+This feature is facilitated by `TaskCommandParser`, `TaskMarkAsDoneCommandParser` and `TaskMarkAsDoneCommand`.
+The operation is exposed in the `Model` interface as `Model#setTask()`.
+
+Given below is an example usage scenario and how the marking task as done mechanism behaves at each step.
+
+1. The user executes the task mark as done command and provides the `moduleCode` and the `taskNum` of the
+task to be marked as done.
+2. `TaskMarkAsDoneCommandParser` creates a new `TaskMarkAsDoneCommand` based on the `moduleCode` and `taskNum`.
+3. `LogicManager` executes the `TaskMarkAsDoneCommand`.
+4. `TaskMarkAsDoneCommand` retrieves the `moduleCode` and `taskNum` of the task to be marked as done,
+and then retrieves the current existing `Task` from `ModManager`.
+5. `TaskMarkAsDoneCommand` creates a clone of the retrieved `Task`, then mark this new `Task` as done.
+6. `ModManager` sets the existing task to the new task, marked as done in the `UniqueTaskList`.
+7. `ModelManager` updates the `filteredTasks` in `ModelManager`.
+
+The following sequence diagram shows how the task mark as done command works:
+
+.Sequence Diagram for `*task* done /module CS2103T /id 986` Command
+image::TaskMarkAsDoneSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser`, `TaskMarkAsDoneCommandParser`, and `TaskMarkAsDoneCommand` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+The following activity diagram summarizes what happens when a user executes the task mark as done command:
+
+.Activity Diagram for a general `*task* done` Command
+image::TaskMarkAsDoneActivityDiagram.png[]
 
 ===== Viewing all tasks across modules in Mod Manger
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
@@ -582,7 +613,7 @@ Given below is an example usage scenario and how the task view undone tasks mech
 
 The following sequence diagram shows how the task view undone tasks command works:
 
-.Sequence Diagram for `*task* unfinished` Command
+.Sequence Diagram for `*task* undone` Command
 image::TaskListUndoneSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskListUndoneCommandParser`, `TaskListUndoneCommand` should end at
@@ -590,7 +621,7 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes a task view undone tasks only command:
 
-.Activity Diagram for `*task* unfinished` Command
+.Activity Diagram for `*task* undone` Command
 image::TaskListUndoneActivityDiagram.png[]
 
 ===== Finding tasks by description
@@ -647,7 +678,7 @@ image::TaskSearchActivityDiagram.png[]
 
 ==== Design Considerations
 
-===== Aspect: How the optional attribute of `TaskDateTime` is managed
+===== Aspect: A task may have a specified time frame, or not. How do we implement this feature?
 * **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
 A task with a specified time period will be created as a `ScheduledTask`, while a task with no
 time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
@@ -664,18 +695,18 @@ In this case, we have to re-create a new `ScheduledTask` with the same descripti
 If we need to maintain a `List<ScheduledTask>` or `List<Task>` somewhere in the code, for example,
 in our `Module` instance, we also have to update the list contents in our `Module` s too.
 This requires the association between `Module` and `Task` to be bi-directional, which
-increases content and data coupling and make it harder for us to maintain and conduct tests. There is also extra overhead time
-communicating and collaborating with another member in our team who is doing the `Module` component, Because of these challenges,
+increases coupling and make it harder for us to maintain and conduct tests. There is also extra overhead time
+communicating and collaborating with another member in our team responsible for the `Module` component, Because of these challenges,
 we decide to weaken the association between `Task` and `Module`, which is elaborated in our next aspect.
 
 * **Alternative 2:** Implement `Task` as a concrete class in Mod Manager. `Task` s without a specified time period
-will have its `TaskDateTime` set to `null`, while `Task` s with a given time period will be assign a `TaskDateTime` attribute, which
-is a wrapper class for Java's `LocalDateTime`.
+will have its time attribute `taskDateTime` set to `null`, while `Task` s with a given time period will be assign a
+non-null instance of `taskDateTime`.
 ** Pros: Easier to implement, as we only need to create one class `Task`.
 ** Cons: We must handle `null` cases every time we query something about the time of a `Task`.
-For example, it's more challenging to implement the `*search*` and `*upcoming*` command, since we have to handle the cases when the `TaskDateTime` instance is `null`.
-It's very complex to implement the method `compareTo` of `Comparable` interface for `Task` to compare the time between tasks,
-when one, or both of the `TaskDateTime` attributes can be `null`.
+For example, it's more challenging to implement the `*search*` and `*upcoming*` command, since we have to check whether the task has a non-null `taskDateTime` or not.
+Moreover, it's complex to implement the method `compareTo` of `Comparable` interface for `Task` to compare the time between tasks,
+when one, or both of our `taskDateTime` attributes can be `null`.
 
 ===== Aspect: The association between `Module` and `Task`
 * **Alternative 1 (current choice):** Aggregation: Each `Task` can have an unique `ModuleCode` tag, which uniquely identifies which `Module` the task belongs to.
@@ -700,6 +731,8 @@ For example, if we drop a `Module` in NUS, we will also drop all the `Task` s re
 such as assignments, homework, term tests, and exams.
 ** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
 and collaborating with the team member responsible for the `Module` component, as mentioned above.
+
+// tag::task-second-part[]
 
 === Facilitator Management Feature
 
@@ -1319,28 +1352,30 @@ Use case resumes at step 1.
 === Use case: UC11 - Add task
 
 [discrete]
-=== Use case: UC12 - Mark task as done
+=== Use case: UC12 - Edit task
 
 [discrete]
-=== Use case: UC13 - List tasks
+=== Use case: UC13 - Delete task
+
+//tag::use-case-tasks-second-part[]
+[discrete]
+=== Use case: UC14 - Mark task as done
 
 [discrete]
-=== Use case: UC14 - List tasks for a specific module
+=== Use case: UC15 - List tasks
 
 [discrete]
-=== Use case: UC15 - List undone tasks
+=== Use case: UC16 - List tasks for a specific module
 
 [discrete]
-=== Use case: UC16 - Find task by description
+=== Use case: UC17 - List undone tasks
 
 [discrete]
-=== Use cse: UC17 - Search task by date
+=== Use case: UC18 - Find task by description
 
 [discrete]
-=== Use case: UC18 - Edit task
-
-[discrete]
-=== Use case: UC19 - Delete task
+=== Use cse: UC19 - Search task by date
+//end::use-case-tasks-second-part[]
 
 // tag::use-case-facilitator[]
 [discrete]

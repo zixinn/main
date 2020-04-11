@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ModManagerParser" as ModManagerParser LOGIC_COLOR
 participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
-participant "listNotDoneTasksCommand:TaskListUnDoneCommand" as TaskListUnDoneCommand LOGIC_COLOR
+participant "listUndoneCommand:TaskListUnDoneCommand" as TaskListUnDoneCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,15 +33,15 @@ create TaskListUnDoneCommand
 TaskCommandParser -> TaskListUnDoneCommand
 activate TaskListUnDoneCommand
 
-TaskListUnDoneCommand --> TaskCommandParser : listNotDoneTasksCommand
+TaskListUnDoneCommand --> TaskCommandParser : listUndoneCommand
 deactivate TaskListUnDoneCommand
 
-TaskCommandParser --> ModManagerParser : listNotDoneTasksCommand
+TaskCommandParser --> ModManagerParser : listUndoneCommand
 deactivate TaskCommandParser
 TaskCommandParser -[hidden]-> ModManagerParser
 destroy TaskCommandParser
 
-ModManagerParser --> LogicManager : listNotDoneTasksCommand
+ModManagerParser --> LogicManager : listUndoneCommand
 deactivate ModManagerParser
 
 LogicManager -> TaskListUnDoneCommand : execute()

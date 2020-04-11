@@ -11,10 +11,13 @@ import java.util.List;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.module.ModuleEditCommand;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.util.TaskNumManager;
+import seedu.address.model.util.Description;
 
 /**
  * Marks a task as done in Mod Manager.
@@ -75,7 +78,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
         boolean isChanged = editedTask.markAsDone();
 
         if (!isChanged) {
-            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode.toString(), taskNum));
+            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
         }
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
