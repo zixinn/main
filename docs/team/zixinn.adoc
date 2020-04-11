@@ -7,7 +7,7 @@
 
 == Overview
 
-Mod Manager is a desktop application that assists students in managing schedules and contacts for their modules. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 25 kLoC.
+Mod Manager is a desktop application that assists students in managing tasks, schedules and contacts for their modules. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 25 kLoC.
 
 Mod Manager is morphed from existing desktop Java application https://github.com/nus-cs2103-AY1920S2/addressbook-level3[Address Book (Level 3)] over a period of 8 weeks by my team of 5 software engineering students.
 
@@ -34,7 +34,8 @@ Given below is a summary of my contributions to Mod Manager.
 *Other contributions*:
 
 * Project management:
-** Managed issue tracker and milestones for team repo and merged pull requests
+** Managed issue tracker and milestones for team repo
+** Merged pull requests
 * Enhancements to existing features:
 ** Wrote additional tests to increase coverage from 60% to 66%: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/121[#121]
 ** Updated sample data: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/183[#183]
