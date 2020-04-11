@@ -62,4 +62,5 @@ public class TaskSearchCommand extends TaskCommand {
                 || (other instanceof TaskSearchCommand // instanceof handles nulls
                 && predicate.equals(((TaskSearchCommand) other).predicate)); // state check
     }
+
 }

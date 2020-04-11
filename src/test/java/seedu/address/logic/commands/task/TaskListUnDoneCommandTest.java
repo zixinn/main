@@ -1,15 +1,21 @@
+/*
 package seedu.address.logic.commands.task;
 
-/*
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_TASKS_UNDONE_OVERVIEW;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.task.Task;
+
 class TaskListUnDoneCommandTest {
     private Model model;
     private Model expectedModel;
 
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
-    }
     @Test
     public void execute_everyTaskIsNotDone_allTasksFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_UNDONE_OVERVIEW, 4);
@@ -17,10 +23,10 @@ class TaskListUnDoneCommandTest {
         expectedModel.updateFilteredTaskList(task -> !task.isTaskDone());
         //assertCommandSuccess(command, model, expectedMessage, CommandType.TASK, expectedModel);
         assertEquals(Arrays.asList(
-                SCHEDULED_ASSIGNMENT_TASK,
-                SCHEDULED_HOMEWORK_TASK,
-                NON_SCHEDULED_PROGRAMMING_TASK,
-                NON_SCHEDULED_PROGRAMMING_ASSIGNMENT_TASK), expectedModel.getFilteredTaskList());
+                scheduledAssignmentTask,
+                scheduledHomeworkTask,
+                nonScheduledProgrammingTask,
+                nonScheduledProgrammingAssignmentTask), expectedModel.getFilteredTaskList());
     }
 
     @Test
@@ -47,9 +53,9 @@ class TaskListUnDoneCommandTest {
 
         //assertCommandSuccess(command, model, expectedMessage, CommandType.TASK, expectedModel);
         assertEquals(Arrays.asList(
-                SCHEDULED_HOMEWORK_TASK,
-                NON_SCHEDULED_PROGRAMMING_TASK,
-                NON_SCHEDULED_PROGRAMMING_ASSIGNMENT_TASK), expectedModel.getFilteredTaskList());
+                scheduledHomeworkTask,
+                nonScheduledProgrammingTask,
+                nonScheduledProgrammingAssignmentTask), expectedModel.getFilteredTaskList());
     }
 }
 */

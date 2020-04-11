@@ -17,6 +17,9 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_03;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.task.TaskSearchCommandParser.DATE_STRING;
+import static seedu.address.logic.parser.task.TaskSearchCommandParser.MONTH_STRING;
+import static seedu.address.logic.parser.task.TaskSearchCommandParser.YEAR_STRING;
 
 import java.util.HashMap;
 
@@ -43,8 +46,8 @@ public class TaskSearchCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020,
                 new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>() {
                     {
-                        put("date", Integer.parseInt(TASK_DAY_26));
-                        put("year", Integer.parseInt(TASK_YEAR_2020));
+                        put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                        put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
                     }
                 })));
         // the rest of the methods below will not test the presence of Preamble
@@ -59,12 +62,12 @@ public class TaskSearchCommandParserTest {
 
     @Test
     public void parse_someFieldsPresentAndHaveValidValues_success() {
-        // apply heuristic 'each Valid Input at Least Once in a Positive Test Case'
+        // apply heuristic 'each valid input at Least Once in a Positive Test Case'
 
         // one and only valid field, year only
         HashMap<String, Integer> year = new HashMap<String, Integer>() {
             {
-                put("year", Integer.parseInt(TASK_YEAR_2020));
+                put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
             }
         };
 
@@ -77,8 +80,8 @@ public class TaskSearchCommandParserTest {
         // two and only two valid fields, day and month
         HashMap<String, Integer> dayMonth = new HashMap<String, Integer>() {
             {
-                put("date", Integer.parseInt(TASK_DAY_26));
-                put("month", Integer.parseInt(TASK_MONTH_03));
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                put(MONTH_STRING, Integer.parseInt(TASK_MONTH_03));
             }
         };
 
@@ -93,9 +96,9 @@ public class TaskSearchCommandParserTest {
     public void parse_allFieldsPresentAndHaveValidValues_success() {
         HashMap<String, Integer> fullHashMap = new HashMap<String, Integer>() {
             {
-                put("date", Integer.parseInt(TASK_DAY_26));
-                put("month", Integer.parseInt(TASK_MONTH_03));
-                put("year", Integer.parseInt(TASK_YEAR_2020));
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                put(MONTH_STRING, Integer.parseInt(TASK_MONTH_03));
+                put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
             }
         };
 
