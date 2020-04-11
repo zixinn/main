@@ -36,6 +36,7 @@ import seedu.address.logic.commands.task.TaskListUnDoneCommand;
 import seedu.address.logic.commands.task.TaskMarkAsDoneCommand;
 import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.TaskContainsInModulePredicate;
 import seedu.address.model.task.TaskContainsKeywordsPredicate;
 import seedu.address.model.task.TaskSearchPredicate;
 
@@ -98,7 +99,8 @@ public class TaskCommandParserTest {
     public void parse_listTaskForMod() throws Exception {
         TaskForOneModuleCommand command = (TaskForOneModuleCommand) parser.parse(Command.COMMAND_WORD_MODULE
                 + MODULE_CODE_DESC_CS2103T);
-        assertEquals(new TaskForOneModuleCommand(VALID_MODULE_CODE_CS2103T), command);
+        assertEquals(new TaskForOneModuleCommand(
+                new TaskContainsInModulePredicate(VALID_MODULE_CODE_CS2103T)), command);
     }
 
     @Test

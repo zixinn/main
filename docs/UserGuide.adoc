@@ -637,6 +637,7 @@ Format:
 
 Example: `*task* delete CS2103T 973`
 
+// tag::task-second-part[]
 ==== Marking a task as done
 
 You can mark the task as done in the module in Mod Manager.
@@ -674,7 +675,7 @@ image::TaskDoneAfterCloseUp.png[]
 The task card has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
 
-==== Viewing all tasks across modules in ModManger
+==== Viewing all tasks across all modules in ModManger
 
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
@@ -718,16 +719,14 @@ Mod Manager will automatically redirect you to the Tasks tab if you are currentl
 .All tasks belonging to the module `CS3230` are listed
 image::TaskListModule.png[]
 
-==== Viewing all tasks not done
+==== Viewing all tasks not done/finished
 Previously, we know that we can mark a task as done, so as to organise, manage,
 and plan our tasks better. Now, with this command, you can see all the
-tasks that have not yet been completed (not done).
+tasks that have not yet been finished.
 
-Format:
+Format: `*task* undone`
 
-* `*task* not-done`
-
-.Before `*task* not-done`, all tasks are listed
+.Before `*task* undone`, all tasks are listed
 image::TaskListNotDoneBefore.png[]
 
 By typing the command above and hit kbd:[Enter] , you should only see uncompleted tasks,
@@ -850,7 +849,7 @@ if Mod Manager is used over a long period of time.
 
 * `*task* search /date 14 /month 2 /year 2021` +
 Searches for all tasks happening on 14/02/2021.
-// end::task[]
+// end::task-second-part[]
 
 === Facilitator feature : `*facil*`
 // tag::facilitator[]
@@ -1147,9 +1146,11 @@ You can add a priority level to a task.
 You can receive reminders for deadlines and events the next day.
 // end::upcoming[]
 
+// tag::upcoming-tasks[]
 ==== Finding upcoming tasks `[coming in v2.0]`
 
-You can find upcoming tasks.
+You can find upcoming tasks, such as assignment submission and final exam in Mod Manager.
+// end::upcoming-tasks[]
 
 ==== Viewing of the recently edited item after an `add`, `edit` or `delete` command `[coming in v2.0]`
 
@@ -1243,14 +1244,15 @@ image::TaskCardDone.png[]
 |  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
+|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* not-done`
-|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
 |  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
+|  `*task* undone`
 
 .1+|Undo
 |  `*undo*`
+
 |=====
 
 .Summary of common command parameters
