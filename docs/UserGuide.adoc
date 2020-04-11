@@ -1240,17 +1240,15 @@ image::TaskCardDone.png[]
 
 .9+|Task
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
+|  `*task* delete MOD_CODE ID_NUMBER`
+|  `*task* done /code MOD_CODE /id ID_NUMBER`
 |  `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]` +
    `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
-|  `*task* delete MOD_CODE ID_NUMBER`
-//tag::task-summary-second[]
-|  `*task* done /code MOD_CODE /id ID_NUMBER`
+|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* undone`
-|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
-//end::task-summary-second[]
+|  `*task* undone`
 
 .1+|Undo
 |  `*undo*`
