@@ -38,6 +38,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
     public static final String MESSAGE_TASK_ID_NOT_EXISTENT = "The Task's ID_NUMBER is not found! Please try again.";
     public static final String MESSAGE_TASK_ALREADY_DONE = "Task of module %s with ID %d is already done. "
         + "Please try again with another task!";
+
     private final String moduleCode;
     private final int taskNum;
     /**
@@ -62,6 +63,9 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, moduleCode, taskNum));
         }
 
+        assert model.hasModuleCode(moduleCode) : "The module should be already available in Mod Manager";
+        assert TaskNumManager.doesNumExist(new ModuleCode(moduleCode), taskNum) : "The Task ID is valid for the module";
+
         Task taskToEdit = current.stream().reduce(null, (x, y) -> {
             if (y.getTaskNum() == this.taskNum) {
                 return y;
@@ -69,14 +73,21 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
                 return x;
             }
         });
-        assert taskToEdit != null;
 
-        Task editedTask = taskToEdit.getClone();
+        assert (taskToEdit != null) : "The matching task should have been found above";
+
+        Task editedTask = taskToEdit.getClone(); // returns a defensive copy
+
         boolean isChanged = editedTask.markAsDone();
+
+        assert (editedTask != taskToEdit) : "deep copied the task";
 
         if (!isChanged) {
             throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
         }
+
+        assert (isChanged) : "Marking the task as done successfully";
+
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedTask),

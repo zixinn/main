@@ -14,6 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new TaskAddCommand object
@@ -60,7 +61,10 @@ public class TaskMarkAsDoneCommandParser implements Parser<TaskMarkAsDoneCommand
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_TASK_ID));
         }
 
-        String moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)).toString();
+        ModuleCode modCode = ParserUtil.parseModuleCode(
+                argMultimap.getValue(PREFIX_MODULE_CODE)).getClone(); // returns a defensive copy
+
+        String moduleCode = modCode.toString();
         String taskId = String.valueOf(ParserUtil.parseTaskId(argMultimap.getValue(PREFIX_TASK_ID)));
 
         return new TaskMarkAsDoneCommand(moduleCode, taskId);

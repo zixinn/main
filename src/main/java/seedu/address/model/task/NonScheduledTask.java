@@ -19,7 +19,7 @@ public class NonScheduledTask extends Task {
 
     protected NonScheduledTask(Description description, ModuleCode moduleCode) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
         this.taskNum = TaskNumManager.getNum(moduleCode);
         this.isDone = false;
         TaskNumManager.addNum(moduleCode, taskNum);
@@ -27,7 +27,7 @@ public class NonScheduledTask extends Task {
 
     public NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
         this.taskNum = taskNum;
         this.isDone = false;
         TaskNumManager.addNum(moduleCode, taskNum);
@@ -35,7 +35,7 @@ public class NonScheduledTask extends Task {
 
     public NonScheduledTask(Description description, ModuleCode moduleCode, int taskNum, boolean isDone) {
         this.description = description;
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.getClone(); // returns a defensive copy
         this.taskNum = taskNum;
         this.isDone = isDone;
         TaskNumManager.addNum(moduleCode, taskNum);
@@ -55,7 +55,7 @@ public class NonScheduledTask extends Task {
 
     @Override
     public ModuleCode getModuleCode() {
-        return moduleCode;
+        return moduleCode.getClone(); // returns a defensive copy
     }
 
     @Override

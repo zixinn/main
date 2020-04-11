@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import java.util.function.Predicate;
 
+import seedu.address.model.module.ModuleCode;
+
 
 /**
  * Tests that a {@code Task}'s {@code Description} matches any of the keywords given.
@@ -10,6 +12,7 @@ public class TaskContainsInModulePredicate implements Predicate<Task> {
     private final String moduleCode;
 
     public TaskContainsInModulePredicate(String moduleCode) {
+        assert (ModuleCode.isValidModuleCode(moduleCode)) : "Module code should be valid";
         this.moduleCode = moduleCode;
     }
 

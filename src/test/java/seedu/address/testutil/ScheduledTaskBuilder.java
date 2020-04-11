@@ -57,7 +57,7 @@ public class ScheduledTaskBuilder {
     /**
      * Sets the {@code isDone} of the {@code ScheduledTask} that we are building.
      */
-    public ScheduledTaskBuilder withIsDone(boolean isDone) {
+    public ScheduledTaskBuilder setDone(boolean isDone) {
         this.isDone = isDone;
         return this;
     }

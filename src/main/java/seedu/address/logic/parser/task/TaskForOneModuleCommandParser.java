@@ -38,8 +38,12 @@ public class TaskForOneModuleCommandParser implements Parser<TaskForOneModuleCom
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
         }
 
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
-        return new TaskForOneModuleCommand(new TaskContainsInModulePredicate(moduleCode.toString()));
+        ModuleCode modCode = ParserUtil.parseModuleCode(
+                argMultimap.getValue(PREFIX_MODULE_CODE)).getClone(); // returns a defensive copy
+
+        String moduleCode = modCode.toString();
+
+        return new TaskForOneModuleCommand(new TaskContainsInModulePredicate(moduleCode));
     }
 
     /**

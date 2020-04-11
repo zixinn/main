@@ -26,18 +26,19 @@ import seedu.address.logic.commands.task.TaskSearchCommand;
 import seedu.address.model.task.TaskSearchPredicate;
 
 public class TaskSearchCommandParserTest {
+    private static String wrongSyntaxMessage =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE);
+    private static String invalidParametersMessage =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
+    private static String outOfBoundsMessage =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
+
     private TaskSearchCommandParser parser = new TaskSearchCommandParser();
 
     @Test
     public void parse_withPreamble_success() {
-        // whitespace only preamble, empty HashMap (no day/month/year supplied)
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE,
-                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
-
-        // arbitrary preamble
-        assertParseSuccess(parser, PREAMBLE_NON_EMPTY,
-                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
-
         // arbitrary preamble with parameters supplied
         assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020,
                 new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>() {
@@ -46,16 +47,14 @@ public class TaskSearchCommandParserTest {
                         put("year", Integer.parseInt(TASK_YEAR_2020));
                     }
                 })));
-
         // the rest of the methods below will not test the presence of Preamble
         // since we already tested it here.
     }
 
     @Test
-    public void parse_allFieldsMissing_success() {
+    public void parse_allFieldsMissing_failure() {
         // no preamble, empty HashMap (no day/month/year supplied)
-        assertParseSuccess(parser, EMPTY_ARGUMENTS,
-                new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>())));
+        assertParseFailure(parser, EMPTY_ARGUMENTS, wrongSyntaxMessage);
     }
 
     @Test
@@ -107,30 +106,24 @@ public class TaskSearchCommandParserTest {
 
     @Test
     public void parse_fieldsArePresentButValuesOutOfBound_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
-
         assertParseFailure(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
-                expectedMessage);
+                outOfBoundsMessage);
     }
 
     @Test
     public void parse_fieldsArePresentButAtLeastOneFieldHaveStringInput_failure() {
         // apply heuristic ‘no more than one invalid input in a test case’
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
-
         // invalid field is day
         assertParseFailure(parser, INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
-                expectedMessage);
+                invalidParametersMessage);
 
         // invalid field is month
         assertParseFailure(parser, TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
-                expectedMessage);
+                invalidParametersMessage);
 
         // invalid field is year
         assertParseFailure(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
-                expectedMessage);
+                invalidParametersMessage);
     }
 }

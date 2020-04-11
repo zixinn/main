@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(Task toCheck) {
+    public boolean hasThisTask(Task toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameTask);
     }
@@ -45,7 +45,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (hasThisTask(toAdd)) {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
@@ -67,7 +67,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
 
-        if (!target.isSameTask(editedTask) && contains(editedTask)) {
+        if (!target.isSameTask(editedTask) && hasThisTask(editedTask)) {
             throw new DuplicateTaskException();
         }
 
@@ -125,6 +125,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 editedTask = new ScheduledTask(task.getDescription(), task.getTaskDateTime().get(), editedModuleCode,
                         task.getTaskNum(), task.isTaskDone());
             } else {
+                assert (task instanceof NonScheduledTask) : "This task should not be schedule-able";
                 editedTask = new NonScheduledTask(task.getDescription(), editedModuleCode,
                         task.getTaskNum(), task.isTaskDone());
             }
@@ -145,7 +146,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
-        if (!tasksAreUnique(tasks)) {
+        if (!areTasksUnique(tasks)) {
             throw new DuplicateTaskException();
         }
 
@@ -189,7 +190,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if {@code tasks} contains only unique tasks.
      */
-    private boolean tasksAreUnique(List<Task> tasks) {
+    private boolean areTasksUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
                 if (tasks.get(i).isSameTask(tasks.get(j))) {
