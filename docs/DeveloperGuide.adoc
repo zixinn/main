@@ -502,16 +502,16 @@ Generating task number is done through static calls to methods of `TaskNumManage
 
 It supports the following operations:
 
-* `*add*` - Adds a task to a `Module` in Mod Manager.
-* `*edit*` - Edits the information of a task in Mod Manager.
-* `*delete*` - Deletes a task from the `Module` and Mod Manager.
-* `*done*` - Marks a task as done in Mod Manager
-* `*list*` - Shows a list of all tasks across all `Module` s in Mod Manager.
-* `*module*` - Shows a list of all tasks for a specified `Module` in Mod Manager.
-* `*undone*` - Shows a list of all undone tasks in Mod Manager.
-* `*find*` - Finds a task in Mod Manager by its description.
-* `*search*`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
-* `*upcoming*` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
+* `add` - Adds a task to a `Module` in Mod Manager.
+* `edit` - Edits the information of a task in Mod Manager.
+* `delete` - Deletes a task from the `Module` and Mod Manager.
+* `done` - Marks a task as done in Mod Manager
+* `list` - Shows a list of all tasks across all `Module` s in Mod Manager.
+* `module` - Shows a list of all tasks for a specified `Module` in Mod Manager.
+* `undone` - Shows a list of all undone tasks in Mod Manager.
+* `find` - Finds a task in Mod Manager by its description.
+* `search`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
+* `upcoming` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
 
 //end::taskOverview[]
 ==== Implementation Details
