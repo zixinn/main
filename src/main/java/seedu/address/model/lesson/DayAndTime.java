@@ -16,7 +16,7 @@ import seedu.address.model.lesson.exceptions.InvalidTimeRangeException;
 public class DayAndTime implements Comparable<DayAndTime> {
 
     public static final String MESSAGE_CONSTRAINTS_DAY_AND_TIME =
-            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY\n "
+            "Day should only be either MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY\n"
                     + "and time should be in HH:MM 24 hours format. Day, start time and end time must be all present.";
 
     public static final String MESSAGE_CONSTRAINTS_DAY =

@@ -27,7 +27,7 @@ public class LessonFindCommandTest {
         LessonFindCommand command = new LessonFindCommand(day);
         CommandResult result = command.execute(model);
         String resultString = result.getFeedbackToUser();
-        String expectedResult = "Lessons on " + day.toString() + "\n" + "\u2022 "
+        String expectedResult = "Classes on " + day.toString() + "\n" + "\u2022 "
                 + model.findLessonByDay(DayOfWeek.WEDNESDAY).get(0).toString() + "\n";
         assertEquals(resultString, expectedResult);
     }
@@ -35,7 +35,7 @@ public class LessonFindCommandTest {
     @Test
     public void execute_dayWithNoLessonLessonList_noLessonsFound() throws CommandException {
         String result = new LessonFindCommand(DayOfWeek.SATURDAY).execute(model).getFeedbackToUser();
-        String expectedResult = "No lessons on SATURDAY";
+        String expectedResult = "No class on SATURDAY";
         assertEquals(result, expectedResult);
     }
 
