@@ -29,6 +29,15 @@ import seedu.address.model.task.TaskSearchPredicate;
 public class TaskSearchCommandParserTest {
     private TaskSearchCommandParser parser = new TaskSearchCommandParser();
 
+    private static String WRONG_COMMAND_SYNTAX_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE);
+    private static String INVALID_PARAMETERS_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
+    private static String OUT_OF_BOUNDS_COMMAND_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
+
     @Test
     public void parse_withPreamble_success() {
         // arbitrary preamble with parameters supplied
@@ -45,9 +54,8 @@ public class TaskSearchCommandParserTest {
 
     @Test
     public void parse_allFieldsMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskSearchCommand.MESSAGE_USAGE);
         // no preamble, empty HashMap (no day/month/year supplied)
-        assertParseFailure(parser, EMPTY_ARGUMENTS, expectedMessage);
+        assertParseFailure(parser, EMPTY_ARGUMENTS, WRONG_COMMAND_SYNTAX_MESSAGE);
     }
 
     @Test
@@ -99,30 +107,24 @@ public class TaskSearchCommandParserTest {
 
     @Test
     public void parse_fieldsArePresentButValuesOutOfBound_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
-
         assertParseFailure(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
-                expectedMessage);
+                OUT_OF_BOUNDS_COMMAND_MESSAGE);
     }
 
     @Test
     public void parse_fieldsArePresentButAtLeastOneFieldHaveStringInput_failure() {
         // apply heuristic ‘no more than one invalid input in a test case’
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TaskSearchCommand.MESSAGE_INVALID_DAY_MONTH_YEAR);
-
         // invalid field is day
         assertParseFailure(parser, INVALID_TASK_DAY_STRING + TASK_CMD_MONTH_03 + TASK_CMD_YEAR_2020,
-                expectedMessage);
+                INVALID_PARAMETERS_MESSAGE);
 
         // invalid field is month
         assertParseFailure(parser, TASK_CMD_DAY_26 + INVALID_TASK_MONTH_STRING + TASK_CMD_YEAR_2020,
-                expectedMessage);
+                INVALID_PARAMETERS_MESSAGE);
 
         // invalid field is year
         assertParseFailure(parser, TASK_CMD_DAY_26 + TASK_CMD_MONTH_03 + INVALID_TASK_YEAR_STRING,
-                expectedMessage);
+                INVALID_PARAMETERS_MESSAGE);
     }
 }

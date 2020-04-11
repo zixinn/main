@@ -120,8 +120,6 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
 
         // check for out of bounds date, month, and/or year
 
-        boolean isOneParameterProvided = (keywords.size() == 1);
-
         if (isAllDateMonthYearProvided(keywords)) {
             if (!isValidDate(keywords)) {
                 throw OUT_OF_BOUNDS_PARAMETERS_EXCEPTION;
@@ -131,6 +129,8 @@ public class TaskSearchCommandParser implements Parser<TaskSearchCommand> {
         }
 
         assert (keywords.size() <= 2): "At least one of the three parameters should be missing";
+
+        boolean isOneParameterProvided = (keywords.size() == 1);
 
         if (isOneParameterProvided) {
             if (!isTheOnlyKeyNotOutOfBound(keywords)) {
