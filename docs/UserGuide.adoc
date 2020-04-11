@@ -22,11 +22,11 @@ By: `Team AY1920S2-CS2103T-F10-4`      Since: `Jan 2020`      Licence: `MIT`
 // tag::introduction[]
 Welcome to *Mod Manager*!
 
-*Mod Manager* is a desktop application that assists students in *managing schedules and contacts for their modules* in a semester.
+*Mod Manager* is a desktop application that assists students in *managing tasks, schedules, and contacts for their modules* in a semester.
 
 More importantly, *Mod Manager* is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-If you can type fast, Mod Manager can get your management of schedules and contacts done faster than traditional GUI apps.
+If you can type fast, Mod Manager can get your management of tasks, schedules and contacts done faster than traditional GUI apps.
 
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 // end::introduction[]
@@ -38,15 +38,25 @@ This user guide helps you to master how to use Mod Manager.
 It explains the features and commands supported by Mod Manager, with examples to illustrate how the application works.
 // end::about[]
 
+Note the following symbols and formatting used in this document:
+
+.Symbols used in this User Guide
+[%autowidth]
+|=====
+^|*Symbol* |*Meaning*
+^|kbd:[Enter] | The enter button on the keyboard.
+^|image:InfoIcon.png[width="40"] | Information that you need to know.
+|=====
+
 == Quick Start
 
 === Installing Mod Manager
 Here are the steps to get you started with using Mod Manager:
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `modmanager.jar` link:{repoURL}/releases[here].
+.  Download the latest `ModManager.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Mod Manager.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Double-click the file to start the application. The GUI should appear in a few seconds.
 +
 .GUI for Mod Manager
 image::Gui.png[width="800"]
@@ -56,13 +66,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
-* *`cmd all`* : lists all available commands in our Mod Manager.
-* *`mod add /code CS2103T /desc Software Engineering`* : adds the module CS2103T to the module list.
-* *`class add /code CS2103T /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud`* : adds a class to the module CS2103T.
-* *`task add /code CS2103T /desc Complete tP tasks`*: adds a task to the module CS2103T.
-* *`facil add /name Akshay Narayan /email dcsaksh@nus.edu.sg /code CS2103T`*: adds a facilitator to the module CS2103T. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
-* *`cal view /week this`* : views your schedules for the current week.
-* *`exit`* : exits the application.
+* `*cmd* all` : lists all available commands in our Mod Manager.
+* `*mod* add /code CS3233 /desc Competitive Programming` : adds the module CS3233 to the module list.
+* `*class* add /code CS3233 /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud` : adds a lecture class to the module CS3233.
+* `*task* add /code CS3233 /desc Complete Pset 10 /on 30/04/2020 /at 23:59`: adds a task to the module CS3233.
+* `*facil* add /name Steven Halim /email stevenha@comp.nus.edu.sg /code CS3233`: adds a facilitator to the module CS3233. If you are rushing to write an e-mail to your lecturer, you can refer to this conveniently.
+* `*cal* view /week this` : views your schedules for the current week. You should see the CS3233 lecture group
+that you added above.
+* `*exit*` : exits the application.
 
 .  Refer to <<Features>> for details of each command.
 
@@ -87,47 +98,157 @@ The four tabs are **Module**, **Facilitators**, **Tasks** and **Calendar**
 It also shows the list of modules you currently have.
 +
 
-.Module tab
+.**Module** tab
 image::Ui.png[]
 
 * **Facilitators** tab contains information about all the facilitators you currently have.
 +
 
-.Facilitators tab
+.**Facilitators** tab
 image::Facil.png[]
 
-* **Tasks** tab contains information about all the tasks you currently have.
+* **Tasks** tab contains information about all the tasks you currently have. Completed tasks
+are shown in green, whereas the rest are uncompleted tasks.
 +
 
-.Tasks tab
+.**Tasks** tab
 image::Task.png[]
 
 * **Calendar** tab shows tasks and lessons in a week.
 +
 
-.Calendar tab
+.**Calendar** tab
 image::Calendar.png[]
 
 [[Features]]
 == Features
 
+This section describes the main features of Mod Manager and how to use them.
+
+The features are grouped into six categories:
+
+. <<General, General>> feature
+. <<Module feature : `*mod*`, Module>> feature
+. <<Class feature : `*class*`, Class>> feature
+. <<Facilitator feature : `*facil*`, Facilitator>> feature
+. <<Task feature : `*task*`, Task>> feature
+. <<Calendar feature : `*cal*`, Calendar>> feature
+
+Additionally, the <<Upcoming `[coming in v2.0]`, upcoming>> features section offers a
+preview of what you can expect in **Mod Manager v2.0**.
+
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-* Items in square brackets are optional. Items in curly brackets are mutually exclusive.
-* Items with `…`​ after them can be used multiple times including zero times.
-* Parameters can be in any order.
-* Module code and facilitator name are case-insensitive.
+This document uses the following notation to describe command formats:
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. +
+e.g. In the command format `*mod* add /code MOD_CODE`, `MOD_CODE` is a parameter
+which can be used as `*mod* add /code CS2103T`.
+* Items in square brackets are optional. +
+e.g `/code MOD_CODE [/desc DESCRIPTION]` can be used as
+`/code CS2103T /desc Software Engineering` or as `/code CS2103T`.
+* Items with `...`​ after them can be used multiple times, including 0 times. +
+e.g. `[MORE_DESCRIPTIONS]...` can be used as `{nbsp}` (i.e. 0 times),
+`Software` (once), `Software Engineering` (twice),
+`SWE AI Algorithms` etc.
+//@Todo: check if below works
+* Parameters can be used in any order unless otherwise specified.
+e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
+`/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-=== Viewing help : `*help*`
+=== General
+The following commands carry out general operations in Mod Manager.
 
-You can open up the help window that displays you a link to the user guide.
+==== Viewing help : `*help*`
 
-Format: `*help*`
+You can open the help window that displays a link to our user guide.
 
-=== Managing modules : `*mod*`
+Format:
+
+* `*help*`
+
+==== Undoing previous commands : `*undo*`
+
+You can restore the Mod Manager to the state before the previous undoable command was executed.
+
+Format:
+
+* `*undo*`
+
+==== Redoing previously undone commands : `*redo*`
+
+You can reverse your undone actions.
+
+Format:
+
+* `*redo*`
+
+==== Listing commands : `*cmd*`
+
+*Listing all commands*:
+
+Lists all valid command groups.
+
+The command groups available in `ModManager` are the words in bold you have seen throughout this document.
+These include: `*facil*, *mod*, *task*, ...`
+
+Format:
+
+* `*cmd* all`
+
+*Listing commands for a specific feature*:
+
+Lists commands for a specific group.
+
+Format:
+
+* `*cmd* group COMMAND_WORD`
+
+Example: `*cmd* group task`
+
+==== Automatic command guidance
+
+Provides guidance for mistyped commands by showing a list of possible valid commands. +
+The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
+
+//tag::clear[]
+==== Clearing all entries : `*clear*`
+
+You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
+
+Format:
+
+* `*clear*`
+
+Example:
+
+Suppose your semester has ended and you do not want to see any information related to those modules you have taken in that semester anymore.
+You can type `*clear*` as shown below.
+
+.Before `*clear*`
+image::BeforeClear.png[]
+
+After pressing kbd:[Enter], Mod Manager is empty. All the entries you have are cleared.
+
+.After `*clear*`
+image::AfterClear.png[]
+
+//end::clear[]
+
+//tag::exit[]
+==== Exiting the program : `*exit*`
+
+You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
+
+Format:
+
+* `*exit*`
+//end::exit[]
+
+
+=== Module feature : `*mod*`
 
 // tag::module[]
 // tag::mod[]
@@ -143,7 +264,7 @@ Format:
 
 * `*mod* add /code MOD_CODE [/desc DESCRIPTION]`
 
-Parameter constraints:
+Command properties:
 ****
 * MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
 * DESCRIPTION should not exceed 64 characters.
@@ -167,7 +288,7 @@ You can also add a module without description.
 To add a module with the module code `CS2101`,
 you can type the following command:
 
-`mod add /code CS2101`
+`*mod* add /code CS2101`
 
 .Before `*mod* add /code CS2101`
 image::ModAddBefore2.png[]
@@ -204,7 +325,7 @@ Format:
 * `*mod* view INDEX`
 * `*mod* view MOD_CODE`
 
-Parameter constraints:
+Command properties:
 ****
 * Views the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -245,7 +366,7 @@ Format:
 * `*mod* edit INDEX [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 * `*mod* edit MOD_CODE [/code NEW_MODE_CODE] [/desc DESCRIPTION]`
 
-Parameter constraints:
+Command properties:
 ****
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -303,7 +424,7 @@ Format:
 * `*mod* delete INDEX`
 * `*mod* delete MOD_CODE`
 
-Parameter constraints:
+Command properties:
 ****
 * Deletes the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -337,7 +458,7 @@ image::ModDeleteAfter2.png[]
 
 // tag::class[]
 
-=== Managing classes : `*class*`
+=== Class feature : `*class*`
 
 You can add, find, edit or delete classes within ModManager. +
 When managing your classes, you should take note of the following areas in the main viewing area. To find the main viewing area, you can refer to section 3.1.
@@ -349,7 +470,9 @@ image::ClassExplain.png[]
 
 You can add a class to a module.
 
-Format: `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]` +
+Format:
+
+* `*class* add /code MOD_CODE /type CLASS_TYPE /at DAY START_TIME END_TIME [/venue VENUE]` +
 
 Command properties:
 ****
@@ -357,9 +480,10 @@ Command properties:
 * CLASS_TYPE available for use are LEC, TUT, SEC, REC and LAB.
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
 * START_TIME and END_TIME should be in 24 hour HH:mm format.
-* VENUE is optional
+* VENUE is optional.
 ****
-Example: +
+Example:
+
 You have a CS2103T lecture on Friday from 14:00 to 16:00 at i3-Aud. Before adding that class, ModManager looks like what you see in the figure below. +
 
 .Before adding a class
@@ -376,13 +500,16 @@ image::ClassAddAfter.png[]
 
 You can find classes occurring on a particular day.
 
-Format: `*class* find /at DAY`
+Format:
+
+* `*class* find /at DAY`
 
 Command properties:
 ****
 * DAY available for use are MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY and SUNDAY.
 ****
-Example: +
+Example:
+
 To know what classes you have on Friday, you can type `*class* find /at friday` and you will be able to see the classes in the result display box as shown in the figure below.
 
 .After finding class by day
@@ -392,8 +519,12 @@ image::ClassFindDay.png[]
 
 You can find the next class that will start soon.
 
-Format: `*class* find /next` +
-Example: +
+Format:
+
+* `*class* find /next`
+
+Example:
+
 After typing `*class* find /next`, you will be directed to the module's page and you will see the class as shown in the figure below.
 
 .After finding next class
@@ -403,7 +534,9 @@ image::ClassFindNext.png[]
 
 You can edit the information of the class. The class to be edited is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
-Format: `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
+Format:
+
+* `*class* edit INDEX /code MOD_CODE [/code NEW_MOD_CODE] [/type CLASS_TYPE] [/at DAY START_TIME END_TIME] [/venue VENUE]` +
 
 Command properties:
 ****
@@ -414,7 +547,8 @@ Command properties:
 * START_TIME and END_TIME should be in 24 hour HH:mm format.
 * At least one of the optional fields must be provided.
 ****
-Example: +
+Example:
+
 Let's say that the venue of the CS2103T lecture you just added changed to Home. You can edit the class by typing `*class* edit 1 /code CS2103T /venue Home`. ModManager will direct you to the module's page and it will reflect the updated venue as seen below.
 
 .After editing a class
@@ -424,14 +558,17 @@ image::ClassEdit.png[]
 
 You can delete the class from the module. The class to be deleted is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
-Format: `*class* delete INDEX /code MOD_CODE`
+Format:
+
+* `*class* delete INDEX /code MOD_CODE`
 
 Command properties:
 ****
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: +
+Example:
+
 You can delete the CS2103T lecture by typing `*class* delete 1 /code CS2103T`. The class will not appear in the class list under the module CS2103T as seen below.
 
 .After deleting a class
@@ -439,17 +576,22 @@ image::ClassDelete.png[]
 
 // end::class[]
 
-=== Managing tasks : `*task*`
+// start::task[]
+=== Task feature : `*task*`
+The commands in this section carry out operations on the task list in Mod Manager.
+Executing these commands will bring you to the Tasks tab.
 
 ==== Adding a task
 
 Adds a task to a module.
 
-Format: `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
+Format:
+
+* `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
 
 Example: `*task* add /code CS3230 /desc Programming Assignment 2 /on 20/02/2020 /at 23:59`
 
-Parameter constraints:
+Command properties:
 ****
 * MOD_CODE must be an existing and valid module code in the list of modules.
 * A module can be linked to any number of tasks (including 0).
@@ -461,66 +603,6 @@ e.g. Day 32 or Month 13 is not allowed.
 e.g. 24:00 is not allowed.
 * Duplicate tasks across modules are allowed. However,
 tasks within a same module must have different descriptions. They can occupy the same time period.
-****
-
-==== Marking a task as done
-
-Marks a task as done in the module.
-Format: `*task* done /code MOD_CODE /id ID_NUMBER` +
-Example: `*task* done /code CS2103T /id 979`
-
-==== Viewing all tasks across modules in ModManger
-
-Shows a list of all tasks across all modules in the Mod Manager. +
-Format: `*task* list`
-
-==== Viewing tasks for a specific module in ModManger
-Shows a list of tasks for a particular module in the Mod Manager. +
-Format: `*task* module /code CS2103T`
-
-==== Viewing all undone tasks
-Shows a list of all tasks that are not yet done across all modules in the Mod Manager. +
-Format: `*task* undone`
-
-==== Finding a task by description
-
-With this command, you can find tasks that contain any of the given keywords in their description.
-
-Format: `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
-
-Parameter constraints:
-****
-* The search works across modules, and no `/code` commands are required. For example, you may want to find all the `assignment` currently due.
-* If no descriptions are supplied, no tasks will be found.
-* Search for description is case insensitive. e.g `programming` will match `Programming`.
-* The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
-* Tasks are only searched in the description.
-* Words can be partially matched e.g. `A` will match `Assignment`.
-* Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
-****
-
-==== Searching tasks by date
-
-Searches all tasks that occur on your specified date, month, or year.
-
-Format: `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
-
-Example: `*task* search /month 4`, `*task* search /day 10 /month 4`
-
-Parameter constraints:
-****
-* The search works across modules, and no `/code` commands are required.
-* Tasks are only searched for its date. Tasks that do not have dates or times
-will not be found in this list.
-* If no optional fields are provided, the Mod Manager's behaviour is the same as `*task* list`.
-* An invalid day, month, or year number can be provided, e.g.
-`/day 32`, `/month 13`, `year -1`, however, no matching tasks
-will be returned by the search. On the other hand, Invalid inputs such as
-`/day monday`, `/month December`, `/year this year` are not allowed,
-and you will have to follow the input requirements using valid numbers for
-`/day`, `/month`, and `/year` instead.
-* Tasks matching all conditions will be returned (i.e. `AND` search). e.g. `/day 10 /month 4` will
-match only tasks that are on 10 April in any year.
 ****
 
 ==== Editing a task
@@ -536,7 +618,9 @@ From here on, you will be introduced to Mod Manager's task ID system.
 
 You can edit a task's description, its date and time details, or both.
 
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
+Format:
+
+* `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
 
 Mod Manager will find the task associated with the task ID number provided and update the information correspondingly.
 
@@ -544,7 +628,9 @@ Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59`
 
 Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so.
 
-Format: `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
+Format:
+
+* `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
 
 Example: `*task* edit CS2103T 848 /on non`
 
@@ -552,12 +638,228 @@ Example: `*task* edit CS2103T 848 /on non`
 
 You can delete a task from Mod Manager's system.
 
-Format: `*task* delete MOD_CODE ID_NUMBER`
+Format:
+
+* `*task* delete MOD_CODE ID_NUMBER`
 
 Example: `*task* delete CS2103T 973`
 
-=== Managing facilitators : `*facil*`
+==== Marking a task as done
 
+You can mark the task as done in the module in Mod Manager.
+
+NOTE: A newly added task as above will be considered as not done by default.
+
+NOTE: Editing a task will not change the done/not done status of the task.
+
+NOTE: Tasks that are already marked as done cannot be re-marked as done.
+
+Format:
+
+* `*task* done /code MOD_CODE /id ID_NUMBER` +
+
+Command properties:
+****
+* MOD_CODE should belong to a valid and existing module in Mod Manager.
+* ID_NUMBER should belong to a valid task for the module above.
+****
+
+Example:
+
+You can mark a task as done in the module. To mark the task with
+task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the following command:
+
+`*task* done /code CS2105 /id 224`
+and hit kbd:[Enter]
+
+.Before `*task* done /code CS2105 /id 224`
+image::TaskDoneBeforeCloseUp.png[]
+
+.After `*task* done /code CS2105 /id 224`
+image::TaskDoneAfterCloseUp.png[]
+
+The task card has changed to green; which means our task has been marked as done.
+Hooray! We just completed a task.
+
+==== Viewing all tasks across modules in ModManger
+
+You can view a list of all tasks across all modules in Mod Manager.
+This is great when you need an overview of all tasks that you need to complete
+at present.
+
+Format:
+
+* `*task* list`
+
+Example:
+
+By typing the command above, you should see the following:
+
+.`*task* list` shows a list of all tasks in Mod Manager
+image::TaskList.png[]
+
+==== Viewing tasks for a specific module in ModManger
+If you want to find tasks for a specific module in Mod Manager, this is the command for you to use!
+
+Format:
+
+* `*task* module /code CS2103T`
+
+Command properties:
+****
+* MOD_CODE should belong to a valid and existing module in Mod Manager.
+****
+
+NOTE: Alternatively, you can also view the tasks for a specific module in the Module tab (main dashboard).
+
+Example:
+
+If you want a list of current tasks for the module `CS3230`, you can type in the following command:
+
+`*task* module /code CS3230`
+and hit kbd:[Enter]
+
+It is not compulsory for you to be at the Tasks tab before typing in this command.
+Mod Manager will automatically redirect you to the Tasks tab if you are currently at another tab.
+
+.All tasks belonging to the module `CS3230` are listed
+image::TaskListModule.png[]
+
+==== Viewing all tasks not done
+Previously, we know that we can mark a task as done, so as to organise, manage,
+and plan our tasks better. Now, with this command, you can see all the
+tasks that have not yet been completed (not done).
+
+Format:
+
+* `*task* not-done`
+
+.Before `*task* not-done`, all tasks are listed
+image::TaskListNotDoneBefore.png[]
+
+By typing the command above and hit kbd:[Enter] , you should only see uncompleted tasks,
+which are in dark red color:
+
+.Only uncompleted tasks are shown
+image::TaskListNotDoneAfter.png[]
+
+==== Finding tasks by description
+
+You are browsing through the task list. But there are too many tasks! You suddenly
+remember a specific task that you want to do, but you can only vaguely remember its description,
+e.g. something related to assignment.
+
+This command is exactly what you need. In your case, you can find all tasks that
+contain the word `assignment`, which may include `Programming Assignment`,
+`written assignment`, `Take-home Lab Assignment` (note that it can be case-insensitive).
+If you remember multiple words in your wanted tasks, you may also type in multiple words as you want.
+Tasks that meet at least one of the keywords you provided will be shown to you.
+
+Format:
+
+* `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
+
+Command properties:
+****
+* The `find` works across modules, so no `/code` command are required. For example, you may want to find all the `assignment` currently due.
+* Searching for description is case insensitive. e.g `programming` will match `Programming`.
+* The order of the descriptions does not matter. e.g. `Programming Assignment` will match `Assignment Programming`.
+* Tasks are only searched in the description.
+* Words can be partially matched e.g. `assign` will match `assignment`.
+* Tasks matching at least one description will be returned (i.e. `OR` search). e.g. `assign home` will return both `Programming Assignment 2` and `Homework 3`.
+****
+
+Examples:
+
+To find tasks that contain the word `oral`, `assign`, or `tut` in their description,
+you can type in the following command:
+
+`*task* find oral assign tut` and press kbd:[Enter]
+
+.After `*task* find oral assign tut`, all matching tasks are displayed.
+image::TaskFindAfter.png[]
+
+Explanation: +
+- `Oral Presentation 2` contains `Oral` which matches `oral` (case-insensitive). +
+- `Programming Assignment 2` contains `Assignment` which matches `assign` (case-insensitive, and words can be partial match) +
+-  Similarly, `Assignment 3` will match `assign`, and `Tutorial` will match `tut` +
+- As long as a task's description matches *one* of the keywords provided, it will be shown. +
+
+You can try typing in `*task* find assign tut oral` and press kbd:[Enter]. This will return the same list
+of tasks, since the ordering of the keywords does not matter.
+
+Other examples:
+
+* `*task* find homework` +
+Finds all tasks that contain the word `homework` in their description
+
+* `*task* find math coding` +
+Finds all tasks that contain the word `math` *or* `coding` in their description
+
+==== Searching tasks by date
+
+With this command, you can search for all tasks that occur on your specified date, month, or year.
+
+NOTE: Tasks are only searched for its date. Tasks that do not have dates or times
+will not be found in this list.
+
+Format:
+
+* `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
+
+Command properties:
+****
+* The `search` works across modules, so no `/code` commands are required.
+* If no optional fields are provided, Mod Manager will output all tasks
+that have a specified time period.
+* Invalid inputs such as `/date monday`, `/month December`, `/year this year` are not allowed.
+Please use numbers for `/date`, `/month`, and `/year` instead.
+* Invalid date, month, or year is not allowed. For example: +
+- `/date 32`, `/date 0`: `date` can only range from `1` to `31`.
+- `/month 13`, `/month 0`: `month` can only range from `1` to `12`.
+- `/year 0`, `/year 99999`: the `search` only accept `year` ranging from `1` to `9999`
+- `/date 30 /month 2`: there is no 30/2 in any year
+- `/date 29 /month 2 /year 2019`: this is not possible since `2019` is not a leap year.
+However, `/date 29 /month 2` (year is not provided) is okay.
+* Tasks matching *all* conditions will be returned (i.e. `AND` search). e.g. `/month 5 /year 2020` will
+only match tasks that are in May 2020.
+****
+
+Example:
+
+You can search for tasks that are due on the submission date of CS2103T for AY19/20 S2
+(13 April). To find tasks happening on 13 April,
+you can type `*task* search /date 13 /month 4` and press kbd:[Enter]. This will return all tasks
+that are happening on 13 April.
+
+.Before `*task* search /date 13 /month 4`, all tasks are listed
+image::TaskSearchBefore.png[]
+Note that the content above may be different from what is currently on your Mod Manager. You may `add`
+or `edit` the tasks to match we have above
+
+.After `*task* search /date 13 /month 4`, only matching tasks are listed
+image::TaskSearchAfter.png[]
+
+Explanation: the two tasks both have date as `13` and month as `4`.
+
+Other examples:
+
+* `*task* search /date 1` +
+Searches for all tasks happening on the first day of the month, in any year. Who wants
+to study on New Year's Day really?
+
+* `*task* search /month 4 /year 2020` +
+Searches for all tasks in the current month (at the time of writing, April 2020).
+
+* `*task* search /year 2020` +
+Searches for all tasks in this year (at the time of writing). This will be useful
+if Mod Manager is used over a long period of time.
+
+* `*task* search /date 14 /month 2 /year 2021` +
+Searches for all tasks happening on 14/02/2021.
+// end::task[]
+
+=== Facilitator feature : `*facil*`
 // tag::facilitator[]
 The commands in this section carry out operations on the facilitator list in Mod Manager.
 Executing these commands will bring you to the Facilitators tab.
@@ -571,7 +873,7 @@ Format:
 * `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [MORE_MOD_CODES]...`
 * `*facil* add /name FACILITATOR_NAME [/phone PHONE] [/email EMAIL] [/office OFFICE] /code MOD_CODE [/code MORE_MOD_CODES]...`
 
-Parameter constraints:
+Command properties:
 ****
 * At least one of the optional fields (phone, email, office) must be provided.
 * A facilitator can be linked to one or more modules. A module with the module code provided must exist in Mod Manager.
@@ -631,7 +933,7 @@ Format:
 
 * `*facil* find FACILITATOR_NAME [MORE_FACILITATOR_NAMES]...`
 
-Parameter constraints:
+Command properties:
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`.
 * The order of the name does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -675,9 +977,9 @@ Format:
 * `*facil* edit INDEX [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 * `*facil* edit FACILITATOR_NAME [/name FACILITATOR_NAME] [/phone PHONE] [/email EMAIL] [/office OFFICE] [/code MOD_CODE...]`
 
-Parameter constraints:
+Command properties:
 ****
-* Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the facilitator tab. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the Facilitators tab. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing module codes, the existing module codes of the facilitator will be removed i.e adding of module code is not cumulative.
@@ -688,7 +990,7 @@ Parameter constraints:
 Examples:
 
 You can edit the information of a facilitator using the index in the last shown facilitator list.
-To update the name and email of the first facilitator in the last shown facilitator list in the facilitator tab to `Akshay` and `hisnewemail@nus.edu.sg` respectively,
+To update the name and email of the first facilitator in the last shown facilitator list in the Facilitators tab to `Akshay` and `hisnewemail@nus.edu.sg` respectively,
 you can type the following command:
 
 `*facil* edit 1 /name Akshay /email hisnewemail@nus.edu.sg`
@@ -712,7 +1014,7 @@ image::FacilEditBefore2.png[]
 image::FacilEditAfter2.png[]
 
 You can also remove the information of a facilitator without specifying any input after the prefix `/phone`, `/email` or `/office`.
-To remove the phone of the second facilitator in the last shown facilitator list in the facilitator tab,
+To remove the phone of the second facilitator in the last shown facilitator list in the Facilitators tab,
 type the following command:
 
 `*facil* edit 2 /phone`
@@ -732,15 +1034,15 @@ Format:
 * `*facil* delete INDEX`
 * `*facil* delete FACILITATOR_NAME`
 
-Parameter constraints:
+Command properties:
 ****
-* Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the facilitator tab. The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the facilitator at the specified `INDEX`. The index refers to the index number shown in the last displayed facilitator list in the Facilitators tab. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
 You can delete a facilitator using the index in the last shown facilitator list.
-To delete the first facilitator in the last shown facilitator list in the facilitator tab,
+To delete the first facilitator in the last shown facilitator list in the Facilitators tab,
 you can type the following command:
 
 `*facil* delete 1`
@@ -765,7 +1067,7 @@ image::FacilDeleteAfter2.png[]
 // end::facilitator[]
 
 //tag::calendar[]
-=== Managing calendar : `*cal*`
+=== Calendar feature : `*cal*`
 
 The commands in this section carry out operations related to the calendar in Mod Manager.
 Executing these commands will bring you to the Calendar tab.
@@ -774,24 +1076,30 @@ Executing these commands will bring you to the Calendar tab.
 
 You can view the calendar for the current week. It displays the tasks and classes you have in the current week.
 
-Format: `*cal* view /week this`
+Format:
 
-Example: +
-You can view the calendar for the current week by typing the above command.
-The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in the current week.
+* `*cal* view /week this`
+
+Example:
+
+After typing `*cal* view /week this`, the calendar for the current week will be displayed to you as shown below.
+The red cards represent the tasks you have not done, the green cards represent the tasks you have already done and the blue cards represent the classes you have in the current week.
 
 .Outcome of `*cal* view /week this`
 image::CalView1.png[]
 
 ==== Viewing calendar for next week
 
-You can view the calendar for next week. It displays the tasks and classes you have in next week.
+You can view the calendar for next week. It displays the tasks and classes you have in the next week.
 
-Format: `*cal* view /week next`
+Format:
 
-Example: +
-You can view the calendar for the next week by typing the above command.
-The yellow boxes represents the tasks you have while the blue boxes represents the lessons you have in next week.
+* `*cal* view /week next`
+
+Example:
+
+After typing `*cal* view /week next`, the calendar for the next week will be displayed to you as shown below.
+The red cards represent the tasks you have not done, the green cards represent the tasks you have already done and the blue cards represent the classes you have in next week.
 
 .Outcome of `*cal* view /week next`
 image::CalView2.png[]
@@ -801,10 +1109,14 @@ image::CalView2.png[]
 You can find the empty slots from current day to end of the week of the current day.
 The empty slots are time periods where you do not have classes or tasks.
 
-Format: `*cal* find empty`
+Format:
 
-Example: +
-You can get the list of empty slots by typing the above command. The list will be displayed in the result display box.
+* `*cal* find empty`
+
+Example:
+
+You can get the list of empty slots after typing `*cal* find empty`. The list will be displayed in the result display box as seen below.
+The command will not change the week of the calendar you are viewing.
 
 .Outcome of `*cal* find empty`
 image::CalFind1.png[]
@@ -813,12 +1125,10 @@ The full message in the result display box in the above figure is:
 
 ****
 Here's the list of empty slots from today to Sunday: +
-WEDNESDAY: +
-00:00-12:00  12:00-14:00  16:00-23:59 +
 THURSDAY: +
-00:00-08:00  11:00-23:59 +
+00:00-08:00  12:00-16:00  18:00-23:59 +
 FRIDAY: +
-00:00-10:00  11:00-14:00  16:00-23:59 +
+00:00-10:00  13:00-14:00  16:00-23:59 +
 SATURDAY: +
 00:00-23:59 +
 SUNDAY: +
@@ -826,54 +1136,10 @@ SUNDAY: +
 ****
 //end::calendar[]
 
-=== Listing commands : `*cmd*`
-
-==== Listing all commands
-
-Lists all valid command groups.
-
-The command groups available in `ModManager` are the words in bold you have seen throughout this document.
-These include: `*facil*, *mod*, *task*, ...`
-
-Format: `*cmd* all`
-
-==== Listing commands for a specific feature
-
-Lists commands for a specific group.
-
-Format: `*cmd* group COMMAND_WORD`
-
-Example: `*cmd* group task`
-
-=== Automatic command guidance
-
-Provides guidance for mistyped commands by showing a list of possible valid commands. +
-The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
-
-//tag::clear[]
-=== Clearing all entries : `*clear*`
-
-You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
-
-Format: `*clear*`
-//end::clear[]
-
-//tag::exit[]
-=== Exiting the program : `*exit*`
-
-You can exit the program. Upon closing the application, the Mod Manager data will be saved automatically in your hard disk.
-
-Format: `*exit*`
-//end::exit[]
-
 === Upcoming `[coming in v2.0]`
 
 // tag::upcoming[]
 These features will be available in the next version of Mod Manager.
-
-==== Undoing previous command `[coming in v2.0]`
-
-You can restore the Mod Manager to the state before the previous undoable command was executed.
 
 ==== Categorising tasks `[coming in v2.0]`
 
@@ -892,12 +1158,36 @@ You can receive reminders for deadlines and events the next day.
 
 You can find upcoming tasks.
 
-==== Finding
+==== Viewing of the recently edited item after an `add`, `edit` or `delete` command `[coming in v2.0]`
+
+After an `add`, `edit`, or `delete` operation, the view will be scrolled to
+that recently created or modified item, so that you can refer to the information easily.
+The newly created or modified details will be highlighted and focused so that you know what has been changed.
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Mod Manager folder.
+=== How do I transfer my data to another Computer?
+
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous Mod Manager folder.
+
+== Glossary
+This glossary aims to provide a definition for the special vocabulary used in this user guide.
+
+[[dashboard]] Dashboard::
+The default tab in view when the application starts (i.e. Module tab).
+
+[[taskcard]] Task card::
+A task card represents a task with details such as the module it belongs to,
+description, and time period (if provided upon creation).
+
+A dark red card represents a task that is not yet done.
+
+image::TaskCardNotDone.png[]
+
+A green card represents a done task.
+
+image::TaskCardDone.png[]
 
 == Command Summary
 
@@ -951,6 +1241,9 @@ You can find upcoming tasks.
 |  `*mod* view INDEX` +
    `*mod* view MOD_CODE`
 
+.1+|Redo
+|  `*redo*`
+
 .9+|Task
 |  `*task* add /code MOD_CODE /desc DESCRIPTION [/on DATE] [/at TIME]`
 |  `*task* delete MOD_CODE ID_NUMBER`
@@ -960,5 +1253,20 @@ You can find upcoming tasks.
 |  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...` +
 |  `*task* list`
 |  `*task* module /code MOD_CODE`
-|  `*task* search [/day DAY] [/month MONTH] [/year YEAR]`
-|  `*task* undone`
+|  `*task* not-done`
+|  `*task* find DESCRIPTION [MORE_DESCRIPTIONS]...`
+|  `*task* search [/date DATE] [/month MONTH] [/year YEAR]`
+
+.1+|Undo
+|  `*undo*`
+|=====
+
+.Summary of common command parameters
+[%autowidth]
+|======
+|*Parameter* | *Constraints*
+|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+|`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
+                 This includes `Module` 's and `Task` 's description.
+
+

@@ -2,10 +2,8 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ARGUMENTS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_32;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_OUT_OF_BOUNDS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DAY_STRING;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_13;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_OUT_OF_BOUNDS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_MONTH_STRING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_YEAR_STRING;
@@ -44,7 +42,7 @@ public class TaskSearchCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_NON_EMPTY + TASK_CMD_DAY_26 + TASK_CMD_YEAR_2020,
                 new TaskSearchCommand(new TaskSearchPredicate(new HashMap<String, Integer>() {
                     {
-                        put("day", Integer.parseInt(TASK_DAY_26));
+                        put("date", Integer.parseInt(TASK_DAY_26));
                         put("year", Integer.parseInt(TASK_YEAR_2020));
                     }
                 })));
@@ -80,7 +78,7 @@ public class TaskSearchCommandParserTest {
         // two and only two valid fields, day and month
         HashMap<String, Integer> dayMonth = new HashMap<String, Integer>() {
             {
-                put("day", Integer.parseInt(TASK_DAY_26));
+                put("date", Integer.parseInt(TASK_DAY_26));
                 put("month", Integer.parseInt(TASK_MONTH_03));
             }
         };
@@ -96,7 +94,7 @@ public class TaskSearchCommandParserTest {
     public void parse_allFieldsPresentAndHaveValidValues_success() {
         HashMap<String, Integer> fullHashMap = new HashMap<String, Integer>() {
             {
-                put("day", Integer.parseInt(TASK_DAY_26));
+                put("date", Integer.parseInt(TASK_DAY_26));
                 put("month", Integer.parseInt(TASK_MONTH_03));
                 put("year", Integer.parseInt(TASK_YEAR_2020));
             }
@@ -108,18 +106,12 @@ public class TaskSearchCommandParserTest {
     }
 
     @Test
-    public void parse_fieldsArePresentButValuesOutOfBound_success() {
-        // /day 32 and /month 13 are allowed, look at the UG for more details.
-        HashMap<String, Integer> outOfBoundsDayAndMonthHashMap = new HashMap<String, Integer>() {
-            {
-                put("day", Integer.parseInt(INVALID_TASK_DAY_32));
-                put("month", Integer.parseInt(INVALID_TASK_MONTH_13));
-            }
-        };
+    public void parse_fieldsArePresentButValuesOutOfBound_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                TaskSearchCommand.MESSAGE_OUT_OF_BOUNDS_VALUES);
 
-        assertParseSuccess(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS
-                        + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
-                new TaskSearchCommand(new TaskSearchPredicate(outOfBoundsDayAndMonthHashMap)));
+        assertParseFailure(parser, INVALID_TASK_DAY_OUT_OF_BOUNDS + INVALID_TASK_MONTH_OUT_OF_BOUNDS,
+                expectedMessage);
     }
 
     @Test

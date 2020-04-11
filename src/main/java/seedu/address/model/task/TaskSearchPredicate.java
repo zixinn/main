@@ -21,23 +21,25 @@ public class TaskSearchPredicate implements Predicate<Task> {
             return false;
         }
 
-        boolean checkDay = true;
-        boolean checkMonth = true;
-        boolean checkYear = true;
-
-        if (keywords.containsKey("day")) {
-            checkDay = (task.getTaskDateTime().get().isDateOnThisDay(keywords.get("day")));
+        if (keywords.containsKey("date")) {
+            if (!task.getTaskDateTime().get().isDateOnThisDay(keywords.get("date"))) {
+                return false;
+            }
         }
 
         if (keywords.containsKey("month")) {
-            checkMonth = (task.getTaskDateTime().get().isDateOnThisMonth(keywords.get("month")));
+            if (!task.getTaskDateTime().get().isDateOnThisMonth(keywords.get("month"))) {
+                return false;
+            }
         }
 
         if (keywords.containsKey("year")) {
-            checkYear = (task.getTaskDateTime().get().isDateOnThisYear(keywords.get("year")));
+            if (!task.getTaskDateTime().get().isDateOnThisYear(keywords.get("year"))) {
+                return false;
+            }
         }
 
-        return checkDay && checkMonth && checkYear;
+        return true;
     }
 
     @Override

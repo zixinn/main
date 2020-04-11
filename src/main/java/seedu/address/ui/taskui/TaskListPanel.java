@@ -34,6 +34,7 @@ public class TaskListPanel extends UiPart<Region> {
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new TaskListCard(task, getIndex() + 1).getRoot());
                 if (task.isTaskDone()) {

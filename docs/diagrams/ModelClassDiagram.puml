@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam ArrowFontSize 15
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyModManager <<Interface>>
@@ -14,7 +15,7 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
+Class DoableActionList
 Package Module {
 }
 
@@ -46,6 +47,7 @@ ModManager *--> "1" UniqueFacilitatorList
 ModManager *--> "1" UniqueTaskList
 ModManager *--> "1" LessonList
 
+ModelManager *-> "1" DoableActionList
 ModelManager -->"1" Calendar
 ModelManager -->"1" Module : filtered list
 ModelManager -->"1" Facilitator : filtered list

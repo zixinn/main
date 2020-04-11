@@ -45,15 +45,10 @@ public class TaskDeleteCommand extends TaskCommand {
         }
 
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-        List<Task> lastShown = model.getFilteredTaskList();
+        List<Task> current = model.getFilteredTaskList();
 
-        Task toDelete = lastShown.stream().reduce(null, (x, y) -> {
-            if (y.getModuleCode().equals(moduleCode) && y.getTaskNum() == taskNum) {
-                return y;
-            } else {
-                return x;
-            }
-        });
+        Task toDelete = current.stream().reduce(null, (x, y)
+            -> y.getModuleCode().equals(moduleCode) && y.getTaskNum() == taskNum ? y : x);
         assert toDelete != null;
 
         TaskNumManager.removeNum(toDelete.getModuleCode(), toDelete.getTaskNum());

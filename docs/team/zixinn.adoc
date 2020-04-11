@@ -60,7 +60,7 @@ Given below are sections I contributed to the User Guide. They showcase my abili
 
 include::../UserGuide.adoc[tag=about]
 
-=== Managing Modules : `*mod*`
+=== Module feature : `*mod*`
 
 //include::../UserGuide.adoc[tag=module]
 
