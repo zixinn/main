@@ -1,0 +1,100 @@
+@startuml
+scale 0.6
+!include style.puml
+
+skinparam ArrowFontSize 60
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModManagerParser" as ModManagerParser LOGIC_COLOR
+participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
+participant ":TaskFindCommandParser" as TaskFindCommandParser LOGIC_COLOR
+participant "find:TaskFindCommand" as TaskFindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "predicate:TaskContainsKeywordsPredicate" as TaskContainsKeywordsPredicate MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute(\n"task find assignment homework")
+activate LogicManager
+
+LogicManager -> ModManagerParser : parseCommand(\n"task find assignment homework")
+activate ModManagerParser
+
+create TaskCommandParser
+ModManagerParser -> TaskCommandParser
+activate TaskCommandParser
+
+TaskCommandParser --> ModManagerParser
+deactivate TaskCommandParser
+
+ModManagerParser -> TaskCommandParser : parse("find assignment homework")
+activate TaskCommandParser
+
+create TaskFindCommandParser
+TaskCommandParser -> TaskFindCommandParser
+activate TaskFindCommandParser
+
+TaskFindCommandParser --> TaskCommandParser
+deactivate TaskFindCommandParser
+
+TaskCommandParser -> TaskFindCommandParser : parse("assignment homework")
+activate TaskFindCommandParser
+
+create TaskContainsKeywordsPredicate
+TaskFindCommandParser -> TaskContainsKeywordsPredicate : TaskContainsKeywordsPredicate(["assignment", "homework"])
+activate TaskContainsKeywordsPredicate
+
+TaskContainsKeywordsPredicate --> TaskFindCommandParser : predicate
+deactivate TaskContainsKeywordsPredicate
+
+create TaskFindCommand
+TaskFindCommandParser -> TaskFindCommand : TaskFindCommand(predicate)
+activate TaskFindCommand
+
+TaskFindCommand --> TaskFindCommandParser : find
+deactivate TaskFindCommand
+
+TaskFindCommandParser --> TaskCommandParser : find
+deactivate TaskFindCommandParser
+TaskFindCommandParser -[hidden]-> TaskCommandParser
+destroy TaskFindCommandParser
+
+TaskCommandParser --> ModManagerParser : find
+deactivate TaskCommandParser
+TaskCommandParser -[hidden]-> ModManagerParser
+destroy TaskCommandParser
+
+ModManagerParser --> LogicManager : find
+deactivate ModManagerParser
+
+LogicManager -> TaskFindCommand : execute()
+activate TaskFindCommand
+
+TaskFindCommand -> ModelManager : updateFilteredTaskList(predicate)
+activate ModelManager
+
+ModelManager --> TaskFindCommand
+deactivate ModelManager
+
+TaskContainsKeywordsPredicate -[hidden]-> ModelManager
+destroy TaskContainsKeywordsPredicate
+
+create CommandResult
+TaskFindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TaskFindCommand
+deactivate CommandResult
+
+TaskFindCommand --> LogicManager : result
+deactivate TaskFindCommand
+TaskFindCommand -[hidden]-> LogicManager
+destroy TaskFindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.task.TaskForOneModuleCommand;
+import seedu.address.model.task.TaskContainsInModulePredicate;
 
 class TaskForOneModuleCommandParserTest {
     private TaskForOneModuleCommandParser parser = new TaskForOneModuleCommandParser();
@@ -20,15 +21,15 @@ class TaskForOneModuleCommandParserTest {
     public void parse_moduleCodePresent_success() {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_CS2101,
-                new TaskForOneModuleCommand(VALID_MODULE_CODE_CS2101));
+                new TaskForOneModuleCommand(new TaskContainsInModulePredicate(VALID_MODULE_CODE_CS2101)));
 
         // arbitrary preamble
         assertParseSuccess(parser, PREAMBLE_NON_EMPTY + MODULE_CODE_DESC_CS2101,
-                new TaskForOneModuleCommand(VALID_MODULE_CODE_CS2101));
+                new TaskForOneModuleCommand(new TaskContainsInModulePredicate(VALID_MODULE_CODE_CS2101)));
 
         // no premable
         assertParseSuccess(parser, MODULE_CODE_DESC_CS2101,
-                new TaskForOneModuleCommand(VALID_MODULE_CODE_CS2101));
+                new TaskForOneModuleCommand(new TaskContainsInModulePredicate(VALID_MODULE_CODE_CS2101)));
     }
 
     @Test

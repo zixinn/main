@@ -267,18 +267,12 @@ public class ModelManager implements Model {
     public void setLesson(Lesson target, Lesson edited) {
         requireAllNonNull(target, edited);
         modManager.setLesson(target, edited);
-        filteredModules.setPredicate(x -> x.getModuleCode().equals(edited.getModuleCode()));
-        module = Optional.ofNullable(filteredModules.get(0));
-        filteredModules.setPredicate(x -> true);
     }
 
     @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         modManager.removeLesson(lesson);
-        filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
-        module = Optional.ofNullable(filteredModules.get(0));
-        filteredModules.setPredicate(x -> true);
     }
 
     @Override
@@ -290,18 +284,12 @@ public class ModelManager implements Model {
     @Override
     public Lesson findNextLesson() {
         LessonList lessons = modManager.getLessons();
-        Lesson lesson = lessons.findNextLesson();
-        if (lesson != null) {
-            filteredModules.setPredicate(x -> x.getModuleCode().equals(lesson.getModuleCode()));
-            module = Optional.ofNullable(filteredModules.get(0));
-            filteredModules.setPredicate(x -> true);
-        }
-        return lesson;
+        return lessons.findNextLesson();
     }
 
     @Override
     public List<Lesson> findLessonByDay(DayOfWeek day) {
-        return modManager.getLessons().findLessonsByDay(day);
+        return modManager.findLessonsByDay(day);
     }
 
     @Override

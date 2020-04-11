@@ -7,11 +7,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.util.action.DoableActionType;
+import seedu.address.model.util.action.LessonAction;
 
 
 /**
@@ -45,4 +52,27 @@ public abstract class LessonCommand extends Command {
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
+
+    /**
+     * Updates the list for facilitators and tasks for viewing.
+     */
+    public static void updateList(Module module, Model model) {
+        model.updateModule(Optional.of(module));
+        ModuleCode moduleCode = module.getModuleCode();
+        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(moduleCode.value));
+        model.updateTaskListForModule(x -> x.getModuleCode().equals(moduleCode));
+    }
+
+    /**
+     * Updates the list of action for undo and redo commands.
+     */
+    public static void updateAction(Lesson lesson, Lesson editedLesson, DoableActionType type, Model model) {
+        if (editedLesson == null) {
+            LessonAction lessonAction = new LessonAction(lesson, type);
+            model.addAction(lessonAction);
+        } else {
+            LessonAction lessonAction = new LessonAction(lesson, editedLesson, type);
+            model.addAction(lessonAction);
+        }
+    }
 }

@@ -75,7 +75,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
         boolean isChanged = editedTask.markAsDone();
 
         if (!isChanged) {
-            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode.toString(), taskNum));
+            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
         }
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);

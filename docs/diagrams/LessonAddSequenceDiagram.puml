@@ -46,7 +46,7 @@ LessonCommandParser -> LessonAddCommandParser : parse\n("/code CS9000 \n/type LE
 activate LessonAddCommandParser
 
 create Lesson
-LessonAddCommandParser -> Lesson : Lesson(CS9000, LEC, MONDAY, 16:00, 18:00, null)
+LessonAddCommandParser -> Lesson : Lesson(CS9000, LEC, MONDAY 16:00 18:00, null)
 activate Lesson
 
 Lesson --> LessonAddCommandParser : l
@@ -75,6 +75,12 @@ deactivate ModManagerParser
 LogicManager -> LessonAddCommand : execute()
 activate LessonAddCommand
 
+LessonAddCommand -> LessonAddCommand : updateList()
+activate LessonAddCommand
+
+LessonAddCommand --> LessonAddCommand
+deactivate LessonAddCommand
+
 LessonAddCommand -> ModelManager : addLesson(l)
 activate ModelManager
 
@@ -92,6 +98,12 @@ deactivate ModManager
 
 ModelManager --> LessonAddCommand
 deactivate ModelManager
+
+LessonAddCommand -> LessonAddCommand : updateActions()
+activate LessonAddCommand
+
+LessonAddCommand --> LessonAddCommand
+deactivate LessonAddCommand
 
 create CommandResult
 LessonAddCommand -> CommandResult

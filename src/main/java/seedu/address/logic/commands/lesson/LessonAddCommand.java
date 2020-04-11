@@ -12,11 +12,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facilitator.ModuleCodesContainKeywordPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.util.action.DoableActionType;
-import seedu.address.model.util.action.LessonAction;
 
 /**
  * Adds a lesson to Mod Manager.
@@ -53,7 +52,8 @@ public class LessonAddCommand extends LessonCommand {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        Optional<Module> module = model.findModule(toAdd.getModuleCode());
+        ModuleCode toAddModCode = toAdd.getModuleCode();
+        Optional<Module> module = model.findModule(toAddModCode);
         if (module.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CODE);
         }
@@ -62,13 +62,10 @@ public class LessonAddCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_TIME_RANGE);
         }
 
-        model.updateModule(module);
-        model.updateFacilitatorListForModule(new ModuleCodesContainKeywordPredicate(toAdd.getModuleCode().value));
-        model.updateTaskListForModule(x -> x.getModuleCode().equals(toAdd.getModuleCode()));
-
+        updateList(module.get(), model);
         model.addLesson(toAdd);
-        LessonAction addLessonAction = new LessonAction(toAdd, DoableActionType.ADD);
-        model.addAction(addLessonAction);
+        updateAction(toAdd, null, DoableActionType.ADD, model);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.LESSON);
     }
 
