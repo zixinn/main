@@ -157,8 +157,10 @@ public class FacilEditCommand extends FacilCommand {
 
         model.setFacilitator(facilitatorToEdit, editedFacilitator);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
+
         FacilAction editFacilAction = new FacilAction(facilitatorToEdit, editedFacilitator, DoableActionType.EDIT);
         model.addAction(editFacilAction);
+
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator),
                 CommandType.FACILITATOR);
     }

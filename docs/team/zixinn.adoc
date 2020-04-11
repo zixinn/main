@@ -60,7 +60,7 @@ Given below are sections I contributed to the User Guide. They showcase my abili
 
 include::../UserGuide.adoc[tag=about]
 
-=== Module feature : `*mod*`
+=== Module Feature : `*mod*`
 
 //include::../UserGuide.adoc[tag=module]
 
@@ -68,11 +68,11 @@ include::../UserGuide.adoc[tag=mod]
 
 include::../UserGuide.adoc[tag=mod-view]
 
-//=== Managing facilitators : `*facil*`
+//=== Facilitator Feature : `*facil*`
 
 //include::../UserGuide.adoc[tag=facilitator]
 
-//=== Upcoming `[coming in v2.0]`
+//=== Upcoming Features `[coming in v2.0]`
 
 //include::../UserGuide.adoc[tag=upcoming]
 

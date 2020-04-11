@@ -18,6 +18,8 @@ participant ":ModelManager" as ModelManager MODEL_COLOR
 participant "l:ObservableList" as ObservableList MODEL_COLOR
 participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
+participant "fa:FacilAction" as FacilAction MODEL_COLOR
+participant ":DoableActionList" as DoableActionList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(\n"facil delete 1")
@@ -95,6 +97,25 @@ deactivate UniqueFacilitatorList
 
 ModManager --> ModelManager
 deactivate ModManager
+
+ModelManager --> FacilDeleteCommand
+deactivate ModelManager
+
+create FacilAction
+FacilDeleteCommand -> FacilAction : FacilAction(f, DELETE)
+activate FacilAction
+
+FacilAction --> FacilDeleteCommand : fa
+deactivate FacilAction
+
+FacilDeleteCommand -> ModelManager : addAction(fa)
+activate ModelManager
+
+ModelManager -> DoableActionList : addAction(fa)
+activate DoableActionList
+
+DoableActionList --> ModelManager
+deactivate DoableActionList
 
 ModelManager --> FacilDeleteCommand
 deactivate ModelManager

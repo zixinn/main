@@ -82,8 +82,10 @@ public class FacilAddCommand extends FacilCommand {
         }
 
         model.addFacilitator(toAdd);
+
         FacilAction addFacilAction = new FacilAction(toAdd, DoableActionType.ADD);
         model.addAction(addFacilAction);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandType.FACILITATOR);
     }
 

@@ -19,6 +19,8 @@ participant "l:ObservableList" as ObservableList MODEL_COLOR
 participant "n:Facilitator" as Facilitator MODEL_COLOR
 participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
+participant "fa:FacilAction" as FacilAction MODEL_COLOR
+participant ":DoableActionList" as DoableActionList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(\n"facil edit 1 \n/phone\n 87654321")
@@ -123,8 +125,30 @@ ModManager --> ModelManager
 deactivate ModManager
 
 ModelManager --> FacilEditCommand
+deactivate ModelManager
 
 FacilEditCommand -> ModelManager : updateFilteredFacilitatorList(\nPREDICATE_SHOW_ALL_FACILITATORS)
+activate ModelManager
+
+ModelManager --> FacilEditCommand
+deactivate ModelManager
+
+create FacilAction
+FacilEditCommand -> FacilAction : FacilAction(f, n, EDIT)
+activate FacilAction
+
+FacilAction --> FacilEditCommand : fa
+deactivate FacilAction
+
+FacilEditCommand -> ModelManager
+activate ModelManager
+
+ModelManager -> DoableActionList : addAction(fa)
+activate DoableActionList
+
+DoableActionList --> ModelManager
+deactivate DoableActionList
+
 ModelManager --> FacilEditCommand
 deactivate ModelManager
 

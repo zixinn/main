@@ -3,7 +3,6 @@ package seedu.address.logic.commands.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.List;
 import java.util.Optional;
@@ -106,9 +105,6 @@ public class ModuleEditCommand extends ModuleCommand {
         }
 
         model.setModule(moduleToEdit, editedModule);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-        ModuleAction editModAction = new ModuleAction(moduleToEdit, editedModule, DoableActionType.EDIT);
-        model.addAction(editModAction);
 
         if (!moduleToEdit.getModuleCode().equals(editedModule.getModuleCode())) {
             model.setModuleCodeInFacilitatorList(moduleToEdit.getModuleCode(), editedModule.getModuleCode());
@@ -122,6 +118,9 @@ public class ModuleEditCommand extends ModuleCommand {
                     new ModuleCodesContainKeywordPredicate(editedModule.getModuleCode().value));
             model.updateTaskListForModule(x -> x.getModuleCode().equals(editedModule.getModuleCode()));
         }
+
+        ModuleAction editModAction = new ModuleAction(moduleToEdit, editedModule, DoableActionType.EDIT);
+        model.addAction(editModAction);
 
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule), CommandType.MODULE);
     }
