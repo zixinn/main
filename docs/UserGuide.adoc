@@ -44,7 +44,7 @@ Note the following symbols and formatting used in this document:
 [%autowidth]
 |=====
 ^|*Symbol* |*Meaning*
-^|kbd:[Enter] | The enter button on the keyboard.
+^|Enter | The enter button on the keyboard.
 ^|image:InfoIcon.png[width="40"] | Information that you need to know.
 |=====
 
@@ -61,8 +61,8 @@ Here are the steps to get you started with using Mod Manager:
 .GUI for Mod Manager
 image::Gui.png[width="800"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Type the command in the command box and press Enter to execute it. +
+e.g. typing *`help`* and pressing Enter will open the help window.
 +
 Here are some example commands that you can try:
 
@@ -292,7 +292,7 @@ You can type `*clear*` as shown below.
 .Before `*clear*`
 image::BeforeClear.png[]
 
-After pressing kbd:[Enter], Mod Manager is empty. All the entries you have are cleared.
+After pressing Enter, Mod Manager is empty. All the entries you have are cleared.
 
 .After `*clear*`
 image::AfterClear.png[]
@@ -767,7 +767,7 @@ You can mark a task as done in the module. To mark the task with
 task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the following command:
 
 `*task* done /code CS2105 /id 224`
-and hit kbd:[Enter]
+and hit Enter
 
 .Before `*task* done /code CS2105 /id 224`
 image::TaskDoneBeforeCloseUp.png[]
@@ -817,7 +817,7 @@ Example:
 If you want a list of current tasks for the module `CS3230`, you can type in the following command:
 
 `*task* module /code CS3230`
-and hit kbd:[Enter]
+and hit Enter
 
 It is not compulsory for you to be at the Tasks tab before typing in this command.
 Mod Manager will automatically redirect you to the Tasks tab if you are currently at another tab.
@@ -835,7 +835,7 @@ Format: `*task* undone`
 .Before `*task* undone`, all tasks are listed
 image::TaskListNotDoneBefore.png[]
 
-By typing the command above and hit kbd:[Enter] , you should only see uncompleted tasks,
+By typing the command above and hit Enter, you should only see uncompleted tasks,
 which are in dark red color:
 
 .Only uncompleted tasks are shown
@@ -872,7 +872,7 @@ Examples:
 To find tasks that contain the word `oral`, `assign`, or `tut` in their description,
 you can type in the following command:
 
-`*task* find oral assign tut` and press kbd:[Enter]
+`*task* find oral assign tut` and press Enter
 
 .After `*task* find oral assign tut`, all matching tasks are displayed.
 image::TaskFindAfter.png[]
@@ -883,7 +883,7 @@ Explanation: +
 -  Similarly, `Assignment 3` will match `assign`, and `Tutorial` will match `tut` +
 - As long as a task's description matches *one* of the keywords provided, it will be shown. +
 
-You can try typing in `*task* find assign tut oral` and press kbd:[Enter]. This will return the same list
+You can try typing in `*task* find assign tut oral` and press Enter. This will return the same list
 of tasks, since the ordering of the keywords does not matter.
 
 Other examples:
@@ -927,7 +927,7 @@ Example:
 
 You can search for tasks that are due on the submission date of CS2103T for AY19/20 S2
 (13 April). To find tasks happening on 13 April,
-you can type `*task* search /date 13 /month 4` and press kbd:[Enter]. This will return all tasks
+you can type `*task* search /date 13 /month 4` and press Enter. This will return all tasks
 that are happening on 13 April.
 
 .Before `*task* search /date 13 /month 4`, all tasks are listed
