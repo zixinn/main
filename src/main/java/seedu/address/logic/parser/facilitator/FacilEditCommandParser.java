@@ -53,6 +53,19 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
                     FacilEditCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.numOfValuesPresent(PREFIX_NAME) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NAME));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_PHONE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_PHONE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_EMAIL) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_EMAIL));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_OFFICE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_OFFICE));
+        }
+
         try {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
@@ -68,19 +81,6 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
             }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacilEditCommand.MESSAGE_USAGE));
-        }
-
-        if (argMultimap.numOfValuesPresent(PREFIX_NAME) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_NAME));
-        }
-        if (argMultimap.numOfValuesPresent(PREFIX_PHONE) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_PHONE));
-        }
-        if (argMultimap.numOfValuesPresent(PREFIX_EMAIL) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_EMAIL));
-        }
-        if (argMultimap.numOfValuesPresent(PREFIX_OFFICE) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_OFFICE));
         }
 
         FacilEditCommand.EditFacilitatorDescriptor editFacilitatorDescriptor =
@@ -102,10 +102,6 @@ public class FacilEditCommandParser implements Parser<FacilEditCommand> {
         }
         parseModuleCodesForEdit(argMultimap.getAllValues(PREFIX_MODULE_CODE))
                 .ifPresent(editFacilitatorDescriptor::setModuleCodes);
-
-        if (!editFacilitatorDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(FacilEditCommand.MESSAGE_NOT_EDITED);
-        }
 
         if (mode == 0) {
             return new FacilEditCommand(index, editFacilitatorDescriptor);

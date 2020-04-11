@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.facilitator;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,7 +19,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -61,7 +61,6 @@ public class FacilEditCommand extends FacilCommand {
             + PREFIX_PHONE + " 84841235";
 
     public static final String MESSAGE_EDIT_FACILITATOR_SUCCESS = "Edited Facilitator: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_ALL_OPTIONAL_FIELDS_DELETED =
             "At least one of phone, email and office should not be empty.";
@@ -155,6 +154,10 @@ public class FacilEditCommand extends FacilCommand {
             }
         }
 
+        if (facilitatorToEdit.equals(editedFacilitator)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         model.setFacilitator(facilitatorToEdit, editedFacilitator);
         model.updateFilteredFacilitatorList(PREDICATE_SHOW_ALL_FACILITATORS);
 
@@ -243,13 +246,6 @@ public class FacilEditCommand extends FacilCommand {
             setEmail(toCopy.email);
             setOffice(toCopy.office);
             setModuleCodes(toCopy.moduleCodes);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, office, moduleCodes);
         }
 
         public void setName(Name name) {

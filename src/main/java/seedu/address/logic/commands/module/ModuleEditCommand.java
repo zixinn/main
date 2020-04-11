@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
@@ -9,7 +10,6 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +44,6 @@ public class ModuleEditCommand extends ModuleCommand {
             + PREFIX_DESCRIPTION + " SE is love. SE is life";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Mod Manager.";
     public static final String MESSAGE_NON_EXISTENT_MODULE = "%s does not exist.";
 
@@ -103,6 +102,10 @@ public class ModuleEditCommand extends ModuleCommand {
 
         if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
+        }
+
+        if (moduleToEdit.equals(editedModule)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         model.setModule(moduleToEdit, editedModule);
@@ -183,13 +186,6 @@ public class ModuleEditCommand extends ModuleCommand {
         public EditModuleDescriptor(ModuleEditCommand.EditModuleDescriptor toCopy) {
             setModuleCode(toCopy.moduleCode);
             setDescription(toCopy.description);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(moduleCode, description);
         }
 
         public void setModuleCode(ModuleCode moduleCode) {

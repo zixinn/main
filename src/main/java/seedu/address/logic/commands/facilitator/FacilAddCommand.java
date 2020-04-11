@@ -55,7 +55,6 @@ public class FacilAddCommand extends FacilCommand {
             "At least one of the optional fields (phone, email, office) must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITATOR = "This facilitator already exists in Mod Manager.";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module %1$s does not exist in Mod Manager.";
-    public static final String MESSAGE_NO_MODULE_CODES_FOUND = "No module codes found";
 
     private final Facilitator toAdd;
 

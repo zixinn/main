@@ -3,6 +3,7 @@ package seedu.address.logic.commands.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_LESSON_INVALID_TIME_RANGE;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -12,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -93,6 +93,10 @@ public class LessonEditCommand extends LessonCommand {
             throw new CommandException(String.format(MESSAGE_LESSON_INVALID_TIME_RANGE, "edited"));
         }
 
+        if (lessonToEdit.equals(editedLesson)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         model.setLesson(lessonToEdit, editedLesson);
         updateAction(lessonToEdit, editedLesson, DoableActionType.EDIT, model);
         updateList(model.findModule(editedLesson.getModuleCode()).get(), model);
@@ -157,10 +161,6 @@ public class LessonEditCommand extends LessonCommand {
             setLessonType(copy.type);
             setDayAndTime(copy.dayAndTime);
             setVenue(copy.venue);
-        }
-
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(moduleCode, type, dayAndTime, venue);
         }
 
         public void setModuleCode(ModuleCode moduleCode) {

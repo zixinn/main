@@ -39,4 +39,5 @@ public class Messages {
     public static final String MESSAGE_LESSON_INVALID_TIME_RANGE = "The %s class clashes with another class";
 
     public static final String MESSAGE_TOO_MANY_ARGUMENTS = "There should not be more than %1$s %2$s prefix provided.";
+    public static final String MESSAGE_NOT_EDITED = "No difference detected. At least one different field is required.";
 }

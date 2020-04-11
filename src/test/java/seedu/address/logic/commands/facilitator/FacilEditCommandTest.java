@@ -116,32 +116,6 @@ public class FacilEditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredListWithIndex_success() {
-        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST,
-                new FacilEditCommand.EditFacilitatorDescriptor());
-        Facilitator editedFacilitator = model.getFilteredFacilitatorList().get(INDEX_FIRST.getZeroBased());
-
-        String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
-
-        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredListWithName_success() {
-        Facilitator editedFacilitator = model.getFilteredFacilitatorList().get(INDEX_FIRST.getZeroBased());
-        FacilEditCommand editCommand = new FacilEditCommand(editedFacilitator.getName(),
-                new FacilEditCommand.EditFacilitatorDescriptor());
-
-        String expectedMessage = String.format(FacilEditCommand.MESSAGE_EDIT_FACILITATOR_SUCCESS, editedFacilitator);
-
-        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.FACILITATOR, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showFacilitatorAtIndex(model, INDEX_FIRST);
 
@@ -289,6 +263,23 @@ public class FacilEditCommandTest {
 
         assertCommandFailure(editCommand, model,
                 String.format(FacilEditCommand.MESSAGE_MODULE_DOES_NOT_EXIST, "CS1231"));
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListWithIndex_failure() {
+        FacilEditCommand editCommand = new FacilEditCommand(INDEX_FIRST,
+                new FacilEditCommand.EditFacilitatorDescriptor());
+        String expectedMessage = Messages.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListWithName_failure() {
+        Facilitator editedFacilitator = model.getFilteredFacilitatorList().get(INDEX_FIRST.getZeroBased());
+        FacilEditCommand editCommand = new FacilEditCommand(editedFacilitator.getName(),
+                new FacilEditCommand.EditFacilitatorDescriptor());
+        String expectedMessage = Messages.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
