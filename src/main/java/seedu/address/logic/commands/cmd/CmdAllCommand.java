@@ -21,11 +21,17 @@ public class CmdAllCommand extends CmdCommand {
     public CommandResult execute(Model model) throws CommandException {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are all available command groups: \n");
-        Command.ALL_COMMAND_GROUPS.forEach(str -> builder.append(str).append(", "));
-        StringBuilder stripedLastComma = new StringBuilder(
-                builder.toString().substring(0, builder.toString().length() - 2) + ".");
-        stripedLastComma.append("\n").append(instruction);
+        boolean first = true;
+        for (String group : Command.ALL_COMMAND_GROUPS) {
+            if (first) {
+                builder.append(group);
+                first = false;
+            } else {
+                builder.append(", ").append(group);
+            }
+        }
 
-        return new CommandResult(stripedLastComma.toString(), CommandType.CMD);
+        builder.append("\n").append(instruction);
+        return new CommandResult(builder.toString(), CommandType.CMD);
     }
 }
