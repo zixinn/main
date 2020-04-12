@@ -98,7 +98,7 @@ public class CalFindCommand extends CalCommand {
 
                 if (schedulable instanceof Lesson) {
                     startTime = ((Lesson) schedulable).getDayAndTime().getEndTime();
-                } else if (startTime.isBefore(time)){
+                } else if (startTime.isBefore(time)) {
                     startTime = time;
                 }
             }
