@@ -1976,19 +1976,24 @@ Use case resumes from step 1.
 == Non Functional Requirements
 
 // tag::nfr[]
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should work on different screen sizes.
-.  Should be able to hold up to 250 classes, 250 tasks and 250 facilitators.
-.  Response time for each command should be within 3 seconds.
+.  The product should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+.  The product should be able to render its layout to different screen sizes.
+.  The product should be able to support up to 250 modules, 250 classes, 250 facilitators, and 250 tasks.
+.  The response to any command should become visible within 3 seconds.
 .  A user with above average typing speed for regular English text (i.e. not code and system admin commands)
 should be able to accomplish most of the tasks faster than doing the same task using the mouse.
-.  A user should be able to navigate from one tab to another by typing or clicking.
-.  Should work without any internet connection.
-.  Rate of failure should not exceed 5%.
-.  User data should be protected and should not be accessible to other users.
-.  Should be intuitive and easy to use, and users should become proficient within an hour.
-.  Should not conflict with other applications or processes.
-.  A developer with one year of experience should be able to add a new feature, including source code modifications and testing, with no more than one week of labour.
+.  The product should work without any internet connection.
+.  The system failure rate should be less than 5 failure per 100 commands.
+.  Mod Manager's internal storage can be transferred to other Mod Manager instances on other systems.
+.  The product should be intuitive and easy to use for a novice who has never used similar Task Management applications.
+.  A developer with one year of experience should be able to add a new feature,
+including source code modifications and testing, with no more than one week of labour.
+.  The product should not conflict with other applications or processes.
+.  The product is free and open source.
+.  The product is not required to handle non-NUS modules, or academic programmes at NUS
+not following a modular system.
+.  The product is not required to handle non-English characters for modules, classes, facilitators, and
+tasks' content.
 // end::nfr[]
 
 [appendix]

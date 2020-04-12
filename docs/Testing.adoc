@@ -1,3 +1,4 @@
+//tag:Testing[]
 = Mod Manager - Testing
 :site-section: DeveloperGuide
 :toc:
@@ -50,3 +51,4 @@ e.g. `seedu.address.logic.LogicManagerTest`
 
 .`Accessibility` permission is granted to `IntelliJ IDEA`
 image::testfx-idea-accessibility-permissions.png[width="600"]
+//end:Testing[]
