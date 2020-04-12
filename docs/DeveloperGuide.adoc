@@ -159,14 +159,27 @@ image::LessonPackageClassDiagram.png[]
 * A `LessonList` comprises of instances of `Lesson`.
 
 ==== Task
-Place-holder
+.Structure of the Task Package
+image::TaskPackageClassDiagram.png[]
+
+* The `Task` package contains an abstract class `Task`. It has two concrete subclasses: `ScheduledTask` and `NonScheduledTask`.
+* A `ScheduledTask` contains a `TaskDateTime` to indicate its date and time.
+* A `NonScheduledTask` represents a task whose date and time are not specified, so it does not contain a `TaskDateTime`.
+* Any `Task` would contain a `ModuleCode` to indicate which `Module` it is a task of.
+* A `UniqueTaskList` comprises of instances of `NonScheduledTask` and `ScheduledTask`.
 
 ==== Calendar
 * The `Calendar` package contains a concrete class `Calendar`.
 * The `Calendar` contains a LocalDate to represent the calendar date.
 
 ==== DoableAction
-Place-holder
+.Structure of the Action Package
+image::DoableActionClassDiagram.png[]
+
+* `DoableAction` is an interface of actions that can be undone/redone in Mod Manager, stored in the `Action` package.
+* Actual implementations of `DoableAction` are `ModuleAction`, `LessonAction`, `FacilAction`, and `TaskAction`, each of which
+has a `DoableActionType` value to assist how the undo/redo process is carried out.
+* A `DoableActionList` comprises of instances of classes mentioned above.
 
 [[Design-Storage]]
 === Storage Component
