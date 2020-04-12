@@ -38,6 +38,4 @@ LessonAction *-up---> DoableActionType
 ModuleAction *-up---> DoableActionType
 TaskAction *-up---> DoableActionType
 
-
-
 @enduml

@@ -24,5 +24,4 @@ ScheduledTask *-> "1" TaskDateTime
 NonScheduledTask --|> Task
 NonScheduledTask *-up-> "1" ModuleCode
 
-
 @enduml
