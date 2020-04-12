@@ -82,7 +82,7 @@ include::../DeveloperGuide.adoc[tag=use-case-calendar]
 
 include::../DeveloperGuide.adoc[tag=glossary]
 
-=== Appendix G: Instructions for Manual Testing
+=== Appendix F: Instructions for Manual Testing
 
 include::../DeveloperGuide.adoc[tag=testing-cal]
 
