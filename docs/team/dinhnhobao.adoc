@@ -5,7 +5,7 @@
 
 == PROJECT: Mod Manager
 
----
+
 
 == Overview
 
@@ -18,7 +18,7 @@ with about 6 KLoC and evolve it into our *Mod Manager* with more than 10 KLoC.
 The project spans over a period of eight weeks, where each of us
 idealise and design the product, utilise CI/CD for weekly project enhancements,
 implement features and functionality, write documentation (User Guide & Developer Guide),
-as well as take part in Quality Assurance.
+and take part in Quality Assurance.
 
 Technologies: Java, JavaFx, GitHub, Intellij IDEA
 
@@ -27,12 +27,13 @@ The following sections document all the contributions that I have made to *Mod M
 == Summary of contributions
 
 * *Code contributed*:
-I personally contributed more than 3 KLoC to Mod Manager. All my code contributions
+I personally contributed almost 4 KLoC to Mod Manager. All my code contributions
 can be found https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=dinhnhobao&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=dinhnhobao&tabRepo=AY1920S2-CS2103T-F10-4%2Fmain%5Bmaster%5D[here].
 
 * *Major enhancement*: idealise and design the `Task` component of Mod Manager. The `Task`
 component allows NUS students to manage their tasks, such as programming assignments, homework,
 tutorials, reviewing lecture content, exam revision for their respective modules in a semester.
+Implement most of the commands available for the `Task` component of Mod Manager.
 
 ** What it does: every `Task` has a description, a time frame (for example, `13/04/2020 23:59`),
 and a `Module` it belongs to. It allows users to organise and manage their tasks easier, with
@@ -56,10 +57,14 @@ which lead to incremental changes over the period of the project. For the comman
 input validation and data formatting is critical to avoid unexpected behaviours to our application.
 
 ** Credits: The idea is adapted from https://github.com/se-edu/addressbook-level3[AddressBook (Level 3)]
-and https://github.com/nus-cs2103-AY1920S2/duke[the Duke project]
+and https://github.com/nus-cs2103-AY1920S2/duke[the Duke project]. Huge thanks to my teammates who
+have gave feedback and improved on the design of the `Task`, which includes making it more OOP
+to integrate it better with the rest of the application, and adding the `taskId` feature
+to support the identification of tasks in our `Task` commands.
 
-* *Minor enhancement*: design and implement the UI to represent a `Task`. The design inspired
-other components of *Mod Manager* to adapt a similar presentation.
+* *Minor enhancement*: design and implement the UI to represent a `Task`. The design is useful for the
+value proposition of the product, as it helps you to recognise what tasks are completed and
+what are not easily.
 
 Dark red color indicates a task that is not yet done.
 
@@ -72,28 +77,43 @@ image::TaskCardDone.png[]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+** Project management: mainly responsible for managing deadlines and deliverables for our team.
+*** Ensure that all milestone progress are reached (which includes team-based and individual-based tasks). We managed to achieve
+more than 90% of the recommended milestone tasks, much higher than the minimum requirement
+of 60% of the class.
+*** Managed releases https://github.com/AY1920S2-CS2103T-F10-4/main/releases/tag/v1.2[v1.2]
+and https://github.com/AY1920S2-CS2103T-F10-4/main/releases/tag/v1.2.1[v1.2.1] on GitHub
+*** Maintained the issue tracker and milestones for team repo
 
-_{you can add/remove categories in the list above}_
+** Enhancements to existing features:
+*** Design and update the UI color scheme for a `Task` (PR https://github.com/AY1920S2-CS2103T-F10-4/main/pull/128/commits/96669def1decbbc8043c7e7db97d4ba775ddfd0d[#128])
+*** Wrote extensive tests for `Task` component, maintaining test coverage of around 90% for my components as shown
+https://coveralls.io/builds/30020995/source?filename=file%3A%2Fhome%2Ftravis%2Fbuild%2FAY1920S2-CS2103T-F10-4%2Fmain%2Fsrc%2Fmain%2Fjava%2Fseedu%2Faddress%2Flogic%2Fcommands%2Ftask%2FTaskMarkAsDoneCommand.java[here] and
+https://coveralls.io/builds/30020995/source?filename=file%3A%2Fhome%2Ftravis%2Fbuild%2FAY1920S2-CS2103T-F10-4%2Fmain%2Fsrc%2Fmain%2Fjava%2Fseedu%2Faddress%2Flogic%2Fparser%2Ftask%2FTaskMarkAsDoneCommandParser.java[here]
+for a command.
+
+** Documentation:
+*** Initiate the "Command Summary" section of the User Guide, and cosmetic tweaks to existing contents
+of the User Guide, PR https://github.com/AY1920S2-CS2103T-F10-4/main/pull/13[#13]
+*** Revise sections of the Developer Guide, PR https://github.com/AY1920S2-CS2103T-F10-4/main/pull/204[#204]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (https://github.com/dinhnhobao/ped/issues[1],
+https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/35[2], and https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/45[3])
+*** Resolved multiple merge conflicts when integrating code with upstream repo (PRs
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/204[#204],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/192[#192],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/128[#128],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/111[#111],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/107[#107],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/81[#81],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/44[#44]
+)
+
 
 == Contributions to the User Guide
 |===
-|_Given below are sections I contributed to the User Guide.
-They comprise most of the commands for the `Task` component.
+|_Given below are some sections I contributed to the User Guide.
+They comprise some of the commands for the `Task` component.
 They showcase my ability to write documentation targeting end-users._
 |===
 NOTE: For your easier understanding of the content below, every `Task` in a `Module` has an `ID`,
@@ -101,32 +121,22 @@ which uniquely identifies the task in the module. The `ID` is important for us t
 from the others in the `Module`, since two `Task` s may have the same description and time frame.
 The `Task` component uses Singapore's standard date format (`dd/MM/yyyy`).
 
-include::../UserGuide.adoc[tag=task-second-part]
+include::../UserGuide.adoc[tag=task-mark-as-done-UG]
 
-include::../UserGuide.adoc[tag=upcoming-tasks]
-
-I also contributed to some sessions of the User Guide for the entire Mod Manager.
+include::../UserGuide.adoc[tag=task-find-description-UG]
 
 == Contributions to the Developer Guide
 
 |===
-|I idealise and design the `Task` component of *Mod Manager*. I implemented most of the commands
-for this `Task` component, the remaining are CRUD commands which are based on my initiated `Task` design.
+|I idealised and designed the `Task` component, and then implemented most of the commands
+for this component.
 
-Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+Given below are some sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-NOTE: For your easier understanding of the content below, every `Task` in a `Module` has an `ID`,
-which uniquely identifies the task in the module. The `ID` is important for us to differentiate a task
-from the others in the `Module`, since two `Task` s may have the same description and time frame.
-
 === Implementation, Task Component
 
-include::../DeveloperGuide.adoc[tag=task-second-part]
-
-=== Appendix C: Use Cases
-
-include::../DeveloperGuide.adoc[tag=use-case-tasks-second-part]
-
+include::../DeveloperGuide.adoc[tag=task-mark-as-done-DG]
+include::../DeveloperGuide.adoc[tag=task-find-description-DG]
 
 == PROJECT: PowerPointLabs
 
