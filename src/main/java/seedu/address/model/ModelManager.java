@@ -35,7 +35,6 @@ public class ModelManager implements Model {
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Task> filteredTasks;
-    private final List<Lesson> filteredLesson;
     private Optional<Module> module;
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
@@ -56,7 +55,6 @@ public class ModelManager implements Model {
         filteredFacilitators = new FilteredList<>(this.modManager.getFacilitatorList());
         filteredModules = new FilteredList<>(this.modManager.getModuleList());
         filteredTasks = new FilteredList<>(this.modManager.getTaskList());
-        filteredLesson = this.modManager.getLessonList();
         module = Optional.empty();
         facilitatorsForModule = new FilteredList<>(this.modManager.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
@@ -139,7 +137,6 @@ public class ModelManager implements Model {
     @Override
     public void addModule(Module module) {
         modManager.addModule(module);
-        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
     @Override
@@ -416,7 +413,7 @@ public class ModelManager implements Model {
         return calendar;
     }
 
-    //=========== DoableactionList ==========================================================================
+    //=========== DoableActionList ==========================================================================
 
     @Override
     public void addAction(DoableAction<?> action) {

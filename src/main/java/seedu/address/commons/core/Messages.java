@@ -7,11 +7,11 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
-    public static final String MESSAGE_UNKNOWN_MODULE_COMMAND = "Unknown module command! \n%1$s";
-    public static final String MESSAGE_UNKNOWN_FACILITATOR_COMMAND = "Unknown facilitator command! \n%1$s";
+    public static final String MESSAGE_UNKNOWN_MODULE_COMMAND = "Unknown mod command! \n%1$s";
+    public static final String MESSAGE_UNKNOWN_FACILITATOR_COMMAND = "Unknown facil command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_LESSON_COMMAND = "Unknown class command! \n%1$s";
-    public static final String MESSAGE_UNKNOWN_CALENDAR_COMMAND = "Unknown calendar command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_TASK_COMMAND = "Unknown task command! \n%1$s";
+    public static final String MESSAGE_UNKNOWN_CALENDAR_COMMAND = "Unknown cal command! \n%1$s";
     public static final String MESSAGE_UNKNOWN_CMD_COMMAND = "Unknown cmd command! \n%1$s";
 
     public static final String MESSAGE_INVALID_MODULE_DISPLAYED_INDEX =
@@ -39,4 +39,5 @@ public class Messages {
     public static final String MESSAGE_LESSON_INVALID_TIME_RANGE = "The %s class clashes with another class";
 
     public static final String MESSAGE_TOO_MANY_ARGUMENTS = "There should not be more than %1$s %2$s prefix provided.";
+    public static final String MESSAGE_NOT_EDITED = "No difference detected. At least one different field is required.";
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
@@ -44,7 +45,6 @@ public class TaskEditCommand extends TaskCommand {
             + PREFIX_ON + " non";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %s";
-    public static final String MESSAGE_NOT_EDITED = "No difference detected. At least one different field is required.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Mod Manager.";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task of module %s with ID %d does not exist in Mod Manager.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "The module %s does not exist in Mod Manager.";

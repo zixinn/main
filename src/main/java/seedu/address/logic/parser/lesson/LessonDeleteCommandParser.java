@@ -33,20 +33,21 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
         }
 
+        if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
+            if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+                throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+            }
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
-            if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
-                throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
-            }
-            return new LessonDeleteCommand(index, ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
-        }
+        return new LessonDeleteCommand(index, ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE)));
     }
 
     /**

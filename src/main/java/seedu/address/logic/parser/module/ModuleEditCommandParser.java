@@ -36,6 +36,19 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         ParseException invalidFormatException = null;
         String preamble = argMultimap.getPreamble();
 
+        if (argMultimap.getValue(PREFIX_MODULE_CODE) == null && argMultimap.getValue(PREFIX_DESCRIPTION) == null
+                || preamble.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ModuleEditCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
+        }
+        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
+        }
+
         try {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
@@ -47,16 +60,9 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         }
 
         ModuleEditCommand.EditModuleDescriptor editModuleDescriptor = new ModuleEditCommand.EditModuleDescriptor();
-        if (mode == 1 && (preamble.equals("") || !ModuleCode.isValidModuleCode(preamble))) {
+        if (mode == 1 && !ModuleCode.isValidModuleCode(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ModuleEditCommand.MESSAGE_USAGE), invalidFormatException);
-        }
-
-        if (argMultimap.numOfValuesPresent(PREFIX_MODULE_CODE) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_MODULE_CODE));
-        }
-        if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
         }
 
         if (argMultimap.getValue(PREFIX_MODULE_CODE) != null) {
@@ -65,10 +71,6 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         if (argMultimap.getValue(PREFIX_DESCRIPTION) != null) {
             editModuleDescriptor.setDescription(ParserUtil.parseDescription(
                     parseFieldForEdit(argMultimap.getValue(PREFIX_DESCRIPTION))));
-        }
-
-        if (!editModuleDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(ModuleEditCommand.MESSAGE_NOT_EDITED);
         }
 
         if (mode == 0) {

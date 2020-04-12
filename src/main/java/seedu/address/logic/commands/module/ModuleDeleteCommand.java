@@ -26,7 +26,8 @@ import seedu.address.model.util.action.ModuleAction;
 public class ModuleDeleteCommand extends ModuleCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE
-            + ": Deletes the module identified by the index number used in the displayed module list.\n"
+            + ": Deletes the module identified by the index number or module code used in the displayed module list.\n"
+            + ModuleCode.MESSAGE_CONSTRAINTS + "\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_GROUP_MOD + " " + COMMAND_WORD_DELETE + " 1\n"
             + "Parameters: MODULE_CODE (must be a valid module code)\n"
@@ -96,13 +97,13 @@ public class ModuleDeleteCommand extends ModuleCommand {
         model.deleteTasksWithModuleCode(moduleCode);
         model.removeLessonFromModule(moduleCode);
 
-        ModuleAction deleteModAction =
-                new ModuleAction(moduleToDelete, relatedLessons, relatedTasks, relatedFacil, DoableActionType.DELETE);
-        model.addAction(deleteModAction);
-
         if (model.getModule().isPresent() && model.getModule().get().equals(moduleToDelete)) {
             model.updateModule(Optional.empty());
         }
+
+        ModuleAction deleteModAction =
+                new ModuleAction(moduleToDelete, relatedLessons, relatedTasks, relatedFacil, DoableActionType.DELETE);
+        model.addAction(deleteModAction);
 
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete),
                 CommandType.MODULE);

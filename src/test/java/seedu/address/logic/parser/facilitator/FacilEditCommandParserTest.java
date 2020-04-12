@@ -61,8 +61,8 @@ public class FacilEditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no field specified
-        assertParseFailure(parser, "1", FacilEditCommand.MESSAGE_NOT_EDITED);
-        assertParseFailure(parser, VALID_NAME_AMY, FacilEditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index or name and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

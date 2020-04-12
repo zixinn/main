@@ -48,6 +48,7 @@ public class ModuleAddCommand extends ModuleCommand {
         }
 
         model.addModule(toAdd);
+
         ModuleAction addModAction = new ModuleAction(toAdd, DoableActionType.ADD);
         model.addAction(addModAction);
 

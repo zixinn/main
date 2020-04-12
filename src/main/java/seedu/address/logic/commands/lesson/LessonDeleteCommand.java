@@ -21,16 +21,13 @@ public class LessonDeleteCommand extends LessonCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
             + ": Deletes the class identified by the index number used in the displayed class list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE + " 1\n"
-            + " or \n"
             + "Parameters: INDEX (must be a positive number) " + PREFIX_MODULE_CODE + " MOD_CODE\n"
             + "Example: " + COMMAND_GROUP_CLASS + " " + COMMAND_WORD_DELETE
             + " 1 " + PREFIX_MODULE_CODE + " CS2103T\n";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Class: %1$s";
 
-    public static final String MESSAGE_INVALID_MODULE_CODE = "Module code provided is invalid";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Module code provided is invalid.";
 
     private final Index targetIndex;
     private ModuleCode moduleCode;

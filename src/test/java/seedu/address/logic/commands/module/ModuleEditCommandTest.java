@@ -118,32 +118,6 @@ public class ModuleEditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedIndex_success() {
-        ModuleEditCommand editCommand = new ModuleEditCommand(INDEX_FIRST,
-                new ModuleEditCommand.EditModuleDescriptor());
-        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST.getZeroBased());
-
-        String expectedMessage = String.format(ModuleEditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
-
-        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedModuleCode_success() {
-        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2103T),
-                new ModuleEditCommand.EditModuleDescriptor());
-        Module editedModule = model.findModule(new ModuleCode(VALID_MODULE_CODE_CS2103T)).get();
-
-        String expectedMessage = String.format(ModuleEditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
-
-        Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, CommandType.MODULE, expectedModel);
-    }
-
-    @Test
     public void execute_moduleViewedEditedWithIndex_success() {
         Index indexLastModule = Index.fromOneBased(model.getFilteredModuleList().size());
         Module lastModule = model.getFilteredModuleList().get(indexLastModule.getZeroBased());
@@ -229,6 +203,22 @@ public class ModuleEditCommandTest {
         ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2103T), descriptor);
 
         assertCommandFailure(editCommand, model, ModuleEditCommand.MESSAGE_DUPLICATE_MODULE);
+    }
+
+    @Test
+    public void execute_notEditedIndex_failure() {
+        ModuleEditCommand editCommand = new ModuleEditCommand(INDEX_FIRST,
+                new ModuleEditCommand.EditModuleDescriptor());
+        String expectedMessage = Messages.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_notEditedModuleCode_failure() {
+        ModuleEditCommand editCommand = new ModuleEditCommand(new ModuleCode(VALID_MODULE_CODE_CS2103T),
+                new ModuleEditCommand.EditModuleDescriptor());
+        String expectedMessage = Messages.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

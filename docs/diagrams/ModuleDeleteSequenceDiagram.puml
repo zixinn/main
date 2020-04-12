@@ -22,6 +22,8 @@ participant "m:Module" as Module MODEL_COLOR
 participant ":UniqueFacilitatorList" as UniqueFacilitatorList MODEL_COLOR
 participant ":UniqueTaskList" as UniqueTaskList MODEL_COLOR
 participant ":LessonList" as LessonList MODEL_COLOR
+participant "ma:ModuleAction" as ModuleAction MODEL_COLOR
+participant ":DoableActionList" as DoableActionList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(\n"mod delete 1")
@@ -159,6 +161,25 @@ deactivate LessonList
 
 ModManager --> ModelManager
 deactivate ModManager
+
+ModelManager --> ModuleDeleteCommand
+deactivate ModelManager
+
+create ModuleAction
+ModuleDeleteCommand -> ModuleAction : ModuleAction(m, l, t, f, DELETE)
+activate ModuleAction
+
+ModuleAction --> ModuleDeleteCommand : ma
+deactivate ModuleAction
+
+ModuleDeleteCommand -> ModelManager : addAction(ma)
+activate ModelManager
+
+ModelManager -> DoableActionList : addAction(ma)
+activate DoableActionList
+
+DoableActionList --> ModelManager
+deactivate DoableActionList
 
 ModelManager --> ModuleDeleteCommand
 deactivate ModelManager
