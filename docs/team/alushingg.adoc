@@ -70,7 +70,7 @@ include::../DeveloperGuide.adoc[tag=calendar]
 image::NewCalendar.png[width="400"]
 
 .Old Design for Calendar Appearance (Alternative 2)
-image::OldCalendar.png[width="300"]
+image::OldCalendar.png[width="400"]
 
 include::../DeveloperGuide.adoc[tag=cal-design]
 
@@ -80,7 +80,7 @@ include::../DeveloperGuide.adoc[tag=use-case-calendar]
 
 === Appendix E: Glossary
 
-include::../DeveloperGuide.adoc[tag=glossary]
+include::../DeveloperGuide.adoc[tag=glos]
 
 === Appendix F: Instructions for Manual Testing
 
