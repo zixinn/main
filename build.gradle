@@ -67,7 +67,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'ModManager.jar'
+    archiveName = 'ModManager_v1.4.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }

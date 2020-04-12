@@ -95,7 +95,7 @@ The `UI` component,
 
 [[Design-Logic]]
 === Logic Component
-
+//tag::logic[]
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
 image::LogicClassDiagram.png[]
@@ -113,7 +113,7 @@ determine the specific kind of the user command and let a subtype parser of it d
 
 This logic component design is chosen because we have many commands that can be grouped with the same keyword (e.g. `mod`, `task`, `lesson`, etc).
 The design provides good abstraction for the developers without cluttering a particular parser class.
-
+//end::logic[]
 [[Design-Model]]
 === Model Component
 //tag::model[]
@@ -162,6 +162,7 @@ image::LessonPackageClassDiagram.png[]
 * A `LessonList` comprises of instances of `Lesson`.
 
 ==== Task
+//tag::task-package[]
 .Structure of the Task Package
 image::TaskPackageClassDiagram.png[]
 
@@ -170,11 +171,12 @@ image::TaskPackageClassDiagram.png[]
 * A `NonScheduledTask` represents a task whose date and time are not specified, so it does not contain a `TaskDateTime`.
 * Any `Task` would contain a `ModuleCode` to indicate which `Module` it is a task of.
 * A `UniqueTaskList` comprises of instances of `NonScheduledTask` and `ScheduledTask`.
-
+//end::task-package[]
 ==== Calendar
 * The `Calendar` package contains a concrete class `Calendar` which represents a calendar date.
 
 ==== DoableAction
+//tag::doable-package[]
 .Structure of the Action Package
 image::DoableActionClassDiagram.png[]
 
@@ -182,6 +184,7 @@ image::DoableActionClassDiagram.png[]
 * Actual implementations of `DoableAction` are `ModuleAction`, `LessonAction`, `FacilAction`, and `TaskAction`, each of which
 has a `DoableActionType` value to assist how the undo/redo process is carried out.
 * A `DoableActionList` comprises of instances of classes mentioned above.
+//end::doable-package[]
 
 [[Design-Storage]]
 === Storage Component
@@ -1548,6 +1551,7 @@ Use case resumes from step 1.
 
 // end::use-case-class[]
 
+//tag::use-case-tasks-first-part[]
 [discrete]
 === Use case: UC11 - Add task
 
@@ -1622,6 +1626,7 @@ Use case ends.
 ** 1a1. Mod Manager shows an error message.
 +
 Use case resumes from step 1.
+//end::use-case-tasks-first-part[]
 
 //tag::use-case-tasks-second-part[]
 
@@ -1920,6 +1925,7 @@ Use case resumes from step 1.
 Use case ends.
 //end::use-case-calendar[]
 
+//tag::use-case-undo-redo[]
 [discrete]
 === Use case: UC27 - Undo a command
 
@@ -1948,6 +1954,7 @@ Use case resumes from step 1.
 * 2. Mod Manager redoes the most previously undone command.
 +
 Use case ends.
+//end::use-case-undo-redo[]
 
 *<<extensions, Extensions>>*
 [none]
@@ -2047,6 +2054,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Shows the <<gui, GUI>> with an empty set of modules, classes, tasks and facilitators.
 // end::testing-general[]
 
+//tag::testing-undo-redo[]
 . Undo/Redo commands.
 
 .. Type any valid command that adds/edits/deletes an entry of Mod Manager that can successfully execute and press kbd:[Enter]. +
@@ -2057,6 +2065,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Type redo and press kbd:[Enter]. +
    Expected: The previously undone command is executed again.
+//end::testing-undo-redo[]
 
 === Testing of Module Feature
 

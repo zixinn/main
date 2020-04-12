@@ -168,7 +168,7 @@ Format:
 
 * `*help*`
 
-//tag::undo-redo[]
+//tag::undo[]
 ==== Undoing previous commands : `*undo*`
 
 During a usage session with Mod Manager, you may make mistakes while adding/editing/deleting an entry. It
@@ -202,6 +202,7 @@ editing.
 
 .After `undo`
 image::undo-3.png[]
+//end::undo[]
 
 ==== Redoing previously undone commands : `*redo*`
 
@@ -224,7 +225,7 @@ After you press kbd:[Enter], the previously undone effect will come back.
 
 .After `redo`
 image::redo-2.png[]
-//end::undo-redo[]
+
 
 ==== Listing commands : `*cmd*`
 
