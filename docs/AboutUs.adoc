@@ -25,8 +25,8 @@ In charge of[Component XYZ]: e.g. In charge of Model, UI, Storage, etc. If you a
 == Project Team
 
 === Nguyen Dang Phuc Nhat
-image::NNpanpan.png[width="150", align="left"]
-{empty}[https://github.com/NNpanpan[github]] [<<NNpanpan#, portfolio>>]
+image::nnpanpan.png[width="150", align="left"]
+{empty}[https://github.com/NNpanpan[github]] [<<nnpanpan#, portfolio>>]
 
 Role: Developer, Project Lead +
 Responsibilities: Cmd Component, Undo/Redo Commands
