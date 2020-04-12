@@ -73,7 +73,7 @@ public class CalFindCommand extends CalCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Calendar calendar = model.getCalendar();
+        Calendar calendar = Calendar.getNowCalendar();
         List<Task> tasks = model.getFilteredTaskList();
         List<Lesson> lessons = model.getLessons();
         int dayOfWeek = calendar.getDayOfWeek();
@@ -98,7 +98,7 @@ public class CalFindCommand extends CalCommand {
 
                 if (schedulable instanceof Lesson) {
                     startTime = ((Lesson) schedulable).getDayAndTime().getEndTime();
-                } else {
+                } else if (startTime.isBefore(time)){
                     startTime = time;
                 }
             }
