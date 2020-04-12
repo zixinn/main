@@ -65,19 +65,8 @@ public class TaskCommandParserTest {
     }
 
     @Test
-    public void parse_edit() throws Exception {
-        // TODO: @nhatnguyen
-        /*
-        Module module = new ModuleBuilder().build();
-        ModuleEditCommand.EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
-        ModuleEditCommand command = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " "
-                + INDEX_FIRST.getOneBased() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
-        assertEquals(new ModuleEditCommand(INDEX_FIRST, descriptor), command);
-
-        ModuleEditCommand command1 = (ModuleEditCommand) parser.parse(Command.COMMAND_WORD_EDIT + " CS2030 "
-                + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
-        assertEquals(new ModuleEditCommand(new ModuleCode("CS2030"), descriptor), command1);
-        */
+    public void parse_edit_fail() {
+        TaskEditCommandParser editParser = new TaskEditCommandParser();
     }
 
     @Test
