@@ -1148,6 +1148,7 @@ Given below is an example usage scenario and how the calendar find mechanism beh
 1. The user executes the calendar find command.
 2. `CalFindCommandParser` creates a new `CalFindCommand`.
 3. `LogicManager` executes the `CalFindCommand`.
+//end::calendar[]
 
 The following sequence diagram shows how the calendar find command works:
 
@@ -1155,7 +1156,6 @@ The following sequence diagram shows how the calendar find command works:
 image::CalFindSequenceDiagram.png[]
 
 NOTE: The lifeline for `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-//end::calendar[]
 
 The following activity diagram summarizes what happens when a user executes a calendar find command:
 
@@ -2011,17 +2011,20 @@ tasks' content.
 [appendix]
 == Glossary
 //tag::glossary[]
+//tag::glos[]
 [[cli]] CLI::
 Command-line interface: processes commands to a computer program in the form of lines of text.
 
 [[mss]] MSS::
 Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong.
+
 [[extensions]] Extensions::
 "Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario
 that can happen if certain things are not as expected by the <<mss, MSS>>.
 
 [[gui]] GUI::
 Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons.
+//end::glos[]
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X.
