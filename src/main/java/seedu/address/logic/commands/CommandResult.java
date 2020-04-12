@@ -52,4 +52,8 @@ public class CommandResult {
         return Objects.hash(feedbackToUser, type);
     }
 
+    @Override
+    public String toString() {
+        return feedbackToUser;
+    }
 }
