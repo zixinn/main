@@ -30,6 +30,17 @@ public class ScheduledTaskBuilder {
     }
 
     /**
+     * Initializes the ScheduledTaskBuilder with the data of {@code taskToCopy}.
+     */
+    public ScheduledTaskBuilder(ScheduledTask taskToCopy) {
+        moduleCode = taskToCopy.getModuleCode();
+        description = taskToCopy.getDescription();
+        taskDateTime = taskToCopy.getTaskDateTime().get();
+        isDone = taskToCopy.isTaskDone();
+        taskId = taskToCopy.getTaskNum();
+    }
+
+    /**
      * Sets the {@code ModuleCode} of the {@code ScheduledTask} that we are building.
      */
     public ScheduledTaskBuilder withModuleCode(String moduleCode) {
