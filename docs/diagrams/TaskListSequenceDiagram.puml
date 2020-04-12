@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+skinparam ParticipantFontSize 40
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -13,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("task list")
+[-> LogicManager : execute("task\nlist")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("task list")
+LogicManager -> ModManagerParser : parseCommand("task\n list")
 activate ModManagerParser
 
 create TaskCommandParser

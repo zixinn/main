@@ -1,11 +1,12 @@
 @startuml
 !include style.puml
+skinparam ParticipantFontSize 40
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ModManagerParser" as ModManagerParser LOGIC_COLOR
 participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
-participant "listUndoneCommand:TaskListUnDoneCommand" as TaskListUnDoneCommand LOGIC_COLOR
+participant "list:TaskListUnDoneCommand" as TaskListUnDoneCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("task undone")
+[-> LogicManager : execute("task \n undone")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand("task undone")
+LogicManager -> ModManagerParser : parseCommand("task \n undone")
 activate ModManagerParser
 
 create TaskCommandParser
@@ -33,21 +34,21 @@ create TaskListUnDoneCommand
 TaskCommandParser -> TaskListUnDoneCommand
 activate TaskListUnDoneCommand
 
-TaskListUnDoneCommand --> TaskCommandParser : listUndoneCommand
+TaskListUnDoneCommand --> TaskCommandParser : list
 deactivate TaskListUnDoneCommand
 
-TaskCommandParser --> ModManagerParser : listUndoneCommand
+TaskCommandParser --> ModManagerParser : list
 deactivate TaskCommandParser
 TaskCommandParser -[hidden]-> ModManagerParser
 destroy TaskCommandParser
 
-ModManagerParser --> LogicManager : listUndoneCommand
+ModManagerParser --> LogicManager : list
 deactivate ModManagerParser
 
 LogicManager -> TaskListUnDoneCommand : execute()
 activate TaskListUnDoneCommand
 
-TaskListUnDoneCommand -> ModelManager : updateFilteredTaskList(TaskListUnDoneCommand#predicateIsTaskNotDone())
+TaskListUnDoneCommand -> ModelManager : updateFilteredTaskList(\npredicateIsTaskNotDone())
 activate ModelManager
 
 ModelManager --> TaskListUnDoneCommand
