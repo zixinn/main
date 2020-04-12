@@ -759,7 +759,7 @@ Press kbd:[Enter] and the task will be gone from the list.
 image::task-delete-2.png[]
 //end::task-edit-delete[]
 
-// tag::task-second-part[]
+//tag::task-mark-as-done-UG[]
 ==== Marking a task as done
 
 You can mark the task as done in the module in Mod Manager.
@@ -796,7 +796,7 @@ image::TaskDoneAfterCloseUp.png[]
 
 The <<taskcard, task card>> has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
-
+//end::task-mark-as-done-UG[]
 ==== Viewing all tasks across all modules
 
 You can view a list of all tasks across all modules in Mod Manager.
@@ -857,6 +857,7 @@ which are in dark red color:
 .Only uncompleted tasks are shown
 image::TaskListNotDoneAfter.png[]
 
+//tag::task-find-description-UG[]
 ==== Finding tasks by description
 
 You are browsing through the task list. But there are too many tasks! You suddenly
@@ -909,6 +910,7 @@ Finds all tasks that contain the word `homework` in their description
 
 * `*task* find math coding` +
 Finds all tasks that contain the word `math` *or* `coding` in their description
+//end::task-find-description-UG[]
 
 ==== Searching tasks by date
 
@@ -971,7 +973,6 @@ if Mod Manager is used over a long period of time.
 
 * `*task* search /date 14 /month 2 /year 2021` +
 Searches for all tasks happening on 14/02/2021.
-// end::task-second-part[]
 
 === Facilitator feature : `*facil*`
 // tag::facilitator[]
