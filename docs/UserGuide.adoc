@@ -44,7 +44,7 @@ Note the following symbols used in this document:
 [%autowidth]
 |=====
 ^|*Symbol* |*Meaning*
-^|Enter | The enter button on the keyboard.
+^|kbd:[Enter] | The enter button on the keyboard.
 ^|image:InfoIcon.png[width="40"] | Information that you need to know.
 |=====
 
@@ -61,8 +61,8 @@ Here are the steps to get you started with using Mod Manager:
 .GUI for Mod Manager
 image::Gui.png[width="800"]
 +
-.  Type the command in the command box and press Enter to execute it. +
-e.g. typing *`help`* and pressing Enter will open the help window.
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
@@ -127,7 +127,7 @@ This section describes the main features of Mod Manager and how to use them.
 
 The features are grouped into six categories:
 
-. <<General, General>> feature
+. <<General features, General>> features
 . <<Module feature : `*mod*`, Module>> feature
 . <<Class feature : `*class*`, Class>> feature
 . <<Facilitator feature : `*facil*`, Facilitator>> feature
@@ -157,8 +157,8 @@ e.g. if the command specifies `/code MOD_CODE /desc DESCRIPTION`,
 `/desc DESCRIPTION /code MOD_CODE` is also acceptable.
 ====
 
-=== General Features
-The following commands carry out general operations in Mod Manager.
+=== General features
+This section is about some general operations in Mod Manager.
 
 ==== Viewing help : `*help*`
 
@@ -167,55 +167,134 @@ You can open the help window that displays a link to our user guide.
 Format:
 
 * `*help*`
-
+//tag::undo-redo[]
 ==== Undoing previous commands : `*undo*`
 
-You can restore the Mod Manager to the state before the previous undoable command was executed.
+During a usage session with Mod Manager, you may make mistakes while adding/editing/deleting an entry. It
+would be nice if you can reverse the effect in a neat way. The `*undo*` command is here to give you that
+convenience.
+
+All of your commands are recorded, so with `*undo*`, you can reverse the effect of previous add/edit/delete commands one by one,
+starting with the most previous command.
+
+As of the current version, you can only use `*undo*` to reverse the effects of add/edit/delete commands.
 
 Format:
 
 * `*undo*`
 
+Example:
+
+Let's say you are editing a task of module ST2334 with ID number 401. It is the task highlighted with the red box. Don't
+bother with the command if you haven't read the section on <<Task feature : `*task*`, Task feature>> yet. This is just a quick demonstration.
+
+.Editing a task as per usual
+image::undo-1.png[]
+
+After that, you realize you didn't mean to make this change, so you type `*undo*`.
+
+.Before `undo`
+image::undo-2.png[]
+
+After you press kbd:[Enter], the effect will be reverted and the change is undone. The task is back to before your
+editing.
+
+.After `undo`
+image::undo-3.png[]
+
 ==== Redoing previously undone commands : `*redo*`
 
-You can reverse your undone actions.
+We understand that you can change your mind right after undo-ing, so we give have the `*redo*` command to assist you.
+
+You can reverse the effect of the most previous `*undo*` command with `*redo*`.
 
 Format:
 
 * `*redo*`
 
+Example:
+
+Let's say you have just used `*undo*` to a task edit command.
+
+.Before `redo`
+image::redo-1.png[]
+
+After you press kbd:[Enter], the previously undone effect will come back.
+
+.After `redo`
+image::redo-2.png[]
+//end::undo-redo[]
 ==== Listing commands : `*cmd*`
 
 *Listing all commands*:
 
-Lists all valid command groups.
+Sometimes, you might forget what commands are available in Mod Manager. To give you a quick reminder of all the
+command groups provided, we have the `*cmd* all` command.
 
 The command groups available in Mod Manager are the words in bold you have seen throughout this document.
+
 These include: `*facil*, *mod*, *task*, ...`
 
 Format:
 
 * `*cmd* all`
 
+Example:
+
+Type `*cmd* all` into the Command Box.
+
+.Before executing `*cmd* all`
+image::cmdAll1.png[]
+
+Press kbd:[Enter] and you will be able to see all the command groups listed.
+
+.After executing `*cmd* all`
+image::cmdAll2.png[]
+
 *Listing commands for a specific feature*:
 
-Lists commands for a specific group.
+Seeing all the command groups might not be sufficient to remind you of the specific command formats. That's why there is
+`*cmd* group`. It will list all valid command formats of a group for you, so you can get back to work.
+
+You can use `*cmd* all` first to get a glimpse of all the command groups we have.
 
 Format:
 
-* `*cmd* group COMMAND_WORD`
+* `*cmd* group COMMAND_GROUP`
 
-Example: `*cmd* group task`
+Example: `*cmd* group class`
 
-==== Automatic command guidance
+You want to know what commands there are in command group `class`. Type `*cmd* group class` into the Command Box.
 
-Provides guidance for mistyped commands by showing a list of possible valid commands. +
-The command(s) closest to your mistyped one will be shown: both the syntax format(s) and context-dependent examples.
+.Before executing `*cmd* group class`
+image::cmdGroup1.png[]
+
+Hit kbd:[Enter] and you will see the commands associated in the command group `class`. Since there are quite a few commands
+there, you might want to scroll down through the list.
+
+.After executing `*cmd* group class`
+image::cmdGroup2.png[]
+
+==== Navigating through past commands with up/down key
+
+During a Mod Manager usage session, you may want to repeat some commands but you feel quite lazy to type again. Therefore,
+we bring you the ability to use the `up/down` arrow key on your keyboard to find the past command that you need.
+
+Example:
+
+Let's say you want to use command "mod view CS2103T" again, but you have already executed 5 more commands ever since.
+Just simply press the `up` key on your keyboard a few times and you will see it in the command box.
+
+If you have been pressing `up` and accidentally bypassed the command you need, just press `down` until you see it again.
+
+For this feature, you can try out very quickly. Just open Mod Manager, type in a few commands and press `up/down` like you mean it.
+That's the best and only way to truly feel the convenience of Mod Manager.
 
 //tag::clear[]
 ==== Clearing all entries : `*clear*`
 
 You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
+Please use this command cautiously, you cannot `undo` after it!
 
 Format:
 
@@ -229,7 +308,7 @@ You can type `*clear*` as shown below.
 .Before `*clear*`
 image::BeforeClear.png[]
 
-After pressing Enter, Mod Manager is empty. All the entries you have are cleared.
+After pressing kbd:[Enter], Mod Manager is empty. All the entries you have are cleared.
 
 .After `*clear*`
 image::AfterClear.png[]
@@ -597,41 +676,68 @@ Command properties:
 * `DATE` and `TIME` are optional fields, however, there can only be a `TIME` field
 if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is not allowed.
 * `DATE` follows `_dd/MM/yyyy_` format. It should be a valid date,
-e.g. Day 32 or Month 13 is not allowed.
-* `TIME` follows `_HH:mm_` format. It should be a valid time period,
-e.g. 24:00 is not allowed.
-* Duplicate tasks across modules are allowed. However,
+e.g. Day 32 or Month 13 is not allowed. A special date is reserved in Mod Manager for a special functional purpose: 01/01/1970. If
+you choose to use this date as your input, Mod Manager won't (for now) show an error message, but is not guaranteed to exhibit
+a normal behaviour.
+* `TIME` follows `_HH:mm_` format. It should be a valid time period between 00:01 and 23:59,
+e.g. 00:00 and 24:00 are not allowed - if you input these values, they will be ignored.
+* Similar tasks across modules are allowed. However,
 tasks within a same module must have different descriptions. They can occupy the same time period.
 ****
 
+//tag::task-edit-delete[]
 ==== Editing a task
 
 From here on, you will be introduced to Mod Manager's task ID system.
 ****
-* A task can be uniquely identified in the system by two things: its associated module and a 3-digit number.
+* A task can be uniquely identified in the system by two things: its associated module and a 3-digit number (from 100-999).
 * A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
 * Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
-* You can find out a task's ID by looking at the general task list - can be viewed with `*task* list`
-(section 4.4.3) , or the task list of a specific module - can be viewed with `*mod* view` (section 4.2.3).
+* You can find out a task's ID by looking at the general task list - can be viewed with
+<<Viewing all tasks across all modules in ModManger, `*task* list`>>,
+or the task list of a specific module - can be viewed with <<Viewing information of a module, `*mod* view`>>.
 ****
 
-You can edit a task's description, its date and time details, or both.
+You can edit a task's description, its date and time details, or both by providing the correct task ID and the updated
+information.
 
 Format:
 
 * `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
 
-Mod Manager will find the task associated with the task ID number provided and update the information correspondingly.
+Mod Manager will find the task associated with the module code and task ID number provided and update the information correspondingly.
+The properties of `DESCRIPTION`, `DATE` and `TIME` are described in the <<Adding a task, adding a task>> section.
 
-Example: `*task* edit CS2103T 848 /desc UG submission /on 12/04/2020 /at 23:59`
+Example: `*task* edit CS2101 344 /desc OP2 /on 08/04/2020`
 
-Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so.
+Type the command into the command box. The task to edit in this example is marked by the red rectangle.
+
+.Before `*task* edit`
+image::task-edit-1.png[]
+
+After pressing kbd:[Enter], you will see that the task has been edited.
+
+.After `*task* edit`
+image::task-edit-2.png[]
+
+Since you may want to remove the date and time of a task, Mod Manager provides you a way to do so. Note that if you try
+to remove the date and time from a task without these values,
 
 Format:
 
 * `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] /on non`
 
-Example: `*task* edit CS2103T 848 /on non`
+Example: `*task* edit ST2334 401 /on non`
+
+.A task whose date and time that you want to remove
+image::task-edit-3.png[]
+
+Again, press kbd:[Enter] and you will see its date and time has been removed. Its order in the list may be changed due to
+the sorting property of the <<Viewing all tasks across all modules in ModManger, task list>>.
+
+.The task's date and time removed.
+image::task-edit-4.png[]
+
 
 ==== Deleting a task
 
@@ -641,7 +747,16 @@ Format:
 
 * `*task* delete MOD_CODE ID_NUMBER`
 
-Example: `*task* delete CS2103T 973`
+Example: `*task* delete CS2101 344`
+
+.The task to delete
+image::task-delete-1.png[]
+
+Press kbd:[Enter] and the task will be gone from the list.
+
+.Task deleted from the list.
+image::task-delete-2.png[]
+//end::task-edit-delete[]
 
 // tag::task-second-part[]
 ==== Marking a task as done
@@ -670,7 +785,7 @@ You can mark a task as done in the module. To mark the task with
 task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the following command:
 
 `*task* done /code CS2105 /id 224`
-and hit Enter
+and hit kbd:[Enter]
 
 .Before `*task* done /code CS2105 /id 224`
 image::TaskDoneBeforeCloseUp.png[]
@@ -686,6 +801,9 @@ Hooray! We just completed a task.
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
 at present.
+
+The tasks will be automatically sorted by time for you: tasks with nearer date will be prioritized, and tasks without
+date and time will be at the end.
 
 Format:
 
@@ -717,7 +835,7 @@ Example:
 If you want a list of current tasks for the module `CS3230`, you can type in the following command:
 
 `*task* module /code CS3230`
-and hit Enter
+and hit kbd:[Enter]
 
 It is not compulsory for you to be at the Tasks tab before typing in this command.
 Mod Manager will automatically redirect you to the Tasks tab if you are currently at another tab.
@@ -735,7 +853,7 @@ Format: `*task* undone`
 .Before `*task* undone`, all tasks are listed
 image::TaskListNotDoneBefore.png[]
 
-By typing the command above and hit Enter, you should only see uncompleted tasks,
+By typing the command above and hit kbd:[Enter], you should only see uncompleted tasks,
 which are in dark red color:
 
 .Only uncompleted tasks are shown
@@ -772,7 +890,7 @@ Examples:
 To find tasks that contain the word `oral`, `assign`, or `tut` in their description,
 you can type in the following command:
 
-`*task* find oral assign tut` and press Enter
+`*task* find oral assign tut` and press kbd:[Enter]
 
 .After `*task* find oral assign tut`, all matching tasks are displayed.
 image::TaskFindAfter.png[]
@@ -783,7 +901,7 @@ Explanation: +
 -  Similarly, `Assignment 3` will match `assign`, and `Tutorial` will match `tut` +
 - As long as a task's description matches *one* of the keywords provided, it will be shown. +
 
-You can try typing in `*task* find assign tut oral` and press Enter. This will return the same list
+You can try typing in `*task* find assign tut oral` and press kbd:[Enter]. This will return the same list
 of tasks, since the ordering of the keywords does not matter.
 
 Other examples:
@@ -827,7 +945,7 @@ Example:
 
 You can search for tasks that are due on the submission date of CS2103T for AY19/20 S2
 (13 April). To find tasks happening on 13 April,
-you can type `*task* search /date 13 /month 4` and press Enter. This will return all tasks
+you can type `*task* search /date 13 /month 4` and press kbd:[Enter]. This will return all tasks
 that are happening on 13 April.
 
 .Before `*task* search /date 13 /month 4`, all tasks are listed
@@ -1255,7 +1373,7 @@ image::TaskCardDone.png[]
 [%autowidth]
 |=====
 |*Parameter* | *Constraints*
-|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 digits (and a possible trailing letter) with no spaces.
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
                  This includes `Module` 's and `Task` 's description.
 |=====

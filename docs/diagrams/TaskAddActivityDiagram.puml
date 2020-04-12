@@ -10,12 +10,16 @@ if () then ([module code and description are present])
                     :Model adds task to UniqueTaskList;
                     :Logic saves ModManager to Storage;
                 else ([else])
+                    :Ui shows error message;
                 endif
         else ([else])
+            :Ui shows error message;
         endif
     else ([else])
+        :Ui shows error message;
     endif
 else([else])
+    :Ui shows error message;
 endif
 stop
 @enduml
