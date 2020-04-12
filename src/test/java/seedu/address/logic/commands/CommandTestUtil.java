@@ -46,8 +46,10 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
     public static final String VALID_MODULE_CODE_GEQ1000 = "GEQ1000";
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
+    public static final String TASK_DAY_25 = "25";
     public static final String TASK_DAY_26 = "26";
     public static final String TASK_MONTH_03 = "3";
+    public static final String TASK_MONTH_06 = "6";
     public static final String TASK_YEAR_2020 = "2020";
     public static final String VALID_TASK_ID = "619";
 
@@ -75,6 +77,7 @@ public class CommandTestUtil {
     public static final String VALID_BROKEN_FIND_WORDS_HOME = "hOMe";
     public static final String VALID_BROKEN_FIND_WORDS_SLEEP = "slEe";
     public static final String VALID_BROKEN_FIND_WORDS_ONLINE = "lIne";
+    public static final String VALID_BROKEN_FIND_WORDS_CONQUER = "cOnQ";
 
     public static final String TASK_UNKNOWN_COMMAND = "task unknownCommand";
 

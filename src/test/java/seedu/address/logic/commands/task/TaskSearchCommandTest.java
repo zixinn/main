@@ -37,24 +37,24 @@ public class TaskSearchCommandTest {
 
     @Test
     public void equals() {
-        HashMap<String, Integer> hashMap = new HashMap<String, Integer>() {
+        HashMap<String, Integer> dateYearHashMap = new HashMap<String, Integer>() {
             {
                 put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
                 put(YEAR_STRING, Integer.parseInt(TASK_YEAR_2020));
             }
         };
 
-        HashMap<String, Integer> differentHashMap = new HashMap<String, Integer>() {
+        HashMap<String, Integer> dateHashMap = new HashMap<String, Integer>() {
             {
                 put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
             }
         };
         TaskSearchPredicate firstPredicate =
-                new TaskSearchPredicate(hashMap);
+                new TaskSearchPredicate(dateYearHashMap);
         TaskSearchPredicate secondPredicate =
-                new TaskSearchPredicate(hashMap);
+                new TaskSearchPredicate(dateYearHashMap);
         TaskSearchPredicate thirdDifferentPredicate =
-                new TaskSearchPredicate(differentHashMap);
+                new TaskSearchPredicate(dateHashMap);
         TaskSearchCommand searchFirstCommand = new TaskSearchCommand(firstPredicate);
         TaskSearchCommand searchSecondCommand = new TaskSearchCommand(secondPredicate);
         TaskSearchCommand searchThirdCommand = new TaskSearchCommand(thirdDifferentPredicate);
@@ -80,7 +80,7 @@ public class TaskSearchCommandTest {
     }
 
     @Test
-    public void execute_oneFieldPresentAndHaveValidValue_success() {
+    public void execute_oneFieldPresent_success() {
         // one and only valid field, year only
         HashMap<String, Integer> yearHashMap = new HashMap<String, Integer>() {
             {
@@ -98,7 +98,7 @@ public class TaskSearchCommandTest {
     }
 
     @Test
-    public void execute_twoFieldsPresentAndHaveValidValues_success() {
+    public void execute_twoFieldsPresent_success() {
         // two and only two valid fields, day and month
         HashMap<String, Integer> dayMonthHashMap = new HashMap<String, Integer>() {
             {
@@ -117,7 +117,7 @@ public class TaskSearchCommandTest {
     }
 
     @Test
-    public void execute_allFieldsPresentAndHaveValidValues_success() {
+    public void execute_allThreeFieldsPresent_success() {
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>() {
             {
                 put(DATE_STRING, Integer.parseInt(TASK_DAY_26));

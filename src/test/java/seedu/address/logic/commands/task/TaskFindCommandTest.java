@@ -7,7 +7,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.AN_INT_VALUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_AS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_HOME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_ONLINE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_PROG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_SLEEP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_HOMEWORK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROGRAMMING;
@@ -185,6 +187,21 @@ public class TaskFindCommandTest {
                 nonScheduledProgrammingTask,
                 nonScheduledProgrammingAssignmentTask),
                 expectedModel.getFilteredTaskList());
+    }
+
+
+    @Test
+    public void execute_noKeywordMatches_noTasksFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskContainsKeywordsPredicate predicate = preparePredicate(
+                VALID_BROKEN_FIND_WORDS_SLEEP
+                        + " " + VALID_BROKEN_FIND_WORDS_SLEEP
+                        + " " + VALID_BROKEN_FIND_WORDS_SLEEP
+                        + " " + VALID_BROKEN_FIND_WORDS_ONLINE);
+        TaskFindCommand command = new TaskFindCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, CommandType.TASK, expectedModel);
+        assertEquals(Arrays.asList(), expectedModel.getFilteredTaskList());
     }
 
     /**
