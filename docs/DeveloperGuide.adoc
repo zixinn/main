@@ -154,7 +154,7 @@ image::FacilitatorPackageClassDiagram.png[]
 image::LessonPackageClassDiagram.png[]
 
 * The `Lesson` package contains a concrete class `Lesson`.
-* A `Lesson` contains a `DayAndTime` which indicate which day of the week and what time the lesson is on.
+* A `Lesson` contains a `DayAndTime` which indicates which day of the week and the time the lesson is on.
 * A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs.
 * A `LessonList` comprises of instances of `Lesson`.
 
@@ -169,8 +169,7 @@ image::TaskPackageClassDiagram.png[]
 * A `UniqueTaskList` comprises of instances of `NonScheduledTask` and `ScheduledTask`.
 
 ==== Calendar
-* The `Calendar` package contains a concrete class `Calendar`.
-* The `Calendar` contains a LocalDate to represent the calendar date.
+* The `Calendar` package contains a concrete class `Calendar` which represents a calendar date.
 
 ==== DoableAction
 .Structure of the Action Package
