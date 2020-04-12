@@ -40,8 +40,7 @@ public class TaskForOneModuleCommand extends TaskCommand {
             throw new CommandException(String.format(MESSAGE_MODULE_DOES_NOT_EXIST, moduleCode));
         }
 
-        assert model.hasModuleCode(moduleCode) : "The module should be already available in Mod Manager";
-
+        assert (model.hasModuleCode(moduleCode)) : "Module should be available in Mod Manager";
         model.updateFilteredTaskList(predicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 moduleCode), CommandType.TASK);

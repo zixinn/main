@@ -1,6 +1,6 @@
 @startuml
 scale 0.6
-!include style.puml
+!include smallerStyle.puml
 skinparam ArrowFontSize 60
 
 box Logic LOGIC_COLOR_T1
@@ -20,10 +20,10 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueTaskList" as UniqueTaskList MODEL_COLOR
 end box
 
-[-> LogicManager : execute(\n "task done /module CS2103T /id 986")
+[-> LogicManager : execute(\n "task done \n /module \n CS2103T \n /id \n 986")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand(\n "task done /module CS2103T /id 986")
+LogicManager -> ModManagerParser : parseCommand(\n "task done \n /module \n CS2103T \n /id \n 986")
 activate ModManagerParser
 
 create TaskCommandParser
@@ -33,7 +33,7 @@ activate TaskCommandParser
 TaskCommandParser --> ModManagerParser
 deactivate TaskCommandParser
 
-ModManagerParser -> TaskCommandParser : parse("done /module CS2103T /id 986")
+ModManagerParser -> TaskCommandParser : parse("done \n /module \n CS2103T \n /id \n 986")
 activate TaskCommandParser
 
 create TaskMarkAsDoneCommandParser
@@ -43,11 +43,11 @@ activate TaskMarkAsDoneCommandParser
 TaskMarkAsDoneCommandParser --> TaskCommandParser
 deactivate TaskMarkAsDoneCommandParser
 
-TaskCommandParser -> TaskMarkAsDoneCommandParser : parse("/module CS2103T /id 986")
+TaskCommandParser -> TaskMarkAsDoneCommandParser : parse("/module \n CS2103T \n /id \n 986")
 activate TaskMarkAsDoneCommandParser
 
 create TaskMarkAsDoneCommand
-TaskMarkAsDoneCommandParser -> TaskMarkAsDoneCommand : TaskMarkAsDoneCommand("CS2103T", "986")
+TaskMarkAsDoneCommandParser -> TaskMarkAsDoneCommand : TaskMarkAsDoneCommand(\n"CS2103T",\n "986")
 activate TaskMarkAsDoneCommand
 
 TaskMarkAsDoneCommand --> TaskMarkAsDoneCommandParser : cmd
