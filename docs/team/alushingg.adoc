@@ -49,7 +49,6 @@ This section shows a summary of my contributions to Mod Manager.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-=== General Feature
 
 include::../UserGuide.adoc[tag=calendar]
 
