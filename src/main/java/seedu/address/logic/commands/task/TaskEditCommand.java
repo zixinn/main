@@ -85,7 +85,6 @@ public class TaskEditCommand extends TaskCommand {
         assert taskToEdit != null;
 
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        System.out.println(current);
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             logger.severe("Dups: " + editedTask.toString() + " and " + taskToEdit.toString());
@@ -141,6 +140,23 @@ public class TaskEditCommand extends TaskCommand {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TaskEditCommand)) {
+            return false;
+        }
+
+        TaskEditCommand tec = (TaskEditCommand) other;
+
+        return moduleCode.equals(tec.moduleCode)
+                && taskNum == tec.taskNum
+                && editTaskDescriptor.equals(tec.editTaskDescriptor);
+    }
+
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
@@ -178,8 +194,16 @@ public class TaskEditCommand extends TaskCommand {
             this.isDone = task.isTaskDone();
         }
 
+        public void setModuleCode(ModuleCode moduleCode) {
+            this.moduleCode = moduleCode;
+        }
+
         public ModuleCode getModuleCode() {
             return this.moduleCode;
+        }
+
+        public void setTaskNum(int taskNum) {
+            this.taskNum = taskNum;
         }
 
         public int getTaskNum() {
@@ -227,8 +251,8 @@ public class TaskEditCommand extends TaskCommand {
 
             return this.moduleCode.equals(e.moduleCode)
                     && this.taskNum == e.taskNum
-                    && this.description.equals(e.description)
-                    && this.taskDateTime.equals(e.taskDateTime)
+                    && Optional.ofNullable(this.description).equals(Optional.ofNullable(e.description))
+                    && Optional.ofNullable(this.taskDateTime).equals(Optional.ofNullable(e.taskDateTime))
                     && this.isDone == (e.isDone);
         }
     }
