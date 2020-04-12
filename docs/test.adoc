@@ -1,0 +1,4 @@
+:imagesDir: images
+
+.Bolabola
+image::TaskMarkAsDoneSequenceDiagram.png[]

@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -146,7 +147,7 @@ image::FacilitatorPackageClassDiagram.png[]
 
 * The `Facilitator` package contains a concrete class `Facilitator`.
 * A `Facilitator` contains a `Name`, `Email` and `Office`.
-* A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs.
+* A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs to.
 * A `UniqueFacilitatorList` comprises of instances of `Facilitator`.
 
 ==== Lesson
@@ -155,7 +156,7 @@ image::LessonPackageClassDiagram.png[]
 
 * The `Lesson` package contains a concrete class `Lesson`.
 * A `Lesson` contains a `DayAndTime` which indicates which day of the week and the time the lesson is on.
-* A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs.
+* A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs to.
 * A `LessonList` comprises of instances of `Lesson`.
 
 ==== Task
@@ -198,7 +199,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common Classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -209,7 +210,6 @@ This section describes some noteworthy details on how certain features are imple
 There are a few general features implemented to help users improve their workflow with Mod Manager.
 
 These are: `undo` and `redo` feature, navigating through past commands with up/down keys, `clear` command, and `help` command.
-
 
 ==== Implementation Details
 
@@ -277,7 +277,7 @@ It supports the following operations:
 
 * `add` - Adds a module to Mod Manager.
 * `list` - Lists all modules in Mod Manager.
-* `view` - View information of a module in Mod Manager.
+* `view` - Views information of a module in Mod Manager.
 * `edit` - Edits a module in Mod Manager.
 * `delete` - Deletes a module in Mod Manager.
 // end::mod[]
@@ -574,11 +574,11 @@ It supports the following operations:
 * `add` - Adds a task to a `Module` in Mod Manager.
 * `edit` - Edits the information of a task in Mod Manager.
 * `delete` - Deletes a task from the `Module` and Mod Manager.
-* `done` - Marks a task as done in Mod Manager
+* `done` - Marks a task as done in Mod Manager.
 * `list` - Shows a list of all tasks across all `Module` s in Mod Manager.
 * `module` - Shows a list of all tasks for a specified `Module` in Mod Manager.
 * `undone` - Shows a list of all undone tasks in Mod Manager.
-* `find` - Finds a task in Mod Manager by its description.
+* `find` - Finds tasks in Mod Manager by its description.
 * `search`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
 * `upcoming` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
 
@@ -592,9 +592,9 @@ This feature is facilitated by `TaskCommandParser`, `TaskAddCommandParser` and `
 TaskAddCommand`.
 The operation is exposed in the `Model` interface as `Model#addTask()`.
 
-Given below is an example usage scenario and how the `*task* add` mechanism behaves at each step:
+Given below is an example usage scenario and how the `task add` mechanism behaves at each step:
 
-1. The user executes the `*task* add` command and provides the module code, the description of the task (both compulsory),
+1. The user executes the `task add` command and provides the module code, the description of the task (both compulsory),
 and a time period (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
 2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time period (if provided).
 3. `TaskAddCommandParser` creates a new `TaskAddCommand` based on the task.
@@ -602,7 +602,7 @@ and a time period (optional), which consists of a date (for example, `15/04/2020
 5. `ModManager` adds the task to the `UniqueTaskList`.
 6. `ModelManager` updates the `filteredTasks` in `ModelManager`.
 
-The following sequence diagram shows how the `*task* add` command works:
+The following sequence diagram shows how the `task add` command works:
 
 .Sequence Diagram for `task add` Command
 image::TaskAddSequenceDiagram.png[]
@@ -610,7 +610,7 @@ image::TaskAddSequenceDiagram.png[]
 NOTE: The lifeline for `TaskCommandParser`, `TaskAddCommandParser` and `TaskAddCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following activity diagram summarizes what happens when a user executes a `*task* add` command:
+The following activity diagram summarizes what happens when a user executes a `task add` command:
 
 .Activity Diagram for `task add` Command
 image::TaskAddActivityDiagram.png[]
@@ -670,7 +670,7 @@ Given below is an example usage scenario and how the task delete mechanism behav
 4. `TaskDeleteCommand` retrieves the task to be deleted.
 5. `ModManager` deletes the task from the `UniqueTaskList`.
 
-The following sequence diagram shows how a `TaskDeleteCommand` is created after the parsing  steps:
+The following sequence diagram shows how a `TaskDeleteCommand` is created after the parsing steps:
 
 .Sequence Diagram for `TaskDeleteCommand` Creation Steps
 image::TaskDeleteCommandSequenceDiagram.png[]
@@ -711,7 +711,7 @@ and then retrieves the current existing `Task` from `ModManager`.
 
 The following sequence diagram shows how the task mark as done command works:
 
-.Sequence Diagram for `*task* done /code CS2103T /id 986` Command
+.Sequence Diagram for `task done /code CS2103T /id 986` Command
 image::TaskMarkAsDoneSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskMarkAsDoneCommandParser`, and `TaskMarkAsDoneCommand` should end at
@@ -719,10 +719,10 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes the task mark as done command:
 
-.Activity Diagram for a general `*task* done` Command
+.Activity Diagram for `task done` Command
 image::TaskMarkAsDoneActivityDiagram.png[]
 
-===== Viewing all tasks across modules in Mod Manager
+===== Viewing all tasks across modules
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -736,7 +736,7 @@ Given below is an example usage scenario and how the task list mechanism behaves
 
 The following sequence diagram shows how the task list command works:
 
-.Sequence Diagram for `*task* list` Command
+.Sequence Diagram for `task list` Command
 image::TaskListSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser` and `TaskListCommand` should end at
@@ -744,34 +744,33 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes a task list command:
 
-.Activity Diagram for `*task* list` Command
+.Activity Diagram for `task list` Command
 image::TaskListActivityDiagram.png[]
 
-===== Viewing tasks for a specific module in ModManger
+===== Viewing tasks for a specific module
 The viewing task by module feature allows users to find all tasks belonging to a specific module in Mod Manager.
-This feature is facilitated by `TaskCommandParser`, `TaskForOneModuleCommandParser` and `
-TaskForOneModuleCommand`.
+This feature is facilitated by `TaskCommandParser`, `TaskForOneModuleCommandParser` and `TaskForOneModuleCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
 Given below is an example usage scenario and how the task search mechanism behaves at each step:
 
-1. The user executes the task search command and provides the day, month, or year, or any combination of which
+1. The user executes the find tasks by module command and provides the module code of the module
 that they want to search for.
-2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
-3. `LogicManager` executes the `TaskSearchCommand`.
+2. `TaskForOneModuleCommandParser` creates a new `TaskForOneModuleCommand` based on the module code.
+3. `LogicManager` executes the `TaskForOneModuleCommand`.
 4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
 
 The following sequence diagram shows how the search tasks for a specific module command works:
 
-.Sequence Diagram for `*task* module /code CS2103T` Command
+.Sequence Diagram for `task module /code CS2103T` Command
 image::TaskForModuleSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskForOneModuleCommandParser`, `TaskForOneModuleCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
-The following activity diagram summarizes what happens when a user executes a task find command:
+The following activity diagram summarizes what happens when a user executes a search tasks for a specific module command:
 
-.Activity Diagram for a general `*task* module` Command
+.Activity Diagram for `task module` Command
 image::TaskForModuleActivityDiagram.png[]
 
 ===== Viewing undone tasks
@@ -788,15 +787,15 @@ Given below is an example usage scenario and how the task view undone tasks mech
 
 The following sequence diagram shows how the task view undone tasks command works:
 
-.Sequence Diagram for `*task* undone` Command
+.Sequence Diagram for `task undone` Command
 image::TaskListUndoneSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskListUndoneCommandParser`, `TaskListUndoneCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
-The following activity diagram summarizes what happens when a user executes a task view undone tasks only command:
+The following activity diagram summarizes what happens when a user executes a task view undone tasks command:
 
-.Activity Diagram for `*task* undone` Command
+.Activity Diagram for `task undone` Command
 image::TaskListUndoneActivityDiagram.png[]
 
 ===== Finding tasks by description
@@ -813,7 +812,7 @@ Given below is an example usage scenario and how the task find mechanism behaves
 
 The following sequence diagram shows how the task find command works:
 
-.Sequence Diagram for `*task* find assignment homework` Command
+.Sequence Diagram for `task find assignment homework` Command
 image::TaskFindSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskFindCommandParser`, `TaskFindCommand` and `TaskContainsKeywordsPredicate` should end at
@@ -821,61 +820,33 @@ the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
 
 The following activity diagram summarizes what happens when a user executes a task find command:
 
-.Activity Diagram for a general `*task* find` Command
+.Activity Diagram for `task find` Command
 image::TaskFindActivityDiagram.png[]
 
 ===== Searching tasks by date
 The search task feature allows users to search all tasks that occur on the specified date, month, or year.
-This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
-TaskSearchCommand`.
+This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `TaskSearchCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
 Given below is an example usage scenario and how the task search mechanism behaves at each step:
 
-1. The user executes the task search command and provides the day, month, or year, or any combination of which
+1. The user executes the task search command and provides the date, month, or year, or any combination of which
 that they want to search for.
-2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
+2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the date, month and year.
 3. `LogicManager` executes the `TaskSearchCommand`.
 4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
 
 The following sequence diagram shows how the task search command works:
 
-.Sequence Diagram for `*task* search /date 25 /month 6` Command
+.Sequence Diagram for `task search /date 25 /month 6` Command
 image::TaskSearchSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskSearchCommandParser`, `TaskSearchCommand` and `TaskSearchPredicate` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
-The following activity diagram summarizes what happens when a user executes a task find command:
+The following activity diagram summarizes what happens when a user executes a task search command:
 
-.Activity Diagram for a general `*task* search` Command
-image::TaskSearchActivityDiagram.png[]
-
-===== Searching tasks by date
-The search task feature allows users to search all tasks that occur on the specified date, month, or year.
-This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `
-TaskSearchCommand`.
-The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
-
-Given below is an example usage scenario and how the `*task* search` mechanism behaves at each step:
-
-1. The user executes the `*task* search` command and provides the day, month, or year, or any combination of which
-that they want to search for search for.
-2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the names.
-3. `LogicManager` executes the `TaskSearchCommand`.
-4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
-
-The following sequence diagram shows how the `*task* search` command works:
-
-.Sequence Diagram for `*task* search` Command
-image::TaskSearchSequenceDiagram.png[]
-
-NOTE: The lifeline for `TaskCommandParser`, `TaskSearchCommandParser`, `TaskSearchCommand` and `TaskSearch` should end at
-the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
-The following activity diagram summarizes what happens when a user executes a task find command:
-
-.Activity Diagram for `*task* search` Command
+.Activity Diagram for `task search` Command
 image::TaskSearchActivityDiagram.png[]
 
 ==== Design Considerations
@@ -947,7 +918,7 @@ It supports the following operations:
 
 * `add` - Adds a facilitator to Mod Manager.
 * `list` - Lists all facilitators in Mod Manager.
-* `find` - Finds a facilitator in Mod Manager by name.
+* `find` - Finds facilitators in Mod Manager by name.
 * `edit` - Edits a facilitator in Mod Manager.
 * `delete` - Deletes a facilitator in Mod Manager.
 
@@ -1680,8 +1651,8 @@ Use case resumes from step 1.
 Use case resumes from step 1.
 
 [discrete]
+=== Use case: UC15 - View all tasks across modules
 
-=== Use case: UC15 - View all tasks across modules in Mod Manager
 *<<mss, MSS>>*
 [none]
 * 1.  User requests to list all tasks across modules in Mod Manager.
@@ -1699,8 +1670,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-
-=== Use case: UC16 - View tasks for a specific module in Mod Manger
+=== Use case: UC16 - View tasks for a specific module
 
 *<<mss, MSS>>*
 [none]
@@ -1725,8 +1695,8 @@ Use case resumes from step 1.
 Use case ends.
 
 [discrete]
-
 === Use case: UC17 - View undone tasks
+
 *<<mss, MSS>>*
 [none]
 * 1.  User requests to list all undone tasks across modules in Mod Manager.
@@ -1742,7 +1712,6 @@ Use case ends.
 Use case ends.
 
 [discrete]
-
 === Use case: UC18 - Find tasks by description
 
 *<<mss, MSS>>*
@@ -1766,7 +1735,6 @@ Use case ends.
 ** 1b1. Mod Manager shows an error message.
 +
 Use case resumes from step 1.
-
 
 [discrete]
 === Use case: UC19 - Search for tasks by date
@@ -1799,7 +1767,6 @@ Use case resumes from step 1.
 +
 Use case ends.
 //end::use-case-tasks-second-part[]
-
 
 // tag::use-case-facilitator[]
 [discrete]
@@ -2077,7 +2044,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Exiting the application.
 
-.. Type `exit` in the command box and press Enter. +
+.. Type `exit` in the command box and press kbd:[Enter]. +
    Expected: Closes the application window and saves data.
 
 .. Click on the close button on the application window. +
@@ -2093,13 +2060,13 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Undo/Redo commands.
 
-.. Type any valid command that adds/edits/deletes an entry of Mod Manager that can successfully execute and press Enter. +
+.. Type any valid command that adds/edits/deletes an entry of Mod Manager that can successfully execute and press kbd:[Enter]. +
    Expected: Mod Manager behaves as specified for that command.
 
-.. Type undo and press Enter. +
+.. Type undo and press kbd:[Enter]. +
    Expected: Mod Manager returns to the state before the the add/edit/delete command was executed.
 
-.. Type redo and press Enter. +
+.. Type redo and press kbd:[Enter]. +
    Expected: The previously undone command is executed again.
 // end::testing-general[]
 

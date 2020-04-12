@@ -9,11 +9,11 @@ if () then ([index or module code is provided])
             if () then ([index is not out of bounds])
                 :Model deletes module from UniqueModuleList;
                 :Model deletes facilitators of the module
-                            from UniqueFacilitatorList;
+                from UniqueFacilitatorList in ModManager;
                 :Model deletes tasks of the module
-                            from UniqueTaskList;
+                from UniqueTaskList in ModManager;
                 :Model delete lessons of the module
-                                from LessonList;
+                from LessonList in ModManager;
                 :Logic saves ModManager to Storage;
                 :Ui shows the updated module list;
             else ([else])
@@ -29,11 +29,11 @@ if () then ([index or module code is provided])
             if () then ([module exists in ModManager])
                 :Model deletes module from UniqueModuleList;
                 :Model deletes facilitators of the module
-                            from UniqueFacilitatorList;
+                from UniqueFacilitatorList in ModManager;
                 :Model deletes tasks of the module
-                            from UniqueTaskList;
+                from UniqueTaskList in ModManager;
                 :Model delete lessons of the module
-                                from LessonList;
+                from LessonList in ModManager;
                 :Logic saves ModManager to Storage;
                 :Ui shows the updated module list;
             else ([else])

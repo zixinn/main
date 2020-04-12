@@ -66,22 +66,28 @@
     "moduleCode" : [ "GEQ1000" ]
   } ],
   "tasks": [ {
-    "description" : "Programming Assignment 2",
-    "taskTime" : "18/03/2020",
-    "moduleCode" : "CS4223",
-    "taskNum" : 111,
+    "description" : "written assignment 1 ",
+    "taskTime" : "01/04/2020",
+    "moduleCode" : "CS2103T",
+    "taskNum" : 619,
     "isDone" : false
   }, {
-    "description" : "Programming Assignment 3",
-    "taskTime" : "21/03/2020 19:30",
-    "moduleCode" : "CS4223",
-    "taskNum" : 999,
+    "description" : "homework 3",
+    "taskTime" : "25/06/2020",
+    "moduleCode" : "CS2101",
+    "taskNum" : 737,
     "isDone" : false
   }, {
-    "description" : "OP2 Presentation",
+    "description" : "Programming Lab 2",
+    "taskTime" : "",
+    "moduleCode" : "CS2103T",
+    "taskNum" : 123,
+    "isDone" : false
+  }, {
+    "description" : "Programming Lab 2written assignment 1 ",
     "taskTime" : "",
     "moduleCode" : "CS2101",
-    "taskNum" : 314,
+    "taskNum" : 345,
     "isDone" : false
   } ],
   "lessons": [ {

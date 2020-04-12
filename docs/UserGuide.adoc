@@ -134,7 +134,7 @@ The features are grouped into six categories:
 . <<Task feature : `*task*`, Task>> feature
 . <<Calendar feature : `*cal*`, Calendar>> feature
 
-Additionally, the <<Upcoming `[coming in v2.0]`, upcoming>> features section offers a
+Additionally, the <<Upcoming features`[coming in v2.0]`, upcoming>> features section offers a
 preview of what you can expect in **Mod Manager v2.0**.
 
 ====
@@ -167,6 +167,7 @@ You can open the help window that displays a link to our user guide.
 Format:
 
 * `*help*`
+
 //tag::undo-redo[]
 ==== Undoing previous commands : `*undo*`
 
@@ -224,6 +225,7 @@ After you press kbd:[Enter], the previously undone effect will come back.
 .After `redo`
 image::redo-2.png[]
 //end::undo-redo[]
+
 ==== Listing commands : `*cmd*`
 
 *Listing all commands*:
@@ -324,7 +326,6 @@ Format:
 
 * `*exit*`
 //end::exit[]
-
 
 === Module feature : `*mod*`
 
@@ -661,7 +662,7 @@ Executing these commands will bring you to the Tasks tab.
 
 ==== Adding a task
 
-Adds a task to a module.
+You can add a task to a module.
 
 Format:
 
@@ -735,9 +736,8 @@ image::task-edit-3.png[]
 Again, press kbd:[Enter] and you will see its date and time has been removed. Its order in the list may be changed due to
 the sorting property of the <<Viewing all tasks across all modules in ModManger, task list>>.
 
-.The task's date and time removed.
+.The task's date and time removed
 image::task-edit-4.png[]
-
 
 ==== Deleting a task
 
@@ -754,7 +754,7 @@ image::task-delete-1.png[]
 
 Press kbd:[Enter] and the task will be gone from the list.
 
-.Task deleted from the list.
+.Task deleted from the list
 image::task-delete-2.png[]
 //end::task-edit-delete[]
 
@@ -892,7 +892,7 @@ you can type in the following command:
 
 `*task* find oral assign tut` and press kbd:[Enter]
 
-.After `*task* find oral assign tut`, all matching tasks are displayed.
+.After `*task* find oral assign tut`, all matching tasks are displayed
 image::TaskFindAfter.png[]
 
 Explanation: +
@@ -1252,7 +1252,7 @@ SUNDAY: +
 ****
 //end::calendar[]
 
-=== Upcoming Features `[coming in v2.0]`
+=== Upcoming features `[coming in v2.0]`
 
 // tag::upcoming[]
 These features will be available in the next version of Mod Manager.
@@ -1377,4 +1377,3 @@ image::TaskCardDone.png[]
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
                  This includes `Module` 's and `Task` 's description.
 |=====
-

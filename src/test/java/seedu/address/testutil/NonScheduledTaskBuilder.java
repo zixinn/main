@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.task.NonScheduledTask;
 import seedu.address.model.util.Description;
@@ -19,7 +18,7 @@ public class NonScheduledTaskBuilder {
     private boolean isDone;
     private int taskId;
 
-    public NonScheduledTaskBuilder() throws ParseException {
+    public NonScheduledTaskBuilder() {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         description = new Description(DEFAULT_DESCRIPTION);
         isDone = DEFAULT_IS_DONE;
