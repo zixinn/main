@@ -724,7 +724,7 @@ The following activity diagram summarizes what happens when a user executes the 
 .Activity Diagram for `task done` Command
 image::TaskMarkAsDoneActivityDiagram.png[]
 
-===== Viewing all tasks across modules
+===== Viewing all tasks across modules in Mod Manager
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -795,7 +795,7 @@ image::TaskListUndoneSequenceDiagram.png[]
 NOTE: The lifeline for `TaskCommandParser`, `TaskListUndoneCommandParser`, `TaskListUndoneCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
-The following activity diagram summarizes what happens when a user executes a task view undone tasks command:
+The following activity diagram summarizes what happens when a user executes a view undone tasks command:
 
 .Activity Diagram for `task undone` Command
 image::TaskListUndoneActivityDiagram.png[]
@@ -853,7 +853,7 @@ image::TaskSearchActivityDiagram.png[]
 
 ==== Design Considerations
 
-===== Aspect: A task may have a specified time frame, or not. How do we implement this feature?
+===== Aspect: A task may have a specified time period, or not. How do we implement this feature?
 * **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
 A task with a specified time period will be created as a `ScheduledTask`, while a task with no
 time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
@@ -1980,40 +1980,60 @@ Use case resumes from step 1.
 == Non Functional Requirements
 
 // tag::nfr[]
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should work on different screen sizes.
-.  Should be able to hold up to 250 classes, 250 tasks and 250 facilitators.
-.  Response time for each command should be within 3 seconds.
+.  The product should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+.  The product should be able to render its layout to different screen sizes.
+.  The product should be able to support up to 250 modules, 250 classes, 250 facilitators, and 250 tasks.
+.  The response to any command should become visible within 3 seconds.
 .  A user with above average typing speed for regular English text (i.e. not code and system admin commands)
 should be able to accomplish most of the tasks faster than doing the same task using the mouse.
-.  A user should be able to navigate from one tab to another by typing or clicking.
-.  Should work without any internet connection.
-.  Rate of failure should not exceed 5%.
-.  User data should be protected and should not be accessible to other users.
-.  Should be intuitive and easy to use, and users should become proficient within an hour.
-.  Should not conflict with other applications or processes.
-.  A developer with one year of experience should be able to add a new feature, including source code modifications and testing, with no more than one week of labour.
+.  The product should work without any internet connection.
+.  The system failure rate should be less than 5 failure per 100 commands.
+.  Mod Manager's internal storage can be transferred to other Mod Manager instances on other systems.
+.  The product should be intuitive and easy to use for a novice who has never used similar Task Management applications.
+.  A developer with one year of experience should be able to add a new feature,
+including source code modifications and testing, with no more than one week of labour.
+.  The product should not conflict with other applications or processes.
+.  The product is free and open source.
+.  The product is not required to handle non-NUS modules, or academic programmes at NUS
+not following a modular system.
+.  The product is not required to handle non-English characters for modules, classes, facilitators, and
+tasks' content.
 // end::nfr[]
 
 [appendix]
 == Glossary
 //tag::glossary[]
 [[cli]] CLI::
-Command-line interface: processes commands to a computer program in the form of lines of text
-
-[[extensions]] Extensions::
-"Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario that can happen if certain things are not as expected by the <<mss, MSS>>
-
-[[gui]] GUI::
-Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons
-
-[[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
+Command-line interface: processes commands to a computer program in the form of lines of text.
 
 [[mss]] MSS::
-Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
-//end::glossary[]
+Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong.
+[[extensions]] Extensions::
+"Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario
+that can happen if certain things are not as expected by the <<mss, MSS>>.
 
+[[gui]] GUI::
+Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons.
+
+[[mainstream-os]] Mainstream OS::
+Windows, Linux, Unix, OS-X.
+
+//tag::taskcard[]
+[[taskcard]] Task card::
+A task card represents a task with details such as the module it belongs to,
+description, and time period (if provided upon creation).
+
+A dark red card represents a task that is not yet done.
+
+image::TaskCardNotDone.png[]
+
+A green card represents a done task.
+
+image::TaskCardDone.png[]
+
+//end::taskcard[]
+
+//end::glossary[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -2151,6 +2171,61 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No class is deleted. Error details shown in the status message.
 
 // end::testing-class[]
+
+//tag:testing-task[]
+=== Testing of Task Features
+
+. Viewing all tasks across all modules in Mod Manager.
+.. Prerequisites: Some tasks are already available in Mod Manager.
+
+.. Test case: `task list` +
+Expected: All of the tasks across all modules are shown.
+
+. Marking a task as done in Mod Manager.
+.. Prerequisites: List all tasks using the `task list` command.
+Module `CS2103T` exists in Mod Manager. You have this <<taskcard, task card>> below in
+your task list:
+image:appendixMarkAsDoneExample.png[]
+However, if you do not have the above task, or module `CS2103T` in your Mod Manager,
+you may choose any of the tasks already
+available and take note of its module code and task ID. Use that module code and task ID instead of
+our module code example of `CS2103T` and  task ID example of `986` as below.
+
+.. Test case: `task done /code CS2103T /id 986` +
+   Expected: The corresponding <<taskcard, task card>> changed to green. Our task has
+been marked as done successfully! You can try with other tasks using
+a different module code (currently `CS2103T`) and a valid task ID (currently `986`).
+
+. Viewing tasks for a specific `Module`.
+
+.. Prerequisites: List all tasks using the `task list` command.
+Module `CS2103T` exists in Mod Manager.
+.. Test case: `task module /code CS2103T` +
+   Expected: All of the tasks for module `CS2103T` are shown.
+
+. Viewing undone tasks
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task undone` +
+Expected: All of the undone tasks are shown. Undone tasks are shown in dark red
+as in <<taskcard, here>>.
+
+. Finding tasks by description.
+
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task find assign home` +
+   Expected: All of the tasks that contain the keyword `assign` or `home` in
+their description are shown. For example, you may see tasks with descriptions such as
+`assignment`, `Homework` or
+`Programming Assignment 2`. Partial match and case in-sensitive is allowed.
+
+. Searching tasks by date.
+
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task search /month 4 /year 2020` +
+   Expected: All of the tasks happening on `April 2020` are shown. You now know what tasks
+are due this month (at the time of writing)!
+
+//end:testing-task[]
 
 === Testing of Facilitator Feature
 

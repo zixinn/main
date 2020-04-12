@@ -793,7 +793,7 @@ image::TaskDoneBeforeCloseUp.png[]
 .After `*task* done /code CS2105 /id 224`
 image::TaskDoneAfterCloseUp.png[]
 
-The task card has changed to green; which means our task has been marked as done.
+The <<taskcard, task card>> has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
 
 ==== Viewing all tasks across all modules
@@ -801,9 +801,6 @@ Hooray! We just completed a task.
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
 at present.
-
-The tasks will be automatically sorted by time for you: tasks with nearer date will be prioritized, and tasks without
-date and time will be at the end.
 
 Format:
 
@@ -1295,6 +1292,7 @@ This glossary aims to provide a definition for the special vocabulary used in th
 [[dashboard]] Dashboard::
 The default tab in view when the application starts (i.e. Module tab).
 
+//tag::taskcard[]
 [[taskcard]] Task card::
 A task card represents a task with details such as the module it belongs to,
 description, and time period (if provided upon creation).
@@ -1307,6 +1305,7 @@ A green card represents a done task.
 
 image::TaskCardDone.png[]
 
+//end::taskcard[]
 == Command Summary
 
 .Summary of command formats
