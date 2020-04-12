@@ -130,6 +130,26 @@ The `Model`,
 * does not depend on any of the other three components.
 //end::model[]
 
+More detailed designs of important sub-components are below.
+
+==== Module
+Place-holder
+
+==== Facilitator
+Place-holder
+
+==== Lesson
+Place-holder
+
+==== Task
+Place-holder
+
+==== Calendar
+Place-holder
+
+==== DoableAction
+Place-holder
+
 [[Design-Storage]]
 === Storage Component
 
