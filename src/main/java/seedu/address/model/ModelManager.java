@@ -35,7 +35,7 @@ public class ModelManager implements Model {
     private final FilteredList<Module> filteredModules;
     private final FilteredList<Facilitator> filteredFacilitators;
     private final FilteredList<Task> filteredTasks;
-    private Optional<Module> module;
+    private Optional<Module> moduleToShow;
     private final FilteredList<Facilitator> facilitatorsForModule;
     private final FilteredList<Task> tasksForModule;
     private Calendar calendar;
@@ -55,7 +55,7 @@ public class ModelManager implements Model {
         filteredFacilitators = new FilteredList<>(this.modManager.getFacilitatorList());
         filteredModules = new FilteredList<>(this.modManager.getModuleList());
         filteredTasks = new FilteredList<>(this.modManager.getTaskList());
-        module = Optional.empty();
+        moduleToShow = Optional.empty();
         facilitatorsForModule = new FilteredList<>(this.modManager.getFacilitatorList());
         facilitatorsForModule.setPredicate(PREDICATE_SHOW_NO_FACILITATORS);
         tasksForModule = new FilteredList<>(this.modManager.getTaskList());
@@ -148,7 +148,7 @@ public class ModelManager implements Model {
 
     @Override
     public Optional<Module> getModule() {
-        return module;
+        return moduleToShow;
     }
 
     @Override
@@ -157,8 +157,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateModule(Optional<Module> module) {
-        this.module = module;
+    public void updateModule(Optional<Module> moduleToShow) {
+        this.moduleToShow = moduleToShow;
     }
 
     //=========== Filtered Module List Accessors =============================================================

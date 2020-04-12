@@ -42,7 +42,6 @@ LogicManager -->"1" ModManagerParser
 ModManagerParser .left.> XYZCommandParser: creates >
 
 XYZAbcCommandParser ..> XYZAbcCommand : creates >
-XYZCommandParser ..> XYZAbcCommandParser : creates >
 XYZCommandParser ..|> Parser
 XYZAbcCommandParser ..> ArgumentMultimap
 XYZAbcCommandParser ..> ArgumentTokenizer
