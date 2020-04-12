@@ -47,6 +47,7 @@ public class TaskBuilder {
         description = new Description(desc);
         return this;
     }
+
     /**
      * Sets the {@code ModuleCode} of the {@code Task} that we are building.
      */

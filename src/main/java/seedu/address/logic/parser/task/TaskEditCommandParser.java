@@ -51,6 +51,9 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         TaskEditCommand.EditTaskDescriptor editTaskDescriptor =
                 new TaskEditCommand.EditTaskDescriptor();
 
+        editTaskDescriptor.setModuleCode(moduleCode);
+        editTaskDescriptor.setTaskNum(taskNum);
+
         if (argMultimap.numOfValuesPresent(PREFIX_DESCRIPTION) > 1) {
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_DESCRIPTION));
         }
@@ -93,6 +96,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskEditCommand.MESSAGE_USAGE));
         }
 
+        assert moduleCode != null;
         return new TaskEditCommand(moduleCode, taskNum, editTaskDescriptor);
     }
 
@@ -119,7 +123,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         }
         sc.close();
 
-        return new Pair<ModuleCode, Integer>(moduleCode, taskNum);
+        return new Pair<>(moduleCode, taskNum);
     }
 
     /**
