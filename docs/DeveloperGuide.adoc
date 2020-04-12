@@ -691,8 +691,7 @@ The execution of a `TaskDeleteCommand` is described below.
 
 //end::task-delete[]
 
-//tag::task-second-part[]
-
+//tag::task-mark-as-done-DG[]
 ===== Marking a task as done
 The marking a task as done command allows users to mark a certain `Task` in a `Module` as done,
 based on its task ID called `taskNum`.
@@ -723,6 +722,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 .Activity Diagram for `task done` Command
 image::TaskMarkAsDoneActivityDiagram.png[]
+//end::task-mark-as-done-DG[]
 
 ===== Viewing all tasks across modules in Mod Manager
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
@@ -800,6 +800,7 @@ The following activity diagram summarizes what happens when a user executes a vi
 .Activity Diagram for `task undone` Command
 image::TaskListUndoneActivityDiagram.png[]
 
+//tag::task-find-description-DG[]
 ===== Finding tasks by description
 The find task feature allows users to find a task by its description in Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskFindCommandParser` and `TaskFindCommand`.
@@ -824,6 +825,7 @@ The following activity diagram summarizes what happens when a user executes a ta
 
 .Activity Diagram for `task find` Command
 image::TaskFindActivityDiagram.png[]
+//end::task-find-description-DG[]
 
 ===== Searching tasks by date
 The search task feature allows users to search all tasks that occur on the specified date, month, or year.
@@ -907,7 +909,6 @@ such as assignments, homework, term tests, and exams.
 ** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
 and collaborating with the team member responsible for the `Module` component, as mentioned above.
 
-//end::task-second-part[]
 
 === Facilitator Management Feature
 
