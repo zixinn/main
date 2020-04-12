@@ -590,13 +590,16 @@ actually input `01/01/1970` as a date.
 
 The following sequence diagram shows how a `TaskEditCommand` is created after the parsing steps:
 
-.Sequence Diagram for `TaskEditCommand` creation steps
+.Sequence Diagram for `TaskEditCommand` Creation Steps
 image::TaskEditCommandSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser` and `TaskEditCommandParser` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The execution of a `TaskEditCommand` is described below.
 
 1. `List<Task> current` is retrieved by calling `model.getFilteredTaskList`.
-2. Retrieve the correct `taskToEdit` from `current` by turning it into a `stream` and use the `reduce` method.
+2. The correct `taskToEdit` is retrieved from `current` by turning it into a `stream` and use the `reduce` method.
 3. The `editedTask` is created using method `createEditedTask`.
 4. `model` sets `taskToEdit` to `editedTask` in the `UniqueTaskList` via calls to `ModManager`.
 5. An `editTaskAction` is created and added to `model`.
@@ -619,13 +622,16 @@ Given below is an example usage scenario and how the task delete mechanism behav
 
 The following sequence diagram shows how a `TaskDeleteCommand` is created after the parsing  steps:
 
-.Sequence Diagram for `TaskDeleteCommand` creation steps
+.Sequence Diagram for `TaskDeleteCommand` Creation Steps
 image::TaskDeleteCommandSequenceDiagram.png[]
+
+NOTE: The lifeline for `TaskCommandParser` and `TaskDeleteCommandParser` should end at
+the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The execution of a `TaskDeleteCommand` is described below.
 
 1. `List<Task> current` is retrieved by calling `model.getFilteredTaskList`.
-2. Retrieve the correct `taskToDelete` from `current` by turning it into a `stream` and use the `reduce` method.
+2. The correct `taskToDelete` is retrieved from `current` by turning it into a `stream` and use the `reduce` method.
 3. The `taskNum` of `taskToDelete` is removed from the system via `TaskNumManager`.
 4. `model` deletes `taskToDelete` in the `UniqueTaskList` via calls to `ModManager`.
 5. A `deleteTaskAction` is created and added to `model`.
@@ -1237,11 +1243,11 @@ Low (unlikely to have) - `*`
 
 |`* * *` |student |view information related to a module |I can prepare for each module
 
-|`* * *` |student |view all tasks across all modules |I can organise, plan, and manage my tasks better.
+|`* * *` |student |view all tasks across all modules |I can organise, plan, and manage my tasks better
 
-|`* * *` |student |view tasks for a specific module |I can manage and keep track of homework, programming assignments, and other tasks specifically for the module.
+|`* * *` |student |view tasks for a specific module |I can manage and keep track of homework, programming assignments, and other tasks specifically for the module
 
-|`* * *` |student |view all tasks not done |I know what tasks are not yet completed and do them.
+|`* * *` |student |view all tasks not done |I know what tasks are not yet completed and do them
 
 |`* * *` |student |view facilitators' information |I can contact them when I need help
 
@@ -1251,7 +1257,7 @@ Low (unlikely to have) - `*`
 
 |`* * *` |student |edit a task |I can keep my tasks up to date
 
-|`* * *` |student |mark a task as done |I can keep track of what tasks I have completed and what I have not yet completed.
+|`* * *` |student |mark a task as done |I can keep track of what tasks I have completed and what I have not yet completed
 
 |`* * *` |student |edit a facilitator’s information |I can keep their contact details up to date
 
@@ -1273,15 +1279,19 @@ Low (unlikely to have) - `*`
 
 |`* * *` |user |import and export data |I can easily migrate the data to another computer
 
+|`* * *` |user |undo or redo my commands |I can save time from trying to fix my mistakes
+
 |`* *` |student |find a facilitator by name |I can locate details of facilitators without having to go through the entire list
 
-|`* *` |student |find tasks by description |I can find the exact tasks that I want to do, such as a particular programming assignment on multimedia streaming.
+|`* *` |student |find tasks by description |I can find the exact tasks that I want to do, such as a particular programming assignment on multimedia streaming
 
-|`* *` |student |search tasks by its date |I know what tasks are happening today, tomorrow, this month, next month, or any other time periods.
+|`* *` |student |search tasks by its date |I know what tasks are happening today, tomorrow, this month, next month, or any other time periods
 
 |`* *` |student |find upcoming tasks |I can prioritise them
 
 |`* *` |busy student |find empty slots in my schedule |I can manage my time easily
+
+|`* *` |user |see my past commands quickly |I can re-use a command without having to type it again
 
 |`*` |student |mark a task as done |I can not take note of them anymore
 
@@ -1515,16 +1525,82 @@ Use case resumes from step 1.
 [discrete]
 === Use case: UC11 - Add task
 
+*<<mss, MSS>>*
+[none]
+* 1. User request to add a task and provides the details of the new task.
+* 2. Mod Manager adds a task.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. Compulsory fields are not provided or fields provided are invalid.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1b. No optional fields are provided.
++
+[none]
+** 1b1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
 [discrete]
 === Use case: UC12 - Edit task
+
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to edit a task and provides the task ID (with a module code and a task number) and the new details.
+* 2.  Mod Manager edits the task.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. The given module code is invalid or the task num doesn't exist in Mod Manager.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
+[none]
+* 1a. Fields provided are invalid or no optional fields are provided.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
 
 [discrete]
 === Use case: UC13 - Delete task
 
+*<<mss, MSS>>*
+[none]
+* 1.  User requests to delete a task and provides the task ID (with a module code and a task number).
+* 2.  Mod Manager deletes the task.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+
+[none]
+* 1a. The given module code is invalid or the task num doesn't exist in Mod Manager.
++
+[none]
+** 1a1. Mod Manager shows an error message.
++
+Use case resumes from step 1.
+
 //tag::use-case-tasks-second-part[]
 
 [discrete]
-=== Use case: UC14 - Marking a task as done
+=== Use case: UC14 - Mark a task as done
 
 *<<mss, MSS>>*
 [none]
@@ -1554,7 +1630,7 @@ Use case resumes from step 1.
 
 [discrete]
 
-=== Use case: UC15 - Viewing all tasks across modules in Mod Manager
+=== Use case: UC15 - View all tasks across modules in Mod Manager
 *<<mss, MSS>>*
 [none]
 * 1.  User requests to list all tasks across modules in Mod Manager.
@@ -1571,7 +1647,7 @@ Use case ends.
 +
 Use case ends.
 
-=== Use case: UC16 - Viewing tasks for a specific module in Mod Manger
+=== Use case: UC16 - View tasks for a specific module in Mod Manger
 
 *<<mss, MSS>>*
 [none]
@@ -1596,7 +1672,7 @@ Use case resumes from step 1.
 Use case ends.
 [discrete]
 
-=== Use case: UC17 - Viewing undone tasks
+=== Use case: UC17 - View undone tasks
 *<<mss, MSS>>*
 [none]
 * 1.  User requests to list all undone tasks across modules in Mod Manager.
@@ -1612,7 +1688,7 @@ Use case ends.
 Use case ends.
 [discrete]
 
-=== Use case: UC18 - Finding tasks by description
+=== Use case: UC18 - Find tasks by description
 
 *<<mss, MSS>>*
 [none]
@@ -1638,7 +1714,7 @@ Use case resumes from step 1.
 
 
 [discrete]
-=== Use case: UC19 - Searching tasks by date
+=== Use case: UC19 - Search for tasks by date
 *<<mss, MSS>>*
 [none]
 * 1. User requests to searches for a task by its date and provides the date, month, and year, or any of which.
@@ -1819,7 +1895,45 @@ Use case ends.
 //end::use-case-calendar[]
 
 [discrete]
-=== Use case: UC27 - Clear all entries in Mod Manager
+=== Use case: UC27 - Undo a command
+
+*<<mss, MSS>>*
+[none]
+* 1. User requests to undo.
+* 2. Mod Manager undoes the most previous command.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. There are no commands that can be undone.
++
+[none]
+** 1a1. Mod Manager shows an error messsage.
++
+Use case resumes from step 1.
+
+[discrete]
+=== Use case: UC28 - Redo a command
+
+*<<mss, MSS>>*
+[none]
+* 1. User requests to redo.
+* 2. Mod Manager redoes the most previously undone command.
++
+Use case ends.
+
+*<<extensions, Extensions>>*
+[none]
+* 1a. There are no commands that can be redone.
++
+[none]
+** 1a1. Mod Manager shows an error messsage.
++
+Use case resumes from step 1.
+
+[discrete]
+=== Use case: UC29 - Clear all entries in Mod Manager
 *<<mss, MSS>>*
 [none]
 * 1. User requests to clear all entries.
@@ -1908,7 +2022,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Exiting the application.
 
-.. Type `exit` in the command box and press kbd:[Enter]. +
+.. Type `exit` in the command box and press Enter. +
    Expected: Closes the application window and saves data.
 
 .. Click on the close button on the application window. +
@@ -1921,6 +2035,17 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Edit the data file to contain duplicate modules. Double-click the jar file. +
    Expected: Shows the <<gui, GUI>> with an empty set of modules, classes, tasks and facilitators.
+
+. Undo/Redo commands.
+
+.. Type any valid command that adds/edits/deletes an entry of Mod Manager that can successfully execute and press Enter. +
+   Expected: Mod Manager behaves as specified for that command.
+
+.. Type undo and press Enter. +
+   Expected: Mod Manager returns to the state before the the add/edit/delete command was executed.
+
+.. Type redo and press Enter. +
+   Expected: The previously undone command is executed again.
 // end::testing-general[]
 
 === Testing of Module Feature

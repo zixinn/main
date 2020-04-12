@@ -14,7 +14,7 @@ Class ReadOnlyModManager
 Class Model
 Class ModelManager
 Class UserPrefs
-Class ReadOnlyUserPrefs
+Interface ReadOnlyUserPrefs <<Interface>>
 Class DoableActionList
 Package Module {
 }
@@ -49,8 +49,8 @@ ModManager *--> "1" LessonList
 
 ModelManager *-> "1" DoableActionList
 ModelManager -->"1" Calendar
-ModelManager -->"1" Module : filtered list
-ModelManager -->"1" Facilitator : filtered list
-ModelManager -->"1" Task : filtered list
-ModelManager -->"1" Lesson : filtered list
+ModelManager -->"*" Module
+ModelManager -->"*" Facilitator : filtered list
+ModelManager -->"*" Task : filtered list
+ModelManager -->"*" Lesson : filtered list
 @enduml

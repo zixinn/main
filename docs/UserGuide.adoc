@@ -44,7 +44,7 @@ Note the following symbols used in this document:
 [%autowidth]
 |=====
 ^|*Symbol* |*Meaning*
-^|Enter | The enter button on the keyboard.
+^|kbd:[Enter] | The enter button on the keyboard.
 ^|image:InfoIcon.png[width="40"] | Information that you need to know.
 |=====
 
@@ -61,8 +61,8 @@ Here are the steps to get you started with using Mod Manager:
 .GUI for Mod Manager
 image::Gui.png[width="800"]
 +
-.  Type the command in the command box and press Enter to execute it. +
-e.g. typing *`help`* and pressing Enter will open the help window.
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 Here are some example commands that you can try:
 
@@ -193,13 +193,13 @@ image::undo-1.png[]
 
 After that, you realize you didn't mean to make this change, so you type `*undo*`.
 
-.Before undo
+.Before `undo`
 image::undo-2.png[]
 
 After you press kbd:[Enter], the effect will be reverted and the change is undone. The task is back to before your
 editing.
 
-.After undo
+.After `undo`
 image::undo-3.png[]
 
 ==== Redoing previously undone commands : `*redo*`
@@ -216,12 +216,12 @@ Example:
 
 Let's say you have just used `*undo*` to a task edit command.
 
-.Before redo
+.Before `redo`
 image::redo-1.png[]
 
 After you press kbd:[Enter], the previously undone effect will come back.
 
-.After redo
+.After `redo`
 image::redo-2.png[]
 //end::undo-redo[]
 ==== Listing commands : `*cmd*`
@@ -231,11 +231,8 @@ image::redo-2.png[]
 Sometimes, you might forget what commands are available in Mod Manager. To give you a quick reminder of all the
 command groups provided, we have the `*cmd* all` command.
 
-<<<<<<< HEAD
-The command groups available in `Mod Manager` are the words in bold you have seen throughout this document.
-=======
 The command groups available in Mod Manager are the words in bold you have seen throughout this document.
->>>>>>> 9064f36b0133a117928cfd0f0493cffbdca3a969
+
 These include: `*facil*, *mod*, *task*, ...`
 
 Format:
@@ -311,7 +308,7 @@ You can type `*clear*` as shown below.
 .Before `*clear*`
 image::BeforeClear.png[]
 
-After pressing Enter, Mod Manager is empty. All the entries you have are cleared.
+After pressing kbd:[Enter], Mod Manager is empty. All the entries you have are cleared.
 
 .After `*clear*`
 image::AfterClear.png[]
@@ -679,7 +676,9 @@ Command properties:
 * `DATE` and `TIME` are optional fields, however, there can only be a `TIME` field
 if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is not allowed.
 * `DATE` follows `_dd/MM/yyyy_` format. It should be a valid date,
-e.g. Day 32 or Month 13 is not allowed.
+e.g. Day 32 or Month 13 is not allowed. A special date is reserved in Mod Manager for a special functional purpose: 01/01/1970. If
+you choose to use this date as your input, Mod Manager won't (for now) show an error message, but is not guaranteed to exhibit
+a normal behaviour.
 * `TIME` follows `_HH:mm_` format. It should be a valid time period between 00:01 and 23:59,
 e.g. 00:00 and 24:00 are not allowed - if you input these values, they will be ignored.
 * Similar tasks across modules are allowed. However,
@@ -786,7 +785,7 @@ You can mark a task as done in the module. To mark the task with
 task ID `ID_NUMBER` in module `MOD_CODE` to be done, you can type in the following command:
 
 `*task* done /code CS2105 /id 224`
-and hit Enter
+and hit kbd:[Enter]
 
 .Before `*task* done /code CS2105 /id 224`
 image::TaskDoneBeforeCloseUp.png[]
@@ -836,7 +835,7 @@ Example:
 If you want a list of current tasks for the module `CS3230`, you can type in the following command:
 
 `*task* module /code CS3230`
-and hit Enter
+and hit kbd:[Enter]
 
 It is not compulsory for you to be at the Tasks tab before typing in this command.
 Mod Manager will automatically redirect you to the Tasks tab if you are currently at another tab.
@@ -854,7 +853,7 @@ Format: `*task* undone`
 .Before `*task* undone`, all tasks are listed
 image::TaskListNotDoneBefore.png[]
 
-By typing the command above and hit Enter, you should only see uncompleted tasks,
+By typing the command above and hit kbd:[Enter], you should only see uncompleted tasks,
 which are in dark red color:
 
 .Only uncompleted tasks are shown
@@ -891,7 +890,7 @@ Examples:
 To find tasks that contain the word `oral`, `assign`, or `tut` in their description,
 you can type in the following command:
 
-`*task* find oral assign tut` and press Enter
+`*task* find oral assign tut` and press kbd:[Enter]
 
 .After `*task* find oral assign tut`, all matching tasks are displayed.
 image::TaskFindAfter.png[]
@@ -902,7 +901,7 @@ Explanation: +
 -  Similarly, `Assignment 3` will match `assign`, and `Tutorial` will match `tut` +
 - As long as a task's description matches *one* of the keywords provided, it will be shown. +
 
-You can try typing in `*task* find assign tut oral` and press Enter. This will return the same list
+You can try typing in `*task* find assign tut oral` and press kbd:[Enter]. This will return the same list
 of tasks, since the ordering of the keywords does not matter.
 
 Other examples:
@@ -946,7 +945,7 @@ Example:
 
 You can search for tasks that are due on the submission date of CS2103T for AY19/20 S2
 (13 April). To find tasks happening on 13 April,
-you can type `*task* search /date 13 /month 4` and press Enter. This will return all tasks
+you can type `*task* search /date 13 /month 4` and press kbd:[Enter]. This will return all tasks
 that are happening on 13 April.
 
 .Before `*task* search /date 13 /month 4`, all tasks are listed
