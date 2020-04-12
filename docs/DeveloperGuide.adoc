@@ -2013,22 +2013,6 @@ Windows, Linux, Unix, OS-X
 [[mss]] MSS::
 Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
 //end::glossary[]
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
@@ -2061,6 +2045,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Edit the data file to contain duplicate modules. Double-click the jar file. +
    Expected: Shows the <<gui, GUI>> with an empty set of modules, classes, tasks and facilitators.
+// end::testing-general[]
 
 . Undo/Redo commands.
 
@@ -2072,7 +2057,6 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Type redo and press kbd:[Enter]. +
    Expected: The previously undone command is executed again.
-// end::testing-general[]
 
 === Testing of Module Feature
 
