@@ -27,8 +27,6 @@ public class TypicalModules {
             .withDescription("Calculus for Computing").build();
     public static final Module GEQ1000 = new ModuleBuilder().withModuleCode("GEQ1000")
             .withDescription("Asking Questions").build();
-    public static final Module CS3233 = new ModuleBuilder().withModuleCode("CS3233")
-            .withDescription("Competitive Programming").build();
     public static final Module CS4223 = new ModuleBuilder().withModuleCode("CS4223")
             .withDescription("Multi-core Architectures").build();
 

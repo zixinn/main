@@ -24,6 +24,7 @@ end box
 activate LogicManager
 
 LogicManager -> ModManagerParser : parseCommand("task \n done \n /module \n CS2103T \n /id \n 986")
+
 activate ModManagerParser
 
 create TaskCommandParser

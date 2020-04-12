@@ -19,7 +19,7 @@ public class TaskListCommandTest {
     private Model expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
+    public void execute_listIsShown_success() {
         assertCommandSuccess(new TaskListCommand(), model, TaskListCommand.MESSAGE_SUCCESS, CommandType.TASK,
                 expectedModel);
     }

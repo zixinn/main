@@ -13,6 +13,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
+participant Calendar <<class>> MODEL_COLOR
 end box
 
 [-> LogicManager : execute\n("cal find empty")
@@ -66,11 +67,11 @@ deactivate ModManagerParser
 LogicManager -> CalFindCommand : execute()
 activate CalFindCommand
 
-CalFindCommand -> ModelManager : getCalendar()
-activate ModelManager
+CalFindCommand -> Calendar : getNowCalendar()
+activate Calendar
 
-ModelManager --> CalFindCommand
-deactivate ModelManager
+Calendar --> CalFindCommand
+deactivate Calendar
 
 CalFindCommand -> ModelManager : getFilteredTaskList()
 activate ModelManager
@@ -78,7 +79,7 @@ activate ModelManager
 ModelManager --> CalFindCommand
 deactivate ModelManager
 
-CalFindCommand -> ModelManager : getLessons();
+CalFindCommand -> ModelManager : getLessons()
 activate ModelManager
 
 ModelManager --> CalFindCommand

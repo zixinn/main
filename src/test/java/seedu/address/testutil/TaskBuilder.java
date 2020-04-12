@@ -13,10 +13,10 @@ import seedu.address.model.util.Description;
 public class TaskBuilder {
 
     public static final String DEFAULT_DESC = "Do your work!";
-    public static final String DEFAULT_MOD_CODE = "CS4223";
+    public static final String DEFAULT_MOD_CODE = "CS2101";
     public static final String DEFAULT_DATE = "30/04/1975";
     public static final String DEFAULT_TIME = "17:30";
-    public static final int DEFAULT_TASK_NUM = 999;
+    public static final int DEFAULT_TASK_NUM = 737;
 
     private Description description;
     private ModuleCode moduleCode;
