@@ -123,7 +123,7 @@ public class FacilAddCommandTest {
 
         @Override
         public void addAction(DoableAction<?> action) {
-
+            //empty method body
         }
 
         @Override
@@ -133,7 +133,7 @@ public class FacilAddCommandTest {
     }
 
     /**
-     * A Model stub that contains no modules.
+     * A Model stub that does not contain module of the facilitator to be added.
      */
     private class ModelStubWithoutModule extends ModelStub {
         private final ArrayList<Facilitator> facilitatorsAdded = new ArrayList<>();
@@ -158,8 +158,7 @@ public class FacilAddCommandTest {
 
         @Override
         public void addAction(DoableAction<?> action) {
-
+            //empty method body
         }
     }
-
 }

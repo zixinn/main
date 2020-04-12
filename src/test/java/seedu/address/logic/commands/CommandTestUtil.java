@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -9,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
@@ -46,8 +48,12 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS4215 = "CS4215";
     public static final String VALID_MODULE_CODE_GEQ1000 = "GEQ1000";
     public static final String DOES_NOT_EXIST_MODULE_GGG1234P = "GGG1234P";
-
     public static final String VALID_MODULE_CODES_CHAIN = "CS2101 CS2103T CS3230 CS4215";
+
+    public static final String TASK_DATE_1 = "05/05/2020";
+    public static final String TASK_DATE_2 = "06/06/2020";
+    public static final String TASK_TIME_1 = "23:59";
+    public static final String TASK_TIME_2 = "16:00";
     public static final String TASK_DAY_25 = "25";
     public static final String TASK_DAY_26 = "26";
     public static final String TASK_MONTH_03 = "3";
@@ -58,7 +64,6 @@ public class CommandTestUtil {
     public static final String VALID_TASK_ID_THIRD = "123";
     public static final String VALID_TASK_ID_FOURTH = "345";
     public static final String INVALID_TASK_ID = "1103";
-
 
     public static final String VALID_DESCRIPTION_CS2103T = "Software Engineering";
     public static final String VALID_DESCRIPTION_CS2101 = "Effective Communication for Computing Professionals";
@@ -100,12 +105,21 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_CS2101 = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS2101;
     public static final String DESCRIPTION_DESC_CS1101S = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_CS1101S;
 
+    public static final String TASK_DESCRIPTION_DESC_PROGRAMMING = " " + PREFIX_DESCRIPTION
+            + " " + VALID_TASK_DESCRIPTION_PROGRAMMING;
+    public static final String TASK_DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION
+            + " " + VALID_TASK_DESCRIPTION_ASSIGNMENT;
+    public static final String TASK_DESCRIPTION_DESC_HOMEWORK = " " + PREFIX_DESCRIPTION
+            + " " + VALID_TASK_DESCRIPTION_HOMEWORK;
+    public static final String TASK_DATE_DESC_1 = " " + PREFIX_ON + " " + TASK_DATE_1;
+    public static final String TASK_DATE_DESC_2 = " " + PREFIX_ON + " " + TASK_DATE_2;
+    public static final String TASK_TIME_DESC_1 = " " + PREFIX_AT + " " + TASK_TIME_1;
+    public static final String TASK_TIME_DESC_2 = " " + PREFIX_AT + " " + TASK_TIME_2;
+
     public static final String TASK_CMD_DAY_26 = " " + PREFIX_DATE + " " + TASK_DAY_26;
     public static final String TASK_CMD_MONTH_03 = " " + PREFIX_MONTH + " " + TASK_MONTH_03;
     public static final String TASK_CMD_YEAR_2020 = " " + PREFIX_YEAR + " " + TASK_YEAR_2020;
     public static final String TASK_ID_DESC_VALID_ID = " " + PREFIX_TASK_ID + " " + VALID_TASK_ID_FIRST;
-
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
@@ -120,6 +134,10 @@ public class CommandTestUtil {
             + " cs2103*"; // '*' not allowed in module codes
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " very very very very"
             + " very very very very very very very very very long description"; // string more than 64 characters
+
+    public static final String INVALID_DATE_DESC = " " + PREFIX_ON + " 20/13/2020";
+    public static final String INVALID_TIME_DESC = " " + PREFIX_AT + " 16:66";
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol

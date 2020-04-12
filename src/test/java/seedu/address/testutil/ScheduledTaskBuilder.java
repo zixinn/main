@@ -49,8 +49,16 @@ public class ScheduledTaskBuilder {
     /**
      * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
      */
-    public ScheduledTaskBuilder withTaskDateTime(String taskDateTime) {
-        this.taskDateTime = new TaskDateTime(taskDateTime);
+    public ScheduledTaskBuilder withTaskDateTime(String taskDate) {
+        this.taskDateTime = new TaskDateTime(taskDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withTaskDateTime(String taskDate, String taskTime) {
+        this.taskDateTime = new TaskDateTime(taskDate, taskTime);
         return this;
     }
 
