@@ -26,7 +26,8 @@ class TaskContainsKeywordsPredicateTest {
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList(VALID_FIND_WORDS_PROGRAMMING);
-        List<String> secondPredicateKeywordList = Arrays.asList(VALID_BROKEN_FIND_WORDS_AS, VALID_BROKEN_FIND_WORDS_HOME);
+        List<String> secondPredicateKeywordList = Arrays.asList(
+                VALID_BROKEN_FIND_WORDS_AS, VALID_BROKEN_FIND_WORDS_HOME);
 
         TaskContainsKeywordsPredicate firstPredicate = new TaskContainsKeywordsPredicate(firstPredicateKeywordList);
         TaskContainsKeywordsPredicate secondPredicate = new TaskContainsKeywordsPredicate(secondPredicateKeywordList);

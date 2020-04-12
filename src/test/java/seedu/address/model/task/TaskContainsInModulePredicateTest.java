@@ -1,20 +1,12 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_AS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_HOME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROGRAMMING;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS3230;
-import static seedu.address.testutil.TypicalModules.CS2103T;
-import static seedu.address.testutil.TypicalModules.ES2660;
 import static seedu.address.testutil.TypicalTasks.nonScheduledProgrammingAssignmentTask;
 import static seedu.address.testutil.TypicalTasks.scheduledAssignmentTask;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 

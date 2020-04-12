@@ -7,30 +7,15 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_03;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_MONTH_06;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_AS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BROKEN_FIND_WORDS_HOME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROGRAMMING;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.task.TaskSearchCommandParser.DATE_STRING;
 import static seedu.address.logic.parser.task.TaskSearchCommandParser.MONTH_STRING;
 import static seedu.address.logic.parser.task.TaskSearchCommandParser.YEAR_STRING;
 import static seedu.address.testutil.TypicalTasks.scheduledAssignmentTask;
 import static seedu.address.testutil.TypicalTasks.scheduledHomeworkTask;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.task.TaskSearchCommand;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.task.util.TaskDateTime;
-import seedu.address.model.util.Description;
 
 class TaskSearchPredicateTest {
     private static HashMap<String, Integer> keywords = new HashMap<>();
@@ -139,8 +124,10 @@ class TaskSearchPredicateTest {
     public void test_multipleFieldsMatchNone_returnsFalse() {
         HashMap<String, Integer> multipleFieldsHashMap = new HashMap<String, Integer>() {
             {
-                put(DATE_STRING, Integer.parseInt(TASK_DAY_26)); // changed to different date
-                put(MONTH_STRING, Integer.parseInt(TASK_MONTH_03));  // changed to different month
+                // changed to different date
+                put(DATE_STRING, Integer.parseInt(TASK_DAY_26));
+                // changed to different month
+                put(MONTH_STRING, Integer.parseInt(TASK_MONTH_03));
             }
         };
 

@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.AN_INT_VALUE;
 import static seedu.address.logic.commands.CommandTestUtil.DOES_NOT_EXIST_MODULE_GGG1234P;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_ID;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_DAY_26;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_YEAR_2020;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_FIRST;
@@ -16,14 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.task.TaskEditCommand.MESSAGE_TASK_NOT_FOUND;
 import static seedu.address.logic.commands.task.TaskForOneModuleCommand.MESSAGE_MODULE_DOES_NOT_EXIST;
 import static seedu.address.logic.commands.task.TaskMarkAsDoneCommand.MESSAGE_SUCCESS;
-import static seedu.address.logic.commands.task.TaskMarkAsDoneCommand.MESSAGE_TASK_ALREADY_DONE;
-import static seedu.address.logic.parser.task.TaskSearchCommandParser.DATE_STRING;
-import static seedu.address.logic.parser.task.TaskSearchCommandParser.YEAR_STRING;
 import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 
-import java.util.HashMap;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandType;
@@ -31,14 +23,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskContainsInModulePredicate;
-import seedu.address.model.task.TaskSearchPredicate;
 
 class TaskMarkAsDoneCommandTest {
+    private static final int TASK_INDEX_TO_CHOOSE = 0;
+
     private Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalModManager(), new UserPrefs());
-
-    private static final int TASK_INDEX_TO_CHOOSE = 0;
 
     @Test
     public void equals() {
@@ -57,7 +47,7 @@ class TaskMarkAsDoneCommandTest {
         assertFalse(firstCommand.equals(null));
 
         // same module code and task ID -> returns true
-        TaskMarkAsDoneCommand firstCommandCopy =  new TaskMarkAsDoneCommand(
+        TaskMarkAsDoneCommand firstCommandCopy = new TaskMarkAsDoneCommand(
                 VALID_MODULE_CODE_CS2103T, VALID_TASK_ID_FIRST);
         assertTrue(firstCommand.equals(firstCommandCopy));
 
