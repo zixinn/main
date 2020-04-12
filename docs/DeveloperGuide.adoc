@@ -2000,36 +2000,22 @@ tasks' content.
 == Glossary
 //tag::glossary[]
 [[cli]] CLI::
-Command-line interface: processes commands to a computer program in the form of lines of text
-
-[[extensions]] Extensions::
-"Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario that can happen if certain things are not as expected by the <<mss, MSS>>
-
-[[gui]] GUI::
-Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons
-
-[[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
+Command-line interface: processes commands to a computer program in the form of lines of text.
 
 [[mss]] MSS::
-Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong
+Main Success Scenario: describes the most straightforwards interaction for a given use case, which assumes that nothing goes wrong.
+[[extensions]] Extensions::
+"Add-on"s to the <<mss, MSS>> that describe exceptional or alternative flow of events, describe variations of the scenario
+that can happen if certain things are not as expected by the <<mss, MSS>>.
+
+[[gui]] GUI::
+Graphical user interface: a form of user interface that allows user to interact with electronic devices through graphical icons.
+
+[[mainstream-os]] Mainstream OS::
+Windows, Linux, Unix, OS-X.
+
 //end::glossary[]
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
