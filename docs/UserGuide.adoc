@@ -68,7 +68,7 @@ Here are some example commands that you can try:
 
 * `*cmd* all` : lists all available commands in our Mod Manager.
 * `*mod* add /code CS3233 /desc Competitive Programming` : adds the module CS3233 to the module list.
-* `*class* add /code CS3233 /type LEC /at FRIDAY 14:00 16:00 /venue i3-Aud` : adds a lecture class to the module CS3233.
+* `*class* add /code CS3233 /type LEC /at TUESDAY 14:00 16:00 /venue i3-Aud` : adds a lecture class to the module CS3233.
 * `*task* add /code CS3233 /desc Complete Pset 10 /on 30/04/2020 /at 23:59`: adds a task to the module CS3233.
 * `*facil* add /name Steven Halim /email stevenha@comp.nus.edu.sg /code CS3233`: adds a facilitator to the module CS3233. If you are rushing to write an email to your lecturer, you can refer to this conveniently.
 * `*cal* view /week this` : views your schedules for the current week. You should see the CS3233 lecture group
@@ -346,7 +346,7 @@ Format:
 
 Command properties:
 ****
-* MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+* MOD_CODE should be 2-3 letters followed by 4 numbers (and a possible trailing letter) with no spaces.
 * DESCRIPTION should not exceed 64 characters.
 ****
 
@@ -451,7 +451,7 @@ Command properties:
 * Edits the module at the specified `INDEX` or with the specified `MOD_CODE`. The index refers to the index number shown in the displayed module list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* MOD_CODE should be 2-3 letters followed by 4 numbers (and a letter) with no spaces.
+* MOD_CODE should be 2-3 letters followed by 4 numbers (and a possible trailing letter) with no spaces.
 * DESCRIPTION should not exceed 64 characters.
 * You can remove the description linked to the module by typing `/desc` without specifying any input after it.
 ****
@@ -760,11 +760,12 @@ image::task-delete-2.png[]
 //end::task-edit-delete[]
 
 //tag::task-mark-as-done-UG[]
+
 ==== Marking a task as done
 
 You can mark the task as done in the module in Mod Manager.
 
-NOTE: A newly added task as above will be considered as not done by default.
+NOTE: A newly added task will be not done by default.
 
 NOTE: Editing a task will not change the done/not done status of the task.
 
@@ -797,6 +798,7 @@ image::TaskDoneAfterCloseUp.png[]
 The <<taskcard, task card>> has changed to green; which means our task has been marked as done.
 Hooray! We just completed a task.
 //end::task-mark-as-done-UG[]
+
 ==== Viewing all tasks across all modules
 
 You can view a list of all tasks across all modules in Mod Manager.
@@ -809,7 +811,7 @@ Format:
 
 Example:
 
-By typing the command above, you should see the following:
+By typing the command above, you should see a list of tasks, such as the following:
 
 .`*task* list` shows a list of all tasks in Mod Manager
 image::TaskList.png[]
@@ -826,7 +828,7 @@ Command properties:
 * MOD_CODE should belong to a valid and existing module in Mod Manager.
 ****
 
-NOTE: Alternatively, you can also view the tasks for a specific module in the Module tab (main dashboard).
+NOTE: Alternatively, you can also view the tasks for a specific module in the `Module` tab (the <<dashboard,dashboard>>).
 
 Example:
 
@@ -950,8 +952,6 @@ that are happening on 13 April.
 
 .Before `*task* search /date 13 /month 4`, all tasks are listed
 image::TaskSearchBefore.png[]
-Note that the content above may be different from what is currently on your Mod Manager. You may `add`
-or `edit` the tasks to match we have above
 
 .After `*task* search /date 13 /month 4`, only matching tasks are listed
 image::TaskSearchAfter.png[]
@@ -1292,14 +1292,14 @@ the data of your previous Mod Manager folder.
 This glossary aims to provide a definition for the special vocabulary used in this user guide.
 
 [[dashboard]] Dashboard::
-The default tab in view when the application starts (i.e. Module tab).
+The default tab in view when the application starts (i.e. the `Module` tab).
 
 //tag::taskcard[]
 [[taskcard]] Task card::
 A task card represents a task with details such as the module it belongs to,
 description, and time period (if provided upon creation).
 
-A dark red card represents a task that is not yet done.
+A dark red card represents a task that is not done.
 
 image::TaskCardNotDone.png[]
 
@@ -1374,7 +1374,8 @@ image::TaskCardDone.png[]
 [%autowidth]
 |=====
 |*Parameter* | *Constraints*
-|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 digits (and a possible trailing letter) with no spaces.
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
                  This includes `Module` 's and `Task` 's description.
+|`MOD_CODE` |`MOD_CODE` should be 2-3 letters followed by 4 digits (and a possible trailing letter) with no spaces.
+
 |=====

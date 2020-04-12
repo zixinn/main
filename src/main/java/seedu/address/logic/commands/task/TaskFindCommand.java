@@ -18,7 +18,7 @@ public class TaskFindCommand extends TaskCommand {
     public static final String MESSAGE_USAGE = COMMAND_GROUP_TASK + " " + COMMAND_WORD_FIND
             + ": Finds all tasks for which the description contains any of the "
             + "specified task description (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: TASK_DESCRIPTION \n"
+            + "Parameters: DESCRIPTION [MORE_DESCRIPTIONS]... \n"
             + "Example: " + COMMAND_GROUP_TASK + " " + COMMAND_WORD_FIND + " assignment";
 
     private final TaskContainsKeywordsPredicate predicate;
