@@ -2,10 +2,10 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:experimental:
 
 == PROJECT: Mod Manager
 
----
 
 == Overview
 This portfolio summarizes my contribution to Mod Manager, a software developed by a team of me and 4 other fellow CS2103T students.
@@ -48,14 +48,14 @@ simpler nature and being easy to upgrade in the future.
 
 *Code contributed*:
 
-* [https://github.com/AY1920S2-CS2103T-F10-4/main/pulls?q=is%3Apr+author%3ANNpanpan+is%3Aclosed+[Functional code]][https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=NNpanpan&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=undefined&zR=undefined&zACS=undefined&zS=undefined&zU=undefined&zMG=false&zFTF=undefined&zFGS=undefined&zSO=undefined&zSWO=undefined&zSD=false&zSWD=false[Reposense]]
+* [https://github.com/AY1920S2-CS2103T-F10-4/main/pulls?q=is%3Apr+author%3ANNpanpan+is%3Aclosed+[Functional code]][https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=NNpanpan&sort=totalCommits%20dsc&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[Reposense]]
 
 *Other contributions*:
 
 ** Project management:
 *** Reviewed and merged pull requests on Github.
 ** Documentation:
-*** Wrote the task edit/delete and undo/redo sections of the User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/135[#135], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/196[#196]
+*** Wrote the task edit/delete, and part of general features sections of the User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/135[#135], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/196[#196]
 *** Wrote the general features and task edit/delete sections of the Developer Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/196[#196]
 ** Community:
 *** PR reviews (with non-trivial comments): https://github.com/AY1920S2-CS2103T-F10-4/main/pull/189[#189]
@@ -67,11 +67,7 @@ simpler nature and being easy to upgrade in the future.
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
-== Undo/Redo features
-include::../UserGuide.adoc[tag=undo-redo]
-
-== `task edit` and `task delete` commands
+== Task feature
 include::../UserGuide.adoc[tag=task-edit-delete]
 
 == Contributions to the Developer Guide
@@ -79,12 +75,13 @@ include::../UserGuide.adoc[tag=task-edit-delete]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-== General Features
+=== Model Component
+include::../DeveloperGuide.adoc[tag=doable-package]
+
+=== General Features
 include::../DeveloperGuide.adoc[tag=general-features]
 
-== `task edit`
+=== Task Management Feature
 include::../DeveloperGuide.adoc[tag=task-edit]
 
-== `task delete`
-include::../DeveloperGuide.adoc[tag=task-delete]
 
