@@ -146,7 +146,7 @@ image::FacilitatorPackageClassDiagram.png[]
 
 * The `Facilitator` package contains a concrete class `Facilitator`.
 * A `Facilitator` contains a `Name`, `Email` and `Office`.
-* A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs.
+* A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs to.
 * A `UniqueFacilitatorList` comprises of instances of `Facilitator`.
 
 ==== Lesson
@@ -155,7 +155,7 @@ image::LessonPackageClassDiagram.png[]
 
 * The `Lesson` package contains a concrete class `Lesson`.
 * A `Lesson` contains a `DayAndTime` which indicates which day of the week and the time the lesson is on.
-* A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs.
+* A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs to.
 * A `LessonList` comprises of instances of `Lesson`.
 
 ==== Task
