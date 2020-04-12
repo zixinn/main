@@ -30,6 +30,17 @@ public class ScheduledTaskBuilder {
     }
 
     /**
+     * Initializes the ScheduledTaskBuilder with the data of {@code taskToCopy}.
+     */
+    public ScheduledTaskBuilder(ScheduledTask taskToCopy) {
+        moduleCode = taskToCopy.getModuleCode();
+        description = taskToCopy.getDescription();
+        taskDateTime = taskToCopy.getTaskDateTime().get();
+        isDone = taskToCopy.isTaskDone();
+        taskId = taskToCopy.getTaskNum();
+    }
+
+    /**
      * Sets the {@code ModuleCode} of the {@code ScheduledTask} that we are building.
      */
     public ScheduledTaskBuilder withModuleCode(String moduleCode) {
@@ -49,8 +60,16 @@ public class ScheduledTaskBuilder {
     /**
      * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
      */
-    public ScheduledTaskBuilder withTaskDateTime(String taskDateTime) {
-        this.taskDateTime = new TaskDateTime(taskDateTime);
+    public ScheduledTaskBuilder withTaskDateTime(String taskDate) {
+        this.taskDateTime = new TaskDateTime(taskDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TaskDateTime} of the {@code ScheduledTask} that we are building.
+     */
+    public ScheduledTaskBuilder withTaskDateTime(String taskDate, String taskTime) {
+        this.taskDateTime = new TaskDateTime(taskDate, taskTime);
         return this;
     }
 

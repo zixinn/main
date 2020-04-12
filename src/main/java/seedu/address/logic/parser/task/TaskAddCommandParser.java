@@ -37,7 +37,8 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION, PREFIX_ON, PREFIX_AT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_DESCRIPTION)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskAddCommand.MESSAGE_USAGE));
         }
 
@@ -54,8 +55,8 @@ public class TaskAddCommandParser implements Parser<TaskAddCommand> {
             throw new ParseException(String.format(MESSAGE_TOO_MANY_ARGUMENTS, "one", PREFIX_AT));
         }
 
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE));
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION));
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ON)) {
             if (arePrefixesPresent(argMultimap, PREFIX_AT)) {
