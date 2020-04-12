@@ -793,7 +793,7 @@ image::TaskListUndoneSequenceDiagram.png[]
 NOTE: The lifeline for `TaskCommandParser`, `TaskListUndoneCommandParser`, `TaskListUndoneCommand` should end at
 the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
-The following activity diagram summarizes what happens when a user executes a task view undone tasks command:
+The following activity diagram summarizes what happens when a user executes a view undone tasks command:
 
 .Activity Diagram for `task undone` Command
 image::TaskListUndoneActivityDiagram.png[]
@@ -851,7 +851,7 @@ image::TaskSearchActivityDiagram.png[]
 
 ==== Design Considerations
 
-===== Aspect: A task may have a specified time frame, or not. How do we implement this feature?
+===== Aspect: A task may have a specified time period, or not. How do we implement this feature?
 * **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
 A task with a specified time period will be created as a `ScheduledTask`, while a task with no
 time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
