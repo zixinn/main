@@ -133,19 +133,37 @@ The `Model`,
 More detailed designs of important sub-components are below.
 
 ==== Module
-Place-holder
+.Structure of the Module Package
+image::ModulePackageClassDiagram.png[]
+
+* The `Module` package contains a concrete class `Module`.
+* A `Module` contains a `ModuleCode` and a `Description` of the module.
+* A `UniqueModuleList` comprises of instances of `Module`.
 
 ==== Facilitator
-Place-holder
+.Structure of the Facilitator Package
+image::FacilitatorPackageClassDiagram.png[]
+
+* The `Facilitator` package contains a concrete class `Facilitator`.
+* A `Facilitator` contains a `Name`, `Email` and `Office`.
+* A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs.
+* A `UniqueFacilitatorList` comprises of instances of `Facilitator`.
 
 ==== Lesson
-Place-holder
+.Structure of the Lesson Package
+image::LessonPackageClassDiagram.png[]
+
+* The `Lesson` package contains a concrete class `Lesson`.
+* A `Lesson` contains a `DayAndTime` which indicate which day of the week and what time the lesson is on.
+* A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs.
+* A `LessonList` comprises of instances of `Lesson`.
 
 ==== Task
 Place-holder
 
 ==== Calendar
-Place-holder
+* The `Calendar` package contains a concrete class `Calendar`.
+* The `Calendar` contains a LocalDate to represent the calendar date.
 
 ==== DoableAction
 Place-holder
@@ -681,7 +699,7 @@ and then retrieves the current existing `Task` from `ModManager`.
 
 The following sequence diagram shows how the task mark as done command works:
 
-.Sequence Diagram for `*task* done /module CS2103T /id 986` Command
+.Sequence Diagram for `*task* done /code CS2103T /id 986` Command
 image::TaskMarkAsDoneSequenceDiagram.png[]
 
 NOTE: The lifeline for `TaskCommandParser`, `TaskMarkAsDoneCommandParser`, and `TaskMarkAsDoneCommand` should end at
@@ -1187,6 +1205,7 @@ This is because without the `/type`, it is possible that users thought that the 
 Alternative 1 is chosen because it is shorter than alternative 2 and hence it can be easier for users to type.
 It is easier to implement too. The word `empty` is kept to allow users to know what the find command is for.
 //end::calendar[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -1667,6 +1686,8 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+
 === Use case: UC16 - View tasks for a specific module in Mod Manger
 
 *<<mss, MSS>>*
@@ -1690,6 +1711,7 @@ Use case resumes from step 1.
 * 1b. There are no tasks currently available for the specified module.
 +
 Use case ends.
+
 [discrete]
 
 === Use case: UC17 - View undone tasks
@@ -1706,6 +1728,7 @@ Use case ends.
 * 1a. There are no undone tasks currently available in Mod Manager.
 +
 Use case ends.
+
 [discrete]
 
 === Use case: UC18 - Find tasks by description
