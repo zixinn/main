@@ -183,8 +183,6 @@ public class UndoRedoCommandTest {
                         new Description("Zoom zoom vromm"), new ModuleCode(VALID_MODULE_CODE_CS2103T)));
         taskAdd.execute(testModel);
 
-        System.out.println("current tasks: " + testModel.getFilteredTaskList());
-
         Task editedTask = new TaskBuilder().withDescription("Megaman")
                 .withTaskDateTime(new TaskDateTime("18/01/2021", "23:50")).build();
         TaskEditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
@@ -192,13 +190,9 @@ public class UndoRedoCommandTest {
                 new ModuleCode(TaskBuilder.DEFAULT_MOD_CODE), TaskBuilder.DEFAULT_TASK_NUM, descriptor);
         taskEdit.execute(testModel);
 
-        System.out.println("current tasks: " + testModel.getFilteredTaskList());
-
         TaskDeleteCommand taskDelete = new TaskDeleteCommand(
                 new ModuleCode(VALID_MODULE_CODE_CS2103T), Integer.parseInt(VALID_TASK_ID_FIRST));
         taskDelete.execute(testModel);
-
-        System.out.println("current tasks: " + testModel.getFilteredTaskList());
 
         new UndoCommand().execute(testModel);
         new UndoCommand().execute(testModel);
