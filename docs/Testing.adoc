@@ -1,3 +1,4 @@
+//tag:Testing[]
 = Mod Manager - Testing
 :site-section: DeveloperGuide
 :toc:

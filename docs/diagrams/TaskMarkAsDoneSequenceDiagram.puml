@@ -1,6 +1,6 @@
 @startuml
-scale 0.6
-!include smallerStyle.puml
+scale 1
+!include style.puml
 skinparam ArrowFontSize 60
 
 box Logic LOGIC_COLOR_T1
@@ -20,10 +20,11 @@ participant ":ModManager" as ModManager MODEL_COLOR
 participant ":UniqueTaskList" as UniqueTaskList MODEL_COLOR
 end box
 
-[-> LogicManager : execute(\n "task done \n /module \n CS2103T \n /id \n 986")
+[-> LogicManager : execute("task \n done \n /module \n CS2103T \n /id \n 986")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand(\n "task done \n /module \n CS2103T \n /id \n 986")
+LogicManager -> ModManagerParser : parseCommand("task \n done \n /module \n CS2103T \n /id \n 986")
+
 activate ModManagerParser
 
 create TaskCommandParser

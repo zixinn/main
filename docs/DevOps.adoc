@@ -1,3 +1,4 @@
+//tag:DevOps[]
 = Mod Manager - Dev Ops
 :site-section: DeveloperGuide
 :toc:

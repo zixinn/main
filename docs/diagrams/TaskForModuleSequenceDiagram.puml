@@ -1,5 +1,4 @@
 @startuml
-scale 0.6
 !include style.puml
 
 skinparam ArrowFontSize 60
@@ -9,19 +8,19 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ModManagerParser" as ModManagerParser LOGIC_COLOR
 participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
 participant ":TaskForOneModuleCommandParser" as TaskForOneModuleCommandParser LOGIC_COLOR
-participant "predicate:TaskForOneModuleCommand" as TaskForOneModuleCommand LOGIC_COLOR
+participant "c:TaskForOneModuleCommand" as TaskForOneModuleCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "predicate:TaskContainsInModulePredicate" as TaskContainsInModulePredicate MODEL_COLOR
+participant "p:TaskContainsInModulePredicate" as TaskContainsInModulePredicate MODEL_COLOR
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute(\n"task module /code CS2103T")
+[-> LogicManager : execute(\n"task \n module \n /code\n CS2103T")
 activate LogicManager
 
-LogicManager -> ModManagerParser : parseCommand(\n"task module /code CS2103T")
+LogicManager -> ModManagerParser : parseCommand(\n"task \n module \n /code\n CS2103T")
 activate ModManagerParser
 
 create TaskCommandParser
@@ -31,7 +30,7 @@ activate TaskCommandParser
 TaskCommandParser --> ModManagerParser
 deactivate TaskCommandParser
 
-ModManagerParser -> TaskCommandParser : parse("module /code CS2103T")
+ModManagerParser -> TaskCommandParser : parse("module \n /code \n CS2103T")
 activate TaskCommandParser
 
 create TaskForOneModuleCommandParser
@@ -41,40 +40,40 @@ activate TaskForOneModuleCommandParser
 TaskForOneModuleCommandParser --> TaskCommandParser
 deactivate TaskForOneModuleCommandParser
 
-TaskCommandParser -> TaskForOneModuleCommandParser : parse("/code CS2103T")
+TaskCommandParser -> TaskForOneModuleCommandParser : parse("/code \n CS2103T")
 activate TaskForOneModuleCommandParser
 
 create TaskContainsInModulePredicate
-TaskForOneModuleCommandParser -> TaskContainsInModulePredicate : TaskContainsInModulePredicate("CS2103T")
+TaskForOneModuleCommandParser -> TaskContainsInModulePredicate : TaskContains\nInModulePredicate("CS2103T")
 activate TaskContainsInModulePredicate
 
-TaskContainsInModulePredicate --> TaskForOneModuleCommandParser : predicate
+TaskContainsInModulePredicate --> TaskForOneModuleCommandParser : p
 deactivate TaskContainsInModulePredicate
 
 create TaskForOneModuleCommand
-TaskForOneModuleCommandParser -> TaskForOneModuleCommand : TaskForOneModuleCommand(predicate)
+TaskForOneModuleCommandParser -> TaskForOneModuleCommand : TaskFor\nOneModuleCommand(p)
 activate TaskForOneModuleCommand
 
-TaskForOneModuleCommand --> TaskForOneModuleCommandParser : predicate
+TaskForOneModuleCommand --> TaskForOneModuleCommandParser : c
 deactivate TaskForOneModuleCommand
 
-TaskForOneModuleCommandParser --> TaskCommandParser : predicate
+TaskForOneModuleCommandParser --> TaskCommandParser : c
 deactivate TaskForOneModuleCommandParser
 TaskForOneModuleCommandParser -[hidden]-> TaskCommandParser
 destroy TaskForOneModuleCommandParser
 
-TaskCommandParser --> ModManagerParser : predicate
+TaskCommandParser --> ModManagerParser : c
 deactivate TaskCommandParser
 TaskCommandParser -[hidden]-> ModManagerParser
 destroy TaskCommandParser
 
-ModManagerParser --> LogicManager : predicate
+ModManagerParser --> LogicManager : c
 deactivate ModManagerParser
 
 LogicManager -> TaskForOneModuleCommand : execute()
 activate TaskForOneModuleCommand
 
-TaskForOneModuleCommand -> ModelManager : updateFilteredTaskList(predicate)
+TaskForOneModuleCommand -> ModelManager : updateFilteredTaskList(p)
 activate ModelManager
 
 ModelManager --> TaskForOneModuleCommand
