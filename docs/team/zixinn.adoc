@@ -112,6 +112,8 @@ include::../DeveloperGuide.adoc[tag=use-case-mod-edit-delete]
 
 include::../DeveloperGuide.adoc[tag=nfr]
 
+=== Appendix F: Instructions for Manual Testing
+
 === Testing of General Features
 
 include::../DeveloperGuide.adoc[tag=testing-general]
