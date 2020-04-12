@@ -11,7 +11,8 @@ if () then ([index or module code is provided])
                 if () then ([index is not out of bounds])
                     :Command creates edited module;
                     if () then ([ModManager does not contain edited module])
-                        :Model edits module in UniqueModuleList;
+                        :Model edits module in UniqueModuleList
+                                          in ModManager;
                         :Logic saves ModManager to Storage;
                         :Ui shows the updated module list;
                     else ([else])
