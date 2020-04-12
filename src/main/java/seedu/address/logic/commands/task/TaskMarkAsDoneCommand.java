@@ -36,7 +36,7 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
     public static final String MESSAGE_TASK_ID_INVALID = "The Task's ID_NUMBER is not valid. "
             + "It cannot contain letters or special characters.";
     public static final String MESSAGE_TASK_ID_NOT_EXISTENT = "The Task's ID_NUMBER is not found! Please try again.";
-    public static final String MESSAGE_TASK_ALREADY_DONE = "Task of module %s with ID %d is already done. "
+    public static final String MESSAGE_TASK_ALREADY_DONE = "Task of module %s with ID %s is already done. "
         + "Please try again with another task!";
 
     private final String moduleCode;
@@ -83,7 +83,8 @@ public class TaskMarkAsDoneCommand extends TaskCommand {
         assert (editedTask != taskToEdit) : "deep copied the task";
 
         if (!isChanged) {
-            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode, taskNum));
+            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_DONE, moduleCode,
+                    taskNum));
         }
 
         assert (isChanged) : "Marking the task as done successfully";

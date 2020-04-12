@@ -17,7 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_ASSI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_HOMEWORK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIND_WORDS_PROGRAMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_FIRST;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -107,7 +107,7 @@ public class TaskCommandParserTest {
     public void parse_mark_done() throws Exception {
         TaskMarkAsDoneCommand command = (TaskMarkAsDoneCommand) parser.parse(Command.COMMAND_WORD_DONE + " "
                 + MODULE_CODE_DESC_CS2103T + TASK_ID_DESC_VALID_ID);
-        assertEquals(new TaskMarkAsDoneCommand(VALID_MODULE_CODE_CS2103T, VALID_TASK_ID), command);
+        assertEquals(new TaskMarkAsDoneCommand(VALID_MODULE_CODE_CS2103T, VALID_TASK_ID_FIRST), command);
     }
 
     @Test

@@ -5,6 +5,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_HOMEWORK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PROGRAMMING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_FIRST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_FOURTH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_SECOND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_THIRD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,27 +26,27 @@ public class TypicalTasks {
             .withModuleCode(VALID_MODULE_CODE_CS2103T)
             .withDescription(VALID_TASK_DESCRIPTION_ASSIGNMENT)
             .withTaskDateTime("01/04/2020")
-            .withTaskId(999)
+            .withTaskId(getIntegerTaskId(VALID_TASK_ID_FIRST))
             .setDone(false)
             .build();
     public static ScheduledTask scheduledHomeworkTask = new ScheduledTaskBuilder()
             .withModuleCode(VALID_MODULE_CODE_CS2101)
             .withDescription(VALID_TASK_DESCRIPTION_HOMEWORK)
             .withTaskDateTime("25/06/2020")
-            .withTaskId(998)
+            .withTaskId(getIntegerTaskId(VALID_TASK_ID_SECOND))
             .setDone(false)
             .build();
     public static NonScheduledTask nonScheduledProgrammingTask = new NonScheduledTaskBuilder()
             .withModuleCode(VALID_MODULE_CODE_CS2103T)
             .withDescription(VALID_TASK_DESCRIPTION_PROGRAMMING)
-            .withTaskId(997)
+            .withTaskId(getIntegerTaskId(VALID_TASK_ID_THIRD))
             .withIsDone(false)
             .build();
     public static NonScheduledTask nonScheduledProgrammingAssignmentTask = new NonScheduledTaskBuilder()
             .withModuleCode(VALID_MODULE_CODE_CS2101)
             .withDescription(VALID_TASK_DESCRIPTION_PROGRAMMING
                     + VALID_TASK_DESCRIPTION_ASSIGNMENT)
-            .withTaskId(996)
+            .withTaskId(getIntegerTaskId(VALID_TASK_ID_FOURTH))
             .withIsDone(false)
             .build();
 
@@ -51,6 +55,10 @@ public class TypicalTasks {
     public static List<Task> getTypicalTasks() {
         return new ArrayList<Task>(Arrays.asList(scheduledAssignmentTask,
                 scheduledHomeworkTask, nonScheduledProgrammingTask, nonScheduledProgrammingAssignmentTask));
+    }
+
+    public static int getIntegerTaskId(String taskId) {
+        return Integer.parseInt(taskId);
     }
 }
 
