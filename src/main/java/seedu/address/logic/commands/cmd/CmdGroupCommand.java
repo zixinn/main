@@ -65,7 +65,7 @@ public class CmdGroupCommand extends CmdCommand {
 
         case COMMAND_GROUP_EXIT:
             return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,
-                    getCommands(List.of("exit"))), CommandType.CMD);
+                    getCommands(List.of(COMMAND_GROUP_EXIT))), CommandType.CMD);
 
         case COMMAND_GROUP_UNDO:
             return new CommandResult(String.format(MESSAGE_CMD_GROUP_SUCCESS, commandGroup,

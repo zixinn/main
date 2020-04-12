@@ -127,7 +127,7 @@ This section describes the main features of Mod Manager and how to use them.
 
 The features are grouped into six categories:
 
-. <<General, General>> feature
+. <<General, General>> features
 . <<Module feature : `*mod*`, Module>> feature
 . <<Class feature : `*class*`, Class>> feature
 . <<Facilitator feature : `*facil*`, Facilitator>> feature

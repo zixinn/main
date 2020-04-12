@@ -7,7 +7,8 @@ if () then ([index or name is provided])
         if () then ([index is valid])
             :Logic executes command;
             if () then ([index is not out of bounds])
-                :Model deletes facilitator from UniqueFacilitatorList;
+                :Model deletes facilitator from UniqueFacilitatorList
+                                         in ModManager;
                 :Logic saves ModManager to Storage;
                 :Ui shows the updated facilitator list;
             else ([else])
@@ -21,7 +22,8 @@ if () then ([index or name is provided])
         if () then ([name is valid])
             :Logic executes command;
             if () then ([facilitator exists in ModManager])
-                :Model deletes facilitator from UniqueFacilitatorList;
+                :Model deletes facilitator from UniqueFacilitatorList
+                                         in ModManager;
                 :Logic saves ModManager to Storage;
                 :Ui shows the updated facilitator list;
             else ([else])
