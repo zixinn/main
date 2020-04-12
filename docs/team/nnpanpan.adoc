@@ -67,10 +67,6 @@ simpler nature and being easy to upgrade in the future.
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
-== General features
-include::../UserGuide.adoc[tag=undo]
-
 == Task feature
 include::../UserGuide.adoc[tag=task-edit-delete]
 
@@ -79,9 +75,6 @@ include::../UserGuide.adoc[tag=task-edit-delete]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-=== Logic Component
-include::../DeveloperGuide.adoc[tag=logic]
-
 === Model Component
 include::../DeveloperGuide.adoc[tag=doable-package]
 
@@ -91,6 +84,4 @@ include::../DeveloperGuide.adoc[tag=general-features]
 === Task Management Feature
 include::../DeveloperGuide.adoc[tag=task-edit]
 
-=== Appendix C: Use Cases
-include::../DeveloperGuide.adoc[tag=use-case-tasks-first-part]
 
