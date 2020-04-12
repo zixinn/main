@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalModManager.getTypicalModManager;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandType;
-import seedu.address.model.ModManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,7 +28,7 @@ public class TaskDeleteCommandTest {
 
         String expectedMessage = String.format(TaskDeleteCommand.MESSAGE_TASK_DELETE_SUCCESS, taskToDelete);
 
-        ModelManager expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModManager(), new UserPrefs());
         expectedModel.deleteTask(taskToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, CommandType.TASK, expectedModel);
@@ -38,7 +37,7 @@ public class TaskDeleteCommandTest {
     @Test
     public void execute_moduleCodeNotExist_throwsCommandException() {
         Task taskToDelete = new TaskBuilder().withModuleCode("CS3232").build();
-        
+
         TaskDeleteCommand deleteCommand = new TaskDeleteCommand(
                 taskToDelete.getModuleCode(), taskToDelete.getTaskNum());
 
