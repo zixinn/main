@@ -133,6 +133,7 @@ The `Model`,
 
 More detailed designs of important sub-components are below.
 
+//tag::mod-package[]
 ==== Module
 .Structure of the Module Package
 image::ModulePackageClassDiagram.png[]
@@ -140,6 +141,7 @@ image::ModulePackageClassDiagram.png[]
 * The `Module` package contains a concrete class `Module`.
 * A `Module` contains a `ModuleCode` and a `Description` of the module.
 * A `UniqueModuleList` comprises of instances of `Module`.
+//end::mod-package[]
 
 ==== Facilitator
 .Structure of the Facilitator Package
@@ -1149,6 +1151,7 @@ The following sequence diagram shows how the calendar find command works:
 image::CalFindSequenceDiagram.png[]
 
 NOTE: The lifeline for `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+//end::calendar[]
 
 The following activity diagram summarizes what happens when a user executes a calendar find command:
 
@@ -1159,12 +1162,13 @@ image::CalFindActivityDiagram.png[]
 
 ===== Aspect: Calendar appearance
 .New Design for Calendar Appearance (Alternative 1)
-image::NewCalendar.png[]
+image::NewCalendar.png[width="800"]
 
 
 .Old Design for Calendar Appearance (Alternative 2)
-image::OldCalendar.png[]
+image::OldCalendar.png[width="800"]
 
+//tag::cal-design[]
 * **Alternative 1 (current choice):** Displaying the days of a week in calendar from left to right.
 ** Pros: The whole week can be seen on one screen without having users to scroll down for a particular day.
 ** Cons: Words that are long in number of characters may not be able to be displayed in a single line.
@@ -1187,7 +1191,7 @@ This is because without the `/type`, it is possible that users thought that the 
 
 Alternative 1 is chosen because it is shorter than alternative 2 and hence it can be easier for users to type.
 It is easier to implement too. The word `empty` is kept to allow users to know what the find command is for.
-//end::calendar[]
+//end::cal-design[]
 
 === Logging
 

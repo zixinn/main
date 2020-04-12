@@ -37,9 +37,9 @@ This section shows a summary of my contributions to Mod Manager.
 *** Managed releases `v1.3` on GitHub
 *** Merged pull requests
 ** Documentation:
-*** Updated exit and clear command of User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/133[#133]
+*** Updated exit and clear command of User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/133[#133], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/190[#190]
 *** Added calendar feature of User Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/9[#9], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/110[#110]
-*** Added implementation, use cases and testing of calendar feature of Developer Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/23[#23], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/105[#105]
+*** Added implementation, use cases and testing of calendar feature of Developer Guide: https://github.com/AY1920S2-CS2103T-F10-4/main/pull/23[#23], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/105[#105], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/182[#182]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-F10-4/main/pull/81[#81], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/98[#98], https://github.com/AY1920S2-CS2103T-F10-4/main/pull/128[#128]
 
@@ -49,11 +49,9 @@ This section shows a summary of my contributions to Mod Manager.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+=== General Feature
+
 include::../UserGuide.adoc[tag=calendar]
-
-include::../UserGuide.adoc[tag=clear]
-
-include::../UserGuide.adoc[tag=exit]
 
 == Contributions to the Developer Guide
 
@@ -61,15 +59,31 @@ include::../UserGuide.adoc[tag=exit]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+=== Model Component
+include::../DeveloperGuide.adoc[tag=mod-package]
+
 include::../DeveloperGuide.adoc[tag=calendar]
+
+==== Design Considerations
+
+===== Aspect: Calendar appearance
+.New Design for Calendar Appearance (Alternative 1)
+image::NewCalendar.png[width="400"]
+
+.Old Design for Calendar Appearance (Alternative 2)
+image::OldCalendar.png[width="300"]
+
+include::../DeveloperGuide.adoc[tag=cal-design]
 
 === Appendix C: Use Cases
 
 include::../DeveloperGuide.adoc[tag=use-case-calendar]
 
-== Appendix E: Glossary
+=== Appendix E: Glossary
 
 include::../DeveloperGuide.adoc[tag=glossary]
+
+=== Appendix G: Instructions for Manual Testing
 
 include::../DeveloperGuide.adoc[tag=testing-cal]
 
