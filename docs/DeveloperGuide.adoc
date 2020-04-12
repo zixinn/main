@@ -722,7 +722,7 @@ The following activity diagram summarizes what happens when a user executes the 
 .Activity Diagram for `task done` Command
 image::TaskMarkAsDoneActivityDiagram.png[]
 
-===== Viewing all tasks across modules
+===== Viewing all tasks across modules in Mod Manager
 The list task feature allows users to list all tasks across all  modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -2014,6 +2014,21 @@ Graphical user interface: a form of user interface that allows user to interact 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X.
 
+//tag::taskcard[]
+[[taskcard]] Task card::
+A task card represents a task with details such as the module it belongs to,
+description, and time period (if provided upon creation).
+
+A dark red card represents a task that is not yet done.
+
+image::TaskCardNotDone.png[]
+
+A green card represents a done task.
+
+image::TaskCardDone.png[]
+
+//end::taskcard[]
+
 //end::glossary[]
 [appendix]
 
@@ -2154,6 +2169,61 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No class is deleted. Error details shown in the status message.
 
 // end::testing-class[]
+
+//tag:testing-task[]
+=== Testing of Task Features
+
+. Viewing all tasks across all modules in Mod Manager.
+.. Prerequisites: Some tasks are already available in Mod Manager.
+
+.. Test case: `task list` +
+Expected: All of the tasks across all modules are shown.
+
+. Marking a task as done in Mod Manager.
+.. Prerequisites: List all tasks using the `task list` command.
+Module `CS2103T` exists in Mod Manager. You have this <<taskcard, task card>> below in
+your task list:
+image:appendixMarkAsDoneExample.png[]
+However, if you do not have the above task, or module `CS2103T` in your Mod Manager,
+you may choose any of the tasks already
+available and take note of its module code and task ID. Use that module code and task ID instead of
+our module code example of `CS2103T` and  task ID example of `986` as below.
+
+.. Test case: `task done /code CS2103T /id 986` +
+   Expected: The corresponding <<taskcard, task card>> changed to green. Our task has
+been marked as done successfully! You can try with other tasks using
+a different module code (currently `CS2103T`) and a valid task ID (currently `986`).
+
+. Viewing tasks for a specific `Module`.
+
+.. Prerequisites: List all tasks using the `task list` command.
+Module `CS2103T` exists in Mod Manager.
+.. Test case: `task module /code CS2103T` +
+   Expected: All of the tasks for module `CS2103T` are shown.
+
+. Viewing undone tasks
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task undone` +
+Expected: All of the undone tasks are shown. Undone tasks are shown in dark red
+as in <<taskcard, here>>.
+
+. Finding tasks by description.
+
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task find assign home` +
+   Expected: All of the tasks that contain the keyword `assign` or `home` in
+their description are shown. For example, you may see tasks with descriptions such as
+`assignment`, `Homework` or
+`Programming Assignment 2`. Partial match and case in-sensitive is allowed.
+
+. Searching tasks by date.
+
+.. Prerequisites: List all tasks using the `task list` command.
+.. Test case: `task search /month 4 /year 2020` +
+   Expected: All of the tasks happening on `April 2020` are shown. You now know what tasks
+are due this month (at the time of writing)!
+
+//end:testing-task[]
 
 === Testing of Facilitator Feature
 
