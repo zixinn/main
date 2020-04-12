@@ -38,7 +38,7 @@ public class TaskDeleteCommandTest {
     @Test
     public void execute_moduleCodeNotExist_throwsCommandException() {
         Task taskToDelete = new TaskBuilder().withModuleCode("CS3232").build();
-        
+
         TaskDeleteCommand deleteCommand = new TaskDeleteCommand(
                 taskToDelete.getModuleCode(), taskToDelete.getTaskNum());
 
