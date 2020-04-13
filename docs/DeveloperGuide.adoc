@@ -856,60 +856,72 @@ image::TaskSearchActivityDiagram.png[]
 
 ==== Design Considerations (Bao)
 
-===== Aspect: A task may have a specified time period, or not. How do we implement this feature?
-* **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
-A task with a specified time period will be created as a `ScheduledTask`, while a task with no
-time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
-`NonScheduledTask` are concrete subclasses of `Task`.
-** Pros: Utilises Object-Oriented Programming. Easy to implement `*search*` functionality,
-which we need to search for tasks that occur on a specified date, month, or year,
-and `*upcoming*` functionality `[coming in v2.0]`, which we need to find the upcoming tasks in Mod Manager.
-For these two features, we only need to work on `ScheduledTask` instances, which reduces the
-burden of checking for `null` `TaskDateTime` instances as the second approach below.
-** Cons: More difficulty in implementation due to time constraints. Moreover, command
-`*edit*` that allows us to edits the information of the task will be troublesome, when
-a user decides to add a time period to a `NonScheduledTask`.
-In this case, we have to re-create a new `ScheduledTask` with the same description and its time provided.
-If we need to maintain a `List<ScheduledTask>` or `List<Task>` somewhere in the code, for example,
-in our `Module` instance, we also have to update the list contents in our `Module` s too.
-This requires the association between `Module` and `Task` to be bi-directional, which
-increases coupling and make it harder for us to maintain and conduct tests. There is also extra overhead time
-communicating and collaborating with another member in our team responsible for the `Module` component, Because of these challenges,
-we decide to weaken the association between `Task` and `Module`, which is elaborated in our next aspect.
-
-* **Alternative 2:** Implement `Task` as a concrete class in Mod Manager. `Task` s without a specified time period
-will have its time attribute `taskDateTime` set to `null`, while `Task` s with a given time period will be assign a
-non-null instance of `taskDateTime`.
-** Pros: Easier to implement, as we only need to create one class `Task`.
-** Cons: We must handle `null` cases every time we query something about the time of a `Task`.
-For example, it's more challenging to implement the `*search*` and `*upcoming*` command, since we have to check whether the task has a non-null `taskDateTime` or not.
-Moreover, it's complex to implement the method `compareTo` of `Comparable` interface for `Task` to compare the time between tasks,
-when one, or both of our `taskDateTime` attributes can be `null`.
-
 ===== Aspect: The association between `Module` and `Task`
-* **Alternative 1 (current choice):** Aggregation: Each `Task` can have an unique `ModuleCode` tag, which uniquely identifies which `Module` the task belongs to.
-This is a aggregation relationship, which is weaker than composition in our second approach.
+* **Alternative 1: (current choice):**
 
-.Class Diagram: A `Task` acts as a container for `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
+Each `Task` can have an unique `ModuleCode` tag,
+which uniquely identifies the `Module` it belongs to. This is an *aggregation* relationship,
+which is weaker than composition in our second alternative.
+
+.Class Diagram: A `Task` acts as a container for the `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
 image::ModuleTaskAggregationDiagram.png[]
 
-** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
-to be aware that there are a list of `Task` s for it.
-** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
-our second approach, but this is a trade-off given the time constraints.
+*Pros*: Low coupling with the `Module` class. The `Module` does not need to know that there are a list of `Task` s for it.
 
-* **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
-If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
+*Cons*: It requires that the `ModuleCode` must uniquely identify the `Module`, which requires
+more time to implement from the `Module` side. The association between `Module` and `Task`
+is weak.
+
+* **Alternative 2:**
+
+Each `Module` consists of a list of `Task` s corresponding to it.
 
 .Class Diagram: A `Module` consists of `Task` objects.
 image::ModuleTaskCompositionDiagram.png[]
 
-** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
-For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
+*Pros*: This design better simulates the real-life interactions between `Module` and `Task`.
+For each NUS `Module`, we have the list of all the `Task` s for it,
 such as assignments, homework, term tests, and exams.
-** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
-and collaborating with the team member responsible for the `Module` component, as mentioned above.
 
+*Cons*: Strong data coupling with the `Module` class, as the `Task` data
+must be shared with the `Modules`.
+
+Alternative 1 is chosen for easier implementation, and to reduce coupling
+between `Task` and `Module`.
+
+===== Aspect: A `Task` may have a specified time period, or no time period. How do we implement this feature?
+* **Alternative 1 (current choice):**
+
+`Task` is implemented as an abstract class. A task with a specified time period will be created as a `ScheduledTask`, while a task with no
+time period will be created as a `NonScheduledTask`. `ScheduledTask` and
+`NonScheduledTask` are concrete subclasses of `Task`.
+
+*Pros*: Utilises Object-Oriented Programming. Commands such as  `task *search*`
+(searching for tasks that occur on a specified date, month, or year)
+and `task *upcoming*` (`[coming in v2.0]`, finding the upcoming tasks in our schedule)
+are easier to implement. We just need to filter out the `ScheduledTask` instances and
+perform operations on them.
+
+*Cons*: More difficulty in implementation due to time constraints. For example, command
+`task *edit*` allows us to add a time period to a class. In this case, our `Task` is
+initially a `NonScheduledTask`, so we have to re-create a new `ScheduledTask`
+with the same description, and the specified time period.
+
+* **Alternative 2:**
+
+`Task` is implemented as a concrete class. `Task` s without a specified time period
+will have  `taskDateTime` set to `null`, while `Task` s with a given time period will be assign
+a valid `taskDateTime`
+
+*Pros*: Much more simple, as we only need to create one class `Task`.
+
+*Cons*: It's troublesome to implement `*task* search` and `*task* upcoming` command
+as above, as we have to avoid `null` cases of `taskDateTime`. Just imagine
+comparing a task with a valid time, such as `13/4/2020 23:59`, to a task with time `null`.
+It's hard to implement this comparison.
+
+Alternative 1 is chosen because it works well with all of our `Task` commands,
+such as `*task* search` and `*task* upcoming` above.
 
 === Facilitator Management Feature
 
