@@ -1312,7 +1312,7 @@ image::TaskCardDone.png[]
 == Command Summary
 
 .Summary of command formats
-[%autowidth]
+[cols="15%,85%"]
 |=====
 |*Category* |*Commands*
 
@@ -1372,7 +1372,7 @@ image::TaskCardDone.png[]
 |=====
 
 .Summary of common command parameters
-[%autowidth]
+[cols="15%,85%"]
 |=====
 |*Parameter* | *Constraints*
 |`DESCRIPTION` |`DESCRIPTION` should not exceed 64 characters.
