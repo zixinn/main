@@ -219,7 +219,7 @@ These are: `undo` and `redo` feature, navigating through past commands with up/d
 ==== Implementation Details
 
 //tag::general-features[]
-===== Undo/Redo Feature (Nhat)
+===== Undo/Redo command (Nhat)
 Each add/edit/delete action is captured as a `DoableAction`. Every time a `DoableAction` is performed, it will be recorded
 to the `DoableActionList`. Thus, after each add/edit/delete command execution, a suitable `DoableAction` will be be
 created and recorded. Other sections might not mention this again.
@@ -232,10 +232,10 @@ The mechanism of `undo` is given below. For `redo`, it is exactly the same.
 2. `LogicManager` executes the `UndoCommand`.
 3. `ModelManager` calls `undo` method of `DoableActionList` to reverse the effect of the most previous `DoableAction`.
 
-===== Navigating Through Past Commands With Up/Down Keys (Nhat)
+===== Navigating through past commands with up/down keys (Nhat)
 This feature applies to each usage session. The mechanism is below.
 
-1. Each time the user types anything and presses Enter in the `CommandBox`, the input will be save the to `UserInputHistory`.
+1. Each time the user types anything and presses kbd:[Enter] in the `CommandBox`, the input will be saved to the `UserInputHistory`.
 
 2. When an `up` key is pressed, the latest previous input will be retrieved from `UserInputHistory` and display at the
 `CommandBox`. If there are no previous inputs to show, the `CommandBox` will either stay the same or become empty.
@@ -243,14 +243,14 @@ This feature applies to each usage session. The mechanism is below.
 3. When a `down` key is pressed, the most previously input seen by pressing `up` will be shown at the `CommandBox`. When
 there are no inputs to show, the `CommandBox` will become empty.
 
-==== Clear command
+===== Clear command
 This command simply clears all the data from the system. The action is not undo-able. Its mechanism is simple.
 
 1. The user inputs a clear command.
 
 2. `ModelManager` will replace the current `ModManager` instance with a newly created one that doesn't contain any data.
 
-==== Help command
+===== Help command
 This command will pop up a window showing a link to the User Guide. The user simply inputs a help command and the window
 will appear.
 
