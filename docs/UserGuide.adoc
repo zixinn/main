@@ -681,10 +681,10 @@ if a `DATE` field is provided. For example, `/at 23:59` without `/on DATE` is no
 e.g. Day 32 or Month 13 is not allowed. A special date is reserved in Mod Manager for a special functional purpose: 01/01/1970. If
 you choose to use this date as your input, Mod Manager won't (for now) show an error message, but is not guaranteed to exhibit
 a normal behaviour.
-* `TIME` follows `_HH:mm_` format. It should be a valid time period between 00:01 and 23:59,
+* `TIME` follows `_HH:mm_` format. It should be a valid time between 00:01 and 23:59,
 e.g. 00:00 and 24:00 are not allowed - if you input these values, they will be ignored.
 * Similar tasks across modules are allowed. However,
-tasks within a same module must have different descriptions. They can occupy the same time period.
+tasks within a same module must have different descriptions. They can occupy the same time.
 ****
 
 //tag::task-edit-delete[]
@@ -929,7 +929,7 @@ Command properties:
 ****
 * The `search` works across modules, so no `/code` commands are required.
 * If no optional fields are provided, Mod Manager will output all tasks
-that have a specified time period.
+that have a specified time.
 * Invalid inputs such as `/date monday`, `/month December`, `/year this year` are not allowed.
 Please use numbers for `/date`, `/month`, and `/year` instead.
 * Invalid date, month, or year is not allowed. For example: +
@@ -1298,7 +1298,7 @@ The default tab in view when the application starts (i.e. the `Module` tab).
 //tag::taskcard[]
 [[taskcard]] Task card::
 A task card represents a task with details such as the module it belongs to,
-description, and time period (if provided upon creation).
+description, and time (if provided upon creation).
 
 A dark red card represents a task that is not done.
 

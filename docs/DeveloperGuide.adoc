@@ -564,7 +564,7 @@ image::LessonDeleteActivityDiagram.png[]
 === Task Management Feature
 //tag::taskOverview[]
 The task management feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
-`ScheduledTask` for a `Task` with a time period and `NonScheduledTask` for a `Task` with no specified time period.
+`ScheduledTask` for a `Task` with a time and `NonScheduledTask` for a `Task` with no specified time.
 A task has a `Description`, an optional `TaskDateTime`, and exactly one `ModuleCode`.
 A `Module` with that `ModuleCode` of the task should exist in Mod Manager.
 
@@ -583,7 +583,7 @@ It supports the following operations:
 * `undone` - Shows a list of all undone tasks in Mod Manager.
 * `find` - Finds tasks in Mod Manager by its description.
 * `search`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
-* `upcoming` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
+* `upcoming` - Finds upcoming tasks (for tasks with a specified time) in Mod Manager. `[coming in v2.0]`
 
 //end::taskOverview[]
 ==== Implementation Details
@@ -598,8 +598,8 @@ The operation is exposed in the `Model` interface as `Model#addTask()`.
 Given below is an example usage scenario and how the `task add` mechanism behaves at each step:
 
 1. The user executes the `task add` command and provides the module code, the description of the task (both compulsory),
-and a time period (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
-2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time period (if provided).
+and a time (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
+2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time (if provided).
 3. `TaskAddCommandParser` creates a new `TaskAddCommand` based on the task.
 4. `LogicManager` executes the `TaskAddCommand`.
 5. `ModManager` adds the task to the `UniqueTaskList`.
@@ -706,7 +706,7 @@ task to be marked as done.
 2. `TaskMarkAsDoneCommandParser` creates a new `TaskMarkAsDoneCommand` based on the `moduleCode` and `taskNum`.
 3. `LogicManager` executes the `TaskMarkAsDoneCommand`.
 4. `TaskMarkAsDoneCommand` retrieves the `moduleCode` and `taskNum` of the task to be marked as done,
-and then retrieves the current existing `Task` from `ModManager`.
+and then retrieves the currently existing `Task` from `ModManager`.
 5. `TaskMarkAsDoneCommand` creates a clone of the retrieved `Task`, then mark this new `Task` as done.
 6. `ModManager` sets the existing task to the new task, marked as done in the `UniqueTaskList`.
 7. `ModelManager` updates the `filteredTasks` in `ModelManager`.
@@ -726,7 +726,7 @@ image::TaskMarkAsDoneActivityDiagram.png[]
 //end::task-mark-as-done-DG[]
 
 ===== Viewing all tasks across modules in Mod Manager (Bao)
-The list task feature allows users to list all tasks across all  modules in Mod Manager.
+The list task feature allows users to list all tasks across all modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
@@ -777,7 +777,7 @@ The following activity diagram summarizes what happens when a user executes a se
 image::TaskForModuleActivityDiagram.png[]
 
 ===== Viewing undone tasks (Bao)
-The viewing undone tasks only feature allows users to view only tasks that are not yet completed in their `Tasks` tab.
+The viewing undone tasks only feature allows users to view only tasks that are not completed in their `Tasks` tab.
 This feature is facilitated by `TaskCommandParser`, `TaskListUndoneCommandParser` and `TaskListUndoneCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
@@ -829,14 +829,14 @@ image::TaskFindActivityDiagram.png[]
 //end::task-find-description-DG[]
 
 ===== Searching tasks by date (Bao)
-The search task feature allows users to search all tasks that occur on the specified date, month, or year.
+The search task feature allows users to search for all tasks that occur on the specified date, month, or year.
 This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `TaskSearchCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
 Given below is an example usage scenario and how the task search mechanism behaves at each step:
 
 1. The user executes the task search command and provides the date, month, or year, or any combination of which
-that they want to search for.
+they want to search for.
 2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the date, month and year.
 3. `LogicManager` executes the `TaskSearchCommand`.
 4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
@@ -859,14 +859,14 @@ image::TaskSearchActivityDiagram.png[]
 ===== Aspect: The association between `Module` and `Task`
 * **Alternative 1 (current choice):**
 
-Each `Task` can have an unique `ModuleCode` tag,
+Each `Task` can have a unique `ModuleCode` tag,
 which uniquely identifies the `Module` it belongs to. This is an *aggregation* relationship,
 which is weaker than composition in our second alternative.
 
 .Class Diagram: A `Task` acts as a container for the `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
 image::ModuleTaskAggregationDiagram.png[]
 
-*Pros*: Low coupling with the `Module` class. The `Module` does not need to know that there are a list of `Task` s for it.
+*Pros*: Low coupling with the `Module` class. The `Module` does not need to know that there is a list of `Task` s for it.
 
 *Cons*: It requires that the `ModuleCode` must uniquely identify the `Module`, which requires
 more time to implement from the `Module` side. The association between `Module` and `Task`
@@ -886,14 +886,14 @@ such as assignments, homework, term tests, and exams.
 *Cons*: Strong data coupling with the `Module` class, as the `Task` data
 must be shared with the `Modules`.
 
-Alternative 1 is chosen for easier implementation, and to reduce coupling
+Alternative 1 is chosen for more straightforward implementation, and to reduce coupling
 between `Task` and `Module`.
 
-===== Aspect: A `Task` may have a specified time period, or no time period. How do we implement this feature?
+===== Aspect: A `Task` may have a specified time, or no time. How do we implement this feature?
 * **Alternative 1 (current choice):**
 
-`Task` is implemented as an abstract class. A task with a specified time period will be created as a `ScheduledTask`, while a task with no
-time period will be created as a `NonScheduledTask`. `ScheduledTask` and
+`Task` is implemented as an abstract class. A task with a specified time will be created as a `ScheduledTask`, while a task with no
+time will be created as a `NonScheduledTask`. `ScheduledTask` and
 `NonScheduledTask` are concrete subclasses of `Task`.
 
 *Pros*: Utilises Object-Oriented Programming. Commands such as  `task *search*`
@@ -903,14 +903,14 @@ are easier to implement. We just need to filter out the `ScheduledTask` instance
 perform operations on them.
 
 *Cons*: More difficulty in implementation due to time constraints. For example, command
-`task *edit*` allows us to add a time period to a class. In this case, our `Task` is
+`task *edit*` allows us to add a time to a class. In this case, our `Task` is
 initially a `NonScheduledTask`, so we have to re-create a new `ScheduledTask`
-with the same description, and the specified time period.
+with the same description, and the specified time.
 
 * **Alternative 2:**
 
-`Task` is implemented as a concrete class. `Task` s without a specified time period
-will have  `taskDateTime` set to `null`, while `Task` s with a given time period will be assign
+`Task` is implemented as a concrete class. `Task` s without a specified time
+will have  `taskDateTime` set to `null`, while `Task` s with a given time will be assign
 a valid `taskDateTime`
 
 *Pros*: Much more simple, as we only need to create one class `Task`.
@@ -2039,7 +2039,7 @@ Windows, Linux, Unix, OS-X.
 //tag::taskcard[]
 [[taskcard]] Task card::
 A task card represents a task with details such as the module it belongs to,
-description, and time period (if provided upon creation).
+description, and time (if provided upon creation).
 
 A dark red card represents a task that is not yet done.
 
