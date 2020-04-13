@@ -169,7 +169,7 @@ Format:
 * `*help*`
 
 //tag::undo[]
-==== Undoing previous commands : `*undo*`
+==== Undoing previous commands : `*undo*` (Nhat)
 
 During a usage session with Mod Manager, you may make mistakes while adding/editing/deleting an entry. It
 would be nice if you can reverse the effect in a neat way. The `*undo*` command is here to give you that
@@ -204,7 +204,7 @@ editing.
 image::undo-3.png[]
 //end::undo[]
 
-==== Redoing previously undone commands : `*redo*`
+==== Redoing previously undone commands : `*redo*` (Nhat)
 
 We understand that you can change your mind right after undo-ing, so we give have the `*redo*` command to assist you.
 
@@ -278,7 +278,7 @@ there, you might want to scroll down through the list.
 .After executing `*cmd* group class`
 image::cmdGroup2.png[]
 
-==== Navigating through past commands with up/down key
+==== Navigating through past commands with up/down key (Nhat)
 
 During a Mod Manager usage session, you may want to repeat some commands but you feel quite lazy to type again. Therefore,
 we bring you the ability to use the `up/down` arrow key on your keyboard to find the past command that you need.
@@ -336,7 +336,7 @@ The commands in this section carry out operations on the module list in Mod Mana
 Executing these commands will bring you to the Module tab.
 // end::mod[]
 
-==== Adding a module
+==== Adding a module (Zi Xin)
 
 You can add a module to Mod Manager.
 
@@ -376,7 +376,7 @@ image::ModAddBefore2.png[]
 .After `*mod* add /code CS2101`
 image::ModAddAfter2.png[]
 
-==== Viewing all modules
+==== Viewing all modules (Zi Xin)
 
 You can view a list of all modules.
 
@@ -396,7 +396,7 @@ you can type the following command:
 image::ModListAfter1.png[]
 
 // tag::mod-view[]
-==== Viewing information of a module
+==== Viewing information of a module (Zi Xin)
 
 You can view all classes, tasks and facilitators for a module.
 
@@ -437,7 +437,7 @@ image::ModViewBefore2.png[]
 image::ModViewAfter2.png[]
 // end::mod-view[]
 
-==== Editing a module
+==== Editing a module (Zi Xin)
 
 You can edit the information of a module.
 
@@ -494,7 +494,7 @@ image::ModEditBefore3.png[]
 .After `*mod* edit 3 /desc`
 image::ModEditAfter3.png[]
 
-==== Deleting a module
+==== Deleting a module (Zi Xin)
 
 You can delete a module from Mod Manager.
 All classes, tasks and facilitators for that module will also be deleted.
@@ -546,7 +546,7 @@ When managing your classes, you should take note of the following areas in the m
 .Explanation of how to look at classes
 image::ClassExplain.png[]
 
-==== Adding a class
+==== Adding a class (Heidi)
 
 You can add a class to a module.
 
@@ -576,7 +576,7 @@ You will see a new class added to the module CS2103T as shown in the figure belo
 .After adding a class
 image::ClassAddAfter.png[]
 
-==== Finding classes by day
+==== Finding classes by day (Heidi)
 
 You can find classes occurring on a particular day.
 
@@ -595,7 +595,7 @@ To know what classes you have on Friday, you can type `*class* find /at friday` 
 .After finding class by day
 image::ClassFindDay.png[]
 
-==== Finding next class
+==== Finding next class (Heidi)
 
 You can find the next class that will start soon.
 
@@ -610,7 +610,7 @@ After typing `*class* find /next`, you will be directed to the module's page and
 .After finding next class
 image::ClassFindNext.png[]
 
-==== Editing a class
+==== Editing a class (Heidi)
 
 You can edit the information of the class. The class to be edited is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
@@ -634,7 +634,7 @@ Let's say that the venue of the CS2103T lecture you just added changed to Home. 
 .After editing a class
 image::ClassEdit.png[]
 
-==== Deleting a class
+==== Deleting a class (Heidi)
 
 You can delete the class from the module. The class to be deleted is selected by its index in the displayed module's class list. You can view the module's class list by using `*mod* view MOD_CODE` as stated in section 3.2.3.
 
@@ -661,7 +661,7 @@ image::ClassDelete.png[]
 The commands in this section carry out operations on the task list in Mod Manager.
 Executing these commands will bring you to the Tasks tab.
 
-==== Adding a task
+==== Adding a task (Nhat, Bao)
 
 You can add a task to a module.
 
@@ -688,7 +688,7 @@ tasks within a same module must have different descriptions. They can occupy the
 ****
 
 //tag::task-edit-delete[]
-==== Editing a task
+==== Editing a task (Nhat)
 
 From here on, you will be introduced to Mod Manager's task ID system.
 ****
@@ -740,7 +740,7 @@ the sorting property of the <<Viewing all tasks across all modules in ModManger,
 .The task's date and time removed
 image::task-edit-4.png[]
 
-==== Deleting a task
+==== Deleting a task (Nhat)
 
 You can delete a task from Mod Manager's system.
 
@@ -761,7 +761,7 @@ image::task-delete-2.png[]
 
 //tag::task-mark-as-done-UG[]
 
-==== Marking a task as done
+==== Marking a task as done (Bao)
 
 You can mark the task as done in the module in Mod Manager.
 
@@ -799,7 +799,7 @@ The <<taskcard, task card>> has changed to green; which means our task has been 
 Hooray! We just completed a task.
 //end::task-mark-as-done-UG[]
 
-==== Viewing all tasks across all modules
+==== Viewing all tasks across all modules (Bao)
 
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
@@ -816,7 +816,7 @@ By typing the command above, you should see a list of tasks, such as the followi
 .`*task* list` shows a list of all tasks in Mod Manager
 image::TaskList.png[]
 
-==== Viewing tasks for a specific module
+==== Viewing tasks for a specific module (Bao)
 If you want to find tasks for a specific module in Mod Manager, this is the command for you to use!
 
 Format:
@@ -843,7 +843,7 @@ Mod Manager will automatically redirect you to the Tasks tab if you are currentl
 .All tasks belonging to the module `CS3230` are listed
 image::TaskListModule.png[]
 
-==== Viewing all tasks not done/finished
+==== Viewing all tasks not done/finished (Bao)
 Previously, we know that we can mark a task as done, so as to organise, manage,
 and plan our tasks better. Now, with this command, you can see all the
 tasks that have not yet been finished.
@@ -860,7 +860,7 @@ which are in dark red color:
 image::TaskListNotDoneAfter.png[]
 
 //tag::task-find-description-UG[]
-==== Finding tasks by description
+==== Finding tasks by description (Bao)
 
 You are browsing through the task list. But there are too many tasks! You suddenly
 remember a specific task that you want to do, but you can only vaguely remember its description,
@@ -914,7 +914,7 @@ Finds all tasks that contain the word `homework` in their description
 Finds all tasks that contain the word `math` *or* `coding` in their description
 //end::task-find-description-UG[]
 
-==== Searching tasks by date
+==== Searching tasks by date (Bao)
 
 With this command, you can search for all tasks that occur on your specified date, month, or year.
 
@@ -979,7 +979,7 @@ Searches for all tasks happening on 14/02/2021.
 The commands in this section carry out operations on the facilitator list in Mod Manager.
 Executing these commands will bring you to the Facilitators tab.
 
-==== Adding a facilitator
+==== Adding a facilitator (Zi Xin)
 
 You can add a facilitator to Mod Manager.
 
@@ -1021,7 +1021,7 @@ image::FacilAddBefore2.png[]
 .After `*facil* add /name Aaron Tan /email tantc@comp.nus.edu.sg /office COM1-0312 /code CS1231 /code CS2100`
 image::FacilAddAfter2.png[]
 
-==== Viewing all facilitators
+==== Viewing all facilitators (Zi Xin)
 
 You can view a list of all facilitators sorted in alphabetical order.
 
@@ -1040,7 +1040,7 @@ you can type the following command:
 .After `*facil* list`
 image::FacilListAfter1.png[]
 
-==== Finding a facilitator by name
+==== Finding a facilitator by name (Zi Xin)
 
 You can find facilitators by name.
 
@@ -1083,7 +1083,7 @@ image::FacilFindBefore2.png[]
 .After `*facil* find yan tan`
 image::FacilFindAfter2.png[]
 
-==== Editing a facilitator
+==== Editing a facilitator (Zi Xin)
 
 You can edit the information of a facilitator.
 
@@ -1140,7 +1140,7 @@ image::FacilEditBefore3.png[]
 .After `*facil* edit 2 /phone`
 image::FacilEditAfter3.png[]
 
-==== Deleting a facilitator
+==== Deleting a facilitator (Zi Xin)
 
 You can delete a facilitator from Mod Manager.
 
@@ -1187,7 +1187,7 @@ image::FacilDeleteAfter2.png[]
 The commands in this section carry out operations related to the calendar in Mod Manager.
 Executing these commands will bring you to the Calendar tab.
 
-==== Viewing calendar for current week
+==== Viewing calendar for current week (Lu Shing)
 
 You can view the calendar for the current week. It displays the tasks and classes you have in the current week.
 
@@ -1203,7 +1203,7 @@ The red cards represent the tasks you have not done, the green cards represent t
 .Outcome of `*cal* view /week this`
 image::CalView1.png[]
 
-==== Viewing calendar for next week
+==== Viewing calendar for next week (Lu Shing)
 
 You can view the calendar for next week. It displays the tasks and classes you have in the next week.
 
@@ -1219,7 +1219,7 @@ The red cards represent the tasks you have not done, the green cards represent t
 .Outcome of `*cal* view /week next`
 image::CalView2.png[]
 
-==== Finding empty slots
+==== Finding empty slots (Lu Shing)
 
 You can find the empty slots from current day to end of the week of the current day.
 The empty slots are time periods where you do not have classes or tasks.
@@ -1272,7 +1272,7 @@ You can receive reminders for deadlines and events the next day.
 // tag::upcoming-tasks[]
 ==== Finding upcoming tasks `[coming in v2.0]`
 
-You can find upcoming tasks, such as assignment submission and final exam in Mod Manager.
+You can find upcoming tasks, such as assignment submissions and final exams in Mod Manager.
 // end::upcoming-tasks[]
 
 ==== Viewing of the recently edited item after an `add`, `edit` or `delete` command `[coming in v2.0]`
