@@ -134,7 +134,7 @@ The `Model`,
 More detailed designs of important sub-components are below.
 
 //tag::mod-package[]
-==== Module
+==== Module (Lu Shing)
 .Structure of the Module Package
 image::ModulePackageClassDiagram.png[]
 
@@ -143,7 +143,7 @@ image::ModulePackageClassDiagram.png[]
 * A `UniqueModuleList` comprises of instances of `Module`.
 //end::mod-package[]
 
-==== Facilitator
+==== Facilitator (Lu Shing)
 .Structure of the Facilitator Package
 image::FacilitatorPackageClassDiagram.png[]
 
@@ -152,7 +152,7 @@ image::FacilitatorPackageClassDiagram.png[]
 * A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs to.
 * A `UniqueFacilitatorList` comprises of instances of `Facilitator`.
 
-==== Lesson
+==== Lesson (Lu Shing)
 .Structure of the Lesson Package
 image::LessonPackageClassDiagram.png[]
 
@@ -161,7 +161,7 @@ image::LessonPackageClassDiagram.png[]
 * A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs to.
 * A `LessonList` comprises of instances of `Lesson`.
 
-==== Task
+==== Task (Nhat)
 //tag::task-package[]
 .Structure of the Task Package
 image::TaskPackageClassDiagram.png[]
@@ -175,7 +175,7 @@ image::TaskPackageClassDiagram.png[]
 ==== Calendar
 * The `Calendar` package contains a concrete class `Calendar` which represents a calendar date.
 
-==== DoableAction
+==== DoableAction (Nhat)
 //tag::doable-package[]
 .Structure of the Action Package
 image::DoableActionClassDiagram.png[]
