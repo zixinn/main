@@ -552,7 +552,7 @@ image::LessonDeleteActivityDiagram.png[]
 ==== Design Considerations (Heidi)
 
 ===== Aspect: Prefix of day and time
-* **Alternative 1 (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
+* **Alternative 1 (current choice):** Have one prefix for all three `day`, `startTime` and `endTime` fields.
 ** Pros: User types less.
 ** Cons: When user wants to edit one field only, user have to key in other unnecessary details.
 * **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
@@ -2193,7 +2193,7 @@ These instructions only provide a starting point for testers to work on; testers
 // end::testing-class[]
 
 //tag:testing-task[]
-=== Testing of Task Features
+=== Testing of Task Feature
 
 . Viewing all tasks across all modules in Mod Manager.
 .. Prerequisites: Some tasks are already available in Mod Manager.
