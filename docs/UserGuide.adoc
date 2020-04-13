@@ -134,7 +134,7 @@ The features are grouped into six categories:
 . <<Task feature : `*task*`, Task>> feature
 . <<Calendar feature : `*cal*`, Calendar>> feature
 
-Additionally, the <<Upcoming features`[coming in v2.0]`, upcoming>> features section offers a
+Additionally, the <<Upcoming features `[coming in v2.0]`, upcoming>> features section offers a
 preview of what you can expect in **Mod Manager v2.0**.
 
 ====
@@ -696,8 +696,7 @@ From here on, you will be introduced to Mod Manager's task ID system.
 * A complete task ID will consist of two elements: `MOD_CODE` and `ID_NUMBER`.
 * Examples of valid task ID: `CS2103T 848`, `CS4231 132`.
 * You can find out a task's ID by looking at the general task list - can be viewed with
-<<Viewing all tasks across all modules in ModManger, `*task* list`>>,
-or the task list of a specific module - can be viewed with <<Viewing information of a module, `*mod* view`>>.
+`*task* list`, or the task list of a specific module - can be viewed with `*mod* view`.
 ****
 
 You can edit a task's description, its date and time details, or both by providing the correct task ID and the updated
@@ -708,7 +707,7 @@ Format:
 * `*task* edit MOD_CODE ID_NUMBER [/desc DESCRIPTION] [/on DATE] [/at TIME]`
 
 Mod Manager will find the task associated with the module code and task ID number provided and update the information correspondingly.
-The properties of `DESCRIPTION`, `DATE` and `TIME` are described in the <<Adding a task, adding a task>> section.
+The properties of `DESCRIPTION`, `DATE` and `TIME` are described in the `*task* add` command above.
 
 Example: `*task* edit CS2101 344 /desc OP2 /on 08/04/2020`
 
@@ -735,7 +734,7 @@ Example: `*task* edit ST2334 401 /on non`
 image::task-edit-3.png[]
 
 Again, press kbd:[Enter] and you will see its date and time has been removed. Its order in the list may be changed due to
-the sorting property of the <<Viewing all tasks across all modules in ModManger, task list>>.
+the sorting property of the <<Viewing all tasks across all modules in Mod Manager (Bao), task list>>.
 
 .The task's date and time removed
 image::task-edit-4.png[]
@@ -799,7 +798,8 @@ The <<taskcard, task card>> has changed to green; which means our task has been 
 Hooray! We just completed a task.
 //end::task-mark-as-done-UG[]
 
-==== Viewing all tasks across all modules (Bao)
+
+==== Viewing all tasks across all modules in Mod Manager (Bao)
 
 You can view a list of all tasks across all modules in Mod Manager.
 This is great when you need an overview of all tasks that you need to complete
@@ -1251,6 +1251,7 @@ SUNDAY: +
 ****
 //end::calendar[]
 
+//tag::all-upcoming[]
 === Upcoming features `[coming in v2.0]`
 
 // tag::upcoming[]
@@ -1280,7 +1281,7 @@ You can find upcoming tasks, such as assignment submissions and final exams in M
 After an `add`, `edit` or `delete` operation, the view will be scrolled to
 that recently created or modified item, so that you can refer to the information easily.
 The newly created or modified details will be highlighted and focused so that you know what has been changed.
-
+//end::all-upcoming[]
 == FAQ
 
 === How do I transfer my data to another computer?
