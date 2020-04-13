@@ -219,7 +219,7 @@ These are: `undo` and `redo` feature, navigating through past commands with up/d
 ==== Implementation Details
 
 //tag::general-features[]
-===== Undo/Redo Feature
+===== Undo/Redo Feature (Nhat)
 Each add/edit/delete action is captured as a `DoableAction`. Every time a `DoableAction` is performed, it will be recorded
 to the `DoableActionList`. Thus, after each add/edit/delete command execution, a suitable `DoableAction` will be be
 created and recorded. Other sections might not mention this again.
@@ -232,7 +232,7 @@ The mechanism of `undo` is given below. For `redo`, it is exactly the same.
 2. `LogicManager` executes the `UndoCommand`.
 3. `ModelManager` calls `undo` method of `DoableActionList` to reverse the effect of the most previous `DoableAction`.
 
-===== Navigating Through Past Commands With Up/Down Keys
+===== Navigating Through Past Commands With Up/Down Keys (Nhat)
 This feature applies to each usage session. The mechanism is below.
 
 1. Each time the user types anything and presses Enter in the `CommandBox`, the input will be save the to `UserInputHistory`.
@@ -254,7 +254,7 @@ This command simply clears all the data from the system. The action is not undo-
 This command will pop up a window showing a link to the User Guide. The user simply inputs a help command and the window
 will appear.
 
-==== Design Considerations
+==== Design Considerations (Nhat)
 
 ===== Aspect: Undo/Redo Implementation
 * **Alternative 1:** Saves the entire database every time an add/edit/delete action occurs.
