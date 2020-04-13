@@ -172,6 +172,7 @@ image::TaskPackageClassDiagram.png[]
 * Any `Task` would contain a `ModuleCode` to indicate which `Module` it is a task of.
 * A `UniqueTaskList` comprises of instances of `NonScheduledTask` and `ScheduledTask`.
 //end::task-package[]
+
 ==== Calendar
 * The `Calendar` package contains a concrete class `Calendar` which represents a calendar date.
 
