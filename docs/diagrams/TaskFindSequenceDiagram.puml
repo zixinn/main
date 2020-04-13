@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ModManagerParser" as ModManagerParser LOGIC_COLOR
 participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
 participant ":TaskFindCommandParser" as TaskFindCommandParser LOGIC_COLOR
-participant "find:TaskFindCommand" as TaskFindCommand LOGIC_COLOR
+participant "f:TaskFindCommand" as TaskFindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
