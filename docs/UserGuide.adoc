@@ -227,7 +227,7 @@ After you press kbd:[Enter], the previously undone effect will come back.
 image::redo-2.png[]
 
 
-==== Listing commands : `*cmd*`
+==== Listing commands : `*cmd*` (Nhat)
 
 *Listing all commands*:
 
@@ -294,7 +294,7 @@ For this feature, you can try out very quickly. Just open Mod Manager, type in a
 That's the best and only way to truly feel the convenience of Mod Manager.
 
 //tag::clear[]
-==== Clearing all entries : `*clear*`
+==== Clearing all entries : `*clear*` (Lu Shing)
 
 You can clear all entries from Mod Manager. All the lists of modules, classes, facilitators and tasks that you have will be cleared.
 Please use this command cautiously, you cannot `undo` after it!
