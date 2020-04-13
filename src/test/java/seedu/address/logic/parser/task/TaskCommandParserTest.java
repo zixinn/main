@@ -44,32 +44,6 @@ public class TaskCommandParserTest {
     private TaskCommandParser parser = new TaskCommandParser();
 
     @Test
-    public void parse_add() throws Exception {
-        // TODO: @nhatnguyen
-        /*
-        Module module = new ModuleBuilder().build();
-        ModuleAddCommand command = (ModuleAddCommand) parser.parse(ModuleUtil.getModuleAddCommand(module));
-
-        assertEquals(new ModuleAddCommand(module), command);
-        */
-    }
-
-    @Test
-    public void parse_delete() throws Exception {
-        // TODO: @nhatnguyen
-        /*
-        ModuleDeleteCommand command = (ModuleDeleteCommand) parser.parse(Command.COMMAND_WORD_DELETE + " "
-                + INDEX_FIRST.getOneBased());
-        assertEquals(new ModuleDeleteCommand(INDEX_FIRST), command);
-        */
-    }
-
-    @Test
-    public void parse_edit_fail() {
-        TaskEditCommandParser editParser = new TaskEditCommandParser();
-    }
-
-    @Test
     public void parse_list() throws Exception {
         assertTrue(parser.parse(Command.COMMAND_WORD_LIST) instanceof TaskListCommand);
     }
