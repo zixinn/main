@@ -68,7 +68,6 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_ON) != null) {
-            System.out.println(argMultimap.getValue(PREFIX_ON));
             present++;
             TaskDateTime taskDateTime;
             if (argMultimap.getValue(PREFIX_ON).trim().equals(TaskEditCommand.SPECIAL_VALUE_NON)) {
@@ -77,7 +76,6 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
                     throw new ParseException(TaskEditCommand.MESSAGE_NON_HAS_NO_TAILS);
                 }
             } else if (argMultimap.getValue(PREFIX_AT) != null) {
-                System.out.println(argMultimap.getValue(PREFIX_AT));
                 taskDateTime = ParserUtil.parseDateTimeForTask(
                         argMultimap.getValue(PREFIX_ON), argMultimap.getValue(PREFIX_AT));
             } else {
@@ -119,7 +117,7 @@ public class TaskEditCommandParser implements Parser<TaskEditCommand> {
         }
         sc.close();
 
-        return new Pair<ModuleCode, Integer>(moduleCode, taskNum);
+        return new Pair<>(moduleCode, taskNum);
     }
 
     /**

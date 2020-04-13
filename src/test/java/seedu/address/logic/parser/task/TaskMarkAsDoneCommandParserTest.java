@@ -23,7 +23,6 @@ class TaskMarkAsDoneCommandParserTest {
     @Test
     public void parse_withPreamble_success() {
         // whitespace only preamble
-        System.out.println(MODULE_CODE_DESC_CS1101S + TASK_ID_DESC_VALID_ID);
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_CS1101S + TASK_ID_DESC_VALID_ID,
                 new TaskMarkAsDoneCommand(VALID_MODULE_CODE_CS1101S, VALID_TASK_ID_FIRST));
 

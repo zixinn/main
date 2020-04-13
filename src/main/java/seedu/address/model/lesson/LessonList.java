@@ -53,9 +53,8 @@ public class LessonList {
      * @return True if time slot is free and false otherwise.
      */
     public boolean isTimeSlotFree(Lesson lessonToBeAdded, Optional<Lesson> lessonToExclude) {
-        System.out.println(lessons);
         for (Lesson lesson : lessons) {
-            if (!lessonToExclude.isEmpty() && lesson.equals(lessonToExclude.get())) {
+            if (lessonToExclude.isPresent() && lesson.equals(lessonToExclude.get())) {
                 continue;
             }
             if (lessonToBeAdded.getDayAndTime().isSameTimeSlot(lesson.getDayAndTime())) {

@@ -41,8 +41,6 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        System.out.println(feedbackToUser);
-        System.out.println(otherCommandResult.feedbackToUser);
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && type.equals(otherCommandResult.type);
     }

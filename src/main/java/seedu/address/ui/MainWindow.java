@@ -201,8 +201,6 @@ public class MainWindow extends UiPart<Stage> {
         facilitatorPanelPlaceholder.setStyle("-fx-border-color: transparent; -fx-effect: null;");
 
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-        System.out.println("Tasks available");
-        System.out.println(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         commandBox = new CommandBox(this::executeCommand);

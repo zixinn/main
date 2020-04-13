@@ -85,7 +85,6 @@ public class TaskEditCommand extends TaskCommand {
         assert taskToEdit != null;
 
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        System.out.println(current);
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             logger.severe("Dups: " + editedTask.toString() + " and " + taskToEdit.toString());
