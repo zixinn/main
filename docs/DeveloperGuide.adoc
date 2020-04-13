@@ -552,7 +552,7 @@ image::LessonDeleteActivityDiagram.png[]
 ==== Design Considerations (Heidi)
 
 ===== Aspect: Prefix of day and time
-* **Alternative 1: (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
+* **Alternative 1 (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
 ** Pros: User types less.
 ** Cons: When user wants to edit one field only, user have to key in other unnecessary details.
 * **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
@@ -857,7 +857,7 @@ image::TaskSearchActivityDiagram.png[]
 ==== Design Considerations (Bao)
 
 ===== Aspect: The association between `Module` and `Task`
-* **Alternative 1: (current choice):**
+* **Alternative 1 (current choice):**
 
 Each `Task` can have an unique `ModuleCode` tag,
 which uniquely identifies the `Module` it belongs to. This is an *aggregation* relationship,

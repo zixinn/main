@@ -95,7 +95,8 @@ for a command.
 ** Documentation:
 *** Initiate the "Command Summary" section of the User Guide, and cosmetic tweaks to existing contents
 of the User Guide, PR https://github.com/AY1920S2-CS2103T-F10-4/main/pull/13[#13]
-*** Revise sections of the Developer Guide, PR https://github.com/AY1920S2-CS2103T-F10-4/main/pull/204[#204]
+*** Revise sections of the Developer Guide, PRs https://github.com/AY1920S2-CS2103T-F10-4/main/pull/204[#204],
+https://github.com/AY1920S2-CS2103T-F10-4/main/pull/212[#212]
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (https://github.com/dinhnhobao/ped/issues[1],
 https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/35[2], and https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/45[3])
