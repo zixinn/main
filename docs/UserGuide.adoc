@@ -227,7 +227,7 @@ After you press kbd:[Enter], the previously undone effect will come back.
 image::redo-2.png[]
 
 
-==== Listing commands : `*cmd*`
+==== Listing commands : `*cmd*` (Nhat)
 
 *Listing all commands*:
 
