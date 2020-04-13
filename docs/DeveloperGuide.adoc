@@ -134,7 +134,7 @@ The `Model`,
 More detailed designs of important sub-components are below.
 
 //tag::mod-package[]
-==== Module
+==== Module (Lu Shing)
 .Structure of the Module Package
 image::ModulePackageClassDiagram.png[]
 
@@ -143,7 +143,7 @@ image::ModulePackageClassDiagram.png[]
 * A `UniqueModuleList` comprises of instances of `Module`.
 //end::mod-package[]
 
-==== Facilitator
+==== Facilitator (Lu Shing)
 .Structure of the Facilitator Package
 image::FacilitatorPackageClassDiagram.png[]
 
@@ -152,7 +152,7 @@ image::FacilitatorPackageClassDiagram.png[]
 * A `Facilitator` also contains at least one `ModuleCode` to indicate which `Module` the facilitator belongs to.
 * A `UniqueFacilitatorList` comprises of instances of `Facilitator`.
 
-==== Lesson
+==== Lesson (Lu Shing)
 .Structure of the Lesson Package
 image::LessonPackageClassDiagram.png[]
 
@@ -161,7 +161,7 @@ image::LessonPackageClassDiagram.png[]
 * A `Lesson` also contains a `LessonType` and a `ModuleCode` to indicate which `Module` the lesson belongs to.
 * A `LessonList` comprises of instances of `Lesson`.
 
-==== Task
+==== Task (Nhat)
 //tag::task-package[]
 .Structure of the Task Package
 image::TaskPackageClassDiagram.png[]
@@ -172,10 +172,11 @@ image::TaskPackageClassDiagram.png[]
 * Any `Task` would contain a `ModuleCode` to indicate which `Module` it is a task of.
 * A `UniqueTaskList` comprises of instances of `NonScheduledTask` and `ScheduledTask`.
 //end::task-package[]
+
 ==== Calendar
 * The `Calendar` package contains a concrete class `Calendar` which represents a calendar date.
 
-==== DoableAction
+==== DoableAction (Nhat)
 //tag::doable-package[]
 .Structure of the Action Package
 image::DoableActionClassDiagram.png[]
@@ -219,7 +220,7 @@ These are: `undo` and `redo` feature, navigating through past commands with up/d
 ==== Implementation Details
 
 //tag::general-features[]
-===== Undo/Redo Feature
+===== Undo/Redo command (Nhat)
 Each add/edit/delete action is captured as a `DoableAction`. Every time a `DoableAction` is performed, it will be recorded
 to the `DoableActionList`. Thus, after each add/edit/delete command execution, a suitable `DoableAction` will be be
 created and recorded. Other sections might not mention this again.
@@ -232,10 +233,10 @@ The mechanism of `undo` is given below. For `redo`, it is exactly the same.
 2. `LogicManager` executes the `UndoCommand`.
 3. `ModelManager` calls `undo` method of `DoableActionList` to reverse the effect of the most previous `DoableAction`.
 
-===== Navigating Through Past Commands With Up/Down Keys
+===== Navigating through past commands with up/down keys (Nhat)
 This feature applies to each usage session. The mechanism is below.
 
-1. Each time the user types anything and presses Enter in the `CommandBox`, the input will be save the to `UserInputHistory`.
+1. Each time the user types anything and presses kbd:[Enter] in the `CommandBox`, the input will be saved to the `UserInputHistory`.
 
 2. When an `up` key is pressed, the latest previous input will be retrieved from `UserInputHistory` and display at the
 `CommandBox`. If there are no previous inputs to show, the `CommandBox` will either stay the same or become empty.
@@ -243,18 +244,18 @@ This feature applies to each usage session. The mechanism is below.
 3. When a `down` key is pressed, the most previously input seen by pressing `up` will be shown at the `CommandBox`. When
 there are no inputs to show, the `CommandBox` will become empty.
 
-==== Clear command
+===== Clear command
 This command simply clears all the data from the system. The action is not undo-able. Its mechanism is simple.
 
 1. The user inputs a clear command.
 
 2. `ModelManager` will replace the current `ModManager` instance with a newly created one that doesn't contain any data.
 
-==== Help command
+===== Help command
 This command will pop up a window showing a link to the User Guide. The user simply inputs a help command and the window
 will appear.
 
-==== Design Considerations
+==== Design Considerations (Nhat)
 
 ===== Aspect: Undo/Redo Implementation
 * **Alternative 1:** Saves the entire database every time an add/edit/delete action occurs.
@@ -290,7 +291,7 @@ It supports the following operations:
 // tag::mod-add[]
 ==== Implementation Details
 
-===== Adding a module
+===== Adding a module (Zi Xin)
 The add module feature allows users to add a module to Mod Manager.
 This feature is facilitated by `ModuleCommandParser`, `ModuleAddCommandParser` and `ModuleAddCommand`.
 The operation is exposed in the `Model` interface as `Model#addModule()`.
@@ -319,7 +320,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 image::ModuleAddActivityDiagram.png[]
 // end::mod-add[]
 
-===== Listing all modules
+===== Listing all modules (Zi Xin)
 The list module feature allows users to list all modules in Mod Manager.
 This feature is facilitated by `ModuleCommandParser`, `ModuleViewCommandParser` and `ModuleViewCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredModuleList()`.
@@ -344,7 +345,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity Diagram for `mod list` Command
 image::ModuleListActivityDiagram.png[]
 
-===== Viewing a module
+===== Viewing a module (Zi Xin)
 The view module feature allows users to view information of a module in Mod Manager.
 This feature is facilitated by `ModuleCommandParser` and `ModuleViewCommand`.
 The operation is exposed in the `Model` interface as `Model#updateModule()`.
@@ -369,7 +370,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity Diagram for `mod view` Command
 image::ModuleViewActivityDiagram.png[]
 
-===== Editing a module
+===== Editing a module (Zi Xin)
 The edit module feature allows users to edit a module from Mod Manager.
 This feature is facilitated by `ModuleCommandParser`, `ModuleEditCommandParser` and `ModuleEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setModule()`.
@@ -399,7 +400,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity Diagram for `mod edit` Command
 image::ModuleEditActivityDiagram.png[]
 
-===== Deleting a module
+===== Deleting a module (Zi Xin)
 The delete module feature allows users to delete a module from Mod Manager.
 This feature is facilitated by `ModuleCommandParser`, `ModuleDeleteCommandParser` and `ModuleDeleteCommand`.
 The operation is exposed in the `Model` interface as `Model#deleteModule()`.
@@ -430,7 +431,7 @@ The following activity diagram summarizes what happens when a user executes a mo
 .Activity Diagram for `mod delete` Command
 image::ModuleDeleteActivityDiagram.png[]
 
-==== Design Considerations
+==== Design Considerations (Zi Xin)
 
 ===== Aspect: Support for editing module code
 * **Alternative 1 (current choice):** Allow users to edit the module code of a module.
@@ -458,7 +459,7 @@ It supports the following operations:
 
 ==== Implementation Details
 
-===== Adding a class
+===== Adding a class (Heidi)
 The add class command allows user to add a class to Mod Manager. This feature is facilitated by `LessonCommandParser`, `LessonAddCommandParser` and `LessonAddCommand`. The operation is exposed in the `Model` interface as `Model#addLesson()`.
 
 Given below is an example usage scenario and how the lesson add mechanism behaves at each step.
@@ -480,7 +481,7 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity Diagram for `class add` Command
 image::LessonAddActivityDiagram.png[]
 
-===== Finding a class
+===== Finding a class (Heidi)
 The find class command allows user to find a class to Mod Manager. This feature is facilitated by `LessonCommandParser`, `LessonFindCommandParser` and `LessonFindCommand`. The operation is exposed in the `Model` interface as `Model#findNextLesson()` and `Model#findLessonByDay`.
 
 Given below is an example usage scenario and how the lesson find mechanism behaves at each step.
@@ -501,8 +502,7 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity Diagram for `class find` Command
 image::LessonFindActivityDiagram.png[]
 
-
-===== Editing a class
+===== Editing a class (Heidi)
 The edit class command allows user to edit a class to Mod Manager. This feature is facilitated by `LessonCommandParser`, `LessonEditCommandParser` and `LessonEditCommand`. The operation is exposed in the `Model` interface as `Model#setLesson()`.
 
 Given below is an example usage scenario and how the lesson edit mechanism behaves at each step.
@@ -527,8 +527,7 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity Diagram for `class edit` Command
 image::LessonEditActivityDiagram.png[]
 
-
-===== Deleting a class
+===== Deleting a class (Heidi)
 The delete class command allows user to add a class to Mod Manager. This feature is facilitated by `LessonCommandParser`, `LessonDeleteCommandParser` and `LessonDeleteCommand`. The operation is exposed in the `Model` interface as `Model#removeLesson()`.
 
 Given below is an example usage scenario and how the lesson delete mechanism behaves at each step.
@@ -551,10 +550,10 @@ The following activity diagram summarizes what happens when a user executes a le
 .Activity Diagram for `class delete` Command
 image::LessonDeleteActivityDiagram.png[]
 
-==== Design Considerations
+==== Design Considerations (Heidi)
 
 ===== Aspect: Prefix of day and time
-* **Alternative 1: (current choice)** Have one prefix for all three `day`, `startTime` and `endTime` fields.
+* **Alternative 1 (current choice):** Have one prefix for all three `day`, `startTime` and `endTime` fields.
 ** Pros: User types less.
 ** Cons: When user wants to edit one field only, user have to key in other unnecessary details.
 * **Alternative 2:** Have one prefix each for `day`, `startTime` and `endTime` fields.
@@ -566,7 +565,7 @@ image::LessonDeleteActivityDiagram.png[]
 === Task Management Feature
 //tag::taskOverview[]
 The task management feature manages the tasks in Mod Manager and is represented by the `Task` abstract class with implementing class
-`ScheduledTask` for a `Task` with a time period and `NonScheduledTask` for a `Task` with no specified time period.
+`ScheduledTask` for a `Task` with a time and `NonScheduledTask` for a `Task` with no specified time.
 A task has a `Description`, an optional `TaskDateTime`, and exactly one `ModuleCode`.
 A `Module` with that `ModuleCode` of the task should exist in Mod Manager.
 
@@ -585,12 +584,12 @@ It supports the following operations:
 * `undone` - Shows a list of all undone tasks in Mod Manager.
 * `find` - Finds tasks in Mod Manager by its description.
 * `search`- Searches for tasks that occur on the specified date, month, or year in Mod Manager.
-* `upcoming` - Finds upcoming tasks (for tasks with a specified time period) in Mod Manager. `[coming in v2.0]`
+* `upcoming` - Finds upcoming tasks (for tasks with a specified time) in Mod Manager. `[coming in v2.0]`
 
 //end::taskOverview[]
 ==== Implementation Details
 
-===== Adding a task
+===== Adding a task (Nhat, Bao)
 // to extend on Task, ScheduledTask and NonScheduledTask
 The add task feature allows users to add a task to Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskAddCommandParser` and `
@@ -600,8 +599,8 @@ The operation is exposed in the `Model` interface as `Model#addTask()`.
 Given below is an example usage scenario and how the `task add` mechanism behaves at each step:
 
 1. The user executes the `task add` command and provides the module code, the description of the task (both compulsory),
-and a time period (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
-2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time period (if provided).
+and a time (optional), which consists of a date (for example, `15/04/2020`) or a date and time (`15/04/2020` and `23:59`) of the task to be added.
+2. `TaskAddCommandParser` creates a new `Task` based on the module code, description, and time (if provided).
 3. `TaskAddCommandParser` creates a new `TaskAddCommand` based on the task.
 4. `LogicManager` executes the `TaskAddCommand`.
 5. `ModManager` adds the task to the `UniqueTaskList`.
@@ -621,7 +620,7 @@ The following activity diagram summarizes what happens when a user executes a `t
 image::TaskAddActivityDiagram.png[]
 
 //tag::task-edit[]
-===== Editing a task
+===== Editing a task (Nhat)
 The `task edit` command allows user to edit a task in Mod Manager.
 The fields that can be edited are: description, and task date and time.
 This feature is facilitated by `TaskCommandParser`, `TaskEditCommandParser` and `TaskEditCommand`.
@@ -662,7 +661,7 @@ The execution of a `TaskEditCommand` is described below.
 //end::task-edit[]
 
 //tag::task-delete[]
-===== Deleting a task
+===== Deleting a task (Nhat)
 The delete task feature allows user to delete a task from Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskDeleteCommandParser` and `TaskDeleteCommand`.
 The operation is exposed in the `Model` interface as `Model#deleteTask()`.
@@ -695,7 +694,7 @@ The execution of a `TaskDeleteCommand` is described below.
 //end::task-delete[]
 
 //tag::task-mark-as-done-DG[]
-===== Marking a task as done
+===== Marking a task as done (Bao)
 The marking a task as done command allows users to mark a certain `Task` in a `Module` as done,
 based on its task ID called `taskNum`.
 This feature is facilitated by `TaskCommandParser`, `TaskMarkAsDoneCommandParser` and `TaskMarkAsDoneCommand`.
@@ -708,7 +707,7 @@ task to be marked as done.
 2. `TaskMarkAsDoneCommandParser` creates a new `TaskMarkAsDoneCommand` based on the `moduleCode` and `taskNum`.
 3. `LogicManager` executes the `TaskMarkAsDoneCommand`.
 4. `TaskMarkAsDoneCommand` retrieves the `moduleCode` and `taskNum` of the task to be marked as done,
-and then retrieves the current existing `Task` from `ModManager`.
+and then retrieves the currently existing `Task` from `ModManager`.
 5. `TaskMarkAsDoneCommand` creates a clone of the retrieved `Task`, then mark this new `Task` as done.
 6. `ModManager` sets the existing task to the new task, marked as done in the `UniqueTaskList`.
 7. `ModelManager` updates the `filteredTasks` in `ModelManager`.
@@ -727,8 +726,8 @@ The following activity diagram summarizes what happens when a user executes the 
 image::TaskMarkAsDoneActivityDiagram.png[]
 //end::task-mark-as-done-DG[]
 
-===== Viewing all tasks across modules in Mod Manager
-The list task feature allows users to list all tasks across all  modules in Mod Manager.
+===== Viewing all tasks across modules in Mod Manager (Bao)
+The list task feature allows users to list all tasks across all modules in Mod Manager.
 This feature is facilitated by `TaskCommandParser` and `TaskListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
@@ -752,7 +751,7 @@ The following activity diagram summarizes what happens when a user executes a ta
 .Activity Diagram for `task list` Command
 image::TaskListActivityDiagram.png[]
 
-===== Viewing tasks for a specific module
+===== Viewing tasks for a specific module (Bao)
 The viewing task by module feature allows users to find all tasks belonging to a specific module in Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskForOneModuleCommandParser` and `TaskForOneModuleCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -778,8 +777,8 @@ The following activity diagram summarizes what happens when a user executes a se
 .Activity Diagram for `task module` Command
 image::TaskForModuleActivityDiagram.png[]
 
-===== Viewing undone tasks
-The viewing undone tasks only feature allows users to view only tasks that are not yet completed in their `Tasks` tab.
+===== Viewing undone tasks (Bao)
+The viewing undone tasks only feature allows users to view only tasks that are not completed in their `Tasks` tab.
 This feature is facilitated by `TaskCommandParser`, `TaskListUndoneCommandParser` and `TaskListUndoneCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
@@ -804,7 +803,7 @@ The following activity diagram summarizes what happens when a user executes a vi
 image::TaskListUndoneActivityDiagram.png[]
 
 //tag::task-find-description-DG[]
-===== Finding tasks by description
+===== Finding tasks by description (Bao)
 The find task feature allows users to find a task by its description in Mod Manager.
 This feature is facilitated by `TaskCommandParser`, `TaskFindCommandParser` and `TaskFindCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
@@ -830,15 +829,15 @@ The following activity diagram summarizes what happens when a user executes a ta
 image::TaskFindActivityDiagram.png[]
 //end::task-find-description-DG[]
 
-===== Searching tasks by date
-The search task feature allows users to search all tasks that occur on the specified date, month, or year.
+===== Searching tasks by date (Bao)
+The search task feature allows users to search for all tasks that occur on the specified date, month, or year.
 This feature is facilitated by `TaskCommandParser`, `TaskSearchCommandParser` and `TaskSearchCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredTaskList()`.
 
 Given below is an example usage scenario and how the task search mechanism behaves at each step:
 
 1. The user executes the task search command and provides the date, month, or year, or any combination of which
-that they want to search for.
+they want to search for.
 2. `TaskSearchCommandParser` creates a new `TaskSearchCommand` based on the date, month and year.
 3. `LogicManager` executes the `TaskSearchCommand`.
 4. `ModelManager` updates the `filteredTasks` in `ModelManager`.
@@ -856,62 +855,74 @@ The following activity diagram summarizes what happens when a user executes a ta
 .Activity Diagram for `task search` Command
 image::TaskSearchActivityDiagram.png[]
 
-==== Design Considerations
-
-===== Aspect: A task may have a specified time period, or not. How do we implement this feature?
-* **Alternative 1 (current choice):** Implement `Task` as an abstract class for Mod Manager.
-A task with a specified time period will be created as a `ScheduledTask`, while a task with no
-time period specified will be created as a `NonScheduledTask`, with both `ScheduledTask` and
-`NonScheduledTask` are concrete subclasses of `Task`.
-** Pros: Utilises Object-Oriented Programming. Easy to implement `*search*` functionality,
-which we need to search for tasks that occur on a specified date, month, or year,
-and `*upcoming*` functionality `[coming in v2.0]`, which we need to find the upcoming tasks in Mod Manager.
-For these two features, we only need to work on `ScheduledTask` instances, which reduces the
-burden of checking for `null` `TaskDateTime` instances as the second approach below.
-** Cons: More difficulty in implementation due to time constraints. Moreover, command
-`*edit*` that allows us to edits the information of the task will be troublesome, when
-a user decides to add a time period to a `NonScheduledTask`.
-In this case, we have to re-create a new `ScheduledTask` with the same description and its time provided.
-If we need to maintain a `List<ScheduledTask>` or `List<Task>` somewhere in the code, for example,
-in our `Module` instance, we also have to update the list contents in our `Module` s too.
-This requires the association between `Module` and `Task` to be bi-directional, which
-increases coupling and make it harder for us to maintain and conduct tests. There is also extra overhead time
-communicating and collaborating with another member in our team responsible for the `Module` component, Because of these challenges,
-we decide to weaken the association between `Task` and `Module`, which is elaborated in our next aspect.
-
-* **Alternative 2:** Implement `Task` as a concrete class in Mod Manager. `Task` s without a specified time period
-will have its time attribute `taskDateTime` set to `null`, while `Task` s with a given time period will be assign a
-non-null instance of `taskDateTime`.
-** Pros: Easier to implement, as we only need to create one class `Task`.
-** Cons: We must handle `null` cases every time we query something about the time of a `Task`.
-For example, it's more challenging to implement the `*search*` and `*upcoming*` command, since we have to check whether the task has a non-null `taskDateTime` or not.
-Moreover, it's complex to implement the method `compareTo` of `Comparable` interface for `Task` to compare the time between tasks,
-when one, or both of our `taskDateTime` attributes can be `null`.
+==== Design Considerations (Bao)
 
 ===== Aspect: The association between `Module` and `Task`
-* **Alternative 1 (current choice):** Aggregation: Each `Task` can have an unique `ModuleCode` tag, which uniquely identifies which `Module` the task belongs to.
-This is a aggregation relationship, which is weaker than composition in our second approach.
+* **Alternative 1 (current choice):**
 
-.Class Diagram: A `Task` acts as a container for `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
+Each `Task` can have a unique `ModuleCode` tag,
+which uniquely identifies the `Module` it belongs to. This is an *aggregation* relationship,
+which is weaker than composition in our second alternative.
+
+.Class Diagram: A `Task` acts as a container for the `ModuleCode` object of a `Module`. `ModuleCode` objects can survive without a `Task` object.
 image::ModuleTaskAggregationDiagram.png[]
 
-** Pros: Easier to implementation, and weak coupling with `Module` implementation. The `Module` need not
-to be aware that there are a list of `Task` s for it.
-** Cons: The association between `Module` and `Task` cannot be extensive and fully descriptive as in
-our second approach, but this is a trade-off given the time constraints.
+*Pros*: Low coupling with the `Module` class. The `Module` does not need to know that there is a list of `Task` s for it.
 
-* **Alternative 2:** Composition: each `Module` has a list of `Task` s corresponding to it.
-If the `Module` is deleted, all of the related `Task` s for the `Module` will also be removed.
+*Cons*: It requires that the `ModuleCode` must uniquely identify the `Module`, which requires
+more time to implement from the `Module` side. The association between `Module` and `Task`
+is weak.
+
+* **Alternative 2:**
+
+Each `Module` consists of a list of `Task` s corresponding to it.
 
 .Class Diagram: A `Module` consists of `Task` objects.
 image::ModuleTaskCompositionDiagram.png[]
 
-** Pros: This design choice better simulates the real-life interactions between `Module` and `Task`.
-For example, if we drop a `Module` in NUS, we will also drop all the `Task` s related to the `Module`,
+*Pros*: This design better simulates the real-life interactions between `Module` and `Task`.
+For each NUS `Module`, we have the list of all the `Task` s for it,
 such as assignments, homework, term tests, and exams.
-** Cons: Difficulty in implementation due to time constraints, as well as strong content and data coupling. More overhead in communicating
-and collaborating with the team member responsible for the `Module` component, as mentioned above.
 
+*Cons*: Strong data coupling with the `Module` class, as the `Task` data
+must be shared with the `Modules`.
+
+Alternative 1 is chosen for more straightforward implementation, and to reduce coupling
+between `Task` and `Module`.
+
+===== Aspect: A `Task` may have a specified time, or no time. How do we implement this feature?
+* **Alternative 1 (current choice):**
+
+`Task` is implemented as an abstract class. A task with a specified time will be created as a `ScheduledTask`, while a task with no
+time will be created as a `NonScheduledTask`. `ScheduledTask` and
+`NonScheduledTask` are concrete subclasses of `Task`.
+
+*Pros*: Utilises Object-Oriented Programming. Commands such as  `task *search*`
+(searching for tasks that occur on a specified date, month, or year)
+and `task *upcoming*` (`[coming in v2.0]`, finding the upcoming tasks in our schedule)
+are easier to implement. We just need to filter out the `ScheduledTask` instances and
+perform operations on them.
+
+*Cons*: More difficulty in implementation due to time constraints. For example, command
+`task *edit*` allows us to add a time to a class. In this case, our `Task` is
+initially a `NonScheduledTask`, so we have to re-create a new `ScheduledTask`
+with the same description, and the specified time.
+
+* **Alternative 2:**
+
+`Task` is implemented as a concrete class. `Task` s without a specified time
+will have  `taskDateTime` set to `null`, while `Task` s with a given time will be assign
+a valid `taskDateTime`
+
+*Pros*: Much more simple, as we only need to create one class `Task`.
+
+*Cons*: It's troublesome to implement `*task* search` and `*task* upcoming` command
+as above, as we have to avoid `null` cases of `taskDateTime`. Just imagine
+comparing a task with a valid time, such as `13/4/2020 23:59`, to a task with time `null`.
+It's hard to implement this comparison.
+
+Alternative 1 is chosen because it works well with all of our `Task` commands,
+such as `*task* search` and `*task* upcoming` above.
 
 === Facilitator Management Feature
 
@@ -930,7 +941,7 @@ It supports the following operations:
 
 ==== Implementation Details
 
-===== Adding a facilitator
+===== Adding a facilitator (Zi Xin)
 The add facilitator feature allows users to add a facilitator to Mod Manager.
 This feature is facilitated by `FacilCommandParser`, `FacilAddCommandParser` and `FacilAddCommand`.
 The operation is exposed in the `Model` interface as `Model#addFacilitator()`.
@@ -959,7 +970,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil add` Command
 image::FacilitatorAddActivityDiagram.png[]
 
-===== Listing all facilitators
+===== Listing all facilitators (Zi Xin)
 The list facilitator feature allows users to list all facilitators in Mod Manager.
 This feature is facilitated by `FacilCommandParser` and `FacilListCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
@@ -984,7 +995,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil list` Command
 image::FacilitatorListActivityDiagram.png[]
 
-===== Finding facilitators
+===== Finding facilitators (Zi Xin)
 The find facilitator feature allows users to find a facilitator by name in Mod Manager.
 This feature is facilitated by `FacilCommandParser`, `FacilFindCommandParser` and `FacilFindCommand`.
 The operation is exposed in the `Model` interface as `Model#updateFilteredFacilitatorList()`.
@@ -1009,7 +1020,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil find` Command
 image::FacilitatorFindActivityDiagram.png[]
 
-===== Editing a facilitator
+===== Editing a facilitator (Zi Xin)
 The edit facilitator feature allows users to edit a facilitator from Mod Manager.
 This feature is facilitated by `FacilCommandParser`, `FacilEditCommandParser` and `FacilEditCommand`.
 The operation is exposed in the `Model` interface as `Model#setFacilitator()`.
@@ -1040,7 +1051,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 .Activity Diagram for `facil edit` Command
 image::FacilitatorEditActivityDiagram.png[]
 
-===== Deleting a facilitator
+===== Deleting a facilitator (Zi Xin)
 The delete facilitator feature allows users to delete a facilitator from Mod Manager.
 This feature is facilitated by `FacilCommandParser`, `FacilDeleteCommandParser` and `FacilDeleteCommand`.
 The operation is exposed in the `Model` interface as `Model#deleteFacilitator()`.
@@ -1069,7 +1080,7 @@ The following activity diagram summarizes what happens when a user executes a fa
 image::FacilitatorDeleteActivityDiagram.png[]
 
 // tag::design-consideration-facilitator[]
-==== Design Considerations
+==== Design Considerations (Zi Xin)
 
 ===== Aspect: Mutability of `Facilitator` object
 * **Alternative 1 (current choice):** Create a new facilitator with the edited fields and replace the existing facilitator with the new facilitator.
@@ -1114,7 +1125,7 @@ It supports the following operations:
 
 ==== Implementation Details
 
-===== Viewing the calendar
+===== Viewing the calendar (Lu Shing)
 The view calendar feature allows users to view the calendar for a week in Mod Manager.
 This feature is facilitated by `CalCommandParser`, `CalViewCommandParser` and `CalViewCommand`. The calendar is exposed in the `Model` interface in `Module#updateCalendar()` and it is retrieved in `MainWindow` to show the timeline for the specified week to users.
 
@@ -1140,7 +1151,7 @@ The following activity diagram summarizes what happens when a user executes a ca
 .Activity Diagram for `cal view` Command
 image::CalViewActivityDiagram.png[]
 
-===== Finding empty slots in calendar
+===== Finding empty slots in calendar (Lu Shing)
 The find empty in calendar feature allows users to know the empty slots they have in the calendar from the current day to the end of the week in Mod Manager. This feature is facilitated by `CalCommandParser`, `CalFindCommandParser` and `CalFindCommand`.
 
 Given below is an example usage scenario and how the calendar find mechanism behaves at each step:
@@ -1162,7 +1173,7 @@ The following activity diagram summarizes what happens when a user executes a ca
 .Activity Diagram for `cal find` Command
 image::CalFindActivityDiagram.png[]
 
-==== Design Considerations
+==== Design Considerations (Lu Shing)
 
 ===== Aspect: Calendar appearance
 .New Design for Calendar Appearance (Alternative 1)
@@ -2032,7 +2043,7 @@ Windows, Linux, Unix, OS-X.
 //tag::taskcard[]
 [[taskcard]] Task card::
 A task card represents a task with details such as the module it belongs to,
-description, and time period (if provided upon creation).
+description, and time (if provided upon creation).
 
 A dark red card represents a task that is not yet done.
 
@@ -2186,7 +2197,7 @@ These instructions only provide a starting point for testers to work on; testers
 // end::testing-class[]
 
 //tag:testing-task[]
-=== Testing of Task Features
+=== Testing of Task Feature
 
 . Viewing all tasks across all modules in Mod Manager.
 .. Prerequisites: Some tasks are already available in Mod Manager.

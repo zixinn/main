@@ -59,7 +59,7 @@ public class TaskDateTime implements Comparable {
      * Constructs a {@code LocalDateTime}.
      *
      * @param date A valid date.
-     * @param timeInDay time period in day
+     * @param timeInDay time in day
      */
     public TaskDateTime(String date, String timeInDay) {
         checkArgument(isValidTaskTime(date + " " + timeInDay), MESSAGE_CONSTRAINTS);
@@ -171,7 +171,7 @@ public class TaskDateTime implements Comparable {
             return "";
         }
         // note for Command
-        // prevent users from creating 00:00 time. For this time period, the user should create an all day Task instead.
+        // prevent users from creating 00:00 time. For this time, the user should create an all day Task instead.
         if (taskTime.isEqual(taskTime.toLocalDate().atStartOfDay())) { // no time in day
             return taskTime.format(dateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }

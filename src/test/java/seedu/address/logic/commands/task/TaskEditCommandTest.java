@@ -26,7 +26,6 @@ public class TaskEditCommandTest {
     @Test
     void execute_allFieldsSuccess() {
         Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder().withDescription("Megaman")
                 .withTaskDateTime(new TaskDateTime("18/01/2021", "23:50")).build();
 
@@ -38,14 +37,12 @@ public class TaskEditCommandTest {
         Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
 
         expectedModel.setTask(expectedModel.getFilteredTaskList().get(1), editedTask);
-        System.out.println(expectedModel.getFilteredTaskList());
         assertCommandSuccess(command, model, expectedMsg, CommandType.TASK, expectedModel);
     }
 
     @Test
     void execute_allFieldNonDateSuccess() {
         Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        System.out.println(model.getFilteredTaskList());
         TaskBuilder editedTask = new TaskBuilder().withDescription("Megaman")
                 .withTaskDateTime(Task.TABOO_DATE_TIME);
 
@@ -58,14 +55,12 @@ public class TaskEditCommandTest {
         Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
 
         expectedModel.setTask(expectedModel.getFilteredTaskList().get(1), editedTask.withTaskDateTime(null).build());
-        System.out.println(expectedModel.getFilteredTaskList());
         assertCommandSuccess(command, model, expectedMsg, CommandType.TASK, expectedModel);
     }
 
     @Test
     void execute_noDescriptionNonDateSuccess() {
         Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        System.out.println(model.getFilteredTaskList());
         TaskBuilder editedTask = new TaskBuilder(model.getFilteredTaskList().get(1))
                 .withTaskDateTime(Task.TABOO_DATE_TIME);
 
@@ -78,14 +73,12 @@ public class TaskEditCommandTest {
         Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
 
         expectedModel.setTask(expectedModel.getFilteredTaskList().get(1), editedTask.withTaskDateTime(null).build());
-        System.out.println(expectedModel.getFilteredTaskList());
         assertCommandSuccess(command, model, expectedMsg, CommandType.TASK, expectedModel);
     }
 
     @Test
     void execute_descriptionNoDateSuccess() {
         Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder().withDescription("Megaman").build();
 
         TaskEditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
@@ -96,14 +89,12 @@ public class TaskEditCommandTest {
         Model expectedModel = new ModelManager(new ModManager(model.getModManager()), new UserPrefs());
 
         expectedModel.setTask(expectedModel.getFilteredTaskList().get(1), editedTask);
-        System.out.println(expectedModel.getFilteredTaskList());
         assertCommandSuccess(command, model, expectedMsg, CommandType.TASK, expectedModel);
     }
 
     @Test
     void execute_duplicateTaskUnsuccessful() {
         Model model = new ModelManager(getTypicalModManager(), new UserPrefs());
-        System.out.println(model.getFilteredTaskList());
         Task editedTask = new TaskBuilder(model.getFilteredTaskList().get(1)).build();
 
         TaskEditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
